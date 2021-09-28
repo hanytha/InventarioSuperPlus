@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Existencias";
+}
+<h2>Existencias</h2>
+<!-- Color del texto del modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Botón del modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
+    <!-- Encabezado del Modal -->
+    <div class="container">
+        <div class="modal fade" id="dialogo1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                    </div>
+                    <!-- Contenido del modal -->
+                    <div class="modal-body">
+                        <h1>BONIFICACIONES</h1>
+                        <h1>REGISTRAR EXISTENCIAS</h1>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <form id="regiration_form" novalidate action="action.php" method="post">
+                            <fieldset>
+                                <h2>Paso 1</h2>
+                                <div class="form-group">
+                                    <label for="numeroCompra">Número de compra</label>
+                                    <input type="text" class="form-control" name="data[numeroCompra]" id="numeroCompra" placeholder="Número Inicial">
+                                </div>
+                                <div class="form-group">
+                                    <label for="existenciaInicial">Existencia Inicial</label>
+                                    <input type="text" class="form-control" name="data[existenciaInicial]" id="existenciaInicial" placeholder="Existencia inicial">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Existencia actual</label>
+                                    <input type="email" class="form-control" id="email" name="data[email]" placeholder="Email">
+                                </div>
+                                <input type="button" class="next btn btn-info" value="Siguiente" />
+                            </fieldset>
+                            <fieldset>
+                                <h2>Paso 2</h2>
+                                <div class="form-group">
+                                    <label for="telefono">Costo</label>
+                                    <input type="text" class="form-control" id="telefono" name="data[telefono]" placeholder="Número Telefónico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="carpeta">Imágen</label>
+                                    <input type="file" name="imagefile" accept="image/jpeg, image/png">
+                                </div>
+                                <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                                <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- pie del modal-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hacer que el modal muestre los pasos por parte-->
+    <style type="text/css">
+        #regiration_form fieldset:not(:first-of-type) {
+            display: none;
+        }
+    </style>
+    <!--Script-->
+    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+    <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

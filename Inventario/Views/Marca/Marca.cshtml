@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Marca";
+}
+
+<h2>Marca</h2>
+<!-- Color del texto del modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Botón del modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<body>
+    <!-- Encabezado del Modal -->
+    <div class="container">
+        <div class="modal fade" id="dialogo1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                    </div>
+                    <!-- Contenido del modal -->
+                    <div class="modal-body">
+                        <h1>REGISTRO DE LAS MARCAS</h1>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <form id="regiration_form" novalidate action="action.php" method="post">
+                            <fieldset>
+                                <h2>Paso 1</h2>
+                                <div class="form-group">
+                                    <label for="nombreMarca">Nombre de la marca</label>
+                                    <input type="text" class="form-control" name="data[nombreMarca]" id="nombreMarca" placeholder="Nombre de la marca">
+                                </div>
+                                <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- pie del modal-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hacer que el modal muestre los pasos por parte-->
+    <style type="text/css">
+        #regiration_form fieldset:not(:first-of-type) {
+            display: none;
+        }
+    </style>
+    <!--Script-->
+    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+    <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

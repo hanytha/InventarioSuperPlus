@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "UnidadMedida";
+}
+
+<!-- Color del texto del modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Botón del modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h1>REGISTRO DE LAS UNIDADES DE MEDIDA</h1>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate action="action.php" method="post">
+                        <fieldset>
+                            <h2>Paso 1</h2>
+                            <div class="form-group">
+                                <label for="nombreMarca">Nombre de la unidad de medida</label>
+                                <input type="text" class="form-control" name="data[nombreMarca]" id="nombreMarca" placeholder="Nombre de la marca">
+                            </div>
+                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- Pie del modal-->
+                <div class="modal-footer">
+
+                    <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>            -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+
+<script src="~/Scrips/jquery.min.js"></script>
+<script src="~/Scrips/Internos/JS_UnidadesDeMedida.js"></script>
+<script src="~/Scrips/js.cookie.js"></script>
+

@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Inventario" Class="DataClasses2DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=AUX_SISTEMAS\PRUEBAS;Initial Catalog=Inventario;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Areas" Member="Areas">
+    <Type Name="Areas">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UNombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Carpeta" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Areas_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdAreas" Type="Articulos" />
+      <Association Name="Areas_SubAreas" Member="SubAreas" ThisKey="Id" OtherKey="IdArea" Type="SubAreas" />
+      <Association Name="Usuarios_Areas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="Id" Type="Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Usuarios" Member="Usuarios">
+    <Type Name="Usuarios">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CURP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidosP" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidosM" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(150)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FechaDeNacimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdConfiguracion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="RFC" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="NoSS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdPerfil" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="LvlPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdArea" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NArea" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSubArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NSArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Asignacion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sitio" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Contraseña" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Usuarios_Areas" Member="Areas" ThisKey="Id" OtherKey="IdUsuario" Type="Areas" />
+      <Association Name="Usuarios_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdUsuarios" Type="Pedidos" />
+      <Association Name="Usuarios_SubAreas" Member="SubAreas" ThisKey="Id" OtherKey="IdUsuario" Type="SubAreas" />
+      <Association Name="Usuarios_Supervision" Member="Supervision" ThisKey="Id" OtherKey="IdUsuario" Type="Supervision" />
+      <Association Name="Configuracion_Usuarios" Member="Configuracion" ThisKey="IdConfiguracion" OtherKey="Id" Type="Configuracion" IsForeignKey="true" />
+      <Association Name="Estado_Usuarios" Member="Estado" ThisKey="IdEstado" OtherKey="Id" Type="Estado" IsForeignKey="true" />
+      <Association Name="Localidad_Usuarios" Member="Localidad" ThisKey="IdLocalidad" OtherKey="Id" Type="Localidad" IsForeignKey="true" />
+      <Association Name="Municipio_Usuarios" Member="Municipio" ThisKey="IdMunicipio" OtherKey="Id" Type="Municipio" IsForeignKey="true" />
+      <Association Name="PerfilDeUsuario_Usuarios" Member="PerfilDeUsuario" ThisKey="IdPerfil" OtherKey="Id" Type="PerfilDeUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Articulos" Member="Articulos">
+    <Type Name="Articulos">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre2" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Stock" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdExistencias" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdTienda" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdMarca" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ExistenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoDeExistencia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Categorias" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Articulos_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdArticulos" Type="Pedidos" />
+      <Association Name="Areas_Articulos" Member="Areas" ThisKey="IdAreas" OtherKey="Id" Type="Areas" IsForeignKey="true" />
+      <Association Name="Categorias_Articulos" Member="Categorias1" ThisKey="IdCategorias" OtherKey="Id" Type="Categorias" IsForeignKey="true" />
+      <Association Name="Impuesto_Articulos" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="Id" Type="Impuesto" IsForeignKey="true" />
+      <Association Name="Marca_Articulos" Member="Marca1" ThisKey="IdMarca" OtherKey="Id" Type="Marca" IsForeignKey="true" />
+      <Association Name="Tienda_Articulos" Member="Tienda" ThisKey="IdTienda" OtherKey="Id" Type="Tienda" IsForeignKey="true" />
+      <Association Name="UnidadDeMedida_Articulos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="Id" Type="UnidadDeMedida" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categorias" Member="Categorias">
+    <Type Name="Categorias">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Categorias_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdCategorias" Type="Articulos" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Configuracion" Member="Configuracion">
+    <Type Name="Configuracion">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RFC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Vision" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Mision" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Valores" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DireccionHost" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Puerto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Logo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="LogoTexto" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="SesionAbierta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SerCorreo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="SerCorreoPort" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SerCorreoUser" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SerCorreoPass" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DirWeb" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Dato2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Dato3" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Dato4" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Configuracion_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdConfiguracion" Type="Usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Estado" Member="Estado">
+    <Type Name="Estado">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Abrev" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Estado_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdEstado" Type="Usuarios" />
+      <Association Name="Estado_Municipio" Member="Municipio" ThisKey="Id" OtherKey="IdEstado" Type="Municipio" />
+      <Association Name="Estado_Proveedores" Member="Proveedores" ThisKey="Id" OtherKey="IdEstado" Type="Proveedores" />
+      <Association Name="Estado_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdEstado" Type="Tienda" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExistenciaAlmacenG" Member="ExistenciaAlmacenG">
+    <Type Name="ExistenciaAlmacenG">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdProducto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NoCompra" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TipoDeExistencia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Imagen" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Impuesto_ExistenciaAlmacenG" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="Id" Type="Impuesto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Existencias" Member="Existencias">
+    <Type Name="Existencias">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdProducto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NoCompra" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TipoDeExistencia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Imagen" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Impuesto_Existencias" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="Id" Type="Impuesto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Impuesto" Member="Impuesto">
+    <Type Name="Impuesto">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Impuesto" Member="Impuesto1" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Porcentaje" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Impuesto_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdImpuesto" Type="Articulos" />
+      <Association Name="Impuesto_ExistenciaAlmacenG" Member="ExistenciaAlmacenG" ThisKey="Id" OtherKey="IdImpuesto" Type="ExistenciaAlmacenG" />
+      <Association Name="Impuesto_Existencias" Member="Existencias" ThisKey="Id" OtherKey="IdImpuesto" Type="Existencias" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Localidad" Member="Localidad">
+    <Type Name="Localidad">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitud" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Longitud" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Altitud" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Lat" Type="System.Decimal" DbType="Decimal(10,7) NOT NULL" CanBeNull="false" />
+      <Column Name="Lng" Type="System.Decimal" DbType="Decimal(10,7) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Localidad_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdLocalidad" Type="Usuarios" />
+      <Association Name="Localidad_Proveedores" Member="Proveedores" ThisKey="Id" OtherKey="IdLocalidad" Type="Proveedores" />
+      <Association Name="Localidad_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdLocalidad" Type="Tienda" />
+      <Association Name="Municipio_Localidad" Member="Municipio" ThisKey="IdMunicipio" OtherKey="Id" Type="Municipio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Marca" Member="Marca">
+    <Type Name="Marca">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPagina" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Marca_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdMarca" Type="Articulos" />
+      <Association Name="Marca_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdMarca" Type="Pedidos" />
+      <Association Name="Pagina_Marca" Member="Pagina" ThisKey="IdPagina" OtherKey="Id" Type="Pagina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Municipio" Member="Municipio">
+    <Type Name="Municipio">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Municipio_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdMunicipio" Type="Usuarios" />
+      <Association Name="Municipio_Localidad" Member="Localidad" ThisKey="Id" OtherKey="IdMunicipio" Type="Localidad" />
+      <Association Name="Municipio_Proveedores" Member="Proveedores" ThisKey="Id" OtherKey="IdMunicipio" Type="Proveedores" />
+      <Association Name="Municipio_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdMunicipio" Type="Tienda" />
+      <Association Name="Estado_Municipio" Member="Estado" ThisKey="IdEstado" OtherKey="Id" Type="Estado" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pagina" Member="Pagina">
+    <Type Name="Pagina">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Abreviatura" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Accion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Controlador" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Icono" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Pagina_Marca" Member="Marca" ThisKey="Id" OtherKey="IdPagina" Type="Marca" />
+      <Association Name="Pagina_UnidadDeMedida" Member="UnidadDeMedida" ThisKey="Id" OtherKey="IdPagina" Type="UnidadDeMedida" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pedidos" Member="Pedidos">
+    <Type Name="Pedidos">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="CantidadSolicitada" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CantidadAprobada" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdMarca" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreArticulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NTienda" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSupervisor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreSupervisor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuarios" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Destino" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Articulos_Pedidos" Member="Articulos" ThisKey="IdArticulos" OtherKey="Id" Type="Articulos" IsForeignKey="true" />
+      <Association Name="Marca_Pedidos" Member="Marca1" ThisKey="IdMarca" OtherKey="Id" Type="Marca" IsForeignKey="true" />
+      <Association Name="Usuarios_Pedidos" Member="Usuarios" ThisKey="IdUsuarios" OtherKey="Id" Type="Usuarios" IsForeignKey="true" />
+      <Association Name="Proveedores_Pedidos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="Id" Type="Proveedores" IsForeignKey="true" />
+      <Association Name="Supervisor_Pedidos" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="Id" Type="Supervisor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PerfilDeUsuario" Member="PerfilDeUsuario">
+    <Type Name="PerfilDeUsuario">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Perfil" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Nivel" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Permisos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Comentarios" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PerfilDeUsuario_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdPerfil" Type="Usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Proveedores" Member="Proveedores">
+    <Type Name="Proveedores">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GiroDelProveedor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CuentaInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RFC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Banco" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NumeroDeCuenta" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UsoCFDI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nomenclatura" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Proveedores_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdProveedor" Type="Pedidos" />
+      <Association Name="Estado_Proveedores" Member="Estado" ThisKey="IdEstado" OtherKey="Id" Type="Estado" IsForeignKey="true" />
+      <Association Name="Localidad_Proveedores" Member="Localidad" ThisKey="IdLocalidad" OtherKey="Id" Type="Localidad" IsForeignKey="true" />
+      <Association Name="Municipio_Proveedores" Member="Municipio" ThisKey="IdMunicipio" OtherKey="Id" Type="Municipio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubAreas" Member="SubAreas">
+    <Type Name="SubAreas">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="NoSubArea" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdArea" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UNombre" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdEncargado2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NEncargado2" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="TelefonoE2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CorreoE2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdEncargado3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NEncargado3" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="TelefonoE3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CorreoE3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Areas_SubAreas" Member="Areas" ThisKey="IdArea" OtherKey="Id" Type="Areas" IsForeignKey="true" />
+      <Association Name="Usuarios_SubAreas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="Id" Type="Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Supervision" Member="Supervision">
+    <Type Name="Supervision">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Supervicion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UNombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Tienda" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Supervision_Tienda" Member="Tienda1" ThisKey="Id" OtherKey="IdSupervision" Type="Tienda" />
+      <Association Name="Usuarios_Supervision" Member="Usuarios" ThisKey="IdUsuario" OtherKey="Id" Type="Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Supervisor" Member="Supervisor">
+    <Type Name="Supervisor">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Supervisor_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdSupervisor" Type="Pedidos" />
+      <Association Name="Supervisor_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdSupervisor" Type="Tienda" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tienda" Member="Tienda">
+    <Type Name="Tienda">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSupervision" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreS" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSupervisor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Unombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdLider" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="LNombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdEncargado1" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="E1Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdEncargado2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="E3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdAuxiliar1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="A1Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdAuxiliar2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="A2Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdAuxiliar3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="A3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Municipio" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Localidad" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Calle" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Latitud" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Longitud" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="HApertura" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="HCierre" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tienda_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdTienda" Type="Articulos" />
+      <Association Name="Estado_Tienda" Member="Estado1" ThisKey="IdEstado" OtherKey="Id" Type="Estado" IsForeignKey="true" />
+      <Association Name="Localidad_Tienda" Member="Localidad1" ThisKey="IdLocalidad" OtherKey="Id" Type="Localidad" IsForeignKey="true" />
+      <Association Name="Municipio_Tienda" Member="Municipio1" ThisKey="IdMunicipio" OtherKey="Id" Type="Municipio" IsForeignKey="true" />
+      <Association Name="Supervision_Tienda" Member="Supervision" ThisKey="IdSupervision" OtherKey="Id" Type="Supervision" IsForeignKey="true" />
+      <Association Name="Supervisor_Tienda" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="Id" Type="Supervisor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UnidadDeMedida" Member="UnidadDeMedida">
+    <Type Name="UnidadDeMedida">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPagina" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdUnidadDeMedida" Type="Articulos" />
+      <Association Name="Pagina_UnidadDeMedida" Member="Pagina" ThisKey="IdPagina" OtherKey="Id" Type="Pagina" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
