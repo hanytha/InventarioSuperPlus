@@ -1,113 +1,201 @@
-﻿CrearAcordeonArticulos(); 
-function CrearAcordeonArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (Art) {
-        var CodHTML = "";
-        for (var i = 0; i < Art.length; i++) {
-            CodHTML += "<button onclick='myFunction(dep" + Art[i].Id + ")' class='w3-btn w3-block w3-black w3-left-align'>" + Art[i].Nombre1 + "</button>";
-            CodHTML += "<div id='dep" + Art[i].Id + "' class='w3-container w3-hide'>";
-            CodHTML += "<h4>Nombre1 :" + Art[i].Nombre1 +"</h4>";
-            CodHTML += "<h4>Nombre2:" + Art[i].Nombre2+"</h4>" ;
-            CodHTML += "<h4>Estado Inicial:" + Art[i].EstadoInicial+"</h4>" ;
-            CodHTML += "<h4>Stock:" + Art[i].Stock + "</h4>";
-            CodHTML += "<h4>ExistenciaActual:" + Art[i].ExistenciaActual + "</h4>";
-            CodHTML += "<h4>Carpeta:" + Art[i].UnidadDeMedida + "</h4>";
-            CodHTML += "<h4>Tipo de Existencia:" + Art[i].TipoDeExistencia+ "</h4>";
-            CodHTML += "<h4>Categoría:" + Art[i].Categorias + "</h4>";
-            CodHTML += "<h4>Nombre del proveedor :" + Art[i].NombreProveedor + "</h4>";
-            CodHTML += "<h4>Marca:" + Art[i].Marca + "</h4>";
-            CodHTML += "<h4>Descripcion:" + Art[i].Descripcion + "</h4>";
-            CodHTML += "<h4>Unidad SAT:" + Art[i].UnidadSAT + "</h4>";
-            CodHTML += "<h4>ClaveProveedor:" + Art[i].ClaveProveedor + "</h4>";
-            CodHTML += "<h4>Clave SAT :" + Art[i].ClaveSAT + "</h4>";
-            CodHTML += "<h4>Precio unitario:" + Art[i].PrecioUnitario + "</h4>";
-            CodHTML += "<h4>Importe :" + Art[i].Importe + "</h4>";
-            CodHTML += "<h4>Imagen:" + Art[i].Imagen + "</h4>";
-            CodHTML += "</div>";
-        }
-        document.getElementById("accordion").innerHTML = CodHTML;
-    });
-}
-
-
-
-
-
-
-AcordeonArticulos();
+﻿
+CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
-function AcordeonArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (RegistrosArticulos) {
-        //Accordeon(RegistrosArticulos, document.getElementById("accordion"));
-        otro(RegistrosArticulos, document.getElementById("accordion"));
+function CrearAcordeonArticulos() {
+    $.get("/Articulo/ConsultaArticulos", function (DatosArticulo) {
+        //Accordeon(DatosArticulo, document.getElementById("accordion"));
+        AcordeonArticulos(DatosArticulo, document.getElementById("accordion"));
     });
 }
-function otro(RegistrosArticulos, CtrlProveedores) {
-    var CodigoHTMLAreas = "";
-    for (var i = 0; i < RegistrosArticulos.length; i++) {
+function AcordeonArticulos(DatosArticulo, CtrlArticulos) {
+    var CodigoHTMLArticulos = "";
+    for (var i = 0; i < DatosArticulo.length; i++) {
         if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0'>";
+            CodigoHTMLArticulos += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+            CodigoHTMLArticulos += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + RegistrosArticulos[i].Id + "'>";
-        CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + RegistrosArticulos[i].Id + "' aria-expanded='false' aria-controls='collapse" + RegistrosArticulos[i].Id + "' class='collapsed'>";
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<span >" + RegistrosArticulos[i].Nombre + "</span>";
-        CodigoHTMLAreas += "</a>";
-        CodigoHTMLAreas += "</h5>";
+        CodigoHTMLArticulos += "<div class='card-header' id='heading" + DatosArticulo[i].Id + "'>";
+        CodigoHTMLArticulos += "<h5 class='mb-0'>";
+        CodigoHTMLArticulos += "<a  data-toggle='collapse' data-target='#collapse" + DatosArticulo[i].Id + "' aria-expanded='false' aria-controls='collapse" + DatosArticulo[i].Id + "' class='collapsed'>";
+        //CodigoHTMLArticulos += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+        CodigoHTMLArticulos += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLArticulos += "<span >" + DatosArticulo[i].Nombre1 + "</span>";
+        CodigoHTMLArticulos += "</a>";
+        CodigoHTMLArticulos += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + RegistrosArticulos[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLAreas += "<div class='card-body'>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + RegistrosArticulos[i].Correo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + RegistrosArticulos[i].GiroDelProveedor + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + RegistrosArticulos[i].CuentaInterbancaria + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + RegistrosArticulos[i].CodigoPostal + "</div>";
-        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosArticulos[i].Direccion + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        //CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12'><strong>Dirección</strong></div >";
-        //CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + RegistrosArticulos[i].RFC + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosArticulos[i].Direccion + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosArticulos[i].Telefono + "</div>";
-        // CodigoHTMLAreas += "</div>";
-        // CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + RegistrosArticulos[i].Banco + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosArticulos[i].Telefono + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + RegistrosArticulos[i].NumeroDeCuenta + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + RegistrosArticulos[i].UsoCFDI + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nomenclatura: </strong>" + RegistrosArticulos[i].Nomenclatura + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + RegistrosArticulos[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + RegistrosArticulos[i].Logo + "</div>";
-        CodigoHTMLAreas += "</div>";
+        CodigoHTMLArticulos += "<div id='collapse" + DatosArticulo[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLArticulos += "<div class='card-body'>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre2: </strong>" + DatosArticulo[i].Nombre2 + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + DatosArticulo[i].EstadoInicial + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Stock: </strong>" + DatosArticulo[i].Stock + "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + DatosArticulo[i].ExistenciaActual + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + DatosArticulo[i].UnidadDeMedida + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Categorias: </strong>" + DatosArticulo[i].Categorias + "</div>";
+        //  CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosArticulo[i].Marca + "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        //CodigoHTMLArticulos += "<div class='col-md-12 col-sm-12 col-xs-12'><strong>Dirección</strong></div >";
+        //CodigoHTMLArticulos += "</div>";
+        //CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>NombreProveedor: </strong>" + DatosArticulo[i].NombreProveedor + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosArticulo[i].Marca + "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
 
-        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + RegistrosArticulos[i].ID + ")'><i id='BtnMO" + RegistrosArticulos[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
-        CodigoHTMLAreas += "</div>";
+        // CodigoHTMLArticulos += "</div>";
+        // CodigoHTMLArticulos += "<div class='row'>";
 
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirModalTienda(" + RegistrosArticulos[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTienda(" + RegistrosArticulos[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + DatosArticulo[i].Descripcion + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + DatosArticulo[i].UnidadSAT + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + DatosArticulo[i].ClaveSAT + "</div>";
+
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>PrecioUnitario: </strong>" + DatosArticulo[i].PrecioUnitario + "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='row'>";
+        CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + DatosArticulo[i].Importe + "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Imagen: </strong>" + DatosArticulo[i].Imagen + "</div>";
+        CodigoHTMLArticulos += "</div>";
+        //CodigoHTMLArticulos += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosArticulo[i].ID + ")'><i id='BtnMO" + DatosArticulo[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLArticulos += "<button class='btn btn-success' onclick='AbrirMArticulos(" + DatosArticulo[i].Id + ")' data-toggle='modal' data-target='#Articulos'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLArticulos += "<button class='btn btn-danger' onclick='EliminarArticulos(" + DatosArticulo[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "</div>";
+        CodigoHTMLArticulos += "</div>";
     }
-    CtrlProveedores.innerHTML = CodigoHTMLAreas;
+    CtrlArticulos.innerHTML = CodigoHTMLArticulos;
 }
+
+//Limpia la información y carga la informacion del proveedor
+function AbrirMArticulos(id) {//la clase ArticuloObligatorio
+    var controlesObligatorio = document.getElementsByClassName("ArticuloObligatorio");
+    for (var i = 0; i < controlesObligatorio.length; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        Limpiar();
+    }
+    else {
+        $.get("/Articulos/ConsultaArticulos/?Id=" + Id, function (DatosArticulo) {
+            document.getElementById("TxtId").value = DatosArticulo[0].Id;
+            document.getElementById("TxtNombre1").value = DatosArticulo[0].Nombre1;
+            document.getElementById("TxtNombre2").value = DatosArticulo[0].Nombre2;
+            document.getElementById("TxtEstadoInicial").value = DatosArticulo[0].EstadoInicial;
+            document.getElementById("TxtExistenciaActual").value = DatosArticulo[0].ExistenciaActual;
+            document.getElementById("TxtUnidadDeMedida").value = DatosArticulo[0].UnidadDeMedida;
+            document.getElementById("cmbCategorias").value = DatosArticulo[0].Categorias;
+            document.getElementById("TxtNombreProveedor").value = DatosArticulo[0].NombreProveedor;
+            document.getElementById("TxtMarca").value = DatosArticulo[0].Marca;
+            document.getElementById("TxtDescripcion").value = DatosArticulo[0].Descripcion;
+            document.getElementById("TxtUnidadSAT").value = DatosArticulo[0].UnidadSAT;
+            document.getElementById("TxtClaveProveedor").value = DatosArticulo[0].ClaveProveedor;
+            document.getElementById("TxtClaveSAT").value = DatosArticulo[0].ClaveSAT;
+            document.getElementById("TxtUsoCFDI").value = DatosArticulo[0].UsoCFDI;
+            document.getElementById("TxtPrecioUnitario").value = DatosArticulo[0].PrecioUnitario;
+            document.getElementById("TxtImporte").value = DatosArticulo[0].Importe;
+            document.getElementById("TxtImagen").value = DatosArticulo[0].Imagen;
+        });
+    }
+
+
+}
+
+//Guarda los cambios y altas de las áreas
+function GuardarProveedor() {
+    if (Obligatorios("Proveedor") == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var Id = document.getElementById("TxtId").value;
+            var Nombre1 = document.getElementById("TxtNombre1").value;
+            var Nombre2 = document.getElementById("TxtNombre2").value;
+            var EstadoInicial = document.getElementById("TxtEstadoInicial").value;
+            var ExistenciaActual = document.getElementById("TxtExistenciaActual").value;
+            var UnidadDeMedida = document.getElementById("TxtUnidadDeMedida").value;
+            var Categorias = document.getElementById("TxtCategorias").value;
+            var Stock = document.getElementById("TxtStock").value;
+            var Importe = document.getElementById("TxtImporte").value;
+            var NombreProveedor = document.getElementById("NombreProveedor").value;
+            var Marca = document.getElementById("TxtMarca").value;
+            var Descripcion = document.getElementById("TxtDescripcion").value;
+
+            ///var temUser = document.getElementById("cmbEncargado");
+            //var UNombre1 = temUser.options[temUser.selectedIndex].text;
+
+            var ClaveProveedor = document.getElementById("TxtClaveProveedor").value;
+            var ClaveSAT = document.getElementById("TxtClaveSAT").value;
+            var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
+            var PrecioUnitario = document.getElementById("TxtPrecioUnitario").value;
+            var Importe = document.getElementById("TxtImporte").value;
+            var Imagen = document.getElementById("TxtImagen").value;
+            var frm = new FormData();
+            frm.append("Id", Id);
+            frm.append("Nombre1", Nombre1);
+            frm.append("Nombre2", Nombre2);
+            frm.append("EstadoInicial", EstadoInicial);
+            frm.append("ExistenciaActual", ExistenciaActual);
+            frm.append("UnidadDeMedida", UnidadDeMedida);
+            frm.append("Categorias", EstadoInicial);
+            frm.append("Stock", Stock);
+            frm.append("categorias", Categorias);
+            frm.append("NombreProveedor", NombreProveedor);
+            frm.append("Marca", Marca);
+            frm.append("Descripcion", Descripcion);
+            frm.append("ClaveProveedor", ClaveProveedor);
+            frm.append("ClaveSAT", ClaveSAT);
+            frm.append("UsoCFDI", UsoCFDI);
+            frm.append("PrecioUnitario", PrecioUnitario);
+            frm.append("Importe", Importe);
+            frm.append("Imagen", Imagen);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Articulos/GuardarArticulo",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Ocurrio un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe el Articulo");
+                    }
+                    else {
+                        alert("Se ejecuto correctamente");
+                        CrearAcordeonArticulos();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
+    }
+}
+//"Elimina" el área cambia el Estatus
+//"Elimina" el área cambia el Estatus
+function EliminarArticulos(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArticulo) {
+            if (DatoArticulo == 1) {
+                alert("Se elimino correctamente");
+                CrearAcordeonArticulos();
+            } else {
+                alert("Ocurrio un error");
+            }
+        });
+    }
+}
+
+

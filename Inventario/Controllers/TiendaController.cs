@@ -22,7 +22,7 @@ namespace Inventario.Controllers
                 {
                     p.Nombre,
                     p.NombreS,
-                    p.UNombre,
+                    p.Unombre,
                     p.LNombre,
                     p.E1Nombre,
                     p.E3Nombre,
@@ -46,7 +46,7 @@ namespace Inventario.Controllers
                 {
                     p.Nombre,
                     p.NombreS,
-                    p.UNombre,
+                    p.Unombre,
                     p.LNombre,
                     p.E1Nombre,
                     p.E3Nombre,

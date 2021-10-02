@@ -70,7 +70,7 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#Proveedores'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + DatosProveedor[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
