@@ -21,8 +21,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-                    p.Supervicion,
-                    p.UNombre,
+                    p.TipoSupervicion,
                     p.Tiendas
                 });
             return Json(supervisiones, JsonRequestBehavior.AllowGet);
@@ -33,8 +32,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-                    p.Supervicion,
-                    p.UNombre,
+                    p.TipoSupervicion,
                     p.Tiendas
                 });
             return Json(supervision, JsonRequestBehavior.AllowGet);

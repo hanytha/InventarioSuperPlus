@@ -30212,6 +30212,53 @@ body {
 
 
 
+/*EL PRINCIPIO QUE HACE QUE FONTAWESOME Y PARECIDOS FUNCIONEN EN LA PÁGINA WEB (Para los iconos agregar, editar..)*/
+/*siempre que queremos poner un icono hay que llamar a .fa o .fas porqué en realidad lo que hacen es llamar la font-family.*/
+.fa,
+.fas {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+/* a continuación hay que poner la instrucción concreta de cada icono. fijaros que en realidad mediante el pseudo-selector ::before introducimos contenido delante de la etiqueta*/
+
+.fa-thumbs-down:before {
+    content: "\f165";
+}
+
+.fa-thumbs-up:before {
+    content: "\f164";
+}
+
+/*si estás familiarizado con los breakpoints de bootstrap esto te gustará*/
+.fa-lg {
+    font-size: 1.33333em;
+    line-height: 0.75em;
+    vertical-align: -.0667em;
+}
+
+.fa-xs {
+    font-size: .75em;
+}
+
+.fa-sm {
+    font-size: .875em;
+}
+
+/*poner el icono a la izquierda o a la derecha*/
+.fa-pull-left {
+    float: left;
+}
+
+.fa-pull-right {
+    float: right;
+}
+
+
+
+
+
+
 
 
 

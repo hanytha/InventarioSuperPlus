@@ -26,7 +26,6 @@ namespace Inventario.Controllers
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
-                    p.Marca,
                     p.Destino,
                     p.Fecha,
                 });
@@ -39,15 +38,11 @@ namespace Inventario.Controllers
                 {
                     p.Id,
                     p.NumeroPedido,
-                    p.IdArticulos,
                     p.NombreArticulo,
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
-                    p.IdMarca,
-                    p.Marca,
                     p.IdProveedor,
-                    p.IdUsuarios,
                     p.Usuario,
                     p.IdArea,
                     p.Destino,

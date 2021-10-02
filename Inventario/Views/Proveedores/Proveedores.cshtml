@@ -1,14 +1,13 @@
-﻿    
+﻿
 @{
     ViewBag.Title = "Proveedores";
 }
 <h2>Proveedores</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--  -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
-<button type="button" onclick="AbrirMProveedores(0)" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="AbrirMProveedores" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -26,7 +25,7 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h2>Paso 1</h2>
                             <div class="form-group">
@@ -130,17 +129,17 @@
                             </div>
 
                             <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="submit_data" />
-                            <button type="button" onclick="GuardarProveedor()" class="btn btn-primary">ENVIAR</button>
+                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor" id="submit_data" />
+                            <button type="button" onclick="GuardarProveedor" class="btn btn-primary">ENVIAR</button>
                             <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
                         </fieldset>
-        </form>
-    </div>
-    <!-- pie del modal-->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            </div>
-</div>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

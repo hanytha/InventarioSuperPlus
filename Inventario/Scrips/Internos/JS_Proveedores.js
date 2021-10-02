@@ -1,77 +1,77 @@
 ﻿
-AcordeonProveedores();
+CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
-function AcordeonProveedores() {
-    $.get("/Proveedores/ConsultaProveedores", function (RegistrosProveedores) {
-        //Accordeon(RegistrosProveedores, document.getElementById("accordion"));
-        otro(RegistrosProveedores, document.getElementById("accordion"));
+function CrearAcordeonProveedores() {
+    $.get("/Proveedores/ConsultaProveedores", function (DatosProveedor) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+        AcordeonProveedores(DatosProveedor, document.getElementById("accordion"));
     });
 }
-function otro(RegistrosProveedores, CtrlProveedores) {
+function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
     var CodigoHTMLAreas = "";
-    for (var i = 0; i < RegistrosProveedores.length; i++) {
+    for (var i = 0; i < DatosProveedor.length; i++) {
         if (i < 1) {
             CodigoHTMLAreas += "<div class='card m-b-0'>";
         }
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + RegistrosProveedores[i].Id + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + DatosProveedor[i].Id + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + RegistrosProveedores[i].Id + "' aria-expanded='false' aria-controls='collapse" + RegistrosProveedores[i].Id + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + DatosProveedor[i].Id + "' aria-expanded='false' aria-controls='collapse" + DatosProveedor[i].Id + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<span >" + RegistrosProveedores[i].Nombre + "</span>";
+        CodigoHTMLAreas += "<span >" + DatosProveedor[i].Nombre + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + RegistrosProveedores[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + DatosProveedor[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + RegistrosProveedores[i].Correo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + RegistrosProveedores[i].GiroDelProveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + RegistrosProveedores[i].Municipio + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + DatosProveedor[i].Correo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + DatosProveedor[i].GiroDelProveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + DatosProveedor[i].Municipio + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + RegistrosProveedores[i].CuentaInterbancaria + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + RegistrosProveedores[i].CodigoPostal + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + RegistrosProveedores[i].Estado + "</div>";
-      //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosProveedores[i].Direccion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + DatosProveedor[i].CuentaInterbancaria + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + DatosProveedor[i].CodigoPostal + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + DatosProveedor[i].Estado + "</div>";
+        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
         //CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12'><strong>Dirección</strong></div >";
         //CodigoHTMLAreas += "</div>";
         //CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + RegistrosProveedores[i].RFC + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosProveedores[i].Direccion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + RegistrosProveedores[i].Localidad + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + DatosProveedor[i].RFC + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + DatosProveedor[i].Localidad + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosProveedores[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + DatosProveedor[i].Telefono + "</div>";
 
-       // CodigoHTMLAreas += "</div>";
-       // CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + RegistrosProveedores[i].Banco + "</div>";
-
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosProveedores[i].Telefono + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + RegistrosProveedores[i].NumeroDeCuenta + "</div>";
+        // CodigoHTMLAreas += "</div>";
+        // CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + DatosProveedor[i].Banco + "</div>";
 
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + RegistrosProveedores[i].UsoCFDI + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nomenclatura: </strong>" + RegistrosProveedores[i].Nomenclatura + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + DatosProveedor[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + DatosProveedor[i].NumeroDeCuenta + "</div>";
+
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + RegistrosProveedores[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + RegistrosProveedores[i].Logo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + DatosProveedor[i].UsoCFDI + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nomenclatura: </strong>" + DatosProveedor[i].Nomenclatura + "</div>";
         CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + RegistrosProveedores[i].ID + ")'><i id='BtnMO" + RegistrosProveedores[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + DatosProveedor[i].Descripcion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + DatosProveedor[i].Logo + "</div>";
+        CodigoHTMLAreas += "</div>";
+        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + RegistrosProveedores[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + RegistrosProveedores[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + DatosProveedor[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -90,10 +90,9 @@ function AbrirMProveedores(id) {//la clase AreaObligatorio
     }
     if (id == 0) {
         Limpiar();
-
     }
     else {
-        $.get("/Proveedores/ConsultaProveedores/?Id=" + Id, function (DatosProveedor) {
+        $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (DatosProveedor) {
             document.getElementById("TxtId").value = DatosProveedor[0].Id;
             document.getElementById("TxtNombre").value = DatosProveedor[0].Nombre;
             document.getElementById("TxtCorreo").value = DatosProveedor[0].Correo;
@@ -134,7 +133,7 @@ function GuardarProveedor() {
             var RFC = document.getElementById("RFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
-            
+
             ///var temUser = document.getElementById("cmbEncargado");
             //var UNombre = temUser.options[temUser.selectedIndex].text;
 
@@ -166,7 +165,7 @@ function GuardarProveedor() {
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/Proveedores/Proveedores",
+                url: "/Proveedores/GuardarProveedor",
                 data: frm,
                 contentType: false,
                 processData: false,
@@ -179,7 +178,7 @@ function GuardarProveedor() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        AcordeonProveedores();
+                        CrearAcordeonProveedores();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -187,18 +186,18 @@ function GuardarProveedor() {
         }
     }
 }
-
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
-    if (confirm("¿Desea eliminar el registo?") == 1) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
 
         $.get("/Proveedores/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonAreas();
+                CrearAcordeonProveedores();
             } else {
                 alert("Ocurrio un error");
             }
         });
     }
 }
+

@@ -23,7 +23,6 @@ namespace Inventario.Controllers
                     p.NumeroPedido,
                     p.NombreArticulo,
                     p.CantidadSolicitada,
-                    p.Marca,
                     p.Fecha,
 
                 });
@@ -38,7 +37,6 @@ namespace Inventario.Controllers
                     p.NumeroPedido,
                     p.NombreArticulo,
                     p.CantidadSolicitada,
-                    p.Marca,
                     p.Fecha
 
                 });
