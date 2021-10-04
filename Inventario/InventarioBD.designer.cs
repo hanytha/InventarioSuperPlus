@@ -108,7 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSPConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSPConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

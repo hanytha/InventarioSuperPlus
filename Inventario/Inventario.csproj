@@ -105,7 +105,6 @@
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
-    <Content Include="Scrips\Internos\JS_Pruebas.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Personal.js" />
@@ -145,7 +144,6 @@
     <Compile Include="Controllers\PedidosintController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
-    <Compile Include="Controllers\Prueba.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
@@ -196,7 +194,6 @@
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
     <Content Include="Views\Configuracion\Configuracion.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
-    <Content Include="Views\Prueba\Prueva.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
