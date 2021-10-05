@@ -71,7 +71,7 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + DatosProveedor[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -84,13 +84,14 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
 }
 
 //Limpia la información y carga la informacion del proveedor
-function AbrirMProveedores(id) {//la clase AreaObligatorio
-    var controlesObligatorio = document.getElementsByClassName("AreaObligatorio");
-    for (var i = 0; i < controlesObligatorio.length; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
+function abrirModal(id) {//la clase AreaObligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error");//Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
-        Limpiar();
+        LimpiarCampos();
     }
     else {
         $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (DatosProveedor) {
@@ -101,8 +102,14 @@ function AbrirMProveedores(id) {//la clase AreaObligatorio
             document.getElementById("TxtCuentaInterbancaria").value = DatosProveedor[0].CuentaInterbancaria;
             document.getElementById("TxtCodigoPostal").value = DatosProveedor[0].CodigoPostal;
             document.getElementById("cmbEstado").value = DatosProveedor[0].Estado;
-            document.getElementById("cmbMunicipio").value = DatosProveedor[0].Municipio;
-            document.getElementById("cmbLocalidad").value = DatosProveedor[0].Localidad;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].IDEstado, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].IDMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
+            });
             document.getElementById("TxtRFC").value = DatosProveedor[0].RFC;
             document.getElementById("TxtDireccion").value = DatosProveedor[0].Direccion;
             document.getElementById("TxtTelefono").value = DatosProveedor[0].Telefono;
@@ -114,6 +121,22 @@ function AbrirMProveedores(id) {//la clase AreaObligatorio
             document.getElementById("TxtLogo").value = DatosProveedor[0].Logo;
         });
     }
+}
+
+
+//limpiar campos
+function LimpiarCampos() {
+    var controles = document.getElementsByClassName("limpiar");
+    var ncontroles = controles.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controles[i].nodeName == "SELECT") {
+            controles[i].value = "0";
+        }
+        else {
+            controles[i].value = "";
+        }
+    }
+    ErroresCampos();
 }
 
 
@@ -161,7 +184,7 @@ function llenarCombo(data, control, primerElemento) {
 
 //Guarda los cambios y altas de las áreas
 function GuardarProveedor() {
-    if (Obligatorios("Proveedor") == true) {
+    if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var Id = document.getElementById("TxtId").value;
             var Nombre = document.getElementById("TxtNombre").value;
@@ -170,20 +193,11 @@ function GuardarProveedor() {
             var CuentaInterbancaria = document.getElementById("TxtCuentaInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
             document.getElementById("cmbEstado").value = data[0].IDEstado;
+
+            var estado = document.getElementById("cmbestado").value;
             var Municipio = document.getElementById("cmbMunicipio").value;
-            var Localidad = document.getElementById("cmdLocalidad").value;
-          
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].estado_id, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
-                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
-            });
-
-
-            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].municipio_id, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
-                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
-            });
-
+            var Localidad = document.getElementById("cmblocalidad").value;
+           
             var RFC = document.getElementById("RFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
@@ -237,6 +251,26 @@ function GuardarProveedor() {
         }
     }
 }
+
+
+
+//marca los campos obligatorios
+function CamposObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {

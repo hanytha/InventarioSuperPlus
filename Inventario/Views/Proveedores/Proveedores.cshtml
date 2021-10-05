@@ -2,12 +2,15 @@
 @{
     ViewBag.Title = "Proveedores";
 }
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Proveedores</h2>
 <!--  -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
-<button onclick="AbrirMProveedores" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -30,15 +33,15 @@
                             <h2>Paso 1</h2>
                             <div class="form-group">
                                 <label for="nombreProveedor">Nombre del proveedor</label>
-                                <input type="text" class="form-control Proveedor" name="data[nombreProveedor]" id="nombreProveedor" placeholder="Nombre del proveedor">
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[nombreProveedor]" id="nombreProveedor" placeholder="Nombre del proveedor">
                             </div>
                             <div class="form-group">
                                 <label for="correoProveedor">E-mail</label>
-                                <input type="email" class="form-control" id="correoProveerdor" placeholder="Correo electrónico">
+                                <input type="email" class="form-control limpiar obligatorio" id="correoProveerdor" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
                                 <label for="giroProveedor">Giro del proveedor</label>
-                                <input type="text" class="form-control Proveedor" name="data[giroProveedor Proveedor]" id="giroProveedor" placeholder="Giro del proveedor">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[giroProveedor Proveedor]" id="giroProveedor" placeholder="Giro del proveedor">
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
@@ -46,16 +49,16 @@
                             <h2> Paso 2</h2>
                             <div class="form-group">
                                 <label for="centaInterbancaria">Cuenta Interbancaria</label>
-                                <input type="text" class="form-control Proveedor" name="data[cuentaInterbancria Proveedor]" id="telefono" placeholder="Número telefónico">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[cuentaInterbancria Proveedor]" id="telefono" placeholder="Número telefónico">
                             </div>
                             <div class="form-group">
                                 <label for="codigoPostal">Código Postal</label>
-                                <input type="text" class="form-control Proveedor" name="data[codigoPostal Proveedor]" id="codigoPostal" placeholder="Código Postal">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[codigoPostal Proveedor]" id="codigoPostal" placeholder="Código Postal">
                             </div>
 
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Estado</span>
-                                <select id="cmbEstado" style="width: 100%" class="form-control"></select>
+                                <select id="cmbEstado" style="width: 100%" class="form-control limpiar obligatorio"></select>
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-default" value="Atras" />
@@ -63,21 +66,21 @@
                         </fieldset>
                         <fieldset>
                             <h2> Paso 3</h2>
-                
+
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Municipio</span>
                                 <BR />
-                                <select id="cmbMunicipio" style="width: 100%" class="form-control"></select>
+                                <select id="cmbMunicipio" style="width: 100%" class="form-control limpiar obligatorio"></select>
                             </div>
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Localidad</span>
                                 <BR />
-                                <select id="cmbLocalidad" style="width: 100%" class="form-control"></select>
+                                <select id="cmbLocalidad" style="width: 100%" class="form-control limpiar obligatorio"></select>
                             </div>
-                    
+
                             <div class="form-group">
                                 <label for="RFCemisor">RFC</label>
-                                <input type="text" class="form-control Proveedor" name="data[RFCemisor Proveedor]" id="RFCemisor" placeholder="RFC del Emisor">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[RFCemisor Proveedor]" id="RFCemisor" placeholder="RFC del Emisor">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -86,15 +89,15 @@
                             <h2> Paso 4</h2>
                             <div class="form-group">
                                 <label for="direccion">Dirección</label>
-                                <input type="text" class="form-control Proveedor" name="data[direccion Proveedor]" id="direccion" placeholder="Dirección">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[direccion Proveedor]" id="direccion" placeholder="Dirección">
                             </div>
                             <div class="form-group">
                                 <label for="telefono"> Teléfono</label>
-                                <input type="text" class="form-control Proveedor" name="data[direccion Proveedor]" id="direccion" placeholder="Teléfono">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[direccion Proveedor]" id="direccion" placeholder="Teléfono">
                             </div>
                             <div class="form-group">
                                 <label for="banco"> Banco</label>
-                                <input type="text" class="form-control Proveedor" name="data[banco Proveedor]" id="banco" placeholder="Banco">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[banco Proveedor]" id="banco" placeholder="Banco">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -103,15 +106,15 @@
                             <h2> Paso 5</h2>
                             <div class="form-group">
                                 <label for="numeroCuenta">Número de Cuenta</label>
-                                <input type="text" class="form-control Proveedor" name="data[numeroCuenta Proveedor]" id="numeroCuenta" placeholder="Número de Cuenta">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[numeroCuenta Proveedor]" id="numeroCuenta" placeholder="Número de Cuenta">
                             </div>
                             <div class="form-group">
                                 <label for="usoCFDI">UsoCFDI</label>
-                                <input type="text" class="form-control Proveedor" name="data[usoCFDI Proveedor]" id="usoCFDI" placeholder="UsoCFDI">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[usoCFDI Proveedor]" id="usoCFDI" placeholder="UsoCFDI">
                             </div>
                             <div class="form-group">
                                 <label for="nomenclatura"> Nomenclatura</label>
-                                <input type="text" class="form-control Proveedor" name="data[nomenclatura Proveedor]" id="nomenclatura" placeholder="Nomenclatura">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[nomenclatura Proveedor]" id="nomenclatura" placeholder="Nomenclatura">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -120,17 +123,19 @@
                             <h2> Paso 6</h2>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <input type="text" class="form-control" name="data[descripcion]" id="descripcion" placeholder="Descripción">
+                                <input type="text" class="form-control limpiar obligatorio" name="data[descripcion]" id="descripcion" placeholder="Descripción">
                             </div>
                             <div class="form-group">
                                 <label for="carpeta">Logo</label>
                                 <input type="file" name="imagefile" accept="image/jpeg, image/png">
                             </div>
-
+                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
                             <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor" id="submit_data" />
                             <button type="button" onclick="GuardarProveedor" class="btn btn-primary">ENVIAR</button>
                             <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="Guardar()">GUARDAR</button>
+                            <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                         </fieldset>
                     </form>
                 </div>
