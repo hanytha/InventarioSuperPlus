@@ -48,6 +48,7 @@ namespace Inventario.Controllers
                     p.RazonSocial,
                     p.ClaveInterbancaria,
                     p.CodigoPostal,
+                    p.IdEstado,
                     p.RFC,
                     p.Direccion,
                     p.Telefono,
@@ -60,7 +61,7 @@ namespace Inventario.Controllers
                 });
             return Json(proveedor, JsonRequestBehavior.AllowGet);
         }
-
+        //Guardar los datos del proveedor
         public int GuardarProveedor(Proveedores DatosProveedor)
         {
             int Afectados = 0;
@@ -69,6 +70,8 @@ namespace Inventario.Controllers
                 long id = DatosProveedor.Id;
                 if (id.Equals(0))
                 {
+                   // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre)).Count();
+
                     int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                     if (nveces == 0)
                     {

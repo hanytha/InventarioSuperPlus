@@ -130,7 +130,7 @@ function GuardarProveedor() {
             var Marca = document.getElementById("TxtMarca").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
-            ///var temUser = document.getElementById("cmbEncargado");
+            //var temUser = document.getElementById("cmbEncargado");
             //var UNombre1 = temUser.options[temUser.selectedIndex].text;
 
             var ClaveProveedor = document.getElementById("TxtClaveProveedor").value;
