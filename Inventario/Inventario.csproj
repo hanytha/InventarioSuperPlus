@@ -97,6 +97,7 @@
     <Content Include="Content\argon.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\nucleo.css" />
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
@@ -135,6 +136,7 @@
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
+    <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
@@ -204,6 +206,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\GLOBAL\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

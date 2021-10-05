@@ -1,4 +1,5 @@
-﻿
+﻿LlenarCMBPrin();
+
 CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
@@ -70,7 +71,7 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#Proveedores'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + DatosProveedor[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -113,9 +114,50 @@ function AbrirMProveedores(id) {//la clase AreaObligatorio
             document.getElementById("TxtLogo").value = DatosProveedor[0].Logo;
         });
     }
-
-
 }
+
+
+//llenar 
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDEstados", function (data) {
+        llenarCombo(data, document.getElementById("cmbEstado"), true);
+    });
+    $.get("/GLOBAL/BDAreas", function (data) {
+        llenarCombo(data, document.getElementById("cmbArea"), true);
+    });
+    $.get("/Usuarios/BDPerfiles", function (data) {
+        llenarCombo(data, document.getElementById("cmbPerfil"), true);
+    });
+}
+
+
+//event Change index Estados para llenar el combobox Municipios
+var IDE = document.getElementById("cmbEstado");
+IDE.addEventListener("change", function () {
+    $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbMunicipio"), true);
+    });
+});
+//event Change index Municipio para llenar el combo box Municipios //Llemar los combos
+var IDM = document.getElementById("cmbMunicipio");
+IDM.addEventListener("change", function () {
+    $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbLocalidad"), true);
+    });
+});
+//funcion general para llenar los select
+function llenarCombo(data, control, primerElemento) {
+    var contenido = "";
+    if (primerElemento == true) {
+        contenido += "<option value='0'>--Seleccione--</option>";
+    }
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
 
 //Guarda los cambios y altas de las áreas
 function GuardarProveedor() {
@@ -127,15 +169,24 @@ function GuardarProveedor() {
             var GiroDelProveedor = document.getElementById("TxtGiroDelProveedor").value;
             var CuentaInterbancaria = document.getElementById("TxtCuentaInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
-            var Estado = document.getElementById("TxtEstado").value;
-            var Municipio = document.getElementById("TxtMunicipio").value;
-            var Localidad = document.getElementById("TxtLocalidad").value;
+            document.getElementById("cmbEstado").value = data[0].IDEstado;
+            var Municipio = document.getElementById("cmbMunicipio").value;
+            var Localidad = document.getElementById("cmdLocalidad").value;
+          
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].estado_id, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
+            });
+
+
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].municipio_id, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
+            });
+
             var RFC = document.getElementById("RFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
-
-            ///var temUser = document.getElementById("cmbEncargado");
-            //var UNombre = temUser.options[temUser.selectedIndex].text;
 
             var Banco = document.getElementById("TxtBanco").value;
             var NumeroDeCuenta = document.getElementById("TxtNumeroDeCuenta").value;
@@ -200,4 +251,5 @@ function EliminarProveedores(id) {
         });
     }
 }
+
 

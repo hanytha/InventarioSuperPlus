@@ -183,12 +183,11 @@ function GuardarProveedor() {
     }
 }
 //"Elimina" el área cambia el Estatus
-//"Elimina" el área cambia el Estatus
 function EliminarArticulos(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArticulo) {
-            if (DatoArticulo == 1) {
+        $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoProveedor) {
+            if (DatoProveedor == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonArticulos();
             } else {
