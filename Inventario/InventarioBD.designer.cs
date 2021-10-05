@@ -1223,7 +1223,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="DateTime NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="Date NOT NULL")]
 		public System.DateTime FechaIngreso
 		{
 			get

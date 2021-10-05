@@ -38,7 +38,7 @@
       <Column Name="Asignacion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="sitio" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Contraseña" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Usuarios_Areas" Member="Areas" ThisKey="Id" OtherKey="IdUsuario" Type="Areas" />

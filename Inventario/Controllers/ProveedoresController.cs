@@ -48,7 +48,6 @@ namespace Inventario.Controllers
                     p.RazonSocial,
                     p.ClaveInterbancaria,
                     p.CodigoPostal,
-
                     p.RFC,
                     p.Direccion,
                     p.Telefono,

@@ -153,4 +153,3 @@ namespace Inventario.Controllers
     }
 
 }
-
