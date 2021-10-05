@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Proveedores";
 }
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Proveedores</h2>
 <!--  -->
@@ -29,7 +28,7 @@
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
-                        <fieldset>
+                        <fieldset><!--Los pasos del modal-->
                             <h2>Paso 1</h2>
                             <div class="form-group">
                                 <label for="nombreProveedor">Nombre del proveedor</label>
@@ -48,8 +47,8 @@
                         <fieldset>
                             <h2> Paso 2</h2>
                             <div class="form-group">
-                                <label for="centaInterbancaria">Cuenta Interbancaria</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[cuentaInterbancria Proveedor]" id="telefono" placeholder="Número telefónico">
+                                <label for="cuentaInterbancaria">Cuenta Interbancaria</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[cuentaInterbancria Proveedor]" id="cuentaInterbancaria" placeholder="Cuenta Interbancaria">
                             </div>
                             <div class="form-group">
                                 <label for="codigoPostal">Código Postal</label>
@@ -131,17 +130,15 @@
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor" id="submit_data" />
-                            <button type="button" onclick="GuardarProveedor" class="btn btn-primary">ENVIAR</button>
+                            <!--  <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="submit_data" />-->
                             <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="Guardar()">GUARDAR</button>
-                            <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>

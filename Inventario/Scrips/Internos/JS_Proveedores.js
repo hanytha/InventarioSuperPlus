@@ -7,7 +7,7 @@ function CrearAcordeonProveedores() {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonProveedores(DatosProveedor, document.getElementById("accordion"));
     });
-}
+}//Acordeon proveedores
 function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < DatosProveedor.length; i++) {
@@ -20,7 +20,6 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='card-header' id='heading" + DatosProveedor[i].Id + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + DatosProveedor[i].Id + "' aria-expanded='false' aria-controls='collapse" + DatosProveedor[i].Id + "' class='collapsed'>";
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<span >" + DatosProveedor[i].Nombre + "</span>";
         CodigoHTMLAreas += "</a>";
@@ -37,28 +36,19 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + DatosProveedor[i].CuentaInterbancaria + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + DatosProveedor[i].CodigoPostal + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + DatosProveedor[i].Estado + "</div>";
-        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        //CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12'><strong>Dirección</strong></div >";
-        //CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + DatosProveedor[i].RFC + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + DatosProveedor[i].Localidad + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + DatosProveedor[i].Telefono + "</div>";
-
-        // CodigoHTMLAreas += "</div>";
-        // CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + DatosProveedor[i].Banco + "</div>";
-
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + DatosProveedor[i].Telefono + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + DatosProveedor[i].NumeroDeCuenta + "</div>";
-
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + DatosProveedor[i].UsoCFDI + "</div>";
@@ -68,7 +58,6 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + DatosProveedor[i].Descripcion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + DatosProveedor[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
@@ -82,13 +71,12 @@ function AcordeonProveedores(DatosProveedor, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error");//Cambia los bordes lo las casillas a color rojo
+        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
         LimpiarCampos();
@@ -123,7 +111,6 @@ function abrirModal(id) {//la clase AreaObligatorio
     }
 }
 
-
 //limpiar campos
 function LimpiarCampos() {
     var controles = document.getElementsByClassName("limpiar");
@@ -131,6 +118,7 @@ function LimpiarCampos() {
     for (var i = 0; i < ncontroles; i++) {
         if (controles[i].nodeName == "SELECT") {
             controles[i].value = "0";
+            CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosProveedor[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         }
         else {
             controles[i].value = "";
@@ -139,8 +127,7 @@ function LimpiarCampos() {
     ErroresCampos();
 }
 
-
-//llenar 
+//llenar los combos Principales
 function LlenarCMBPrin() {
     $.get("/GLOBAL/BDEstados", function (data) {
         llenarCombo(data, document.getElementById("cmbEstado"), true);
@@ -153,7 +140,6 @@ function LlenarCMBPrin() {
     });
 }
 
-
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
@@ -161,7 +147,7 @@ IDE.addEventListener("change", function () {
         llenarCombo(data, document.getElementById("cmbMunicipio"), true);
     });
 });
-//event Change index Municipio para llenar el combo box Municipios //Llemar los combos
+//event Change index Municipio para llenar el combo box Municipios 
 var IDM = document.getElementById("cmbMunicipio");
 IDM.addEventListener("change", function () {
     $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
@@ -179,8 +165,6 @@ function llenarCombo(data, control, primerElemento) {
     }
     control.innerHTML = contenido;
 }
-
-
 
 //Guarda los cambios y altas de las áreas
 function GuardarProveedor() {
@@ -252,8 +236,6 @@ function GuardarProveedor() {
     }
 }
 
-
-
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -270,11 +252,9 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-
         $.get("/Proveedores/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
                 alert("Se elimino correctamente");
