@@ -47,7 +47,7 @@ namespace Inventario.Controllers
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
-            var datos = InvBD.municipios.Where(p => p.activo.Equals(1) && p.id.Equals(IDE))
+            var datos = InvBD.municipios.Where(p => p.activo.Equals(1) && p.estado_id.Equals(IDE))
                 .Select(p => new {
                     ID = p.id,
                     Nombre = p.nombre
@@ -57,7 +57,7 @@ namespace Inventario.Controllers
         //consulta Localidades
         public JsonResult BDLocalidades(int IDM)
         {
-            var datos = InvBD.localidades.Where(p => p.activo.Equals(1) && p.id.Equals(IDM))
+            var datos = InvBD.localidades.Where(p => p.activo.Equals(1) && p.municipio_id.Equals(IDM))
                 .Select(p => new {
                     ID = p.id,
                     Nombre = p.nombre

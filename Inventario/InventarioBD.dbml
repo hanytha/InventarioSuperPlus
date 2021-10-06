@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioSP" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSP;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSPConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSP;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSPConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -319,6 +319,9 @@
       <Column Name="ClaveInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Municipio" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />

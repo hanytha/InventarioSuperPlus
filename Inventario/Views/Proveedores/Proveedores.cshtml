@@ -31,33 +31,33 @@
                         <fieldset><!--Los pasos del modal-->
                             <h2>Paso 1</h2>
                             <div class="form-group">
-                                <label for="nombreProveedor">Nombre del proveedor</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[nombreProveedor]" id="nombreProveedor" placeholder="Nombre del proveedor">
+                                <label for="TxtNombre">Nombre del proveedor</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre del proveedor">
                             </div>
                             <div class="form-group">
-                                <label for="correoProveedor">E-mail</label>
-                                <input type="email" class="form-control limpiar obligatorio" id="correoProveerdor" placeholder="Correo electrónico">
+                                <label for="Txtcorreo">E-mail</label>
+                                <input type="email" class="form-control limpiar obligatorio" id="Txtcorreo" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
-                                <label for="giroProveedor">Giro del proveedor</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[giroProveedor Proveedor]" id="giroProveedor" placeholder="Giro del proveedor">
+                                <label for="TxtRazonSocial">Razón Social</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtRazonSocial]" id="TxtRazonSocial" placeholder="Razón Social">
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
                             <h2> Paso 2</h2>
                             <div class="form-group">
-                                <label for="cuentaInterbancaria">Cuenta Interbancaria</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[cuentaInterbancria Proveedor]" id="cuentaInterbancaria" placeholder="Cuenta Interbancaria">
+                                <label for="TxtCuentaInterbancaria">Cuenta Interbancaria</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtCuentaInterbancaria]" id="TxtCuentaInterbancaria" placeholder="Cuenta Interbancaria">
                             </div>
                             <div class="form-group">
-                                <label for="codigoPostal">Código Postal</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[codigoPostal Proveedor]" id="codigoPostal" placeholder="Código Postal">
+                                <label for="TxtCodigoPostal">Código Postal</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtCodigoPostal]" id="TxtCodigoPostal" placeholder="Código Postal">
                             </div>
 
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Estado</span>
-                                <select id="cmbEstado" style="width: 100%" class="form-control limpiar obligatorio"></select>
+                                <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-default" value="Atras" />
@@ -69,17 +69,17 @@
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Municipio</span>
                                 <BR />
-                                <select id="cmbMunicipio" style="width: 100%" class="form-control limpiar obligatorio"></select>
+                                <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Localidad</span>
                                 <BR />
-                                <select id="cmbLocalidad" style="width: 100%" class="form-control limpiar obligatorio"></select>
+                                <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
 
                             <div class="form-group">
-                                <label for="RFCemisor">RFC</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[RFCemisor Proveedor]" id="RFCemisor" placeholder="RFC del Emisor">
+                                <label for="TxtRFC">RFC</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtRFC]" id="TxtRFC" placeholder="RFC del Emisor">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -87,16 +87,16 @@
                         <fieldset>
                             <h2> Paso 4</h2>
                             <div class="form-group">
-                                <label for="direccion">Dirección</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[direccion Proveedor]" id="direccion" placeholder="Dirección">
+                                <label for="TxtDireccion">Dirección</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtDireccion]" id="TxtDireccion" placeholder="Dirección">
                             </div>
                             <div class="form-group">
-                                <label for="telefono"> Teléfono</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[direccion Proveedor]" id="direccion" placeholder="Teléfono">
+                                <label for="TxtTelefono"> Teléfono</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtTelefono]" id="TxtTelefono" placeholder="Teléfono">
                             </div>
                             <div class="form-group">
-                                <label for="banco"> Banco</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[banco Proveedor]" id="banco" placeholder="Banco">
+                                <label for="TxtBanco"> Banco</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtBanco]" id="TxtBanco" placeholder="Banco">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -104,16 +104,16 @@
                         <fieldset>
                             <h2> Paso 5</h2>
                             <div class="form-group">
-                                <label for="numeroCuenta">Número de Cuenta</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[numeroCuenta Proveedor]" id="numeroCuenta" placeholder="Número de Cuenta">
+                                <label for="TxtNumeroDeCuenta">Número de Cuenta</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNumeroDeCuenta]" id="TxtNumeroDeCuenta" placeholder="Número de Cuenta">
                             </div>
                             <div class="form-group">
-                                <label for="usoCFDI">UsoCFDI</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[usoCFDI Proveedor]" id="usoCFDI" placeholder="UsoCFDI">
+                                <label for="TxtUsoCFDI">UsoCFDI</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtUsoCFDI]" id="TxtUsoCFDI" placeholder="UsoCFDI">
                             </div>
                             <div class="form-group">
-                                <label for="nomenclatura"> Nomenclatura</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[nomenclatura Proveedor]" id="nomenclatura" placeholder="Nomenclatura">
+                                <label for="TxtNomenclatura"> Nomenclatura</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNomenclatura]" id="TxtNomenclatura" placeholder="Nomenclatura">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -121,12 +121,18 @@
                         <fieldset>
                             <h2> Paso 6</h2>
                             <div class="form-group">
-                                <label for="descripcion">Descripción</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[descripcion]" id="descripcion" placeholder="Descripción">
+                                <label for="TxtDescripcion">Descripción</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtDescripcion]" id="TxtDescripcion" placeholder="Descripción">
                             </div>
+                            <!-- <div class="form-group">
+        <label for="TxtLogo">Logo</label>
+        <input type="file" class="form-control limpiar obligatorio" name="TxtLogo" accept="image/jpeg, image/png">
+    </div>-->
                             <div class="form-group">
-                                <label for="carpeta">Logo</label>
-                                <input type="file" name="imagefile" accept="image/jpeg, image/png">
+                                <label for="TxtLogo">Logo</label>
+                                <img id="PBFoto" src="" />
+                                <br />
+                                <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->

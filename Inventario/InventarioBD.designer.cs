@@ -108,7 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSPConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSPConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -7141,6 +7141,12 @@ namespace Inventario
 		
 		private int _IdEstado;
 		
+		private string _Estado;
+		
+		private string _Municipio;
+		
+		private string _Localidad;
+		
 		private string _RFC;
 		
 		private string _Direccion;
@@ -7181,6 +7187,12 @@ namespace Inventario
     partial void OnCodigoPostalChanged();
     partial void OnIdEstadoChanging(int value);
     partial void OnIdEstadoChanged();
+    partial void OnEstadoChanging(string value);
+    partial void OnEstadoChanged();
+    partial void OnMunicipioChanging(string value);
+    partial void OnMunicipioChanged();
+    partial void OnLocalidadChanging(string value);
+    partial void OnLocalidadChanged();
     partial void OnRFCChanging(string value);
     partial void OnRFCChanged();
     partial void OnDireccionChanging(string value);
@@ -7345,6 +7357,66 @@ namespace Inventario
 					this._IdEstado = value;
 					this.SendPropertyChanged("IdEstado");
 					this.OnIdEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Municipio
+		{
+			get
+			{
+				return this._Municipio;
+			}
+			set
+			{
+				if ((this._Municipio != value))
+				{
+					this.OnMunicipioChanging(value);
+					this.SendPropertyChanging();
+					this._Municipio = value;
+					this.SendPropertyChanged("Municipio");
+					this.OnMunicipioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Localidad", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Localidad
+		{
+			get
+			{
+				return this._Localidad;
+			}
+			set
+			{
+				if ((this._Localidad != value))
+				{
+					this.OnLocalidadChanging(value);
+					this.SendPropertyChanging();
+					this._Localidad = value;
+					this.SendPropertyChanged("Localidad");
+					this.OnLocalidadChanged();
 				}
 			}
 		}
