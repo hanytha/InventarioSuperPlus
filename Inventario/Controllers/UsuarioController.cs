@@ -51,7 +51,7 @@ namespace Inventario.Controllers
                     p.ApellidosM,
                     p.Foto,
                     p.FechaDeNacimiento,
-                    p.IdEstado,
+                    p.IdEstados,
                     p.RFC,
                     p.NoSS,
                     p.Correo,
