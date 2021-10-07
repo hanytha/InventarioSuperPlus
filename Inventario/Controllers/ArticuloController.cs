@@ -24,7 +24,8 @@ namespace Inventario.Controllers
                     p.Nombre2,
                     p.EstadoInicial,
                     p.NombreProveedor,
-                    p.IdPedido,
+                    p.Stock,
+                    p.IdEntradas,
                     p.IdTienda,
                     p.IdUnidadDeMedida,
                     p.IdAreas,
@@ -54,7 +55,8 @@ namespace Inventario.Controllers
                     p.Nombre2,
                     p.EstadoInicial,
                     p.NombreProveedor,
-                    p.IdPedido,
+                    p.Stock,
+                    p.IdEntradas,
                     p.IdTienda,
                     p.IdUnidadDeMedida,
                     p.IdAreas,
@@ -71,7 +73,7 @@ namespace Inventario.Controllers
                     p.PrecioUnitario,
                     p.Importe,
                     p.Imagen,
-                    p.Estatus,
+                    p.Estatus
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }

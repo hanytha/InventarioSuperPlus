@@ -53,7 +53,7 @@ namespace Inventario.Controllers
                     p.ClaveInterbancaria,
                     p.CodigoPostal,
                     p.IdEstado,
-                    p. Estado,
+                    p.Estado,
                     p.Municipio,
                     p.Localidad,
                     p.RFC,
@@ -74,58 +74,65 @@ namespace Inventario.Controllers
             int Afectados = 0;
             //try
             //{
-                long id = DatosProveedor.Id;
-                if (id.Equals(0))
-                {
-                    int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre)).Count();
+            long id = DatosProveedor.Id;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre)).Count();
 
-                    // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                    if (nveces == 0)
-                    {
-                        InvBD.Proveedores.InsertOnSubmit(DatosProveedor);
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.Proveedores.InsertOnSubmit(DatosProveedor);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
                 }
                 else
                 {
-                    int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                    if (nveces == 0)
-                    {
-                        Proveedores obj = InvBD.Proveedores.Where(p => p.Id.Equals(id)).First();
-                        obj.Nombre = DatosProveedor.Nombre;
-                        //obj.Id = DatosProveedores.Id;
-                        obj.Correo = DatosProveedor.Correo;
-                        obj.RazonSocial = DatosProveedor.RazonSocial;
-                        obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
-                        obj.CodigoPostal = DatosProveedor.CodigoPostal;
-
-                        obj.IdEstado = DatosProveedor.IdEstado;
-                        //obj.NombreM = usuario.NombreM;
-                        //obj.NombreL = usuario.NombreL;
-                        //obj.IDLocalidad = DatosProveedor.IDLocalidad;
-
-                        obj.RFC = DatosProveedor.RFC;
-                        obj.Direccion = DatosProveedor.Direccion;
-                        obj.Telefono = DatosProveedor.Telefono;
-                        obj.Banco = DatosProveedor.Banco;
-                        obj.NumeroDeCuenta = DatosProveedor.NumeroDeCuenta;
-                        obj.UsoCFDI = DatosProveedor.UsoCFDI;
-                        obj.Nomenclatura = DatosProveedor.Nomenclatura;
-                        obj.Descripcion = DatosProveedor.Descripcion;
-                        obj.Logo = DatosProveedor.Logo;
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                    Afectados = -1;
                 }
+            }
+            else
+            {
+                int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    Proveedores obj = InvBD.Proveedores.Where(p => p.Id.Equals(id)).First();
+                    obj.Nombre = DatosProveedor.Nombre;
+                    //   obj.Id = DatosProveedor.Id;
+                    obj.Correo = DatosProveedor.Correo;
+                    obj.RazonSocial = DatosProveedor.RazonSocial;
+                    obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
+                    obj.CodigoPostal = DatosProveedor.CodigoPostal;
+
+                    obj.IdEstado = DatosProveedor.IdEstado;
+                    //obj.NombreM = usuario.NombreM;
+                    //obj.NombreL = usuario.NombreL;
+                    //obj.IDLocalidad = DatosProveedor.IDLocalidad;
+
+                    //   obj.Estado = DatosProveedor.Estado;
+                    // obj.IdLocalidad = DatosProveedor.IdLocalidad;
+                    //    obj.Localidad = DatosProveedor.Localidad;
+                    //  obj.IdMunicipio.DatosProveedor.Municipio;
+                    // obj.Municipio = DatosProveedor.Municipio;
+
+                    //Datos del Estado
+                    obj.RFC = DatosProveedor.RFC;
+                    obj.Direccion = DatosProveedor.Direccion;
+                    obj.Telefono = DatosProveedor.Telefono;
+                    obj.Banco = DatosProveedor.Banco;
+                    obj.NumeroDeCuenta = DatosProveedor.NumeroDeCuenta;
+                    obj.UsoCFDI = DatosProveedor.UsoCFDI;
+                    obj.Nomenclatura = DatosProveedor.Nomenclatura;
+                    obj.Descripcion = DatosProveedor.Descripcion;
+                    obj.Logo = DatosProveedor.Logo;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
             //}
             //catch (Exception ex)
             //{
@@ -133,7 +140,7 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
-        
+
         public int EliminarProveedor(long Id)
         {
             int nregistradosAfectados = 0;
