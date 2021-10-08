@@ -64,7 +64,7 @@ namespace Inventario.Controllers
                     p.UsoCFDI,
                     p.Nomenclatura,
                     p.Descripcion,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
+                   // FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
             return Json(proveedor, JsonRequestBehavior.AllowGet);
         }
@@ -77,8 +77,7 @@ namespace Inventario.Controllers
             long id = DatosProveedor.Id;
 
 
-            int len = cadF.Length % 4;
-            if (len > 0) cadF = cadF.PadRight(cadF.Length + (4 - len), '=');
+        
 
 
 
@@ -89,7 +88,7 @@ namespace Inventario.Controllers
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
-                    DatosProveedor.Logo = Convert.FromBase64String(cadF);
+                   // DatosProveedor.Logo = Convert.FromBase64String(cadF);
                     InvBD.Proveedores.InsertOnSubmit(DatosProveedor);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -132,7 +131,7 @@ namespace Inventario.Controllers
                     obj.UsoCFDI = DatosProveedor.UsoCFDI;
                     obj.Nomenclatura = DatosProveedor.Nomenclatura;
                     obj.Descripcion = DatosProveedor.Descripcion;
-                    obj.Logo = Convert.FromBase64String(cadF);
+                   // obj.Logo = Convert.FromBase64String(cadF);
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

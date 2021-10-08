@@ -3,7 +3,7 @@ Cargar2();
 Cargar3();
 jsCargar();
 function Cargar() {
-    var folder = "./assets/images/Ayuda/ZArqueologicas";
+    var folder = "./assets/imagenes";
     $.ajax({
         url: folder,
         success: function (data) {
@@ -16,7 +16,7 @@ function Cargar() {
     });
 }
 function Cargar2() {
-    var dir = "~/assets/images/Ayuda/ZArqueologicas";
+    var dir = "~/assets/imagenes";
     var fileextension = ".jpg";
     $.ajax({
         //This will retrieve the contents of the folder if the folder is configured as 'browsable'
@@ -64,7 +64,7 @@ function Cargar3() {
 
 function jsCargar() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/assets/images/Ayuda/ZArqueologicas", true);
+    xhr.open("GET", "/assets/imagenes", true);
     xhr.responseType = 'document';
     xhr.onload = () => {
         if (xhr.status === 200) {
