@@ -1,77 +1,67 @@
-﻿
-AcordeonProveedores();
+﻿LlenarCMBPrin();
+
+CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
-function AcordeonProveedores() {
-    $.get("/Proveedores/ConsultaProveedores", function (RegistrosProveedores) {
-        //Accordeon(RegistrosProveedores, document.getElementById("accordion"));
-        otro(RegistrosProveedores, document.getElementById("accordion"));
+function CrearAcordeonProveedores() {
+    $.get("/Proveedores/ConsultaProveedores", function (Data) {
+        //Accordeon(Data, document.getElementById("accordion"));
+        AcordeonProveedores(Data, document.getElementById("accordion"));
     });
-}
-function otro(RegistrosProveedores, CtrlProveedores) {
+}//Acordeon proveedores
+function AcordeonProveedores(Data, CtrlProveedores) {
     var CodigoHTMLAreas = "";
-    for (var i = 0; i < RegistrosProveedores.length; i++) {
+    for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
             CodigoHTMLAreas += "<div class='card m-b-0'>";
         }
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + RegistrosProveedores[i].Id + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].Id + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + RegistrosProveedores[i].Id + "' aria-expanded='false' aria-controls='collapse" + RegistrosProveedores[i].Id + "' class='collapsed'>";
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].Id + "' aria-expanded='false' aria-controls='collapse" + Data[i].Id + "' class='collapsed'>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<span >" + RegistrosProveedores[i].Nombre + "</span>";
+        CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + RegistrosProveedores[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + RegistrosProveedores[i].Correo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + RegistrosProveedores[i].GiroDelProveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + RegistrosProveedores[i].Municipio + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].RazonSocial + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Cuenta Interbancaria: </strong>" + RegistrosProveedores[i].CuentaInterbancaria + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + RegistrosProveedores[i].CodigoPostal + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + RegistrosProveedores[i].Estado + "</div>";
-      //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosProveedores[i].Direccion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave Interbancaria: </strong>" + Data[i].ClaveInterbancaria + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Código Postal: </strong>" + Data[i].CodigoPostal + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        //CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12'><strong>Dirección</strong></div >";
-        //CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + RegistrosProveedores[i].RFC + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + RegistrosProveedores[i].Direccion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + RegistrosProveedores[i].Localidad + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + Data[i].Direccion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosProveedores[i].Telefono + "</div>";
-
-       // CodigoHTMLAreas += "</div>";
-       // CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + RegistrosProveedores[i].Banco + "</div>";
-
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Banco: </strong>" + Data[i].Banco + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + RegistrosProveedores[i].Telefono + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + RegistrosProveedores[i].NumeroDeCuenta + "</div>";
-
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Cuenta: </strong>" + Data[i].NumeroDeCuenta + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + RegistrosProveedores[i].UsoCFDI + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nomenclatura: </strong>" + RegistrosProveedores[i].Nomenclatura + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + Data[i].UsoCFDI + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nomenclatura: </strong>" + Data[i].Nomenclatura + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + RegistrosProveedores[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + RegistrosProveedores[i].Logo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
-        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + RegistrosProveedores[i].ID + ")'><i id='BtnMO" + RegistrosProveedores[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + RegistrosProveedores[i].Id + ")' data-toggle='modal' data-target='#ModalTiendas'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + RegistrosProveedores[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -83,76 +73,146 @@ function otro(RegistrosProveedores, CtrlProveedores) {
 }
 
 //Limpia la información y carga la informacion del proveedor
-function AbrirMProveedores(id) {//la clase AreaObligatorio
-    var controlesObligatorio = document.getElementsByClassName("AreaObligatorio");
-    for (var i = 0; i < controlesObligatorio.length; i++) {//recorre
+function abrirModal(id) {//la clase AreaObligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
         controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
-        Limpiar();
 
+        LimpiarCampos();
+        sessionStorage.setItem('IDProveedor', '0');
     }
     else {
-        $.get("/Proveedores/ConsultaProveedores/?Id=" + Id, function (DatosProveedor) {
-            document.getElementById("TxtId").value = DatosProveedor[0].Id;
-            document.getElementById("TxtNombre").value = DatosProveedor[0].Nombre;
-            document.getElementById("TxtCorreo").value = DatosProveedor[0].Correo;
-            document.getElementById("TxtGiroDelProveedor").value = DatosProveedor[0].GiroDelProveedor;
-            document.getElementById("TxtCuentaInterbancaria").value = DatosProveedor[0].CuentaInterbancaria;
-            document.getElementById("TxtCodigoPostal").value = DatosProveedor[0].CodigoPostal;
-            document.getElementById("cmbEstado").value = DatosProveedor[0].Estado;
-            document.getElementById("cmbMunicipio").value = DatosProveedor[0].Municipio;
-            document.getElementById("cmbLocalidad").value = DatosProveedor[0].Localidad;
-            document.getElementById("TxtRFC").value = DatosProveedor[0].RFC;
-            document.getElementById("TxtDireccion").value = DatosProveedor[0].Direccion;
-            document.getElementById("TxtTelefono").value = DatosProveedor[0].Telefono;
-            document.getElementById("TxtBanco").value = DatosProveedor[0].Banco;
-            document.getElementById("TxtNumeroDeCuenta").value = DatosProveedor[0].NumeroDeCuenta;
-            document.getElementById("TxtUsoCFDI").value = DatosProveedor[0].UsoCFDI;
-            document.getElementById("TxtNomenclatura").value = DatosProveedor[0].Nomenclatura;
-            document.getElementById("TxtDescripcion").value = DatosProveedor[0].Descripcion;
-            document.getElementById("TxtLogo").value = DatosProveedor[0].Logo;
+
+        $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (Data) {
+            sessionStorage.setItem('IDProveedor', Data[0].Id);
+
+            document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
+            document.getElementById("TxtCuentaInterbancaria").value = Data[0].CuentaInterbancaria;
+            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
+            document.getElementById("cmbEstado").value = Data[0].Estado;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].IDEstado, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].IDMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
+            });
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtBanco").value = Data[0].Banco;
+            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
+            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
+            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
+            document.getElementById("TxtLogo").value = Data[0].Logo;
         });
     }
+}
 
+//limpiar campos
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
 
+//llenar los combos Principales
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDEstados", function (data) {
+        llenarCombo(data, document.getElementById("cmbEstado"));
+    });
+    // $.get("/GLOBAL/BDAreas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbArea"), true);
+    //  });
+    //  $.get("/Usuarios/BDPerfiles", function (data) {
+    //  llenarCombo(data, document.getElementById("cmbPerfil"), true);
+    //});
+}
+
+//event Change index Estados para llenar el combobox Municipios
+var IDE = document.getElementById("cmbEstado");
+IDE.addEventListener("change", function () {
+    $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbMunicipio"));
+    });
+});
+//event Change index Municipio para llenar el combo box Municipios 
+var IDM = document.getElementById("cmbMunicipio");
+IDM.addEventListener("change", function () {
+    $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbLocalidad"));
+    });
+});
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
 }
 
 //Guarda los cambios y altas de las áreas
 function GuardarProveedor() {
-    if (Obligatorios("Proveedor") == true) {
+    if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = document.getElementById("TxtId").value;
+            var Id = sessionStorage.getItem('IDProveedor');
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
-            var GiroDelProveedor = document.getElementById("TxtGiroDelProveedor").value;
+            var RazonSocial = document.getElementById("TxtRazonSocial").value;
             var CuentaInterbancaria = document.getElementById("TxtCuentaInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
-            var Estado = document.getElementById("TxtEstado").value;
-            var Municipio = document.getElementById("TxtMunicipio").value;
-            var Localidad = document.getElementById("TxtLocalidad").value;
-            var RFC = document.getElementById("RFC").value;
+
+            var IdEstado = document.getElementById("cmbEstado").value;
+            var TempEdo = document.getElementById("cmbEstado");
+            var Estado = TempEdo.options[TempEdo.selectedIndex].text;
+            var IDMunicipio = document.getElementById("cmbMunicipio").value;
+            var TempMuni = document.getElementById("cmbMunicipio");
+            var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
+            var IDLocalidad = document.getElementById("cmbLocalidad").value;
+            var TempLoca = document.getElementById("cmbLocalidad");
+            var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
+
+            var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
-            
-            ///var temUser = document.getElementById("cmbEncargado");
-            //var UNombre = temUser.options[temUser.selectedIndex].text;
 
             var Banco = document.getElementById("TxtBanco").value;
             var NumeroDeCuenta = document.getElementById("TxtNumeroDeCuenta").value;
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("TxtLogo").value;
+            var Logo = document.getElementById("BtnFoto").value;
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
-            frm.append("GiroDelProveedor", GiroDelProveedor);
+            frm.append("RazonSocial", RazonSocial);
             frm.append("CuentaInterbancaria", CuentaInterbancaria);
             frm.append("CodigoPostal", CodigoPostal);
-            frm.append("Estado", GiroDelProveedor);
+            frm.append("IdEstado", IdEstado);
+            frm.append("Estado", Estado);
+
+            frm.append("IDMunicipio", IDMunicipio);
             frm.append("Municipio", Municipio);
+            frm.append("IDLocalidad", IDLocalidad);
+            frm.append("NombreL", NombreL);
+
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
             frm.append("Direccion", Direccion);
@@ -166,7 +226,7 @@ function GuardarProveedor() {
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/Proveedores/Proveedores",
+                url: "/Proveedores/GuardarProveedor",
                 data: frm,
                 contentType: false,
                 processData: false,
@@ -179,7 +239,7 @@ function GuardarProveedor() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        AcordeonProveedores();
+                        CrearAcordeonProveedores();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -188,17 +248,34 @@ function GuardarProveedor() {
     }
 }
 
+//marca los campos obligatorios
+function CamposObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
-    if (confirm("¿Desea eliminar el registo?") == 1) {
-
+    if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Proveedores/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonAreas();
+                CrearAcordeonProveedores();
             } else {
                 alert("Ocurrio un error");
             }
         });
     }
 }
+
+

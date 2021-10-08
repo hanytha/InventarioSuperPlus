@@ -15,29 +15,34 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaSupervisiones()
+        public JsonResult ConsultaSupervisores()
         {
-            var supervisiones = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
+            var supervisores = InvBD.Supervisor.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.Id,
-                    p.Supervicion,
-                    p.UNombre,
-                    p.Tiendas
+                    p.Nombre,
+                    p.ApellidoP,
+                    p.ApellidoM,
+                    p.Telefono,
+                    p.Correo
                 });
-            return Json(supervisiones, JsonRequestBehavior.AllowGet);
+            return Json(supervisores, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaSupervision(long Id)
+
+        public JsonResult ConsultaSupervisor(long Id)
         {
-            var supervision = InvBD.Supervision.Where(p => p.Id.Equals(Id))
+            var supervisor = InvBD.Supervisor.Where(p => p.Id.Equals(Id))
                 .Select(p => new
                 {
                     p.Id,
-                    p.Supervicion,
-                    p.UNombre,
-                    p.Tiendas
+                    p.Nombre,
+                    p.ApellidoP,
+                    p.ApellidoM,
+                    p.Telefono,
+                    p.Correo
                 });
-            return Json(supervision, JsonRequestBehavior.AllowGet);
+            return Json(supervisor, JsonRequestBehavior.AllowGet);
         }
     }
 }

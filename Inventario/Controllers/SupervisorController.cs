@@ -22,7 +22,8 @@ namespace Inventario.Controllers
                 {
                     p.Id,
                     p.Nombre,
-                    p.Apellidos,
+                    p.ApellidoP,
+                    p.ApellidoM,
                     p.Telefono,
                     p.Correo
                 });
@@ -36,7 +37,8 @@ namespace Inventario.Controllers
                 {
                     p.Id,
                     p.Nombre,
-                    p.Apellidos,
+                    p.ApellidoP,
+                    p.ApellidoM,
                     p.Telefono,
                     p.Correo
                 });
