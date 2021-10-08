@@ -125,6 +125,8 @@
     <Content Include="Scrips\jquery.min.js" />
     <Content Include="Scrips\jquery.scrollbar.min.js" />
     <Content Include="Scrips\js.cookie.js" />
+    <Content Include="Scrips\Plus\JSCargarImg.js" />
+    <Content Include="Scrips\Plus\JScriptImage.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -71,6 +71,24 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
+
+
+
+//imagenes
+//btnFoto.onchange = function (e) {
+    //var file = document.getElementById("BtnFoto").files[0];
+    //var reader = new FileReader();
+    //if (reader != null) {
+      //  reader.onloadend = function () {
+      //      var img = document.getElementById("PBFoto");
+     //       img.src = reader.result;
+    //    }
+   // }
+ //   reader.readAsDataURL(file);
+//}
+
+
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -91,7 +109,7 @@ function abrirModal(id) {//la clase AreaObligatorio
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
-            document.getElementById("TxtCuentaInterbancaria").value = Data[0].CuentaInterbancaria;
+            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
             document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
             document.getElementById("cmbEstado").value = Data[0].Estado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].IDEstado, function (Municipios) {
@@ -110,7 +128,7 @@ function abrirModal(id) {//la clase AreaObligatorio
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("TxtLogo").value = Data[0].Logo;
+            document.getElementById("PBFoto").value = Data[0].Logo;
         });
     }
 }
@@ -174,7 +192,7 @@ function GuardarProveedor() {
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
-            var CuentaInterbancaria = document.getElementById("TxtCuentaInterbancaria").value;
+            var ClaveInterbancaria = document.getElementById("TxtClaveInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
 
             var IdEstado = document.getElementById("cmbEstado").value;
@@ -196,13 +214,13 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("BtnFoto").value;
+         //   var Logo = document.getElementById("PBFoto").value;
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
             frm.append("RazonSocial", RazonSocial);
-            frm.append("CuentaInterbancaria", CuentaInterbancaria);
+            frm.append("ClaveInterbancaria", ClaveInterbancaria);
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
@@ -221,7 +239,7 @@ function GuardarProveedor() {
             frm.append("UsoCFDI", UsoCFDI);
             frm.append("Nomenclatura", Nomenclatura);
             frm.append("Descripcion", Descripcion);
-            frm.append("Logo", Logo);
+           // frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
