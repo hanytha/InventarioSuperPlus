@@ -59,6 +59,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
+        //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
@@ -71,8 +72,6 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
-
-
 
 //imagenes
 var btnFoto = document.getElementById("BtnFoto");
@@ -91,7 +90,7 @@ btnFoto.onchange = function (e) {
 
 
 //Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase AreaObligatorio
+function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -102,13 +101,14 @@ function abrirModal(id) {//la clase AreaObligatorio
     if (id == 0) {
 
         LimpiarCampos();
-        sessionStorage.setItem('IDProveedor', '0');
+        sessionStorage.setItem('IDProveedor', '0');       ///////////////////////////////// 
     }
     else {
 
         $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (Data) {
-            sessionStorage.setItem('IDProveedor', Data[0].Id);
 
+            sessionStorage.setItem('IDProveedor', Data[0].Id);     ////////////////////
+            /////////////////////// document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
@@ -148,13 +148,12 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 
-
+    //Limpiar las imágenes
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
-    
-    }
 
+    }
 }
 
 //llenar los combos Principales
@@ -217,7 +216,6 @@ function GuardarProveedor() {
             var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
             var Localidad = TempMuni.options[TempMuni.selectedIndex].text;
 
-
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
@@ -242,7 +240,7 @@ function GuardarProveedor() {
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
             frm.append("Localidad", Localidad);
-          //  frm.append("NombreL", NombreL);
+            //  frm.append("NombreL", NombreL);
 
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
@@ -262,6 +260,7 @@ function GuardarProveedor() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
+
                     if (data == 0) {
                         alert("Ocurrio un error");
                     }
