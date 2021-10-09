@@ -75,17 +75,18 @@ function AcordeonProveedores(Data, CtrlProveedores) {
 
 
 //imagenes
-//btnFoto.onchange = function (e) {
-    //var file = document.getElementById("BtnFoto").files[0];
-    //var reader = new FileReader();
-    //if (reader != null) {
-      //  reader.onloadend = function () {
-      //      var img = document.getElementById("PBFoto");
-     //       img.src = reader.result;
-    //    }
-   // }
- //   reader.readAsDataURL(file);
-//}
+var btnFoto = document.getElementById("BtnFoto");
+btnFoto.onchange = function (e) {
+    var file = document.getElementById("BtnFoto").files[0];
+    var reader = new FileReader();
+    if (reader != null) {
+        reader.onloadend = function () {
+            var img = document.getElementById("PBFoto");
+            img.src = reader.result;
+        }
+    }
+    reader.readAsDataURL(file);
+}
 
 
 
@@ -175,12 +176,12 @@ IDM.addEventListener("change", function () {
 //funcion general para llenar los select
 function llenarCombo(data, control) {
 
-    var contenido="";
+    var contenido = "";
     contenido += "<option value='0'>--Seleccione--</option>";
 
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-    }
+    }TxtClaveInterbancaria
     control.innerHTML = contenido;
 }
 
@@ -214,7 +215,7 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-         //   var Logo = document.getElementById("PBFoto").value;
+            var Logo = document.getElementById("PBFoto").value;
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
@@ -239,7 +240,7 @@ function GuardarProveedor() {
             frm.append("UsoCFDI", UsoCFDI);
             frm.append("Nomenclatura", Nomenclatura);
             frm.append("Descripcion", Descripcion);
-           // frm.append("cadF", Logo);
+            frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
