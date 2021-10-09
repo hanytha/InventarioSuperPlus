@@ -54,7 +54,9 @@ namespace Inventario.Controllers
                     p.CodigoPostal,
                     p.IdEstado,
                     p.Estado,
+                    p.IdMunicipio,
                     p.Municipio,
+                    p.IdLocalidad,
                     p.Localidad,
                     p.RFC,
                     p.Direccion,
@@ -64,7 +66,7 @@ namespace Inventario.Controllers
                     p.UsoCFDI,
                     p.Nomenclatura,
                     p.Descripcion,
-                   // FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
+                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
             return Json(proveedor, JsonRequestBehavior.AllowGet);
         }
@@ -72,14 +74,9 @@ namespace Inventario.Controllers
         public int GuardarProveedor(Proveedores DatosProveedor, string cadF)
         {
             int Afectados = 0;
-            //try
-            //{
+            try
+            {
             long id = DatosProveedor.Id;
-
-
-        
-
-
 
             if (id.Equals(0))
             {
@@ -88,7 +85,7 @@ namespace Inventario.Controllers
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
-                   // DatosProveedor.Logo = Convert.FromBase64String(cadF);
+                   DatosProveedor.Logo = Convert.FromBase64String(cadF);
                     InvBD.Proveedores.InsertOnSubmit(DatosProveedor);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -112,17 +109,17 @@ namespace Inventario.Controllers
                     obj.CodigoPostal = DatosProveedor.CodigoPostal;
 
                     obj.IdEstado = DatosProveedor.IdEstado;
-                    //obj.NombreM = usuario.NombreM;
-                    //obj.NombreL = usuario.NombreL;
-                    //obj.IDLocalidad = DatosProveedor.IDLocalidad;
+                    obj.Municipio = DatosProveedor.Municipio;         // <!---->   
+                    obj.IdLocalidad = DatosProveedor.IdLocalidad;   // < !---->
+                    obj.Localidad = DatosProveedor.Localidad;         // <!----> 
+ 
 
-                    //   obj.Estado = DatosProveedor.Estado;
-                    // obj.IdLocalidad = DatosProveedor.IdLocalidad;
-                    //    obj.Localidad = DatosProveedor.Localidad;
-                    //  obj.IdMunicipio.DatosProveedor.Municipio;
-                    // obj.Municipio = DatosProveedor.Municipio;
+                      obj.Estado = DatosProveedor.Estado;    // < !---->
+                     obj.IdLocalidad = DatosProveedor.IdLocalidad; // < !---->
+                       obj.Localidad = DatosProveedor.Localidad; // < !---->
+                      obj.IdMunicipio = DatosProveedor.IdMunicipio; // < !---->
+                     obj.Municipio = DatosProveedor.Municipio;  // < !---->
 
-                    //Datos del Estado
                     obj.RFC = DatosProveedor.RFC;
                     obj.Direccion = DatosProveedor.Direccion;
                     obj.Telefono = DatosProveedor.Telefono;
@@ -131,7 +128,7 @@ namespace Inventario.Controllers
                     obj.UsoCFDI = DatosProveedor.UsoCFDI;
                     obj.Nomenclatura = DatosProveedor.Nomenclatura;
                     obj.Descripcion = DatosProveedor.Descripcion;
-                   // obj.Logo = Convert.FromBase64String(cadF);
+                    obj.Logo = Convert.FromBase64String(cadF);
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -140,11 +137,11 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+               Afectados = 0;
+            }
             return Afectados;
         }
 

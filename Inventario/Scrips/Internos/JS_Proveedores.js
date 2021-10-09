@@ -129,7 +129,7 @@ function abrirModal(id) {//la clase AreaObligatorio
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("PBFoto").value = Data[0].Logo;
+            document.getElementById("PBFoto").src = "data:image/png;base64," + data[0].FOTOMOSTRAR;
         });
     }
 }
@@ -144,6 +144,15 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
+
+
+    var controlesImg = document.getElementsByClassName("limpiarImg");
+    for (var i = 0; i < controlesImg.length; i++) {
+        controlesImg[i].value = null;
+ 
+     
+    }
+
 }
 
 //llenar los combos Principales
@@ -181,7 +190,7 @@ function llenarCombo(data, control) {
 
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-    }TxtClaveInterbancaria
+    }
     control.innerHTML = contenido;
 }
 
@@ -215,7 +224,7 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("PBFoto").value;
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  /////////// <-------->
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
