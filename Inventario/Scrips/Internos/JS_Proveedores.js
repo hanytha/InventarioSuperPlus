@@ -60,7 +60,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -95,7 +95,9 @@ function abrirModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error");
     }
     if (id == 0) {
 
@@ -136,10 +138,11 @@ function abrirModal(id) {//la clase AreaObligatorio
 
 //limpiar campos
 function LimpiarCampos() {
+    //Limpiar la casilla de texto
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
-    }
+    }//Limpiar el campo de select
     var controlesSLT = document.getElementsByClassName("limpiarSelect");
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
@@ -149,8 +152,7 @@ function LimpiarCampos() {
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
- 
-     
+    
     }
 
 }
@@ -184,7 +186,6 @@ IDM.addEventListener("change", function () {
 });
 //funcion general para llenar los select
 function llenarCombo(data, control) {
-
     var contenido = "";
     contenido += "<option value='0'>--Seleccione--</option>";
 
@@ -214,6 +215,8 @@ function GuardarProveedor() {
             var IDLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
             var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
+            var Localidad = TempMuni.options[TempMuni.selectedIndex].text;
+
 
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -224,7 +227,7 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  /////////// <-------->
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
@@ -238,7 +241,8 @@ function GuardarProveedor() {
             frm.append("IDMunicipio", IDMunicipio);
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
-            frm.append("NombreL", NombreL);
+            frm.append("Localidad", Localidad);
+          //  frm.append("NombreL", NombreL);
 
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);

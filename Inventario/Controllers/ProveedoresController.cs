@@ -140,7 +140,7 @@ namespace Inventario.Controllers
             }
             catch (Exception ex)
             {
-               Afectados = 0;
+                Afectados = 0;
             }
             return Afectados;
         }
