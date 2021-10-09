@@ -72,6 +72,19 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
 
+//ver imagen en modal
+var btnFoto = document.getElementById("BtnFoto");
+btnFoto.onchange = function (e) {
+    var file = document.getElementById("BtnFoto").files[0];
+    var reader = new FileReader();
+    if (reader != null) {
+        reader.onloadend = function () {
+            var img = document.getElementById("PBFoto");
+            img.src = reader.result;
+        }
+    }
+    reader.readAsDataURL(file);
+}
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -186,7 +199,7 @@ function GuardarProveedor() {
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
             var IDLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-            var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
+            var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
 
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -211,7 +224,7 @@ function GuardarProveedor() {
             frm.append("IDMunicipio", IDMunicipio);
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
-            frm.append("NombreL", NombreL);
+            frm.append("Localidad", Localidad);
 
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
