@@ -12,11 +12,12 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaCompra  += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra  += "<tr>";
-        CodigoHtmlTablaCompra  += "<td>" + Data[i].MetodoDePago+ "</td>";
+        CodigoHtmlTablaCompra  += "<td>" + Data[i].MetodoDePago + "</td>";
 
         CodigoHtmlTablaCompra  += "<td>";
         CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarCompras(" + Data[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";
+
         CodigoHtmlTablaCompra  += "</td>";
         CodigoHtmlTablaCompra  += "</tr>";
     }
@@ -59,8 +60,6 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
-
-
 
 //Guarda los cambios y altas de las compras
 function GuardarCompra() {
@@ -114,7 +113,6 @@ function CamposObligatorios() {
     return exito;
 }
 
-
 //"Elimina" la compra cambia el Estatus
 function EliminarCompras(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
@@ -130,8 +128,6 @@ function EliminarCompras(id) {
     }
 }
 
-
-
 //abrir PopUp
 function editarModal(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -144,10 +140,11 @@ function editarModal(id) {
     }
     else {
         $.get("/Compra/ConsultaCompras/?Id=" + id, function (data) {
-           // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtMetodoDePago").value = data[0].MetodoDePago;
 
         });
     }
 }
+
 
