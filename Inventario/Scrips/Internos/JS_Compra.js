@@ -1,14 +1,150 @@
-﻿CrearAcordeonCompra(); 
-function CrearAcordeonCompra() {
-    $.get("/Compra/ConsultaCompras", function (Deptos) {
-        var CodHTML = "";
-        for (var i = 0; i < Deptos.length; i++) {
-            CodHTML += "<button onclick='myFunction(dep" + Deptos[i].Id + ")' class='w3-btn w3-block w3-black w3-left-align'>" + Deptos[i].MetodoDePago + "</button>";
-            CodHTML += "<div id='dep" + Deptos[i].Id + "' class='w3-container w3-hide'>";
-            CodHTML += "<h4>MetodoDePago:" + Deptos[i].MetodoDePago +"</h4>";
-            CodHTML += "</div>";
-        }
-        document.getElementById("accordion").innerHTML = CodHTML;
-    });
-
+﻿ConsultaCompras();
+function ConsultaCompras() {
+    $.get("/Compra/ConsultaCompras", function (Data) {
+        CrearTablaCompras(Data);
+    }
+    );
 }
+function CrearTablaCompras(Data) {
+    var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra  += "<table id='tablas' class='table table table-sm'>";
+    CodigoHtmlTablaCompra  += "<thead><tr><th>Método de pago</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra  += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCompra  += "<tr>";
+        CodigoHtmlTablaCompra  += "<td>" + Data[i].MetodoDePago + "</td>";
+
+        CodigoHtmlTablaCompra  += "<td>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarCompras(" + Data[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaCompra  += "</td>";
+        CodigoHtmlTablaCompra  += "</tr>";
+    }
+    CodigoHtmlTablaCompra  += "</tbody>";
+    CodigoHtmlTablaCompra  += "</table>";
+    document.getElementById("tabla").innerHTML = CodigoHtmlTablaCompra ;
+}
+
+
+//Limpia la información y carga la informacion de la compra
+function abrirModal(id) {//la clase AreaObligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+
+        LimpiarCampos();
+        sessionStorage.setItem('IDMetodoP', '0');
+    }
+    else {
+
+        $.get("/Compra/ConsultaCompra/?Id=" + Id, function (Data) {
+            sessionStorage.setItem('IDMetodoP', Data[0].Id);
+
+            document.getElementById("TxtMetodoDePago").value = Data[0].MetodoDePago;
+        });
+    }
+}
+
+//limpiar campos
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
+//Guarda los cambios y altas de las compras
+function GuardarCompra() {
+    if (CamposObligatorios() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var Id = sessionStorage.getItem('IDMetodoP');
+            var MetodoDePago = document.getElementById("TxtMetodoDePago").value;
+            var frm = new FormData();
+            frm.append("Id", Id);
+            frm.append("MetodoDePago", MetodoDePago);
+
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Compra/GuardarCompra",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Ocurrio un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe el MetodoDePago");
+                    }
+                    else {
+                        alert("Se ejecuto correctamente");
+                        ConsultaCompras();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
+    }
+}
+
+//marca los campos obligatorios
+function CamposObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
+//"Elimina" la compra cambia el Estatus
+function EliminarCompras(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/Compra/EliminarCompra/?Id=" + id, function (DatoCompra) {
+            if (DatoCompra == 1) {
+                alert("Se elimino correctamente");
+                ConsultaCompras();
+            } else {
+                alert("Ocurrio un error");
+            }
+        });
+    }
+}
+
+//abrir PopUp
+function editarModal(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        controlesObligatorio[i].parentNode.classList.remove("error");
+    }
+    if (id == 0) {
+        LimpiarCampos();
+    }
+    else {
+        $.get("/Compra/ConsultaCompras/?Id=" + id, function (data) {
+            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+            document.getElementById("TxtMetodoDePago").value = data[0].MetodoDePago;
+
+        });
+    }
+}
+
+

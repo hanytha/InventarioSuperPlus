@@ -93,6 +93,9 @@
     <Content Include="Assets\Imagenes\imagen2.jpg" />
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
+    <Content Include="Assets\NewFolder1\nucleo-icons.svg" />
+    <Content Include="Content\Tabla.css" />
+    <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\argon.css" />
     <Content Include="Content\bootstrap.min.css" />

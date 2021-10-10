@@ -14,6 +14,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         public JsonResult ConsultaPedidosExt()
         {
             var pedidosExt = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
@@ -42,6 +43,8 @@ namespace Inventario.Controllers
                 });
             return Json(pedidoExt, JsonRequestBehavior.AllowGet);
         }
+=======
+>>>>>>> anabel
 
     }
 }

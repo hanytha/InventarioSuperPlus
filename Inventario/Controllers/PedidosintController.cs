@@ -15,6 +15,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         public JsonResult ConsultaPedidosInt()
         {
             var pedidosInternos = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
@@ -51,6 +52,9 @@ namespace Inventario.Controllers
                 });
             return Json(departamento, JsonRequestBehavior.AllowGet);
         }
+=======
+       
+>>>>>>> anabel
 
     }
 }

@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Proveedores";
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> anabel
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Proveedores</h2>
 <!--  -->
@@ -48,8 +52,13 @@
                         <fieldset>
                             <h2> Paso 2</h2>
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label for="TxtClaveInterbancaria">Clave Interbancaria</label>
                                 <input type="text" class="form-control limpiar obligatorio" name="data[TxtClaveInterbancaria]" id="TxtClaveInterbancaria" placeholder="Clave Interbancaria">
+=======
+                                <label for="TxtCuentaInterbancaria">Cuenta Interbancaria</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtCuentaInterbancaria]" id="TxtCuentaInterbancaria" placeholder="Cuenta Interbancaria">
+>>>>>>> anabel
                             </div>
                             <div class="form-group">
                                 <label for="TxtCodigoPostal">Código Postal</label>
@@ -66,6 +75,7 @@
                         </fieldset>
                         <fieldset>
                             <h2> Paso 3</h2>
+
                             <div class="form-group">
                                 <span class="help-block text-muted small-font">Municipio</span>
                                 <BR />
@@ -76,6 +86,7 @@
                                 <BR />
                                 <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
+
                             <div class="form-group">
                                 <label for="TxtRFC">RFC</label>
                                 <input type="text" class="form-control limpiar obligatorio" name="data[TxtRFC]" id="TxtRFC" placeholder="RFC del Emisor">
@@ -116,7 +127,10 @@
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> anabel
                         </fieldset>
                         <fieldset>
                             <h2> Paso 6</h2>
@@ -124,6 +138,7 @@
                                 <label for="TxtDescripcion">Descripción</label>
                                 <input type="text" class="form-control limpiar obligatorio" name="data[TxtDescripcion]" id="TxtDescripcion" placeholder="Descripción">
                             </div>
+<<<<<<< HEAD
                             <!-- Agregar la imagen -->
                             <div class="form-group">
                                 <div>
@@ -136,6 +151,26 @@
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
 
                             <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+=======
+                            <!-- <div class="form-group">
+                                <label for="TxtLogo">Logo</label>
+                                <input type="file" class="form-control limpiar obligatorio" name="TxtLogo" accept="image/jpeg, image/png">
+                            </div>-->
+                            <div class="form-group">
+                                <label for="TxtLogo">Logo</label>
+                                <div class="col-md-6 col-sm-6 col-xs-6 justify-content-end">
+                                    <img id="PBFoto" src="~/assets/images/users/logo.jpg" width="200" height="200" alt="" />
+                                    <br />
+                                    <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                </div>
+                                </div>
+                                <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                                <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
+                                <!--  <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="submit_data" />-->
+                                <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
+                                <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                      </fieldset>
+>>>>>>> anabel
                     </form>
                 </div>
                 <!-- pie del modal-->
@@ -155,5 +190,6 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Proveedores.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

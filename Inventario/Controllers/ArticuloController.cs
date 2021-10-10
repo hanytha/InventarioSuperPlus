@@ -20,37 +20,7 @@ namespace Inventario.Controllers
             var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Nombre1,
-                    p.Nombre2,
-                    p.EstadoInicial,
-                    p.NombreProveedor,
-                    p.Stock,
-                    p.IdEntradas,
-                    p.IdTienda,
-                    p.IdUnidadDeMedida,
-                    p.IdAreas,
-                    p.IdMarca, 
-                    p.IdCategorias,
-                    p.ExistenciaActual,
-                    p.UnidadDeMedida,
-                    p.Categorias,
-                    p.Marca,
-                    p.Descripcion,
-                    p.UnidadSAT,
-                    p.ClaveProveedor,
-                    p.ClaveSAT,
-                    p.PrecioUnitario,
-                    p.Importe,
-                    p.Imagen,
-                    p.Estatus,
-                });
-            return Json(articulos, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult ConsultaArticulo(long Id)
-        {
-            var articulo = InvBD.Articulos.Where(p => p.Estatus.Equals(Id))
-                .Select(p => new
-                {
+                    p.Id,
                     p.Nombre1,
                     p.Nombre2,
                     p.EstadoInicial,
@@ -62,6 +32,10 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+<<<<<<< HEAD
+=======
+                    p.IdProveedor,
+>>>>>>> anabel
                     p.ExistenciaActual,
                     p.UnidadDeMedida,
                     p.Categorias,
@@ -73,7 +47,51 @@ namespace Inventario.Controllers
                     p.PrecioUnitario,
                     p.Importe,
                     p.Imagen,
+                    p.Fecha,
+                    p.Estatus,
+
+                });
+            return Json(articulos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ConsultaArticulo(long Id)
+        {
+            var articulo = InvBD.Articulos.Where(p => p.Estatus.Equals(Id))
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Nombre1,
+                    p.Nombre2,
+                    p.EstadoInicial,
+                    p.NombreProveedor,
+                    p.Stock,
+                    p.IdEntradas,
+                    p.IdTienda,
+                    p.IdUnidadDeMedida,
+                    p.IdAreas,
+                    p.IdMarca,
+                    p.IdCategorias,
+<<<<<<< HEAD
+=======
+                    p.IdProveedor,
+>>>>>>> anabel
+                    p.ExistenciaActual,
+                    p.UnidadDeMedida,
+                    p.Categorias,
+                    p.Marca,
+                    p.Descripcion,
+                    p.UnidadSAT,
+                    p.ClaveProveedor,
+                    p.ClaveSAT,
+                    p.PrecioUnitario,
+                    p.Importe,
+                    p.Imagen,
+<<<<<<< HEAD
                     p.Estatus
+=======
+                    p.Fecha,
+                    p.Estatus,
+
+>>>>>>> anabel
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
@@ -86,7 +104,11 @@ namespace Inventario.Controllers
                 long id = DatosArticulo.Id;
                 if (id.Equals(0))
                 {
+<<<<<<< HEAD
                     int nveces = InvBD.Articulos.Where(p => p.Nombre1.Equals(DatosArticulo.Nombre1) && p.Nombre2.Equals(DatosArticulo.Nombre2) && p.EstadoInicial.Equals(DatosArticulo.EstadoInicial) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)  && p.ExistenciaActual.Equals(DatosArticulo.ExistenciaActual) && p.UnidadDeMedida.Equals(DatosArticulo.UnidadDeMedida) && p.Categorias.Equals(DatosArticulo.Categorias) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.Marca.Equals(DatosArticulo.Marca) && p.Descripcion.Equals(DatosArticulo.Descripcion) && p.Marca.Equals(DatosArticulo.Marca) && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT) && p.ClaveProveedor.Equals(DatosArticulo.ClaveProveedor) && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT) && p.PrecioUnitario.Equals(DatosArticulo.PrecioUnitario) && p.Importe.Equals(DatosArticulo.Importe) && p.Imagen.Equals(DatosArticulo.Imagen)).Count();
+=======
+                    int nveces = InvBD.Articulos.Where(p => p.Nombre1.Equals(DatosArticulo.Nombre1) && p.Nombre2.Equals(DatosArticulo.Nombre2) && p.EstadoInicial.Equals(DatosArticulo.EstadoInicial) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.ExistenciaActual.Equals(DatosArticulo.ExistenciaActual) && p.UnidadDeMedida.Equals(DatosArticulo.UnidadDeMedida) && p.Categorias.Equals(DatosArticulo.Categorias) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.Marca.Equals(DatosArticulo.Marca) && p.Descripcion.Equals(DatosArticulo.Descripcion) && p.Marca.Equals(DatosArticulo.Marca) && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT) && p.ClaveProveedor.Equals(DatosArticulo.ClaveProveedor) && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT) && p.PrecioUnitario.Equals(DatosArticulo.PrecioUnitario) && p.Importe.Equals(DatosArticulo.Importe) && p.Imagen.Equals(DatosArticulo.Imagen)).Count();
+>>>>>>> anabel
                     if (nveces == 0)
                     {
                         InvBD.Articulos.InsertOnSubmit(DatosArticulo);

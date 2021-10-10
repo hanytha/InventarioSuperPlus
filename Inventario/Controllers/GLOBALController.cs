@@ -10,7 +10,11 @@ namespace Inventario.Controllers
     {
         //DCISPlusDataContext InvBD = new DCISPlusDataContext();
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
+<<<<<<< HEAD
         //Consulta de las áreas activas(1)
+=======
+        // GET: GLOBAL
+>>>>>>> anabel
         public JsonResult BDAreas()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
