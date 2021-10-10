@@ -21,7 +21,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-                    p.NombreArticulo,
+                    p.Nombre,
                     p.Cantidad
                 });
             return Json(entradas, JsonRequestBehavior.AllowGet);
@@ -32,7 +32,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-                    p.NombreArticulo,
+                    p.Nombre,
                     p.Cantidad
                 });
             return Json(entrada, JsonRequestBehavior.AllowGet);

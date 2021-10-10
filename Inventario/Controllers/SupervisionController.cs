@@ -21,16 +21,13 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-<<<<<<< HEAD
-                    p.TipoSupervicion,
-                    p.Tiendas
-=======
+                    p.TipoSupervision,
+                    p.Tienda,
                     p.Nombre,
                     p.ApellidoP,
                     p.ApellidoM,
                     p.Telefono,
-                    p.Correo
->>>>>>> anabel
+                    p.Correo,
                 });
             return Json(supervisores, JsonRequestBehavior.AllowGet);
         }
@@ -41,16 +38,13 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.Id,
-<<<<<<< HEAD
-                    p.TipoSupervicion,
-                    p.Tiendas
-=======
+                    p.TipoSupervision,
+                    p.Tienda,
                     p.Nombre,
                     p.ApellidoP,
                     p.ApellidoM,
                     p.Telefono,
-                    p.Correo
->>>>>>> anabel
+                    p.Correo,
                 });
             return Json(supervisor, JsonRequestBehavior.AllowGet);
         }

@@ -61,11 +61,8 @@ namespace Inventario.Controllers
                     p.Foto,
                     p.FechaDeNacimiento,
                     p.IdEstados,
-<<<<<<< HEAD
-=======
                     p.IdMucipios,
                     p.IdLocalidades,
->>>>>>> anabel
                     p.RFC,
                     p.NoSS,
                     p.Correo,

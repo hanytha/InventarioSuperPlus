@@ -61,11 +61,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "</div>";
         //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-<<<<<<< HEAD
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-=======
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='AbrirMProveedores(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
->>>>>>> anabel
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -77,11 +73,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
 
-<<<<<<< HEAD
 //imagenes
-=======
-//ver imagen en modal
->>>>>>> anabel
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
     var file = document.getElementById("BtnFoto").files[0];
@@ -94,7 +86,6 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-<<<<<<< HEAD
 
 
 
@@ -106,28 +97,15 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error");
-=======
-//Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase AreaObligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
->>>>>>> anabel
     }
     if (id == 0) {
 
         LimpiarCampos();
-<<<<<<< HEAD
         sessionStorage.setItem('IDProveedor', '0');       ///////////////////////////////// 
-=======
-        sessionStorage.setItem('IDProveedor', '0');
->>>>>>> anabel
     }
     else {
 
         $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (Data) {
-<<<<<<< HEAD
 
             sessionStorage.setItem('IDProveedor', Data[0].Id);     ////////////////////
             /////////////////////// document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
@@ -135,14 +113,6 @@ function abrirModal(id) {//la clase AreaObligatorio
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
             document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
-=======
-            sessionStorage.setItem('IDProveedor', Data[0].Id);
-
-            document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
-            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
-            document.getElementById("TxtCuentaInterbancaria").value = Data[0].CuentaInterbancaria;
->>>>>>> anabel
             document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
             document.getElementById("cmbEstado").value = Data[0].Estado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].IDEstado, function (Municipios) {
@@ -161,7 +131,6 @@ function abrirModal(id) {//la clase AreaObligatorio
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-<<<<<<< HEAD
             document.getElementById("PBFoto").src = "data:image/png;base64," + data[0].FOTOMOSTRAR;
         });
     }
@@ -219,58 +188,6 @@ function llenarCombo(data, control) {
     var contenido = "";
     contenido += "<option value='0'>--Seleccione--</option>";
 
-=======
-            document.getElementById("TxtLogo").value = Data[0].Logo;
-        });
-    }
-}
-
-//limpiar campos
-function LimpiarCampos() {
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
-    }
-}
-
-//llenar los combos Principales
-function LlenarCMBPrin() {
-    $.get("/GLOBAL/BDEstados", function (data) {
-        llenarCombo(data, document.getElementById("cmbEstado"));
-    });
-    // $.get("/GLOBAL/BDAreas", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArea"), true);
-    //  });
-    //  $.get("/Usuarios/BDPerfiles", function (data) {
-    //  llenarCombo(data, document.getElementById("cmbPerfil"), true);
-    //});
-}
-
-//event Change index Estados para llenar el combobox Municipios
-var IDE = document.getElementById("cmbEstado");
-IDE.addEventListener("change", function () {
-    $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbMunicipio"));
-    });
-});
-//event Change index Municipio para llenar el combo box Municipios 
-var IDM = document.getElementById("cmbMunicipio");
-IDM.addEventListener("change", function () {
-    $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbLocalidad"));
-    });
-});
-//funcion general para llenar los select
-function llenarCombo(data, control) {
-
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-
->>>>>>> anabel
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
     }
@@ -285,11 +202,7 @@ function GuardarProveedor() {
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
-<<<<<<< HEAD
             var ClaveInterbancaria = document.getElementById("TxtClaveInterbancaria").value;
-=======
-            var CuentaInterbancaria = document.getElementById("TxtCuentaInterbancaria").value;
->>>>>>> anabel
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
 
             var IdEstado = document.getElementById("cmbEstado").value;
@@ -300,12 +213,8 @@ function GuardarProveedor() {
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
             var IDLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-<<<<<<< HEAD
             var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
             var Localidad = TempMuni.options[TempMuni.selectedIndex].text;
-=======
-            var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
->>>>>>> anabel
 
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -316,21 +225,13 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-<<<<<<< HEAD
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
-=======
-            var Logo = document.getElementById("BtnFoto").value;
->>>>>>> anabel
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
             frm.append("RazonSocial", RazonSocial);
-<<<<<<< HEAD
             frm.append("ClaveInterbancaria", ClaveInterbancaria);
-=======
-            frm.append("CuentaInterbancaria", CuentaInterbancaria);
->>>>>>> anabel
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
@@ -339,10 +240,7 @@ function GuardarProveedor() {
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
             frm.append("Localidad", Localidad);
-<<<<<<< HEAD
             //  frm.append("NombreL", NombreL);
-=======
->>>>>>> anabel
 
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
