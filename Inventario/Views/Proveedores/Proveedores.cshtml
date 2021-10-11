@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
+
+
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -18,8 +21,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">Registro</h4>
                     <button type="button" class="close" data-dismiss="modal">x</button>
+
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
@@ -134,13 +138,25 @@
                                 </div>
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">
+                                Guardar
+                            </button>
 
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-                    </form>
+
+                            <input type="submit" name="btnGuardar" class="submit btn btn-success" value="Enviar fORMULARIO" onclick="GuardarProveedor()" id="btnGuardar" />
+
+                            <!--  <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+    <input type="submit" name="btnGuardar" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="btnGuardar" />-->
+
+</form>
+
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCerrar" type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
+                    <!--  <button id="btnGuardar" type="button" class="btn btn-success" onclick="Guardar()">GUARDAR</button>-->
+                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" name="btnGuardar" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="btnGuardar" />-->
                 </div>
             </div>
         </div>
@@ -157,3 +173,5 @@
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<script src="~/Scrips/bootstrap-datepicker.min.js"></script>
+<script src="~/Scrips/bootstrap.min.js"></script>

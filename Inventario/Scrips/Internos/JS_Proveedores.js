@@ -290,6 +290,7 @@ function CamposObligatorios() {
         }
         else {
             controlesObligatorio[i].parentNode.classList.remove("error");
+            
         }
     }
     return exito;
@@ -308,4 +309,18 @@ function EliminarProveedores(id) {
     }
 }
 
+(function () {
+    var template = null
+    $('.modal').on('show.bs.modal', function (event) {
+        if (template == null) {//Valores nulos
+            template = $(this).html()
+        } else {
+            $(this).html(template)
+        }
+        // other initialization here, if you want to
+    })
 
+})()
+
+
+//dialogo1

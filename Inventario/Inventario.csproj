@@ -94,16 +94,16 @@
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
     <Content Include="Assets\NewFolder1\nucleo-icons.svg" />
-    <Content Include="Content\Tabla.css" />
     <Content Include="Content\CObligatorios.css" />
+    <Content Include="Content\Tabla.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\argon.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\nucleo.css" />
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
+    <Content Include="Scrips\bootstrap-datepicker.min.js" />
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
@@ -175,9 +175,6 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -218,6 +215,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

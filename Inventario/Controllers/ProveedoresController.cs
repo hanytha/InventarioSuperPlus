@@ -161,6 +161,8 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+
+ 
     }
 
 }
