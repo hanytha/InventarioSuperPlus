@@ -28,7 +28,7 @@ function CrearTablaCompras(Data) {
 
 
 //Limpia la información y carga la informacion de la compra
-function abrirModal(id) {//la clase AreaObligatorio
+function editarModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -41,7 +41,7 @@ function abrirModal(id) {//la clase AreaObligatorio
     }
     else {
 
-        $.get("/Compra/ConsultaCompra/?Id=" + Id, function (Data) {
+        $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
             sessionStorage.setItem('IDMetodoP', Data[0].Id);
 
             document.getElementById("TxtMetodoDePago").value = Data[0].MetodoDePago;
@@ -65,7 +65,7 @@ function LimpiarCampos() {
 function GuardarCompra() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDMetodoP');
+            var Id = sessionStorage.getItem('IDMetodoP')
             var MetodoDePago = document.getElementById("TxtMetodoDePago").value;
             var frm = new FormData();
             frm.append("Id", Id);
@@ -128,23 +128,6 @@ function EliminarCompras(id) {
     }
 }
 
-//abrir PopUp
-function editarModal(id) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {
-        controlesObligatorio[i].parentNode.classList.remove("error");
-    }
-    if (id == 0) {
-        LimpiarCampos();
-    }
-    else {
-        $.get("/Compra/ConsultaCompras/?Id=" + id, function (data) {
-            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
-            document.getElementById("TxtMetodoDePago").value = data[0].MetodoDePago;
 
-        });
-    }
-}
 
 

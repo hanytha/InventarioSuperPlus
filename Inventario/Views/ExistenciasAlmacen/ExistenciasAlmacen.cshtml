@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "ExistenciasAlmacen";
+}
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<h2>ExistenciasAlmacen</h2>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+
+<div id="tabla" class="table-responsive"></div>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h1>REGISTRO DE ALMACEN GENERAL</h1>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post">
+                        <fieldset>
+                            <h2>Paso 1</h2>
+                            <div class="form-group">
+                                <label for="TxtNoPedido">Número de pedido</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNoPedido]" id="TxtNoPedido" placeholder="Número de pedido">
+                            </div>
+                            <div class="form-group">
+                                <label for="TxtExistenciaInicial">Existencia Inicial</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" placeholder="Existencia Inicial">
+                            </div>
+                            <div class="form-group">
+                                <label for="TxtExistenciaActual">Existencia actual</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" placeholder="Existencia Actual">
+                            </div>
+                            <input type="button" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h2>Paso 2</h2>
+                            <div class="form-group">
+                                <label for="TxtCosto">Costo</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtCosto]" id="TxtCosto" placeholder="Existencia Actual">
+                            </div>
+                            <div class="form-group">
+
+
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                            <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
+                            <!--  <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="submit_data" />-->
+                            <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_ExistenciasAlmacen.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

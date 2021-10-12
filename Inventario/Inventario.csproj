@@ -94,18 +94,18 @@
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
     <Content Include="Assets\NewFolder1\nucleo-icons.svg" />
-    <Content Include="Content\Tabla.css" />
     <Content Include="Content\CObligatorios.css" />
+    <Content Include="Content\Tabla.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\argon.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\nucleo.css" />
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
+    <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
+    <Compile Include="Controllers\ExistenciasAlmacenController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
@@ -204,6 +205,7 @@
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
     <Content Include="Views\Configuracion\Configuracion.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
+    <Content Include="Views\ExistenciasAlmacen\ExistenciasAlmacen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -214,7 +216,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\GLOBAL\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
