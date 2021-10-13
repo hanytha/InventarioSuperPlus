@@ -4,7 +4,6 @@ CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {
-        //Accordeon(Data, document.getElementById("accordion"));
         AcordeonProveedores(Data, document.getElementById("accordion"));
     });
 }//Acordeon proveedores
@@ -16,7 +15,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         }
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
-        }
+        } //Obtener los registros de la base de datos para mostrarlo en el accordión
         CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].Id + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].Id + "' aria-expanded='false' aria-controls='collapse" + Data[i].Id + "' class='collapsed'>";
@@ -61,7 +60,10 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "</div>";
         //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+
+        CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -72,7 +74,6 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
-
 //imagenes
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
@@ -87,8 +88,6 @@ btnFoto.onchange = function (e) {
     reader.readAsDataURL(file);
 }
 
-
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -96,32 +95,33 @@ function abrirModal(id) {//la clase  Obligatorio
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
     }
     if (id == 0) {
-
         LimpiarCampos();
-        sessionStorage.setItem('IDProveedor', '0');       ///////////////////////////////// 
+        //  sessionStorage.setItem('IDProveedor', '0');  
     }
     else {
 
-        $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (Data) {
-
-            sessionStorage.setItem('IDProveedor', Data[0].Id);     ////////////////////
-            /////////////////////// document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+        $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
+            //Obtener los datos de los proveedores para permitir editar
+            sessionStorage.setItem('IDProveedor', Data[0].Id);     //
+            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
             document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
             document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
-            document.getElementById("cmbEstado").value = Data[0].Estado;
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].IDEstado, function (Municipios) {
+            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
+            document.getElementById("cmbEstado").value = Data[0].IdEstado;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
                 llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
-                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
+                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
             });
-            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].IDMunicipio, function (Localidades) {
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
                 llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
-                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
+                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
@@ -131,7 +131,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("PBFoto").src = "data:image/png;base64," + data[0].FOTOMOSTRAR;
+            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
         });
     }
 }
@@ -194,13 +194,13 @@ function llenarCombo(data, control) {
     control.innerHTML = contenido;
 }
 
-//Guarda los cambios y altas de las áreas
+//Guarda los cambios y altas de los proveedores
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var Id = sessionStorage.getItem('IDProveedor');
             var Nombre = document.getElementById("TxtNombre").value;
-            var Correo = document.getElementById("Txtcorreo").value;
+            var Correo = document.getElementById("TxtCorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
             var ClaveInterbancaria = document.getElementById("TxtClaveInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
@@ -240,8 +240,6 @@ function GuardarProveedor() {
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
             frm.append("Localidad", Localidad);
-            //  frm.append("NombreL", NombreL);
-
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
             frm.append("Direccion", Direccion);
@@ -290,7 +288,7 @@ function CamposObligatorios() {
         }
         else {
             controlesObligatorio[i].parentNode.classList.remove("error");
-            
+
         }
     }
     return exito;
@@ -324,3 +322,53 @@ function EliminarProveedores(id) {
 
 
 //dialogo1
+
+
+
+
+
+
+/*
+function editarModal(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        controlesObligatorio[i].parentNode.classList.remove("error");
+    }
+    if (id == 0) {
+        LimpiarCampos();
+    }
+    else {
+        $.get("/Proveedores/ConsultaProveedores/?Id=" + id, function (data) {
+            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+          //  document.getElementById("TxtMetodoDePago").value = data[0].MetodoDePago;
+           // sessionStorage.setItem('IDProveedor', Data[0].Id);     ////////////////////
+            /////////////////////// document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+            document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
+            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
+            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
+            document.getElementById("cmbEstado").value = Data[0].id;
+            //document.getElementById("cmbEstado").value = Data[0].estado_id;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + data[0].estado_id, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                document.getElementById("cmbMunicipio").value = data[0].IDMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + data[0].IDMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                document.getElementById("cmbLocalidad").value = data[0].IDLocalidad;
+            });
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtBanco").value = Data[0].Banco;
+            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
+            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
+            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
+            document.getElementById("PBFoto").src = "data:image/png;base64," + data[0].FOTOMOSTRAR;
+        });
+    }
+}
+*/
