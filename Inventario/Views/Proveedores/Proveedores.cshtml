@@ -33,21 +33,36 @@
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <!--Los pasos del modal-->
+                            <!--Los pasos del modal -->
                             <h2>Paso 1</h2>
-                            <div class="form-group">
-                                <label for="TxtNombre">Nombre del proveedor</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre del proveedor">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label limpiar obligatorio" for="TxtNombre">Nombre del proveedor<span class="required">*</span></label>
+                                        <input id="TxtNombre" class="form-control" placeholder="Nombre" type="text">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="TxtCorreo">E-mail</label>
-                                <input type="email" class="form-control limpiar obligatorio" id="TxtCorreo" placeholder="Correo electrónico">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label limpiar obligatorio" for="TxtCorreo">Email address<span class="required">*</span></label>
+                                        <input type="email" id="TxtCorreo" class="form-control" placeholder="name@example.com">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label limpiar obligatorio" for="TxtRazonSocial">Razón Social<span class="required">*</span></label>
+                                        <input type="text" id="TxtRazonSocial" class="form-control" placeholder="Razón Social">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="TxtRazonSocial">Razón Social</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtRazonSocial]" id="TxtRazonSocial" placeholder="Razón Social">
-                            </div>
+
+
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+
                         </fieldset>
                         <fieldset>
                             <h2> Paso 2</h2>
@@ -168,7 +183,58 @@
         display: none;
     }
 </style>
+
+<script>
+    function hideshow() {
+        var password = document.getElementById("password1");
+        var slash = document.getElementById("slash");
+        var eye = document.getElementById("eye");
+
+        if (password.type === 'password') {
+            password.type = "text";
+            slash.style.display = "block";
+            eye.style.display = "none";
+        }
+        else {
+            password.type = "password";
+            slash.style.display = "none";
+            eye.style.display = "block";
+        }
+
+    }
+</script>
+
+<script>
+    // initialize a validator instance from the "FormValidator" constructor.
+    // A "<form>" element is optionally passed as an argument, but is not a must
+    var validator = new FormValidator({
+        "events": ['blur', 'input', 'change']
+    }, document.forms[0]);
+    // on form "submit" event
+    document.forms[0].onsubmit = function (e) {
+        var submit = true,
+            validatorResult = validator.checkAll(this);
+        console.log(validatorResult);
+        return !!validatorResult.valid;
+    };
+    // on form "reset" event
+    document.forms[0].onreset = function (e) {
+        validator.reset();
+    };
+    // stuff related ONLY for this demo page:
+    $('.toggleValidationTooltips').change(function () {
+        validator.settings.alerts = !this.checked;
+        if (this.checked)
+            $('form .alert').remove();
+    }).prop('checked', false);
+
+</script>
+
+
+
 <!--Script-->
+
+<script src="~/Scrips/jquery.min.js"></script><!--Visualizar el accordion-->
 
 <script src="~/Scrips/jquery.min.js"></script> <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->

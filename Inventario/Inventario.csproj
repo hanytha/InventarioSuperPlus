@@ -109,6 +109,7 @@
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Personal.js" />
@@ -119,7 +120,6 @@
     <Content Include="Scrips\Internos\JS_Tienda.js" />
     <Content Include="Scrips\Internos\JS_Configuraciones.js" />
     <Content Include="Scrips\Internos\JS_Usuarios.js" />
-    <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />

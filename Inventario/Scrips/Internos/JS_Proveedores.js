@@ -28,7 +28,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].RazonSocial + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Razón social: </strong>" + Data[i].RazonSocial + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
