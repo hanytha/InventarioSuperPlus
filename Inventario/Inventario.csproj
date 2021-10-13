@@ -104,8 +104,9 @@
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
-    <Content Include="Scrips\Internos\JS_Articulos.js" />
+    <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
+    <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
@@ -136,11 +137,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ClasificacionController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
-    <Compile Include="Controllers\ExistenciasAlmacenController.cs" />
+    <Compile Include="Controllers\ExistenciaAlmacenController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
@@ -205,7 +207,8 @@
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
     <Content Include="Views\Configuracion\Configuracion.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
-    <Content Include="Views\ExistenciasAlmacen\ExistenciasAlmacen.cshtml" />
+    <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
+    <Content Include="Views\Categoria\Categoria.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -216,6 +219,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Catrgoria\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

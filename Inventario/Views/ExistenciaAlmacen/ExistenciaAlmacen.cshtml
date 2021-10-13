@@ -1,18 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "ExistenciasAlmacen";
+    ViewBag.Title = "ExistenciaAlmacen";
 }
 
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <h2>ExistenciasAlmacen</h2>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 
-<div id="tabla" class="table-responsive"></div>
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -33,8 +34,8 @@
                         <fieldset>
                             <h2>Paso 1</h2>
                             <div class="form-group">
-                                <label for="TxtNoPedido">Número de pedido</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNoPedido]" id="TxtNoPedido" placeholder="Número de pedido">
+                                <label for="TxtNumCompra">Número de compra</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNumCompra]" id="TxtNumCompra" placeholder="Número de compra">
                             </div>
                             <div class="form-group">
                                 <label for="TxtExistenciaInicial">Existencia Inicial</label>
@@ -57,16 +58,13 @@
 
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <!--<input type="button" name="previous" class="previous btn btn-default" value="Previo" />-->
-                            <!--  <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="submit_data" />-->
-                            <!--<button class='btn btn-danger' onclick='GuardarProveedor(" + RegistrosProveedores[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";-->
                             <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 ﻿CrearAcordeonExistenciasAlmacen();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistenciasAlmacen() {
-    $.get("/ExistenciasAlmacen/ConsultaExistenciasAlmacenes", function (Data) {
+    $.get("/ExistenciaAlmacen/ConsultaExistenciasAlmacenes", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonExistenciasAlmacen(Data, document.getElementById("accordion"));
     });
@@ -38,7 +38,7 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarExistenciasG(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -48,6 +48,38 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "</div>";
     }
     CtrlAlmacen.innerHTML = CodigoHTMLAreas;
+}
+
+
+
+//Limpia la información y carga la informacion del proveedor
+function abrirModal(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IDGeneral', '0');
+      
+    }
+    else {
+
+        $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacen/?Id=" + id, function (Data) {
+            //Obtener los datos de los proveedores para permitir editar
+            sessionStorage.setItem('IDGeneral', Data[0].Id);
+            document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
+            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
+            document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
+            document.getElementById("TxtCosto").value = Data[0].Coste;
+
+           
+        });
+    }
 }
 
 
@@ -63,11 +95,13 @@ function LimpiarCampos() {
     }
 }
 
+
+
 //Guarda los cambios y altas de las áreas
 function GuardarAlmacen() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDAlmacen');
+            var Id = sessionStorage.getItem('IDGeneral');
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
@@ -82,7 +116,7 @@ function GuardarAlmacen() {
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/ExistenciasAlmacen/GuardarAlmacen",
+                url: "/ExistenciaAlmacen/GuardarAlmacen",
                 data: frm,
                 contentType: false,
                 processData: false,
@@ -103,9 +137,6 @@ function GuardarAlmacen() {
         }
     }
 }
-
-
-
 
 //marca los campos obligatorios
 function CamposObligatorios() {
@@ -131,7 +162,7 @@ function CamposObligatorios() {
 function EliminarExistenciasG(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/ExistenciasAlmacen/EliminarExistenciaG/?Id=" + id, function (DatoExistecia) {
+        $.get("/ExistenciaAlmacen/EliminarExistenciaG/?Id=" + id, function (DatoExistecia) {
             if (DatoExistecia == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonExistenciasAlmacen();
@@ -141,6 +172,5 @@ function EliminarExistenciasG(id) {
         });
     }
 }
-
 
 

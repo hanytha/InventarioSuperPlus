@@ -6,16 +6,15 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-    public class ExistenciasAlmacenController : Controller
+    public class ExistenciaAlmacenController : Controller
     {
         //conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
-        // GET: ExistenciasAlmacen
-        public ActionResult ExistenciasAlmacen()
+        // GET: ExistenciaAlmacen
+        public ActionResult ExistenciaAlmacen()
         {
             return View();
         }
-
         public JsonResult ConsultaExistenciasAlmacenes()
         {//Consulta general
             var almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
