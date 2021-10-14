@@ -258,7 +258,6 @@ function GuardarProveedor() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
-
                     if (data == 0) {
                         alert("Ocurrio un error");
                     }
@@ -307,6 +306,7 @@ function EliminarProveedores(id) {
     }
 }
 
+/*
 (function () {
     var template = null
     $('.modal').on('show.bs.modal', function (event) {
@@ -319,7 +319,7 @@ function EliminarProveedores(id) {
     })
 
 })()
-
+*/
 
 
 
