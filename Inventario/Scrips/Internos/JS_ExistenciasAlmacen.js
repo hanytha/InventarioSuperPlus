@@ -1,7 +1,7 @@
 ﻿CrearAcordeonExistenciasAlmacen();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistenciasAlmacen() {
-    $.get("/ExistenciaAlmacen/ConsultaExistenciasAlmacenes", function (Data) {
+    $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacenes", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonExistenciasAlmacen(Data, document.getElementById("accordion"));
     });
@@ -162,7 +162,7 @@ function CamposObligatorios() {
 function EliminarExistenciasG(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/ExistenciaAlmacen/EliminarExistenciaG/?Id=" + id, function (DatoExistecia) {
+        $.get("/ExistenciaAlmacen/EliminarAlmacen/?Id=" + id, function (DatoExistecia) {
             if (DatoExistecia == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonExistenciasAlmacen();
@@ -172,5 +172,4 @@ function EliminarExistenciasG(id) {
         });
     }
 }
-
 

@@ -7,7 +7,8 @@ using System.Web.Mvc;
 namespace Inventario.Controllers
 {
     public class CompraController : Controller
-    {//conexion con DB
+    {
+        //conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
 
         // GET: MetodoPago

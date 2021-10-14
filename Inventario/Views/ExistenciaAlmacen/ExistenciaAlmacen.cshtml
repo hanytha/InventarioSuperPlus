@@ -30,12 +30,12 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
                             <h2>Paso 1</h2>
                             <div class="form-group">
                                 <label for="TxtNumCompra">Número de compra</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNumCompra]" id="TxtNumCompra" placeholder="Número de compra">
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNumCompra]" id="TxtNumCompra" placeholder="Número de compra" required="required">
                             </div>
                             <div class="form-group">
                                 <label for="TxtExistenciaInicial">Existencia Inicial</label>
@@ -58,18 +58,59 @@
 
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
+                            <button type="submit" value="Submit"  class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button  id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+
+  function validarFormulario(){
+
+      var TxtNumCompra = document.getElementById('TxtNumCompra').value;
+      var TxtExistenciaInicial = document.getElementById('TxtExistenciaInicial').value;
+      var TxtExistenciaActual = document.getElementById('TxtExistenciaActual').value;
+      var TxtCosto = document.getElementById('TxtCosto').value;
+
+
+    //Test edad
+      if (TxtNumCompra == null || TxtNumCompra.length == 0 || isNaN(TxtNumCompra)) {
+          alert('ERROR: Debe ingresar un Número de compra');
+          return false;
+      }
+      //Test edad
+      if (TxtExistenciaInicial == null || TxtExistenciaInicial.length == 0 || isNaN(TxtExistenciaInicial)) {
+          alert('ERROR: Debe ingresar una Existencia Inicial');
+          return false;
+      }
+      //Test edad
+      if (TxtExistenciaActual == null || TxtExistenciaActual.length == 0 || isNaN(TxtExistenciaActual)) {
+          alert('ERROR: Debe ingresar una Existencia Actual');
+          return false;
+      }
+      //Test edad
+      if (TxtCosto == null || TxtCosto.length == 0 || isNaN(TxtCosto)) {
+          alert('ERROR: Debe ingresar un Costo');
+          return false;
+      }
+
+
+    return true;
+  }
+
+</script>
+
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
