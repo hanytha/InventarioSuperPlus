@@ -104,6 +104,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
+    <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
@@ -219,7 +220,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Catrgoria\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

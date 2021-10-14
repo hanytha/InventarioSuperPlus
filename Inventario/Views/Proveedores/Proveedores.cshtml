@@ -27,7 +27,7 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioProveedor()">
                         <fieldset>
                             <!--Los pasos del modal-->
                             <h2>Paso 1</h2>
@@ -135,7 +135,7 @@
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
 
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -157,4 +157,7 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<!--Validacion del formulario-->
+<script src="~/Scrips/General/JS_Validacion.js"></script>
+
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

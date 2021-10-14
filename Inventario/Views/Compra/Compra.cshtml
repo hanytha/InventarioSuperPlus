@@ -32,7 +32,7 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post"  onsubmit="return validarFormularioCompra()">
                         <fieldset>
                             <!--Los pasos del modal-->
 
@@ -42,7 +42,7 @@
                                 <input type="text" class="form-control limpiar obligatorio" name="data[TxtMetodoDePago]" id="TxtMetodoDePago" placeholder="MétodoPago">
 
                             </div>
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
+                            <button id="btnGuardar"  type="submit" value="Submit" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -55,18 +55,20 @@
     </div>
 </div>
 <table>
-
 </table>
 
-    <!--Hacer que el modal muestre los pasos por parte-->
-    <style type="text/css">
-        #regiration_form fieldset:not(:first-of-type) {
-            display: none;
-        }
-    </style>
-    <!--Script-->
-    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-    <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-    <script src="~/Scrips/Internos/JS_Compra.js"></script>
-    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Compra.js"></script>
+<!--Validacion del formulario-->
+<script src="~/Scrips/General/JS_Validacion.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->

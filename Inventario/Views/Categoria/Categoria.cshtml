@@ -31,7 +31,7 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()" >
                         <fieldset>
                             <!--Los pasos del modal-->
 
@@ -40,7 +40,7 @@
                                 <label for="TxtClasificacion">Tipo de clasificación</label>
                                 <input type="text" class="form-control limpiar obligatorio" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
                             </div>
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
+                            <button id="btnGuardar"  type="submit" value="Submit" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -66,4 +66,5 @@
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Categorias.js"></script>
+<script src="~/Scrips/General/JS_Validacion.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
