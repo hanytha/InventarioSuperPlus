@@ -109,7 +109,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDProveedor', Data[0].Id);     //
             // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
             document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
             document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
@@ -200,7 +200,7 @@ function GuardarProveedor() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var Id = sessionStorage.getItem('IDProveedor');
             var Nombre = document.getElementById("TxtNombre").value;
-            var Correo = document.getElementById("TxtCorreo").value;
+            var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
             var ClaveInterbancaria = document.getElementById("TxtClaveInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
@@ -258,6 +258,7 @@ function GuardarProveedor() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
+
                     if (data == 0) {
                         alert("Ocurrio un error");
                     }

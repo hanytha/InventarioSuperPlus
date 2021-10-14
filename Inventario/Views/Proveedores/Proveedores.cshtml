@@ -1,7 +1,10 @@
 ﻿
+
+
 @{
     ViewBag.Title = "Proveedores";
 }
+
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Proveedores</h2>
 <!--  -->
@@ -10,9 +13,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-
-
-
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -21,9 +21,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Registro</h4>
+                    <h4 class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal">x</button>
-
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
@@ -31,180 +30,121 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioProveedor()">
                         <fieldset>
-                            <!--Los pasos del modal -->
+                            <!--Los pasos del modal-->
                             <h2>Paso 1</h2>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Nombre del proveedor<span class="required">*</span></label>
-                                        <input id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="Nombre" type="text">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtNombre">Nombre del proveedor</label>
+                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre del proveedor">
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCorreo">Email address<span class="required">*</span></label>
-                                        <input type="email" id="TxtCorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtRazonSocial">Razón Social<span class="required">*</span></label>
-                                        <input type="text" id="TxtRazonSocial" class="form-control  limpiar obligatorio" placeholder="Razón Social">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="Txtcorreo">E-mail</label>
+                                <input type="email" class="form-control limpiar obligatorio" id="Txtcorreo" placeholder="Correo electrónico">
                             </div>
-
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClaveInterbancaria">Clave Interbancaria<span class="required">*</span></label>
-                                        <input type="text" id="TxtClaveInterbancaria" class="form-control  limpiar obligatorio" placeholder="Clave Interbancaria">
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
-                                        <input type="text" id="TxtCodigoPostal" class="form-control limpiar obligatorio" placeholder="Código Postal">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtRazonSocial">Razón Social</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtRazonSocial]" id="TxtRazonSocial" placeholder="Razón Social">
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-
                         </fieldset>
                         <fieldset>
                             <h2> Paso 2</h2>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbEstado">Estado<span class="required">*</span></label>
-                                        <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbMunicipio">Municipio<span class="required">*</span></label>
-                                        <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtClaveInterbancaria">Clave Interbancaria</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtClaveInterbancaria]" id="TxtClaveInterbancaria" placeholder="Clave Interbancaria">
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbLocalidad">Localidad<span class="required">*</span></label>
-                                        <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtCodigoPostal">Código Postal</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtCodigoPostal]" id="TxtCodigoPostal" placeholder="Código Postal">
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
-                                        <input type="text" id="TxtDireccion" class="form-control limpiar obligatorio" placeholder="Dirección">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <span class="help-block text-muted small-font">Estado</span>
+                                <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
+
                             <input type="button" name="previous" class="previous btn btn-default" value="Atras" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
                             <h2> Paso 3</h2>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtRFC">RFC del Emisor<span class="required">*</span></label>
-                                        <input type="text" id="TxtRFC" class="form-control limpiar obligatorio" placeholder="RFC">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
-                                        <input type="tel" id="TxtTelefono" class="form-control limpiar obligatorio" placeholder="Teléfono">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <span class="help-block text-muted small-font">Municipio</span>
+                                <BR />
+                                <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtBanco">Nombre del Banco<span class="required">*</span></label>
-                                        <input type="text" id="TxtBanco" class="form-control limpiar obligatorio" placeholder="Banco">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumeroDeCuenta">Número de Cuenta<span class="required">*</span></label>
-                                        <input type="text" id="TxtNumeroDeCuenta" class="form-control limpiar obligatorio" placeholder="Número de Cuenta">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <span class="help-block text-muted small-font">Localidad</span>
+                                <BR />
+                                <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI<span class="required">*</span></label>
-                                        <input type="text" id="TxtUsoCFDI" class="form-control limpiar obligatorio" placeholder="UsoCFDI">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomenclatura">Nomenclatura<span class="required">*</span></label>
-                                        <input type="text" id="TxtNomenclatura" class="form-control limpiar obligatorio" placeholder="Nomenclatura">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtRFC">RFC</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtRFC]" id="TxtRFC" placeholder="RFC del Emisor">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> Paso 6</h2>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <textarea id="TxtDescripcion" required="required" class="form-control limpiar obligatorio" name="TxtDescripcion" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
-                                    </div>
-                                </div>
+                            <h2> Paso 4</h2>
+                            <div class="form-group">
+                                <label for="TxtDireccion">Dirección</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtDireccion]" id="TxtDireccion" placeholder="Dirección">
                             </div>
-
-                            <!-- Agregar la imagen -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="PBFoto">Seleccione su logo</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.jpg" width="475" height="300" alt="" />
-
-                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="TxtTelefono"> Teléfono</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtTelefono]" id="TxtTelefono" placeholder="Teléfono">
                             </div>
-
-
-
-
+                            <div class="form-group">
+                                <label for="TxtBanco"> Banco</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtBanco]" id="TxtBanco" placeholder="Banco">
+                            </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <button type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h2> Paso 5</h2>
+                            <div class="form-group">
+                                <label for="TxtNumeroDeCuenta">Número de Cuenta</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNumeroDeCuenta]" id="TxtNumeroDeCuenta" placeholder="Número de Cuenta">
+                            </div>
+                            <div class="form-group">
+                                <label for="TxtUsoCFDI">UsoCFDI</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtUsoCFDI]" id="TxtUsoCFDI" placeholder="UsoCFDI">
+                            </div>
+                            <div class="form-group">
+                                <label for="TxtNomenclatura"> Nomenclatura</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNomenclatura]" id="TxtNomenclatura" placeholder="Nomenclatura">
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
-                            <!--  <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-                            <input type="submit" name="btnGuardar" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="btnGuardar" />-->
+                        </fieldset>
+                        <fieldset>
+                            <h2> Paso 6</h2>
+                            <div class="form-group">
+                                <label for="TxtDescripcion">Descripción</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtDescripcion]" id="TxtDescripcion" placeholder="Descripción">
+                            </div>
+                            <!-- Agregar la imagen -->
+                            <div class="form-group">
+                                <div>
+                                    <!--Definir el tamaño de la imágen-->
+                                    <img id="PBFoto" src="~/Assets/Imagenes/logo.jpg" width="475" height="300" alt="" />
+
+                                    <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                         </fieldset>
                     </form>
-
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <!--  <button id="btnGuardar" type="button" class="btn btn-success" onclick="Guardar()">GUARDAR</button>-->
-                    <!-- <button id="btnCerrar" type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
-                    <input type="submit" name="btnGuardar" class="submit btn btn-success" value="Enviar" onclick="GuardarProveedor()" id="btnGuardar" />-->
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -216,131 +156,10 @@
         display: none;
     }
 </style>
-
-
-
-<!--
-<script>
-    function validarFormulario() {
-        var TxtNombre = document.getElementById('TxtNombre').value;
-        var TxtCorreo = document.getElementById('TxtCorreo').value;
-        var TxtRazonSocial = document.getElementById('TxtRazonSocial').value;
-        var TxtClaveInterbancaria = document.getElementById('TxtClaveInterbancaria').value;
-        var TxtCodigoPostal = document.getElementById('TxtCodigoPostal').value;
-        var cmbEstado = document.getElementById('cmbEstado').value;
-        var cmbMunicipio = document.getElementById('cmbMunicipio').value;
-        var cmbLocalidad = document.getElementById('cmbLocalidad').value;
-        var TxtDireccion = document.getElementById('TxtDireccion').value;
-        var TxtRFC = document.getElementById('TxtRFC').value;
-        var TxtTelefono = document.getElementById('TxtTelefono').value;
-        var TxtBanco = document.getElementById('TxtBanco').value;
-        var TxtNumeroDeCuenta = document.getElementById('TxtNumeroDeCuenta').value;
-        var TxtUsoCFDI = document.getElementById('TxtUsoCFDI').value;
-        var TxtNomenclatura = document.getElementById('TxtNomenclatura').value;
-        var TxtDescripcion = document.getElementById('TxtDescripcion').value;
-        var PBFoto = document.getElementById('PBFoto').value;
-
-        //Test edad
-        if (TxtNombre == null || TxtNombre.length == 0 || isNaN(TxtNombre)) {
-            alert('ERROR: Debe ingresar un Número de compra');
-            return false;
-        }
-        //Test edad
-        if (TxtCorreo == null || TxtCorreo.length == 0 || isNaN(TxtCorreo)) {
-            alert('ERROR: Debe ingresar una Existencia Inicial');
-            return false;
-        }
-        //Test edad
-        if (TxtRazonSocial == null || TxtRazonSocial.length == 0 || isNaN(TxtRazonSocial)) {
-            alert('ERROR: Debe ingresar una Existencia Actual');
-            return false;
-        }
-        //Test edad
-        if (TxtClaveInterbancaria == null || TxtClaveInterbancaria.length == 0 || isNaN(TxtClaveInterbancaria)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        if (TxtCodigoPostal == null || TxtCodigoPostal.length == 0 || isNaN(TxtCodigoPostal)) {
-            alert('ERROR: Debe ingresar un Número de compra');
-            return false;
-        }
-        //Test edad
-        if (cmbEstado == null || cmbEstado.length == 0 || isNaN(cmbEstado)) {
-            alert('ERROR: Debe ingresar una Existencia Inicial');
-            return false;
-        }
-        //Test edad
-        if (cmbMunicipio == null || cmbMunicipio.length == 0 || isNaN(cmbMunicipio)) {
-            alert('ERROR: Debe ingresar una Existencia Actual');
-            return false;
-        }
-        //Test edad
-        if (cmbLocalidad == null || cmbLocalidad.length == 0 || isNaN(cmbLocalidad)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        if (TxtDireccion == null || TxtDireccion.length == 0 || isNaN(TxtDireccion)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-
-        //Test edad
-        if (TxtRFC == null || TxtRFC.length == 0 || isNaN(TxtRFC)) {
-            alert('ERROR: Debe ingresar una Existencia Actual');
-            return false;
-        }
-        //Test edad
-        if (TxtTelefono == null || TxtTelefono.length == 0 || isNaN(TxtTelefono)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        if (TxtBanco == null || TxtBanco.length == 0 || isNaN(TxtBanco)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-
-        //Test edad
-        if (TxtNumeroDeCuenta == null || TxtNumeroDeCuenta.length == 0 || isNaN(TxtNumeroDeCuenta)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        if (TxtUsoCFDI == null || TxtUsoCFDI.length == 0 || isNaN(TxtNumeroDeCuenta)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        if (TxtNomenclatura == null || TxtNomenclatura.length == 0 || isNaN(TxtNomenclatura)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        if (TxtDescripcion == null || TxtDescripcion.length == 0 || isNaN(TxtDescripcion)) {
-            alert('ERROR: Debe ingresar un Costo');
-            return false;
-        }
-        //Test edad
-        // if (PBFoto == null || PBFoto.length == 0 || isNaN(PBFoto)) {
-        //   alert('ERROR: Debe ingresar un Costo');
-        //return false;
-        //}
-
-        return true;
-    }
-</script>  -->
 <!--Script-->
-
-<script src="~/Scrips/jquery.min.js"></script><!--Visualizar el accordion-->
-
-<script src="~/Scrips/jquery.min.js"></script> <!--Visualizar el accordion-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-
-
+<!--Validacion del formulario-->
+<script src="~/Scrips/General/JS_Validaciones.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<script src="~/Scrips/js.cookie.js"></script>
-<script src="~/Scrips/bootstrap-datepicker.min.js"></script>
-<script src="~/Scrips/bootstrap.min.js"></script>
-
