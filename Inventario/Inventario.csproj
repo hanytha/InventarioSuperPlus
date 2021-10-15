@@ -106,6 +106,7 @@
     <Content Include="Scrips\bootstrap-datepicker.min.js" />
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\General\JS_Validaciones.js" />
+    <Content Include="Scrips\General\validator.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
