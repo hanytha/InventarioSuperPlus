@@ -40,115 +40,272 @@
                         <li class="nav-item">
 
                         </li>
-                        <ul class="acorh">
 
-                            <li>
+
+
+                        <li class="list__item">
+                            <div class="list__button">
+                                <img src="~/Assets/Imagenes/ini.png" class="list__img">
                                 @Html.ActionLink("Inicio", "Index", "Index", new { area = "" }, new { @class = "navbar-brand" })
-                            </li>
+                            </div>
+                        </li>
 
-                            <li>
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/usuario.png" class="list__img">
                                 @Html.ActionLink("Usuarios", "Usuario", "Usuario", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Perfiles de usuarios", "Perfiles", "Perfiles", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Perfiles ", "Perfiles", "Perfiles", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
+                            </ul>
 
-                                </ul>
-                            </li>
-                            <li>
+                        </li>
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/area.png" class="list__img">
                                 @Html.ActionLink("Áreas", "Departamentos", "Departamentos", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Subárea", "SubArea", "SubArea", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Subárea", "SubArea", "SubArea", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
+                            </ul>
 
-                                </ul>
-                            </li>
+                        </li>
 
-                            <li>
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/articulo.png" class="list__img">
                                 @Html.ActionLink("Artículos", "Articulo", "Articulo", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Existencias", "Existencias", "Existencias", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Existencias", "Existencias", "Existencias", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
+                                <li class="list__inside">
+                                    @Html.ActionLink("Existencias Almacen", "ExistenciaAlmacen", "ExistenciaAlmacen", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
-                                    <li>
+                                <li class="list__inside">
+                                    @Html.ActionLink("Clasificación", "Clasificacion", "Clasificacion", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                        @Html.ActionLink("Clasificación", "Clasificacion", "Clasificacion", new { area = "" }, new { @class = "navbar-brand" })
+                                <li class="list__inside">
+                                    @Html.ActionLink("Unidad de medida", "UnidadMedida", "UnidadMedida", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
-                                    <li>
+                                <li class="list__inside">
+                                    @Html.ActionLink("Impuestos", "Impuestos", "Impuestos", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
+                            </ul>
 
-                                        @Html.ActionLink("Unidad de medida", "UnidadMedida", "UnidadMedida", new { area = "" }, new { @class = "navbar-brand" })
+                        </li>
 
-                                    </li>
-
-                                </ul>
-                            </li>
-                            <li>
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/tienda.png" class="list__img">
                                 @Html.ActionLink("Tiendas", "Tienda", "Tienda", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Supervisión", "Supervision", "Supervision", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Supervisión", "Supervision", "Supervision", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
-                                    <li>
+                                <li class="list__inside">
+                                    @Html.ActionLink("Supervisor", "Supervisor", "Supervisor", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
+                            </ul>
 
-                                        @Html.ActionLink("Supervisor", "Supervisor", "Supervisor", new { area = "" }, new { @class = "navbar-brand" })
+                        </li>
 
-                                    </li>
 
-                                </ul>
-                            </li>
 
-                            <li>
-                                @Html.ActionLink("Pedidos externos", "Pedidosext", "Pedidosext", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/pedidos.png" class="list__img">
+                                <a href="#" class="nav__link">Pedidos</a>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Pedidos Internos", "Pedidosint", "Pedidosint", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Pedidos externos", "Pedidosext", "Pedidosext", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
-                                    <li>
+                                <li class="list__inside">
+                                    @Html.ActionLink("Pedidos Internos", "Pedidosint", "Pedidosint", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
+                            </ul>
 
-                                        @Html.ActionLink("Proveedores", "Proveedores", "Proveedores", new { area = "" }, new { @class = "navbar-brand" })
+                        </li>
 
-                                    </li>
-                                    <li>
 
-                                        @Html.ActionLink("Marca", "Marca", "Marca", new { area = "" }, new { @class = "navbar-brand" })
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/proveedor.png" class="list__img">
+                                @Html.ActionLink("Proveedores", "Proveedores", "Proveedores", new { area = "" }, new { @class = "navbar-brand" })
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                    </li>
-                                    <li>
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Marca", "Marca", "Marca", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                        @Html.ActionLink("Impuestos", "Impuestos", "Impuestos", new { area = "" }, new { @class = "navbar-brand" })
+                                <li class="list__inside">
+                                    @Html.ActionLink("Bonificaciones", "Bonificaciones", "Bonificaciones", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
+                            </ul>
 
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
+                        </li>
+
+
+                        <li class="list__item list__item--click">
+                            <div class="list__button list__button--click">
+                                <img src="~/Assets/Imagenes/web.png" class="list__img">
                                 @Html.ActionLink("Página", "Pagina", "Pagina", new { area = "" }, new { @class = "navbar-brand" })
-                                <ul>
-                                    <li>
+                                <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            </div>
 
-                                        @Html.ActionLink("Configuración", "Configuracion", "Configuracion", new { area = "" }, new { @class = "navbar-brand" })
+                            <ul class="list__show">
+                                <li class="list__inside">
+                                    @Html.ActionLink("Configuración", "Configuracion", "Configuracion", new { area = "" }, new { @class = "navbar-brand" })
+                                </li>
 
-                                    </li>
+                              
+                            </ul>
 
-                                </ul>
-                            </li>
-                        </ul>
+                        </li>
+
+
                     </ul>
+
 
                 </div>
             </div>
         </div>
+
+
+
+        <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #EAEBEF;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .nav {
+                width: 300px;
+            }
+
+            .nav__link {
+                color: #303440;
+                display: block;
+                padding: 15px 0;
+                text-decoration: none;
+            }
+
+            .nav__link--inside {
+                border-radius: 6px;
+                padding-left: 20px;
+                text-align: left;
+            }
+
+                .nav__link--inside:hover {
+                    background: #F6F8FA;
+                }
+
+            .list {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                border-radius: 0 16px 16px 0;
+                background: #fff;
+            }
+
+            .list__item {
+                list-style: none;
+                width: 100%;
+                text-align: center;
+                overflow: hidden;
+            }
+
+            .list__item--click {
+                cursor: pointer;
+            }
+
+            .list__button {
+                display: flex;
+                align-items: center;
+                gap: 1em;
+                width: 95%;
+                margin: 0 auto;
+            }
+
+            .arrow .list__arrow {
+                transform: rotate(90deg);
+            }
+
+            .list__arrow {
+                margin-left: auto;
+                transition: transform .3s;
+            }
+
+            .list__show {
+                width: 80%;
+                margin-left: auto;
+                border-left: 2px solid #303440;
+                list-style: none;
+                transition: height .4s;
+                height: 0;
+            }
+
+       
+        </style>
+
+
+        <script>
+            let listElements = document.querySelectorAll('.list__button--click');
+
+            listElements.forEach(listElement => {
+                listElement.addEventListener('click', () => {
+
+                    listElement.classList.toggle('arrow');
+
+                    let height = 0;
+                    let menu = listElement.nextElementSibling;
+                    if (menu.clientHeight == "0") {
+                        height = menu.scrollHeight;
+                    }
+
+                    menu.style.height = `${height}px`;
+
+                })
+            });
+        </script>
+
+
+
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
