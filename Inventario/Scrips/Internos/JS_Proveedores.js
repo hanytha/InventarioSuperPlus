@@ -96,7 +96,7 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
+        
     }
     if (id == 0) {
         LimpiarCampos();
@@ -321,6 +321,7 @@ function EliminarProveedores(id) {
 
 })()
 */
+
 
 
 

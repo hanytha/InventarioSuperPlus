@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -182,7 +183,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
 
                             <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
@@ -191,7 +192,9 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
+                    <!--  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>-->
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <!-- <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success">Guardar</button> -->
                 </div>
             </div>
         </div>
@@ -204,10 +207,12 @@
     }
 </style>
 <!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion,Navegación del formulario de paso siguiente y anterior mediante jQuery.-->
+
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <!--Validacion del formulario-->
 <script src="~/Scrips/General/validator.js"></script>
 <script src="~/Scrips/General/JS_Validaciones.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<script src="~/Scrips/Plus/scripts.js"></script>

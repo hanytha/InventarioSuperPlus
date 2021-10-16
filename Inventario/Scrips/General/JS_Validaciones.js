@@ -23,7 +23,7 @@ function validarFormularioProveedor() {
 
     //Test campo obligatorio
     if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
-        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+        alert('ERROR: El campo nombre es obligatorio');
         return false;
     }
     //Test correo
@@ -34,19 +34,19 @@ function validarFormularioProveedor() {
 
     //Test campo obligatorio
     if (TxtRazonSocial == null || TxtRazonSocial.length == 0 || /^\s+$/.test(TxtRazonSocial)) {
-        alert('ERROR: El campo nombre no debe ir vacío TxtRazonSocial');
+        alert('ERROR: El campo RazonSocial  es obligatorio');
         return false;
     }
 
     //Test edad
     if (TxtClaveInterbancaria == null || TxtClaveInterbancaria.length == 0 || isNaN(TxtClaveInterbancaria)) {
-        alert('ERROR: Debe ingresar una edad TxtClaveInterbancaria');
+        alert('ERROR: El campo ClaveInterbancaria es obligatorio');
         return false;
     }
 
     //Test edad
     if (TxtCodigoPostal == null || TxtCodigoPostal.length == 0 || isNaN(TxtCodigoPostal)) {
-        alert('ERROR: Debe ingresar una edad TxtCodigoPostal');
+        alert('ERROR: El campo CodigoPostal es obligatorio');
         return false;
     }
     //Test comboBox
@@ -56,61 +56,60 @@ function validarFormularioProveedor() {
     }
     //Test comboBox
     if (cmbMunicipio == null || cmbMunicipio == 0) {
-        alert('ERROR: Debe seleccionar una opcion del combo box cmbMunicipio');
+        alert('ERROR: Debe seleccionar una opcion del combo box Municipio');
         return false;
     }
     //Test comboBox
     if (cmbLocalidad == null || cmbLocalidad == 0) {
-        alert('ERROR: Debe seleccionar una opcion del combo box cmbLocalidad');
+        alert('ERROR: Debe seleccionar una opcion del combo box Localidad');
         return false;
     }
     //Test campo obligatorio
     if (TxtRFC == null || TxtRFC.length == 0 || /^\s+$/.test(TxtRFC)) {
-        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco TxtRFC');
+        alert('ERROR: El campo RFC es obligatorio');
         return false;
     }
     //Test campo obligatorio
     if (TxtDireccion == null || TxtDireccion.length == 0 || /^\s+$/.test(TxtDireccion)) {
-        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco TxtRFC TxtDireccion');
+        alert('ERROR: El campo Direccion es obligatorio');
         return false;
     }
     //Test edad
     if (TxtTelefono == null || TxtTelefono.length == 0 || isNaN(TxtTelefono)) {
-        alert('ERROR: Debe ingresar una edad TxtTelefono');
+        alert('ERROR: El campo Telefono es obligatorio');
         return false;
     }
 
     //Test campo obligatorio
     if (TxtBanco == null || TxtBanco.length == 0 || /^\s+$/.test(TxtBanco)) {
-        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco TxtBanco');
+        alert('ERROR: El campo Banco es obligatorio');
         return false;
     }
 
 
     //Test edad
     if (TxtNumeroDeCuenta == null || TxtNumeroDeCuenta.length == 0 || isNaN(TxtNumeroDeCuenta)) {
-        alert('ERROR: Debe ingresar una edad TxtNumeroDeCuenta');
+        alert('ERROR: El campo Numero de cuenta es obligatorio');
         return false;
     }
 
     //Test edad
     if (TxtUsoCFDI == null || TxtUsoCFDI.length == 0 || isNaN(TxtUsoCFDI)) {
-        alert('ERROR: Debe ingresar una TxtUsoCFDI');
+        alert('ERROR: El campo UsoCFDI es obligatorio');
         return false;
     }
 
 
     //Test campo obligatorio
     if (TxtNomenclatura == null || TxtNomenclatura.length == 0 || /^\s+$/.test(TxtNomenclatura)) {
-        alert('ERROR: El campo nombre no debe ir vacío TxtNomenclatura');
+        alert('ERROR: El campo Nomenclatura es obligatorio');
         return false;
     }
     //Test campo obligatorio
     if (TxtDescripcion == null || TxtDescripcion.length == 0 || /^\s+$/.test(TxtDescripcion)) {
-        alert('ERROR: El campo nombre no debe ir vacío TxtDescripcion');
+        alert('ERROR: El campo Descripcion es obligatorio');
         return false;
     }
-
-
     return true;
 }
+
