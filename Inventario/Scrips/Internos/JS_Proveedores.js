@@ -96,7 +96,7 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-        
+
     }
     if (id == 0) {
         LimpiarCampos();
@@ -213,8 +213,8 @@ function GuardarProveedor() {
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
             var IDLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-           // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
-            var Localidad  = TempLoca.options[TempLoca.selectedIndex].text;
+            // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
+            var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
 
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -306,7 +306,6 @@ function EliminarProveedores(id) {
         });
     }
 }
-
 ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
 (function () {
     var template = null
@@ -316,7 +315,7 @@ function EliminarProveedores(id) {
 
         } else {
             $(this).html(template)
-             //Recetear el formulario iniciando del paso 1
+            //Recetear el formulario iniciando del paso 1
             $(document).ready(function () {
                 var current = 1, current_step, next_step, steps;
                 steps = $("fieldset").length;
@@ -335,7 +334,7 @@ function EliminarProveedores(id) {
                     setProgressBar(--current);
                 });
                 setProgressBar(current);
-                // Change progress bar action
+                // Cambiar la acción de la barra de progreso
                 function setProgressBar(curStep) {
                     var percent = parseFloat(100 / steps) * curStep;
                     percent = percent.toFixed();
@@ -346,7 +345,7 @@ function EliminarProveedores(id) {
                 //Termina Recetear el formulario
             });
         }
-        // Llenar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
+        // Cragar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
 
         //event Change index Estados para llenar el combobox Municipios
         var IDE = document.getElementById("cmbEstado");
@@ -363,11 +362,15 @@ function EliminarProveedores(id) {
             });
         });
 
-
-
     })
 
 })()
 
 
-
+//Deshabilitar el clic externo para el modal del formulario.
+jQuery(document).ready(function () {
+    jQuery('[data-toggle="modal"]').each(function () {
+        jQuery(this).attr('data-backdrop', 'static');
+        jQuery(this).attr('data-keyboard', 'false');
+    });
+});

@@ -1,5 +1,5 @@
-﻿//------------------Validar proveedor-------------
-
+﻿
+//------------------Validar proveedor-------------
 function validarFormularioProveedor() {
 
     var TxtNombre = document.getElementById('TxtNombre').value;
@@ -19,16 +19,16 @@ function validarFormularioProveedor() {
     var TxtNomenclatura = document.getElementById('TxtNomenclatura').value;
     var TxtDescripcion = document.getElementById('TxtDescripcion').value;
 
-
-
     //Test campo obligatorio
     if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
         alert('ERROR: El campo nombre es obligatorio');
+
         return false;
     }
     //Test correo
     if (!(/\S+@\S+\.\S+/.test(Txtcorreo))) {
         alert('ERROR: Debe escribir un correo válido');
+
         return false;
     }
 
@@ -110,6 +110,7 @@ function validarFormularioProveedor() {
         alert('ERROR: El campo Descripcion es obligatorio');
         return false;
     }
-    return true;
+    //el formulario se envia
+
 }
 
