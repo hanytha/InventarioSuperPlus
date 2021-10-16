@@ -355,14 +355,12 @@ label {
     padding-right: 10px;
     font-size: 1rem;
 }
-
+/*[BARRA DE PROGRESO] para ocultar otros pasos excepto el primer paso(la propiedad “display:none”  quiere decir que está en modo oculto y se activara de acuerdo a los botones atras y siguiente.)*/
 #register_form fieldset:not(:first-of-type) {
 display: none;
 }
 
-  #regiration_form fieldset:not(:first-of-type) {
-    display: none;
-  }
+
 
 ul.acorh,
 ul.acorh * {
