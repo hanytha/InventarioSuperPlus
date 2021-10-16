@@ -1,6 +1,4 @@
 ﻿
-
-
 @{
     ViewBag.Title = "Proveedores";
 }
@@ -8,13 +6,10 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Proveedores</h2>
 <!--  -->
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-
-
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -60,7 +55,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="form-group">
@@ -77,7 +71,6 @@
                                 </div>
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-
                         </fieldset>
                         <fieldset>
                             <h2> Paso 2</h2>
@@ -88,7 +81,6 @@
                                         <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbMunicipio">Municipio<span class="required">*</span></label>
@@ -104,7 +96,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -113,7 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atras" />
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
@@ -160,7 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
@@ -173,7 +164,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Agregar la imagen -->
                             <div class="row">
                                 <div class="col-md-12">
@@ -185,9 +175,7 @@
                                     </div>
                                 </div>
                             </div>
-
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-
                             <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                         </fieldset>
                     </form>

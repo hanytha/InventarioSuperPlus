@@ -22,23 +22,22 @@ function validarFormularioProveedor() {
     //Test campo obligatorio
     if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
         alert('ERROR: El campo nombre es obligatorio');
-
         return false;
     }
-    //Test correo
+    //correo
     if (!(/\S+@\S+\.\S+/.test(Txtcorreo))) {
         alert('ERROR: Debe escribir un correo válido');
 
         return false;
     }
 
-    //Test campo obligatorio
+    //RazonSocial
     if (TxtRazonSocial == null || TxtRazonSocial.length == 0 || /^\s+$/.test(TxtRazonSocial)) {
         alert('ERROR: El campo RazonSocial  es obligatorio');
         return false;
     }
 
-    //Test edad
+    //ClaveInterbancaria
     if (TxtClaveInterbancaria == null || TxtClaveInterbancaria.length == 0 || isNaN(TxtClaveInterbancaria)) {
         alert('ERROR: El campo ClaveInterbancaria es obligatorio');
         return false;

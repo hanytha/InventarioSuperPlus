@@ -6,7 +6,7 @@ function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {
         AcordeonProveedores(Data, document.getElementById("accordion"));
     });
-}//Acordeon proveedores
+}//Acordeón proveedores
 function AcordeonProveedores(Data, CtrlProveedores) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
@@ -61,9 +61,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-
         CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -96,7 +94,6 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
     }
     if (id == 0) {
         LimpiarCampos();
@@ -106,7 +103,7 @@ function abrirModal(id) {//la clase  Obligatorio
 
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDProveedor', Data[0].Id);     //
+            sessionStorage.setItem('IDProveedor', Data[0].Id);     //Variable de sesión
             // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
@@ -152,7 +149,6 @@ function LimpiarCampos() {
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
-
     }
 }
 
@@ -204,7 +200,6 @@ function GuardarProveedor() {
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
             var ClaveInterbancaria = document.getElementById("TxtClaveInterbancaria").value;
             var CodigoPostal = document.getElementById("TxtCodigoPostal").value;
-
             var IdEstado = document.getElementById("cmbEstado").value;
             var TempEdo = document.getElementById("cmbEstado");
             var Estado = TempEdo.options[TempEdo.selectedIndex].text;
@@ -215,11 +210,9 @@ function GuardarProveedor() {
             var TempLoca = document.getElementById("cmbLocalidad");
             // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
             var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
-
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Telefono = document.getElementById("TxtTelefono").value;
-
             var Banco = document.getElementById("TxtBanco").value;
             var NumeroDeCuenta = document.getElementById("TxtNumeroDeCuenta").value;
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
@@ -235,7 +228,6 @@ function GuardarProveedor() {
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
-
             frm.append("IDMunicipio", IDMunicipio);
             frm.append("Municipio", Municipio);
             frm.append("IDLocalidad", IDLocalidad);
@@ -275,7 +267,6 @@ function GuardarProveedor() {
         }
     }
 }
-
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -361,12 +352,8 @@ function EliminarProveedores(id) {
                 llenarCombo(data, document.getElementById("cmbLocalidad"));
             });
         });
-
     })
-
 })()
-
-
 //Deshabilitar el clic externo para el modal del formulario.
 jQuery(document).ready(function () {
     jQuery('[data-toggle="modal"]').each(function () {
@@ -374,3 +361,7 @@ jQuery(document).ready(function () {
         jQuery(this).attr('data-keyboard', 'false');
     });
 });
+
+
+
+
