@@ -307,7 +307,7 @@ function EliminarProveedores(id) {
     }
 }
 
-////Función para regresar el formulario del mnodal al inicio al presionar el botón cancelar////
+////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
 (function () {
     var template = null
     $('.modal').on('show.bs.modal', function (event) {
@@ -316,7 +316,7 @@ function EliminarProveedores(id) {
 
         } else {
             $(this).html(template)
-
+             //Recetear el formulario iniciando del paso 1
             $(document).ready(function () {
                 var current = 1, current_step, next_step, steps;
                 steps = $("fieldset").length;
@@ -343,9 +343,28 @@ function EliminarProveedores(id) {
                         .css("width", percent + "%")
                         .html(percent + "%");
                 }
+                //Termina Recetear el formulario
             });
         }
-        // other initialization here, if you want to
+        // Llenar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
+
+        //event Change index Estados para llenar el combobox Municipios
+        var IDE = document.getElementById("cmbEstado");
+        IDE.addEventListener("change", function () {
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
+                llenarCombo(data, document.getElementById("cmbMunicipio"));
+            });
+        });
+        //event Change index Municipio para llenar el combo box Municipios 
+        var IDM = document.getElementById("cmbMunicipio");
+        IDM.addEventListener("change", function () {
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
+                llenarCombo(data, document.getElementById("cmbLocalidad"));
+            });
+        });
+
+
+
     })
 
 })()
