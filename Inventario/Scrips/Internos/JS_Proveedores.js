@@ -213,8 +213,8 @@ function GuardarProveedor() {
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
             var IDLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-            var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
-            var Localidad = TempMuni.options[TempMuni.selectedIndex].text;
+           // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
+            var Localidad  = TempLoca.options[TempLoca.selectedIndex].text;
 
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
