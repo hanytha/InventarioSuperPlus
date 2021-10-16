@@ -2,12 +2,16 @@
 @{
     ViewBag.Title = "Clasificacion";
 }
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Clasificacion</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
+<div id="tabla" class="default "></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -23,14 +27,14 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h2>PASO 1</h2>
                             <div class="form-group">
-                                <label for="clasificacion">Tipo de clasificación</label>
-                                <input type="text" class="form-control" name="data[clasificacion]" id="clasificacion" placeholder="Clasificación">
+                                <label for="TxtClasificacion">Tipo de clasificación</label>
+                                <input type="text" class="form-control" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
                             </div>
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick="GuardarCategoria()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -51,5 +55,6 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Categorias.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
