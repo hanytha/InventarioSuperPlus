@@ -98,6 +98,7 @@
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\ini.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
+<<<<<<< HEAD
     <Content Include="Assets\Imagenes\pedidos.png" />
     <Content Include="Assets\Imagenes\proveedor.png" />
     <Content Include="Assets\Imagenes\tienda.png" />
@@ -105,6 +106,9 @@
     <Content Include="Assets\Imagenes\web.png" />
     <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Carrusel.css" />
+=======
+    <Content Include="Content\CObligatorios.css" />
+>>>>>>> alma
     <Content Include="Content\Tabla.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\argon.css" />
@@ -113,16 +117,23 @@
     <Content Include="Content\nucleo.css" />
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
+    <Content Include="Scrips\bootstrap-datepicker.min.js" />
     <Content Include="Scrips\bootstrap.min.js" />
+<<<<<<< HEAD
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
+=======
+    <Content Include="Scrips\General\JS_Validaciones.js" />
+    <Content Include="Scrips\General\validator.js" />
+>>>>>>> alma
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Personal.js" />
@@ -133,7 +144,6 @@
     <Content Include="Scrips\Internos\JS_Tienda.js" />
     <Content Include="Scrips\Internos\JS_Configuraciones.js" />
     <Content Include="Scrips\Internos\JS_Usuarios.js" />
-    <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />
@@ -191,9 +201,6 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -235,6 +242,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

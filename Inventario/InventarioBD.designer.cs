@@ -108,7 +108,11 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
+<<<<<<< HEAD
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioPlusConnectionString3"].ConnectionString, mappingSource)
+=======
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioPlusConnectionString1"].ConnectionString, mappingSource)
+>>>>>>> alma
 		{
 			OnCreated();
 		}
@@ -4348,8 +4352,11 @@ namespace Inventario
 		
 		private int _Estatus;
 		
+<<<<<<< HEAD
 		private EntitySet<ExistenciaAlmacenG> _ExistenciaAlmacenG;
 		
+=======
+>>>>>>> alma
 		private EntityRef<Articulos> _Articulos;
 		
     #region Definiciones de métodos de extensibilidad
@@ -4382,7 +4389,10 @@ namespace Inventario
 		
 		public Existencia()
 		{
+<<<<<<< HEAD
 			this._ExistenciaAlmacenG = new EntitySet<ExistenciaAlmacenG>(new Action<ExistenciaAlmacenG>(this.attach_ExistenciaAlmacenG), new Action<ExistenciaAlmacenG>(this.detach_ExistenciaAlmacenG));
+=======
+>>>>>>> alma
 			this._Articulos = default(EntityRef<Articulos>);
 			OnCreated();
 		}
@@ -4611,6 +4621,7 @@ namespace Inventario
 			}
 		}
 		
+<<<<<<< HEAD
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Existencia_ExistenciaAlmacenG", Storage="_ExistenciaAlmacenG", ThisKey="Id", OtherKey="IdExistencias")]
 		public EntitySet<ExistenciaAlmacenG> ExistenciaAlmacenG
 		{
@@ -4624,6 +4635,8 @@ namespace Inventario
 			}
 		}
 		
+=======
+>>>>>>> alma
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulos_Existencia", Storage="_Articulos", ThisKey="IdArticulos", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Articulos Articulos
 		{
@@ -4677,6 +4690,7 @@ namespace Inventario
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+<<<<<<< HEAD
 		
 		private void attach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
 		{
@@ -4689,6 +4703,8 @@ namespace Inventario
 			this.SendPropertyChanging();
 			entity.Existencia = null;
 		}
+=======
+>>>>>>> alma
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExistenciaAlmacenG")]
@@ -4703,7 +4719,7 @@ namespace Inventario
 		
 		private long _NoPedido;
 		
-		private System.DateTime _FechaDeIngreso;
+		private System.Nullable<System.DateTime> _FechaDeIngreso;
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
@@ -4717,8 +4733,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntityRef<Existencia> _Existencia;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4729,7 +4743,7 @@ namespace Inventario
     partial void OnIdExistenciasChanged();
     partial void OnNoPedidoChanging(long value);
     partial void OnNoPedidoChanged();
-    partial void OnFechaDeIngresoChanging(System.DateTime value);
+    partial void OnFechaDeIngresoChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
@@ -4747,7 +4761,6 @@ namespace Inventario
 		
 		public ExistenciaAlmacenG()
 		{
-			this._Existencia = default(EntityRef<Existencia>);
 			OnCreated();
 		}
 		
@@ -4782,10 +4795,6 @@ namespace Inventario
 			{
 				if ((this._IdExistencias != value))
 				{
-					if (this._Existencia.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdExistenciasChanging(value);
 					this.SendPropertyChanging();
 					this._IdExistencias = value;
@@ -4815,8 +4824,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date NOT NULL")]
-		public System.DateTime FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaDeIngreso
 		{
 			get
 			{
@@ -4955,6 +4964,7 @@ namespace Inventario
 			}
 		}
 		
+<<<<<<< HEAD
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Existencia_ExistenciaAlmacenG", Storage="_Existencia", ThisKey="IdExistencias", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Existencia Existencia
 		{
@@ -4989,6 +4999,8 @@ namespace Inventario
 			}
 		}
 		
+=======
+>>>>>>> alma
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
