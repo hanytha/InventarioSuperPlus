@@ -30,7 +30,7 @@ function validarFormularioProveedor() {
 
         return false;
     }
-
+ 
     //RazonSocial
     if (TxtRazonSocial == null || TxtRazonSocial.length == 0 || /^\s+$/.test(TxtRazonSocial)) {
         alert('ERROR: El campo RazonSocial  es obligatorio');

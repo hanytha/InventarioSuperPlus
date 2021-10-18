@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+        <div class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3>¿Ya tienes una cuenta?</h3>
+                    <p>Inicia sesión para entrar en la página</p>
+                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+                </div>
+                <div class="caja__trasera-register">
+                    <h3>¿Aún no tienes una cuenta?</h3>
+                    <p>Regístrate para que puedas iniciar sesión</p>
+                    <button id="btn__registrarse">Regístrarse</button>
+                </div>
+            </div>
+
+            <!--Formulario de Login y registro-->
+            <div class="contenedor__login-register">
+                <!--Login-->
+                <form action="" class="formulario__login">
+                    <h2>Iniciar Sesión</h2>
+                    <div class="input-group">
+                        <input type="email" class="form-input" name="form-input" id="correo">
+                        <label class="label" for="correo">Correo</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" class="form-input" name="form-input" id="pass">
+                        <label class="label" for="pass">Contraseña</label>
+                    </div>
+                    <button>Entrar</button>
+                </form>
+
+                <!--Register-->
+                <form action="" class="formulario__register">
+                    <h2>Regístrarse</h2>
+                    <input type="text" placeholder="Nombre completo">
+                    <input type="text" placeholder="Correo Electronico">
+                    <input type="text" placeholder="Usuario">
+                    <input type="password" placeholder="Contraseña">
+                    <button>Regístrarse</button>
+                </form>
+            </div>
+        </div>
+
+    <script src="~/Scrips/Internos/JS_Login.js"></script>
+    <script src="~/Scrips/General/Form.js"></script>
+    <script src="~/Scrips/General/JS_Validaciones.js"></script>

@@ -117,6 +117,7 @@
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\General\Form.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
@@ -140,6 +141,7 @@
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />
+    <Content Include="Scrips\Internos\JS_Login.js" />
     <Content Include="Scrips\jquery-scrollLock.min.js" />
     <Content Include="Scrips\jquery-ui.min.js" />
     <Content Include="Scrips\jquery.min.js" />
@@ -163,6 +165,7 @@
     <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
@@ -194,9 +197,6 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -225,6 +225,7 @@
     <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -238,6 +239,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

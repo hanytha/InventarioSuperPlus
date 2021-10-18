@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
+
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -183,7 +185,7 @@
                 <!-- pie del modal-->
                 <div class="modal-footer">
                     <!--  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>-->
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onClick="eliminar1()">Cancelar</button>
                     <!-- <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success">Guardar</button> -->
                 </div>
             </div>
@@ -196,6 +198,8 @@
         display: none;
     }
 </style>
+
+<!--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion,Navegación del formulario de paso siguiente y anterior mediante jQuery.-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
@@ -208,3 +212,6 @@
 <script src="~/Scrips/General/JS_Validaciones.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <script src="~/Scrips/Plus/scripts.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

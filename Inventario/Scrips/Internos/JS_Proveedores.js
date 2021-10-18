@@ -284,12 +284,15 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
+
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Proveedores/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
-                alert("Se elimino correctamente");
+               alert("Se elimino correctamente");
+              //  confirmarEliminar();
                 CrearAcordeonProveedores();
             } else {
                 alert("Ocurrio un error");
@@ -297,6 +300,10 @@ function EliminarProveedores(id) {
         });
     }
 }
+
+
+
+
 ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
 (function () {
     var template = null
@@ -362,6 +369,92 @@ jQuery(document).ready(function () {
     });
 });
 
+/*
+function mostrar() {
+    swal('Hola Mundo');
+}*/
+/*Funcion del botón eliminar*/
+function eliminar() {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        })
+    }
 
 
+/*
+//Funcion para confirmar al eliminar registros
+function eliminar1(id) {
+    swal({
+        title: '¿Estas seguro?',
+        text: "No podrás revertir esta acción",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (confirm == 1) {
+            swal(
+                'Deleted!',
+                'El registro se elimino correctamente.',
+                'success'
+            )
+        }
+    })
+}
 
+
+function eliminar2() {
+    swal({
+        title: '¿Desea eliminar el registro?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(function () {
+        swal(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+        )
+    })
+}
+*/
+
+
+function confirmarEliminar() {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }
+    })
+
+}
