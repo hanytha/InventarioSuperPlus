@@ -91,6 +91,7 @@
     <Content Include="Assets\Imagenes\area.png" />
     <Content Include="Assets\Imagenes\articulo.png" />
     <Content Include="Assets\Imagenes\compra.png" />
+    <Content Include="Assets\Imagenes\COMPRAS.jpg" />
     <Content Include="Assets\Imagenes\desplegue.png" />
     <Content Include="Assets\Imagenes\favicon.png" />
     <Content Include="Assets\Imagenes\imagen1.jpg" />
@@ -103,6 +104,7 @@
     <Content Include="Assets\Imagenes\tienda.png" />
     <Content Include="Assets\Imagenes\usuario.png" />
     <Content Include="Assets\Imagenes\web.png" />
+    <Content Include="Content\tarjeta.css" />
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Tabla.css" />
@@ -115,6 +117,7 @@
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap-datepicker.min.js" />
     <Content Include="Scrips\bootstrap.min.js" />
+    <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
