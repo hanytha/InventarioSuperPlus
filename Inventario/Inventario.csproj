@@ -98,17 +98,13 @@
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\ini.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
-<<<<<<< HEAD
     <Content Include="Assets\Imagenes\pedidos.png" />
     <Content Include="Assets\Imagenes\proveedor.png" />
     <Content Include="Assets\Imagenes\tienda.png" />
     <Content Include="Assets\Imagenes\usuario.png" />
     <Content Include="Assets\Imagenes\web.png" />
-    <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Carrusel.css" />
-=======
     <Content Include="Content\CObligatorios.css" />
->>>>>>> alma
     <Content Include="Content\Tabla.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\argon.css" />
@@ -119,16 +115,13 @@
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap-datepicker.min.js" />
     <Content Include="Scrips\bootstrap.min.js" />
-<<<<<<< HEAD
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
-=======
     <Content Include="Scrips\General\JS_Validaciones.js" />
     <Content Include="Scrips\General\validator.js" />
->>>>>>> alma
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
