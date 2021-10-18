@@ -285,6 +285,7 @@ function CamposObligatorios() {
     return exito;
 }
 
+////////////////////////////////
 
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
@@ -301,7 +302,7 @@ function EliminarProveedores(id) {
     }
 }
 
-
+/////////////////////////////
 
 
 ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
@@ -436,7 +437,7 @@ function eliminar2() {
 }
 */
 
-
+//Alerta de confirmación al presionar el botón eliminar
 function confirmarEliminar() {
 
     Swal.fire({
