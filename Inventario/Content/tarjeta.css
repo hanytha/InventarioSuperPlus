@@ -15,9 +15,10 @@
 
 .hero {
     background: linear-gradient(to right, rgba(75, 123, 211, 0.5), rgba(22, 215, 177, 0.3)), url(https://media4.giphy.com/media/26n6G8lRMOrYC6rFS/giphy.gif?cid=ecf05e4768md6ea5vh6qwi3zrgi12vo6gexg89fp7nqp82tz&rid=giphy.gif&ct=g);
-    width: 82vw;
-    height: 40vh;
-    background-size: cover;
+    /*width: 100vw;
+    height: 100vh */
+
+    background-size: auto;
 }
 .contenedor-cards {
     display: flex;

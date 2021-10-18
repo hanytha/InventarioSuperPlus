@@ -14,7 +14,7 @@
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
 <link rel="stylesheet" href="estilos.css">
-
+<div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
             <div class="contenedor-card-item">
@@ -56,67 +56,67 @@
 
         </div>
     </div>
+</div>
 
-
-    <!--Termina tarjeta-->
-    <!-- Botón del modal-->
-    <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button><!--Mostrar los registros en el accordion-->
-    <div id="tabla" class="default "></div>
-    <div id="accordion"></div>
-    <!-- Encabezado del Modal -->
-    <div class="container">
-        <div class="modal fade" id="dialogo1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal">x</button>
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button><!--Mostrar los registros en el accordion-->
+<div id="tabla" class="default "></div>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h1>REGISTRO COMPRA</h1>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <!-- Contenido del modal -->
-                    <div class="modal-body">
-                        <h1>REGISTRO COMPRA</h1>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCompra()">
-                            <fieldset>
-                                <!--Los pasos del modal-->
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCompra()">
+                        <fieldset>
+                            <!--Los pasos del modal-->
 
-                                <h2>PASO 1</h2>
-                                <div class="form-group">
-                                    <label for="TxtMetodoDePago">MÉTODO DE PAGO</label>
-                                    <input type="text" class="form-control limpiar obligatorio" name="data[TxtMetodoDePago]" id="TxtMetodoDePago" placeholder="MétodoPago">
+                            <h2>PASO 1</h2>
+                            <div class="form-group">
+                                <label for="TxtMetodoDePago">MÉTODO DE PAGO</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtMetodoDePago]" id="TxtMetodoDePago" placeholder="MétodoPago">
 
-                                </div>
-                                <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <!-- pie del modal-->
-                    <div class="modal-footer">
-                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
+                            </div>
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-    <table>
-    </table>
+</div>
+<table>
+</table>
 
 
-    <!--Hacer que el modal muestre los pasos por parte-->
-    <style type="text/css">
-        #regiration_form fieldset:not(:first-of-type) {
-            display: none;
-        }
-    </style>
-    <!--Script-->
-    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-    <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-    <script src="~/Scrips/Internos/JS_Compra.js"></script>
-    <!--Validacion del formulario-->
-    <script src="~/Scrips/General/JS_Validacion.js"></script>
-    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Compra.js"></script>
+<!--Validacion del formulario-->
+<script src="~/Scrips/General/JS_Validacion.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 
-    <link href="~/Content/tarjeta.css" rel="stylesheet" />
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
