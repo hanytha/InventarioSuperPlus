@@ -66,35 +66,7 @@ namespace Inventario.Controllers
                         //Accesos.Sitio = DatosUsuario.IDSitio;
                         if (Accesos.IDAsignacion != 0)
                         {
-                            /*
-                            var Asignasion = InvBD.System_Inf_Asignacion.Where(p => p.IDAsignacion.Equals(DatosUsuario.IDAsignacion)).First();
-                            Accesos.Asignacion = Asignasion.Nombre;
-                            */
-                            /*
-                            if (Accesos.Id == 1)
-                            {
-                                var Sucursal = InvBD.Tienda.Where(p => p.Id.Equals(DatosUsuario.IDSitio)).First();
-                                Accesos.Sitio = Sucursal.Nombre;
-                            }
-                            else if (Accesos.IDAsignacion == 2)
-                            {
-                                var Supervision = InvBD.System_Supervision.Where(p => p.IDSupervision.Equals(DatosUsuario.IDSitio)).First();
-                                Accesos.Sitio = Supervision.Supervision;
-                                Accesos.Tiendas = Supervision.Tiendas;
-
-                            }
-                            else if (Accesos.IDAsignacion == 3)
-                            {
-                                Accesos.Sitio = "Oficina";
-                                Accesos.Tiendas = "";
-                            }
-                            else
-                            {
-                                Accesos.Sitio = "No tiene ninguna asignación";
-                                Accesos.Tiendas = "";
-                            }
-                        }
-                        */
+                     
                             if (DatosUsuario.NSArea != "--Seleccione--")
                             {
                                 Accesos.NSArea = DatosUsuario.NSArea;

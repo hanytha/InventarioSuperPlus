@@ -279,7 +279,7 @@ function GuardarProveedor() {
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             var frm = new FormData();
-            frm.append("IdProveedores", IdProveedores);
+            frm.append("Id", Id);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
             frm.append("RazonSocial", RazonSocial);
