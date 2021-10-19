@@ -12,8 +12,10 @@
     <!--  <link rel="stylesheet" href="[nombreCarpetaFontAwesome]/css/all.css">-->
     <!-- Favicon -->
     <link src="~/Assets/Imagenes/favicon.png" type="image.png" />
-    <!-- Fonts -->
+    <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 
+
+    <!-- Fonts -->
     <!-- Icons -->
     <link rel="stylesheet" href="~/Content/nucleo.css">
     <link href="~/Content/nucleo.css" rel="stylesheet" />
@@ -38,18 +40,40 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
 
+
                     <li id="menu" class="list__item" style="cursor: pointer;">
                         <div class="list__button">
-                            <img src="~/Assets/Imagenes/ini.png" class="list__img">
+                            <i class="fas fa-home list__img"></i>
+
                             @Html.ActionLink("Inicio", "Index", "Index")
+
                         </div>
                     </li>
-
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/usuario.png" class="list__img">
+                            <i class="fas fa-cog list__img"></i>
+                            <a href="#" class="nav__link">Configuración</a>
+                            <i class="fas fa-chevron-right list__arrow"></i>
+                        </div>
+
+                        <ul class="list__show">
+                            <li class="list__inside">
+                                @Html.ActionLink("Página", "Pagina", "Pagina")
+                            </li>
+                            <li class="list__inside">
+                                @Html.ActionLink("Configuración", "Configuracion", "Configuracion")
+                            </li>
+
+
+                        </ul>
+
+                    </li>
+                    <li id="menu" class="list__item list__item--click">
+                        <div class="list__button list__button--click">
+                            <i class="fas fa-users list__img"></i>
                             <a href="#" class="nav__link">Usuarios</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
+
                         </div>
 
                         <ul class="list__show">
@@ -66,9 +90,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/area.png" class="list__img">
+                            <i class="far fa-building list__img"></i>
                             <a href="#" class="nav__link">Áreas</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
 
                         <ul class="list__show">
@@ -85,9 +109,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/articulo.png" class="list__img">
+                            <i class="fas fa-box-open list__img"></i>
                             <a href="#" class="nav__link">Artículos</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
                         <ul class="list__show">
                             <li class="list__inside">
@@ -118,9 +142,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/tienda.png" class="list__img">
+                            <i class="fas fa-store list__img"></i>
                             <a href="#" class="nav__link">Tiendas</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
                         <ul class="list__show">
                             <li class="list__inside">
@@ -139,9 +163,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/pedidos.png" class="list__img">
+                            <i class="fas fa-window-restore list__img"></i>
                             <a href="#" class="nav__link">Pedidos</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
 
                         <ul class="list__show">
@@ -159,9 +183,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/proveedor.png" class="list__img">
+                            <i class="fas fa-user-friends list__img"></i>
                             <a href="#" class="nav__link">Proveedores</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
                         <ul class="list__show">
                             <li class="list__inside">
@@ -176,9 +200,9 @@
 
                     <li id="menu" class="list__item list__item--click">
                         <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/compra.png" class="list__img">
+                            <i class="fas fa-shopping-cart list__img"></i>
                             <a href="#" class="nav__link">Compra</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
+                            <i class="fas fa-chevron-right list__arrow"></i>
                         </div>
                         <ul class="list__show">
                             <li class="list__inside">
@@ -194,26 +218,6 @@
                         </ul>
 
                     </li>
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <img src="~/Assets/Imagenes/web.png" class="list__img">
-                            <a href="#" class="nav__link">Página</a>
-                            <img src="~/Assets/Imagenes/desplegue.png" class="list__arrow">
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Página", "Pagina", "Pagina")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Configuración", "Configuracion", "Configuracion")
-                            </li>
-
-
-                        </ul>
-
-                    </li>
-
 
                 </ul>
 
@@ -591,14 +595,15 @@
         <!-- Mask -->
         <!-- Cabecera del Layaut-->
 
+
         @RenderBody()
 
 
 
         <!-- Pie de pagina -->
         <!--<footer class="footer">
-    <p>Contenido del pié de la página.</p>
-    /footer> -->
+        <p>Contenido del pié de la página.</p>
+        /footer> -->
     </div>
     <!-- Argon Scripts -->
     <!-- Script-->
@@ -612,7 +617,8 @@
     <script src="~/Scrips/jquery.min.js"></script>
     <script src="~/Scrips/jquery.scrollbar.min.js"></script>
     <script src="~/Scrips/js.cookie.js"></script>
-
+    <!--Importar iconos-->
+    <script src="/js/all.js"></script>
 
 </body>
 </html>
