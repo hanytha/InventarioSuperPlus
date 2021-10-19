@@ -19,6 +19,7 @@ namespace Inventario.Controllers
             var subareas = InvBD.SubAreas.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
+                    p.IdSubAreas,
                     p.Nombre,
                     p.NoSubArea,
                     p.UNombre,
@@ -38,6 +39,7 @@ namespace Inventario.Controllers
             var subarea = InvBD.SubAreas.Where(p => p.Estatus.Equals(Id))
                 .Select(p => new
                 {
+                    p.IdSubAreas,
                     p.Nombre,
                     p.NoSubArea,
                     p.UNombre,

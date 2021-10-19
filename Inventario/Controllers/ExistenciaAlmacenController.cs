@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdExistenciaAlmacenG,
                     p.IdExistencias,
                     p.NoPedido,
                     p.FechaDeIngreso,
@@ -34,10 +34,10 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaExistenciaAlmacen(long Id)
         {
-            var almacen = InvBD.ExistenciaAlmacenG.Where(p => p.Id.Equals(Id))
+            var almacen = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdExistenciaAlmacenG,
                     p.IdExistencias,
                     p.NoPedido,
                     p.FechaDeIngreso,
@@ -56,7 +56,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             //try
             //{
-            long id = DatosAlmacen.Id;
+            long id = DatosAlmacen.IdExistenciaAlmacenG;
             if (id.Equals(0))
             {
                 int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
@@ -78,7 +78,7 @@ namespace Inventario.Controllers
                 int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido) && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial) && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual) && p.Coste.Equals(DatosAlmacen.Coste)).Count();
                 if (nveces == 0)
                 {
-                    ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.Id.Equals(id)).First();
+                    ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                     obj.NoPedido = DatosAlmacen.NoPedido;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
@@ -108,7 +108,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                ExistenciaAlmacenG almacenG = InvBD.ExistenciaAlmacenG.Where(p => p.Id.Equals(Id)).First();
+                ExistenciaAlmacenG almacenG = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id)).First();
                 almacenG.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

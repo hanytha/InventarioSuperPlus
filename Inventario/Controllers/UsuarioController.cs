@@ -21,7 +21,7 @@ namespace Inventario.Controllers
             var usuarios = InvBD.Usuarios.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdUsuarios,
                     p.CURP,
                     p.Nombre,
                     p.ApellidosP,
@@ -39,8 +39,6 @@ namespace Inventario.Controllers
                     p.LvlPerfil,
                     p.NArea,
                     p.NSArea,
-                    p.Asignacion,
-                    p.sitio,
                     p.Usuario,
                     p.FechaIngreso,
                     p.Contraseña,
@@ -53,7 +51,7 @@ namespace Inventario.Controllers
             var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdUsuarios,
                     p.CURP,
                     p.Nombre,
                     p.ApellidosP,
@@ -71,8 +69,6 @@ namespace Inventario.Controllers
                     p.LvlPerfil,
                     p.NArea,
                     p.NSArea,
-                    p.Asignacion,
-                    p.sitio,
                     p.Usuario,
                     p.FechaIngreso,
                     p.Contraseña,

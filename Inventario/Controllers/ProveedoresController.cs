@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,7 +19,7 @@ namespace Inventario.Controllers
             var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdProveedores,
                     p.Nombre,
                     p.Correo,
                     p.RazonSocial,
@@ -53,7 +48,7 @@ namespace Inventario.Controllers
             var proveedor = InvBD.Proveedores.Where(p => p.Estatus.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdProveedores,
                     p.Nombre,
                     p.Correo,
                     p.RazonSocial,
@@ -82,10 +77,10 @@ namespace Inventario.Controllers
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProv(long Id)
         {
-            var proveedores = InvBD.Proveedores.Where(p => p.Id.Equals(Id))
+            var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdProveedores,
                     p.Nombre,
                     p.Correo,
                     p.RazonSocial,
@@ -116,7 +111,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             try
             {
-                long id = DatosProveedor.Id;
+                long id = DatosProveedor.IdProveedores;
 
                 if (id.Equals(0))
                 {
@@ -140,7 +135,7 @@ namespace Inventario.Controllers
                     int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.IdEstado.Equals(DatosProveedor.IdEstado) && p.IdMunicipio.Equals(DatosProveedor.IdMunicipio) && p.IdLocalidad.Equals(DatosProveedor.IdLocalidad) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura) && p.Descripcion.Equals(DatosProveedor.Descripcion) && p.Logo.Equals(DatosProveedor.Logo)).Count();
                     if (nveces == 0)
                     {
-                        Proveedores obj = InvBD.Proveedores.Where(p => p.Id.Equals(id)).First();
+                        Proveedores obj = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(id)).First();
                         obj.Nombre = DatosProveedor.Nombre;
                         //   obj.Id = DatosProveedor.Id;
                         obj.Correo = DatosProveedor.Correo;
@@ -189,7 +184,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Proveedores Prvdr = InvBD.Proveedores.Where(p => p.Id.Equals(Id)).First();
+                Proveedores Prvdr = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id)).First();
                 Prvdr.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

@@ -16,7 +16,7 @@ namespace Inventario.Controllers
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
-                    ID = p.Id,
+                    ID = p.IdAreas,
                     p.Nombre,
                     p.UNombre,
                     p.Correo,
@@ -28,9 +28,9 @@ namespace Inventario.Controllers
         //consulta SubAreas
         public JsonResult BDSubAreas(long IDA)
         {
-            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.Id.Equals(IDA))
+            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdSubAreas.Equals(IDA))
                 .Select(p => new {
-                    ID = p.Id,
+                    ID = p.IdSubAreas,
                     Nombre = p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
@@ -70,7 +70,7 @@ namespace Inventario.Controllers
         {
             var datos = InvBD.Tienda.Where(p => p.estados.Equals(1))
                 .Select(p => new {
-                    ID = p.Id,
+                    ID = p.IdTienda,
                     p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);

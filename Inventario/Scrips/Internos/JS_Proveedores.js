@@ -16,15 +16,15 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
         } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].Id + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdProveedores + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].Id + "' aria-expanded='false' aria-controls='collapse" + Data[i].Id + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdProveedores + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdProveedores + "' class='collapsed'>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdProveedores + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
@@ -61,8 +61,8 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].IdProveedores + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -103,7 +103,7 @@ function abrirModal(id) {//la clase  Obligatorio
 
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDProveedor', Data[0].Id);     //Variable de sesión
+            sessionStorage.setItem('IDProveedor', Data[0].IdProveedores);     //Variable de sesión
             // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
@@ -194,7 +194,7 @@ function llenarCombo(data, control) {
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDProveedor');
+            var IdProveedores = sessionStorage.getItem('IDProveedor');
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
@@ -220,7 +220,7 @@ function GuardarProveedor() {
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdProveedores", IdProveedores);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
             frm.append("RazonSocial", RazonSocial);

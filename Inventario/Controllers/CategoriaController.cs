@@ -21,17 +21,17 @@ namespace Inventario.Controllers
             var Categorias = InvBD.Categorias.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdCategorias,
                     p.Tipo
                 });
             return Json(Categorias, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaCategoria(long Id)
         {
-            var Categoria = InvBD.Categorias.Where(p => p.Id.Equals(Id))
+            var Categoria = InvBD.Categorias.Where(p => p.IdCategorias.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdCategorias,
                     p.Tipo
                 });
             return Json(Categoria, JsonRequestBehavior.AllowGet);
@@ -42,7 +42,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             //try
             //{
-            long id = DatosCategoria.Id;
+            long id = DatosCategoria.IdCategorias;
             if (id.Equals(0))
             {
                 int nveces = InvBD.Categorias.Where(p => p.Tipo.Equals(DatosCategoria.Tipo)).Count();
@@ -64,7 +64,7 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Categorias.Where(p => p.Tipo.Equals(DatosCategoria.Tipo)).Count();
                 if (nveces == 0)
                 {
-                    Categorias obj = InvBD.Categorias.Where(p => p.Id.Equals(id)).First();
+                    Categorias obj = InvBD.Categorias.Where(p => p.IdCategorias.Equals(id)).First();
                     obj.Tipo = DatosCategoria.Tipo;
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -90,7 +90,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Categorias catego = InvBD.Categorias.Where(p => p.Id.Equals(Id)).First();
+                Categorias catego = InvBD.Categorias.Where(p => p.IdCategorias.Equals(Id)).First();
                 catego.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

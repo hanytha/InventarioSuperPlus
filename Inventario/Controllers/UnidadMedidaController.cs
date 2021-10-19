@@ -20,17 +20,17 @@ namespace Inventario.Controllers
             var unidadesDeMedida = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdUnidadDeMedida,
                     p.Unidad
                 });
             return Json(unidadesDeMedida, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaUnidadDeMedida(long Id)
         {
-            var unidadDeMedida = InvBD.UnidadDeMedida.Where(p => p.Id.Equals(Id))
+            var unidadDeMedida = InvBD.UnidadDeMedida.Where(p => p.IdUnidadDeMedida.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdUnidadDeMedida,
                     p.Unidad
                 });
             return Json(unidadDeMedida, JsonRequestBehavior.AllowGet);

@@ -16,16 +16,16 @@ function AcordeonArticulos(DatosArticulo, CtrlArticulos) {
         else {
             CodigoHTMLArticulos += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLArticulos += "<div class='card-header' id='heading" + DatosArticulo[i].Id + "'>";
+        CodigoHTMLArticulos += "<div class='card-header' id='heading" + DatosArticulo[i].IdArticulos + "'>";
         CodigoHTMLArticulos += "<h5 class='mb-0'>";
-        CodigoHTMLArticulos += "<a  data-toggle='collapse' data-target='#collapse" + DatosArticulo[i].Id + "' aria-expanded='false' aria-controls='collapse" + DatosArticulo[i].Id + "' class='collapsed'>";
+        CodigoHTMLArticulos += "<a  data-toggle='collapse' data-target='#collapse" + DatosArticulo[i].IdArticulos + "' aria-expanded='false' aria-controls='collapse" + DatosArticulo[i].IdArticulos + "' class='collapsed'>";
         //CodigoHTMLArticulos += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLArticulos += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodigoHTMLArticulos += "<span >" + DatosArticulo[i].Nombre1 + "</span>";
         CodigoHTMLArticulos += "</a>";
         CodigoHTMLArticulos += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLArticulos += "<div id='collapse" + DatosArticulo[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLArticulos += "<div id='collapse" + DatosArticulo[i].IdArticulos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLArticulos += "<div class='card-body'>";
         CodigoHTMLArticulos += "<div class='row'>";
         CodigoHTMLArticulos += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre2: </strong>" + DatosArticulo[i].Nombre2 + "</div>";
@@ -67,8 +67,8 @@ function AcordeonArticulos(DatosArticulo, CtrlArticulos) {
         //CodigoHTMLArticulos += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosArticulo[i].ID + ")'><i id='BtnMO" + DatosArticulo[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
         CodigoHTMLArticulos += "</div>";
         CodigoHTMLArticulos += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLArticulos += "<button class='btn btn-success' onclick='AbrirMArticulos(" + DatosArticulo[i].Id + ")' data-toggle='modal' data-target='#Articulos'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLArticulos += "<button class='btn btn-danger' onclick='EliminarArticulos(" + DatosArticulo[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLArticulos += "<button class='btn btn-success' onclick='AbrirMArticulos(" + DatosArticulo[i].IdArticulos + ")' data-toggle='modal' data-target='#Articulos'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLArticulos += "<button class='btn btn-danger' onclick='EliminarArticulos(" + DatosArticulo[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLArticulos += "</div>";
         CodigoHTMLArticulos += "</div>";
         CodigoHTMLArticulos += "</div>";
@@ -89,7 +89,7 @@ function AbrirMArticulos(id) {//la clase ArticuloObligatorio
         Limpiar();
     }
     else {
-        $.get("/Articulos/ConsultaArticulos/?Id=" + Id, function (DatosArticulo) {
+        $.get("/Articulos/ConsultaArticulos/?IdArticulos=" + Id, function (DatosArticulo) {
             document.getElementById("TxtId").value = DatosArticulo[0].Id;
             document.getElementById("TxtNombre1").value = DatosArticulo[0].Nombre1;
             document.getElementById("TxtNombre2").value = DatosArticulo[0].Nombre2;
@@ -117,7 +117,7 @@ function AbrirMArticulos(id) {//la clase ArticuloObligatorio
 function GuardarProveedor() {
     if (Obligatorios("Proveedor") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = document.getElementById("TxtId").value;
+            var IdArticulos = document.getElementById("TxtId").value;
             var Nombre1 = document.getElementById("TxtNombre1").value;
             var Nombre2 = document.getElementById("TxtNombre2").value;
             var EstadoInicial = document.getElementById("TxtEstadoInicial").value;
@@ -140,7 +140,7 @@ function GuardarProveedor() {
             var Importe = document.getElementById("TxtImporte").value;
             var Imagen = document.getElementById("TxtImagen").value;
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdArticulos", IdArticulos);
             frm.append("Nombre1", Nombre1);
             frm.append("Nombre2", Nombre2);
             frm.append("EstadoInicial", EstadoInicial);
@@ -186,7 +186,7 @@ function GuardarProveedor() {
 function EliminarArticulos(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoProveedor) {
+        $.get("/Articulo/EliminarArticulo/?IdArticulos=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonArticulos();

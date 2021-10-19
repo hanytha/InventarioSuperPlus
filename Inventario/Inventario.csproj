@@ -157,7 +157,6 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
-    <Compile Include="Controllers\ClasificacionController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
@@ -166,6 +165,7 @@
     <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
@@ -174,7 +174,6 @@
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
-    <Compile Include="Controllers\pruebaController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
@@ -189,6 +188,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +210,6 @@
     <Content Include="Views\Usuario\Usuario.cshtml" />
     <Content Include="Views\Articulo\Articulo.cshtml" />
     <Content Include="Views\Bonificaciones\Bonificaciones.cshtml" />
-    <Content Include="Views\Clasificacion\Clasificacion.cshtml" />
     <Content Include="Views\Entrada\Entrada.cshtml" />
     <Content Include="Views\Existencias\Existencias.cshtml" />
     <Content Include="Views\Impuestos\Impuestos.cshtml" />
@@ -229,7 +228,6 @@
     <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
-    <Content Include="Views\prueba\prueba.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -239,8 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Accesos\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

@@ -15,8 +15,8 @@ function CrearTablaCategorias(Data) {
         CodigoHtmlTablaCategoria  += "<td>" + Data[i].Tipo + "</td>";
 
         CodigoHtmlTablaCategoria  += "<td>";
-        CodigoHtmlTablaCategoria += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarCategoria(" + Data[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaCategoria += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarCategoria(" + Data[i].IdCategorias + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaCategoria  += "</td>";
         CodigoHtmlTablaCategoria  += "</tr>";
@@ -42,7 +42,7 @@ function editarModal(id) {//la clase AreaObligatorio
     else {
 
         $.get("/Categoria/ConsultaCategoria/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IDCategoria', Data[0].Id);
+            sessionStorage.setItem('IDCategoria', Data[0].IdCategorias);
 
             document.getElementById("TxtClasificacion").value = Data[0].Tipo;
         });
@@ -65,11 +65,11 @@ function LimpiarCampos() {
 function GuardarCategoria() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDCategoria')
+            var IdCategorias = sessionStorage.getItem('IDCategoria')
             var Tipo = document.getElementById("TxtClasificacion").value;
 
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdCategorias", IdCategorias);
             frm.append("Tipo", Tipo);
             frm.append("Estatus", 1);
 

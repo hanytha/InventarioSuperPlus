@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdArticulos,
                     p.Nombre1,
                     p.Nombre2,
                     p.EstadoInicial,
@@ -55,7 +55,7 @@ namespace Inventario.Controllers
             var articulo = InvBD.Articulos.Where(p => p.Estatus.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdArticulos,
                     p.Nombre1,
                     p.Nombre2,
                     p.EstadoInicial,
@@ -90,7 +90,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             try
             {
-                long id = DatosArticulo.Id;
+                long id = DatosArticulo.IdArticulos;
                 if (id.Equals(0))
                 {
                     int nveces = InvBD.Articulos.Where(p => p.Nombre1.Equals(DatosArticulo.Nombre1) && p.Nombre2.Equals(DatosArticulo.Nombre2) && p.EstadoInicial.Equals(DatosArticulo.EstadoInicial) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.ExistenciaActual.Equals(DatosArticulo.ExistenciaActual) && p.UnidadDeMedida.Equals(DatosArticulo.UnidadDeMedida) && p.Categorias.Equals(DatosArticulo.Categorias) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.Marca.Equals(DatosArticulo.Marca) && p.Descripcion.Equals(DatosArticulo.Descripcion) && p.Marca.Equals(DatosArticulo.Marca) && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT) && p.ClaveProveedor.Equals(DatosArticulo.ClaveProveedor) && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT) && p.PrecioUnitario.Equals(DatosArticulo.PrecioUnitario) && p.Importe.Equals(DatosArticulo.Importe) && p.Imagen.Equals(DatosArticulo.Imagen)).Count();
@@ -110,7 +110,7 @@ namespace Inventario.Controllers
                     int nveces = InvBD.Articulos.Where(p => p.Nombre1.Equals(DatosArticulo.Nombre1) && p.Nombre2.Equals(DatosArticulo.Nombre2) && p.EstadoInicial.Equals(DatosArticulo.EstadoInicial) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.ExistenciaActual.Equals(DatosArticulo.ExistenciaActual) && p.UnidadDeMedida.Equals(DatosArticulo.UnidadDeMedida) && p.Categorias.Equals(DatosArticulo.Categorias) && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) && p.Marca.Equals(DatosArticulo.Marca) && p.Descripcion.Equals(DatosArticulo.Descripcion) && p.Marca.Equals(DatosArticulo.Marca) && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT) && p.ClaveProveedor.Equals(DatosArticulo.ClaveProveedor) && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT) && p.PrecioUnitario.Equals(DatosArticulo.PrecioUnitario) && p.Importe.Equals(DatosArticulo.Importe) && p.Imagen.Equals(DatosArticulo.Imagen)).Count();
                     if (nveces == 0)
                     {
-                        Articulos obj = InvBD.Articulos.Where(p => p.Id.Equals(id)).First();
+                        Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
                         obj.Nombre1 = DatosArticulo.Nombre1;
                         //obj.Id = DatosArticuloes.Id;
                         obj.Nombre2 = DatosArticulo.Nombre2;
@@ -148,7 +148,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Articulos Prvdr = InvBD.Articulos.Where(p => p.Id.Equals(Id)).First();
+                Articulos Prvdr = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id)).First();
                 Prvdr.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

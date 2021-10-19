@@ -15,8 +15,8 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaCompra  += "<td>" + Data[i].MetodoDePago + "</td>";
 
         CodigoHtmlTablaCompra  += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarCompras(" + Data[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarCompras(" + Data[i].IdCompra + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaCompra  += "</td>";
         CodigoHtmlTablaCompra  += "</tr>";
@@ -42,7 +42,7 @@ function editarModal(id) {//la clase AreaObligatorio
     else {
 
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IDMetodoP', Data[0].Id);
+            sessionStorage.setItem('IDMetodoP', Data[0].IdCompra);
 
             document.getElementById("TxtMetodoDePago").value = Data[0].MetodoDePago;
         });
@@ -65,11 +65,11 @@ function LimpiarCampos() {
 function GuardarCompra() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDMetodoP')
+            var IdCompra = sessionStorage.getItem('IDMetodoP')
             var MetodoDePago = document.getElementById("TxtMetodoDePago").value;
 
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdCompra", IdCompra);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("Estatus", 1);
 

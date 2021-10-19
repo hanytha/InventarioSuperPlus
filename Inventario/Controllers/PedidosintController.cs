@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var pedidosInternos = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPedidos,
                     p.NumeroPedido,
                     p.NombreArticulo,
                     p.CantidadSolicitada,
@@ -33,10 +33,10 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaPedidoInt(long Id)
         {
-            var departamento = InvBD.Pedidos.Where(p => p.Id.Equals(Id))
+            var departamento = InvBD.Pedidos.Where(p => p.IdPedidos.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPedidos,
                     p.NumeroPedido,
                     p.NombreArticulo,
                     p.CantidadSolicitada,

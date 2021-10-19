@@ -20,6 +20,7 @@ namespace Inventario.Controllers
             var tiendas = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
+                    p.IdTienda,
                     p.Nombre,
                     p.NombreS,
                     p.Unombre,
@@ -44,6 +45,7 @@ namespace Inventario.Controllers
             var tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
+                    p.IdTienda,
                     p.Nombre,
                     p.NombreS,
                     p.Unombre,

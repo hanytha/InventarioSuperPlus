@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var entradas = InvBD.Entradas.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdEntradas,
                     p.NombreArticulo,
                     p.Cantidad
                 });
@@ -28,10 +28,10 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaEntrada(long Id)
         {
-            var entrada = InvBD.Entradas.Where(p => p.Id.Equals(Id))
+            var entrada = InvBD.Entradas.Where(p => p.IdEntradas.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdEntradas,
                     p.NombreArticulo,
                     p.Cantidad
                 });

@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var personales = InvBD.Personal.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPersonal,
                     p.TipoPersonal,
                     p.NumeroTienda
                 });
@@ -28,10 +28,10 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaPersonal(long Id)
         {
-            var personal = InvBD.Personal.Where(p => p.Id.Equals(Id))
+            var personal = InvBD.Personal.Where(p => p.IdPersonal.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPersonal,
                     p.TipoPersonal,
                     p.NumeroTienda
                 });

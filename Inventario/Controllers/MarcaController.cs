@@ -20,17 +20,17 @@ namespace Inventario.Controllers
             var Marcas = InvBD.Marca.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdMarca,
                     p.Nombre,
                 });
             return Json(Marcas, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaMarca(long Id)
         {
-            var Marca = InvBD.Marca.Where(p => p.Id.Equals(Id))
+            var Marca = InvBD.Marca.Where(p => p.IdMarca.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdMarca,
                     p.Nombre,
                 });
             return Json(Marca, JsonRequestBehavior.AllowGet);
@@ -41,7 +41,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             //try
             //{
-            long id = DatosMarca.Id;
+            long id = DatosMarca.IdMarca;
             if (id.Equals(0))
             {
                 int nveces = InvBD.Marca.Where(p => p.Nombre.Equals(DatosMarca.Nombre)).Count();
@@ -63,8 +63,8 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Marca.Where(p => p.Nombre.Equals(DatosMarca.Nombre)).Count();
                 if (nveces == 0)
                 {
-                    Compra obj = InvBD.Compra.Where(p => p.Id.Equals(id)).First();
-                    obj.MetodoDePago = DatosMarca.Nombre;
+                    Marca obj = InvBD.Marca.Where(p => p.IdMarca.Equals(id)).First();
+                    obj.Nombre = DatosMarca.Nombre;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -89,7 +89,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Marca mar = InvBD.Marca.Where(p => p.Id.Equals(Id)).First();
+                Marca mar = InvBD.Marca.Where(p => p.IdMarca.Equals(Id)).First();
                 mar.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

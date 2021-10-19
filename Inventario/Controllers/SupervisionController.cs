@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var supervisores = InvBD.Supervisor.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdSupervision,
                     p.TipoSupervision,
                     p.Tienda,
                     p.Nombre,
@@ -34,10 +34,10 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaSupervisor(long Id)
         {
-            var supervisor = InvBD.Supervisor.Where(p => p.Id.Equals(Id))
+            var supervisor = InvBD.Supervisor.Where(p => p.IdSupervision.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdSupervision,
                     p.TipoSupervision,
                     p.Tienda,
                     p.Nombre,
