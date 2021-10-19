@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioPlus" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioPlus;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioPlusConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioSuperP" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSuperP;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="UNombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
@@ -10,16 +10,16 @@
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Carpeta" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Areas_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdAreas" Type="Articulos" />
-      <Association Name="Areas_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdArea" Type="Pedidos" />
-      <Association Name="Areas_SubAreas" Member="SubAreas" ThisKey="Id" OtherKey="IdArea" Type="SubAreas" />
-      <Association Name="Areas_Supervision" Member="Supervision" ThisKey="Id" OtherKey="IdAreas" Type="Supervision" />
-      <Association Name="Usuarios_Areas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="Id" Type="Usuarios" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Areas_Articulos" Member="Articulos" ThisKey="IdAreas" OtherKey="IdAreas" Type="Articulos" />
+      <Association Name="Areas_Pedidos" Member="Pedidos" ThisKey="IdAreas" OtherKey="IdArea" Type="Pedidos" />
+      <Association Name="Areas_SubAreas" Member="SubAreas" ThisKey="IdAreas" OtherKey="IdArea" Type="SubAreas" />
+      <Association Name="Areas_Supervision" Member="Supervision" ThisKey="IdAreas" OtherKey="IdAreas" Type="Supervision" />
+      <Association Name="Usuarios_Areas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuarios" Type="Usuarios" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuarios">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdUsuarios" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CURP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ApellidosP" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
@@ -34,25 +34,23 @@
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="LvlPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NArea" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NSArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Asignacion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="sitio" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LvlPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Contraseña" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Usuarios_Areas" Member="Areas" ThisKey="Id" OtherKey="IdUsuario" Type="Areas" />
+      <Association Name="Usuarios_Areas" Member="Areas" ThisKey="IdUsuarios" OtherKey="IdUsuario" Type="Areas" />
       <Association Name="estados_Usuarios" Member="estados" ThisKey="IdEstados" OtherKey="id" Type="estados" IsForeignKey="true" />
       <Association Name="localidades_Usuarios" Member="localidades" ThisKey="IdLocalidades" OtherKey="id" Type="localidades" IsForeignKey="true" />
       <Association Name="municipios_Usuarios" Member="municipios" ThisKey="IdMucipios" OtherKey="id" Type="municipios" IsForeignKey="true" />
-      <Association Name="PerfilDeUsuario_Usuarios" Member="PerfilDeUsuario" ThisKey="IdPerfil" OtherKey="Id" Type="PerfilDeUsuario" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PerfilDeUsuario_Usuarios" Member="PerfilDeUsuario" ThisKey="IdPerfil" OtherKey="IdPerfilDeUsuario" Type="PerfilDeUsuario" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Articulos" Member="Articulos">
     <Type Name="Articulos">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Nombre2" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="EstadoInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
@@ -76,23 +74,23 @@
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="PrecioUnitario" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="Importe" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Imagen" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Imagen" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Articulos_Existencia" Member="Existencia" ThisKey="Id" OtherKey="IdArticulos" Type="Existencia" />
-      <Association Name="Articulos_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdArticulo" Type="Pedidos" />
-      <Association Name="Areas_Articulos" Member="Areas" ThisKey="IdAreas" OtherKey="Id" Type="Areas" IsForeignKey="true" />
-      <Association Name="Categorias_Articulos" Member="Categorias1" ThisKey="IdCategorias" OtherKey="Id" Type="Categorias" IsForeignKey="true" />
-      <Association Name="Entradas_Articulos" Member="Entradas" ThisKey="IdEntradas" OtherKey="Id" Type="Entradas" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Marca_Articulos" Member="Marca1" ThisKey="IdMarca" OtherKey="Id" Type="Marca" IsForeignKey="true" />
-      <Association Name="Proveedores_Articulos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="Id" Type="Proveedores" IsForeignKey="true" />
-      <Association Name="Tienda_Articulos" Member="Tienda" ThisKey="IdTienda" OtherKey="Id" Type="Tienda" IsForeignKey="true" />
-      <Association Name="UnidadDeMedida_Articulos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="Id" Type="UnidadDeMedida" IsForeignKey="true" />
+      <Association Name="Articulos_Existencia" Member="Existencia" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="Existencia" />
+      <Association Name="Articulos_Pedidos" Member="Pedidos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="Pedidos" />
+      <Association Name="Areas_Articulos" Member="Areas" ThisKey="IdAreas" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" />
+      <Association Name="Categorias_Articulos" Member="Categorias1" ThisKey="IdCategorias" OtherKey="IdCategorias" Type="Categorias" IsForeignKey="true" />
+      <Association Name="Entradas_Articulos" Member="Entradas" ThisKey="IdEntradas" OtherKey="IdEntradas" Type="Entradas" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Marca_Articulos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
+      <Association Name="Proveedores_Articulos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
+      <Association Name="Tienda_Articulos" Member="Tienda" ThisKey="IdTienda" OtherKey="IdTienda" Type="Tienda" IsForeignKey="true" />
+      <Association Name="UnidadDeMedida_Articulos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Bonificaciones" Member="Bonificaciones">
     <Type Name="Bonificaciones">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdBonificaciones" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NombreArticulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -100,32 +98,32 @@
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="MarcaArticulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Compra_Bonificaciones" Member="Compra" ThisKey="IdCompra" OtherKey="Id" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Compra_Bonificaciones" Member="Compra" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="UnidadDeMedida_Bonificaciones" Member="UnidadDeMedida" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Categorias" Member="Categorias">
     <Type Name="Categorias">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Tipo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Categorias_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdCategorias" Type="Articulos" />
+      <Association Name="Categorias_Articulos" Member="Articulos" ThisKey="IdCategorias" OtherKey="IdCategorias" Type="Articulos" />
     </Type>
   </Table>
   <Table Name="dbo.Compra" Member="Compra">
     <Type Name="Compra">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdCompra" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MetodoDePago" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IdPedido" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Compra_Bonificaciones" Member="Bonificaciones" ThisKey="Id" OtherKey="IdCompra" Type="Bonificaciones" />
-      <Association Name="Impuesto_Compra" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="Id" Type="Impuesto" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Pedidos_Compra" Member="Pedidos" ThisKey="IdPedido" OtherKey="Id" Type="Pedidos" IsForeignKey="true" />
+      <Association Name="Compra_Bonificaciones" Member="Bonificaciones" ThisKey="IdCompra" OtherKey="IdCompra" Type="Bonificaciones" />
+      <Association Name="Compra_Pedidos" Member="Pedidos" ThisKey="IdCompra" OtherKey="IdCompra" Type="Pedidos" />
+      <Association Name="Impuesto_Compra" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="IdImpuesto" Type="Impuesto" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Configuracion" Member="Configuracion">
     <Type Name="Configuracion">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdConfiguracion" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdPagina" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -136,7 +134,7 @@
       <Column Name="Telefono" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="DireccionHost" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Puerto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Logo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="LogoTexto" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="SesionAbierta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="SerCorreo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -149,16 +147,16 @@
       <Column Name="Dato3" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Dato4" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Pagina_Configuracion" Member="Pagina" ThisKey="IdPagina" OtherKey="Id" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Pagina_Configuracion" Member="Pagina" ThisKey="IdPagina" OtherKey="IdPagina" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Entradas" Member="Entradas">
     <Type Name="Entradas">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdEntradas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NombreArticulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Entradas_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdEntradas" Type="Articulos" />
+      <Association Name="Entradas_Articulos" Member="Articulos" ThisKey="IdEntradas" OtherKey="IdEntradas" Type="Articulos" />
     </Type>
   </Table>
   <Table Name="dbo.estados" Member="estados">
@@ -176,7 +174,7 @@
   </Table>
   <Table Name="dbo.Existencia" Member="Existencia">
     <Type Name="Existencia">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdExistencia" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
@@ -187,30 +185,32 @@
       <Column Name="TipoDeExistencia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Imagen" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Articulos_Existencia" Member="Articulos" ThisKey="IdArticulos" OtherKey="Id" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Existencia_ExistenciaAlmacenG" Member="ExistenciaAlmacenG" ThisKey="IdExistencia" OtherKey="IdExistencias" Type="ExistenciaAlmacenG" />
+      <Association Name="Articulos_Existencia" Member="Articulos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.ExistenciaAlmacenG" Member="ExistenciaAlmacenG">
     <Type Name="ExistenciaAlmacenG">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdExistenciaAlmacenG" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdExistencias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NoPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Existencia_ExistenciaAlmacenG" Member="Existencia" ThisKey="IdExistencias" OtherKey="IdExistencia" Type="Existencia" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">
     <Type Name="Impuesto">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Impuesto" Member="Impuesto1" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Porcentaje" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Impuesto_Compra" Member="Compra" ThisKey="Id" OtherKey="IdImpuesto" Type="Compra" />
+      <Association Name="Impuesto_Compra" Member="Compra" ThisKey="IdImpuesto" OtherKey="IdImpuesto" Type="Compra" />
     </Type>
   </Table>
   <Table Name="dbo.localidades" Member="localidades">
@@ -240,10 +240,11 @@
   </Table>
   <Table Name="dbo.Marca" Member="Marca">
     <Type Name="Marca">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMarca" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Marca_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdMarca" Type="Articulos" />
+      <Association Name="Marca_Articulos" Member="Articulos" ThisKey="IdMarca" OtherKey="IdMarca" Type="Articulos" />
+      <Association Name="Marca_Pedidos" Member="Pedidos" ThisKey="IdMarca" OtherKey="IdMarca" Type="Pedidos" />
     </Type>
   </Table>
   <Table Name="dbo.municipios" Member="municipios">
@@ -262,7 +263,7 @@
   </Table>
   <Table Name="dbo.Pagina" Member="Pagina">
     <Type Name="Pagina">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPagina" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Abreviatura" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Mensaje" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Accion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
@@ -270,71 +271,80 @@
       <Column Name="Icono" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Pagina_Configuracion" Member="Configuracion" ThisKey="Id" OtherKey="IdPagina" Type="Configuracion" />
-      <Association Name="Pagina_PerfilDeUsuario" Member="PerfilDeUsuario" ThisKey="Id" OtherKey="IdPagina" Type="PerfilDeUsuario" />
+      <Association Name="Pagina_Configuracion" Member="Configuracion" ThisKey="IdPagina" OtherKey="IdPagina" Type="Configuracion" />
+      <Association Name="Pagina_PerfilDeUsuario" Member="PerfilDeUsuario" ThisKey="IdPagina" OtherKey="IdPagina" Type="PerfilDeUsuario" />
     </Type>
   </Table>
   <Table Name="dbo.Pedidos" Member="Pedidos">
     <Type Name="Pedidos">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPedidos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="NombreArticulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="CantidadSolicitada" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CantidadAprobada" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Tipo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDelProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSupervisor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="IdArea" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Destino" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NumeroTienda" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NombreSupervisor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Pedidos_Compra" Member="Compra" ThisKey="Id" OtherKey="IdPedido" Type="Compra" />
-      <Association Name="Areas_Pedidos" Member="Areas" ThisKey="IdArea" OtherKey="Id" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Articulos_Pedidos" Member="Articulos" ThisKey="IdArticulo" OtherKey="Id" Type="Articulos" IsForeignKey="true" />
-      <Association Name="Proveedores_Pedidos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="Id" Type="Proveedores" IsForeignKey="true" />
+      <Association Name="Areas_Pedidos" Member="Areas" ThisKey="IdArea" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Articulos_Pedidos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" />
+      <Association Name="Compra_Pedidos" Member="Compra" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" />
+      <Association Name="Marca_Pedidos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
+      <Association Name="Proveedores_Pedidos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
+      <Association Name="Supervisor_Pedidos" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Supervisor" IsForeignKey="true" />
+      <Association Name="UnidadDeMedida_Pedidos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PerfilDeUsuario" Member="PerfilDeUsuario">
     <Type Name="PerfilDeUsuario">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPerfilDeUsuario" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdPagina" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Perfil" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Nivel" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Permisos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Comentarios" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="PerfilDeUsuario_Usuarios" Member="Usuarios" ThisKey="Id" OtherKey="IdPerfil" Type="Usuarios" />
-      <Association Name="Pagina_PerfilDeUsuario" Member="Pagina" ThisKey="IdPagina" OtherKey="Id" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PerfilDeUsuario_Usuarios" Member="Usuarios" ThisKey="IdPerfilDeUsuario" OtherKey="IdPerfil" Type="Usuarios" />
+      <Association Name="Pagina_PerfilDeUsuario" Member="Pagina" ThisKey="IdPagina" OtherKey="IdPagina" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Personal" Member="Personal">
     <Type Name="Personal">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPersonal" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TipoPersonal" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NumeroTienda" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Personal_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdPersonal" Type="Tienda" />
+      <Association Name="Personal_SubAreas" Member="SubAreas" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="SubAreas" />
+      <Association Name="Personal_Tienda" Member="Tienda" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="Tienda" />
     </Type>
   </Table>
   <Table Name="dbo.Proveedores" Member="Proveedores">
     <Type Name="Proveedores">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdProveedores" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="RazonSocial" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Municipio" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Localidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Municipio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
@@ -345,52 +355,56 @@
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Proveedores_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdProveedor" Type="Articulos" />
-      <Association Name="Proveedores_Pedidos" Member="Pedidos" ThisKey="Id" OtherKey="IdProveedor" Type="Pedidos" />
+      <Association Name="Proveedores_Articulos" Member="Articulos" ThisKey="IdProveedores" OtherKey="IdProveedor" Type="Articulos" />
+      <Association Name="Proveedores_Pedidos" Member="Pedidos" ThisKey="IdProveedores" OtherKey="IdProveedor" Type="Pedidos" />
+      <Association Name="estados_Proveedores" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="localidades_Proveedores" Member="localidades" ThisKey="IdLocalidad" OtherKey="id" Type="localidades" IsForeignKey="true" />
       <Association Name="municipios_Proveedores" Member="municipios" ThisKey="IdMunicipio" OtherKey="id" Type="municipios" IsForeignKey="true" />
-      <Association Name="estados_Proveedores" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.SubAreas" Member="SubAreas">
     <Type Name="SubAreas">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdSubAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="NoSubArea" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdPersonal" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="UNombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IdEncargado2" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UNombre" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdEncargado1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NEncargado1" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="IdEncargado2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NEncargado2" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TelefonoE2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="CorreoE2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IdEncargado3" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdEncargado3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NEncargado3" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TelefonoE3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="CorreoE3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Areas_SubAreas" Member="Areas" ThisKey="IdArea" OtherKey="Id" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Areas_SubAreas" Member="Areas" ThisKey="IdArea" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" />
+      <Association Name="Personal_SubAreas" Member="Personal" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="Personal" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Supervision" Member="Supervision">
     <Type Name="Supervision">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdSupervision" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TipoSupervicion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Tiendas" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Supervision_Supervisor" Member="Supervisor" ThisKey="Id" OtherKey="IdSupervision" Type="Supervisor" />
-      <Association Name="Supervision_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdSupervision" Type="Tienda" />
-      <Association Name="Areas_Supervision" Member="Areas" ThisKey="IdAreas" OtherKey="Id" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Supervision_Supervisor" Member="Supervisor" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervisor" />
+      <Association Name="Supervision_Tienda" Member="Tienda" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Tienda" />
+      <Association Name="Areas_Supervision" Member="Areas" ThisKey="IdAreas" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Supervisor" Member="Supervisor">
     <Type Name="Supervisor">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdSupervisor" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ApellidoP" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
       <Column Name="ApellidoM" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
@@ -399,13 +413,14 @@
       <Column Name="IdSupervision" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="TipoSupervision" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Supervisor_Tienda" Member="Tienda" ThisKey="Id" OtherKey="IdSupervisor" Type="Tienda" />
-      <Association Name="Supervision_Supervisor" Member="Supervision" ThisKey="IdSupervision" OtherKey="Id" Type="Supervision" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Supervisor_Pedidos" Member="Pedidos" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Pedidos" />
+      <Association Name="Supervisor_Tienda" Member="Tienda" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Tienda" />
+      <Association Name="Supervision_Supervisor" Member="Supervision" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervision" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Tienda" Member="Tienda">
     <Type Name="Tienda">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdTienda" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IdSupervisor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdSupervision" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -433,21 +448,23 @@
       <Column Name="HApertura" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
       <Column Name="HCierre" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Tienda_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdTienda" Type="Articulos" />
-      <Association Name="estados_Tienda" Member="estados" ThisKey="IdEstados" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="localidades_Tienda" Member="localidades1" ThisKey="IdLocalidades" OtherKey="id" Type="localidades" IsForeignKey="true" />
+      <Association Name="Tienda_Articulos" Member="Articulos" ThisKey="IdTienda" OtherKey="IdTienda" Type="Articulos" />
+      <Association Name="estados_Tienda" Member="estados" ThisKey="IdEstados" OtherKey="id" Type="estados" IsForeignKey="true" />
+      <Association Name="localidades_Tienda" Member="localidades1" ThisKey="IdLocalidades" OtherKey="id" Type="localidades" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="municipios_Tienda" Member="municipios1" ThisKey="IdMunicipios" OtherKey="id" Type="municipios" IsForeignKey="true" />
-      <Association Name="Personal_Tienda" Member="Personal" ThisKey="IdPersonal" OtherKey="Id" Type="Personal" IsForeignKey="true" />
-      <Association Name="Supervision_Tienda" Member="Supervision" ThisKey="IdSupervision" OtherKey="Id" Type="Supervision" IsForeignKey="true" />
-      <Association Name="Supervisor_Tienda" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="Id" Type="Supervisor" IsForeignKey="true" />
+      <Association Name="Personal_Tienda" Member="Personal" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="Personal" IsForeignKey="true" />
+      <Association Name="Supervision_Tienda" Member="Supervision" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervision" IsForeignKey="true" />
+      <Association Name="Supervisor_Tienda" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Supervisor" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UnidadDeMedida" Member="UnidadDeMedida">
     <Type Name="UnidadDeMedida">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="Id" OtherKey="IdUnidadDeMedida" Type="Articulos" />
+      <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />
+      <Association Name="UnidadDeMedida_Bonificaciones" Member="Bonificaciones" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Bonificaciones" />
+      <Association Name="UnidadDeMedida_Pedidos" Member="Pedidos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Pedidos" />
     </Type>
   </Table>
 </Database>

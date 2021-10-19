@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var impuestos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdImpuesto,
                     p.Porcentaje
                  
                 });

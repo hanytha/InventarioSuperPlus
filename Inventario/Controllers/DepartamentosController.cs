@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var departamentos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdAreas,
                     p.Nombre,
                     p.UNombre,
                     p.Correo,
@@ -32,10 +32,10 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaDepartamento(long Id)
         {
-            var departamento = InvBD.Areas.Where(p => p.Id.Equals(Id))
+            var departamento = InvBD.Areas.Where(p => p.IdAreas.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdAreas,
                     p.Nombre,
                     p.UNombre,
                     p.Correo,

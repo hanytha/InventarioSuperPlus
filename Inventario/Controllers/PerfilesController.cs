@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             var perfiles = InvBD.PerfilDeUsuario.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPerfilDeUsuario,
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,
@@ -30,10 +30,10 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaConsultaPerfil(long Id)
         {
-            var perfil = InvBD.PerfilDeUsuario.Where(p => p.Id.Equals(Id))
+            var perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id))
                 .Select(p => new
                 {
-                    p.Id,
+                    p.IdPerfilDeUsuario,
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,

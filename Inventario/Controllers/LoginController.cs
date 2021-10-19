@@ -30,7 +30,7 @@ namespace Inventario.Controllers
                         var DatosUsuario = InvBD.Usuarios.Where(p => p.Usuario == User && p.Contraseña == ConSif && p.Estatus.Equals(1))
                         .Select(p => new
                         {
-                            p.Id,
+                            p.IdUsuarios,
                             p.CURP,
                             p.Nombre,
                             p.ApellidosP,
@@ -48,15 +48,13 @@ namespace Inventario.Controllers
                             p.LvlPerfil,
                             p.NArea,
                             p.NSArea,
-                            p.Asignacion,
-                            p.sitio,
                             p.Usuario,
                             p.FechaIngreso,
                             p.Contraseña
                         }).First();
 
-                        Session["Usuario"] = DatosUsuario.Id;
-                        Accesos.Id = DatosUsuario.Id;
+                        Session["Usuario"] = DatosUsuario.  IdUsuarios;
+                        Accesos.Id = DatosUsuario.IdUsuarios;
                         Accesos.CURP = DatosUsuario.CURP;
                         Accesos.Nombre = DatosUsuario.Nombre;
                         Accesos.ApellidosP = DatosUsuario.ApellidosP;
@@ -107,7 +105,7 @@ namespace Inventario.Controllers
                             }
 
 
-                            var Permisos = InvBD.PerfilDeUsuario.Where(p => p.Id.Equals(DatosUsuario.Id)).First();
+                            var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
 
                             string[] abreviaturas = Permisos.Permisos.Split('$');
                             int Filas = abreviaturas.GetLength(0);
@@ -121,7 +119,7 @@ namespace Inventario.Controllers
 
                             for (int i = 0; i < Filas; i++)
                             {
-                                var Pagina = InvBD.Pagina.Where(p => p.Id.Equals(abreviaturas[i]))
+                                var Pagina = InvBD.Pagina.Where(p => p.IdPagina.Equals(abreviaturas[i]))
                                     .Select(p => new
                                     {
                                         p.Accion,
