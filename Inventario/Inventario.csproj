@@ -103,6 +103,8 @@
     <Content Include="Assets\Imagenes\tienda.png" />
     <Content Include="Assets\Imagenes\usuario.png" />
     <Content Include="Assets\Imagenes\web.png" />
+    <Content Include="Assets\Login\bg4.jpg" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Tabla.css" />
@@ -117,7 +119,6 @@
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
-    <Content Include="Scrips\General\Form.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />

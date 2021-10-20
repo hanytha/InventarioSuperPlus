@@ -132,66 +132,6 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-
-
-
-/*
- 
- function abrirModal(id) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
-    if (id == 0) {
-        LimpiarCampos();
-        //  sessionStorage.setItem('IDProveedor', '0');
-    }
-    else {
-
-        $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDProveedor', Data[0].Id);     //Variable de sesión
-            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
-            document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("Txtcorreo").value = Data[0].Correo;
-            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
-            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
-            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
-            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
-            document.getElementById("cmbEstado").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
-                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
-            });
-            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
-                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
-            });
-            document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtDireccion").value = Data[0].Direccion;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            document.getElementById("TxtBanco").value = Data[0].Banco;
-            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
-            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
-            document.getElementById("TxtNomenclatura").value = Data[0].Nomenclatura;
-            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-        });
-    }
-}
-
-*/
-
-
-
-
-
-
-
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
