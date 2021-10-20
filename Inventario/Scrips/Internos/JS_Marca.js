@@ -15,8 +15,8 @@ function CrearTablaMarcas(Data) {
         CodigoHtmlTablaMarcas  += "<td>" + Data[i].Nombre + "</td>";
 
         CodigoHtmlTablaMarcas  += "<td>";
-        CodigoHtmlTablaMarcas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaMarcas += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].Id + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaMarcas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdMarca + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaMarcas += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].IdMarca + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaMarcas  += "</td>";
         CodigoHtmlTablaMarcas  += "</tr>";
@@ -42,7 +42,7 @@ function editarModal(id) {//la clase AreaObligatorio
     else {
 
         $.get("/Marca/ConsultaMarca/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IDMarca', Data[0].Id);
+            sessionStorage.setItem('IDMarca', Data[0].IdMarca);
 
             document.getElementById("TxtNombre").value = Data[0].Nombre;
         });
@@ -65,11 +65,11 @@ function LimpiarCampos() {
 function GuardarMarca() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDMarca')
+            var IdMarca = sessionStorage.getItem('IDMarca')
             var Nombre = document.getElementById("TxtNombre").value;
 
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdMarca", IdMarca);
             frm.append("Nombre", Nombre);
             frm.append("Estatus", 1);
 

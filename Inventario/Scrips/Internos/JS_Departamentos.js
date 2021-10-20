@@ -1,10 +1,10 @@
 ﻿CrearAcordeonDepartamentos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonDepartamentos() {
-    $.get("/Departamentos/ConsultaDepartamentos", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonDepartamentos(Data, document.getElementById("accordion"));
-    });
+    //$.get("/Departamentos/ConsultaDepartamentos", function (Data) {
+    //    //Accordeon(DatosProveedor, document.getElementById("accordion"));
+    //    AcordeonDepartamentos(Data, document.getElementById("accordion"));
+    //});
 }
 function AcordeonDepartamentos(Data, CtrlAlmacen) {
     var CodigoHTMLAreas = "";
@@ -40,7 +40,7 @@ function AcordeonDepartamentos(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdAreas + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarExistenciasG(" + Data[i].IdAreas + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarDepartamento(" + Data[i].IdAreas + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -49,5 +49,130 @@ function AcordeonDepartamentos(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "</div>";
     }
     CtrlAlmacen.innerHTML = CodigoHTMLAreas;
+}
+
+
+//Limpia la información y carga la informacion del proveedor
+function abrirModal(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IDDepartamento', '0');
+      
+    }
+    else {
+
+        $.get("/Departamentos/ConsultaDepartamento/?Id=" + id, function (Data) {
+            //Obtener los datos de los proveedores para permitir editar
+            sessionStorage.setItem('IDDepartamento', Data[0].IdAreas);
+            document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("TxtUsuario").value = Data[0].UNombre;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtCarpeta").value = Data[0].Carpeta;
+
+
+           
+        });
+    }
+}
+
+
+//limpiar campos
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
+
+//Guarda los cambios y altas de las áreas
+function GuardarDepartamento() {
+    if (CamposObligatorios() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdAreas = sessionStorage.getItem('IDDepartamento');
+            var Nombre = document.getElementById("TxtNombre").value;
+            var UNombre = document.getElementById("TxtUsuario").value;
+            var Correo = document.getElementById("TxtCorreo").value;
+            var Telefono = document.getElementById("TxtTelefono").value;
+            var Carpeta = document.getElementById("TxtCarpeta").value;
+
+            var frm = new FormData();
+            frm.append("IdAreas", IdAreas);
+            frm.append("Nombre", Nombre);
+            frm.append("UNombre", UNombre);
+            frm.append("Correo", Correo);
+            frm.append("Telefono", Telefono);
+            frm.append("Carpeta", Carpeta);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Departamentos/GuardarDepartamento",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Ocurrio un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe el proveedor");
+                    }
+                    else {
+                        alert("Se ejecuto correctamente");
+                        CrearAcordeonDepartamentos();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
+    }
+}
+
+
+//marca los campos obligatorios
+function CamposObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
+
+
+//"Elimina" el área cambia el Estatus
+function EliminarDepartamento(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/Departamentos/EliminarDepartamento/?Id=" + id, function (DatoDepartamento) {
+            if (DatoDepartamento == 1) {
+                alert("Se elimino correctamente");
+                CrearAcordeonDepartamentos();
+            } else {
+                alert("Ocurrio un error");
+            }
+        });
+    }
 }
 

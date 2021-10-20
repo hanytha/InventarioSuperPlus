@@ -6,12 +6,56 @@
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
-<h2>Compra</h2>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Botón del modal-->
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
 <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <div id="tabla" class="default "></div>
@@ -26,12 +70,13 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
+                <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO DE LAS MARCAS</h1>
+                    <h1>REGISTRO  MARCA</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post" >
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h2>Paso 1</h2>
                             <div class="form-group">
@@ -66,5 +111,6 @@
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Marca.js"></script>
 <!--Validacion del formulario-->
-<script src="~/Scrips/General/JS_Validacion.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--Scripts de la tarjeta y el botón-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
