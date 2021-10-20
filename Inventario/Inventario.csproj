@@ -122,7 +122,7 @@
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
     <Content Include="Scrips\General\JS_Validaciones.js" />
-    <Content Include="Scrips\General\validator.js" />
+    <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
