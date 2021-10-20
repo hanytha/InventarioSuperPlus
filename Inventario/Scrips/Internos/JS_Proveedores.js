@@ -1,6 +1,4 @@
-﻿LlenarCMBPrin();
-
-CrearAcordeonProveedores();
+﻿CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {
@@ -58,9 +56,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
-        //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].IdProveedores + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
@@ -72,7 +68,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
-//imagenes
+//Logo
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
     var file = document.getElementById("BtnFoto").files[0];
@@ -85,26 +81,21 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
         LimpiarCampos();
-        //  sessionStorage.setItem('IDProveedor', '0');  
     }
     else {
-
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDProveedor', Data[0].IdProveedores);     //Variable de sesión
-            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
@@ -113,11 +104,11 @@ function abrirModal(id) {//la clase  Obligatorio
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
                 document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
             });
             $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
             document.getElementById("TxtRFC").value = Data[0].RFC;
@@ -143,27 +134,12 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-
     //Limpiar las imágenes
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
     }
 }
-
-//llenar los combos Principales
-function LlenarCMBPrin() {
-    $.get("/GLOBAL/BDEstados", function (data) {
-        llenarCombo(data, document.getElementById("cmbEstado"));
-    });
-    // $.get("/GLOBAL/BDAreas", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArea"), true);
-    //  });
-    //  $.get("/Usuarios/BDPerfiles", function (data) {
-    //  llenarCombo(data, document.getElementById("cmbPerfil"), true);
-    //});
-}
-
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
@@ -188,7 +164,6 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-
 //Guarda los cambios y altas de los proveedores
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
@@ -217,7 +192,7 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  
             var frm = new FormData();
             frm.append("Id", Id);
             frm.append("Nombre", Nombre);
@@ -283,16 +258,18 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
-////////////////////////////////
-
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Proveedores/EliminarProveedor/?IdProveedores=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
-               alert("Se elimino correctamente");
-              //  confirmarEliminar();
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se elimino correctamente.',
+                    'success'
+                )
+                //  confirmarEliminar();
                 CrearAcordeonProveedores();
             } else {
                 alert("Ocurrio un error");
@@ -301,95 +278,8 @@ function EliminarProveedores(id) {
     }
 }
 
-/////////////////////////////
 
 
-/*
-function mostrar() {
-    swal('Hola Mundo');
-}*/
-/*Funcion del botón eliminar*/
-function eliminar() {
-        swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then(function () {
-            swal(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-        })
-    }
 
 
-/*
-//Funcion para confirmar al eliminar registros
-function eliminar1(id) {
-    swal({
-        title: '¿Estas seguro?',
-        text: "No podrás revertir esta acción",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (confirm == 1) {
-            swal(
-                'Deleted!',
-                'El registro se elimino correctamente.',
-                'success'
-            )
-        }
-    })
-}
 
-
-function eliminar2() {
-    swal({
-        title: '¿Desea eliminar el registro?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then(function () {
-        swal(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-        )
-    })
-}
-*/
-
-//Alerta de confirmación al presionar el botón eliminar
-function confirmarEliminar() {
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-        }
-    })
-
-}

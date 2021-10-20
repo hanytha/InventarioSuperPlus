@@ -190,6 +190,7 @@
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\AccesosController.cs" />
+    <Compile Include="Models\Estados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,13 +12,10 @@ namespace Inventario.Models
             public static List<string> Mensaje { get; set; }
             public static List<string> Icono { get; set; }
             public static long Id { get; set; } 
-            public static string CURP { get; set; }
             public static string Nombre { get; set; }
             public static string ApellidosP { get; set; }
             public static string ApellidosM { get; set; }
-            public static DateTime FechaDeNacimiento { get; set; }
-            public static string RFC { get; set; }
-            public static string NoSS { get; set; }
+            
             public static string NArea { get; set; }
             public static string NSArea { get; set; }
 

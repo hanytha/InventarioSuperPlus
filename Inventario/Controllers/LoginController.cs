@@ -55,14 +55,12 @@ namespace Inventario.Controllers
 
                         Session["Usuario"] = DatosUsuario.  IdUsuarios;
                         Accesos.Id = DatosUsuario.IdUsuarios;
-                        Accesos.CURP = DatosUsuario.CURP;
+              
                         Accesos.Nombre = DatosUsuario.Nombre;
                         Accesos.ApellidosP = DatosUsuario.ApellidosP;
                         Accesos.ApellidosM = DatosUsuario.ApellidosM;
                         Accesos.Foto = "data:image/png;base64," + Convert.ToBase64String(DatosUsuario.Foto.ToArray());
-                        Accesos.FechaDeNacimiento = DatosUsuario.FechaDeNacimiento;
-                        Accesos.RFC = DatosUsuario.RFC;
-                        Accesos.NoSS = DatosUsuario.NoSS;
+                 
                         //Accesos.Sitio = DatosUsuario.IDSitio;
                         if (Accesos.IDAsignacion != 0)
                         {

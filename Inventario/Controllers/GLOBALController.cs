@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Inventario.Models;
 
 namespace Inventario.Controllers
 {
@@ -36,14 +37,24 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
         //consulta Estados
-        public JsonResult BDEstados()
+        public void BDEstados()
         {
+
+            Estados estado = new Estados();//inicializar
+            Estados.idEstado = new List<int>();
+            Estados.nombre = new List<string>();
+
             var datos = InvBD.estados.Where(p => p.activo.Equals(1))
                 .Select(p => new {
                     ID = p.id,
                     Nombre = p.nombre
                 });
-            return Json(datos, JsonRequestBehavior.AllowGet);
+            foreach (var edos in datos)
+            {
+                Estados.idEstado.Add(edos.ID);
+                Estados.nombre.Add(edos.Nombre);
+            }
+     
         }
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
