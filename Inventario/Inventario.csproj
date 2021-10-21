@@ -88,22 +88,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Imagenes\area.png" />
-    <Content Include="Assets\Imagenes\articulo.png" />
-    <Content Include="Assets\Imagenes\compra.png" />
-    <Content Include="Assets\Imagenes\COMPRAS.jpg" />
-    <Content Include="Assets\Imagenes\desplegue.png" />
     <Content Include="Assets\Imagenes\favicon.png" />
     <Content Include="Assets\Imagenes\imagen1.jpg" />
     <Content Include="Assets\Imagenes\imagen2.jpg" />
     <Content Include="Assets\Imagenes\imagen3.png" />
-    <Content Include="Assets\Imagenes\ini.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
-    <Content Include="Assets\Imagenes\pedidos.png" />
-    <Content Include="Assets\Imagenes\proveedor.png" />
-    <Content Include="Assets\Imagenes\tienda.png" />
-    <Content Include="Assets\Imagenes\usuario.png" />
-    <Content Include="Assets\Imagenes\web.png" />
     <Content Include="Content\tarjeta.css" />
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />
@@ -189,8 +178,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
+    <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

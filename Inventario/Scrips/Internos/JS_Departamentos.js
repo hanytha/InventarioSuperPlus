@@ -176,3 +176,46 @@ function EliminarDepartamento(id) {
     }
 }
 
+
+//---------Validación Departamentos---------
+function validarFormularioD() {
+
+    var TxtNombre = document.getElementById('TxtNombre').value;
+    var TxtUsuario = document.getElementById('TxtUsuario').value;
+    var Txtcorreo = document.getElementById('Txtcorreo').value;
+    var TxtTelefono = document.getElementById('TxtTelefono').value;
+    var TxtCarpeta = document.getElementById('TxtCarpeta').value;
+
+
+    //Test campo obligatorio
+    if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
+        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+        return false;
+    }
+    //Test campo obligatorio
+    if (TxtUsuario == null || TxtUsuario.length == 0 || /^\s+$/.test(TxtUsuario)) {
+        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario');
+        return false;
+    }
+
+    //Test correo
+    if (!(/\S+@\S+\.\S+/.test(Txtcorreo))) {
+        alert('ERROR: Debe escribir un correo válido');
+        return false;
+    }
+
+    //Test edad
+    if (TxtTelefono == null || TxtTelefono.length == 0 || isNaN(TxtTelefono)) {
+        alert('ERROR: Debe ingresar una edad TxtTelefono');
+        return false;
+
+    }
+    //Test campo obligatorio
+    if (TxtCarpeta == null || TxtCarpeta.length == 0 || /^\s+$/.test(TxtCarpeta)) {
+        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario TxtCarpeta');
+        return false;
+    }
+
+    return true;
+}
+

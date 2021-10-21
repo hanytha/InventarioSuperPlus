@@ -2,16 +2,61 @@
 @{
     ViewBag.Title = "Subarea";
 }
-
-<h2>Subarea</h2>
 <!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!-- Botón del modal -->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
@@ -30,44 +75,44 @@
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h2>Paso 1: Información del subÁrea</h2>
                             <div class="form-group">
-                                <label for="nombreSubArea">Nombre del Subárea</label>
-                                <input type="text" class="form-control" name="data[nombreSubArea]" id="nombreSubArea" placeholder="Nombre de la SubÁrea">
+                                <label for="TxtNombre">Nombre del Subárea</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre de la SubÁrea">
                             </div>
                             <div class="form-group">
-                                <label for="numeroSubArea">Número del Subárea</label>
-                                <input type="text" class="form-control" id="numeroSubArea" placeholder="Número del SubArea">
+                                <label for="TxtNumero">Número del Subárea</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNumero]" id="TxtNumero" placeholder="Número de la SubÁrea">
                             </div>
                             <div class="form-group">
-                                <label for="nombreUsuario">Nombre del usuario</label>
-                                <input type="text" class="form-control" name="data[nombreUsuario]" id="nombreUsuario" placeholder="Nombre del usuario">
+                                <label for="TxtNombre1">Nombre del Enacaragado 1</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre1]" id="TxtNombre1" placeholder="Nombre del usuario">
                             </div>
                             <div class="form-group">
-                                <label for="telefono">Teléfono</label>
-                                <input type="text" class="form-control" name="data[telefono]" id="telefono" placeholder="Número telefónico">
+                                <label for="TxtTelefono1">Teléfono Encargado1</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtTelefono1]" id="TxtTelefono1" placeholder="Número telefónico">
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
                             <h2> Paso 2: Información del usuario</h2>
                             <div class="form-group">
-                                <label for="correo">E-mail</label>
-                                <input type="email" class="form-control" name="data[correo]" id="correo" placeholder="Correo electrónico">
+                                <label for="TxtCorreo1">E-mail Encargado1</label>
+                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo1]" id="TxtCorreo1" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
-                                <label for="nombreEncargado2">Nombre del encargado 2</label>
-                                <input type="text" class="form-control" name="data[nombreEncargado2]" id="nombreEncargado2" placeholder="Nombre del Encargado2">
+                                <label for="TxtNombre2">Nombre del encargado 2</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre2]" id="TxtNombre2" placeholder="Nombre del Encargado2">
                             </div>
                             <div class="form-group">
-                                <label for="telefonoEncargado2">Teléfono del encargado 2</label>
-                                <input type="text" class="form-control" id="telefonoEncargado2" name="data[telefonoEncargado2]" placeholder="Teléfono del Encargado2">
+                                <label for="TxtTelefono2">Teléfono del encargado 2</label>
+                                <input type="text" class="form-control limpiar obligatorio" id="TxtTelefono2" name="data[TxtTelefono2]" placeholder="Teléfono del Encargado2">
                             </div>
                             <div class="form-group">
-                                <label for="correoEncargado2">E-mail del encargado 2</label>
-                                <input type="email" class="form-control" name="data[correoEncargado2]" id="correoEncargado2" placeholder="Correo Electrónico">
+                                <label for="TxtCorreo2">E-mail del encargado 2</label>
+                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo2]" id="TxtCorreo2" placeholder="Correo Electrónico">
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
@@ -76,25 +121,25 @@
                         <fieldset>
                             <h2>Paso 3: Información del encargado</h2>
                             <div class="form-group">
-                                <label for="nombreEncargado3">Nombre del encargado 3</label>
-                                <input type="text" class="form-control" name="data[nombreEncargado3]" id="nombreEncargado3" placeholder="Nombre del Encargado3">
+                                <label for="TxtNombre3">Nombre del encargado 3</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre3]" id="TxtNombre3" placeholder="Nombre del Encargado3">
                             </div>
                             <div class="form-group">
-                                <label for="telefonoEncargado3">Teléfono del encargado 3</label>
-                                <input type="text" class="form-control" id="telefonoEncargado3" name="data[telefonoEncargado3]" placeholder="Teléfono del Encargado3">
+                                <label for="TxtTelefono3">Teléfono del encargado 3</label>
+                                <input type="text" class="form-control limpiar obligatorio" id="TxtTelefono3" name="data[TxtTelefono3]" placeholder="Teléfono del Encargado3">
                             </div>
                             <div class="form-group">
-                                <label for="correoEncargado3">E-mail del encargado 3</label>
-                                <input type="email" class="form-control" name="data[correoEncargado3]" id="correoEncargado3" placeholder="Correo Electrónico">
+                                <label for="TxtCorreo3">E-mail del encargado 3</label>
+                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo3]" id="TxtCorreo3" placeholder="Correo Electrónico">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick="GuardarSubarea()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -109,5 +154,6 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_SubAreas.js"></script><!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

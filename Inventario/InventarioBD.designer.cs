@@ -364,8 +364,6 @@ namespace Inventario
 		
 		private EntitySet<Pedidos> _Pedidos;
 		
-		private EntitySet<SubAreas> _SubAreas;
-		
 		private EntitySet<Supervision> _Supervision;
 		
 		private EntityRef<Usuarios> _Usuarios;
@@ -396,7 +394,6 @@ namespace Inventario
 		{
 			this._Articulos = new EntitySet<Articulos>(new Action<Articulos>(this.attach_Articulos), new Action<Articulos>(this.detach_Articulos));
 			this._Pedidos = new EntitySet<Pedidos>(new Action<Pedidos>(this.attach_Pedidos), new Action<Pedidos>(this.detach_Pedidos));
-			this._SubAreas = new EntitySet<SubAreas>(new Action<SubAreas>(this.attach_SubAreas), new Action<SubAreas>(this.detach_SubAreas));
 			this._Supervision = new EntitySet<Supervision>(new Action<Supervision>(this.attach_Supervision), new Action<Supervision>(this.detach_Supervision));
 			this._Usuarios = default(EntityRef<Usuarios>);
 			OnCreated();
@@ -592,19 +589,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Areas_SubAreas", Storage="_SubAreas", ThisKey="IdAreas", OtherKey="IdArea")]
-		public EntitySet<SubAreas> SubAreas
-		{
-			get
-			{
-				return this._SubAreas;
-			}
-			set
-			{
-				this._SubAreas.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Areas_Supervision", Storage="_Supervision", ThisKey="IdAreas", OtherKey="IdAreas")]
 		public EntitySet<Supervision> Supervision
 		{
@@ -696,18 +680,6 @@ namespace Inventario
 			entity.Areas = null;
 		}
 		
-		private void attach_SubAreas(SubAreas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Areas = this;
-		}
-		
-		private void detach_SubAreas(SubAreas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Areas = null;
-		}
-		
 		private void attach_Supervision(Supervision entity)
 		{
 			this.SendPropertyChanging();
@@ -741,11 +713,11 @@ namespace Inventario
 		
 		private System.DateTime _FechaDeNacimiento;
 		
-		private System.Nullable<int> _IdEstados;
+		private System.Nullable<int> _IdEstado;
 		
-		private System.Nullable<int> _IdMucipios;
+		private System.Nullable<int> _IdMunicipio;
 		
-		private System.Nullable<int> _IdLocalidades;
+		private System.Nullable<int> _IdLocalidad;
 		
 		private string _RFC;
 		
@@ -770,6 +742,16 @@ namespace Inventario
 		private string _Contraseña;
 		
 		private int _Estatus;
+		
+		private string _Estado;
+		
+		private string _Municipio;
+		
+		private string _Localidad;
+		
+		private System.Nullable<long> _IdAsignacion;
+		
+		private System.Nullable<long> _IdSitio;
 		
 		private EntitySet<Areas> _Areas;
 		
@@ -799,12 +781,12 @@ namespace Inventario
     partial void OnFotoChanged();
     partial void OnFechaDeNacimientoChanging(System.DateTime value);
     partial void OnFechaDeNacimientoChanged();
-    partial void OnIdEstadosChanging(System.Nullable<int> value);
-    partial void OnIdEstadosChanged();
-    partial void OnIdMucipiosChanging(System.Nullable<int> value);
-    partial void OnIdMucipiosChanged();
-    partial void OnIdLocalidadesChanging(System.Nullable<int> value);
-    partial void OnIdLocalidadesChanged();
+    partial void OnIdEstadoChanging(System.Nullable<int> value);
+    partial void OnIdEstadoChanged();
+    partial void OnIdMunicipioChanging(System.Nullable<int> value);
+    partial void OnIdMunicipioChanged();
+    partial void OnIdLocalidadChanging(System.Nullable<int> value);
+    partial void OnIdLocalidadChanged();
     partial void OnRFCChanging(string value);
     partial void OnRFCChanged();
     partial void OnNoSSChanging(string value);
@@ -829,6 +811,16 @@ namespace Inventario
     partial void OnContraseñaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
+    partial void OnEstadoChanging(string value);
+    partial void OnEstadoChanged();
+    partial void OnMunicipioChanging(string value);
+    partial void OnMunicipioChanged();
+    partial void OnLocalidadChanging(string value);
+    partial void OnLocalidadChanged();
+    partial void OnIdAsignacionChanging(System.Nullable<long> value);
+    partial void OnIdAsignacionChanged();
+    partial void OnIdSitioChanging(System.Nullable<long> value);
+    partial void OnIdSitioChanged();
     #endregion
 		
 		public Usuarios()
@@ -981,74 +973,74 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEstados", DbType="Int")]
-		public System.Nullable<int> IdEstados
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEstado", DbType="Int")]
+		public System.Nullable<int> IdEstado
 		{
 			get
 			{
-				return this._IdEstados;
+				return this._IdEstado;
 			}
 			set
 			{
-				if ((this._IdEstados != value))
+				if ((this._IdEstado != value))
 				{
 					if (this._estados.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnIdEstadosChanging(value);
+					this.OnIdEstadoChanging(value);
 					this.SendPropertyChanging();
-					this._IdEstados = value;
-					this.SendPropertyChanged("IdEstados");
-					this.OnIdEstadosChanged();
+					this._IdEstado = value;
+					this.SendPropertyChanged("IdEstado");
+					this.OnIdEstadoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMucipios", DbType="Int")]
-		public System.Nullable<int> IdMucipios
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMunicipio", DbType="Int")]
+		public System.Nullable<int> IdMunicipio
 		{
 			get
 			{
-				return this._IdMucipios;
+				return this._IdMunicipio;
 			}
 			set
 			{
-				if ((this._IdMucipios != value))
+				if ((this._IdMunicipio != value))
 				{
 					if (this._municipios.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnIdMucipiosChanging(value);
+					this.OnIdMunicipioChanging(value);
 					this.SendPropertyChanging();
-					this._IdMucipios = value;
-					this.SendPropertyChanged("IdMucipios");
-					this.OnIdMucipiosChanged();
+					this._IdMunicipio = value;
+					this.SendPropertyChanged("IdMunicipio");
+					this.OnIdMunicipioChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdLocalidades", DbType="Int")]
-		public System.Nullable<int> IdLocalidades
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdLocalidad", DbType="Int")]
+		public System.Nullable<int> IdLocalidad
 		{
 			get
 			{
-				return this._IdLocalidades;
+				return this._IdLocalidad;
 			}
 			set
 			{
-				if ((this._IdLocalidades != value))
+				if ((this._IdLocalidad != value))
 				{
 					if (this._localidades.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnIdLocalidadesChanging(value);
+					this.OnIdLocalidadChanging(value);
 					this.SendPropertyChanging();
-					this._IdLocalidades = value;
-					this.SendPropertyChanged("IdLocalidades");
-					this.OnIdLocalidadesChanged();
+					this._IdLocalidad = value;
+					this.SendPropertyChanged("IdLocalidad");
+					this.OnIdLocalidadChanged();
 				}
 			}
 		}
@@ -1297,6 +1289,106 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="NChar(10)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="NChar(10)")]
+		public string Municipio
+		{
+			get
+			{
+				return this._Municipio;
+			}
+			set
+			{
+				if ((this._Municipio != value))
+				{
+					this.OnMunicipioChanging(value);
+					this.SendPropertyChanging();
+					this._Municipio = value;
+					this.SendPropertyChanged("Municipio");
+					this.OnMunicipioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Localidad", DbType="NChar(10)")]
+		public string Localidad
+		{
+			get
+			{
+				return this._Localidad;
+			}
+			set
+			{
+				if ((this._Localidad != value))
+				{
+					this.OnLocalidadChanging(value);
+					this.SendPropertyChanging();
+					this._Localidad = value;
+					this.SendPropertyChanged("Localidad");
+					this.OnLocalidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAsignacion", DbType="BigInt")]
+		public System.Nullable<long> IdAsignacion
+		{
+			get
+			{
+				return this._IdAsignacion;
+			}
+			set
+			{
+				if ((this._IdAsignacion != value))
+				{
+					this.OnIdAsignacionChanging(value);
+					this.SendPropertyChanging();
+					this._IdAsignacion = value;
+					this.SendPropertyChanged("IdAsignacion");
+					this.OnIdAsignacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSitio", DbType="BigInt")]
+		public System.Nullable<long> IdSitio
+		{
+			get
+			{
+				return this._IdSitio;
+			}
+			set
+			{
+				if ((this._IdSitio != value))
+				{
+					this.OnIdSitioChanging(value);
+					this.SendPropertyChanging();
+					this._IdSitio = value;
+					this.SendPropertyChanged("IdSitio");
+					this.OnIdSitioChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuarios_Areas", Storage="_Areas", ThisKey="IdUsuarios", OtherKey="IdUsuario")]
 		public EntitySet<Areas> Areas
 		{
@@ -1310,7 +1402,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="estados_Usuarios", Storage="_estados", ThisKey="IdEstados", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="estados_Usuarios", Storage="_estados", ThisKey="IdEstado", OtherKey="id", IsForeignKey=true)]
 		public estados estados
 		{
 			get
@@ -1333,18 +1425,18 @@ namespace Inventario
 					if ((value != null))
 					{
 						value.Usuarios.Add(this);
-						this._IdEstados = value.id;
+						this._IdEstado = value.id;
 					}
 					else
 					{
-						this._IdEstados = default(Nullable<int>);
+						this._IdEstado = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("estados");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Usuarios", Storage="_localidades", ThisKey="IdLocalidades", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Usuarios", Storage="_localidades", ThisKey="IdLocalidad", OtherKey="id", IsForeignKey=true)]
 		public localidades localidades
 		{
 			get
@@ -1367,18 +1459,18 @@ namespace Inventario
 					if ((value != null))
 					{
 						value.Usuarios.Add(this);
-						this._IdLocalidades = value.id;
+						this._IdLocalidad = value.id;
 					}
 					else
 					{
-						this._IdLocalidades = default(Nullable<int>);
+						this._IdLocalidad = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("localidades");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Usuarios", Storage="_municipios", ThisKey="IdMucipios", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Usuarios", Storage="_municipios", ThisKey="IdMunicipio", OtherKey="id", IsForeignKey=true)]
 		public municipios municipios
 		{
 			get
@@ -1401,11 +1493,11 @@ namespace Inventario
 					if ((value != null))
 					{
 						value.Usuarios.Add(this);
-						this._IdMucipios = value.id;
+						this._IdMunicipio = value.id;
 					}
 					else
 					{
-						this._IdMucipios = default(Nullable<int>);
+						this._IdMunicipio = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("municipios");
 				}
@@ -4155,7 +4247,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="estados_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdEstados")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="estados_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdEstado")]
 		public EntitySet<Usuarios> Usuarios
 		{
 			get
@@ -5569,7 +5661,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdLocalidades")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdLocalidad")]
 		public EntitySet<Usuarios> Usuarios
 		{
 			get
@@ -5885,6 +5977,8 @@ namespace Inventario
 		
 		private EntitySet<localidades> _localidades;
 		
+		private EntitySet<Proveedores> _Proveedores;
+		
 		private EntitySet<Tienda> _Tienda;
 		
 		private EntityRef<estados> _estados;
@@ -5909,6 +6003,7 @@ namespace Inventario
 		{
 			this._Usuarios = new EntitySet<Usuarios>(new Action<Usuarios>(this.attach_Usuarios), new Action<Usuarios>(this.detach_Usuarios));
 			this._localidades = new EntitySet<localidades>(new Action<localidades>(this.attach_localidades), new Action<localidades>(this.detach_localidades));
+			this._Proveedores = new EntitySet<Proveedores>(new Action<Proveedores>(this.attach_Proveedores), new Action<Proveedores>(this.detach_Proveedores));
 			this._Tienda = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda), new Action<Tienda>(this.detach_Tienda));
 			this._estados = default(EntityRef<estados>);
 			OnCreated();
@@ -6018,7 +6113,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdMucipios")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Usuarios", Storage="_Usuarios", ThisKey="id", OtherKey="IdMunicipio")]
 		public EntitySet<Usuarios> Usuarios
 		{
 			get
@@ -6041,6 +6136,19 @@ namespace Inventario
 			set
 			{
 				this._localidades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Proveedores", Storage="_Proveedores", ThisKey="id", OtherKey="IdMunicipio")]
+		public EntitySet<Proveedores> Proveedores
+		{
+			get
+			{
+				return this._Proveedores;
+			}
+			set
+			{
+				this._Proveedores.Assign(value);
 			}
 		}
 		
@@ -6135,6 +6243,18 @@ namespace Inventario
 			entity.municipios = null;
 		}
 		
+		private void attach_Proveedores(Proveedores entity)
+		{
+			this.SendPropertyChanging();
+			entity.municipios = this;
+		}
+		
+		private void detach_Proveedores(Proveedores entity)
+		{
+			this.SendPropertyChanging();
+			entity.municipios = null;
+		}
+		
 		private void attach_Tienda(Tienda entity)
 		{
 			this.SendPropertyChanging();
@@ -6156,8 +6276,6 @@ namespace Inventario
 		
 		private long _IdPagina;
 		
-		private string _Abreviatura;
-		
 		private string _Mensaje;
 		
 		private string _Accion;
@@ -6170,6 +6288,10 @@ namespace Inventario
 		
 		private int _Estatus;
 		
+		private string _Tipo;
+		
+		private System.Nullable<long> _Padre;
+		
 		private EntitySet<Configuracion> _Configuracion;
 		
 		private EntitySet<PerfilDeUsuario> _PerfilDeUsuario;
@@ -6180,8 +6302,6 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdPaginaChanging(long value);
     partial void OnIdPaginaChanged();
-    partial void OnAbreviaturaChanging(string value);
-    partial void OnAbreviaturaChanged();
     partial void OnMensajeChanging(string value);
     partial void OnMensajeChanged();
     partial void OnAccionChanging(string value);
@@ -6194,6 +6314,10 @@ namespace Inventario
     partial void OnDescripcionChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
+    partial void OnTipoChanging(string value);
+    partial void OnTipoChanged();
+    partial void OnPadreChanging(System.Nullable<long> value);
+    partial void OnPadreChanged();
     #endregion
 		
 		public Pagina()
@@ -6219,26 +6343,6 @@ namespace Inventario
 					this._IdPagina = value;
 					this.SendPropertyChanged("IdPagina");
 					this.OnIdPaginaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abreviatura", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string Abreviatura
-		{
-			get
-			{
-				return this._Abreviatura;
-			}
-			set
-			{
-				if ((this._Abreviatura != value))
-				{
-					this.OnAbreviaturaChanging(value);
-					this.SendPropertyChanging();
-					this._Abreviatura = value;
-					this.SendPropertyChanged("Abreviatura");
-					this.OnAbreviaturaChanged();
 				}
 			}
 		}
@@ -6359,6 +6463,46 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(50)")]
+		public string Tipo
+		{
+			get
+			{
+				return this._Tipo;
+			}
+			set
+			{
+				if ((this._Tipo != value))
+				{
+					this.OnTipoChanging(value);
+					this.SendPropertyChanging();
+					this._Tipo = value;
+					this.SendPropertyChanged("Tipo");
+					this.OnTipoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Padre", DbType="BigInt")]
+		public System.Nullable<long> Padre
+		{
+			get
+			{
+				return this._Padre;
+			}
+			set
+			{
+				if ((this._Padre != value))
+				{
+					this.OnPadreChanging(value);
+					this.SendPropertyChanging();
+					this._Padre = value;
+					this.SendPropertyChanged("Padre");
+					this.OnPadreChanged();
 				}
 			}
 		}
@@ -7554,8 +7698,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<SubAreas> _SubAreas;
-		
 		private EntitySet<Tienda> _Tienda;
 		
     #region Definiciones de métodos de extensibilidad
@@ -7576,7 +7718,6 @@ namespace Inventario
 		
 		public Personal()
 		{
-			this._SubAreas = new EntitySet<SubAreas>(new Action<SubAreas>(this.attach_SubAreas), new Action<SubAreas>(this.detach_SubAreas));
 			this._Tienda = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda), new Action<Tienda>(this.detach_Tienda));
 			OnCreated();
 		}
@@ -7681,19 +7822,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personal_SubAreas", Storage="_SubAreas", ThisKey="IdPersonal", OtherKey="IdPersonal")]
-		public EntitySet<SubAreas> SubAreas
-		{
-			get
-			{
-				return this._SubAreas;
-			}
-			set
-			{
-				this._SubAreas.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personal_Tienda", Storage="_Tienda", ThisKey="IdPersonal", OtherKey="IdPersonal")]
 		public EntitySet<Tienda> Tienda
 		{
@@ -7725,18 +7853,6 @@ namespace Inventario
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_SubAreas(SubAreas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Personal = this;
-		}
-		
-		private void detach_SubAreas(SubAreas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Personal = null;
 		}
 		
 		private void attach_Tienda(Tienda entity)
@@ -7810,6 +7926,8 @@ namespace Inventario
 		
 		private EntityRef<localidades> _localidades;
 		
+		private EntityRef<municipios> _municipios;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7866,6 +7984,7 @@ namespace Inventario
 			this._Pedidos = new EntitySet<Pedidos>(new Action<Pedidos>(this.attach_Pedidos), new Action<Pedidos>(this.detach_Pedidos));
 			this._estados = default(EntityRef<estados>);
 			this._localidades = default(EntityRef<localidades>);
+			this._municipios = default(EntityRef<municipios>);
 			OnCreated();
 		}
 		
@@ -8044,6 +8163,10 @@ namespace Inventario
 			{
 				if ((this._IdMunicipio != value))
 				{
+					if (this._municipios.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIdMunicipioChanging(value);
 					this.SendPropertyChanging();
 					this._IdMunicipio = value;
@@ -8411,6 +8534,40 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Proveedores", Storage="_municipios", ThisKey="IdMunicipio", OtherKey="id", IsForeignKey=true)]
+		public municipios municipios
+		{
+			get
+			{
+				return this._municipios.Entity;
+			}
+			set
+			{
+				municipios previousValue = this._municipios.Entity;
+				if (((previousValue != value) 
+							|| (this._municipios.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._municipios.Entity = null;
+						previousValue.Proveedores.Remove(this);
+					}
+					this._municipios.Entity = value;
+					if ((value != null))
+					{
+						value.Proveedores.Add(this);
+						this._IdMunicipio = value.id;
+					}
+					else
+					{
+						this._IdMunicipio = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("municipios");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8468,21 +8625,15 @@ namespace Inventario
 		
 		private int _NoSubArea;
 		
-		private System.Nullable<long> _IdArea;
-		
-		private System.Nullable<long> _IdPersonal;
-		
-		private System.Nullable<long> _IdUsuario;
-		
-		private string _UNombre;
-		
-		private System.Nullable<long> _Telefono;
-		
-		private string _Correo;
+		private long _IdArea;
 		
 		private System.Nullable<long> _IdEncargado1;
 		
 		private string _NEncargado1;
+		
+		private System.Nullable<long> _TelefonoE1;
+		
+		private string _CorreoE1;
 		
 		private System.Nullable<long> _IdEncargado2;
 		
@@ -8502,10 +8653,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntityRef<Areas> _Areas;
-		
-		private EntityRef<Personal> _Personal;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -8516,22 +8663,16 @@ namespace Inventario
     partial void OnNombreChanged();
     partial void OnNoSubAreaChanging(int value);
     partial void OnNoSubAreaChanged();
-    partial void OnIdAreaChanging(System.Nullable<long> value);
+    partial void OnIdAreaChanging(long value);
     partial void OnIdAreaChanged();
-    partial void OnIdPersonalChanging(System.Nullable<long> value);
-    partial void OnIdPersonalChanged();
-    partial void OnIdUsuarioChanging(System.Nullable<long> value);
-    partial void OnIdUsuarioChanged();
-    partial void OnUNombreChanging(string value);
-    partial void OnUNombreChanged();
-    partial void OnTelefonoChanging(System.Nullable<long> value);
-    partial void OnTelefonoChanged();
-    partial void OnCorreoChanging(string value);
-    partial void OnCorreoChanged();
     partial void OnIdEncargado1Changing(System.Nullable<long> value);
     partial void OnIdEncargado1Changed();
     partial void OnNEncargado1Changing(string value);
     partial void OnNEncargado1Changed();
+    partial void OnTelefonoE1Changing(System.Nullable<long> value);
+    partial void OnTelefonoE1Changed();
+    partial void OnCorreoE1Changing(string value);
+    partial void OnCorreoE1Changed();
     partial void OnIdEncargado2Changing(System.Nullable<long> value);
     partial void OnIdEncargado2Changed();
     partial void OnNEncargado2Changing(string value);
@@ -8554,8 +8695,6 @@ namespace Inventario
 		
 		public SubAreas()
 		{
-			this._Areas = default(EntityRef<Areas>);
-			this._Personal = default(EntityRef<Personal>);
 			OnCreated();
 		}
 		
@@ -8619,8 +8758,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt")]
-		public System.Nullable<long> IdArea
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt NOT NULL")]
+		public long IdArea
 		{
 			get
 			{
@@ -8630,119 +8769,11 @@ namespace Inventario
 			{
 				if ((this._IdArea != value))
 				{
-					if (this._Areas.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdAreaChanging(value);
 					this.SendPropertyChanging();
 					this._IdArea = value;
 					this.SendPropertyChanged("IdArea");
 					this.OnIdAreaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPersonal", DbType="BigInt")]
-		public System.Nullable<long> IdPersonal
-		{
-			get
-			{
-				return this._IdPersonal;
-			}
-			set
-			{
-				if ((this._IdPersonal != value))
-				{
-					if (this._Personal.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdPersonalChanging(value);
-					this.SendPropertyChanging();
-					this._IdPersonal = value;
-					this.SendPropertyChanged("IdPersonal");
-					this.OnIdPersonalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="BigInt")]
-		public System.Nullable<long> IdUsuario
-		{
-			get
-			{
-				return this._IdUsuario;
-			}
-			set
-			{
-				if ((this._IdUsuario != value))
-				{
-					this.OnIdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._IdUsuario = value;
-					this.SendPropertyChanged("IdUsuario");
-					this.OnIdUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UNombre", DbType="VarChar(250)")]
-		public string UNombre
-		{
-			get
-			{
-				return this._UNombre;
-			}
-			set
-			{
-				if ((this._UNombre != value))
-				{
-					this.OnUNombreChanging(value);
-					this.SendPropertyChanging();
-					this._UNombre = value;
-					this.SendPropertyChanged("UNombre");
-					this.OnUNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="BigInt")]
-		public System.Nullable<long> Telefono
-		{
-			get
-			{
-				return this._Telefono;
-			}
-			set
-			{
-				if ((this._Telefono != value))
-				{
-					this.OnTelefonoChanging(value);
-					this.SendPropertyChanging();
-					this._Telefono = value;
-					this.SendPropertyChanged("Telefono");
-					this.OnTelefonoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
-		public string Correo
-		{
-			get
-			{
-				return this._Correo;
-			}
-			set
-			{
-				if ((this._Correo != value))
-				{
-					this.OnCorreoChanging(value);
-					this.SendPropertyChanging();
-					this._Correo = value;
-					this.SendPropertyChanged("Correo");
-					this.OnCorreoChanged();
 				}
 			}
 		}
@@ -8783,6 +8814,46 @@ namespace Inventario
 					this._NEncargado1 = value;
 					this.SendPropertyChanged("NEncargado1");
 					this.OnNEncargado1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoE1", DbType="BigInt")]
+		public System.Nullable<long> TelefonoE1
+		{
+			get
+			{
+				return this._TelefonoE1;
+			}
+			set
+			{
+				if ((this._TelefonoE1 != value))
+				{
+					this.OnTelefonoE1Changing(value);
+					this.SendPropertyChanging();
+					this._TelefonoE1 = value;
+					this.SendPropertyChanged("TelefonoE1");
+					this.OnTelefonoE1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CorreoE1", DbType="VarChar(50)")]
+		public string CorreoE1
+		{
+			get
+			{
+				return this._CorreoE1;
+			}
+			set
+			{
+				if ((this._CorreoE1 != value))
+				{
+					this.OnCorreoE1Changing(value);
+					this.SendPropertyChanging();
+					this._CorreoE1 = value;
+					this.SendPropertyChanged("CorreoE1");
+					this.OnCorreoE1Changed();
 				}
 			}
 		}
@@ -8963,74 +9034,6 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Areas_SubAreas", Storage="_Areas", ThisKey="IdArea", OtherKey="IdAreas", IsForeignKey=true)]
-		public Areas Areas
-		{
-			get
-			{
-				return this._Areas.Entity;
-			}
-			set
-			{
-				Areas previousValue = this._Areas.Entity;
-				if (((previousValue != value) 
-							|| (this._Areas.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Areas.Entity = null;
-						previousValue.SubAreas.Remove(this);
-					}
-					this._Areas.Entity = value;
-					if ((value != null))
-					{
-						value.SubAreas.Add(this);
-						this._IdArea = value.IdAreas;
-					}
-					else
-					{
-						this._IdArea = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Areas");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personal_SubAreas", Storage="_Personal", ThisKey="IdPersonal", OtherKey="IdPersonal", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Personal Personal
-		{
-			get
-			{
-				return this._Personal.Entity;
-			}
-			set
-			{
-				Personal previousValue = this._Personal.Entity;
-				if (((previousValue != value) 
-							|| (this._Personal.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Personal.Entity = null;
-						previousValue.SubAreas.Remove(this);
-					}
-					this._Personal.Entity = value;
-					if ((value != null))
-					{
-						value.SubAreas.Add(this);
-						this._IdPersonal = value.IdPersonal;
-					}
-					else
-					{
-						this._IdPersonal = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Personal");
 				}
 			}
 		}

@@ -130,5 +130,17 @@ function EliminarCompras(id) {
 }
 
 
+//----------------Validación Formulario Compra-------------------------
+function validarFormularioCompra() {
 
+    var TxtMetodoDePago = document.getElementById('TxtMetodoDePago').value;
+
+    //Test campo obligatorio
+    if (TxtMetodoDePago == null || TxtMetodoDePago.length == 0 || /^\s+$/.test(TxtMetodoDePago)) {
+        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+        return false;
+    }
+
+    return true;
+}
 
