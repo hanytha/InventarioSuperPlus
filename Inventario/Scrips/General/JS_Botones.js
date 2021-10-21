@@ -209,3 +209,7 @@ jQuery(document).ready(function () {
     });
 });
 
+
+function confirmarAccesoURL() {
+    return confirm("¿Está seguro que desea salir de modal?");
+}
