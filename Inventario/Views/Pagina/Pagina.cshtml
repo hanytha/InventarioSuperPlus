@@ -2,11 +2,15 @@
 @{
     ViewBag.Title = "Pagina";
 }
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<h2>Pagina</h2>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+<div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -24,48 +28,84 @@
                     </div>
                     <form id="regiration_form" novalidate action="action.php" method="post">
                         <fieldset>
-                            <h2>PASO 1</h2>
-                            <div class="form-group">
-                                <label for="fName">INGRESAR LA ABREVIATURA</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ABREVIATURA">
+                            <h2> Paso 1</h2>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAbreviatura">Abreviatura<span class="required">*</span></label>
+                                        <input type="text" id="TxtAbreviatura" class="form-control limpiar obligatorio" placeholder="Abreviatura">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
+                                        <input type="text" id="TxtAccion" class="form-control limpiar obligatorio" placeholder="Acción">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="fName">MENSAJE</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="MENSAJE">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
+                                        <textarea id="TxtMensaje" required="required" class="form-control limpiar obligatorio" name="TxtMensaje" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2> PASO 2</h2>
-                            <div class="form-group">
-                                <label for="fName">ACCIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ACCIÓN">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
+                                        <input type="text" id="TxtControlador" class="form-control limpiar obligatorio" placeholder="Controlador">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTipo">Tipo<span class="required">*</span></label>
+                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="fName">CONTROLADOR</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="CONTROLADOR">
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2>PASO 3</h2>
-                            <div class="form-group">
-                                <label for="fName">ICONO</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ICONO">
+                            <h2> Paso 2</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                        <textarea id="TxtDescripcion" required="required" class="form-control limpiar obligatorio" name="TxtDescripcion" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="fName">INGRESE UNA DESCRIPCIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="DESCRIPCIÓN">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPadre">Padre<span class="required">*</span></label>
+                                        <input type="text" id="TxtPadre" class="form-control limpiar obligatorio" placeholder="Padre">
+                                    </div>
+                                </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            <!-- Agregar la imagen -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="PBFoto">Seleccione el ícono</label>
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="200" height="200" alt="" />
+
+                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
+                            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                            -->
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger"  data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -77,8 +117,12 @@
         display: none;
     }
 </style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 
+<script src="~/Scrips/jquery.min.js"></script>
+<!--Validacion del formulario-->
+<script src="~/Scrips/Internos/JS_Paginas.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+

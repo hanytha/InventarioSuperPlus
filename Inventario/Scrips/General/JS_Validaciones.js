@@ -1,4 +1,4 @@
-﻿
+﻿    /*
 //------------------Validar proveedor-------------
 function validarFormularioProveedor() {
 
@@ -18,7 +18,7 @@ function validarFormularioProveedor() {
     var TxtUsoCFDI = document.getElementById('TxtUsoCFDI').value;
     var TxtNomenclatura = document.getElementById('TxtNomenclatura').value;
     var TxtDescripcion = document.getElementById('TxtDescripcion').value;
-    /*
+
     //Test campo obligatorio
     if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
         alert('ERROR: El campo nombre es obligatorio');

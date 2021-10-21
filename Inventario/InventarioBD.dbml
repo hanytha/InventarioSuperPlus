@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioSuperP" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSuperP;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSuperP;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -97,13 +97,12 @@
       <Column Name="IdBonificaciones" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NombreArticulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="MarcaArticulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Compra_Bonificaciones" Member="Compra" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="UnidadDeMedida_Bonificaciones" Member="UnidadDeMedida" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Categorias" Member="Categorias">
@@ -120,7 +119,6 @@
       <Column Name="MetodoDePago" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Compra_Bonificaciones" Member="Bonificaciones" ThisKey="IdCompra" OtherKey="IdCompra" Type="Bonificaciones" />
       <Association Name="Compra_Pedidos" Member="Pedidos" ThisKey="IdCompra" OtherKey="IdCompra" Type="Pedidos" />
       <Association Name="Impuesto_Compra" Member="Impuesto" ThisKey="IdImpuesto" OtherKey="IdImpuesto" Type="Impuesto" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
@@ -187,7 +185,7 @@
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TipoDeExistencia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Imagen" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="Logo" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Existencia_ExistenciaAlmacenG" Member="ExistenciaAlmacenG" ThisKey="IdExistencia" OtherKey="IdExistencias" Type="ExistenciaAlmacenG" />
       <Association Name="Articulos_Existencia" Member="Articulos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
@@ -211,7 +209,7 @@
   <Table Name="dbo.Impuesto" Member="Impuesto">
     <Type Name="Impuesto">
       <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Impuesto" Member="Impuesto1" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Impuestos" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Porcentaje" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Impuesto_Compra" Member="Compra" ThisKey="IdImpuesto" OtherKey="IdImpuesto" Type="Compra" />
@@ -271,11 +269,12 @@
       <Column Name="Mensaje" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Accion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Controlador" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Icono" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Icono" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Tipo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Padre" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Abreviatura" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Pagina_Configuracion" Member="Configuracion" ThisKey="IdPagina" OtherKey="IdPagina" Type="Configuracion" />
       <Association Name="Pagina_PerfilDeUsuario" Member="PerfilDeUsuario" ThisKey="IdPagina" OtherKey="IdPagina" Type="PerfilDeUsuario" />
     </Type>
@@ -462,7 +461,6 @@
       <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />
-      <Association Name="UnidadDeMedida_Bonificaciones" Member="Bonificaciones" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Bonificaciones" />
       <Association Name="UnidadDeMedida_Pedidos" Member="Pedidos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Pedidos" />
     </Type>
   </Table>

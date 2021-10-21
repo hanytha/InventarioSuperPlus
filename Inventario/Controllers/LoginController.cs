@@ -102,7 +102,7 @@ namespace Inventario.Controllers
                                     Accesos.Accion.Add(item.Accion);
                                     Accesos.Controlador.Add(item.Controlador);
                                     Accesos.Mensaje.Add(item.Mensaje);
-                                    Accesos.Icono.Add(item.Icono);
+                                  //  Accesos.Icono.Add(item.Icono);
                                 }
                             }
                         }
