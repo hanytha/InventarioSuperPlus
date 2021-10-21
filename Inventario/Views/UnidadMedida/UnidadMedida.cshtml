@@ -3,20 +3,62 @@
     ViewBag.Title = "UnidadMedida";
 }
 
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Required meta tags -->
-<meta charset="utf-8">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
 
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<div id="accordion"></div>
+        </div>
+    </div>
+</div>
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button><!--Mostrar los registros en el accordion-->
+<!--Muestra la tabla compras-->
+<div id="tabla" class="default "></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -28,40 +70,37 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO DE LAS UNIDADES DE MEDIDA</h1>
+                    <h4>REGISTRO DE LAS UNIDADES DE MEDIDA</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h2>Paso 1</h2>
+                            <h4>Paso 1</h4>
                             <div class="form-group">
-                                <label for="nombreMarca">Nombre de la unidad de medida</label>
-                                <input type="text" class="form-control" name="data[nombreMarca]" id="nombreMarca" placeholder="Nombre de la marca">
+                                <label for="TxtUnidad">Nombre de la unidad de medida</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtUnidad]" id="TxtUnidad" placeholder="Unidad de Medida">
+
                             </div>
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            <button id="btnGuardar" type="button"  class="btn btn-success " onclick="GuardarUnidadDeMedida()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
-                <!-- Pie del modal-->
+                <!-- pie del modal-->
                 <div class="modal-footer">
-
-                    <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>            -->
-
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
+
 <!--Script-->
-
-<script src="~/Scrips/jquery.min.js"></script>
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_UnidadesDeMedida.js"></script>
-<script src="~/Scrips/js.cookie.js"></script>
-
+<!--Validacion del formulario-->
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--Scripts de la tarjeta y el botón-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />

@@ -4392,7 +4392,7 @@ namespace Inventario
 		
 		private string _TipoDeExistencia;
 		
-		private string _Imagen;
+		private string _Logo;
 		
 		private int _Estatus;
 		
@@ -4422,8 +4422,8 @@ namespace Inventario
     partial void OnCosteChanged();
     partial void OnTipoDeExistenciaChanging(string value);
     partial void OnTipoDeExistenciaChanged();
-    partial void OnImagenChanging(string value);
-    partial void OnImagenChanged();
+    partial void OnLogoChanging(string value);
+    partial void OnLogoChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -4619,22 +4619,22 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imagen", DbType="NVarChar(1)")]
-		public string Imagen
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="NVarChar(1)")]
+		public string Logo
 		{
 			get
 			{
-				return this._Imagen;
+				return this._Logo;
 			}
 			set
 			{
-				if ((this._Imagen != value))
+				if ((this._Logo != value))
 				{
-					this.OnImagenChanging(value);
+					this.OnLogoChanging(value);
 					this.SendPropertyChanging();
-					this._Imagen = value;
-					this.SendPropertyChanged("Imagen");
-					this.OnImagenChanged();
+					this._Logo = value;
+					this.SendPropertyChanged("Logo");
+					this.OnLogoChanged();
 				}
 			}
 		}
@@ -5066,7 +5066,7 @@ namespace Inventario
 		
 		private long _IdImpuesto;
 		
-		private long _Impuesto1;
+		private string _Impuestos;
 		
 		private long _Porcentaje;
 		
@@ -5080,8 +5080,8 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdImpuestoChanging(long value);
     partial void OnIdImpuestoChanged();
-    partial void OnImpuesto1Changing(long value);
-    partial void OnImpuesto1Changed();
+    partial void OnImpuestosChanging(string value);
+    partial void OnImpuestosChanged();
     partial void OnPorcentajeChanging(long value);
     partial void OnPorcentajeChanged();
     partial void OnEstatusChanging(int value);
@@ -5114,22 +5114,22 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Impuesto", Storage="_Impuesto1", DbType="BigInt NOT NULL")]
-		public long Impuesto1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Impuestos", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Impuestos
 		{
 			get
 			{
-				return this._Impuesto1;
+				return this._Impuestos;
 			}
 			set
 			{
-				if ((this._Impuesto1 != value))
+				if ((this._Impuestos != value))
 				{
-					this.OnImpuesto1Changing(value);
+					this.OnImpuestosChanging(value);
 					this.SendPropertyChanging();
-					this._Impuesto1 = value;
-					this.SendPropertyChanged("Impuesto1");
-					this.OnImpuesto1Changed();
+					this._Impuestos = value;
+					this.SendPropertyChanged("Impuestos");
+					this.OnImpuestosChanged();
 				}
 			}
 		}
@@ -6282,7 +6282,7 @@ namespace Inventario
 		
 		private string _Controlador;
 		
-		private string _Icono;
+		private System.Data.Linq.Binary _Icono;
 		
 		private string _Descripcion;
 		
@@ -6308,7 +6308,7 @@ namespace Inventario
     partial void OnAccionChanged();
     partial void OnControladorChanging(string value);
     partial void OnControladorChanged();
-    partial void OnIconoChanging(string value);
+    partial void OnIconoChanging(System.Data.Linq.Binary value);
     partial void OnIconoChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
@@ -6407,8 +6407,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150)")]
-		public string Icono
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Icono
 		{
 			get
 			{
@@ -8132,7 +8132,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(MAX)")]
 		public string Estado
 		{
 			get
@@ -8176,7 +8176,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="VarChar(MAX)")]
 		public string Municipio
 		{
 			get
@@ -8220,7 +8220,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Localidad", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Localidad", DbType="VarChar(MAX)")]
 		public string Localidad
 		{
 			get
@@ -8625,7 +8625,7 @@ namespace Inventario
 		
 		private int _NoSubArea;
 		
-		private long _IdArea;
+		private System.Nullable<long> _IdArea;
 		
 		private System.Nullable<long> _IdEncargado1;
 		
@@ -8663,7 +8663,7 @@ namespace Inventario
     partial void OnNombreChanged();
     partial void OnNoSubAreaChanging(int value);
     partial void OnNoSubAreaChanged();
-    partial void OnIdAreaChanging(long value);
+    partial void OnIdAreaChanging(System.Nullable<long> value);
     partial void OnIdAreaChanged();
     partial void OnIdEncargado1Changing(System.Nullable<long> value);
     partial void OnIdEncargado1Changed();
@@ -8758,8 +8758,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt NOT NULL")]
-		public long IdArea
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt")]
+		public System.Nullable<long> IdArea
 		{
 			get
 			{

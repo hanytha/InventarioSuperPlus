@@ -108,7 +108,7 @@ function CamposObligatorios() {
             controlesObligatorio[i].parentNode.classList.add("error");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("error");
         }
     }
     return exito;
