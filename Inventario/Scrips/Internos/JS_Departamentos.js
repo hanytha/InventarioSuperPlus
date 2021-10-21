@@ -100,7 +100,7 @@ function LimpiarCampos() {
 
 //Guarda los cambios y altas de las áreas
 function GuardarDepartamento() {
-    if (CamposObligatorios() == true) {
+    if (CamposObligatorios("Area") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdAreas = sessionStorage.getItem('IDDepartamento');
             var Nombre = document.getElementById("TxtNombre").value;
@@ -143,9 +143,9 @@ function GuardarDepartamento() {
 
 
 //marca los campos obligatorios
-function CamposObligatorios() {
+function CamposObligatorios(clase) {
     var exito = true;
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName(clase);
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {
@@ -219,3 +219,65 @@ function validarFormularioD() {
     return true;
 }
 
+
+
+//-------------------------------
+
+function CrearAcordeonSubAreas(IdArea) {
+    $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+        AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
+    });
+}
+function AcordeonSubAreas(Data, CtrlSub) {
+    var CodigoHTMLAreas = "";
+    for (var i = 0; i < Data.length; i++) {
+        if (i < 1) {
+            CodigoHTMLAreas += "<div class='card m-b-0'>";
+        }
+        else {
+            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+        }
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdSubAreas + "'>";
+        CodigoHTMLAreas += "<h5 class='mb-0'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdSubAreas + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdSubAreas + "' class='collapsed'>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
+        CodigoHTMLAreas += "</a>";
+        CodigoHTMLAreas += "</h5>";
+        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSubAreas + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].NoSubArea + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].NEncargado1 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TelefonoE1 + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].CorreoE1 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].NEncargado2 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TelefonoE2 + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].CorreoE2 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].NEncargado3 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TelefonoE3 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].CorreoE3 + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdSubAreas + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarSubarea(" + Data[i].IdSubAreas + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+    }
+    CtrlSub.innerHTML = CodigoHTMLAreas;
+}

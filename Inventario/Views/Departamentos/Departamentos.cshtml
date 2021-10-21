@@ -73,10 +73,11 @@
                 }
                 string Collapse = "collapse" + ModeloAreas.IdAreas[i], IDTabla = "Tabla_Depto_" + ModeloAreas.IdAreas[i];
                 string Heading = "heading" + ModeloAreas.IdAreas[i], Badge = "Badge" + ModeloAreas.IdAreas[i];
+                string AcordeonSubAreas = "Acorden" + ModeloAreas.IdAreas[i];
                 <div class="@Classe">
                     <div class="card-header" id="@Heading">
                         <h5 class="mb-0">
-                            <a data-toggle="collapse" data-target="#@Collapse" aria-expanded="false" aria-controls="Collapse" class="collapsed">
+                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Collapse" aria-expanded="false" aria-controls="Collapse" class="collapsed">
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                 <span>@ModeloAreas.Nombre[i] </span><span id="@Badge" class="badge badge-danger"></span>
                             </a>
@@ -90,7 +91,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6"><strong>Correo: </strong>@ModeloAreas.Correo[i]</div>
                                     <div class="col-md-6 col-sm-6 col-xs-6"><strong>Teléfono: </strong>@ModeloAreas.Telefono[i]</div>
                                 </div>
-                                <div class="row"><div class="col-md-6 col-sm-6 col-xs-6"><br> </div></div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 accordion"id="@AcordeonSubAreas">Espacio para las SubAreas</div>
+                                </div>
                                 <div class="row">
                                     <div id="@IDTabla" class="col-md-12 col-sm-12 col-xs-12">Espacio para las Incidencias por área</div>
                                     <button class="btn btn-success" onclick="abrirModal(@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
@@ -125,15 +128,15 @@
                             <h2>Paso 1</h2>
                             <div class="form-group">
                                 <label for="TxtNombre">Area</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre de la área">
+                                <input type="text" class="form-control  limpiar Area" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre de la área">
                             </div>
                             <div class="form-group">
                                 <label for="TxtUsuario">Usuario</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtUsuario]" id="TxtUsuario" placeholder="Usuario">
+                                <input type="text" class="form-control  limpiar Area" name="data[TxtUsuario]" id="TxtUsuario" placeholder="Usuario">
                             </div>
                             <div class="form-group">
                                 <label for="TxtCorreo">Correo Electrónico</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtCorreo]" id="TxtCorreo" placeholder="Email">
+                                <input type="text" class="form-control  limpiar Area" name="data[TxtCorreo]" id="TxtCorreo" placeholder="Email">
                             </div>
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
@@ -141,14 +144,14 @@
                             <h2>Paso 2</h2>
                             <div class="form-group">
                                 <label for="TxtTelefono">Teléfono</label>
-                                <input type="text" class="form-control  limpiar obligatorio" id="TxtTelefono" name="data[TxtTelefono]" placeholder="Teléfono">
+                                <input type="text" class="form-control  limpiar Area" id="TxtTelefono" name="data[TxtTelefono]" placeholder="Teléfono">
                             </div>
                             <div class="form-group">
                                 <label for="TxtCarpeta">Carpeta</label>
-                                <input type="text" class="form-control  limpiar obligatorio" id="TxtCarpeta" name="data[TxtCarpeta]" placeholder="Carpeta">
+                                <input type="text" class="form-control  limpiar Area" id="TxtCarpeta" name="data[TxtCarpeta]" placeholder="Carpeta">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="button"  class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -163,6 +166,8 @@
 
 
 
+<!--Modal Sub-->
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -170,7 +175,8 @@
     }
 </style>
 <!--Script-->
-<!--Script--><script src="~/Scrips/jquery.min.js"></script>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>
 <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->

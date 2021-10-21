@@ -1,9 +1,15 @@
 ﻿CrearAcordeonSubAreas();
 //Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonSubAreas() {
+  /* function CrearAcordeonSubAreas() {
     $.get("/Subarea/ConsultaSubAreas", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonSubAreas(Data, document.getElementById("accordion"));
+    });
+}*/
+function CrearAcordeonSubAreas(idArea) {
+    $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + idArea, function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+        AcordeonSubAreas(Data, document.getElementById("accordion" + idArea));
     });
 }
 function AcordeonSubAreas(Data, CtrlSub) {
@@ -56,6 +62,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
+
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -120,7 +127,7 @@ function LimpiarCampos() {
 
 //Guarda los cambios y altas de las áreas
 function GuardarSubarea() {
-    if (CamposObligatorios() == true) {
+    if (CamposObligatorios("SubArea") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdSubAreas = sessionStorage.getItem('IDSb');
             var Nombre = document.getElementById("TxtNombre").value;
@@ -175,9 +182,9 @@ function GuardarSubarea() {
 }
 
 //marca los campos obligatorios
-function CamposObligatorios() {
+function CamposObligatorios(clase) {
     var exito = true;
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName(clase);
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {

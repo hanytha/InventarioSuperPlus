@@ -34,6 +34,26 @@ namespace Inventario.Controllers
                 });
             return Json(subareas, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ConsultasSubAreasXAreas(long idArea)
+        {
+            var subareas = InvBD.SubAreas.Where(p => p.Estatus.Equals(1)&&p.IdArea.Equals(idArea))
+                .Select(p => new
+                {
+                    p.IdSubAreas,
+                    p.Nombre,
+                    p.NoSubArea,
+                    p.NEncargado1,
+                    p.TelefonoE1,
+                    p.CorreoE1,
+                    p.NEncargado2,
+                    p.TelefonoE2,
+                    p.CorreoE2,
+                    p.NEncargado3,
+                    p.TelefonoE3,
+                    p.CorreoE3
+                });
+            return Json(subareas, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ConsultaSubArea(long id)
         {
             var subarea = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(id) && p.Estatus.Equals(1))

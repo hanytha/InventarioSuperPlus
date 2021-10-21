@@ -59,7 +59,7 @@
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar el accordion-->
 <div id="accordion"></div>
-<!-- Encabezado del Modal -->
+<!-- Encabezado del Modal SubArea -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -80,19 +80,19 @@
                             <h4>Paso 1: Información de la subÁrea</h4>
                             <div class="form-group">
                                 <label for="TxtNombre">Nombre de la  Subárea</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre de la SubÁrea">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre de la SubÁrea">
                             </div>
                             <div class="form-group">
                                 <label for="TxtNumero">Número del Subárea</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNumero]" id="TxtNumero" placeholder="Número de la SubÁrea">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtNumero]" id="TxtNumero" placeholder="Número de la SubÁrea">
                             </div>
                             <div class="form-group">
                                 <label for="TxtNombre1">Nombre del Enacaragado 1</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre1]" id="TxtNombre1" placeholder="Nombre del usuario">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtNombre1]" id="TxtNombre1" placeholder="Nombre del usuario">
                             </div>
                             <div class="form-group">
                                 <label for="TxtTelefono1">Teléfono Encargado1</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtTelefono1]" id="TxtTelefono1" placeholder="Número telefónico">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtTelefono1]" id="TxtTelefono1" placeholder="Número telefónico">
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
@@ -100,19 +100,19 @@
                             <h4> Paso 2: Información del usuario</h4>
                             <div class="form-group">
                                 <label for="TxtCorreo1">E-mail Encargado1</label>
-                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo1]" id="TxtCorreo1" placeholder="Correo electrónico">
+                                <input type="email" class="form-control limpiar SubArea" name="data[TxtCorreo1]" id="TxtCorreo1" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
                                 <label for="TxtNombre2">Nombre del encargado 2</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre2]" id="TxtNombre2" placeholder="Nombre del Encargado2">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtNombre2]" id="TxtNombre2" placeholder="Nombre del Encargado2">
                             </div>
                             <div class="form-group">
                                 <label for="TxtTelefono2">Teléfono del encargado 2</label>
-                                <input type="text" class="form-control limpiar obligatorio" id="TxtTelefono2" name="data[TxtTelefono2]" placeholder="Teléfono del Encargado2">
+                                <input type="text" class="form-control limpiar SubArea" id="TxtTelefono2" name="data[TxtTelefono2]" placeholder="Teléfono del Encargado2">
                             </div>
                             <div class="form-group">
                                 <label for="TxtCorreo2">E-mail del encargado 2</label>
-                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo2]" id="TxtCorreo2" placeholder="Correo Electrónico">
+                                <input type="email" class="form-control limpiar SubArea" name="data[TxtCorreo2]" id="TxtCorreo2" placeholder="Correo Electrónico">
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
@@ -122,15 +122,15 @@
                             <h4>Paso 3: Información del encargado</h4>
                             <div class="form-group">
                                 <label for="TxtNombre3">Nombre del encargado 3</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre3]" id="TxtNombre3" placeholder="Nombre del Encargado3">
+                                <input type="text" class="form-control limpiar SubArea" name="data[TxtNombre3]" id="TxtNombre3" placeholder="Nombre del Encargado3">
                             </div>
                             <div class="form-group">
                                 <label for="TxtTelefono3">Teléfono del encargado 3</label>
-                                <input type="text" class="form-control limpiar obligatorio" id="TxtTelefono3" name="data[TxtTelefono3]" placeholder="Teléfono del Encargado3">
+                                <input type="text" class="form-control limpiar SubArea" id="TxtTelefono3" name="data[TxtTelefono3]" placeholder="Teléfono del Encargado3">
                             </div>
                             <div class="form-group">
                                 <label for="TxtCorreo3">E-mail del encargado 3</label>
-                                <input type="email" class="form-control limpiar obligatorio" name="data[TxtCorreo3]" id="TxtCorreo3" placeholder="Correo Electrónico">
+                                <input type="email" class="form-control limpiar SubArea" name="data[TxtCorreo3]" id="TxtCorreo3" placeholder="Correo Electrónico">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
                             <button id="btnGuardar" type="button"  class="btn btn-success " onclick="GuardarSubarea()">Guardar</button>
