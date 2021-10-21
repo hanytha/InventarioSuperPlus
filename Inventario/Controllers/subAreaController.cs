@@ -34,9 +34,9 @@ namespace Inventario.Controllers
                 });
             return Json(subareas, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaSubArea()
+        public JsonResult ConsultaSubArea(long id)
         {
-            var subarea = InvBD.SubAreas.Where(p => p.Estatus.Equals(1))
+            var subarea = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdSubAreas,
@@ -79,11 +79,12 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.SubAreas.Where(p => p.Nombre.Equals(DatosSub.Nombre) && p.NEncargado1.Equals(DatosSub.NEncargado1) && p.TelefonoE1.Equals(DatosSub.TelefonoE1) && p.CorreoE1.Equals(DatosSub.CorreoE1) && p.NEncargado2.Equals(DatosSub.NEncargado2) && p.TelefonoE2.Equals(DatosSub.TelefonoE2) && p.CorreoE2.Equals(DatosSub.CorreoE2) && p.NEncargado3.Equals(DatosSub.NEncargado3) && p.TelefonoE3.Equals(DatosSub.TelefonoE3) && p.CorreoE3.Equals(DatosSub.CorreoE3)).Count();
+                int nveces = InvBD.SubAreas.Where(p => p.Nombre.Equals(DatosSub.Nombre) && p.NoSubArea.Equals(DatosSub.NoSubArea) && p.NEncargado1.Equals(DatosSub.NEncargado1) && p.TelefonoE1.Equals(DatosSub.TelefonoE1) && p.CorreoE1.Equals(DatosSub.CorreoE1) && p.NEncargado2.Equals(DatosSub.NEncargado2) && p.TelefonoE2.Equals(DatosSub.TelefonoE2) && p.CorreoE2.Equals(DatosSub.CorreoE2) && p.NEncargado3.Equals(DatosSub.NEncargado3) && p.TelefonoE3.Equals(DatosSub.TelefonoE3) && p.CorreoE3.Equals(DatosSub.CorreoE3)).Count();
                 if (nveces == 0)
                 {
                     SubAreas obj = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(id)).First();
                     obj.Nombre = DatosSub.Nombre;
+                    obj.NoSubArea = DatosSub.NoSubArea;
                     obj.NEncargado1 = DatosSub.NEncargado1;
                     obj.TelefonoE1 = DatosSub.TelefonoE1;
                     obj.CorreoE1 = DatosSub.CorreoE1;

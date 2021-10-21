@@ -59,7 +59,7 @@ function abrirModal(id) {//la clase  Obligatorio
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+        controlesObligatorio[i].classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
     if (id == 0) {
@@ -150,10 +150,10 @@ function CamposObligatorios() {
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {
             exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+            controlesObligatorio[i].classList.add("error");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("error");
         }
     }
     return exito;

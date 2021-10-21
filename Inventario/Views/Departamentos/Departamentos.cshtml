@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
+
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -93,8 +93,8 @@
                                 <div class="row"><div class="col-md-6 col-sm-6 col-xs-6"><br> </div></div>
                                 <div class="row">
                                     <div id="@IDTabla" class="col-md-12 col-sm-12 col-xs-12">Espacio para las Incidencias por área</div>
-                                    <button class="btn btn-success" onclick="abrirModal( + Data[i].IdAreas + )" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger" onclick="EliminarDepartamento( + Data[i].IdAreas + ,this)"><i class="fas fa-eraser"></i></button>
+                                    <button class="btn btn-success" onclick="abrirModal(@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" onclick="EliminarDepartamento(@ModeloAreas.IdAreas[i],this)"><i class="fas fa-eraser"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                 <input type="text" class="form-control  limpiar obligatorio" id="TxtCarpeta" name="data[TxtCarpeta]" placeholder="Carpeta">
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
+                            <button id="btnGuardar" type="button"  class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>

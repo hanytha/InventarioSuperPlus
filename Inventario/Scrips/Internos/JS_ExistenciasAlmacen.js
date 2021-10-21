@@ -77,7 +77,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCosto").value = Data[0].Coste;
 
-           
         });
     }
 }

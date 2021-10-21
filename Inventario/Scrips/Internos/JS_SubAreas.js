@@ -65,6 +65,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
 
 
 
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -77,15 +78,16 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDSub', '0');
+        sessionStorage.setItem('IDSb', '0');
 
     }
     else {
 
         $.get("/Subarea/ConsultaSubArea/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDSub', Data[0].IdSubAreas);
+            sessionStorage.setItem('IDSb', Data[0].IdSubAreas);
             document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("TxtNumero").value = Data[0].NoSubArea;
             document.getElementById("TxtNombre1").value = Data[0].NEncargado1;
             document.getElementById("TxtTelefono1").value = Data[0].TelefonoE1;
             document.getElementById("TxtCorreo1").value = Data[0].CorreoE1;
@@ -95,6 +97,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombre3").value = Data[0].NEncargado3;
             document.getElementById("TxtTelefono3").value = Data[0].TelefonoE3;
             document.getElementById("TxtCorreo3").value = Data[0].CorreoE3;
+
 
         });
     }
@@ -119,7 +122,7 @@ function LimpiarCampos() {
 function GuardarSubarea() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdSubAreas = sessionStorage.getItem('IDSub');
+            var IdSubAreas = sessionStorage.getItem('IDSb');
             var Nombre = document.getElementById("TxtNombre").value;
             var NoSubArea = document.getElementById("TxtNumero").value;
             var NEncargado1 = document.getElementById("TxtNombre1").value;
@@ -145,6 +148,7 @@ function GuardarSubarea() {
             frm.append("NEncargado3", NEncargado3);
             frm.append("TelefonoE3", TelefonoE3);
             frm.append("CorreoE3", CorreoE3);
+
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -203,3 +207,5 @@ function EliminarSubarea(id) {
         });
     }
 }
+
+
