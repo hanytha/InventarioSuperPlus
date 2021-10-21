@@ -98,16 +98,22 @@ function abrirModal(id) {//la clase  Obligatorio
     }
 }
 
-
 //limpiar campos
 function LimpiarCampos() {
+    //Limpiar la casilla de texto
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
-    }
+    }//Limpiar el campo de select
     var controlesSLT = document.getElementsByClassName("limpiarSelect");
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
+    }
+
+    //Limpiar las imágenes
+    var controlesImg = document.getElementsByClassName("limpiarImg");
+    for (var i = 0; i < controlesImg.length; i++) {
+        controlesImg[i].value = null;
     }
 }
 

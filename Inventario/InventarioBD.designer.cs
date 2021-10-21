@@ -2612,6 +2612,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdUnidadDeMedida;
 		
+		private string _UnidadDeMedida;
+		
 		private System.Nullable<long> _IdCompra;
 		
 		private long _Cantidad;
@@ -2621,10 +2623,6 @@ namespace Inventario
 		private string _MarcaArticulo;
 		
 		private int _Estatus;
-		
-		private EntityRef<Compra> _Compra;
-		
-		private EntityRef<UnidadDeMedida> _UnidadDeMedida;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -2636,6 +2634,8 @@ namespace Inventario
     partial void OnNombreArticuloChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
+    partial void OnUnidadDeMedidaChanging(string value);
+    partial void OnUnidadDeMedidaChanged();
     partial void OnIdCompraChanging(System.Nullable<long> value);
     partial void OnIdCompraChanged();
     partial void OnCantidadChanging(long value);
@@ -2650,8 +2650,6 @@ namespace Inventario
 		
 		public Bonificaciones()
 		{
-			this._Compra = default(EntityRef<Compra>);
-			this._UnidadDeMedida = default(EntityRef<UnidadDeMedida>);
 			OnCreated();
 		}
 		
@@ -2706,15 +2704,31 @@ namespace Inventario
 			{
 				if ((this._IdUnidadDeMedida != value))
 				{
-					if (this._UnidadDeMedida.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdUnidadDeMedidaChanging(value);
 					this.SendPropertyChanging();
 					this._IdUnidadDeMedida = value;
 					this.SendPropertyChanged("IdUnidadDeMedida");
 					this.OnIdUnidadDeMedidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnidadDeMedida", DbType="VarChar(150)")]
+		public string UnidadDeMedida
+		{
+			get
+			{
+				return this._UnidadDeMedida;
+			}
+			set
+			{
+				if ((this._UnidadDeMedida != value))
+				{
+					this.OnUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._UnidadDeMedida = value;
+					this.SendPropertyChanged("UnidadDeMedida");
+					this.OnUnidadDeMedidaChanged();
 				}
 			}
 		}
@@ -2730,10 +2744,6 @@ namespace Inventario
 			{
 				if ((this._IdCompra != value))
 				{
-					if (this._Compra.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdCompraChanging(value);
 					this.SendPropertyChanging();
 					this._IdCompra = value;
@@ -2819,74 +2829,6 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_Bonificaciones", Storage="_Compra", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Compra Compra
-		{
-			get
-			{
-				return this._Compra.Entity;
-			}
-			set
-			{
-				Compra previousValue = this._Compra.Entity;
-				if (((previousValue != value) 
-							|| (this._Compra.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Compra.Entity = null;
-						previousValue.Bonificaciones.Remove(this);
-					}
-					this._Compra.Entity = value;
-					if ((value != null))
-					{
-						value.Bonificaciones.Add(this);
-						this._IdCompra = value.IdCompra;
-					}
-					else
-					{
-						this._IdCompra = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Compra");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnidadDeMedida_Bonificaciones", Storage="_UnidadDeMedida", ThisKey="IdUnidadDeMedida", OtherKey="IdUnidadDeMedida", IsForeignKey=true)]
-		public UnidadDeMedida UnidadDeMedida
-		{
-			get
-			{
-				return this._UnidadDeMedida.Entity;
-			}
-			set
-			{
-				UnidadDeMedida previousValue = this._UnidadDeMedida.Entity;
-				if (((previousValue != value) 
-							|| (this._UnidadDeMedida.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UnidadDeMedida.Entity = null;
-						previousValue.Bonificaciones.Remove(this);
-					}
-					this._UnidadDeMedida.Entity = value;
-					if ((value != null))
-					{
-						value.Bonificaciones.Add(this);
-						this._IdUnidadDeMedida = value.IdUnidadDeMedida;
-					}
-					else
-					{
-						this._IdUnidadDeMedida = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("UnidadDeMedida");
 				}
 			}
 		}
@@ -3064,8 +3006,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<Bonificaciones> _Bonificaciones;
-		
 		private EntitySet<Pedidos> _Pedidos;
 		
 		private EntityRef<Impuesto> _Impuesto;
@@ -3086,7 +3026,6 @@ namespace Inventario
 		
 		public Compra()
 		{
-			this._Bonificaciones = new EntitySet<Bonificaciones>(new Action<Bonificaciones>(this.attach_Bonificaciones), new Action<Bonificaciones>(this.detach_Bonificaciones));
 			this._Pedidos = new EntitySet<Pedidos>(new Action<Pedidos>(this.attach_Pedidos), new Action<Pedidos>(this.detach_Pedidos));
 			this._Impuesto = default(EntityRef<Impuesto>);
 			OnCreated();
@@ -3176,19 +3115,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_Bonificaciones", Storage="_Bonificaciones", ThisKey="IdCompra", OtherKey="IdCompra")]
-		public EntitySet<Bonificaciones> Bonificaciones
-		{
-			get
-			{
-				return this._Bonificaciones;
-			}
-			set
-			{
-				this._Bonificaciones.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_Pedidos", Storage="_Pedidos", ThisKey="IdCompra", OtherKey="IdCompra")]
 		public EntitySet<Pedidos> Pedidos
 		{
@@ -3254,18 +3180,6 @@ namespace Inventario
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Bonificaciones(Bonificaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra = this;
-		}
-		
-		private void detach_Bonificaciones(Bonificaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra = null;
 		}
 		
 		private void attach_Pedidos(Pedidos entity)
@@ -4392,7 +4306,7 @@ namespace Inventario
 		
 		private string _TipoDeExistencia;
 		
-		private string _Logo;
+		private System.Data.Linq.Binary _Logo;
 		
 		private int _Estatus;
 		
@@ -4422,7 +4336,7 @@ namespace Inventario
     partial void OnCosteChanged();
     partial void OnTipoDeExistenciaChanging(string value);
     partial void OnTipoDeExistenciaChanged();
-    partial void OnLogoChanging(string value);
+    partial void OnLogoChanging(System.Data.Linq.Binary value);
     partial void OnLogoChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
@@ -4619,8 +4533,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="NVarChar(1)")]
-		public string Logo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Logo
 		{
 			get
 			{
@@ -6276,6 +6190,8 @@ namespace Inventario
 		
 		private long _IdPagina;
 		
+		private string _Abreviatura;
+		
 		private string _Mensaje;
 		
 		private string _Accion;
@@ -6286,11 +6202,11 @@ namespace Inventario
 		
 		private string _Descripcion;
 		
-		private int _Estatus;
-		
 		private string _Tipo;
 		
 		private System.Nullable<long> _Padre;
+		
+		private int _Estatus;
 		
 		private EntitySet<Configuracion> _Configuracion;
 		
@@ -6302,6 +6218,8 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdPaginaChanging(long value);
     partial void OnIdPaginaChanged();
+    partial void OnAbreviaturaChanging(string value);
+    partial void OnAbreviaturaChanged();
     partial void OnMensajeChanging(string value);
     partial void OnMensajeChanged();
     partial void OnAccionChanging(string value);
@@ -6312,12 +6230,12 @@ namespace Inventario
     partial void OnIconoChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
-    partial void OnEstatusChanging(int value);
-    partial void OnEstatusChanged();
     partial void OnTipoChanging(string value);
     partial void OnTipoChanged();
     partial void OnPadreChanging(System.Nullable<long> value);
     partial void OnPadreChanged();
+    partial void OnEstatusChanging(int value);
+    partial void OnEstatusChanged();
     #endregion
 		
 		public Pagina()
@@ -6343,6 +6261,26 @@ namespace Inventario
 					this._IdPagina = value;
 					this.SendPropertyChanged("IdPagina");
 					this.OnIdPaginaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abreviatura", DbType="VarChar(50)")]
+		public string Abreviatura
+		{
+			get
+			{
+				return this._Abreviatura;
+			}
+			set
+			{
+				if ((this._Abreviatura != value))
+				{
+					this.OnAbreviaturaChanging(value);
+					this.SendPropertyChanging();
+					this._Abreviatura = value;
+					this.SendPropertyChanged("Abreviatura");
+					this.OnAbreviaturaChanged();
 				}
 			}
 		}
@@ -6447,26 +6385,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
-		public int Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this.OnEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._Estatus = value;
-					this.SendPropertyChanged("Estatus");
-					this.OnEstatusChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(50)")]
 		public string Tipo
 		{
@@ -6503,6 +6421,26 @@ namespace Inventario
 					this._Padre = value;
 					this.SendPropertyChanged("Padre");
 					this.OnPadreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
+		public int Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
 				}
 			}
 		}
@@ -10711,8 +10649,6 @@ namespace Inventario
 		
 		private EntitySet<Articulos> _Articulos;
 		
-		private EntitySet<Bonificaciones> _Bonificaciones;
-		
 		private EntitySet<Pedidos> _Pedidos;
 		
     #region Definiciones de métodos de extensibilidad
@@ -10730,7 +10666,6 @@ namespace Inventario
 		public UnidadDeMedida()
 		{
 			this._Articulos = new EntitySet<Articulos>(new Action<Articulos>(this.attach_Articulos), new Action<Articulos>(this.detach_Articulos));
-			this._Bonificaciones = new EntitySet<Bonificaciones>(new Action<Bonificaciones>(this.attach_Bonificaciones), new Action<Bonificaciones>(this.detach_Bonificaciones));
 			this._Pedidos = new EntitySet<Pedidos>(new Action<Pedidos>(this.attach_Pedidos), new Action<Pedidos>(this.detach_Pedidos));
 			OnCreated();
 		}
@@ -10808,19 +10743,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnidadDeMedida_Bonificaciones", Storage="_Bonificaciones", ThisKey="IdUnidadDeMedida", OtherKey="IdUnidadDeMedida")]
-		public EntitySet<Bonificaciones> Bonificaciones
-		{
-			get
-			{
-				return this._Bonificaciones;
-			}
-			set
-			{
-				this._Bonificaciones.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnidadDeMedida_Pedidos", Storage="_Pedidos", ThisKey="IdUnidadDeMedida", OtherKey="IdUnidadDeMedida")]
 		public EntitySet<Pedidos> Pedidos
 		{
@@ -10864,18 +10786,6 @@ namespace Inventario
 		{
 			this.SendPropertyChanging();
 			entity.UnidadDeMedida1 = null;
-		}
-		
-		private void attach_Bonificaciones(Bonificaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.UnidadDeMedida = this;
-		}
-		
-		private void detach_Bonificaciones(Bonificaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.UnidadDeMedida = null;
 		}
 		
 		private void attach_Pedidos(Pedidos entity)
