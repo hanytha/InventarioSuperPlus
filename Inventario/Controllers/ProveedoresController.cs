@@ -13,8 +13,9 @@ namespace Inventario.Controllers
         {
             return View();
         }
+        //consulta general de los proveedores
         public JsonResult ConsultaProveedores()
-        {//Consulta general
+        {
             var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
@@ -42,39 +43,11 @@ namespace Inventario.Controllers
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaProveedor(long Id)
-        {//Consulta específico mediante ID
-            var proveedor = InvBD.Proveedores.Where(p => p.Estatus.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdProveedores,
-                    p.Nombre,
-                    p.Correo,
-                    p.RazonSocial,
-                    p.ClaveInterbancaria,
-                    p.CodigoPostal,
-                    p.IdEstado,
-                    p.Estado,
-                    p.IdMunicipio,
-                    p.Municipio,
-                    p.IdLocalidad,
-                    p.Localidad,
-                    p.RFC,
-                    p.Direccion,
-                    p.Telefono,
-                    p.Banco,
-                    p.NumeroDeCuenta,
-                    p.UsoCFDI,
-                    p.Nomenclatura,
-                    p.Descripcion,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
-                });
-            return Json(proveedor, JsonRequestBehavior.AllowGet);
-        }
+        
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProv(long Id)
         {
-            var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id))
+            var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdProveedores,
@@ -84,11 +57,8 @@ namespace Inventario.Controllers
                     p.ClaveInterbancaria,
                     p.CodigoPostal,
                     p.IdEstado,
-                    p.Estado,
                     p.IdMunicipio,
-                    p.Municipio,
                     p.IdLocalidad,
-                    p.Localidad,
                     p.RFC,
                     p.Direccion,
                     p.Telefono,
@@ -108,7 +78,6 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosProveedor.IdProveedores;
-
                 if (id.Equals(0))
                 {
                     //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
@@ -127,26 +96,32 @@ namespace Inventario.Controllers
                 }
                 else
                 {
-                    int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.IdEstado.Equals(DatosProveedor.IdEstado) && p.IdMunicipio.Equals(DatosProveedor.IdMunicipio) && p.IdLocalidad.Equals(DatosProveedor.IdLocalidad) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura) && p.Descripcion.Equals(DatosProveedor.Descripcion) && p.Logo.Equals(DatosProveedor.Logo)).Count();
+                    int nveces = InvBD.Proveedores.Where(p =>p.Correo.Equals(DatosProveedor.Correo) 
+                    && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) 
+                    && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) 
+                    && p.IdEstado.Equals(DatosProveedor.IdEstado) 
+                    && p.IdMunicipio.Equals(DatosProveedor.IdMunicipio) 
+                    && p.IdLocalidad.Equals(DatosProveedor.IdLocalidad) 
+                    && p.Direccion.Equals(DatosProveedor.Direccion) 
+                    && p.Telefono.Equals(DatosProveedor.Telefono) 
+                    && p.Banco.Equals(DatosProveedor.Banco) 
+                    && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) 
+                    && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) 
+                    && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura) 
+                    && p.Descripcion.Equals(DatosProveedor.Descripcion) 
+                    && p.Logo.Equals(DatosProveedor.Logo)).Count();
                     if (nveces == 0)
                     {
                         Proveedores obj = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(id)).First();
-                        obj.Nombre = DatosProveedor.Nombre;
                         obj.Correo = DatosProveedor.Correo;
-                        obj.RazonSocial = DatosProveedor.RazonSocial;
                         obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
                         obj.CodigoPostal = DatosProveedor.CodigoPostal;
-
                         obj.IdEstado = DatosProveedor.IdEstado;
-                        obj.Municipio = DatosProveedor.Municipio;
-                        obj.IdLocalidad = DatosProveedor.IdLocalidad;
-                        obj.Localidad = DatosProveedor.Localidad;
                         obj.Estado = DatosProveedor.Estado;
-                        obj.IdLocalidad = DatosProveedor.IdLocalidad;
-                        obj.Localidad = DatosProveedor.Localidad;
                         obj.IdMunicipio = DatosProveedor.IdMunicipio;
                         obj.Municipio = DatosProveedor.Municipio;
-                        obj.RFC = DatosProveedor.RFC;
+                        obj.IdLocalidad = DatosProveedor.IdLocalidad;
+                        obj.Localidad = DatosProveedor.Localidad;
                         obj.Direccion = DatosProveedor.Direccion;
                         obj.Telefono = DatosProveedor.Telefono;
                         obj.Banco = DatosProveedor.Banco;

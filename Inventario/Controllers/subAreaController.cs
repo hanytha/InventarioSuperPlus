@@ -21,9 +21,6 @@ namespace Inventario.Controllers
                 {
                     p.Nombre,
                     p.NoSubArea,
-                    p.UNombre,
-                    p.Telefono,
-                    p.Correo,
                     p.NEncargado2,
                     p.TelefonoE2,
                     p.CorreoE2,
@@ -40,9 +37,6 @@ namespace Inventario.Controllers
                 {
                     p.Nombre,
                     p.NoSubArea,
-                    p.UNombre,
-                    p.Telefono,
-                    p.Correo,
                     p.NEncargado2,
                     p.TelefonoE2,
                     p.CorreoE2,

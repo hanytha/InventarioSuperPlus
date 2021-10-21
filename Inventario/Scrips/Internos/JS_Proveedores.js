@@ -1,9 +1,11 @@
-﻿CrearAcordeonProveedores();
+﻿var imagen64;
+CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {
         AcordeonProveedores(Data, document.getElementById("accordion"));
     });
+    imagen64 = getBase64Image(document.getElementById("PBFoto"));
 }//Acordeón proveedores
 function AcordeonProveedores(Data, CtrlProveedores) {
     var CodigoHTMLAreas = "";
@@ -91,11 +93,12 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
+        sessionStorage.setItem('IdProveedores', 0);
     }
     else {
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDProveedor', Data[0].IdProveedores);     //Variable de sesión
+            sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);     //Variable de sesión
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
@@ -168,7 +171,7 @@ function llenarCombo(data, control) {
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = sessionStorage.getItem('IDProveedor');
+            var IdProveedores = sessionStorage.getItem('IdProveedores');
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
@@ -177,12 +180,11 @@ function GuardarProveedor() {
             var IdEstado = document.getElementById("cmbEstado").value;
             var TempEdo = document.getElementById("cmbEstado");
             var Estado = TempEdo.options[TempEdo.selectedIndex].text;
-            var IDMunicipio = document.getElementById("cmbMunicipio").value;
+            var IdMunicipio = document.getElementById("cmbMunicipio").value;
             var TempMuni = document.getElementById("cmbMunicipio");
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
-            var IDLocalidad = document.getElementById("cmbLocalidad").value;
+            var IdLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-            // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
             var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -192,9 +194,12 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
+            if (Logo.endsWith('png')) {
+                Logo = imagen64.replace("data:image/png;base64,", "");
+            }
             var frm = new FormData();
-            frm.append("Id", Id);
+            frm.append("IdProveedores", IdProveedores);
             frm.append("Nombre", Nombre);
             frm.append("Correo", Correo);
             frm.append("RazonSocial", RazonSocial);
@@ -202,11 +207,10 @@ function GuardarProveedor() {
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
-            frm.append("IDMunicipio", IDMunicipio);
+            frm.append("IdMunicipio", IdMunicipio);
             frm.append("Municipio", Municipio);
-            frm.append("IDLocalidad", IDLocalidad);
+            frm.append("IdLocalidad", IdLocalidad);
             frm.append("Localidad", Localidad);
-            frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
             frm.append("Direccion", Direccion);
             frm.append("Telefono", Telefono);
@@ -214,8 +218,8 @@ function GuardarProveedor() {
             frm.append("NumeroDeCuenta", NumeroDeCuenta);
             frm.append("UsoCFDI", UsoCFDI);
             frm.append("Nomenclatura", Nomenclatura);
-            frm.append("Descripcion", Descripcion);
             frm.append("cadF", Logo);
+            frm.append("Descripcion", Descripcion);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -240,6 +244,16 @@ function GuardarProveedor() {
             });
         }
     }
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 //marca los campos obligatorios
 function CamposObligatorios() {

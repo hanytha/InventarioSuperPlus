@@ -18,7 +18,7 @@ function validarFormularioProveedor() {
     var TxtUsoCFDI = document.getElementById('TxtUsoCFDI').value;
     var TxtNomenclatura = document.getElementById('TxtNomenclatura').value;
     var TxtDescripcion = document.getElementById('TxtDescripcion').value;
-
+    /*
     //Test campo obligatorio
     if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
         alert('ERROR: El campo nombre es obligatorio');
@@ -98,12 +98,13 @@ function validarFormularioProveedor() {
         return false;
     }
 
-
+    /*
     //Test campo obligatorio
     if (TxtNomenclatura == null || TxtNomenclatura.length == 0 || /^\s+$/.test(TxtNomenclatura)) {
         alert('ERROR: El campo Nomenclatura es obligatorio');
         return false;
     }
+
     //Test campo obligatorio
     if (TxtDescripcion == null || TxtDescripcion.length == 0 || /^\s+$/.test(TxtDescripcion)) {
         alert('ERROR: El campo Descripcion es obligatorio');
@@ -112,4 +113,4 @@ function validarFormularioProveedor() {
     //el formulario se envia
 
 }
-
+    */

@@ -12,7 +12,6 @@
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Areas_Articulos" Member="Articulos" ThisKey="IdAreas" OtherKey="IdAreas" Type="Articulos" />
       <Association Name="Areas_Pedidos" Member="Pedidos" ThisKey="IdAreas" OtherKey="IdArea" Type="Pedidos" />
-      <Association Name="Areas_SubAreas" Member="SubAreas" ThisKey="IdAreas" OtherKey="IdArea" Type="SubAreas" />
       <Association Name="Areas_Supervision" Member="Supervision" ThisKey="IdAreas" OtherKey="IdAreas" Type="Supervision" />
       <Association Name="Usuarios_Areas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuarios" Type="Usuarios" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
@@ -44,6 +43,8 @@
       <Column Name="Estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Municipio" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Localidad" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Association Name="Usuarios_Areas" Member="Areas" ThisKey="IdUsuarios" OtherKey="IdUsuario" Type="Areas" />
       <Association Name="estados_Usuarios" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" />
       <Association Name="localidades_Usuarios" Member="localidades" ThisKey="IdLocalidad" OtherKey="id" Type="localidades" IsForeignKey="true" />
@@ -331,7 +332,6 @@
       <Column Name="TipoPersonal" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NumeroTienda" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Personal_SubAreas" Member="SubAreas" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="SubAreas" />
       <Association Name="Personal_Tienda" Member="Tienda" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="Tienda" />
     </Type>
   </Table>
@@ -344,11 +344,11 @@
       <Column Name="ClaveInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Estado" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Municipio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Municipio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Localidad" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
@@ -372,13 +372,10 @@
       <Column Name="Nombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="NoSubArea" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="IdPersonal" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="UNombre" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdEncargado1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NEncargado1" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="TelefonoE1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CorreoE1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdEncargado2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NEncargado2" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TelefonoE2" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -388,8 +385,6 @@
       <Column Name="TelefonoE3" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="CorreoE3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Areas_SubAreas" Member="Areas" ThisKey="IdArea" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" />
-      <Association Name="Personal_SubAreas" Member="Personal" ThisKey="IdPersonal" OtherKey="IdPersonal" Type="Personal" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Supervision" Member="Supervision">
