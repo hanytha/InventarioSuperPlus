@@ -263,10 +263,10 @@ function CamposObligatorios() {
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {
             exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+            controlesObligatorio[i].classList.add("border-danger");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("border-danger");
 
         }
     }
