@@ -71,7 +71,7 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO CLASIFICACIÓN</h1>
+                    <h4>REGISTRO CLASIFICACIÓN</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -79,12 +79,16 @@
                         <fieldset>
                             <!--Los pasos del modal-->
 
-                            <h2>PASO 1</h2>
-                            <div class="form-group">
-                                <label for="TxtClasificacion">Tipo de clasificación</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
+                            <h4>PASO 1</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
+                                        <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
                             </div>
-                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -110,6 +114,5 @@
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Categorias.js"></script>
-<script src="~/Scrips/General/JS_Validacion.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />

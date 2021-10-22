@@ -72,39 +72,44 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO DE ALMACEN GENERAL</h1>
+                    <h4>REGISTRO DE ALMACEN GENERAL</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
-                            <h2>Paso 1</h2>
-                            <div class="form-group">
-                                <label for="TxtNumCompra">Número de compra</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtNumCompra]" id="TxtNumCompra" placeholder="Número de compra" required="required">
-                            </div>
-                            <div class="form-group">
-                                <label for="TxtExistenciaInicial">Existencia Inicial</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" placeholder="Existencia Inicial">
-                            </div>
-                            <div class="form-group">
-                                <label for="TxtExistenciaActual">Existencia actual</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" placeholder="Existencia Actual">
-                            </div>
-                            <input type="button" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2>Paso 2</h2>
-                            <div class="form-group">
-                                <label for="TxtCosto">Costo</label>
-                                <input type="text" class="form-control  limpiar obligatorio" name="data[TxtCosto]" id="TxtCosto" placeholder="Existencia Actual">
-                            </div>
-                            <div class="form-group">
+                            <h4>Paso 1</h4>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumCompra">Número de compra<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNumCompra]" id="TxtNumCompra" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                    </div>
+                                </div>
 
-
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaInicial">Existencia Inicial<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="Razón Social">
+                                    </div>
+                                </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <button type="button"  class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="Razón Social">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>

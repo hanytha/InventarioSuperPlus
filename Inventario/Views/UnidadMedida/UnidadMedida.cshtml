@@ -77,12 +77,15 @@
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h4>Paso 1</h4>
-                            <div class="form-group">
-                                <label for="TxtUnidad">Nombre de la unidad de medida</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtUnidad]" id="TxtUnidad" placeholder="Unidad de Medida">
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUnidad">Nombre de la unidad de medida<span class="required">*</span></label>
+                                        <input id="TxtUnidad" name="data[TxtUnidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
                             </div>
-                            <button id="btnGuardar" type="button"  class="btn btn-success " onclick="GuardarUnidadDeMedida()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarUnidadDeMedida()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>

@@ -67,31 +67,33 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" onclick="return confirmarAccesoURL()">x</button>
+                    <button type="button" class="close" data-dismiss="modal" >x</button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO COMPRA</h1>
+                    <h4>REGISTRO COMPRA</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCompra()">
+                    <form id="regiration_form" novalidate method="post" >
                         <fieldset>
                             <!--Los pasos del modal-->
-
-                            <h2>PASO 1</h2>
-                            <div class="form-group">
-                                <label for="TxtMetodoDePago">MÉTODO DE PAGO</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtMetodoDePago]" id="TxtMetodoDePago" placeholder="MétodoPago">
-
+                            <h4>PASO 1</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtMetodoDePago">Método de pago<span class="required">*</span></label>
+                                        <input id="TxtMetodoDePago" name="data[TxtMetodoDePago]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
                             </div>
-                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
+                            <button id="btnGuardar" type="button"  class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="return confirmarAccesoURL()">Cancelar</button>
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -107,4 +109,3 @@
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
-<script src="~/Scrips/General/JS_Botones.js"></script>

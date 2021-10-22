@@ -2,16 +2,63 @@
 @{
     ViewBag.Title = "Configuracion";
 }
-<!--Titulo-->
-<h2>Configuracion</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Botón del modal -->
-<button onclick="AbrirMConfiguracion" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -23,14 +70,15 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
+                <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>CONFIGURACIÓN</h1>
+                    <h4>CONFIGURACIÓN</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h2>PASO 1</h2>
+                            <h4>PASO 1</h4>
                             <div class="form-group">
                                 <label for="fName">INGRESAR EL RFC</label>
                                 <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="NOMBRE 1">
@@ -46,7 +94,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 2</h2>
+                            <h4> PASO 2</h4>
                             <div class="form-group">
                                 <label for="fName">VISIÓN</label>
                                 <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
@@ -63,7 +111,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 3</h2>
+                            <h4> PASO 3</h4>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="fName">DIRECCIÓN</label>
@@ -82,7 +130,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 4</h2>
+                            <h4> PASO 4</h4>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="fName">PUERTO</label>
@@ -101,7 +149,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 5</h2>
+                            <h4> PASO 5</h4>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="fName">SESION ABIERTA</label>
@@ -121,7 +169,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 6</h2>
+                            <h4> PASO 6</h4>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="fName">SERCORREOUSER</label>
@@ -140,7 +188,7 @@
                             <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h2> PASO 7</h2>
+                            <h4> PASO 7</h4>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="fName">DATO</label>
@@ -166,12 +214,56 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!--------------------------------------------------------------------->
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+<div id="tabla" class="default "></div>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO CLASIFICACIÓN</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
+                        <fieldset>
+                            <!--Los pasos del modal-->
+
+                            <h4>PASO 1</h4>
+                            <div class="form-group">
+                                <label for="TxtClasificacion">Tipo de clasificación</label>
+                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
+                            </div>
+                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -182,5 +274,7 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Configuraciones.js"></script>
+<!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--Scripts de la tarjeta y el botón-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />

@@ -33,7 +33,7 @@ function AcordeonExistencias(Data, CtrlExistencia) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].TipoDeExistencia + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].Imagen + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -48,8 +48,6 @@ function AcordeonExistencias(Data, CtrlExistencia) {
     }
     CtrlExistencia.innerHTML = CodigoHTMLAreas;
 }
-
-
 
 //imagenes
 var btnFoto = document.getElementById("BtnFoto");
@@ -66,7 +64,6 @@ btnFoto.onchange = function (e) {
 }
 
 
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -75,28 +72,26 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDExist', '0');
-
+        sessionStorage.setItem('IDExt', '0');  
     }
     else {
 
         $.get("/Existencias/ConsultaExistencia/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDExist', Data[0].IdExistencia);
-            document.getElementById("TxtNumCompra").value = Data[0].NoCompra;
+            sessionStorage.setItem('IDExt', Data[0].IdExistencia);     //Variable de sesión
+            document.getElementById("TxtNuCompra").value = Data[0].NoCompra;
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
-            document.getElementById("TxtTipoDeExistencia").value = Data[0].TipoDeExistencia;
             document.getElementById("TxtCosto").value = Data[0].Coste;
+            document.getElementById("TxtTipoDeExistencia").value = Data[0].ClaveInterbancaria;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-
         });
     }
 }
+
 
 //limpiar campos
 function LimpiarCampos() {
@@ -119,25 +114,25 @@ function LimpiarCampos() {
 
 
 
-//Guarda los cambios y altas de las áreas
+//Guarda los cambios y altas de los proveedores
 function GuardarExistencia() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdExistencia = sessionStorage.getItem('IDExist');
+            var IdExistencia = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNuCompra").value;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-            var TipoDeExistencia = document.getElementById("TxtTipoDeExistencia").value;
             var Coste = document.getElementById("TxtCosto").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
+            var TipoDeExistencia = document.getElementById("TxtTipoDeExistencia").value;
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
 
             var frm = new FormData();
             frm.append("IdExistencia", IdExistencia);
             frm.append("NoCompra", NoCompra);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
-            frm.append("TipoDeExistencia", TipoDeExistencia);
             frm.append("Coste", Coste);
+            frm.append("TipoDeExistencia", TipoDeExistencia);
             frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
@@ -147,6 +142,7 @@ function GuardarExistencia() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
+
                     if (data == 0) {
                         alert("Ocurrio un error");
                     }
@@ -163,7 +159,6 @@ function GuardarExistencia() {
         }
     }
 }
-
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -176,19 +171,16 @@ function CamposObligatorios() {
         }
         else {
             controlesObligatorio[i].parentNode.classList.remove("error");
+
         }
     }
     return exito;
 }
-
-
-
 //"Elimina" el área cambia el Estatus
 function EliminarExistencia(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-
-        $.get("/Existencias/EliminarExistencia/?Id=" + id, function (DatoExistecias) {
-            if (DatoExistecias == 1) {
+        $.get("/ConsultaExistencias/EliminarExistencia/?Id=" + id, function (DatoExistencia) {
+            if (DatoExistencia == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonExistencias();
             } else {

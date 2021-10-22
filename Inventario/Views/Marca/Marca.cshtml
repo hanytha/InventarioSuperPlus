@@ -72,18 +72,22 @@
                 <!-- Contenido del modal -->
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO  MARCA</h1>
+                    <h4>REGISTRO  MARCA</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h2>Paso 1</h2>
-                            <div class="form-group">
-                                <label for="TxtNombre">Nombre de la marca</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtNombre]" id="TxtNombre" placeholder="Nombre">
+                            <h4>Paso 1</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre">Nombre de la marca<span class="required">*</span></label>
+                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
                             </div>
-                            <button id="btnGuardar" type="button"  class="btn btn-success " onclick=" GuardarMarca()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarMarca()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
