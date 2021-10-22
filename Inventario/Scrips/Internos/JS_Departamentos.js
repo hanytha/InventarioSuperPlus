@@ -1,4 +1,5 @@
-﻿CrearAcordeonDepartamentos();
+﻿
+CrearAcordeonDepartamentos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonDepartamentos() {
     //$.get("/Departamentos/ConsultaDepartamentos", function (Data) {
@@ -62,8 +63,9 @@ function abrirModal(id) {//la clase  Obligatorio
         controlesObligatorio[i].classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
+    LimpiarCampos();
     if (id == 0) {
-        LimpiarCampos();
+       
         sessionStorage.setItem('IDDepartamento', '0');
       
     }
@@ -225,7 +227,6 @@ function validarFormularioD() {
 
 function CrearAcordeonSubAreas(IdArea) {
     $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
     });
 }
@@ -249,6 +250,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSubAreas + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Area + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].NoSubArea + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].NEncargado1 + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TelefonoE1 + "</div>";
@@ -285,7 +287,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
 
 
 //Limpia la información y carga la informacion del proveedor
-function abrirModalSub(id) {//la clase  Obligatorio
+function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -294,15 +296,17 @@ function abrirModalSub(id) {//la clase  Obligatorio
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
-    if (id == 0) {
-        LimpiarCampos();
-        sessionStorage.setItem('IDSb', '0');
+    LimpiarCampos();
+    if (idSubarea == 0) {
+       
+        sessionStorage.setItem('IDSb', idSubarea);
 
     }
     else {
 
-        $.get("/Subarea/ConsultaSubArea/?Id=" + id, function (Data) {
+        $.get("/Subarea/ConsultaSubArea/?Id=" + idSubarea, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
+            let id = Data[0].IdSubAreas;
             sessionStorage.setItem('IDSb', Data[0].IdSubAreas);
             document.getElementById("TxtNombreSub").value = Data[0].Nombre;
             document.getElementById("TxtNumero").value = Data[0].NoSubArea;
@@ -320,6 +324,7 @@ function abrirModalSub(id) {//la clase  Obligatorio
         });
     }
 }
+
 
 
 //Guarda los cambios y altas de las áreas
@@ -378,10 +383,9 @@ function GuardarSubarea() {
     }
 }
 
-
 //limpiar campos
-function LimpiarCampos() {
-    var controlesTXT = document.getElementsByClassName("limpiarSub");
+function LimpiarCamposSub() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
     }
@@ -390,8 +394,6 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
-
-
 
 //"Elimina" el área cambia el Estatus
 function EliminarSubarea(id) {

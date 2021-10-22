@@ -84,7 +84,7 @@
                         </h5>
                         <div id="@Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonArea" style="">
                             <div class="card-body">
-  <!--Boton para editar y agregar SUBAREAS-->   <button style="background-color:DarkTurquoise "   class="btn btn-success" onclick="abrirModalSub(@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
+                                <!--Boton para editar y agregar SUBAREAS-->   <button style="background-color:DarkTurquoise " class="btn btn-success" onclick="abrirModalSub(0,@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12"><strong>Jefe de área: </strong>@ModeloAreas.UNombre[i]</div>
                                 </div>
@@ -177,10 +177,6 @@
 </div>
 
 <!---------------------------------Abrir Modal SubArea--------------------------------------------------->
-<!--Mostrar el accordion-->
-<div id="accordion"></div>
-<!-- Encabezado del Modal SubArea -->
-
 <div class="modal fade" id="dialogo">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -199,10 +195,16 @@
                     <fieldset>
                         <h4>Paso 1: Información de la subÁrea</h4>
                         <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbArea">Área<span class="required">*</span></label>
+                                    <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreSub">Nombre de la  Subárea<span class="required">*</span></label>
-                                    <input id="TxtNombreSub" name="data[TxtNombreSub]" class="form-control  limpiarSub " placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombreSub" name="data[TxtNombreSub]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -210,7 +212,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumero">Número del Subárea<span class="required">*</span></label>
-                                    <input id="TxtNumero" name="data[TxtNumero]" class="form-control  limpiarSub " placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNumero" name="data[TxtNumero]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -218,7 +220,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombre1">Nombre del encargado 1<span class="required">*</span></label>
-                                    <input id="TxtNombre1" name="data[TxtNombre1]" class="form-control  limpiarSub " placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombre1" name="data[TxtNombre1]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -226,14 +228,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono1">Teléfono del encargado 1<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono1]" id="TxtTelefono1" class="form-control  limpiarSub " placeholder="name@example.com">
+                                    <input type="text" name="data[TxtTelefono1]" id="TxtTelefono1" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCorreo1">Correo  del encargado 1<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo1]" id="TxtCorreo1" class="form-control  limpiarSub " placeholder="Razón Social">
+                                    <input type="text" name="data[TxtCorreo1]" id="TxtCorreo1" class="form-control  limpiar obligatorio" placeholder="Razón Social">
                                 </div>
                             </div>
                         </div>
@@ -245,7 +247,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombre2">Nombre del encargado 2<span class="required">*</span></label>
-                                    <input id="TxtNombre2" name="data[TxtNombre2]" class="form-control  limpiarSub " placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombre2" name="data[TxtNombre2]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -253,14 +255,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono2">Teléfono del encargado 2<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono2]" id="TxtTelefono2" class="form-control  limpiarSub " placeholder="name@example.com">
+                                    <input type="text" name="data[TxtTelefono2]" id="TxtTelefono2" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCorreo2">Correo  del encargado 2<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo2]" id="TxtCorreo2" class="form-control  limpiarSub " placeholder="Razón Social">
+                                    <input type="text" name="data[TxtCorreo2]" id="TxtCorreo2" class="form-control  limpiar obligatorio" placeholder="Razón Social">
                                 </div>
                             </div>
                         </div>
@@ -268,7 +270,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombre3">Nombre del encargado 3<span class="required">*</span></label>
-                                    <input id="TxtNombre3" name="data[TxtNombre3]" class="form-control  limpiarSub " placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombre3" name="data[TxtNombre3]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -276,14 +278,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono3">Teléfono del encargado 3<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono3]" id="TxtTelefono3" class="form-control  limpiarSub " placeholder="name@example.com">
+                                    <input type="text" name="data[TxtTelefono3]" id="TxtTelefono3" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCorreo3">Correo  del encargado 3<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo3]" id="TxtCorreo3" class="form-control  limpiarSub " placeholder="Razón Social">
+                                    <input type="text" name="data[TxtCorreo3]" id="TxtCorreo3" class="form-control  limpiar obligatorio" placeholder="Razón Social">
                                 </div>
                             </div>
                         </div>
@@ -299,6 +301,7 @@
         </div>
     </div>
 </div>
+
 <!---------------------------------Termina Modal SubArea--------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">

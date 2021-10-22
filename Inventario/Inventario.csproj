@@ -112,6 +112,7 @@
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
+    <Content Include="Scrips\Internos\JS_Entrada.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />

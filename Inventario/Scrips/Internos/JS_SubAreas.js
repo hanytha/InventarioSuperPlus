@@ -36,7 +36,6 @@ function abrirModalSub(id) {//la clase  Obligatorio
     }
 }
 
-
 //limpiar campos
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -48,8 +47,6 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
-
-
 
 //Guarda los cambios y altas de las áreas
 function GuardarSubarea() {
