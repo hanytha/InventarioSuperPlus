@@ -4,187 +4,197 @@
 }
 
 <h2>Tienda</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-
-<!--Mostrar los datos del acordión que se van agregando en la Base de Datos-->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
-
-<!-- Modal -->
-
-<div class="modal fade" id="dialogo1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Encabezado del Modal -->
-            <div class="modal-header">
-                <h4 class="modal-title">Título del diálogo</h4>
-                <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-
-            <!-- Contenido del modal -->
-            <div class="modal-body">
-                <h1>TIENDA</h1>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
+                <!-- Contenido del modal -->
+                <!-- crearemos un DIV con la clase “progress” que será el artífice para la animación del paso a paso.-->
+                <div class="modal-body">
+                    <h1>REGISTRO DE PROVEEDORES</h1>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioProveedor()">
 
-                <form id="regiration_form" novalidate action="action.php" method="post">
-                    <fieldset>
-                        <h2>PASO 1</h2>
-                        <div class="form-group">
-                            <label for="fName">INGRESE EL NOMBRE</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="NOMBRE">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">SELECIONE EL ESTADO</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>SELESCCIONE EL ESTADO</option>
-                                <option>OAXACA</option>
-                                <option>CHIAPAS</option>
-                                <option>COLIMA</option>
-                                <option>GUERRERO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">SELECCIONE EL MUNICIPIO</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>SELESCCIONE EL MUNICIPIO</option>
-                                <option>OAXACA</option>
-                                <option>CHIAPAS</option>
-                                <option>COLIMA</option>
-                                <option>GUERRERO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">SELECCIONE LA LOCALIDAD</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>SELECCIONE LA LOCALIDAD</option>
-                                <option>OAXACA</option>
-                                <option>CHIAPAS</option>
-                                <option>COLIMA</option>
-                                <option>GUERRERO</option>
-                            </select>
-                        </div>
-                        <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
-                        <h2> PASO 2</h2>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">SELECCIONE LA SUPERVISIÓN</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>SELECCIONE LA UPERVISIÓN</option>
-                                <option>OAXACA</option>
-                                <option>CHIAPAS</option>
-                                <option>COLIMA</option>
-                                <option>GUERRERO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESE EL CP</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="CP">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESE LA CALLE</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="CALLE">
-                        </div>
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
-                        <h2> PASO 3</h2>
-                        <div class="form-group">
-                            <label for="fName">INGRESE EL NÚMERO DE TELÉFONO</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="TELÉFONO">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESE LA LATITUD</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="LATITUD">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESE LA LONGITUD</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="LONGITUD">
-                        </div>
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
-                        <h2> PASO 4</h2>
-                        <div class="form-group">
-                            <label for="fName">INGRESE EL NOMBRE DEL LIDER</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="LIDER DE TIENDA">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR LA HORA DE APERTURA</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="HORA DE APERTURA">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR LA HORA DE SIERRE</label>
-                            <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="HORA DE SIERRE">
-                        </div>
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
+                        <fieldset>
+                            <h2> Paso 1</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre">Nombre de la tienda<span class="required">*</span></label>
+                                        <input id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="Nombre de la tienda" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbEstado">Estado<span class="required">*</span></label>
+                                        <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                            <option value="0">--Seleccione--</option>
+                                            @*@{
+                                if (Estados.idEstado != null)
+                                {
+                                    for (int i = 0; i < Estados.idEstado.Count(); i++)
+                                    {
+                                        <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
+                                    }
+                                }
+                            }*@
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMunicipio">Municipio<span class="required">*</span></label>
+                                        <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbLocalidad">Localidad<span class="required">*</span></label>
+                                        <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <h2>PASO 5</h2>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <!--Los pasos del modal-->
+                            <h2>Paso 2</h2>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
+                                        <input type="text" id="TxtDireccion" class="form-control limpiar obligatorio" placeholder="Dirección">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCodigoPostal">Codigo Postal<span class="required">*</span></label>
+                                        <input id="TxtCodigoPostal" class="form-control  limpiar obligatorio" placeholder="Codigo Postal" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumeroTelefono">Número de Telefono<span class="required">*</span></label>
+                                        <input type="text" id="TxtNumeroTelefono" class="form-control  limpiar obligatorio" placeholder="Número de Telefono">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL ENCARGADO 1</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ENCARGADO 1">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL ENCARGADO 2</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ENCARGADO 2">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL ENCARGADO 3</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ENCARGADO 3">
-                        </div>
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
-                        <h2> PASO 6</h2>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL AUXILIAR 1</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="AUXILIAR 1">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL AUXILIAR 2</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="AUXILIAR 2">
-                        </div>
-                        <div class="form-group">
-                            <label for="fName">INGRESAR EL NOMBRE DEL AUXILIAR 3</label>
-                            <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="AUXILIAR 3">
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtLatitud">Latitud<span class="required">*</span></label>
+                                        <input id="TxtLatitud" class="form-control  limpiar obligatorio" placeholder="Latitud" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtLongitud">Longitud<span class="required">*</span></label>
+                                        <input type="text" id="TxtLongitud" class="form-control  limpiar obligatorio" placeholder="Longitud">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <br>
-                        <div id="listas">
-                            <label for="fName">AGREGAR</label>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h2> Paso 3</h2>
 
-                        </div>
-
-
-                        <input type="button" class="btn btn-primary" id="add_field" value="adicionar">
-
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
-                    </fieldset>
-                </form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span class="required">*</span></label>
+                                        <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtLider">Nombre del Lider<span class="required">*</span></label>
+                                        <input type="text" id="TxtLider" class="form-control limpiar obligatorio" placeholder="Nombre del Lider">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtHoraApertura">Hora de apertura<span class="required">*</span></label>
+                                        <input type="time" id="TxtHoraApertura" class="form-control limpiar obligatorio" placeholder="Hora de apertura">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtHoraCierre">Hora de cierre<span class="required">*</span></label>
+                                        <input type="time" id="TxtHoraCierre" class="form-control limpiar obligatorio" placeholder="Hora de cierre">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h2> Paso 4</h2>
+                          
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado1">Nombre del encargado 1<span class="required">*</span></label>
+                                        <input type="text" id="TxtEncargado1" class="form-control limpiar obligatorio" placeholder="Nombre del encargado 1">
+                                    </div>
+                                </div>
+                            </div>
+                   
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado2">Nombre del encargado 2<span class="required">*</span></label>
+                                        <input type="text" id="TxtEncargado2" class="form-control limpiar obligatorio" placeholder="Nombre del encargado 2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado1">Nombre del encargado 3<span class="required">*</span></label>
+                                        <input type="text" id="TxtEncargado3" class="form-control limpiar obligatorio" placeholder="Nombre del encargado 3">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+        -->
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="return confirmarAccesoURL()" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
-            <!-- pie del modal-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
-
         </div>
     </div>
 </div>
@@ -195,7 +205,10 @@
     }
 </style>
 <!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion,Navegación del formulario de paso siguiente y anterior mediante jQuery.-->
+<script src="~/Scrips/Internos/JS_Tienda.js"></script>
+<!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<script src="~/Scrips/General/JS_Botones.js"></script>
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
