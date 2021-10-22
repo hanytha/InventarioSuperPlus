@@ -45,19 +45,19 @@ namespace Inventario.Controllers
                     p.Mensaje,
                     p.Accion,
                     p.Controlador,
+                    p.Icono,
                     p.Descripcion,
                     p.Tipo,
-                    p.Padre,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Icono.ToArray()),
+                    p.Padre
                 });
             return Json(paginas, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos del proveedor
-        public int GuardarPagina(Pagina DatosPagina, string cadF)
+        public int GuardarPagina(Pagina DatosPagina)
         {
             int Afectados = 0;
-          //  try
-          //  {
+           try
+            {
                 long id = DatosPagina.IdPagina;
                 if (id.Equals(0))
                 {
@@ -65,7 +65,6 @@ namespace Inventario.Controllers
                     int nveces = InvBD.Pagina.Where(p => p.Mensaje.Equals(DatosPagina.Mensaje)).Count();
                     if (nveces == 0)
                     {
-                        DatosPagina.Icono = Convert.FromBase64String(cadF);
                         InvBD.Pagina.InsertOnSubmit(DatosPagina);
                         InvBD.SubmitChanges();
                         Afectados = 1;
@@ -95,8 +94,8 @@ namespace Inventario.Controllers
                         obj.Descripcion = DatosPagina.Descripcion;
                         obj.Tipo = DatosPagina.Tipo;
                         obj.Padre = DatosPagina.Padre;
-                        obj.Icono = Convert.FromBase64String(cadF);
-                        InvBD.SubmitChanges();
+                        obj.Icono = DatosPagina.Icono;
+                    InvBD.SubmitChanges();
                         Afectados = 1;
                     }
                     else
@@ -104,11 +103,11 @@ namespace Inventario.Controllers
                         Afectados = -1;
                     }
                 }
-            //}
-           // catch (Exception ex)
-          //  {
-               // Afectados = 0;
-         //   }
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
             return Afectados;
         }
         public int EliminarPagina(long IdPagina)

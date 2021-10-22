@@ -4306,7 +4306,7 @@ namespace Inventario
 		
 		private string _TipoDeExistencia;
 		
-		private string _Logo;
+		private System.Data.Linq.Binary _Logo;
 		
 		private int _Estatus;
 		
@@ -4336,7 +4336,7 @@ namespace Inventario
     partial void OnCosteChanged();
     partial void OnTipoDeExistenciaChanging(string value);
     partial void OnTipoDeExistenciaChanged();
-    partial void OnLogoChanging(string value);
+    partial void OnLogoChanging(System.Data.Linq.Binary value);
     partial void OnLogoChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
@@ -4533,8 +4533,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="NVarChar(1)")]
-		public string Logo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Logo
 		{
 			get
 			{
@@ -6190,13 +6190,15 @@ namespace Inventario
 		
 		private long _IdPagina;
 		
+		private string _Abreviatura;
+		
 		private string _Mensaje;
 		
 		private string _Accion;
 		
 		private string _Controlador;
 		
-		private System.Data.Linq.Binary _Icono;
+		private string _Icono;
 		
 		private string _Descripcion;
 		
@@ -6205,8 +6207,6 @@ namespace Inventario
 		private System.Nullable<long> _Padre;
 		
 		private int _Estatus;
-		
-		private string _Abreviatura;
 		
 		private EntitySet<Configuracion> _Configuracion;
 		
@@ -6218,13 +6218,15 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdPaginaChanging(long value);
     partial void OnIdPaginaChanged();
+    partial void OnAbreviaturaChanging(string value);
+    partial void OnAbreviaturaChanged();
     partial void OnMensajeChanging(string value);
     partial void OnMensajeChanged();
     partial void OnAccionChanging(string value);
     partial void OnAccionChanged();
     partial void OnControladorChanging(string value);
     partial void OnControladorChanged();
-    partial void OnIconoChanging(System.Data.Linq.Binary value);
+    partial void OnIconoChanging(string value);
     partial void OnIconoChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
@@ -6234,8 +6236,6 @@ namespace Inventario
     partial void OnPadreChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
-    partial void OnAbreviaturaChanging(string value);
-    partial void OnAbreviaturaChanged();
     #endregion
 		
 		public Pagina()
@@ -6261,6 +6261,26 @@ namespace Inventario
 					this._IdPagina = value;
 					this.SendPropertyChanged("IdPagina");
 					this.OnIdPaginaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abreviatura", DbType="VarChar(50)")]
+		public string Abreviatura
+		{
+			get
+			{
+				return this._Abreviatura;
+			}
+			set
+			{
+				if ((this._Abreviatura != value))
+				{
+					this.OnAbreviaturaChanging(value);
+					this.SendPropertyChanging();
+					this._Abreviatura = value;
+					this.SendPropertyChanged("Abreviatura");
+					this.OnAbreviaturaChanged();
 				}
 			}
 		}
@@ -6325,8 +6345,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Icono
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150)")]
+		public string Icono
 		{
 			get
 			{
@@ -6421,26 +6441,6 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abreviatura", DbType="VarChar(50)")]
-		public string Abreviatura
-		{
-			get
-			{
-				return this._Abreviatura;
-			}
-			set
-			{
-				if ((this._Abreviatura != value))
-				{
-					this.OnAbreviaturaChanging(value);
-					this.SendPropertyChanging();
-					this._Abreviatura = value;
-					this.SendPropertyChanged("Abreviatura");
-					this.OnAbreviaturaChanged();
 				}
 			}
 		}
