@@ -224,7 +224,7 @@ function validarFormularioD() {
 
 
 //-------------Scrips SUBÁREAS------------------
-
+BloquearCTRL();
 function CrearAcordeonSubAreas(IdArea) {
     $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
         AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
@@ -300,7 +300,7 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     if (idSubarea == 0) {
        
         sessionStorage.setItem('IDSb', idSubarea);
-
+        document.getElementById("cmbArea").value = idArea;
     }
     else {
 
@@ -416,6 +416,15 @@ function EliminarSubarea(id) {
     }
 }
 
+
+
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
 
 function LlenarCMBPrin() {
