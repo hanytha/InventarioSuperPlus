@@ -95,7 +95,7 @@ function LimpiarCampos() {
 function LlenarCMB() {
  
     $.get("/Pagina/BDPagina", function (data) {
-        llenarComboPaginas(data, document.getElementById("cmbPadre"), true);
+        llenarCombo(data, document.getElementById("cmbPadre"), true);
     });
 }
 
