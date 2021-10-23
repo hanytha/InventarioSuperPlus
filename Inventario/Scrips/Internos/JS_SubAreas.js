@@ -1,4 +1,4 @@
-﻿
+﻿LlenarCMBPrin();
 //Limpia la información y carga la informacion del proveedor
 function abrirModalSub(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -16,9 +16,11 @@ function abrirModalSub(id) {//la clase  Obligatorio
     }
     else {
 
-        $.get("/Subarea/ConsultaSubArea/?Id=" + id, function (Data) {
+        $.get("/Subarea/ConsultasSubAreasXAreas/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
+
             sessionStorage.setItem('IDSb', Data[0].IdSubAreas);
+            document.getElementById("cmbArea").value = Data[0].IdArea;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtNumero").value = Data[0].NoSubArea;
             document.getElementById("TxtNombre1").value = Data[0].NEncargado1;
@@ -36,106 +38,128 @@ function abrirModalSub(id) {//la clase  Obligatorio
     }
 }
 
-//limpiar campos
-function LimpiarCampos() {
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
+    //Guarda los cambios y altas de las áreas
+    function GuardarSubarea() {
+        if (CamposObligatorios("SubArea") == true) {
+            if (confirm("¿Desea aplicar los cambios?") == 1) {
+                var IdSubAreas = sessionStorage.getItem('IDSb');
+                var IdArea = document.getElementById("cmbArea").value;
+                var Area = document.getElementById("cmbArea");
+                var Nombre = document.getElementById("TxtNombre").value;
+                var NoSubArea = document.getElementById("TxtNumero").value;
+                var NEncargado1 = document.getElementById("TxtNombre1").value;
+                var TelefonoE1 = document.getElementById("TxtTelefono1").value;
+                var CorreoE1 = document.getElementById("TxtCorreo1").value;
+                var NEncargado2 = document.getElementById("TxtNombre2").value;
+                var TelefonoE2 = document.getElementById("TxtTelefono2").value;
+                var CorreoE2 = document.getElementById("TxtCorreo2").value;
+                var NEncargado3 = document.getElementById("TxtNombre3").value;
+                var TelefonoE3 = document.getElementById("TxtTelefono3").value;
+                var CorreoE3 = document.getElementById("TxtCorreo3").value;
+
+                var frm = new FormData();
+                frm.append("IdSubAreas", IdSubAreas);
+                frm.append("IdArea", IdArea);
+                frm.append("Area", Area);
+                frm.append("Nombre", Nombre);
+                frm.append("NoSubArea", NoSubArea);
+                frm.append("NEncargado1", NEncargado1);
+                frm.append("TelefonoE1", TelefonoE1);
+                frm.append("CorreoE1", CorreoE1);
+                frm.append("NEncargado2", NEncargado2);
+                frm.append("TelefonoE2", TelefonoE2);
+                frm.append("CorreoE2", CorreoE2);
+                frm.append("NEncargado3", NEncargado3);
+                frm.append("TelefonoE3", TelefonoE3);
+                frm.append("CorreoE3", CorreoE3);
+
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/Subarea/GuardarSubarea",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            alert("Ocurrio un error");
+                        }
+                        else if (data == -1) {
+                            alert("Ya existe el proveedor");
+                        }
+                        else {
+                            alert("Se ejecuto correctamente");
+                            CrearAcordeonSubAreas();
+                            document.getElementById("btnCancelar").click();
+                        }
+                    }
+                });
+            }
+        }
     }
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
+
+    //marca los campos obligatorios
+    function CamposObligatorios(clase) {
+        var exito = true;
+        var controlesObligatorio = document.getElementsByClassName(clase);
+        var ncontroles = controlesObligatorio.length;
+        for (var i = 0; i < ncontroles; i++) {
+            if (controlesObligatorio[i].value == "") {
+                exito = false;
+                controlesObligatorio[i].parentNode.classList.add("error");
+            }
+            else {
+                controlesObligatorio[i].parentNode.classList.remove("error");
+            }
+        }
+        return exito;
     }
-}
 
-//Guarda los cambios y altas de las áreas
-function GuardarSubarea() {
-    if (CamposObligatorios("SubArea") == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdSubAreas = sessionStorage.getItem('IDSb');
-            var Nombre = document.getElementById("TxtNombre").value;
-            var NoSubArea = document.getElementById("TxtNumero").value;
-            var NEncargado1 = document.getElementById("TxtNombre1").value;
-            var TelefonoE1 = document.getElementById("TxtTelefono1").value;
-            var CorreoE1 = document.getElementById("TxtCorreo1").value;
-            var NEncargado2 = document.getElementById("TxtNombre2").value;
-            var TelefonoE2 = document.getElementById("TxtTelefono2").value;
-            var CorreoE2 = document.getElementById("TxtCorreo2").value;
-            var NEncargado3 = document.getElementById("TxtNombre3").value;
-            var TelefonoE3 = document.getElementById("TxtTelefono3").value;
-            var CorreoE3 = document.getElementById("TxtCorreo3").value;
 
-            var frm = new FormData();
-            frm.append("IdSubAreas", IdSubAreas);
-            frm.append("Nombre", Nombre);
-            frm.append("NoSubArea", NoSubArea);
-            frm.append("NEncargado1", NEncargado1);
-            frm.append("TelefonoE1", TelefonoE1);
-            frm.append("CorreoE1", CorreoE1);
-            frm.append("NEncargado2", NEncargado2);
-            frm.append("TelefonoE2", TelefonoE2);
-            frm.append("CorreoE2", CorreoE2);
-            frm.append("NEncargado3", NEncargado3);
-            frm.append("TelefonoE3", TelefonoE3);
-            frm.append("CorreoE3", CorreoE3);
 
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Subarea/GuardarSubarea",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el proveedor");
-                    }
-                    else {
-                        alert("Se ejecuto correctamente");
-                        CrearAcordeonSubAreas();
-                        document.getElementById("btnCancelar").click();
-                    }
+    //"Elimina" el área cambia el Estatus
+    function EliminarSubarea(id) {
+        if (confirm("¿Desea eliminar el registro?") == 1) {
+
+            $.get("/Subarea/EliminarSubarea/?Id=" + id, function (DatoSub) {
+                if (DatoSub == 1) {
+                    alert("Se elimino correctamente");
+                    CrearAcordeonSubAreas();
+                } else {
+                    alert("Ocurrio un error");
                 }
             });
         }
     }
-}
 
-//marca los campos obligatorios
-function CamposObligatorios(clase) {
-    var exito = true;
-    var controlesObligatorio = document.getElementsByClassName(clase);
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "") {
-            exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+
+
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDAreas", function (data) {
+        llenarCombo(data, document.getElementById("cmbArea"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
         }
-        else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+        control.innerHTML = contenido;
+    }
+    //limpiar campos
+    function LimpiarCampos() {
+        var controlesTXT = document.getElementsByClassName("limpiar");
+        for (var i = 0; i < controlesTXT.length; i++) {
+            controlesTXT[i].value = "";
+        }
+        var controlesSLT = document.getElementsByClassName("limpiarSelect");
+        for (var i = 0; i < controlesSLT.length; i++) {
+            controlesSLT[i].value = "0";
         }
     }
-    return exito;
+
+
 }
-
-
-
-//"Elimina" el área cambia el Estatus
-function EliminarSubarea(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-
-        $.get("/Subarea/EliminarSubarea/?Id=" + id, function (DatoSub) {
-            if (DatoSub == 1) {
-                alert("Se elimino correctamente");
-                CrearAcordeonSubAreas();
-            } else {
-                alert("Ocurrio un error");
-            }
-        });
-    }
-}
-
-
