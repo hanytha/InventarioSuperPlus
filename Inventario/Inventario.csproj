@@ -93,6 +93,7 @@
     <Content Include="Assets\Imagenes\imagen2.jpg" />
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
+    <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Content\tarjeta.css" />
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />

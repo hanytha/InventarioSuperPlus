@@ -6200,10 +6200,6 @@ namespace Inventario
 		
 		private string _Descripcion;
 		
-		private string _Tipo;
-		
-		private System.Nullable<long> _Padre;
-		
 		private int _Estatus;
 		
 		private EntitySet<Configuracion> _Configuracion;
@@ -6226,10 +6222,6 @@ namespace Inventario
     partial void OnIconoChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
-    partial void OnTipoChanging(string value);
-    partial void OnTipoChanged();
-    partial void OnPadreChanging(System.Nullable<long> value);
-    partial void OnPadreChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -6357,46 +6349,6 @@ namespace Inventario
 					this._Descripcion = value;
 					this.SendPropertyChanged("Descripcion");
 					this.OnDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(50)")]
-		public string Tipo
-		{
-			get
-			{
-				return this._Tipo;
-			}
-			set
-			{
-				if ((this._Tipo != value))
-				{
-					this.OnTipoChanging(value);
-					this.SendPropertyChanging();
-					this._Tipo = value;
-					this.SendPropertyChanged("Tipo");
-					this.OnTipoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Padre", DbType="BigInt")]
-		public System.Nullable<long> Padre
-		{
-			get
-			{
-				return this._Padre;
-			}
-			set
-			{
-				if ((this._Padre != value))
-				{
-					this.OnPadreChanging(value);
-					this.SendPropertyChanging();
-					this._Padre = value;
-					this.SendPropertyChanged("Padre");
-					this.OnPadreChanged();
 				}
 			}
 		}

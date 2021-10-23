@@ -271,8 +271,6 @@
       <Column Name="Controlador" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Icono" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="Tipo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Padre" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Pagina_Configuracion" Member="Configuracion" ThisKey="IdPagina" OtherKey="IdPagina" Type="Configuracion" />
       <Association Name="Pagina_PerfilDeUsuario" Member="PerfilDeUsuario" ThisKey="IdPagina" OtherKey="IdPagina" Type="PerfilDeUsuario" />

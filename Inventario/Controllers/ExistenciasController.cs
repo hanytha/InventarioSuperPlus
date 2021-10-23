@@ -20,10 +20,12 @@ namespace Inventario.Controllers
             var existencias = InvBD.Existencia.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-
                     p.IdExistencia,
+                    p.IdArticulos,
                     p.NoCompra,
+                    p.FechaDeIngreso,
                     p.ExitenciaInicial,
+                    p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeExistencia,
@@ -37,8 +39,11 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdExistencia,
+                    p.IdArticulos,
                     p.NoCompra,
+                    p.FechaDeIngreso,
                     p.ExitenciaInicial,
+                    p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeExistencia,
@@ -48,37 +53,26 @@ namespace Inventario.Controllers
         }
 
 
-  /*      //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaProv(long Id)
+        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
+        public JsonResult ConsultaEXT(long Id)
         {
-            var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id))
+            var existencias = InvBD.Existencia.Where(p => p.IdExistencia.Equals(Id))
                 .Select(p => new
                 {
-                    p.IdProveedores,
-                    p.Nombre,
-                    p.Correo,
-                    p.RazonSocial,
-                    p.ClaveInterbancaria,
-                    p.CodigoPostal,
-                    p.IdEstado,
-                    p.Estado,
-                    p.IdMunicipio,
-                    p.Municipio,
-                    p.IdLocalidad,
-                    p.Localidad,
-                    p.RFC,
-                    p.Direccion,
-                    p.Telefono,
-                    p.Banco,
-                    p.NumeroDeCuenta,
-                    p.UsoCFDI,
-                    p.Nomenclatura,
-                    p.Descripcion,
+
+                    p.IdExistencia,
+                    p.IdArticulos,
+                    p.NoCompra,
+                    p.ExitenciaInicial,
+                    p.ExitenciaActual,
+                    p.Coste,
+                    p.TipoDeExistencia,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
-            return Json(proveedores, JsonRequestBehavior.AllowGet);
+            return Json(existencias, JsonRequestBehavior.AllowGet);
         }
-  */
+
+        //Guardar los datos del proveedor
         //Guardar los datos del proveedor
         public int GuardarExistencia(Existencia DatosExistencia, string cadF)
         {
@@ -86,12 +80,10 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosExistencia.IdExistencia;
-
                 if (id.Equals(0))
                 {
                     //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
                     int nveces = InvBD.Existencia.Where(p => p.NoCompra.Equals(DatosExistencia.NoCompra)).Count();
-                    // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                     if (nveces == 0)
                     {
                         DatosExistencia.Logo = Convert.FromBase64String(cadF);
@@ -131,14 +123,14 @@ namespace Inventario.Controllers
             }
             return Afectados;
         }
-
+        //Eliminar Compra
         public int EliminarExistencia(long Id)
         {
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Existencia Exis = InvBD.Existencia.Where(p => p.IdExistencia.Equals(Id)).First();
-                Exis.Estatus = 0;//Cambia el estatus en 0
+                Existencia exis = InvBD.Existencia.Where(p => p.IdExistencia.Equals(Id)).First();
+                exis.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
             }
@@ -149,6 +141,6 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-
     }
 }
+
