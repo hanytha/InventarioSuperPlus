@@ -250,7 +250,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSubAreas + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Area + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].Area + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].NoSubArea + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].NEncargado1 + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TelefonoE1 + "</div>";
@@ -334,7 +334,8 @@ function GuardarSubarea() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdSubAreas = sessionStorage.getItem('IDSb');
             var IdArea = document.getElementById("cmbArea").value;
-            var Area = document.getElementById("cmbArea");
+            var TempEdo = document.getElementById("cmbArea");
+            var Area = TempEdo.options[TempEdo.selectedIndex].text;
             var Nombre = document.getElementById("TxtNombreSub").value;
             var NoSubArea = document.getElementById("TxtNumero").value;
             var NEncargado1 = document.getElementById("TxtNombre1").value;
