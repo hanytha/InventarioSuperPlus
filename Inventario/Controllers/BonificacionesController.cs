@@ -28,10 +28,29 @@ namespace Inventario.Controllers
                     p.Cantidad,
                     p.NombreProveedor,
                     p.MarcaArticulo,
+
                     p.Estatus,
 
                 });
             return Json(bonificaciones, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ConsultasBonificacionesXUnidadMedida(long idUnidad)
+        {
+            var bonis = InvBD.Bonificaciones.Where(p => p.Estatus.Equals(1) && p.IdUnidadDeMedida.Equals(idUnidad))
+                .Select(p => new
+                {
+                    p.IdBonificaciones,
+                    p.NombreArticulo,
+                    p.IdUnidadDeMedida,
+                    p.UnidadDeMedida,
+                    p.IdCompra,
+                    p.Cantidad,
+                    p.NombreProveedor,
+                    p.MarcaArticulo,
+                    p.Estatus,
+
+                });
+            return Json(bonis, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaBonificacion(long Id)
         {

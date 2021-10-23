@@ -75,5 +75,15 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //consulta Tiendas
+        public JsonResult BDUnidadesMedida()
+        {
+            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdUnidadDeMedida,
+                   Nombre= p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }

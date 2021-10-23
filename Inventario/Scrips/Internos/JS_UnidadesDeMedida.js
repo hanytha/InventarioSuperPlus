@@ -1,4 +1,6 @@
-﻿ConsultaUnidadDeMedida();
+﻿
+
+ConsultaUnidadDeMedida();
 function ConsultaUnidadDeMedida() {
     $.get("/UnidadMedida/ConsultaUnidadDeMedidas", function (Data) {
         CrearTablaUnidadDeMedida(Data);

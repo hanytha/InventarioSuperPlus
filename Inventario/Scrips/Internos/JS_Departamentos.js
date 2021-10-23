@@ -326,8 +326,6 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     }
 }
 
-
-
 //Guarda los cambios y altas de las áreas
 function GuardarSubarea() {
     if (CamposObligatorios("SubArea") == true) {
@@ -441,17 +439,6 @@ function LlenarCMBPrin() {
             contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
         }
         control.innerHTML = contenido;
-    }
-    //limpiar campos
-    function LimpiarCampos() {
-        var controlesTXT = document.getElementsByClassName("limpiar");
-        for (var i = 0; i < controlesTXT.length; i++) {
-            controlesTXT[i].value = "";
-        }
-        var controlesSLT = document.getElementsByClassName("limpiarSelect");
-        for (var i = 0; i < controlesSLT.length; i++) {
-            controlesSLT[i].value = "0";
-        }
     }
 
 
