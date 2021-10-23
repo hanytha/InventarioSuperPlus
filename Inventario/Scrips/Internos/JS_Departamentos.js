@@ -1,4 +1,4 @@
-﻿
+﻿LlenarCMBPrin();
 CrearAcordeonDepartamentos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonDepartamentos() {
@@ -308,6 +308,7 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
             //Obtener los datos de los proveedores para permitir editar
             let id = Data[0].IdSubAreas;
             sessionStorage.setItem('IDSb', Data[0].IdSubAreas);
+            document.getElementById("cmbArea").value = Data[0].IdArea;
             document.getElementById("TxtNombreSub").value = Data[0].Nombre;
             document.getElementById("TxtNumero").value = Data[0].NoSubArea;
             document.getElementById("TxtNombre1").value = Data[0].NEncargado1;
@@ -332,6 +333,8 @@ function GuardarSubarea() {
     if (CamposObligatorios("SubArea") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdSubAreas = sessionStorage.getItem('IDSb');
+            var IdArea = document.getElementById("cmbArea").value;
+            var Area = document.getElementById("cmbArea");
             var Nombre = document.getElementById("TxtNombreSub").value;
             var NoSubArea = document.getElementById("TxtNumero").value;
             var NEncargado1 = document.getElementById("TxtNombre1").value;
@@ -346,6 +349,8 @@ function GuardarSubarea() {
 
             var frm = new FormData();
             frm.append("IdSubAreas", IdSubAreas);
+            frm.append("IdArea", IdArea);
+            frm.append("Area", Area);
             frm.append("Nombre", Nombre);
             frm.append("NoSubArea", NoSubArea);
             frm.append("NEncargado1", NEncargado1);
@@ -411,3 +416,33 @@ function EliminarSubarea(id) {
 }
 
 
+
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDAreas", function (data) {
+        llenarCombo(data, document.getElementById("cmbArea"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+    //limpiar campos
+    function LimpiarCampos() {
+        var controlesTXT = document.getElementsByClassName("limpiar");
+        for (var i = 0; i < controlesTXT.length; i++) {
+            controlesTXT[i].value = "";
+        }
+        var controlesSLT = document.getElementsByClassName("limpiarSelect");
+        for (var i = 0; i < controlesSLT.length; i++) {
+            controlesSLT[i].value = "0";
+        }
+    }
+
+
+}
