@@ -55,40 +55,38 @@
     </div>
 </div>
 <!--Termina tarjeta-->
-
+<!--------------------------------------------MODAL COMPRA-------------------------------------------------------------->
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button><!--Mostrar los registros en el accordion-->
+<button onclick="editarModalCompra(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCompra">REGISTRAR COMPRA</button><!--Mostrar los registros en el accordion-->
 <!--Muestra la tabla compras-->
-<div id="tabla" class="default "></div>
+<div id="tablaCompra" class="table "></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalCompra">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" >x</button>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     <h4>REGISTRO COMPRA</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate method="post" >
-                        <fieldset>
-                            <!--Los pasos del modal-->
-                            <h4>PASO 1</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtMetodoDePago">Método de pago<span class="required">*</span></label>
-                                        <input id="TxtMetodoDePago" name="data[TxtMetodoDePago]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+
+                    <form id="regiration_form" novalidate method="post">
+
+                        <!--Los pasos del modal-->
+                        <h4>PASO 1</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMetodoDePago">Método de pago<span class="required">*</span></label>
+                                    <input id="TxtMetodoDePago" name="data[TxtMetodoDePago]" class="form-control  limpiar obligatoriox" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <button id="btnGuardar" type="button"  class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
-                        </fieldset>
+                        </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarCompra()">Guardar</button>
+
                     </form>
                 </div>
                 <!-- pie del modal-->
@@ -98,13 +96,96 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
+<!------------------------------------------------------------Modal impuesto--------------------------------------------------------------------------->
+<!-- Botón del modal-->
+<button onclick="editarModalImpuestos(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImpuesto">REGISTRAR IMPUESTO</button><!--Mostrar los registros en el accordion-->
+<!--Muestra la tabla compras-->
+<div id="tablaImpuesto" class="table"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalImpuesto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" >x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO DE IMPUESTOS</h4>
+                    <form id="regiration_form" novalidate method="post">
+                            <h4>Paso 1</h4>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtImpuesto">Impuesto:<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtImpuesto]" id="TxtImpuesto" class="form-control  limpiar ObligatoriosImpuestos" placeholder="name@example.com">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPorcentaje">Porcentaje:<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtPorcentaje]" id="TxtPorcentaje" class="form-control  limpiar ObligatoriosImpuestos" placeholder="Razón Social">
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarImpuesto()">Guardar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------------------------------------MODAL UNDIAD DE MEDEIDA---------------------------------------------------------------------->
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUnidad">REGISTRAR UNIDAD DE MEDIDA</button><!--Mostrar los registros en el accordion-->
+<!--Muestra la tabla compras-->
+<div id="tablaUnidadMedida" class="default "></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalUnidad">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO DE LAS UNIDADES DE MEDIDA</h4>
+                    <form id="regiration_form" novalidate method="post">
+                            <h4>Paso 1</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUnidad">Nombre de la unidad de medida<span class="required">*</span></label>
+                                        <input id="TxtUnidad" name="data[TxtUnidad]" class="form-control  limpiar ObligatoriosUnidades" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarUnidadDeMedida()">Guardar</button>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Compra.js"></script>
+
 <!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->

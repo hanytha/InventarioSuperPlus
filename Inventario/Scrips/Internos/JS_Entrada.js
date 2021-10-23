@@ -16,15 +16,15 @@ function CrearTablaEntradas(Data) {
         CodigoHtmlTablaEntradas += "<td>" + Data[i].Cantidad + "</td>";
 
         CodigoHtmlTablaEntradas  += "<td>";
-        CodigoHtmlTablaEntradas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdEntradas + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaEntradas += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].IdEntradas + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaEntradas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdEntradas + ")' data-toggle='modal' data-target='#ModalEntrada'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaEntradas += "<button class='btn btn-danger' onclick='EliminarEntrada(" + Data[i].IdEntradas + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaEntradas  += "</td>";
         CodigoHtmlTablaEntradas  += "</tr>";
     }
     CodigoHtmlTablaEntradas += "</tbody>";
     CodigoHtmlTablaEntradas  += "</table>";
-    document.getElementById("tabla").innerHTML = CodigoHtmlTablaEntradas ;
+    document.getElementById("tablaEntrada").innerHTML = CodigoHtmlTablaEntradas ;
 }
 
 
@@ -119,13 +119,13 @@ function CamposObligatorios() {
 }
 
 //"Elimina" la compra cambia el Estatus
-function EliminarMarca(id) {
+function EliminarEntrada(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Marca/EliminarMarca/?Id=" + id, function (DatoMarca) {
+        $.get("/Entrada/EliminarEntrada/?Id=" + id, function (DatoMarca) {
             if (DatoMarca == 1) {
                 alert("Se elimino correctamente");
-                ConsultaMarcas();
+                ConsultaEntradas();
             } else {
                 alert("Ocurrio un error");
             }

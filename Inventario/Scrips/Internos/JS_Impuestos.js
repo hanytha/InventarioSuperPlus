@@ -7,8 +7,8 @@ function ConsultaImpuesto() {
 }
 function CrearTablaImpuesto(Data) {
     var CodigoHtmlTablaCompra = "";
-    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm'>";
-    CodigoHtmlTablaCompra += "<thead><tr><th>Impuesto</th><th>Porcentaje</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Impuesto</th><th>Porcentaje</th><th>Acción</thead>";
     CodigoHtmlTablaCompra += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra += "<tr>";
@@ -16,7 +16,7 @@ function CrearTablaImpuesto(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Porcentaje + "</td>";
 
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#ModalImpuesto'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarImpuesto(" + Data[i].IdImpuesto + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";
@@ -24,7 +24,7 @@ function CrearTablaImpuesto(Data) {
     }
     CodigoHtmlTablaCompra += "</tbody>";
     CodigoHtmlTablaCompra += "</table>";
-    document.getElementById("tabla").innerHTML = CodigoHtmlTablaCompra;
+    document.getElementById("tablaImpuesto").innerHTML = CodigoHtmlTablaCompra;
 }
 
 
@@ -42,7 +42,7 @@ function LimpiarCampos() {
 }
 //Limpia la información y carga la informacion de la compra
 function editarModal(id) {//la clase AreaObligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("ObligatoriosImpuestos");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
@@ -65,7 +65,7 @@ function editarModal(id) {//la clase AreaObligatorio
 
 //Guarda los cambios y altas de los impuestos
 function GuardarImpuesto() {
-    if (CamposObligatorios() == true) {
+    if (CamposObligatoriosImpuestos() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdImpuesto = sessionStorage.getItem('IDImpuest')
             var Impuestos = document.getElementById("TxtImpuesto").value;
@@ -102,9 +102,9 @@ function GuardarImpuesto() {
 }
 
 //marca los campos obligatorios
-function CamposObligatorios() {
+function CamposObligatoriosImpuestos() {
     var exito = true;
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("ObligatoriosImpuestos");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {

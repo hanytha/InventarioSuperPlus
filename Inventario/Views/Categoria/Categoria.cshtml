@@ -55,14 +55,15 @@
 </div>
 
 <!--Termina tarjeta-->
+<!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
 <!--Mostrar los registros en el accordion-->
-<div id="tabla" class="default "></div>
+<div id="tablaCategoria" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalCategoria">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,24 +73,19 @@
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     <h4>REGISTRO CLASIFICACIÓN</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
-                        <fieldset>
-                            <!--Los pasos del modal-->
+                        <!--Los pasos del modal-->
 
-                            <h4>PASO 1</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                        <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+                        <h4>PASO 1</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
+                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
-                        </fieldset>
+                        </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del modal-->
@@ -100,9 +96,6 @@
         </div>
     </div>
 </div>
-<table>
-</table>
-
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
