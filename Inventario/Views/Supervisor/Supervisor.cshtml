@@ -81,9 +81,9 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbSupervision">Supervisión<span class="required">*</span></label>
                                         <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                            <option>---Seleccione---</option>
-                                            <option>Local</option>
-                                            <option>Foranio</option>
+                                            <option value="0">---Seleccione---</option>
+                                            <option value="1">Local</option>
+                                            <option value="2">Foranio</option>
                                         </select>
 
                                     </div>
@@ -118,3 +118,57 @@
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<script>
+    ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
+    (function () {
+        var template = null
+        $('.modal').on('show.bs.modal', function (event) {
+            if (template == null) {//Valores nulos
+                template = $(this).html()
+
+            } else {
+                $(this).html(template)
+                //Recetear el formulario iniciando del paso 1
+                $(document).ready(function () {
+                    var current = 1, current_step, next_step, steps;
+                    steps = $("fieldset").length;
+                    $(".next").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().next();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(++current);
+                    });
+                    $(".previous").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().prev();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(--current);
+                    });
+                    setProgressBar(current);
+                    // Cambiar la acción de la barra de progreso
+                    function setProgressBar(curStep) {
+                        var percent = parseFloat(100 / steps) * curStep;
+                        percent = percent.toFixed();
+                        $(".progress-bar")
+                            .css("width", percent + "%")
+                            .html(percent + "%")
+                            ;
+                    }
+                    //Termina Recetear el formulario
+                });
+            }
+
+        })
+    })()
+
+    //Deshabilitar el clic externo para el modal del formulario.
+    jQuery(document).ready(function () {
+        jQuery('[data-toggle="modal"]').each(function () {
+            jQuery(this).attr('data-backdrop', 'static');
+            jQuery(this).attr('data-keyboard', 'false');
+        });
+    });
+
+</script>

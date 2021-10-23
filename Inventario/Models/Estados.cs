@@ -10,4 +10,6 @@ namespace Inventario.Models
         public static List<int> idEstado { get; set; }
         public static List<String> nombre { get; set; }
     }
+
+
 }

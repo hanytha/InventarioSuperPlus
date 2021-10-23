@@ -1,4 +1,6 @@
-﻿var imagen64;
+﻿LlenarCMB();
+
+var imagen64;
 CrearAcordeonPagina();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPagina() {
@@ -28,7 +30,6 @@ function AcordeonPagina(Data, CtrlProveedores) {
         CodigoHTMLPagina += "<div class='card-body'>";
         CodigoHTMLPagina += "<div class='row'>";
         CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Mensaje: </strong>" + Data[i].Mensaje + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Abreviatura: </strong>" + Data[i].Abreviatura + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Controlador: </strong>" + Data[i].Controlador + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Icono: </strong>" + Data[i].Icono + "</div>";
         CodigoHTMLPagina += "</div>";
@@ -72,7 +73,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtControlador").value = Data[0].Controlador;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("TxtTipo").value = Data[0].Tipo;
-            document.getElementById("TxtPadre").value = Data[0].Padre;
+            document.getElementById("cmbPadre").value = Data[0].Padre;
             document.getElementById("TxtIconos").value = Data[0].Icono;
         });
     }
@@ -88,6 +89,41 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
+}
+
+
+function LlenarCMB() {
+ 
+    $.get("/Pagina/BDPagina", function (data) {
+        llenarComboPaginas(data, document.getElementById("cmbPadre"), true);
+    });
+}
+
+
+
+
+function llenarComboPaginas(data, control, primerElemento) {
+    var contenido = "";
+    if (primerElemento == true) {
+        contenido += "<option value=''>--Seleccione--</option>";
+    }
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
+
+
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
 }
 //Guarda los cambios y altas de los proveedores
 function GuardarPagina() {

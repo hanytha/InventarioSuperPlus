@@ -22,7 +22,6 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdPagina,
-                    p.Abreviatura,
                     p.Mensaje,
                     p.Accion,
                     p.Controlador,
@@ -41,7 +40,6 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdPagina,
-                    p.Abreviatura,
                     p.Mensaje,
                     p.Accion,
                     p.Controlador,
@@ -78,7 +76,6 @@ namespace Inventario.Controllers
                 {
                     int nveces = InvBD.Pagina.Where(p => p.Mensaje.Equals(DatosPagina.Mensaje)
                     && p.Accion.Equals(DatosPagina.Accion)
-                    && p.Abreviatura.Equals(DatosPagina.Abreviatura)
                     && p.Controlador.Equals(DatosPagina.Controlador)
                     && p.Descripcion.Equals(DatosPagina.Descripcion)
                     && p.Tipo.Equals(DatosPagina.Tipo)
@@ -87,7 +84,6 @@ namespace Inventario.Controllers
                     if (nveces == 0)
                     {
                         Pagina obj = InvBD.Pagina.Where(p => p.IdPagina.Equals(id)).First(); 
-                        obj.Abreviatura = DatosPagina.Abreviatura;
                         obj.Mensaje = DatosPagina.Mensaje;
                         obj.Accion = DatosPagina.Accion;
                         obj.Controlador = DatosPagina.Controlador;
@@ -126,6 +122,31 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+
+
+
+
+        public JsonResult BDPagina()
+        {
+            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdPagina,
+                    Mensaje = p.Mensaje
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
     }
+
 }
+
+
+
+
 

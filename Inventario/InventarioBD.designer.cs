@@ -6190,8 +6190,6 @@ namespace Inventario
 		
 		private long _IdPagina;
 		
-		private string _Abreviatura;
-		
 		private string _Mensaje;
 		
 		private string _Accion;
@@ -6218,8 +6216,6 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdPaginaChanging(long value);
     partial void OnIdPaginaChanged();
-    partial void OnAbreviaturaChanging(string value);
-    partial void OnAbreviaturaChanged();
     partial void OnMensajeChanging(string value);
     partial void OnMensajeChanged();
     partial void OnAccionChanging(string value);
@@ -6261,26 +6257,6 @@ namespace Inventario
 					this._IdPagina = value;
 					this.SendPropertyChanged("IdPagina");
 					this.OnIdPaginaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abreviatura", DbType="VarChar(50)")]
-		public string Abreviatura
-		{
-			get
-			{
-				return this._Abreviatura;
-			}
-			set
-			{
-				if ((this._Abreviatura != value))
-				{
-					this.OnAbreviaturaChanging(value);
-					this.SendPropertyChanging();
-					this._Abreviatura = value;
-					this.SendPropertyChanged("Abreviatura");
-					this.OnAbreviaturaChanged();
 				}
 			}
 		}
@@ -6345,7 +6321,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
 		public string Icono
 		{
 			get
@@ -8565,6 +8541,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArea;
 		
+		private string _Area;
+		
 		private System.Nullable<long> _IdEncargado1;
 		
 		private string _NEncargado1;
@@ -8603,6 +8581,8 @@ namespace Inventario
     partial void OnNoSubAreaChanged();
     partial void OnIdAreaChanging(System.Nullable<long> value);
     partial void OnIdAreaChanged();
+    partial void OnAreaChanging(string value);
+    partial void OnAreaChanged();
     partial void OnIdEncargado1Changing(System.Nullable<long> value);
     partial void OnIdEncargado1Changed();
     partial void OnNEncargado1Changing(string value);
@@ -8712,6 +8692,26 @@ namespace Inventario
 					this._IdArea = value;
 					this.SendPropertyChanged("IdArea");
 					this.OnIdAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(150)")]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this.OnAreaChanging(value);
+					this.SendPropertyChanging();
+					this._Area = value;
+					this.SendPropertyChanged("Area");
+					this.OnAreaChanged();
 				}
 			}
 		}
