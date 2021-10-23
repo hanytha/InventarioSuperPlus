@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioSuperP" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSuperP;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=HP-ELITEBOOK\PDHN17;Initial Catalog=InventarioSuperP;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -269,7 +269,7 @@
       <Column Name="Mensaje" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Accion" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Controlador" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Icono" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Icono" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Tipo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Padre" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -370,7 +370,6 @@
       <Column Name="Nombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="NoSubArea" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Area" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdEncargado1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NEncargado1" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TelefonoE1" Type="System.Int64" DbType="BigInt" CanBeNull="true" />

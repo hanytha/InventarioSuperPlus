@@ -136,7 +136,16 @@ function GuardarPagina() {
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var Tipo = document.getElementById("cmbTipo").value;
+            var TempTipo = document.getElementById("cmbTipo");
+            var Tipo = TempTipo.options[TempTipo.selectedIndex].text;
+         //   var Tipo = document.getElementById("cmbTipo").value;
+
             var Padre = document.getElementById("cmbTipo").value;
+            var TempPadre = document.getElementById("cmbPadre");
+           // var Tipo = TempPadre.options[TempLoca.selectedIndex].text;
+            var Padre = TempPadre.options[TempPadre.selectedIndex].text;
+
+           // var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
             frm.append("IdPagina", IdPagina);
@@ -171,16 +180,6 @@ function GuardarPagina() {
             });
         }
     }
-}
-//Convertir la imagen a 64 bit
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 //marca los campos obligatorios
 function CamposObligatorios() {

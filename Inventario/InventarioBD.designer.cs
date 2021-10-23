@@ -108,7 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -6321,7 +6321,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150)")]
 		public string Icono
 		{
 			get
@@ -8541,8 +8541,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArea;
 		
-		private string _Area;
-		
 		private System.Nullable<long> _IdEncargado1;
 		
 		private string _NEncargado1;
@@ -8581,8 +8579,6 @@ namespace Inventario
     partial void OnNoSubAreaChanged();
     partial void OnIdAreaChanging(System.Nullable<long> value);
     partial void OnIdAreaChanged();
-    partial void OnAreaChanging(string value);
-    partial void OnAreaChanged();
     partial void OnIdEncargado1Changing(System.Nullable<long> value);
     partial void OnIdEncargado1Changed();
     partial void OnNEncargado1Changing(string value);
@@ -8692,26 +8688,6 @@ namespace Inventario
 					this._IdArea = value;
 					this.SendPropertyChanged("IdArea");
 					this.OnIdAreaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(150)")]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this.OnAreaChanging(value);
-					this.SendPropertyChanging();
-					this._Area = value;
-					this.SendPropertyChanged("Area");
-					this.OnAreaChanged();
 				}
 			}
 		}
