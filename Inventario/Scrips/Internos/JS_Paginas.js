@@ -70,8 +70,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtMensaje").value = Data[0].Mensaje;
             document.getElementById("TxtControlador").value = Data[0].Controlador;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("cmbTipo").value = Data[0].Tipo;
-            document.getElementById("cmbPadre").value = Data[0].Padre;
             document.getElementById("TxtIconos").value = Data[0].Icono;
         });
     }

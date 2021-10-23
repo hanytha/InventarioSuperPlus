@@ -123,7 +123,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdPagina,
-                    Mensaje = p.Mensaje
+                    Descripcion = p.Descripcion
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

@@ -1,4 +1,5 @@
-﻿var imagen64;
+﻿MostrarPaginas();
+var imagen64;
 CrearAcordeonPerfil();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPerfil() {
@@ -46,6 +47,7 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
+
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -122,6 +124,7 @@ function GuardarPerfil() {
 
 //marca los campos obligatorios
 function CamposObligatorios() {
+
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -159,6 +162,21 @@ function EliminarPerfil(id) {
 
 
 
+
+
+function MostrarPaginas() {
+    $.get("/Pagina/BDPagina", function (Paginas) {
+        var codigoHtmlPagina = "";
+        codigoHtmlPagina += "<div class='row'>";
+        for (var i = 0; i < Paginas.length; i++) {
+            CodigoHTMLPerfil += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            CodigoHTMLPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font'>" + Paginas[i].Descripcion + "</span>";
+            CodigoHTMLPagina += "</div>";
+        }
+        CodigoHTMLPagina += "</div>";
+        document.getElementById("divPagina").innerHTML = codigoHtmlPagina;
+    });
+}
 
 
 
