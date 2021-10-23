@@ -26,9 +26,7 @@ namespace Inventario.Controllers
                     p.Accion,
                     p.Controlador,
                     p.Icono,
-                    p.Descripcion,
-                    p.Tipo,
-                    p.Padre
+                    p.Descripcion
                 });
             return Json(paginas, JsonRequestBehavior.AllowGet);
         }
@@ -45,8 +43,6 @@ namespace Inventario.Controllers
                     p.Controlador,
                     p.Icono,
                     p.Descripcion,
-                    p.Tipo,
-                    p.Padre
                 });
             return Json(paginas, JsonRequestBehavior.AllowGet);
         }
@@ -78,8 +74,6 @@ namespace Inventario.Controllers
                     && p.Accion.Equals(DatosPagina.Accion)
                     && p.Controlador.Equals(DatosPagina.Controlador)
                     && p.Descripcion.Equals(DatosPagina.Descripcion)
-                    && p.Tipo.Equals(DatosPagina.Tipo)
-                    && p.Padre.Equals(DatosPagina.Padre)
                     && p.Icono.Equals(DatosPagina.Icono)).Count();
                     if (nveces == 0)
                     {
@@ -88,8 +82,6 @@ namespace Inventario.Controllers
                         obj.Accion = DatosPagina.Accion;
                         obj.Controlador = DatosPagina.Controlador;
                         obj.Descripcion = DatosPagina.Descripcion;
-                        obj.Tipo = DatosPagina.Tipo;
-                        obj.Padre = DatosPagina.Padre;
                         obj.Icono = DatosPagina.Icono;
                     InvBD.SubmitChanges();
                         Afectados = 1;

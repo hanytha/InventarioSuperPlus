@@ -108,7 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -6200,10 +6200,6 @@ namespace Inventario
 		
 		private string _Descripcion;
 		
-		private string _Tipo;
-		
-		private System.Nullable<long> _Padre;
-		
 		private int _Estatus;
 		
 		private EntitySet<Configuracion> _Configuracion;
@@ -6226,10 +6222,6 @@ namespace Inventario
     partial void OnIconoChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
-    partial void OnTipoChanging(string value);
-    partial void OnTipoChanged();
-    partial void OnPadreChanging(System.Nullable<long> value);
-    partial void OnPadreChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -6321,7 +6313,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Icono", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
 		public string Icono
 		{
 			get
@@ -6357,46 +6349,6 @@ namespace Inventario
 					this._Descripcion = value;
 					this.SendPropertyChanged("Descripcion");
 					this.OnDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(50)")]
-		public string Tipo
-		{
-			get
-			{
-				return this._Tipo;
-			}
-			set
-			{
-				if ((this._Tipo != value))
-				{
-					this.OnTipoChanging(value);
-					this.SendPropertyChanging();
-					this._Tipo = value;
-					this.SendPropertyChanged("Tipo");
-					this.OnTipoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Padre", DbType="BigInt")]
-		public System.Nullable<long> Padre
-		{
-			get
-			{
-				return this._Padre;
-			}
-			set
-			{
-				if ((this._Padre != value))
-				{
-					this.OnPadreChanging(value);
-					this.SendPropertyChanging();
-					this._Padre = value;
-					this.SendPropertyChanged("Padre");
-					this.OnPadreChanged();
 				}
 			}
 		}
@@ -8541,6 +8493,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArea;
 		
+		private string _Area;
+		
 		private System.Nullable<long> _IdEncargado1;
 		
 		private string _NEncargado1;
@@ -8579,6 +8533,8 @@ namespace Inventario
     partial void OnNoSubAreaChanged();
     partial void OnIdAreaChanging(System.Nullable<long> value);
     partial void OnIdAreaChanged();
+    partial void OnAreaChanging(string value);
+    partial void OnAreaChanged();
     partial void OnIdEncargado1Changing(System.Nullable<long> value);
     partial void OnIdEncargado1Changed();
     partial void OnNEncargado1Changing(string value);
@@ -8688,6 +8644,26 @@ namespace Inventario
 					this._IdArea = value;
 					this.SendPropertyChanged("IdArea");
 					this.OnIdAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(150)")]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this.OnAreaChanging(value);
+					this.SendPropertyChanging();
+					this._Area = value;
+					this.SendPropertyChanged("Area");
+					this.OnAreaChanged();
 				}
 			}
 		}

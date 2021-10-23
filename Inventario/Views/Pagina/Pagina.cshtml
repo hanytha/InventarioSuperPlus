@@ -45,34 +45,21 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
                                         <input type="text" id="TxtMensaje" class="form-control limpiar obligatorio" placeholder="Mensaje">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbTipo">Tipo<span class="required">*</span></label>
-                                        <select id="cmbTipo" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                            <option value="0">---Seleccione---</option>
-                                            <option value="1">Padre</option>
-                                            <option value="2">Hijo</option>
-                                        </select>
+                                        <label class="form-control-label" for="TxtIconos">Icono<span class="required">*</span></label>
+                                        <input type="text" id="TxtIconos" class="form-control limpiar obligatorio" placeholder="Icono">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="form-control-label" for="cmbPadre">Padre<span class="required">*</span></label>
-                                    <select id="cmbPadre" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                    </select>
-                                </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2> Paso 2</h2>
+                           
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -81,17 +68,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
-                            <!-- Agregar la imagen -->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtIconos">Icono<span class="required">*</span></label>
-                                        <input type="text" id="TxtIconos" class="form-control limpiar obligatorio" placeholder="Icono">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                         
                             <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
                             <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                             -->

@@ -22,21 +22,19 @@ function AcordeonPagina(Data, CtrlProveedores) {
         CodigoHTMLPagina += "<h5 class='mb-0'>";
         CodigoHTMLPagina += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPagina + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPagina + "' class='collapsed'>";
         CodigoHTMLPagina += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLPagina += "<span >" + Data[i].Accion + "</span>";
+        CodigoHTMLPagina += "<span >" + Data[i].Mensaje + "</span>";
         CodigoHTMLPagina += "</a>";
         CodigoHTMLPagina += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
         CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPagina + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLPagina += "<div class='card-body'>";
         CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Mensaje: </strong>" + Data[i].Mensaje + "</div>";
+        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Mensaje: </strong>" + Data[i].Accion + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Controlador: </strong>" + Data[i].Controlador + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Icono: </strong>" + Data[i].Icono + "</div>";
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "<div class='row'>";
         CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripcion: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + Data[i].Tipo + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Padre: </strong>" + Data[i].Padre + "</div>";
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -135,16 +133,7 @@ function GuardarPagina() {
 
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Tipo = document.getElementById("cmbTipo").value;
-            var TempTipo = document.getElementById("cmbTipo");
-            var Tipo = TempTipo.options[TempTipo.selectedIndex].text;
-         //   var Tipo = document.getElementById("cmbTipo").value;
-
-            var Padre = document.getElementById("cmbTipo").value;
-            var TempPadre = document.getElementById("cmbPadre");
-           // var Tipo = TempPadre.options[TempLoca.selectedIndex].text;
-            var Padre = TempPadre.options[TempPadre.selectedIndex].text;
-
+          
            // var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
@@ -153,8 +142,6 @@ function GuardarPagina() {
             frm.append("Mensaje", Mensaje);
             frm.append("Controlador", Controlador);
             frm.append("Descripcion", Descripcion);
-            frm.append("Tipo", Tipo);
-            frm.append("Padre", Padre);
             frm.append("Icono", Icono);
             frm.append("Estatus", 1);
             $.ajax({
