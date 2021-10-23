@@ -72,7 +72,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtMensaje").value = Data[0].Mensaje;
             document.getElementById("TxtControlador").value = Data[0].Controlador;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("TxtTipo").value = Data[0].Tipo;
+            document.getElementById("cmbTipo").value = Data[0].Tipo;
             document.getElementById("cmbPadre").value = Data[0].Padre;
             document.getElementById("TxtIconos").value = Data[0].Icono;
         });
@@ -131,18 +131,16 @@ function GuardarPagina() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdPagina = sessionStorage.getItem('IdPagina');
             var Accion = document.getElementById("TxtAccion").value;
-            var Abreviatura = document.getElementById("TxtAbreviatura").value;
             var Mensaje = document.getElementById("TxtMensaje").value;
 
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Tipo = document.getElementById("TxtTipo").value;
-            var Padre = document.getElementById("TxtPadre").value;
+            var Tipo = document.getElementById("cmbTipo").value;
+            var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
             frm.append("IdPagina", IdPagina);
             frm.append("Accion", Accion);
-            frm.append("Abreviatura", Abreviatura);
             frm.append("Mensaje", Mensaje);
             frm.append("Controlador", Controlador);
             frm.append("Descripcion", Descripcion);
