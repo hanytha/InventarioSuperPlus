@@ -1,11 +1,11 @@
-﻿LlenarCMBPrin();
-
+﻿var imagen64;
 CrearAcordeonProveedores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {
         AcordeonProveedores(Data, document.getElementById("accordion"));
     });
+    imagen64 = getBase64Image(document.getElementById("PBFoto"));
 }//Acordeón proveedores
 function AcordeonProveedores(Data, CtrlProveedores) {
     var CodigoHTMLAreas = "";
@@ -58,9 +58,11 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
-        //Botón para modificar y eliminar los datos de losproveedores
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+<<<<<<< HEAD
         // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+=======
+>>>>>>> alma
         CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].IdProveedores + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
@@ -72,7 +74,7 @@ function AcordeonProveedores(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLAreas;
 }
-//imagenes
+//Logo
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
     var file = document.getElementById("BtnFoto").files[0];
@@ -85,26 +87,27 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
         LimpiarCampos();
-        //  sessionStorage.setItem('IDProveedor', '0');  
+        sessionStorage.setItem('IdProveedores', 0);
     }
     else {
-
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
+<<<<<<< HEAD
             sessionStorage.setItem('IDProveedor', Data[0].IdProveedores);     //Variable de sesión
             // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
+=======
+            sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);     //Variable de sesión
+>>>>>>> alma
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
@@ -113,11 +116,11 @@ function abrirModal(id) {//la clase  Obligatorio
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbMunicipio"), true);
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
                 document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
             });
             $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbLocalidad"), true);
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
             document.getElementById("TxtRFC").value = Data[0].RFC;
@@ -132,7 +135,6 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -144,27 +146,12 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-
     //Limpiar las imágenes
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
     }
 }
-
-//llenar los combos Principales
-function LlenarCMBPrin() {
-    $.get("/GLOBAL/BDEstados", function (data) {
-        llenarCombo(data, document.getElementById("cmbEstado"));
-    });
-    // $.get("/GLOBAL/BDAreas", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArea"), true);
-    //  });
-    //  $.get("/Usuarios/BDPerfiles", function (data) {
-    //  llenarCombo(data, document.getElementById("cmbPerfil"), true);
-    //});
-}
-
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
@@ -189,12 +176,15 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-
 //Guarda los cambios y altas de los proveedores
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
+<<<<<<< HEAD
             var IdProveedores = sessionStorage.getItem('IDProveedor');
+=======
+            var IdProveedores = sessionStorage.getItem('IdProveedores');
+>>>>>>> alma
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;
@@ -203,12 +193,11 @@ function GuardarProveedor() {
             var IdEstado = document.getElementById("cmbEstado").value;
             var TempEdo = document.getElementById("cmbEstado");
             var Estado = TempEdo.options[TempEdo.selectedIndex].text;
-            var IDMunicipio = document.getElementById("cmbMunicipio").value;
+            var IdMunicipio = document.getElementById("cmbMunicipio").value;
             var TempMuni = document.getElementById("cmbMunicipio");
             var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
-            var IDLocalidad = document.getElementById("cmbLocalidad").value;
+            var IdLocalidad = document.getElementById("cmbLocalidad").value;
             var TempLoca = document.getElementById("cmbLocalidad");
-            // var NombreL = TempLoca.options[TempLoca.selectedIndex].text;
             var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
             var RFC = document.getElementById("TxtRFC").value;
             var Direccion = document.getElementById("TxtDireccion").value;
@@ -218,7 +207,10 @@ function GuardarProveedor() {
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Nomenclatura = document.getElementById("TxtNomenclatura").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
+            if (Logo.endsWith('png')) {
+                Logo = imagen64.replace("data:image/png;base64,", "");
+            }
             var frm = new FormData();
             frm.append("IdProveedores", IdProveedores);
             frm.append("Nombre", Nombre);
@@ -228,11 +220,10 @@ function GuardarProveedor() {
             frm.append("CodigoPostal", CodigoPostal);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
-            frm.append("IDMunicipio", IDMunicipio);
+            frm.append("IdMunicipio", IdMunicipio);
             frm.append("Municipio", Municipio);
-            frm.append("IDLocalidad", IDLocalidad);
+            frm.append("IdLocalidad", IdLocalidad);
             frm.append("Localidad", Localidad);
-            frm.append("CodigoPostal", CodigoPostal);
             frm.append("RFC", RFC);
             frm.append("Direccion", Direccion);
             frm.append("Telefono", Telefono);
@@ -240,8 +231,8 @@ function GuardarProveedor() {
             frm.append("NumeroDeCuenta", NumeroDeCuenta);
             frm.append("UsoCFDI", UsoCFDI);
             frm.append("Nomenclatura", Nomenclatura);
-            frm.append("Descripcion", Descripcion);
             frm.append("cadF", Logo);
+            frm.append("Descripcion", Descripcion);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -267,6 +258,16 @@ function GuardarProveedor() {
         }
     }
 }
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -275,10 +276,10 @@ function CamposObligatorios() {
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {
             exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+            controlesObligatorio[i].classList.add("border-danger");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("border-danger");
 
         }
     }
@@ -287,9 +288,15 @@ function CamposObligatorios() {
 //"Elimina" el área cambia el Estatus
 function EliminarProveedores(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Proveedores/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
+        $.get("/Proveedores/EliminarProveedor/?IdProveedores=" + id, function (DatoProveedor) {
             if (DatoProveedor == 1) {
-                alert("Se elimino correctamente");
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se elimino correctamente.',
+                    'success'
+                )
+                //  confirmarEliminar();
                 CrearAcordeonProveedores();
             } else {
                 alert("Ocurrio un error");
@@ -297,70 +304,8 @@ function EliminarProveedores(id) {
         });
     }
 }
-////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
-(function () {
-    var template = null
-    $('.modal').on('show.bs.modal', function (event) {
-        if (template == null) {//Valores nulos
-            template = $(this).html()
 
-        } else {
-            $(this).html(template)
-            //Recetear el formulario iniciando del paso 1
-            $(document).ready(function () {
-                var current = 1, current_step, next_step, steps;
-                steps = $("fieldset").length;
-                $(".next").click(function () {
-                    current_step = $(this).parent();
-                    next_step = $(this).parent().next();
-                    next_step.show();
-                    current_step.hide();
-                    setProgressBar(++current);
-                });
-                $(".previous").click(function () {
-                    current_step = $(this).parent();
-                    next_step = $(this).parent().prev();
-                    next_step.show();
-                    current_step.hide();
-                    setProgressBar(--current);
-                });
-                setProgressBar(current);
-                // Cambiar la acción de la barra de progreso
-                function setProgressBar(curStep) {
-                    var percent = parseFloat(100 / steps) * curStep;
-                    percent = percent.toFixed();
-                    $(".progress-bar")
-                        .css("width", percent + "%")
-                        .html(percent + "%");
-                }
-                //Termina Recetear el formulario
-            });
-        }
-        // Cragar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
 
-        //event Change index Estados para llenar el combobox Municipios
-        var IDE = document.getElementById("cmbEstado");
-        IDE.addEventListener("change", function () {
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
-                llenarCombo(data, document.getElementById("cmbMunicipio"));
-            });
-        });
-        //event Change index Municipio para llenar el combo box Municipios 
-        var IDM = document.getElementById("cmbMunicipio");
-        IDM.addEventListener("change", function () {
-            $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
-                llenarCombo(data, document.getElementById("cmbLocalidad"));
-            });
-        });
-    })
-})()
-//Deshabilitar el clic externo para el modal del formulario.
-jQuery(document).ready(function () {
-    jQuery('[data-toggle="modal"]').each(function () {
-        jQuery(this).attr('data-backdrop', 'static');
-        jQuery(this).attr('data-keyboard', 'false');
-    });
-});
 
 
 

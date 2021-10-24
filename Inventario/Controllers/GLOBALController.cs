@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Inventario.Models;
 
 namespace Inventario.Controllers
 {
@@ -15,7 +16,12 @@ namespace Inventario.Controllers
         public JsonResult BDAreas()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+<<<<<<< HEAD
                 .Select(p => new {
+=======
+                .Select(p => new
+                {
+>>>>>>> alma
                     ID = p.IdAreas,
                     p.Nombre,
                     p.UNombre,
@@ -29,27 +35,49 @@ namespace Inventario.Controllers
         public JsonResult BDSubAreas(long IDA)
         {
             var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdSubAreas.Equals(IDA))
+<<<<<<< HEAD
                 .Select(p => new {
+=======
+                .Select(p => new
+                {
+>>>>>>> alma
                     ID = p.IdSubAreas,
                     Nombre = p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
         //consulta Estados
-        public JsonResult BDEstados()
+        public void BDEstados()
         {
+
+            Estados estado = new Estados();//inicializar
+            Estados.idEstado = new List<int>();
+            Estados.nombre = new List<string>();
+
             var datos = InvBD.estados.Where(p => p.activo.Equals(1))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.id,
                     Nombre = p.nombre
                 });
-            return Json(datos, JsonRequestBehavior.AllowGet);
+            foreach (var edos in datos)
+            {
+                Estados.idEstado.Add(edos.ID);
+                Estados.nombre.Add(edos.Nombre);
+            }
+
         }
+
+
+
+
+
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
             var datos = InvBD.municipios.Where(p => p.activo.Equals(1) && p.estado_id.Equals(IDE))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.id,
                     Nombre = p.nombre
                 });
@@ -59,17 +87,39 @@ namespace Inventario.Controllers
         public JsonResult BDLocalidades(int IDM)
         {
             var datos = InvBD.localidades.Where(p => p.activo.Equals(1) && p.municipio_id.Equals(IDM))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.id,
                     Nombre = p.nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Consulta Paginas
+        public JsonResult BDPagina()
+        {
+            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdPagina,
+                    Mensaje = p.Mensaje
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         //consulta Tiendas
         public JsonResult BDTiendas()
         {
             var datos = InvBD.Tienda.Where(p => p.estados.Equals(1))
+<<<<<<< HEAD
                 .Select(p => new {
+=======
+                .Select(p => new
+                {
+>>>>>>> alma
                     ID = p.IdTienda,
                     p.Nombre
                 });
@@ -87,3 +137,5 @@ namespace Inventario.Controllers
         }
     }
 }
+
+   

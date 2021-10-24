@@ -1,4 +1,4 @@
-﻿
+﻿    /*
 //------------------Validar proveedor-------------
 function validarFormularioProveedor() {
 
@@ -30,7 +30,7 @@ function validarFormularioProveedor() {
 
         return false;
     }
-
+ 
     //RazonSocial
     if (TxtRazonSocial == null || TxtRazonSocial.length == 0 || /^\s+$/.test(TxtRazonSocial)) {
         alert('ERROR: El campo RazonSocial  es obligatorio');
@@ -98,12 +98,13 @@ function validarFormularioProveedor() {
         return false;
     }
 
-
+    /*
     //Test campo obligatorio
     if (TxtNomenclatura == null || TxtNomenclatura.length == 0 || /^\s+$/.test(TxtNomenclatura)) {
         alert('ERROR: El campo Nomenclatura es obligatorio');
         return false;
     }
+
     //Test campo obligatorio
     if (TxtDescripcion == null || TxtDescripcion.length == 0 || /^\s+$/.test(TxtDescripcion)) {
         alert('ERROR: El campo Descripcion es obligatorio');
@@ -112,4 +113,4 @@ function validarFormularioProveedor() {
     //el formulario se envia
 
 }
-
+    */

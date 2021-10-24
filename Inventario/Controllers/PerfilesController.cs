@@ -15,12 +15,18 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaPerfiles()
+        //
+        //consulta general de los proveedores
+        public JsonResult ConsultaPefiles()
         {
             var perfiles = InvBD.PerfilDeUsuario.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdPerfilDeUsuario,
+<<<<<<< HEAD
+=======
+                    p.IdPagina,
+>>>>>>> alma
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,
@@ -28,12 +34,22 @@ namespace Inventario.Controllers
                 });
             return Json(perfiles, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaConsultaPerfil(long Id)
+
+        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
+        public JsonResult ConsultaPerfil(long Id)
         {
+<<<<<<< HEAD
             var perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id))
                 .Select(p => new
                 {
                     p.IdPerfilDeUsuario,
+=======
+            var perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdPerfilDeUsuario,
+                    p.IdPagina,
+>>>>>>> alma
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,
@@ -41,5 +57,74 @@ namespace Inventario.Controllers
                 });
             return Json(perfil, JsonRequestBehavior.AllowGet);
         }
+        //Guardar los datos del proveedor
+        public int GuardarPerfil(PerfilDeUsuario DatosPerfil)
+        {
+            int Afectados = 0;
+            try
+            {
+                long id = DatosPerfil.IdPerfilDeUsuario;
+                if (id.Equals(0))
+                {
+                    //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
+                    int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil)).Count();
+                    if (nveces == 0)
+                    {
+                        InvBD.PerfilDeUsuario.InsertOnSubmit(DatosPerfil);
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
+                }
+                else
+                {
+                    int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil)
+                    && p.IdPagina.Equals(DatosPerfil.IdPagina)
+                    && p.Nivel.Equals(DatosPerfil.Nivel)
+                    && p.Permisos.Equals(DatosPerfil.Permisos)
+                    && p.Comentarios.Equals(DatosPerfil.Comentarios)).Count();
+                    if (nveces == 0)
+                    {
+                        PerfilDeUsuario obj = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(id)).First();
+                        obj.IdPagina = DatosPerfil.IdPagina;
+                        obj.Nivel = DatosPerfil.Nivel;
+                        obj.Permisos = DatosPerfil.Permisos;
+                        obj.Comentarios = DatosPerfil.Comentarios;
+                       
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
+            return Afectados;
+        }
+        public int EliminarPerfil(long IdPerfilDeUsuario)
+        {
+            int nregistradosAfectados = 0;
+            try
+            {//Consulta los datos y el primer Id que encuentra  lo compara
+                PerfilDeUsuario Perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(IdPerfilDeUsuario)).First();
+                Perfil.Estatus = 0;//Cambia el estatus en 0
+                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+                nregistradosAfectados = 1;//Se pudo realizar
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
+            return nregistradosAfectados;
+        }
     }
 }
+

@@ -27,7 +27,11 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaUnidadDeMedida(long Id)
         {
+<<<<<<< HEAD
             var medida = InvBD.UnidadDeMedida.Where(p => p.IdUnidadDeMedida.Equals(Id))
+=======
+            var unidadDeMedida = InvBD.UnidadDeMedida.Where(p => p.IdUnidadDeMedida.Equals(Id))
+>>>>>>> alma
                 .Select(p => new
                 {
                     p.IdUnidadDeMedida,

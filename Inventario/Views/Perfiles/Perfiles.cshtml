@@ -32,34 +32,54 @@
                     <form id="regiration_form" novalidate action="action.php" method="post">
                         <fieldset>
                             <h2>Paso 1</h2>
-                            <div class="form-group">
-                                <label for="perfil">Perfil</label>
-                                <input type="text" class="form-control" name="data[perfil]" id="perfil" placeholder="Perfil del usuario">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                        <input type="text" id="TxtPerfil" class="form-control limpiar obligatorio" placeholder="Perfil">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                        <input type="text" id="TxtNivel" class="form-control limpiar obligatorio" placeholder="Nivel">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="nivel">Nivel</label>
-                                <input type="text" class="form-control" name="data[nivel]" id="nivel" placeholder="Nivel">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPermisos">Permisos<span class="required">*</span></label>
+                                        <input type="text" id="TxtPermisos" class="form-control limpiar obligatorio" placeholder="Permisos">
+                                    </div>
+                                </div>
                             </div>
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2>Paso 2</h2>
-                            <div class="form-group">
-                                <label for="permisos">Permisos</label>
-                                <input type="text" class="form-control" id="permisos" name="data[permisos]" placeholder="Permisos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtComentarios">Comentarios<span class="required">*</span></label>
+                                        <textarea id="TxtComentarios" required="required" class="form-control limpiar obligatorio" name="TxtComentarios" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="Comentario">Comentario</label>
-                                <textarea rows="4" class="form-control" placeholder="A few words about you ...">Agrege un comentario...</textarea>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtComentarios">PERMISOS<span class="required">*</span></label>
+                                        <div id="divPagina"></div>
+                                      
+                                    </div>
+                                </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -74,5 +94,66 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Perfiles.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+
+
+<script>
+    ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
+    (function () {
+        var template = null
+        $('.modal').on('show.bs.modal', function (event) {
+            if (template == null) {//Valores nulos
+                template = $(this).html()
+
+            } else {
+                $(this).html(template)
+                //Recetear el formulario iniciando del paso 1
+                $(document).ready(function () {
+                    var current = 1, current_step, next_step, steps;
+                    steps = $("fieldset").length;
+                    $(".next").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().next();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(++current);
+                    });
+                    $(".previous").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().prev();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(--current);
+                    });
+                    setProgressBar(current);
+                    // Cambiar la acción de la barra de progreso
+                    function setProgressBar(curStep) {
+                        var percent = parseFloat(100 / steps) * curStep;
+                        percent = percent.toFixed();
+                        $(".progress-bar")
+                            .css("width", percent + "%")
+                            .html(percent + "%");
+                    }
+                    //Termina Recetear el formulario
+                });
+            }
+
+        })
+    })()
+
+    //Deshabilitar el clic externo para el modal del formulario.
+    jQuery(document).ready(function () {
+        jQuery('[data-toggle="modal"]').each(function () {
+            jQuery(this).attr('data-backdrop', 'static');
+            jQuery(this).attr('data-keyboard', 'false');
+        });
+    });
+
+</script>
+
+

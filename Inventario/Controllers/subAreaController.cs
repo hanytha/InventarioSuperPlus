@@ -24,9 +24,12 @@ namespace Inventario.Controllers
                     p.Area,
                     p.Nombre,
                     p.NoSubArea,
+<<<<<<< HEAD
                     p.NEncargado1,
                     p.TelefonoE1,
                     p.CorreoE1,
+=======
+>>>>>>> alma
                     p.NEncargado2,
                     p.TelefonoE2,
                     p.CorreoE2,
@@ -46,6 +49,7 @@ namespace Inventario.Controllers
                     p.Area,
                     p.Nombre,
                     p.NoSubArea,
+<<<<<<< HEAD
                     p.NEncargado1,
                     p.TelefonoE1,
                     p.CorreoE1,
@@ -72,6 +76,8 @@ namespace Inventario.Controllers
                     p.NEncargado1,
                     p.TelefonoE1,
                     p.CorreoE1,
+=======
+>>>>>>> alma
                     p.NEncargado2,
                     p.TelefonoE2,
                     p.CorreoE2,

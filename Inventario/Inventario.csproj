@@ -93,8 +93,18 @@
     <Content Include="Assets\Imagenes\imagen2.jpg" />
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.jpg" />
+<<<<<<< HEAD
     <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Content\tarjeta.css" />
+=======
+    <Content Include="Assets\Imagenes\pedidos.png" />
+    <Content Include="Assets\Imagenes\proveedor.png" />
+    <Content Include="Assets\Imagenes\tienda.png" />
+    <Content Include="Assets\Imagenes\usuario.png" />
+    <Content Include="Assets\Imagenes\web.png" />
+    <Content Include="Assets\Login\bg4.jpg" />
+    <Content Include="Content\Login.css" />
+>>>>>>> alma
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Tabla.css" />
@@ -118,11 +128,12 @@
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
     <Content Include="Scrips\General\JS_Validaciones.js" />
-    <Content Include="Scrips\General\validator.js" />
+    <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
     <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
+    <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
@@ -137,6 +148,7 @@
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />
+    <Content Include="Scrips\Internos\JS_Login.js" />
     <Content Include="Scrips\jquery-scrollLock.min.js" />
     <Content Include="Scrips\jquery-ui.min.js" />
     <Content Include="Scrips\jquery.min.js" />
@@ -182,8 +194,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\ModeloAreas.cs" />
     <Compile Include="Models\ModeloSubAreas.cs" />
+=======
+    <Compile Include="Models\AccesosController.cs" />
+    <Compile Include="Models\Estados.cs" />
+>>>>>>> alma
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,9 +210,6 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -223,6 +237,7 @@
     <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -232,9 +247,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+=======
+    <Folder Include="Views\accesos\" />
+>>>>>>> alma
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

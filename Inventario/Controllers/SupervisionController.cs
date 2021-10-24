@@ -37,7 +37,11 @@ namespace Inventario.Controllers
             var supervisor = InvBD.Supervisor.Where(p => p.IdSupervision.Equals(Id))
                 .Select(p => new
                 {
+<<<<<<< HEAD
                     p.IdSupervision,
+=======
+                    p.IdSupervisor,
+>>>>>>> alma
                     p.TipoSupervision,
                     p.Tienda,
                     p.Nombre,
