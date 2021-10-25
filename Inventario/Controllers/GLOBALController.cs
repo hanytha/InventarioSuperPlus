@@ -102,17 +102,7 @@ namespace Inventario.Controllers
 
 
         //consulta Tiendas
-        public JsonResult BDTiendas()
-        {
-            var datos = InvBD.Tienda.Where(p => p.estados.Equals(1))
-             
-                .Select(p => new
-                {
-                    ID = p.IdTienda,
-                    p.Nombre
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
+
         //consulta Tiendas
         public JsonResult BDUnidadesMedida()
         {
@@ -120,6 +110,26 @@ namespace Inventario.Controllers
                 .Select(p => new {
                     ID = p.IdUnidadDeMedida,
                    Nombre= p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //consulta Tiendas
+        public JsonResult BDTienda()
+        {
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdTienda,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //consulta Tiendas
+        public JsonResult BDImpuesto()
+        {
+            var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdImpuesto,
+                    Nombre = p.Impuestos
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

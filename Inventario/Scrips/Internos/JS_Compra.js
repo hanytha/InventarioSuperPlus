@@ -1,4 +1,5 @@
-﻿ConsultaCompras();
+﻿LlenarCMBPImpuesto();
+ConsultaCompras();
 function ConsultaCompras() {
     $.get("/Compra/ConsultaCompras", function (Data) {
         CrearTablaCompras(Data);
@@ -8,11 +9,12 @@ function ConsultaCompras() {
 function CrearTablaCompras(Data) {
     var CodigoHtmlTablaCompra = "";
     CodigoHtmlTablaCompra  += "<table id='tablas' class='table'>";
-    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Método de pago</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Método de pago</th><th>Tipo de Impuesto</th><th>Acción</thead>";
     CodigoHtmlTablaCompra  += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra  += "<tr>";
-        CodigoHtmlTablaCompra  += "<td>" + Data[i].MetodoDePago + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].MetodoDePago + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Impuesto + "</td>";
 
         CodigoHtmlTablaCompra  += "<td>";
         CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModalCompra(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#ModalCompra'><i class='fas fa-edit'></i></button>";
@@ -45,6 +47,7 @@ function editarModalCompra(id) {//la clase AreaObligatorio
             sessionStorage.setItem('IDMetodoP', Data[0].IdCompra);
 
             document.getElementById("TxtMetodoDePago").value = Data[0].MetodoDePago;
+            document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
         });
     }
 }
@@ -67,10 +70,15 @@ function GuardarCompra() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDMetodoP')
             var MetodoDePago = document.getElementById("TxtMetodoDePago").value;
+            var IdImpuesto = document.getElementById("cmbImpuesto").value;
+            var TempEdo = document.getElementById("cmbImpuesto");
+            var Impuesto = TempEdo.options[TempEdo.selectedIndex].text;
 
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
             frm.append("MetodoDePago", MetodoDePago);
+            frm.append("IdImpuesto", IdImpuesto);
+            frm.append("Impuesto", Impuesto);
             frm.append("Estatus", 1);
 
             $.ajax({
@@ -127,6 +135,28 @@ function EliminarCompras(id) {
         });
     }
 }
+
+function LlenarCMBPImpuesto() {
+    $.get("/GLOBAL/BDImpuesto", function (data) {
+        llenarCombo(data, document.getElementById("cmbImpuesto"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+
+}
+
+
+
 
 
 //----------------------------------------Impuesto-------------------------------------

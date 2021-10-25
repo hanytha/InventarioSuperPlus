@@ -22,7 +22,9 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdCompra,
-                    p.MetodoDePago
+                    p.MetodoDePago,
+                    p.IdImpuesto,
+                    p.Impuesto
                 });
             return Json(Compras, JsonRequestBehavior.AllowGet);
         }
@@ -32,7 +34,9 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdCompra,
-                    p.MetodoDePago
+                    p.MetodoDePago,
+                    p.IdImpuesto,
+                    p.Impuesto
                 });
             return Json(Compra, JsonRequestBehavior.AllowGet);
         }
@@ -61,11 +65,13 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)).Count();
+                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)&&p.IdImpuesto.Equals(DatosCompra.IdImpuesto)).Count();
                 if (nveces == 0)
                 {
                     Compra obj = InvBD.Compra.Where(p => p.IdCompra.Equals(id)).First();
                     obj.MetodoDePago = DatosCompra.MetodoDePago;
+                    obj.IdImpuesto = DatosCompra.IdImpuesto;
+                    obj.Impuesto = DatosCompra.Impuesto;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

@@ -72,46 +72,52 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE LAS UNIDADES DE MEDIDA</h4>
+                    <h4>REGISTRO DE BONIFICACIONES</h4>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Ingrese el nombre del artículo<span class="required">*</span></label>
-                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombre">Ingrese el nombre del artículo<span class="required">*</span></label>
+                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
-                                        <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
+                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-control-label" for="cmbUnidadM">Unidad de Medida<span class="required">*</span></label>
-                                <select id="cmbUnidadM" style="width: 100%" class="form-control limpiarSelect "></select>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
-                                        <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbUnidadM">Unidad de Medida<span class="required">*</span></label>
+                                    <select id="cmbUnidadM" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtMarca">INGRESE LA MARCA DEL ARTÍCULO<span class="required">*</span></label>
-                                        <input id="TxtMarca" name="data[TxtMarca]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
+                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMarca">INGRESE LA MARCA DEL ARTÍCULO<span class="required">*</span></label>
+                                    <input id="TxtMarca" name="data[TxtMarca]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del diálogo -->
