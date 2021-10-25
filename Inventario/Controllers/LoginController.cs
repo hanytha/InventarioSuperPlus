@@ -24,10 +24,10 @@ namespace Inventario.Controllers
                 string ConSif = Encrypt(Password);
                 using (InventarioBDDataContext InvBD = new InventarioBDDataContext())
                 {
-                    solicitud = InvBD.Usuarios.Where(p => p.Usuario == User && p.Contraseña == ConSif && p.Estatus.Equals(1)).Count();
+                    solicitud = InvBD.Usuarios.Where(p => p.Usuario == User && p.Password == ConSif && p.Estatus.Equals(1)).Count();
                     if (solicitud == 1)
                     {
-                        var DatosUsuario = InvBD.Usuarios.Where(p => p.Usuario == User && p.Contraseña == ConSif && p.Estatus.Equals(1))
+                        var DatosUsuario = InvBD.Usuarios.Where(p => p.Usuario == User && p.Password == ConSif && p.Estatus.Equals(1))
                         .Select(p => new
                         {
                             p.IdUsuarios,
@@ -50,7 +50,7 @@ namespace Inventario.Controllers
                             p.NSArea,
                             p.Usuario,
                             p.FechaIngreso,
-                            p.Contraseña
+                            p.Password
                         }).First();
 
                         Session["Usuario"] = DatosUsuario.IdUsuarios;

@@ -1,5 +1,18 @@
 ﻿var imagen64;
 CrearAcordeonProveedores();
+
+
+
+BloquearCTRL();
+
+    function BloquearCTRL() {
+        var CTRL = document.getElementsByClassName("bloquear");
+        for (var i = 0; i < CTRL.length; i++) {
+            $("#" + CTRL[i].id).attr('disabled', 'disabled');
+        }
+    }
+
+
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaProveedores", function (Data) {

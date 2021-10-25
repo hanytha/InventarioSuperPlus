@@ -59,10 +59,11 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
 function CrearTablaPerfiles(Data) {
     var CodigoHtmlTablaCompra = "";
     CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
     CodigoHtmlTablaCompra += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra += "<tr>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Perfil + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Nivel + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Comentarios + "</td>";
 
@@ -168,7 +169,7 @@ function GuardarPerfil() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonPerfil();
+                        ConsultaPerfiles();
                         document.getElementById("btnCancelar").click();
                     }
                 }
