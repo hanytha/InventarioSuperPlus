@@ -64,6 +64,17 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtPerfil").value = Data[0].Perfil;
             document.getElementById("TxtNivel").value = Data[0].Nivel;
             document.getElementById("divPagina").value = Data[0].Permisos;
+            //Se recorre el checkbox de permisos, separando las opciones concatenadas y se activan las casillas guardados
+            var activar = Data[0].Permisos.split('#');
+            var ChevPermisos = document.getElementsByClassName("checkbox-area");
+            for (let j = 0; j < activar.length; j++) {
+                for (let i = 0; i < ChevPermisos.length; i++) {
+                    if (ChevPermisos[i].id == activar[j]) {
+                        ChevPermisos[i].checked = true;
+                        break;
+                    }
+                }
+            }
             document.getElementById("TxtComentarios").value = Data[0].Comentarios;
         });
     }
@@ -87,7 +98,7 @@ function GuardarPerfil() {
             var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
             var Perfil = document.getElementById("TxtPerfil").value;
             var Nivel = document.getElementById("TxtNivel").value;
-          //  var Permisos = document.getElementById("divPagina").value;
+          //  Se recorre el checkbox de permisos para buscar las casillas seleccionadas, se separan con "#" y se guardan en la base de datos
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
             let seleccionados = "";
             for (let i = 0; i < ChevPermisos.length; i++) {
