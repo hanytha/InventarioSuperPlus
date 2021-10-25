@@ -1,4 +1,16 @@
 ﻿
+
+
+ConsultaPerfiles();
+function ConsultaPerfiles() {
+    $.get("/Perfiles/ConsultaPefiles", function (Data) {
+        CrearTablaPerfiles(Data);
+    }
+    );
+}
+
+/*
+ 
 CrearAcordeonPerfil();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPerfil() {
@@ -42,7 +54,31 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
         CodigoHTMLPerfil += "</div>";
     }
     CtrlPerfiles.innerHTML = CodigoHTMLPerfil;
+}*/
+
+function CrearTablaPerfiles(Data) {
+    var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCompra += "<tr>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Nivel + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Comentarios + "</td>";
+
+        CodigoHtmlTablaCompra += "<td>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].IdPerfilDeUsuario + ",this)'><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaCompra += "</td>";
+        CodigoHtmlTablaCompra += "</tr>";
+    }
+    CodigoHtmlTablaCompra += "</tbody>";
+    CodigoHtmlTablaCompra += "</table>";
+    document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
 }
+
+
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
