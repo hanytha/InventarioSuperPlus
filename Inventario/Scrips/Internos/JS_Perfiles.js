@@ -1,5 +1,4 @@
-﻿MostrarPaginas();
-var imagen64;
+﻿
 CrearAcordeonPerfil();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPerfil() {
@@ -47,7 +46,7 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-
+    MostrarPaginas();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -169,11 +168,11 @@ function MostrarPaginas() {
         var codigoHtmlPagina = "";
         codigoHtmlPagina += "<div class='row'>";
         for (var i = 0; i < Paginas.length; i++) {
-            CodigoHTMLPerfil += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            CodigoHTMLPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font'>" + Paginas[i].Descripcion + "</span>";
-            CodigoHTMLPagina += "</div>";
+            codigoHtmlPagina += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            codigoHtmlPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font'>" + Paginas[i].Descripcion + "</span>";
+            codigoHtmlPagina += "</div>";
         }
-        CodigoHTMLPagina += "</div>";
+        codigoHtmlPagina += "</div>";
         document.getElementById("divPagina").innerHTML = codigoHtmlPagina;
     });
 }

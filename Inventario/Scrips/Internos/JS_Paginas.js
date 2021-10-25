@@ -1,6 +1,4 @@
-﻿LlenarCMB();
-
-var imagen64;
+﻿
 CrearAcordeonPagina();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPagina() {
