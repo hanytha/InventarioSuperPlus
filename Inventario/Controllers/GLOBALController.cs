@@ -133,6 +133,16 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //consulta Supervición
+        public JsonResult BDSupervicion()
+        {
+            var datos = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdSupervision,
+                    Nombre = p.TipoSupervicion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 
