@@ -12,16 +12,13 @@ namespace Inventario.Controllers
         // GET: Index
         public ActionResult Index()
         {
-<<<<<<< HEAD
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
-=======
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();
             cargarEstados.BDEstados();
             //DPto.Clases_Departamentos();
->>>>>>> alma
             return View();
 
         }

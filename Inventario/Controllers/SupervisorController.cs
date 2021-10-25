@@ -37,11 +37,7 @@ namespace Inventario.Controllers
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaSupervisor(long Id)
         {
-<<<<<<< HEAD
-            var supervisor = InvBD.Supervisor.Where(p => p.IdSupervisor.Equals(Id))
-=======
             var supervisor = InvBD.Supervisor.Where(p => p.IdSupervisor.Equals(Id) && p.Estatus.Equals(1))
->>>>>>> alma
                 .Select(p => new
                 {
                     p.IdSupervisor,

@@ -22,10 +22,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdImpuesto,
-<<<<<<< HEAD
                     p.Impuestos,
-=======
->>>>>>> alma
                     p.Porcentaje
 
                 });

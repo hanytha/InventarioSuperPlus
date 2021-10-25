@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="InventarioSuperP" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-<<<<<<< HEAD
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45\SQLEXPRESS;Initial Catalog=InventarioSuperP;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString" Provider="System.Data.SqlClient" />
-=======
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=InventarioSuperP;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString1" Provider="System.Data.SqlClient" />
->>>>>>> alma
+  <Connection Mode="WebSettings" ConnectionString="Data Source=HP-ELITEBOOK\PDHN17;Initial Catalog=InventarioSuperP;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="InventarioSuperPConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

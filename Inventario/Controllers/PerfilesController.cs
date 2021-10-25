@@ -23,10 +23,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdPerfilDeUsuario,
-<<<<<<< HEAD
-=======
                     p.IdPagina,
->>>>>>> alma
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,
@@ -38,18 +35,11 @@ namespace Inventario.Controllers
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaPerfil(long Id)
         {
-<<<<<<< HEAD
-            var perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdPerfilDeUsuario,
-=======
             var perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdPerfilDeUsuario,
                     p.IdPagina,
->>>>>>> alma
                     p.Perfil,
                     p.Nivel,
                     p.Permisos,

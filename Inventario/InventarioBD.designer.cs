@@ -108,11 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-<<<<<<< HEAD
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString"].ConnectionString, mappingSource)
-=======
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString1"].ConnectionString, mappingSource)
->>>>>>> alma
 		{
 			OnCreated();
 		}

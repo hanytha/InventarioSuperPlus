@@ -43,7 +43,6 @@ namespace Inventario.Controllers
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
-<<<<<<< HEAD
         public JsonResult ConsultaProveedor(long Id)
         {//Consulta específico mediante ID
             var proveedor = InvBD.Proveedores.Where(p => p.Estatus.Equals(Id))
@@ -73,19 +72,10 @@ namespace Inventario.Controllers
                 });
             return Json(proveedor, JsonRequestBehavior.AllowGet);
         }
-
-
-        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaProv(long Id)
-        {
-            var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id))
-=======
-        
-        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
+         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProv(long Id)
         {
             var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
->>>>>>> alma
                 .Select(p => new
                 {
                     p.IdProveedores,
@@ -116,10 +106,6 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosProveedor.IdProveedores;
-<<<<<<< HEAD
-
-=======
->>>>>>> alma
                 if (id.Equals(0))
                 {
                     //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
@@ -155,11 +141,8 @@ namespace Inventario.Controllers
                     if (nveces == 0)
                     {
                         Proveedores obj = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(id)).First();
-<<<<<<< HEAD
                         obj.Nombre = DatosProveedor.Nombre;
                         //   obj.Id = DatosProveedor.Id;
-=======
->>>>>>> alma
                         obj.Correo = DatosProveedor.Correo;
                         obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
                         obj.CodigoPostal = DatosProveedor.CodigoPostal;
@@ -197,11 +180,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-<<<<<<< HEAD
-                Proveedores Prvdr = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id)).First();
-=======
                 Proveedores Prvdr = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(IdProveedores)).First();
->>>>>>> alma
                 Prvdr.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

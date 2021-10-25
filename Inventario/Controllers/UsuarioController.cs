@@ -16,8 +16,6 @@ namespace Inventario.Controllers
             return View();
         }
 
-<<<<<<< HEAD
-=======
         public JsonResult ConsultaUsuarios()
         {
             var usuarios = InvBD.Usuarios.Where(p => p.Estatus.Equals(1))
@@ -163,7 +161,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
->>>>>>> alma
     }
 }
 

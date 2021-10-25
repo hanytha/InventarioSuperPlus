@@ -2,12 +2,10 @@
 @{
     ViewBag.Title = "Pagina";
 }
-<<<<<<< HEAD
+
 <!-- Color del texto del modal -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-=======
+
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <h2>Pagina</h2>
 
@@ -17,77 +15,77 @@
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
->>>>>>> alma
+
 <!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h1>PÁGINA</h1>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+
+<div class="modal fade" id="dialogo1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                <h1>PÁGINA</h1>
+
+                <form id="regiration_form" novalidate method="post">
+
+                    <h2> Paso 1</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
+                                <input type="text" id="TxtAccion" class="form-control limpiar obligatorio" placeholder="Acción">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
+                                <input type="text" id="TxtControlador" class="form-control limpiar obligatorio" placeholder="Controlador">
+                            </div>
+                        </div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
-                        <fieldset>
-                            <h2> Paso 1</h2>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
-                                        <input type="text" id="TxtAccion" class="form-control limpiar obligatorio" placeholder="Acción">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
-                                        <input type="text" id="TxtControlador" class="form-control limpiar obligatorio" placeholder="Controlador">
-                                    </div>
-                                </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
+                                <input type="text" id="TxtMensaje" class="form-control limpiar obligatorio" placeholder="Mensaje">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
-                                        <input type="text" id="TxtMensaje" class="form-control limpiar obligatorio" placeholder="Mensaje">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtIconos">Icono<span class="required">*</span></label>
-                                        <input type="text" id="TxtIconos" class="form-control limpiar obligatorio" placeholder="Icono">
-                                    </div>
-                                </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtIconos">Icono<span class="required">*</span></label>
+                                <input type="text" id="TxtIconos" class="form-control limpiar obligatorio" placeholder="Icono">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <textarea id="TxtDescripcion" required="required" class="form-control limpiar obligatorio" name="TxtDescripcion" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
-                                    </div>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                <textarea id="TxtDescripcion" required="required" class="form-control limpiar obligatorio" name="TxtDescripcion" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
                             </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
-                            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
+            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
+            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- pie del modal-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">

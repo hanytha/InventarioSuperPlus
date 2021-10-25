@@ -59,10 +59,6 @@ function AcordeonProveedores(Data, CtrlProveedores) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-<<<<<<< HEAD
-        // CodigoHTMLAreas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].Id + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-=======
->>>>>>> alma
         CodigoHTMLAreas += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarProveedores(" + Data[i].IdProveedores + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
@@ -102,12 +98,7 @@ function abrirModal(id) {//la clase  Obligatorio
     else {
         $.get("/Proveedores/ConsultaProv/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-<<<<<<< HEAD
-            sessionStorage.setItem('IDProveedor', Data[0].IdProveedores);     //Variable de sesión
-            // document.getElementById("TxtIDUsuario").value = data[0].IDUsuario;
-=======
             sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);     //Variable de sesión
->>>>>>> alma
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
@@ -180,11 +171,7 @@ function llenarCombo(data, control) {
 function GuardarProveedor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-<<<<<<< HEAD
-            var IdProveedores = sessionStorage.getItem('IDProveedor');
-=======
             var IdProveedores = sessionStorage.getItem('IdProveedores');
->>>>>>> alma
             var Nombre = document.getElementById("TxtNombre").value;
             var Correo = document.getElementById("Txtcorreo").value;
             var RazonSocial = document.getElementById("TxtRazonSocial").value;

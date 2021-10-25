@@ -92,11 +92,8 @@
     <Content Include="Assets\Imagenes\imagen1.jpg" />
     <Content Include="Assets\Imagenes\imagen2.jpg" />
     <Content Include="Assets\Imagenes\imagen3.png" />
-    <Content Include="Assets\Imagenes\logo.jpg" />
-<<<<<<< HEAD
     <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Content\tarjeta.css" />
-=======
     <Content Include="Assets\Imagenes\pedidos.png" />
     <Content Include="Assets\Imagenes\proveedor.png" />
     <Content Include="Assets\Imagenes\tienda.png" />
@@ -104,7 +101,6 @@
     <Content Include="Assets\Imagenes\web.png" />
     <Content Include="Assets\Login\bg4.jpg" />
     <Content Include="Content\Login.css" />
->>>>>>> alma
     <Content Include="Content\Carrusel.css" />
     <Content Include="Content\CObligatorios.css" />
     <Content Include="Content\Tabla.css" />
@@ -194,13 +190,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\ModeloAreas.cs" />
     <Compile Include="Models\ModeloSubAreas.cs" />
-=======
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
->>>>>>> alma
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +203,9 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -247,18 +243,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-=======
     <Folder Include="Views\accesos\" />
->>>>>>> alma
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
