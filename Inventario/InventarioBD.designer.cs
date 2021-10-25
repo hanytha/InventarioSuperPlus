@@ -108,7 +108,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["InventarioSuperPConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -4294,11 +4294,11 @@ namespace Inventario
 		
 		private long _NoCompra;
 		
-		private System.DateTime _FechaDeIngreso;
+		private string _FechaDeIngreso;
 		
 		private long _ExitenciaInicial;
 		
-		private System.DateTime _FechaFinal;
+		private System.Nullable<System.DateTime> _FechaFinal;
 		
 		private long _ExitenciaActual;
 		
@@ -4324,11 +4324,11 @@ namespace Inventario
     partial void OnIdArticulosChanged();
     partial void OnNoCompraChanging(long value);
     partial void OnNoCompraChanged();
-    partial void OnFechaDeIngresoChanging(System.DateTime value);
+    partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(long value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(System.DateTime value);
+    partial void OnFechaFinalChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(long value);
     partial void OnExitenciaActualChanged();
@@ -4413,8 +4413,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date NOT NULL")]
-		public System.DateTime FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(150)")]
+		public string FechaDeIngreso
 		{
 			get
 			{
@@ -4453,8 +4453,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date NOT NULL")]
-		public System.DateTime FechaFinal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaFinal
 		{
 			get
 			{

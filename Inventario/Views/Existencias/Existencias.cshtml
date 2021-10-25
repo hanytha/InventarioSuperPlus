@@ -76,7 +76,16 @@
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h4>Paso 1</h4>
-
+                            <!--Insertar fecha-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span >*</span></label>
+                                        <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]"  size="25" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Termina-->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -88,8 +97,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="ExitenciaInicial">Existencia Inicial<span class="required">*</span></label>
-                                        <input id="ExitenciaInicial" name="data[ExitenciaInicial]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                        <label class="form-control-label" for="TxtExitenciaInicial">Existencia Inicial<span class="required">*</span></label>
+                                        <input id="TxtExitenciaInicial" name="data[TxtExitenciaInicial]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +137,7 @@
                                         <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
                                         <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="200" height="200" alt="" />
 
-                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiarImg" value="SUBIR" />
                                     </div>
                                 </div>
                             </div>
@@ -139,13 +148,24 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
+
+
+
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngreso').value = fecha;
+
+</script>
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -159,4 +179,3 @@
 <script src="~/Scrips/Internos/JS_Existencias.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-

@@ -34,8 +34,8 @@ namespace Inventario.Controllers
             return Json(existencias, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaExistencia(long Id)
-        {//Consulta específico mediante ID
-            var existencia = InvBD.Existencia.Where(p => p.Estatus.Equals(Id))
+        {
+            var existencia = InvBD.Existencia.Where(p => p.IdExistencia.Equals(Id))
                 .Select(p => new
                 {
                     p.IdExistencia,
@@ -52,28 +52,6 @@ namespace Inventario.Controllers
             return Json(existencia, JsonRequestBehavior.AllowGet);
         }
 
-
-        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaEXT(long Id)
-        {
-            var existencias = InvBD.Existencia.Where(p => p.IdExistencia.Equals(Id))
-                .Select(p => new
-                {
-
-                    p.IdExistencia,
-                    p.IdArticulos,
-                    p.NoCompra,
-                    p.ExitenciaInicial,
-                    p.ExitenciaActual,
-                    p.Coste,
-                    p.TipoDeExistencia,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
-                });
-            return Json(existencias, JsonRequestBehavior.AllowGet);
-        }
-
-        //Guardar los datos del proveedor
-        //Guardar los datos del proveedor
         public int GuardarExistencia(Existencia DatosExistencia, string cadF)
         {
             int Afectados = 0;

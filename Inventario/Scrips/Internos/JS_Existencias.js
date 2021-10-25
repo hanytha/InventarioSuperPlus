@@ -1,10 +1,13 @@
-﻿CrearAcordeonExistencias();
+﻿var imagen64;
+BloquearCTRL();
+CrearAcordeonExistencias();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistencias() {
     $.get("/Existencias/ConsultaExistencias", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonExistencias(Data, document.getElementById("accordion"));
     });
+    imagen64 = getBase64Image(document.getElementById("PBFoto"));
 }
 function AcordeonExistencias(Data, CtrlExistencia) {
     var CodigoHTMLAreas = "";
@@ -27,6 +30,7 @@ function AcordeonExistencias(Data, CtrlExistencia) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdExistencia + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].FechaDeIngreso + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].ExitenciaInicial + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].ExitenciaActual + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Coste + "</div>";
@@ -49,7 +53,7 @@ function AcordeonExistencias(Data, CtrlExistencia) {
     CtrlExistencia.innerHTML = CodigoHTMLAreas;
 }
 
-//imagenes
+//Logo
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
     var file = document.getElementById("BtnFoto").files[0];
@@ -63,7 +67,6 @@ btnFoto.onchange = function (e) {
     reader.readAsDataURL(file);
 }
 
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -75,64 +78,66 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDExt', '0');  
+        sessionStorage.setItem('IDExti', '0');  
     }
     else {
 
         $.get("/Existencias/ConsultaExistencia/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDExt', Data[0].IdExistencia);     //Variable de sesión
+            sessionStorage.setItem('IDExti', Data[0].IdExistencia);
             document.getElementById("TxtNuCompra").value = Data[0].NoCompra;
-            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
+            document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
+            document.getElementById("TxtTipoDeExistencia").value = Data[0].TipoDeExistencia;
             document.getElementById("TxtCosto").value = Data[0].Coste;
-            document.getElementById("TxtTipoDeExistencia").value = Data[0].ClaveInterbancaria;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+
         });
     }
 }
-
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
-    }//Limpiar el campo de select
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
     }
-
     //Limpiar las imágenes
     var controlesImg = document.getElementsByClassName("limpiarImg");
     for (var i = 0; i < controlesImg.length; i++) {
         controlesImg[i].value = null;
     }
 }
-
-
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
 //Guarda los cambios y altas de los proveedores
 function GuardarExistencia() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdExistencia = sessionStorage.getItem('IDExt');
+            var IdExistencia = sessionStorage.getItem('IDExti');
+            var FechaDeIngreso = document.getElementById("TxtFechaIngreso").value;
             var NoCompra = document.getElementById("TxtNuCompra").value;
-            var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
+            var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-            var Coste = document.getElementById("TxtCosto").value;
             var TipoDeExistencia = document.getElementById("TxtTipoDeExistencia").value;
+            var Coste = document.getElementById("TxtCosto").value;
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
-
+            if (Logo.endsWith('png')) {
+                Logo = imagen64.replace("data:image/png;base64,", "");
+            }
             var frm = new FormData();
             frm.append("IdExistencia", IdExistencia);
+            frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("NoCompra", NoCompra);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
-            frm.append("Coste", Coste);
             frm.append("TipoDeExistencia", TipoDeExistencia);
+            frm.append("Coste", Coste);
             frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
@@ -159,6 +164,17 @@ function GuardarExistencia() {
         }
     }
 }
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -179,7 +195,7 @@ function CamposObligatorios() {
 //"Elimina" el área cambia el Estatus
 function EliminarExistencia(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/ConsultaExistencias/EliminarExistencia/?Id=" + id, function (DatoExistencia) {
+        $.get("/Existencias/EliminarExistencia/?Id=" + id, function (DatoExistencia) {
             if (DatoExistencia == 1) {
                 alert("Se elimino correctamente");
                 CrearAcordeonExistencias();
