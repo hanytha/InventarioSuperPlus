@@ -1,4 +1,5 @@
-﻿CrearAcordeonExistenciasAlmacen();
+﻿BloquearCTRL();
+CrearAcordeonExistenciasAlmacen();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistenciasAlmacen() {
     $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacenes", function (Data) {
@@ -27,9 +28,11 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaDeIngreso + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].ExitenciaInicial + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].ExitenciaActual + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Coste + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TipoDeOperacion + "</div>";
         CodigoHTMLAreas += "</div>";
 
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
@@ -76,6 +79,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCosto").value = Data[0].Coste;
+            document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
 
         });
     }
@@ -94,6 +98,12 @@ function LimpiarCampos() {
     }
 }
 
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
 
 //Guarda los cambios y altas de las áreas
@@ -101,17 +111,22 @@ function GuardarAlmacen() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IDGeneral');
+            var FechaDeIngreso = document.getElementById("TxtFechaIngreso").value;
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
             var Coste = document.getElementById("TxtCosto").value;
+            var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
+          
 
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+            frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("NoPedido", NoPedido);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);
+            frm.append("TipoDeOperacion", TipoDeOperacion);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",

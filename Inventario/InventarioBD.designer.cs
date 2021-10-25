@@ -4665,7 +4665,7 @@ namespace Inventario
 		
 		private long _NoPedido;
 		
-		private System.DateTime _FechaDeIngreso;
+		private string _FechaDeIngreso;
 		
 		private long _ExitenciaInicial;
 		
@@ -4691,7 +4691,7 @@ namespace Inventario
     partial void OnIdExistenciasChanged();
     partial void OnNoPedidoChanging(long value);
     partial void OnNoPedidoChanged();
-    partial void OnFechaDeIngresoChanging(System.DateTime value);
+    partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(long value);
     partial void OnExitenciaInicialChanged();
@@ -4777,8 +4777,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date NOT NULL")]
-		public System.DateTime FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string FechaDeIngreso
 		{
 			get
 			{
