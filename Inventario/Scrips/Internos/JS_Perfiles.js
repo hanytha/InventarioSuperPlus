@@ -63,7 +63,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IdPerfilDeUsuario', Data[0].IdPerfilDeUsuario);     //Variable de sesión
             document.getElementById("TxtPerfil").value = Data[0].Perfil;
             document.getElementById("TxtNivel").value = Data[0].Nivel;
-            document.getElementById("TxtPermisos").value = Data[0].Permisos;
+            document.getElementById("divPagina").value = Data[0].Permisos;
             document.getElementById("TxtComentarios").value = Data[0].Comentarios;
         });
     }
@@ -87,7 +87,16 @@ function GuardarPerfil() {
             var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
             var Perfil = document.getElementById("TxtPerfil").value;
             var Nivel = document.getElementById("TxtNivel").value;
-            var Permisos = document.getElementById("TxtPermisos").value;
+          //  var Permisos = document.getElementById("divPagina").value;
+            var ChevPermisos = document.getElementsByClassName("checkbox-area");
+            let seleccionados = "";
+            for (let i = 0; i < ChevPermisos.length; i++) {
+                if (ChevPermisos[i].checked == true) {
+                    seleccionados += ChevPermisos[i].id;
+                    seleccionados += "#";
+                }
+            }
+            var Permisos = seleccionados.substring(0, seleccionados.length - 1);
             var Comentarios = document.getElementById("TxtComentarios").value;
            
             var frm = new FormData();
@@ -108,7 +117,7 @@ function GuardarPerfil() {
                         alert("Ocurrio un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe el perfil");
                     }
                     else {
                         alert("Se ejecuto correctamente");
