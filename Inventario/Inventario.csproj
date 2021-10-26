@@ -120,6 +120,7 @@
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Entrada.js" />
+    <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen.js" />
@@ -181,6 +182,7 @@
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\TipoDeMovimientoController.cs" />
+    <Compile Include="Controllers\TiposDeMovimientoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -236,6 +238,7 @@
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\TipoDeMovimiento\TipoDeMovimiento.cshtml" />
+    <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
