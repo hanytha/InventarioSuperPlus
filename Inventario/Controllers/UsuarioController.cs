@@ -42,32 +42,7 @@ namespace Inventario.Controllers
             var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(Id))
                 .Select(p => new
                 {
-                    p.IdUsuarios,
-                    p.CURP,
-                    p.Nombre,
-                    p.ApellidosP,
-                    p.ApellidosM,
-                    p.Foto,
-                    p.FechaDeNacimiento,
-                    p.IdEstado,
-                    p.IdMunicipio,
-                    p.IdLocalidad,
-                    p.RFC,
-                    p.NoSS,
-                    p.Correo,
-                    p.Telefono,
-                    p.IdPerfil,
-                    p.NArea,
-                    p.NSArea,
-                    p.LvlPerfil,
-                    p.Usuario,
-                    p.FechaIngreso,
-                    p.Password,
-                    p.Estatus,
-                    p.Estado,
-                    p.Municipio,
-                    p.Localidad,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Foto.ToArray()),
+                    p.IdUsuarios
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
         }

@@ -16,28 +16,36 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaPedidosExt()
         {
-            var pedidosExt = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
+            var pedidosExt = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdPedidos,
+                    p.IdPedidosExternos,
                     p.NumeroPedido,
-                    p.NombreArticulo,
                     p.CantidadSolicitada,
+                    p.IdUnidadDeMedida,
+                    p.IdMarca,
+                    p.IdProveedor,
+                    p.IdArticulo,
                     p.Fecha,
+                    p.Estatus
 
                 });
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaPedidoExt(long Id)
         {
-            var pedidoExt = InvBD.Pedidos.Where(p => p.IdPedidos.Equals(Id))
+            var pedidoExt = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(Id))
                 .Select(p => new
                 {
-                    p.IdPedidos,
+                    p.IdPedidosExternos,
                     p.NumeroPedido,
-                    p.NombreArticulo,
                     p.CantidadSolicitada,
-                    p.Fecha
+                    p.IdUnidadDeMedida,
+                    p.IdMarca,
+                    p.IdProveedor,
+                    p.IdArticulo,
+                    p.Fecha,
+                    p.Estatus
 
                 });
             return Json(pedidoExt, JsonRequestBehavior.AllowGet);

@@ -1,8 +1,6 @@
 ﻿
 LlenarCMBPrin();
 
-
-
 var imagen64;
 CrearAcordeonUsuarios();
 //Crea el acordeón e inserta (los registros de la base de datos)
@@ -155,7 +153,7 @@ function abrirModal(id) {//la clase  Obligatorio
         sessionStorage.setItem('IdUsuarios', 0);
     }
     else {
-        $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
+        $.get("/Usuario/ConsultaUsr/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);     //Variable de sesión
             document.getElementById("TxtCURP").value = Data[0].Nombre;

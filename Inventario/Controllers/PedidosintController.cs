@@ -17,35 +17,39 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaPedidosInt()
         {
-            var pedidosInternos = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
+            var pedidosInternos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdPedidos,
+                    p.IdPedidosInternos,
                     p.NumeroPedido,
-                    p.NombreArticulo,
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
-                    p.Destino,
+                    p.IdUnidadDeMedida,
+                    p.IdMarca,
+                    p.IdTienda,
+                    p.IdArticulo,
+                    p.IdExistenciaAlmacenG,
                     p.Fecha,
+                    p.Estatus
                 });
             return Json(pedidosInternos, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ConsultaPedidoInt(long Id)
         {
-            var departamento = InvBD.Pedidos.Where(p => p.IdPedidos.Equals(Id))
+            var departamento = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id))
                 .Select(p => new
                 {
-                    p.IdPedidos,
+                    p.IdPedidosInternos,
                     p.NumeroPedido,
-                    p.NombreArticulo,
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
-                    p.IdProveedor,
-                    p.Usuario,
-                    p.IdArea,
-                    p.Destino,
+                    p.IdUnidadDeMedida,
+                    p.IdMarca,
+                    p.IdTienda,
+                    p.IdArticulo,
+                    p.IdExistenciaAlmacenG,
                     p.Fecha,
                     p.Estatus
                 });

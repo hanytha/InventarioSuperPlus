@@ -105,7 +105,7 @@ namespace Inventario.Controllers
         //consulta Tiendas
         public JsonResult BDTiendas()
         {
-            var datos = InvBD.Tienda.Where(p => p.estados.Equals(1))
+            var datos = InvBD.Tienda.Where(p => p.Estado.Equals(1))
              
                 .Select(p => new
                 {
