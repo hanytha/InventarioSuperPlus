@@ -1,54 +1,56 @@
-﻿
+﻿LlenarCMBPSupervicion();
+
 CrearAcordeonSupervisores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonSupervisores() {
     $.get("/Supervisor/ConsultaSupervisores", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonSupervisores(Data, document.getElementById("accordion"));
     });
-
-}//Acordeón proveedores
-function AcordeonSupervisores(Data, CtrlSupervisores) {
-    var CodigoHTMLSupervisor = "";
+}
+function AcordeonSupervisores(Data, CtrlBonis) {
+    var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLSupervisor += "<div class='card m-b-0'>";
+            CodigoHTMLAreas += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLSupervisor += "<div class='card m-b-0 border-top'>";
-        } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLSupervisor += "<div class='card-header' id='heading" + Data[i].IdSupervisor + "'>";
-        CodigoHTMLSupervisor += "<h5 class='mb-0'>";
-        CodigoHTMLSupervisor += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdSupervisor + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdSupervisor + "' class='collapsed'>";
-        CodigoHTMLSupervisor += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLSupervisor += "<span >" + Data[i].Nombre + "</span>";
-        CodigoHTMLSupervisor += "</a>";
-        CodigoHTMLSupervisor += "</h5>";
+            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+        }
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdSupervisor + "'>";
+        CodigoHTMLAreas += "<h5 class='mb-0'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdSupervisor + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdSupervisor + "' class='collapsed'>";
+        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
+        CodigoHTMLAreas += "</a>";
+        CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLSupervisor += "<div id='collapse" + Data[i].IdSupervisor + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLSupervisor += "<div class='card-body'>";
-        CodigoHTMLSupervisor += "<div class='row'>";
-        CodigoHTMLSupervisor += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>ApellidoP: </strong>" + Data[i].ApellidoP + "</div>";
-        CodigoHTMLSupervisor += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>ApellidoM: </strong>" + Data[i].ApellidoM + "</div>";
-        CodigoHTMLSupervisor += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
- 
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "<div class='row'>";
-        CodigoHTMLSupervisor += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-        CodigoHTMLSupervisor += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>TipoSupervision: </strong>" + Data[i].TipoSupervision + "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLSupervisor += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLSupervisor += "<button class='btn btn-danger' onclick='EliminarSupervisor(" + Data[i].IdSupervisor + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
-        CodigoHTMLSupervisor += "</div>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSupervisor + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].ApellidoP + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].ApellidoM + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Correo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TipoSupervision + "</div>";
+        CodigoHTMLAreas += "</div>";
+
+        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarSupervisor(" + Data[i].IdSupervisor + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
     }
-    CtrlSupervisores.innerHTML = CodigoHTMLSupervisor;
+    CtrlBonis.innerHTML = CodigoHTMLAreas;
 }
+
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -71,34 +73,25 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtApellidoM").value = Data[0].ApellidoM;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
-            document.getElementById("cmbSupervision").value = Data[0].TipoSupervision;
+            document.getElementById("cmbSupervicion").value = Data[0].IdSupervision;
         });
     }
 }
-//limpiar campos
-function LimpiarCampos() {
-    //Limpiar la casilla de texto
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }//Limpiar el campo de select
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
-    }
-}
+
 //Guarda los cambios y altas de los proveedores
-function GuardarSupervisores() {
+function GuardarSupervisor() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdSupervisor = sessionStorage.getItem('IdSupervisor');
             var Nombre = document.getElementById("TxtNombre").value;
             var ApellidoP = document.getElementById("TxtApellidoP").value;
             var ApellidoM = document.getElementById("TxtApellidoM").value;
-
             var Telefono = document.getElementById("TxtTelefono").value;
             var Correo = document.getElementById("TxtCorreo").value;
-            var TipoSupervision = document.getElementById("cmbSupervision").value;
+            var IdSupervision = document.getElementById("cmbSupervicion").value;
+            var TempEdo = document.getElementById("cmbSupervicion");
+            var TipoSupervision = TempEdo.options[TempEdo.selectedIndex].text;
+
             var frm = new FormData();
             frm.append("IdSupervisor", IdSupervisor);
             frm.append("Nombre", Nombre);
@@ -106,6 +99,7 @@ function GuardarSupervisores() {
             frm.append("ApellidoM", ApellidoM);
             frm.append("Telefono", Telefono);
             frm.append("Correo", Correo);
+            frm.append("IdSupervision", IdSupervision);
             frm.append("TipoSupervision", TipoSupervision);
             frm.append("Estatus", 1);
             $.ajax({
@@ -133,6 +127,18 @@ function GuardarSupervisores() {
     }
 }
 
+//limpiar campos
+function LimpiarCampos() {
+    //Limpiar la casilla de texto
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }//Limpiar el campo de select
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -150,18 +156,14 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
 //"Elimina" el área cambia el Estatus
 function EliminarSupervisor(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Supervisor/EliminarSupervisor/?IdSupervisor=" + id, function (DatoSupervisor) {
+
+        $.get("/Supervisor/EliminarSupervisor/?Id=" + id, function (DatoSupervisor) {
             if (DatoSupervisor == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
+                alert("Se elimino correctamente");
                 CrearAcordeonSupervisores();
             } else {
                 alert("Ocurrio un error");
@@ -172,8 +174,21 @@ function EliminarSupervisor(id) {
 
 
 
+function LlenarCMBPSupervicion() {
+    $.get("/GLOBAL/BDSupervicion", function (data) {
+        llenarCombo(data, document.getElementById("cmbSupervicion"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
 
 
-
-
-
+}

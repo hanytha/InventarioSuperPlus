@@ -2,18 +2,66 @@
 @{
     ViewBag.Title = "Supervisor";
 }
-<h2>Supervisor</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
 
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
-
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -25,85 +73,68 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Supervisor</h1>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
-                        <fieldset>
-
-                            <h2>Paso 1</h2>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Nombre<span class="required">*</span></label>
-                                        <input type="text" id="TxtNombre" class="form-control limpiar obligatorio" placeholder="Nombre">
-                                    </div>
+                    <h4>REGISTRO DE BONIFICACIONES</h4>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario--><div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombre">Nombre<span class="required">*</span></label>
+                                    <input type="text" id="TxtNombre" class="form-control limpiar obligatorio" placeholder="Nombre">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtApellidoP">Apellido Paterno<span class="required">*</span></label>
-                                        <input id="TxtApellidoP" class="form-control  limpiar obligatorio" placeholder="Apellido Paterno" maxlength="100" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtApellidoM">Apellido Materno<span class="required">*</span></label>
-                                        <input type="text" id="TxtApellidoM" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Apellido Materno">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtApellidoP">Apellido Paterno<span class="required">*</span></label>
+                                    <input id="TxtApellidoP" class="form-control  limpiar obligatorio" placeholder="Apellido Paterno" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Número telefónico<span class="required">*</span></label>
-                                        <input type="text" id="TxtTelefono" class="form-control limpiar obligatorio" placeholder="Número telefónico">
-                                    </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtApellidoM">Apellido Materno<span class="required">*</span></label>
+                                    <input type="text" id="TxtApellidoM" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Apellido Materno">
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2> Paso 2</h2>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCorreo">Correo electrónico<span class="required">*</span></label>
-                                        <input type="text" id="TxtCorreo" class="form-control limpiar obligatorio" placeholder="Correo electrónico">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTelefono">Número telefónico<span class="required">*</span></label>
+                                    <input type="text" id="TxtTelefono" class="form-control limpiar obligatorio" placeholder="Número telefónico">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span class="required">*</span></label>
-                                        <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                            <option value="0">---Seleccione---</option>
-                                            <option value="1">Local</option>
-                                            <option value="2">Foranio</option>
-                                        </select>
-
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCorreo">Correo electrónico<span class="required">*</span></label>
+                                    <input type="text" id="TxtCorreo" class="form-control limpiar obligatorio" placeholder="Correo electrónico">
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarSupervisores()">Guardar</button>
-                            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-                            -->
-                        </fieldset>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbSupervicion">Tipo de Supervición<span class="required">*</span></label>
+                                    <select id="cmbSupervicion" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="GuardarSupervisor()">Guardar</button>
                     </form>
                 </div>
-                <!-- pie del modal-->
+                <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -113,62 +144,8 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Supervisores.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--sweetalert2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-<script>
-    ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
-    (function () {
-        var template = null
-        $('.modal').on('show.bs.modal', function (event) {
-            if (template == null) {//Valores nulos
-                template = $(this).html()
-
-            } else {
-                $(this).html(template)
-                //Recetear el formulario iniciando del paso 1
-                $(document).ready(function () {
-                    var current = 1, current_step, next_step, steps;
-                    steps = $("fieldset").length;
-                    $(".next").click(function () {
-                        current_step = $(this).parent();
-                        next_step = $(this).parent().next();
-                        next_step.show();
-                        current_step.hide();
-                        setProgressBar(++current);
-                    });
-                    $(".previous").click(function () {
-                        current_step = $(this).parent();
-                        next_step = $(this).parent().prev();
-                        next_step.show();
-                        current_step.hide();
-                        setProgressBar(--current);
-                    });
-                    setProgressBar(current);
-                    // Cambiar la acción de la barra de progreso
-                    function setProgressBar(curStep) {
-                        var percent = parseFloat(100 / steps) * curStep;
-                        percent = percent.toFixed();
-                        $(".progress-bar")
-                            .css("width", percent + "%")
-                            .html(percent + "%")
-                            ;
-                    }
-                    //Termina Recetear el formulario
-                });
-            }
-
-        })
-    })()
-
-    //Deshabilitar el clic externo para el modal del formulario.
-    jQuery(document).ready(function () {
-        jQuery('[data-toggle="modal"]').each(function () {
-            jQuery(this).attr('data-backdrop', 'static');
-            jQuery(this).attr('data-keyboard', 'false');
-        });
-    });
-
-</script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/Plus/scripts.js"></script>
