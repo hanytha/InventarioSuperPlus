@@ -85,10 +85,10 @@ function LlenarCMBPrin() {
     //    llenarCombo(data, document.getElementById("cmbEstado"), true);
     //});
     $.get("/GLOBAL/BDAreas", function (data) {
-        llenarCombo(data, document.getElementById("cmbArea"), true);
+        llenarCombo(data, document.getElementById("cmbArea"));
     });
     $.get("/Usuario/ConsultaPerfiles", function (data) {
-        llenarCombo(data, document.getElementById("cmbPerfil"), true);
+        llenarCombo(data, document.getElementById("cmbPerfil"));
     });
 }
 
@@ -96,29 +96,29 @@ function LlenarCMBPrin() {
 var IDA = document.getElementById("cmbArea");
 IDA.addEventListener("change", function () {
     $.get("/GLOBAL/BDSubAreas/?IDA=" + IDA.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbSubArea"), true);
+        llenarCombo(data, document.getElementById("cmbSubArea"));
     });
 });
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
     $.get("/GLOBAL/BDMunicipio/?IDE=" + IDE.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbMunicipio"), true);
+        llenarCombo(data, document.getElementById("cmbMunicipio"));
     });
 });
 //event Change index Municipio para llenar el combo box Municipios
 var IDM = document.getElementById("cmbMunicipio");
 IDM.addEventListener("change", function () {
     $.get("/GLOBAL/BDLocalidades/?IDM=" + IDM.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbLocalidad"), true);
+        llenarCombo(data, document.getElementById("cmbLocalidad"));
     });
 });
 //funcion general para llenar los select
-function llenarCombo(data, control, primerElemento) {
+function llenarCombo(data, control) {
     var contenido = "";
-    if (primerElemento == true) {
+  
         contenido += "<option value='0'>--Seleccione--</option>";
-    }
+    
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
     }
@@ -175,7 +175,7 @@ function abrirModal(id) {//la clase  Obligatorio
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
             $.get("/GLOBAL/BDSubAreas/?IDA=" + data[0].IDArea, function (Subareas) {
-                llenarCombo(Subareas, document.getElementById("cmbSubArea"), true);
+                llenarCombo(Subareas, document.getElementById("cmbSubArea"));
                 document.getElementById("cmbSubArea").value = data[0].IDSubArea;
             });
             document.getElementById("TxtCorreo").value = Data[0].Correo;

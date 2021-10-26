@@ -29,7 +29,8 @@ namespace Inventario.Controllers
         //consulta SubAreas
         public JsonResult BDSubAreas(long IDA)
         {
-            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdSubAreas.Equals(IDA))
+            // Consulta de todas las subareas activas que pertenezcan a dicha area para mostrarlo en el combo dependiendo de la área que se seleccione
+            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) &&  p.IdArea.Equals(IDA))
                 .Select(p => new
                 {
                     ID = p.IdSubAreas,
