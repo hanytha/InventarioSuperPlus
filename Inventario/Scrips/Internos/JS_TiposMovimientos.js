@@ -16,27 +16,25 @@ function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdTipoDeMovimientos+ "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdMovimientos+ "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdTipoDeMovimientos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdTipoDeMovimientos + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdMovimientos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdMovimientos + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<span >" + Data[i].TipoDeMovimiento + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdTipoDeMovimientos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdMovimientos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].Origen + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Destino + "</div>";
         CodigoHTMLAreas += "</div>";
 
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdTipoDeMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdTipoDeMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -68,11 +66,10 @@ function abrirModal(id) {//la clase  Obligatorio
 
         $.get("/TiposDeMovimiento/ConsultaTipoDeMovimiento/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDTDM', Data[0].IdTipoDeMovimientos);
+            sessionStorage.setItem('IDTDM', Data[0].IdMovimientos);
             document.getElementById("TxtTipoDeMovimiento").value = Data[0].TipoDeMovimiento;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("TxtOrigen").value = Data[0].Origen;
-            document.getElementById("TxtDestino").value = Data[0].Destino;
+
 
 
         });
@@ -104,20 +101,17 @@ function BloquearCTRL() {
 function GuardarTipoDeMovimiento() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdTipoDeMovimientos = sessionStorage.getItem('IDTDM');
+            var IdMovimientos = sessionStorage.getItem('IDTDM');
             var TipoDeMovimiento = document.getElementById("TxtTipoDeMovimiento").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var Origen = document.getElementById("TxtOrigen").value;
-            var Destino = document.getElementById("TxtDestino").value;
 
           
 
             var frm = new FormData();
-            frm.append("IdTipoDeMovimientos", IdTipoDeMovimientos);
+            frm.append("IdMovimientos", IdMovimientos);
             frm.append("TipoDeMovimiento", TipoDeMovimiento);
             frm.append("Descripcion", Descripcion);
-            frm.append("Origen", Origen);
-            frm.append("Destino", Destino);
+
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",

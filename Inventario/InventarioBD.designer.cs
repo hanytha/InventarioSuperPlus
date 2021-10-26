@@ -1625,7 +1625,7 @@ namespace Inventario
 		
 		private string _ClaveSAT;
 		
-		private string _Imagen;
+		private System.Data.Linq.Binary _Logo;
 		
 		private System.DateTime _Fecha;
 		
@@ -1673,8 +1673,8 @@ namespace Inventario
     partial void OnUnidadSATChanged();
     partial void OnClaveSATChanging(string value);
     partial void OnClaveSATChanged();
-    partial void OnImagenChanging(string value);
-    partial void OnImagenChanged();
+    partial void OnLogoChanging(System.Data.Linq.Binary value);
+    partial void OnLogoChanged();
     partial void OnFechaChanging(System.DateTime value);
     partial void OnFechaChanged();
     partial void OnEstatusChanging(int value);
@@ -1930,22 +1930,22 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imagen", DbType="NVarChar(150)")]
-		public string Imagen
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Logo
 		{
 			get
 			{
-				return this._Imagen;
+				return this._Logo;
 			}
 			set
 			{
-				if ((this._Imagen != value))
+				if ((this._Logo != value))
 				{
-					this.OnImagenChanging(value);
+					this.OnLogoChanging(value);
 					this.SendPropertyChanging();
-					this._Imagen = value;
-					this.SendPropertyChanged("Imagen");
-					this.OnImagenChanged();
+					this._Logo = value;
+					this.SendPropertyChanged("Logo");
+					this.OnLogoChanged();
 				}
 			}
 		}
@@ -9579,7 +9579,7 @@ namespace Inventario
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private long _IdTipoDeMovimientos;
+		private long _IdMovimientos;
 		
 		private System.Nullable<long> _IdArticulos;
 		
@@ -9587,11 +9587,9 @@ namespace Inventario
 		
 		private string _TipoDeMovimiento;
 		
+		private System.Nullable<int> _Unidades;
+		
 		private string _Descripcion;
-		
-		private string _Origen;
-		
-		private string _Destino;
 		
 		private int _Estatus;
 		
@@ -9603,20 +9601,18 @@ namespace Inventario
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdTipoDeMovimientosChanging(long value);
-    partial void OnIdTipoDeMovimientosChanged();
+    partial void OnIdMovimientosChanging(long value);
+    partial void OnIdMovimientosChanged();
     partial void OnIdArticulosChanging(System.Nullable<long> value);
     partial void OnIdArticulosChanged();
     partial void OnIdCompraChanging(System.Nullable<long> value);
     partial void OnIdCompraChanged();
     partial void OnTipoDeMovimientoChanging(string value);
     partial void OnTipoDeMovimientoChanged();
+    partial void OnUnidadesChanging(System.Nullable<int> value);
+    partial void OnUnidadesChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
-    partial void OnOrigenChanging(string value);
-    partial void OnOrigenChanged();
-    partial void OnDestinoChanging(string value);
-    partial void OnDestinoChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -9628,22 +9624,22 @@ namespace Inventario
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoDeMovimientos", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long IdTipoDeMovimientos
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMovimientos", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdMovimientos
 		{
 			get
 			{
-				return this._IdTipoDeMovimientos;
+				return this._IdMovimientos;
 			}
 			set
 			{
-				if ((this._IdTipoDeMovimientos != value))
+				if ((this._IdMovimientos != value))
 				{
-					this.OnIdTipoDeMovimientosChanging(value);
+					this.OnIdMovimientosChanging(value);
 					this.SendPropertyChanging();
-					this._IdTipoDeMovimientos = value;
-					this.SendPropertyChanged("IdTipoDeMovimientos");
-					this.OnIdTipoDeMovimientosChanged();
+					this._IdMovimientos = value;
+					this.SendPropertyChanged("IdMovimientos");
+					this.OnIdMovimientosChanged();
 				}
 			}
 		}
@@ -9716,6 +9712,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidades", DbType="Int")]
+		public System.Nullable<int> Unidades
+		{
+			get
+			{
+				return this._Unidades;
+			}
+			set
+			{
+				if ((this._Unidades != value))
+				{
+					this.OnUnidadesChanging(value);
+					this.SendPropertyChanging();
+					this._Unidades = value;
+					this.SendPropertyChanged("Unidades");
+					this.OnUnidadesChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Descripcion
 		{
@@ -9732,46 +9748,6 @@ namespace Inventario
 					this._Descripcion = value;
 					this.SendPropertyChanged("Descripcion");
 					this.OnDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Origen", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Origen
-		{
-			get
-			{
-				return this._Origen;
-			}
-			set
-			{
-				if ((this._Origen != value))
-				{
-					this.OnOrigenChanging(value);
-					this.SendPropertyChanging();
-					this._Origen = value;
-					this.SendPropertyChanged("Origen");
-					this.OnOrigenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destino", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Destino
-		{
-			get
-			{
-				return this._Destino;
-			}
-			set
-			{
-				if ((this._Destino != value))
-				{
-					this.OnDestinoChanging(value);
-					this.SendPropertyChanging();
-					this._Destino = value;
-					this.SendPropertyChanged("Destino");
-					this.OnDestinoChanged();
 				}
 			}
 		}

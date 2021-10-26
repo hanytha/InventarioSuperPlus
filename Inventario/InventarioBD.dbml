@@ -67,7 +67,7 @@
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Imagen" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_Compra" Member="Compra" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="Compra" />
@@ -408,13 +408,12 @@
   </Table>
   <Table Name="dbo.TipoDeMovimientos" Member="TipoDeMovimientos">
     <Type Name="TipoDeMovimientos">
-      <Column Name="IdTipoDeMovimientos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMovimientos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="TipoDeMovimiento" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Unidades" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Origen" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Destino" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_TipoDeMovimientos" Member="Articulos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" />
       <Association Name="Compra_TipoDeMovimientos" Member="Compra" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />

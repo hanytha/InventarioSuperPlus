@@ -20,13 +20,11 @@ namespace Inventario.Controllers
             var movimientos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdTipoDeMovimientos,
+                    p.IdMovimientos,
                     p.IdArticulos,
                     p.IdCompra,
                     p.TipoDeMovimiento,
                     p.Descripcion,
-                    p.Origen,
-                    p.Destino,
                     p.Estatus,
 
                 });
@@ -34,16 +32,14 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaTipoDeMovimiento(long Id)
         {
-            var movimiento = InvBD.TipoDeMovimientos.Where(p => p.IdTipoDeMovimientos.Equals(Id))
+            var movimiento = InvBD.TipoDeMovimientos.Where(p => p.IdMovimientos.Equals(Id))
                 .Select(p => new
                 {
-                    p.IdTipoDeMovimientos,
+                    p.IdMovimientos,
                     p.IdArticulos,
                     p.IdCompra,
                     p.TipoDeMovimiento,
                     p.Descripcion,
-                    p.Origen,
-                    p.Destino,
                     p.Estatus,
 
                 });
@@ -55,7 +51,7 @@ namespace Inventario.Controllers
             int Afectados = 0;
             //try
             //{
-            long id = DatosMovimiento.IdTipoDeMovimientos;
+            long id = DatosMovimiento.IdMovimientos;
             if (id.Equals(0))
             {
                 int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento)).Count();
@@ -74,14 +70,12 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento) && p.Descripcion.Equals(DatosMovimiento.Descripcion) && p.Origen.Equals(DatosMovimiento.Origen) && p.Destino.Equals(DatosMovimiento.Destino)).Count();
+                int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento) && p.Descripcion.Equals(DatosMovimiento.Descripcion) ).Count();
                 if (nveces == 0)
                 {
-                    TipoDeMovimientos obj = InvBD.TipoDeMovimientos.Where(p => p.IdTipoDeMovimientos.Equals(id)).First();
+                    TipoDeMovimientos obj = InvBD.TipoDeMovimientos.Where(p => p.IdMovimientos.Equals(id)).First();
                     obj.TipoDeMovimiento = DatosMovimiento.TipoDeMovimiento;
                     obj.Descripcion = DatosMovimiento.Descripcion;
-                    obj.Origen = DatosMovimiento.Origen;
-                    obj.Destino = DatosMovimiento.Destino;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -107,7 +101,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                TipoDeMovimientos tipoM = InvBD.TipoDeMovimientos.Where(p => p.IdTipoDeMovimientos.Equals(Id)).First();
+                TipoDeMovimientos tipoM = InvBD.TipoDeMovimientos.Where(p => p.IdMovimientos.Equals(Id)).First();
                 tipoM.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
