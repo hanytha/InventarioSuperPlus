@@ -129,7 +129,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdImpuesto,
-                    Nombre = p.Impuestos
+        
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
@@ -140,6 +140,16 @@ namespace Inventario.Controllers
                 .Select(p => new {
                     ID = p.IdSupervision,
                     Nombre = p.TipoSupervicion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDCompra()
+        {
+            var datos = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdCompra,
+               
+                  
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

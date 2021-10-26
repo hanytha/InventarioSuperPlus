@@ -24,7 +24,6 @@ namespace Inventario.Controllers
                     p.TipoSupervicion,
                     p.IdUsuario,
                     p.IdAreas,
-                    p.IdTienda,
                     p.Tienda,
                     p.nombreUsuario,
                     p.Estatus,
@@ -41,7 +40,6 @@ namespace Inventario.Controllers
                     p.TipoSupervicion,
                     p.IdUsuario,
                     p.IdAreas,
-                    p.IdTienda,
                     p.Tienda,
                     p.nombreUsuario,
                     p.Estatus,
@@ -58,7 +56,6 @@ namespace Inventario.Controllers
                     p.TipoSupervicion,
                     p.IdUsuario,
                     p.IdAreas,
-                    p.IdTienda,
                     p.Tienda,
                     p.nombreUsuario,
                     p.Estatus,
@@ -91,12 +88,11 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.IdTienda.Equals(DatosSupervicion.IdTienda) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario)).Count();
+                int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario)).Count();
                 if (nveces == 0)
                 {
                     Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
                     obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
-                    obj.IdTienda = DatosSupervicion.IdTienda;
                     obj.Tienda = DatosSupervicion.Tienda;
                     obj.nombreUsuario = DatosSupervicion.nombreUsuario;
                     InvBD.SubmitChanges();

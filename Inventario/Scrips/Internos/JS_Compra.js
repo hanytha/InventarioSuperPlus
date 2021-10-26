@@ -9,12 +9,13 @@ function ConsultaCompras() {
 function CrearTablaCompras(Data) {
     var CodigoHtmlTablaCompra = "";
     CodigoHtmlTablaCompra  += "<table id='tablas' class='table'>";
-    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Método de pago</th><th>Tipo de Impuesto</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Método de pago</th><th>Tipo de Impuesto</th><th>Tipo de Bonificación</th><th>Acción</thead>";
     CodigoHtmlTablaCompra  += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra  += "<tr>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].MetodoDePago + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Impuesto + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].TipoBonificacion + "</td>";
 
         CodigoHtmlTablaCompra  += "<td>";
         CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModalCompra(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#ModalCompra'><i class='fas fa-edit'></i></button>";
@@ -48,6 +49,7 @@ function editarModalCompra(id) {//la clase AreaObligatorio
 
             document.getElementById("TxtMetodoDePago").value = Data[0].MetodoDePago;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
+            document.getElementById("TxtTipoBonificacion").value = Data[0].TipoBonificacion;
         });
     }
 }
@@ -73,12 +75,14 @@ function GuardarCompra() {
             var IdImpuesto = document.getElementById("cmbImpuesto").value;
             var TempEdo = document.getElementById("cmbImpuesto");
             var Impuesto = TempEdo.options[TempEdo.selectedIndex].text;
+            var TipoBonificacion = document.getElementById("TxtTipoBonificacion").value;
 
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("IdImpuesto", IdImpuesto);
             frm.append("Impuesto", Impuesto);
+            frm.append("TipoBonificacion", TipoBonificacion);
             frm.append("Estatus", 1);
 
             $.ajax({

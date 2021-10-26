@@ -180,6 +180,7 @@
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
+    <Compile Include="Controllers\TipoDeMovimientoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -234,6 +235,7 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\TipoDeMovimiento\TipoDeMovimiento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

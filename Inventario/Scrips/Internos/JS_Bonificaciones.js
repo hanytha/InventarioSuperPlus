@@ -1,4 +1,5 @@
 ﻿LlenarCMBPUnidad();
+LlenarCMCompra();
 CrearAcordeonBonificaciones();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonBonificaciones() {
@@ -29,6 +30,7 @@ function AcordeonBonificaciones(Data, CtrlBonis) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].UnidadDeMedida + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].TipoBonificacion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].Cantidad + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].NombreProveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].MarcaArticulo + "</div>";
@@ -73,6 +75,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombre").value = Data[0].NombreArticulo;
             document.getElementById("TxtCantidad").value = Data[0].Cantidad;
             document.getElementById("cmbUnidadM").value = Data[0].IdUnidadDeMedida;
+            document.getElementById("cmbCompra").value = Data[0].IdCompra;
             document.getElementById("TxtNombreP").value = Data[0].NombreProveedor;
             document.getElementById("TxtMarca").value = Data[0].MarcaArticulo;
 
@@ -93,6 +96,11 @@ function GuardarBonificacion() {
             var IdUnidadDeMedida = document.getElementById("cmbUnidadM").value;
             var TempEdo = document.getElementById("cmbUnidadM");
             var UnidadDeMedida = TempEdo.options[TempEdo.selectedIndex].text;
+
+            var IdCompra = document.getElementById("cmbCompra").value;
+            var TempMuni = document.getElementById("cmbCompra");
+            var Compra = TempMuni.options[TempMuni.selectedIndex].text;
+
             var NombreProveedor = document.getElementById("TxtNombreP").value;
             var MarcaArticulo = document.getElementById("TxtMarca").value;
 
@@ -103,6 +111,8 @@ function GuardarBonificacion() {
             frm.append("Cantidad", Cantidad);
             frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
             frm.append("UnidadDeMedida", UnidadDeMedida);
+            frm.append("IdCompra", IdCompra);
+            frm.append("Compra", Compra);
             frm.append("NombreProveedor", NombreProveedor);
             frm.append("MarcaArticulo", MarcaArticulo);
 
@@ -186,6 +196,25 @@ function LlenarCMBPUnidad() {
         llenarCombo(data, document.getElementById("cmbUnidadM"));
     });
 
+        //funcion general para llenar los select
+        function llenarCombo(data, control) {
+            var contenido = "";
+            contenido += "<option value='0'>--Seleccione--</option>";
+
+            for (var i = 0; i < data.length; i++) {
+                contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+            }
+            control.innerHTML = contenido;
+        }
+
+    }
+
+
+function LlenarCMCompra() {
+    $.get("/GLOBAL/BDCompra", function (data) {
+        llenarCombo(data, document.getElementById("cmbCompra"));
+    });
+
     //funcion general para llenar los select
     function llenarCombo(data, control) {
         var contenido = "";
@@ -197,5 +226,5 @@ function LlenarCMBPUnidad() {
         control.innerHTML = contenido;
     }
 
-
 }
+

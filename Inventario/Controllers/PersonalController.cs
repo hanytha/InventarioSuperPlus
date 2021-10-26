@@ -15,27 +15,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaPersonales()
-        {
-            var personales = InvBD.Personal.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdPersonal,
-                    p.TipoPersonal,
-                    p.NumeroTienda
-                });
-            return Json(personales, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult ConsultaPersonal(long Id)
-        {
-            var personal = InvBD.Personal.Where(p => p.IdPersonal.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdPersonal,
-                    p.TipoPersonal,
-                    p.NumeroTienda
-                });
-            return Json(personal, JsonRequestBehavior.AllowGet);
-        }
+    
     }
 }

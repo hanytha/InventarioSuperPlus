@@ -37,7 +37,6 @@ namespace Inventario.Controllers
                     p.Banco,
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
-                    p.Nomenclatura,
                     p.Descripcion,
                     p.Logo
                 });
@@ -66,7 +65,6 @@ namespace Inventario.Controllers
                     p.Banco,
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
-                    p.Nomenclatura,
                     p.Descripcion,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
@@ -93,7 +91,6 @@ namespace Inventario.Controllers
                     p.Banco,
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
-                    p.Nomenclatura,
                     p.Descripcion,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
@@ -135,7 +132,6 @@ namespace Inventario.Controllers
                     && p.Banco.Equals(DatosProveedor.Banco) 
                     && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) 
                     && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) 
-                    && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura) 
                     && p.Descripcion.Equals(DatosProveedor.Descripcion) 
                     && p.Logo.Equals(DatosProveedor.Logo)).Count();
                     if (nveces == 0)
@@ -157,7 +153,6 @@ namespace Inventario.Controllers
                         obj.Banco = DatosProveedor.Banco;
                         obj.NumeroDeCuenta = DatosProveedor.NumeroDeCuenta;
                         obj.UsoCFDI = DatosProveedor.UsoCFDI;
-                        obj.Nomenclatura = DatosProveedor.Nomenclatura;
                         obj.Descripcion = DatosProveedor.Descripcion;
                         obj.Logo = Convert.FromBase64String(cadF);
                         InvBD.SubmitChanges();

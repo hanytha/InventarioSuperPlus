@@ -179,49 +179,6 @@ function EliminarDepartamento(id) {
 }
 
 
-//---------Validación Departamentos---------
-function validarFormularioD() {
-
-    var TxtNombre = document.getElementById('TxtNombre').value;
-    var TxtUsuario = document.getElementById('TxtUsuario').value;
-    var Txtcorreo = document.getElementById('Txtcorreo').value;
-    var TxtTelefono = document.getElementById('TxtTelefono').value;
-    var TxtCarpeta = document.getElementById('TxtCarpeta').value;
-
-
-    //Test campo obligatorio
-    if (TxtNombre == null || TxtNombre.length == 0 || /^\s+$/.test(TxtNombre)) {
-        alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
-        return false;
-    }
-    //Test campo obligatorio
-    if (TxtUsuario == null || TxtUsuario.length == 0 || /^\s+$/.test(TxtUsuario)) {
-        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario');
-        return false;
-    }
-
-    //Test correo
-    if (!(/\S+@\S+\.\S+/.test(Txtcorreo))) {
-        alert('ERROR: Debe escribir un correo válido');
-        return false;
-    }
-
-    //Test edad
-    if (TxtTelefono == null || TxtTelefono.length == 0 || isNaN(TxtTelefono)) {
-        alert('ERROR: Debe ingresar una edad TxtTelefono');
-        return false;
-
-    }
-    //Test campo obligatorio
-    if (TxtCarpeta == null || TxtCarpeta.length == 0 || /^\s+$/.test(TxtCarpeta)) {
-        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario TxtCarpeta');
-        return false;
-    }
-
-    return true;
-}
-
-
 
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
@@ -288,7 +245,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("ObligatoriosSub");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
@@ -328,7 +285,7 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
 
 //Guarda los cambios y altas de las áreas
 function GuardarSubarea() {
-    if (CamposObligatorios("SubArea") == true) {
+    if (CamposObligatoriosSub("SubArea") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdSubAreas = sessionStorage.getItem('IDSb');
             var IdArea = document.getElementById("cmbArea").value;
@@ -397,6 +354,23 @@ function LimpiarCamposSub() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
+}
+
+//marca los campos obligatorios
+function CamposObligatoriosSub() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("ObligatoriosSub");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
 }
 
 //"Elimina" el área cambia el Estatus
