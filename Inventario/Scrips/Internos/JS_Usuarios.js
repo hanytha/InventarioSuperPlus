@@ -151,7 +151,7 @@ function abrirModal(id) {//la clase  Obligatorio
         $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
 
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);
-   
+
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);     //Variable de sesión
 
@@ -166,7 +166,9 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNSS").value = Data[0].NoSS;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtUsuario").value = Data[0].Usuario;
-     
+            document.getElementById("cmbEstado").value = Data[0].IdEstado;
+            document.getElementById("cmbPerfil").value = Data[0].IdPerfil;
+            document.getElementById("cmbArea").value = Data[0].IdArea;
 
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
@@ -178,15 +180,15 @@ function abrirModal(id) {//la clase  Obligatorio
                 llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
-            $.get("/GLOBAL/BDSubAreas/?IDA=" + data[0].IdArea, function (Subareas) {
+            $.get("/GLOBAL/BDSubAreas/?IDA=" + Data[0].IdArea, function (Subareas) {
                 llenarCombo(Subareas, document.getElementById("cmbSubArea"));
-                document.getElementById("cmbSubArea").value = data[0].IdSubArea;
+                document.getElementById("cmbSubArea").value = Data[0].IdSubArea;
             });
 
-            document.getElementById("Txtpassword").value = data[0].Password;
-            document.getElementById("TxtConfirmacion").value = data[0].Password;
+            document.getElementById("Txtpassword").value = Data[0].Password;
+            document.getElementById("TxtConfirmacion").value = Data[0].Password;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-           
+
         });
     }
 }
