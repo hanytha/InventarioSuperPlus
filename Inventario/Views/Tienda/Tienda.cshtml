@@ -3,13 +3,63 @@
     ViewBag.Title = "Tienda";
 }
 
-<h2>Tienda</h2>
-
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
+
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -21,16 +71,14 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
-                <!-- crearemos un DIV con la clase “progress” que será el artífice para la animación del paso a paso.-->
                 <div class="modal-body">
-                    <h1>REGISTRO DE PROVEEDORES</h1>
+                    <h4>REGISTRO DE ALMACEN GENERAL</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioProveedor()">
-
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h2> Paso 1</h2>
+                            <h4>Paso 1</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -44,16 +92,6 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbEstado">Estado<span class="required">*</span></label>
                                         <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                            <option value="0">--Seleccione--</option>
-                                            @*@{
-                                if (Estados.idEstado != null)
-                                {
-                                    for (int i = 0; i < Estados.idEstado.Count(); i++)
-                                    {
-                                        <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
-                                    }
-                                }
-                            }*@
                                         </select>
                                     </div>
                                 </div>
@@ -157,7 +195,7 @@
                         </fieldset>
                         <fieldset>
                             <h2> Paso 4</h2>
-                          
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -166,7 +204,7 @@
                                     </div>
                                 </div>
                             </div>
-                   
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -186,18 +224,20 @@
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
                             <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-        -->
+                            -->
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="return confirmarAccesoURL()" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger"  data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -205,10 +245,9 @@
     }
 </style>
 <!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion,Navegación del formulario de paso siguiente y anterior mediante jQuery.-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Tienda.js"></script>
-<!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<script src="~/Scrips/General/JS_Botones.js"></script>
-<!--sweetalert2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

@@ -1,42 +1,70 @@
-﻿CrearAcordeonTiendas();
-function CrearAcordeonTiendas() {
-    $.get("/Tienda/ConsultaTiendas", function (Tnda) {
-        var CodHTML = "";
-        for (var i = 0; i < Tnda.length; i++) {
-            CodHTML += "<button onclick='myFunction(Tda" + Tnda[i].Id + ")' class='w3-btn w3-block w3-black w3-left-align'>" + Tnda[i].Nombre + "</button>";
-            CodHTML += "<div id='Tda" + Tnda[i].Id + "' class='w3-container w3-hide'>";
-            CodHTML += "<h4>Nombre:" + Tnda[i].Nombre + "</h4>";
-            CodHTML += "<h4>NombreS:" + Tnda[i].NombreS + "</h4>";
-            CodHTML += "<h4>Unombre:" + Tnda[i].Unombre + "</h4>";
-            CodHTML += "<h4>LNombre:" + Tnda[i].LNombre + "</h4>";
-            CodHTML += "<h4>E1Nombre:" + Tnda[i].E1Nombre + "</h4>";
-            CodHTML += "<h4>E3Nombre:" + Tnda[i].E3Nombre + "</h4>";
-            CodHTML += "<h4>A1Nombre:" + Tnda[i].A1Nombre + "</h4>";
-            CodHTML += "<h4>A2Nombre:" + Tnda[i].A2Nombre + "</h4>";
-            CodHTML += "<h4>A3Nombre:" + Tnda[i].A3Nombre + "</h4>";
-            CodHTML += "<h4>SesionAbierta:" + Tnda[i].SesionAbierta + "</h4>";
-            CodHTML += "<h4>Estado:" + Tnda[i].Estado + "</h4>";
-            CodHTML += "<h4>Municipio:" + Tnda[i].Municipio + "</h4>";
-            CodHTML += "<h4>Localidad:" + Tnda[i].Localidad + "</h4>";
-            CodHTML += "<h4>Calle:" + Tnda[i].Calle + "</h4>";
-            CodHTML += "<h4>CP:" + Tnda[i].CP + "</h4>";
-            CodHTML += "<h4>Telefono:" + Tnda[i].Telefono + "</h4>";
-            CodHTML += "<h4>Latitud:" + Tnda[i].Latitud + "</h4>";
-            CodHTML += "<h4>Longitud:" + Tnda[i].Longitud + "</h4>";
-            CodHTML += "<h4>HApertura:" + Tnda[i].HApertura + "</h4>";
-            CodHTML += "<h4>HCierre:" + Tnda[i].HCierre + "</h4>";
-
-            CodHTML += "</div>";
-        }
-        document.getElementById("accordion").innerHTML = CodHTML;
+﻿CrearAcordeonTienda();
+//Crea el acordeón e inserta (los registros de la base de datos)
+function CrearAcordeonTienda() {
+    $.get("/Tienda/ConsultaTiendas", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+        AcordeonTienda(Data, document.getElementById("accordion"));
     });
+}
+function AcordeonTienda(Data, CtrlAlmacen) {
+    var CodigoHTMLAreas = "";
+    for (var i = 0; i < Data.length; i++) {
+        if (i < 1) {
+            CodigoHTMLAreas += "<div class='card m-b-0'>";
+        }
+        else {
+            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+        }
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdTienda + "'>";
+        CodigoHTMLAreas += "<h5 class='mb-0'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdTienda + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdTienda + "' class='collapsed'>";
+        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
+        CodigoHTMLAreas += "</a>";
+        CodigoHTMLAreas += "</h5>";
+        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdTienda + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].NombreS + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Unombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].LNombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].E1Nombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].E2Nombre + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].E3Nombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].A1Nombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].A2Nombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].A3Nombre + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].IdEstados + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].IdMunicipios + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].IdLocalidades + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].Calle + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].CP + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].Latitud + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Longitud + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].HApertura + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].HCierre + "</div>";
+        CodigoHTMLAreas += "</div>";
 
-}
-function myFunction(Id) {
-    var x = document.getElementById(Id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
+        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdTienda + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarExistenciasG(" + Data[i].IdTienda + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
     }
+    CtrlAlmacen.innerHTML = CodigoHTMLAreas;
 }
+
