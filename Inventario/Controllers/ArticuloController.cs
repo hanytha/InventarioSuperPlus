@@ -31,9 +31,10 @@ namespace Inventario.Controllers
                     p.Descripcion,
                     p.UnidadSAT,
                     p.ClaveSAT,
+                    p.Logo,
                     p.Fecha,
-                    p.Logo
-
+                    p.FechaSistema,
+                    p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
@@ -54,12 +55,15 @@ namespace Inventario.Controllers
                     p.UnidadSAT,
                     p.ClaveSAT,
                     p.Fecha,
+                    p.FechaSistema,
+                    p.Estatus,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
-
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
+
+
         //Guardar los datos de la compra
         public int GuardarArticulo(Articulos DatosArticulo, string cadF)
         {

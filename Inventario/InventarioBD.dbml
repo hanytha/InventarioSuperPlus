@@ -25,8 +25,8 @@
       <Column Name="ApellidosM" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="FechaDeNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="IdEstados" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdMucipios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NoSS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -48,9 +48,9 @@
       <Column Name="SubArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Usuarios_Areas" Member="Areas" ThisKey="IdUsuarios" OtherKey="IdUsuario" Type="Areas" />
-      <Association Name="estados_Usuarios" Member="estados" ThisKey="IdEstados" OtherKey="id" Type="estados" IsForeignKey="true" />
+      <Association Name="estados_Usuarios" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" />
       <Association Name="localidades_Usuarios" Member="localidades" ThisKey="IdLocalidad" OtherKey="id" Type="localidades" IsForeignKey="true" />
-      <Association Name="municipios_Usuarios" Member="municipios" ThisKey="IdMucipios" OtherKey="id" Type="municipios" IsForeignKey="true" />
+      <Association Name="municipios_Usuarios" Member="municipios" ThisKey="IdMunicipio" OtherKey="id" Type="municipios" IsForeignKey="true" />
       <Association Name="PerfilDeUsuario_Usuarios" Member="PerfilDeUsuario" ThisKey="IdPerfil" OtherKey="IdPerfilDeUsuario" Type="PerfilDeUsuario" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -68,7 +68,8 @@
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_Compra" Member="Compra" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="Compra" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />
@@ -146,7 +147,7 @@
       <Column Name="nombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="abrev" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="estados_Usuarios" Member="Usuarios" ThisKey="id" OtherKey="IdEstados" Type="Usuarios" />
+      <Association Name="estados_Usuarios" Member="Usuarios" ThisKey="id" OtherKey="IdEstado" Type="Usuarios" />
       <Association Name="estados_municipios" Member="municipios" ThisKey="id" OtherKey="estado_id" Type="municipios" />
       <Association Name="estados_Proveedores" Member="Proveedores" ThisKey="id" OtherKey="IdEstado" Type="Proveedores" />
     </Type>
@@ -218,8 +219,9 @@
       <Column Name="clave" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="municipios_Usuarios" Member="Usuarios" ThisKey="id" OtherKey="IdMucipios" Type="Usuarios" />
+      <Association Name="municipios_Usuarios" Member="Usuarios" ThisKey="id" OtherKey="IdMunicipio" Type="Usuarios" />
       <Association Name="municipios_localidades" Member="localidades" ThisKey="id" OtherKey="municipio_id" Type="localidades" />
+      <Association Name="municipios_Proveedores" Member="Proveedores" ThisKey="id" OtherKey="IdMunicipio" Type="Proveedores" />
       <Association Name="municipios_Tienda" Member="Tienda" ThisKey="id" OtherKey="IdMunicipios" Type="Tienda" />
       <Association Name="estados_municipios" Member="estados" ThisKey="estado_id" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -315,6 +317,7 @@
       <Association Name="Proveedores_PedidosExternos" Member="PedidosExternos" ThisKey="IdProveedores" OtherKey="IdProveedor" Type="PedidosExternos" />
       <Association Name="estados_Proveedores" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="localidades_Proveedores" Member="localidades" ThisKey="IdLocalidad" OtherKey="id" Type="localidades" IsForeignKey="true" />
+      <Association Name="municipios_Proveedores" Member="municipios" ThisKey="IdMunicipio" OtherKey="id" Type="municipios" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SubAreas" Member="SubAreas">
