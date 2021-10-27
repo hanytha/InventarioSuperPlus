@@ -54,9 +54,6 @@ function AcordeonArticulos(Data, CtrlArti) {
 }
 
 
-
-
-
 //Logo
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
@@ -70,34 +67,30 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDArti', '0');
+        sessionStorage.setItem('IdArt', 0);
     }
     else {
-
         $.get("/Articulo/ConsultaArticulo/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDArti', Data[0].IdExistencia);
+            sessionStorage.setItem('IdArt', Data[0].IdArticulos);     //Variable de sesión
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
-            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
+            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-
         });
     }
 }
@@ -107,36 +100,34 @@ function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
-    }
-    //Limpiar las imágenes
-    var controlesImg = document.getElementsByClassName("limpiarImg");
-    for (var i = 0; i < controlesImg.length; i++) {
-        controlesImg[i].value = null;
-    }
+    }//Limpiar el campo de select
+ 
 }
+
 
 //Guarda los cambios y altas de los proveedores
 function GuardarArticulo() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdArticulos = sessionStorage.getItem('IDArti');
+            var IdArticulos = sessionStorage.getItem('IdArt');
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
+            var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-            var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value; 
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
+            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
             if (Logo.endsWith('png')) {
                 Logo = imagen64.replace("data:image/png;base64,", "");
             }
+
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
             frm.append("NombreProveedor", NombreProveedor);
-            frm.append("Descripcion", Descripcion);
             frm.append("PrecioUnitarioPromedio", PrecioUnitarioPromedio);
+            frm.append("Descripcion", Descripcion);
             frm.append("UnidadSAT", UnidadSAT);
             frm.append("ClaveSAT", ClaveSAT);
             frm.append("Fecha", Fecha);
@@ -176,7 +167,6 @@ function getBase64Image(img) {
     var dataURL = canvas.toDataURL("image/png");
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
-
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -185,18 +175,21 @@ function CamposObligatorios() {
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "") {
             exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+            controlesObligatorio[i].classList.add("border-danger");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("border-danger");
 
         }
     }
     return exito;
 }
+
+
 //"Elimina" el área cambia el Estatus
 function EliminarArticulo(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
+
         $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArticulo) {
             if (DatoArticulo == 1) {
                 alert("Se elimino correctamente");
@@ -207,3 +200,4 @@ function EliminarArticulo(id) {
         });
     }
 }
+

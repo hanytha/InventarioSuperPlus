@@ -219,3 +219,48 @@ function validarFormularioD() {
 }
 
 
+
+//---------Validación Departamentos---------
+function validarFormularioArticulos() {
+
+    var TxtNombreEmpresa = document.getElementById('TxtNombreEmpresa').value;
+    var TxtNombreProveedor = document.getElementById('TxtNombreProveedor').value;
+    var TxtDescripcion = document.getElementById('TxtDescripcion').value;
+    var TxtPrecioUnitarioPromedio = document.getElementById('TxtPrecioUnitarioPromedio').value;
+    var TxtUnidadSAT = document.getElementById('TxtUnidadSAT').value;
+    var TxtClaveSAT = document.getElementById('TxtClaveSAT').value;
+    var TxtFecha = document.getElementById('TxtFecha').value;
+
+    //Test campo obligatorio
+    if (TxtNombreEmpresa == null || TxtNombreEmpresa.length == 0 || /^\s+$/.test(TxtNombreEmpresa)) {
+        alert('ERROR: El campo nombre no debe ir vacío TxtNombreEmpresa');
+        return false;
+    }
+    //Test campo obligatorio
+    if (TxtUsuario == null || TxtUsuario.length == 0 || /^\s+$/.test(TxtUsuario)) {
+        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario');
+        return false;
+    }
+
+    //Test correo
+    if (!(/\S+@\S+\.\S+/.test(Txtcorreo))) {
+        alert('ERROR: Debe escribir un correo válido');
+        return false;
+    }
+
+    //Test edad
+    if (TxtTelefono == null || TxtTelefono.length == 0 || isNaN(TxtTelefono)) {
+        alert('ERROR: Debe ingresar una edad TxtTelefono');
+        return false;
+
+    }
+    //Test campo obligatorio
+    if (TxtCarpeta == null || TxtCarpeta.length == 0 || /^\s+$/.test(TxtCarpeta)) {
+        alert('ERROR: El campo nombre no debe ir vacío TxtUsuario TxtCarpeta');
+        return false;
+    }
+
+    return true;
+}
+
+
