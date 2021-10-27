@@ -5,76 +5,71 @@ var imagen64;
 CrearAcordeonUsuarios();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonUsuarios() {
-    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+    $.get("/Usr/ConsultaUsuarios", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonUsuarios(Data, document.getElementById("accordion"));
     });
     imagen64 = getBase64Image(document.getElementById("PBFoto"));
-}//Acordeón proveedores
-function AcordeonUsuarios(Data, CtrlUsuarios) {
-    var CodigoHTMLUsuario = "";
+}
+function AcordeonUsuarios(Data, CtrlBonis) {
+    var CodigoHTMLUsuarios = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLUsuario += "<div class='card m-b-0'>";
+            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLUsuario += "<div class='card m-b-0 border-top'>";
-        } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLUsuario += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
-        CodigoHTMLUsuario += "<h5 class='mb-0'>";
-        CodigoHTMLUsuario += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
-        CodigoHTMLUsuario += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLUsuario += "<span >" + Data[i].CURP + "</span>";
-        CodigoHTMLUsuario += "</a>";
-        CodigoHTMLUsuario += "</h5>";
+            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
+        }
+        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
+        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
+        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
+        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
+        CodigoHTMLUsuarios += "</a>";
+        CodigoHTMLUsuarios += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLUsuario += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLUsuario += "<div class='card-body'>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>ApellidosP: </strong>" + Data[i].ApellidosP + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].ApellidosM + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Foto: </strong>" + Data[i].Foto + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaDeNacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NArea: </strong>" + Data[i].NArea + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>NSArea: </strong>" + Data[i].NSArea + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>LvlPerfil: </strong>" + Data[i].LvlPerfil + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='row'>";
-        CodigoHTMLUsuario += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
+        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLUsuarios += "<div class='card-body'>";
+        CodigoHTMLUsuarios += "<div class='row'>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CURP: </strong>" + Data[i].Nombre + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CURP: </strong>" + Data[i].Estado + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos PateEstadorno: </strong>" + Data[i].Municipio + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Noss: </strong>" + Data[i].Noss + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NArea: </strong>" + Data[i].Perfil + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NArea: </strong>" + Data[i].NArea + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NSArea: </strong>" + Data[i].NSArea + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].LvlPerfil + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil: </strong>" + Data[i].Perfil + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Password: </strong>" + Data[i].Password + "</div>";
+        CodigoHTMLUsuarios += "</div>";
 
-        CodigoHTMLUsuario += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Contraseña: </strong>" + Data[i].Password + "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLUsuario += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#diaFoto1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLUsuario += "<button class='btn btn-danger' onclick='EliminarUsuarioses(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
-        CodigoHTMLUsuario += "</div>";
+        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "</div>";
+        CodigoHTMLUsuarios += "</div>";
     }
-    CtrlUsuarios.innerHTML = CodigoHTMLUsuario;
+    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
 }
+
 
 
 //llena los combosprincipales
@@ -150,18 +145,29 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IdUsuarios', 0);
+        sessionStorage.setItem('IdUsuarios', '0');
     }
     else {
-        $.get("/Usuario/ConsultaUsr/?Id=" + id, function (Data) {
+        $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
+
+            sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);
+   
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);     //Variable de sesión
-            document.getElementById("TxtCURP").value = Data[0].Nombre;
+
+            document.getElementById("TxtCURP").value = Data[0].CURP;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtApellidoP").value = Data[0].Nombre;
-            document.getElementById("TxtApellidoM").value = Data[0].Nombre;
-            document.getElementById("TxtFechaN").value = Data[0].Nombre;
-            document.getElementById("TxtRFC").value = Data[0].Nombre;
+            document.getElementById("TxtApellidoP").value = Data[0].ApellidosP;
+            document.getElementById("TxtApellidoM").value = Data[0].ApellidosM;
+            document.getElementById("TxtFechaN").value = Data[0].FechaDeNacimiento;
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtNSS").value = Data[0].NoSS;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtUsuario").value = Data[0].Usuario;
+     
+
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
@@ -172,16 +178,15 @@ function abrirModal(id) {//la clase  Obligatorio
                 llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
-            $.get("/GLOBAL/BDSubAreas/?IDA=" + data[0].IDArea, function (Subareas) {
+            $.get("/GLOBAL/BDSubAreas/?IDA=" + data[0].IdArea, function (Subareas) {
                 llenarCombo(Subareas, document.getElementById("cmbSubArea"));
-                document.getElementById("cmbSubArea").value = data[0].IDSubArea;
+                document.getElementById("cmbSubArea").value = data[0].IdSubArea;
             });
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
-            document.getElementById("TxtNSS").value = Data[0].RFC;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            document.getElementById("Txtpassword").value = data[0].Contraseña;
-            document.getElementById("TxtConfirmacion").value = data[0].Contraseña;
+
+            document.getElementById("Txtpassword").value = data[0].Password;
+            document.getElementById("TxtConfirmacion").value = data[0].Password;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+           
         });
     }
 }
@@ -196,11 +201,7 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-    //Limpiar las imágenes
-    var controlesImg = document.getElementsByClassName("limpiarImg");
-    for (var i = 0; i < controlesImg.length; i++) {
-        controlesImg[i].value = null;
-    }
+    
 }
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
@@ -216,6 +217,99 @@ IDM.addEventListener("change", function () {
         llenarCombo(data, document.getElementById("cmbLocalidad"));
     });
 });
+
+
+
+
+function Guardar() {
+    if (CamposObligatorios() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdUsuarios = sessionStorage.getItem('IdUsuarios');
+            var CURP = document.getElementById("TxtCURP").value;
+            var Nombre = document.getElementById("TxtNombre").value;
+            var ApellidoP = document.getElementById("TxtApellidoP").value;
+            var ApellidoM = document.getElementById("TxtApellidoM").value;
+            var RFC = document.getElementById("TxtFechaN").value;
+            var IdEstado = document.getElementById("cmbEstado").value;
+            var TempEdo = document.getElementById("cmbEstado");
+            var Estado = TempEdo.options[TempEdo.selectedIndex].text;
+            var IdMunicipio = document.getElementById("cmbMunicipio").value;
+            var TempMuni = document.getElementById("cmbMunicipio");
+            var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
+            var IdLocalidad = document.getElementById("cmbLocalidad").value;
+            var TempLoca = document.getElementById("cmbLocalidad");
+            var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
+            var NoSS = document.getElementById("TxtNSS").value;
+            var Telefono = document.getElementById("Txtelefono").value;
+            var IDArea = document.getElementById("cmbArea").value;
+            var TempNA = document.getElementById("cmbArea");
+            var NombreA = TempNA.options[TempNA.selectedIndex].text;
+            var IDSubArea = document.getElementById("cmbSubArea").value;
+            var TempNSA = document.getElementById("cmbSubArea");
+            var NombreAS = TempNSA.options[TempNSA.selectedIndex].text;
+            var IDPerfil = document.getElementById("cmbPerfil").value;
+            var TempPerf = document.getElementById("cmbPerfil");
+            var Perfil = TempPerf.options[TempPerf.selectedIndex].text;
+            var Usuario = document.getElementById("TxtUsuario").value;
+            var TempEdo = document.getElementById("cmbSupervicion");
+            var Foto = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
+            var Password = document.getElementById("Txtpassword").value;
+
+            var frm = new FormData();
+            frm.append("IdUsuarios", IdUsuarios);
+            frm.append("CURP", CURP);
+            frm.append("Nombre", Nombre);
+            frm.append("ApellidoP", ApellidoP);
+            frm.append("ApellidoM", ApellidoM);
+            frm.append("FechaDeNacimiento", Telefono);
+            frm.append("RFC", RFC);
+            frm.append("IdEstado", IdEstado);
+            frm.append("Estado", Estado);
+            frm.append("IdMunicipio", IdMunicipio);
+            frm.append("Municipio", Municipio);
+            frm.append("IdLocalidad", IdLocalidad);
+            frm.append("Localidad", Localidad);
+            frm.append("NoSS", NoSS);
+            frm.append("Telefono", Telefono);
+            frm.append("IDArea", IDArea);
+            frm.append("NombreA", NombreA);
+            frm.append("IDSubArea", IDSubArea);
+            frm.append("NombreAS", NombreAS);
+            frm.append("IDPerfil", IDPerfil);
+            frm.append("Perfil", Perfil);
+            frm.append("Usuario", Usuario);
+            frm.append("cadF", Foto);
+            frm.append("Password", Password);
+
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Usuario/GuardarUsuario",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    if (data == 0) {
+                        alert("Ocurrio un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe el supervidor");
+                    }
+                    else {
+                        alert("Se ejecutó correctamente");
+                        CrearAcordeonUsuarios();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
+    }
+}
+
+
+
+
 
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
@@ -243,7 +337,7 @@ function GuardarUsuario() {
                 var NoSS = document.getElementById("TxtNSS").value;
                 var Correo = document.getElementById("TxtCorreo").value;
                 var Telefono = document.getElementById("Txtelefono").value;
-                var FNacimiento = document.getElementById("TxtFnaci").value;
+                var FNacimiento = document.getElementById("TxtFechaN").value;
                 var IdArea = document.getElementById("cmbArea").value;
                 var TempNA = document.getElementById("cmbArea");
                 var NombreA = TempNA.options[TempNA.selectedIndex].text;
@@ -254,13 +348,11 @@ function GuardarUsuario() {
                 var TempPerf = document.getElementById("cmbPerfil");
                 var Perfil = TempPerf.options[TempPerf.selectedIndex].text;
                 var Usuario = document.getElementById("TxtUsuario").value;
-
-                var Descripcion = document.getElementById("TxtDescripcion").value;
                 var Foto = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
                 if (Foto.endsWith('png')) {
                     Foto = imagen64.replace("data:image/png;base64,", "");
                 }
-                var password = document.getElementById("TxtContrasena").value;
+                var password = document.getElementById("Txtpassword").value;
                 var Correo = document.getElementById("TxtCorreo").value;
                 var f = new Date();
                 var FechaIngreso = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
@@ -288,8 +380,11 @@ function GuardarUsuario() {
                 frm.append("IdSubArea", IdSubArea);
                 frm.append("NombreAS", NombreAS);
                 frm.append("IdPerfil", IdPerfil);
+                frm.append("Perfil", Perfil);
+                frm.append("FechaIngreso", FechaIngreso);
+                frm.append("Usuario", Usuario);
                 frm.append("cadF", Foto);
-                frm.append("Descripcion", Descripcion);
+                frm.append("password", password);
                 frm.append("Estatus", 1);
                 $.ajax({
                     type: "POST",
@@ -347,7 +442,7 @@ function CamposObligatorios() {
     return exito;
 }
 //"Elimina" el área cambia el Estatus
-function EliminarUsuarioses(id) {
+function EliminarUsuario(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Usuario/EliminarUsuarios/?IdUsuarios=" + id, function (DatoUsuario) {
             if (DatoUsuario == 1) {

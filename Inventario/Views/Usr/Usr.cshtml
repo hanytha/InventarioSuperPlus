@@ -1,12 +1,13 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "Usuario";
+    ViewBag.Title = "Usr";
 }
 
-<h2>Usuario</h2>
-<!--Titulo-->
-<link href="~/Content/Tabla.css" rel="stylesheet" />
+<h2>Usr</h2>
+
+
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
@@ -51,6 +52,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -60,6 +62,7 @@
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -80,17 +83,27 @@
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h4>Paso 1</h4>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCURP">ID<span class="required">*</span></label>
+                                        <input id="TxtCURP" name="data[TxtCURP]" class="form-control  limpiar obligatorio" placeholder="CURP" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCURP">Clave Única de Registro de Población<span class="required">*</span></label>
-                                        <input id="TxtCURP" name="data[TxtCURP]" class="form-control  limpiar obligatorio" placeholder="CURP" size="15" maxlength="20" type="text">
+                                        <input id="TxtCURP" name="data[TxtCURP]" class="form-control  limpiar obligatorio" placeholder="CURP" maxlength="100" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNombre">Nombre<span class="required">*</span></label>
-                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -99,13 +112,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtApellidoP">Apelido Paterno<span class="required">*</span></label>
-                                        <input id="TxtApellidoP" name="data[TxtApellidoP]" class="form-control  limpiar obligatorio" placeholder="Apellido paterno" size="15" maxlength="20" type="text">
+                                        <input id="TxtApellidoP" name="data[TxtApellidoP]" class="form-control  limpiar obligatorio" placeholder="Apellido paterno" maxlength="100" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtApellidoM">Apelido Materno<span class="required">*</span></label>
-                                        <input id="TxtApellidoM" name="data[TxtApellidoM]" class="form-control  limpiar obligatorio" placeholder="Apelido Materno" size="30" maxlength="100" type="text">
+                                        <input id="TxtApellidoM" name="data[TxtApellidoM]" class="form-control  limpiar obligatorio" placeholder="Apelido Materno" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -138,14 +151,14 @@
                                         <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio">
                                             <option value="0">--Seleccione--</option>
                                             @{
-                                                if (Estados.idEstado != null)
-                                                {
-                                                    for (int i = 0; i < Estados.idEstado.Count(); i++)
-                                                    {
-                                                        <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
-                                                    }
-                                                }
-                                            }
+                            if (Estados.idEstado != null)
+                            {
+                                for (int i = 0; i < Estados.idEstado.Count(); i++)
+                                {
+                                    <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
+                                }
+                            }
+                        }
                                         </select>
                                     </div>
                                 </div>
@@ -166,10 +179,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCorreo">Correo electrónico<span class="required">*</span></label>
-                                        <input type="email" class="form-control" id="TxtCorreo" name="data[Txtemail]" placeholder="Email">
+                                        <input type="text" id="TxtCorreo" class="form-control limpiar obligatorio" placeholder="Correo electrónico">
                                     </div>
                                 </div>
                             </div>
@@ -186,13 +199,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNSS">Número de Seguro Social<span class="required">*</span></label>
-                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" placeholder="NSS" size="15" maxlength="20" type="text">
+                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" maxlength="100" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Número de teléfono<span class="required">*</span></label>
-                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Número de teléfono" size="30" maxlength="100" type="text">
+                                        <label class="form-control-label" for="Txtelefono">Número de teléfono<span class="required">*</span></label>
+                                        <input id="Txtelefono" name="data[Txtelefono]" class="form-control  limpiar obligatorio"  maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +245,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtUsuario">Usuario</label>
-                                        <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar" placeholder="Usuario" type="text">
+                                        <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar" placeholder="Usuario"  maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -250,23 +263,23 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="Txtpassword">Contraseña<span class="required">*</span></label>
-                                        <input type="password" class="form-control" id="Txtpassword" name="data[Txtpassword]" placeholder="Contraseña">
+                                        <input type="password" class="form-control" id="Txtpassword" name="data[Txtemail]" placeholder="Contraseña"  maxlength="100" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtConfirmacion">Confirme su contraseña<span class="required">*</span></label>
-                                        <input type="password" class="form-control" id="TxtConfirmacion" name="data[TxtConfirmacion]" placeholder="Contraseña">
+                                        <input type="password" class="form-control" id="TxtConfirmacion" name="data[TxtConfirmacion]" placeholder="Contraseña"  maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" Guardar()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
                         </fieldset>
 
-                </form>
-            </div>
+                    </form>
+                </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
                     <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -275,8 +288,8 @@
         </div>
     </div>
 </div>
-<table>
-</table>
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -287,10 +300,7 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Usuarios.js"></script>
-<!--Validacion del formulario-->
+<script src="~/Scrips/Internos/Usr.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
-<!--sweetalert2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/Plus/scripts.js"></script>

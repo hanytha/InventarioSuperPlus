@@ -1627,7 +1627,9 @@ namespace Inventario
 		
 		private System.Data.Linq.Binary _Logo;
 		
-		private System.DateTime _Fecha;
+		private string _Fecha;
+		
+		private string _FechaSistema;
 		
 		private int _Estatus;
 		
@@ -1675,8 +1677,10 @@ namespace Inventario
     partial void OnClaveSATChanged();
     partial void OnLogoChanging(System.Data.Linq.Binary value);
     partial void OnLogoChanged();
-    partial void OnFechaChanging(System.DateTime value);
+    partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
+    partial void OnFechaSistemaChanging(string value);
+    partial void OnFechaSistemaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -1950,8 +1954,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
-		public System.DateTime Fecha
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
 		{
 			get
 			{
@@ -1966,6 +1970,26 @@ namespace Inventario
 					this._Fecha = value;
 					this.SendPropertyChanged("Fecha");
 					this.OnFechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaSistema", DbType="VarChar(50)")]
+		public string FechaSistema
+		{
+			get
+			{
+				return this._FechaSistema;
+			}
+			set
+			{
+				if ((this._FechaSistema != value))
+				{
+					this.OnFechaSistemaChanging(value);
+					this.SendPropertyChanging();
+					this._FechaSistema = value;
+					this.SendPropertyChanged("FechaSistema");
+					this.OnFechaSistemaChanged();
 				}
 			}
 		}

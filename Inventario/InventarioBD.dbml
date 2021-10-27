@@ -68,7 +68,8 @@
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_Compra" Member="Compra" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="Compra" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />

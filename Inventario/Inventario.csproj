@@ -130,6 +130,7 @@
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
+    <Content Include="Scrips\Internos\Usr.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Perfiles.js" />
@@ -177,6 +178,7 @@
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\UsrController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,6 +227,7 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Usr\Usr.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

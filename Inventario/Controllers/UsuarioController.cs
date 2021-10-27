@@ -32,24 +32,24 @@ namespace Inventario.Controllers
                     p.Correo,
                     p.Telefono,
                     p.LvlPerfil,
-                    p.Usuario,
-                    FechaIngreso = ((DateTime)p.FechaIngreso).ToShortDateString(),
+                    p.Usuario
                 });
             return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaUsuario(long Id)
-        {//Consulta específico mediante ID
-            var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdUsuarios
-                });
-            return Json(usuario, JsonRequestBehavior.AllowGet);
-        }
-        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaUsr(long Id)
+        //public JsonResult ConsultaUsuario(long Id)
+        //{//Consulta específico mediante ID
+        //    var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(Id))
+        //        .Select(p => new
+        //        {
+        //            p.IdUsuarios
+        //        });
+        //    return Json(usuario, JsonRequestBehavior.AllowGet);
+        //}
+      
+
+        public JsonResult ConsultaUsuario()
         {
-            var us = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(Id) && p.Estatus.Equals(1))
+            var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdUsuarios,
@@ -57,8 +57,6 @@ namespace Inventario.Controllers
                     p.Nombre,
                     p.ApellidosP,
                     p.ApellidosM,
-                    p.Foto,
-                    p.FechaDeNacimiento,
                     p.IdEstado,
                     p.IdMunicipio,
                     p.IdLocalidad,
@@ -73,17 +71,16 @@ namespace Inventario.Controllers
                     p.Usuario,
                     p.FechaIngreso,
                     p.Password,
-                    p.Estatus,
                     p.Estado,
                     p.Municipio,
                     p.Localidad,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Foto.ToArray()),
-                    Fecha = ((DateTime)p.FechaDeNacimiento).ToShortDateString()
+                    p.IdArea,
+                    p.IdSubArea,
+                    p.Area,
+                    p.SubArea
                 });
-            return Json(us, JsonRequestBehavior.AllowGet);
+            return Json(usuario, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
 
@@ -165,7 +162,7 @@ namespace Inventario.Controllers
                         obj.IdLocalidad = DatosUsuarios.IdLocalidad;
                         obj.Correo = DatosUsuarios.Correo;
                         obj.Telefono = DatosUsuarios.Telefono;
-                      
+
                         InvBD.SubmitChanges();
                         Afectados = 1;
                     }
