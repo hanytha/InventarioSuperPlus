@@ -56,6 +56,7 @@
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="PrecioUnitarioPromedio" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
@@ -190,7 +191,6 @@
       <Column Name="viviendas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="localidades_Proveedores" Member="Proveedores" ThisKey="id" OtherKey="IdLocalidad" Type="Proveedores" />
-      <Association Name="localidades_Tienda" Member="Tienda" ThisKey="id" OtherKey="IdLocalidades" Type="Tienda" />
       <Association Name="municipios_localidades" Member="municipios" ThisKey="municipio_id" OtherKey="id" Type="municipios" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -213,7 +213,6 @@
       <Column Name="activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="municipios_localidades" Member="localidades" ThisKey="id" OtherKey="municipio_id" Type="localidades" />
       <Association Name="municipios_Proveedores" Member="Proveedores" ThisKey="id" OtherKey="IdMunicipio" Type="Proveedores" />
-      <Association Name="municipios_Tienda" Member="Tienda" ThisKey="id" OtherKey="IdMunicipios" Type="Tienda" />
       <Association Name="estados_municipios" Member="estados" ThisKey="estado_id" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -378,25 +377,20 @@
       <Column Name="A1Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A2Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Supervicion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdEstados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdMunicipios" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Municipios" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdLocalidades" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Localidades" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Municipio" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Calle" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="CP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Latitud" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Longitud" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="HApertura" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
-      <Column Name="HCierre" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="HApertura" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HCierre" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Tienda_PedidosInternos" Member="PedidosInternos" ThisKey="IdTienda" OtherKey="IdTienda" Type="PedidosInternos" />
-      <Association Name="localidades_Tienda" Member="localidades1" ThisKey="IdLocalidades" OtherKey="id" Type="localidades" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="municipios_Tienda" Member="municipios1" ThisKey="IdMunicipios" OtherKey="id" Type="municipios" IsForeignKey="true" />
       <Association Name="Supervision_Tienda" Member="Supervision" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervision" IsForeignKey="true" />
       <Association Name="Supervisor_Tienda" Member="Supervisor" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Supervisor" IsForeignKey="true" />
     </Type>

@@ -61,6 +61,25 @@ namespace Inventario.Controllers
         }
 
 
+        public JsonResult BDTienda()
+        {
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdTienda,
+                     Nombre= p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDPagina()
+        {
+            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdPagina,
+                    Descripcion = p.Descripcion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
 
 
@@ -89,16 +108,7 @@ namespace Inventario.Controllers
 
 
         //Consulta Paginas
-        public JsonResult BDPagina()
-        {
-            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    ID = p.IdPagina,
-                    Mensaje = p.Mensaje
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
+
 
 
 

@@ -33,8 +33,6 @@ namespace Inventario.Controllers
                     p.Calle,
                     p.CP,
                     p.Telefono,
-                    p.Latitud,
-                    p.Longitud,
                     p.HApertura,
                     p.HCierre
                 });
@@ -58,8 +56,6 @@ namespace Inventario.Controllers
                     p.Calle,
                     p.CP,
                     p.Telefono,
-                    p.Latitud,
-                    p.Longitud,
                     p.HApertura,
                     p.HCierre
                 });

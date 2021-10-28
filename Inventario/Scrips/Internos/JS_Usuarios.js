@@ -37,7 +37,7 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
         CodigoHTMLUsuarios += "<h5 class='mb-0'>";
         CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
-        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+
         CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
         CodigoHTMLUsuarios += "</a>";
@@ -54,7 +54,7 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
- 
+  
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
 
@@ -322,7 +322,7 @@ function GuardarUsuario() {
                             alert("Ya existe el proveedor");
                         }
                         else {
-                            alert("Se ejecuto correctamente");
+                            alert("Se ejecutó correctamente");
                             CrearAcordeonUsuarios();
                             document.getElementById("btnCancelar").click();
                         }
