@@ -24,8 +24,8 @@ namespace Inventario.Controllers
                     p.Nombre,
                     p.IdSupervisor,
                     p.IdSupervision,
-                    p.NombreS,
                     p.Unombre,
+                    p.NombreS,
                     p.LNombre,
                     p.E1Nombre,
                     p.E2Nombre,
@@ -33,17 +33,16 @@ namespace Inventario.Controllers
                     p.A1Nombre,
                     p.A2Nombre,
                     p.A3Nombre,
-                    p.IdEstados,
+                    p.IdEstado,
                     p.Estado,
-                    p.IdMunicipios,
-                    p.Municipios,
-                    p.IdLocalidades,
-                    p.Localidades,
+                    p.IdMunicipio,
+                    p.Municipio,
+                    p.Direccion,
+                    p.IdLocalidad,
+                    p.Localidad,
                     p.Calle,
                     p.CP,
                     p.Telefono,
-                    p.Latitud,
-                    p.Longitud,
                     p.HApertura,
                     p.HCierre,
                     p.Estatus,
@@ -51,17 +50,17 @@ namespace Inventario.Controllers
                 });
             return Json(tiendas, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaTienda()
+        public JsonResult ConsultaTienda(long Id)
         {
-            var tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+            var tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Id))
                 .Select(p => new
                 {
                     p.IdTienda,
                     p.Nombre,
                     p.IdSupervisor,
                     p.IdSupervision,
-                    p.NombreS,
                     p.Unombre,
+                    p.NombreS,
                     p.LNombre,
                     p.E1Nombre,
                     p.E2Nombre,
@@ -69,24 +68,23 @@ namespace Inventario.Controllers
                     p.A1Nombre,
                     p.A2Nombre,
                     p.A3Nombre,
-                    p.IdEstados,
+                    p.IdEstado,
                     p.Estado,
-                    p.IdMunicipios,
-                    p.Municipios,
-                    p.IdLocalidades,
-                    p.Localidades,
+                    p.IdMunicipio,
+                    p.Municipio,
+                    p.IdLocalidad,
+                    p.Localidad,
+                    p.Direccion,
                     p.Calle,
                     p.CP,
                     p.Telefono,
-                    p.Latitud,
-                    p.Longitud,
                     p.HApertura,
                     p.HCierre,
                     p.Estatus,
                 });
             return Json(tienda, JsonRequestBehavior.AllowGet);
         }
-     /*
+   
         //Guardar los datos de la compra
         public int GuardarTienda(Tienda DatosTienda)
         {
@@ -114,41 +112,53 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Tienda.Where(p => p.Nombre.Equals(DatosTienda.Nombre) 
                 && p.NombreS.Equals(DatosTienda.NombreS)
-                && p.Unombre.Equals(DatosTienda.Unombre) 
-                && p.LNombre.Equals(DatosTienda.LNombre)
-                && p.E1Nombre.Equals(DatosTienda.E1Nombre)
-                && p.E2Nombre.Equals(DatosTienda.E2Nombre) 
-                && p.E3Nombre.Equals(DatosTienda.E3Nombre) 
-                && p.A1Nombre.Equals(DatosTienda.A1Nombre) 
-                && p.A2Nombre.Equals(DatosTienda.A2Nombre) 
-                && p.A3Nombre.Equals(DatosTienda.A3Nombre)
-                && p.IdEstados.Equals(DatosTienda.IdEstado)
+                && p.IdEstado.Equals(DatosTienda.IdEstado)
                 && p.IdMunicipio.Equals(DatosTienda.IdMunicipio)
                 && p.IdLocalidad.Equals(DatosTienda.IdLocalidad)
-
-
-
-
-                && p.CorreoE3.Equals(DatosTienda.CorreoE3)).Count();
+                && p.Direccion.Equals(DatosTienda.Direccion)
+                && p.Calle.Equals(DatosTienda.Calle)
+                && p.CP.Equals(DatosTienda.CP)
+                && p.Telefono.Equals(DatosTienda.Telefono)
+                && p.HApertura.Equals(DatosTienda.HApertura)
+                && p.HCierre.Equals(DatosTienda.HCierre)
+                && p.IdSupervision.Equals(DatosTienda.IdSupervision)
+                && p.Unombre.Equals(DatosTienda.Unombre)
+                && p.LNombre.Equals(DatosTienda.LNombre)
+                && p.E1Nombre.Equals(DatosTienda.E1Nombre)
+                && p.E2Nombre.Equals(DatosTienda.E2Nombre)
+                && p.E3Nombre.Equals(DatosTienda.E3Nombre)
+                && p.A1Nombre.Equals(DatosTienda.A1Nombre)
+                && p.A2Nombre.Equals(DatosTienda.A2Nombre)
+                && p.A3Nombre.Equals(DatosTienda.A3Nombre)).Count();
 
 
                 if (nveces == 0)
                 {
-                    SubAreas obj = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(id)).First();
-                    obj.Nombre = DatosSub.Nombre;
-                    obj.IdArea = DatosSub.IdArea;
-                    obj.Area = DatosSub.Area;
-                    obj.NoSubArea = DatosSub.NoSubArea;
-                    obj.NEncargado1 = DatosSub.NEncargado1;
-                    obj.TelefonoE1 = DatosSub.TelefonoE1;
-                    obj.CorreoE1 = DatosSub.CorreoE1;
-                    obj.NEncargado2 = DatosSub.NEncargado2;
-                    obj.TelefonoE2 = DatosSub.TelefonoE2;
-                    obj.CorreoE2 = DatosSub.CorreoE2;
-                    obj.NEncargado3 = DatosSub.NEncargado3;
-                    obj.TelefonoE3 = DatosSub.TelefonoE3;
-                    obj.CorreoE3 = DatosSub.CorreoE3;
+                    Tienda obj = InvBD.Tienda.Where(p => p.IdTienda.Equals(id)).First();
 
+                    obj.Nombre = DatosTienda.Nombre;
+                    obj.NombreS = DatosTienda.NombreS;
+                    obj.IdEstado = DatosTienda.IdEstado;
+                    obj.Estado = DatosTienda.Estado;
+                    obj.IdMunicipio = DatosTienda.IdMunicipio;
+                    obj.Municipio= DatosTienda.Municipio;
+                    obj.IdLocalidad = DatosTienda.IdLocalidad;
+                    obj.Localidad = DatosTienda.Localidad;
+                    obj.Direccion = DatosTienda.Direccion;
+                    obj.Calle = DatosTienda.Calle;
+                    obj.CP = DatosTienda.CP;
+                    obj.Telefono = DatosTienda.Telefono;
+                    obj.HApertura = DatosTienda.HApertura;
+                    obj.HCierre = DatosTienda.HCierre;
+                    obj.IdSupervision = DatosTienda.IdSupervision;
+                    obj.Unombre = DatosTienda.Unombre;
+                    obj.LNombre = DatosTienda.LNombre;
+                    obj.E1Nombre = DatosTienda.E1Nombre;
+                    obj.E2Nombre = DatosTienda.E2Nombre;
+                    obj.E3Nombre = DatosTienda.E3Nombre;
+                    obj.A1Nombre = DatosTienda.A1Nombre;
+                    obj.A2Nombre = DatosTienda.A2Nombre;
+                    obj.A3Nombre = DatosTienda.A3Nombre;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -169,13 +179,13 @@ namespace Inventario.Controllers
 
 
         //Eliminar Compra
-        public int EliminarSubarea(long Id)
+        public int EliminarTienda(long Id)
         {
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                SubAreas almacenG = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(Id)).First();
-                almacenG.Estatus = 0;//Cambia el estatus en 0
+                Tienda tiend = InvBD.Tienda.Where(p => p.IdTienda.Equals(Id)).First();
+                tiend.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
             }
@@ -185,6 +195,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-     */
+     
     }
 }

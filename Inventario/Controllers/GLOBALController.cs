@@ -59,10 +59,6 @@ namespace Inventario.Controllers
 
         }
 
-
-
-
-
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -153,6 +149,20 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        //consulta Estados
+        public JsonResult BDEstado()
+        {
+            var datos = InvBD.estados.Where(p => p.activo.Equals(1))
+                .Select(p => new {
+                    ID = p.id,
+                    Nombre = p.nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
 

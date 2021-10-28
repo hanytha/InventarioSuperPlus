@@ -143,6 +143,7 @@ function LimpiarCampos() {
         controlesImg[i].value = null;
     }
 }
+
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
