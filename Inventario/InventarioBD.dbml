@@ -33,11 +33,11 @@
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="NArea" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NSArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="LvlPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Municipio" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
@@ -388,6 +388,7 @@
       <Column Name="A1Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A2Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Supervicion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdEstados" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdMunicipios" Type="System.Int32" DbType="Int" CanBeNull="true" />

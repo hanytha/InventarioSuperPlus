@@ -715,7 +715,7 @@ namespace Inventario
 		
 		private string _Usuario;
 		
-		private System.DateTime _FechaIngreso;
+		private System.Nullable<System.DateTime> _FechaIngreso;
 		
 		private string _Password;
 		
@@ -787,7 +787,7 @@ namespace Inventario
     partial void OnLvlPerfilChanged();
     partial void OnUsuarioChanging(string value);
     partial void OnUsuarioChanged();
-    partial void OnFechaIngresoChanging(System.DateTime value);
+    partial void OnFechaIngresoChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaIngresoChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
@@ -1135,7 +1135,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NArea", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NArea", DbType="VarChar(150)")]
 		public string NArea
 		{
 			get
@@ -1215,8 +1215,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="DateTime NOT NULL")]
-		public System.DateTime FechaIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaIngreso
 		{
 			get
 			{
@@ -8820,6 +8820,8 @@ namespace Inventario
 		
 		private string _A3Nombre;
 		
+		private string _Supervicion;
+		
 		private System.Nullable<int> _IdEstados;
 		
 		private string _Estado;
@@ -8888,6 +8890,8 @@ namespace Inventario
     partial void OnA2NombreChanged();
     partial void OnA3NombreChanging(string value);
     partial void OnA3NombreChanged();
+    partial void OnSupervicionChanging(string value);
+    partial void OnSupervicionChanged();
     partial void OnIdEstadosChanging(System.Nullable<int> value);
     partial void OnIdEstadosChanged();
     partial void OnEstadoChanging(string value);
@@ -9192,6 +9196,26 @@ namespace Inventario
 					this._A3Nombre = value;
 					this.SendPropertyChanged("A3Nombre");
 					this.OnA3NombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supervicion", DbType="VarChar(150)")]
+		public string Supervicion
+		{
+			get
+			{
+				return this._Supervicion;
+			}
+			set
+			{
+				if ((this._Supervicion != value))
+				{
+					this.OnSupervicionChanging(value);
+					this.SendPropertyChanging();
+					this._Supervicion = value;
+					this.SendPropertyChanged("Supervicion");
+					this.OnSupervicionChanged();
 				}
 			}
 		}

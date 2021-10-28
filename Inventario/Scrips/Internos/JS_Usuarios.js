@@ -43,24 +43,18 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLUsuarios += "<div class='card-body'>";
         CodigoHTMLUsuarios += "<div class='row'>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CURP: </strong>" + Data[i].Nombre + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CURP: </strong>" + Data[i].Estado + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos PateEstadorno: </strong>" + Data[i].Municipio + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Noss: </strong>" + Data[i].Noss + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NArea: </strong>" + Data[i].Perfil + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NArea: </strong>" + Data[i].NArea + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NSArea: </strong>" + Data[i].NSArea + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].LvlPerfil + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil: </strong>" + Data[i].Perfil + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Password: </strong>" + Data[i].Password + "</div>";
@@ -253,7 +247,7 @@ function Guardar() {
             var TempLoca = document.getElementById("cmbLocalidad");
             var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
             var NoSS = document.getElementById("TxtNSS").value;
-            var Telefono = document.getElementById("Txtelefono").value;
+            var Telefono = document.getElementById("TxtTelefono").value;
             var IDArea = document.getElementById("cmbArea").value;
             var TempNA = document.getElementById("cmbArea");
             var NombreA = TempNA.options[TempNA.selectedIndex].text;
@@ -327,7 +321,7 @@ function Guardar() {
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
     var pas1 = document.getElementById("Txtpassword").value;
-    var pas2 = document.getElementById("Txtpassword").value;
+    var pas2 = document.getElementById("TxtConfirmacion").value;
     if (pas1 == pas2) {
         if (CamposObligatorios() == true) {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -349,7 +343,7 @@ function GuardarUsuario() {
                 var RFC = document.getElementById("TxtRFC").value;
                 var NoSS = document.getElementById("TxtNSS").value;
                 var Correo = document.getElementById("TxtCorreo").value;
-                var Telefono = document.getElementById("Txtelefono").value;
+                var Telefono = document.getElementById("TxtTelefono").value;
                 var FNacimiento = document.getElementById("TxtFechaN").value;
                 var IdArea = document.getElementById("cmbArea").value;
                 var TempNA = document.getElementById("cmbArea");
@@ -437,6 +431,7 @@ function getBase64Image(img) {
     var dataURL = canvas.toDataURL("image/png");
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
+
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;

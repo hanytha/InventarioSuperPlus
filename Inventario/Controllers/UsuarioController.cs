@@ -119,64 +119,64 @@ namespace Inventario.Controllers
         public int GuardarUsuario(Usuarios DatosUsuarios, string cadF)
         {
             int Afectados = 0;
-            try
+            //try
+            //{
+            long id = DatosUsuarios.IdUsuarios;
+            if (id.Equals(0))
             {
-                long id = DatosUsuarios.IdUsuarios;
-                if (id.Equals(0))
+                //Guardar el Usuario cuando no exista uno con el mismo nombre en la base de datos
+                int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)).Count();
+                if (nveces == 0)
                 {
-                    //Guardar el Usuario cuando no exista uno con el mismo nombre en la base de datos
-                    int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)).Count();
-                    if (nveces == 0)
-                    {
-                        DatosUsuarios.Foto = Convert.FromBase64String(cadF);
-                        InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                    DatosUsuarios.Foto = Convert.FromBase64String(cadF);
+                    InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
                 }
                 else
                 {
-                    int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)
-                    && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
-                    && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
-                    && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio) && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad)
-                    && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
-
-                    if (nveces == 0)
-                    {
-                        Usuarios obj = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(id)).First();
-                        obj.Nombre = DatosUsuarios.Nombre;
-                        obj.ApellidosP = DatosUsuarios.ApellidosP;
-                        obj.ApellidosM = DatosUsuarios.ApellidosM;
-                        obj.Password = DatosUsuarios.Password;
-                        obj.IdArea = DatosUsuarios.IdArea;
-                        obj.IdSubArea = DatosUsuarios.IdSubArea;
-                        obj.Foto = Convert.FromBase64String(cadF);
-                        obj.IdPerfil = DatosUsuarios.IdPerfil;
-                        obj.IdMunicipio = DatosUsuarios.IdMunicipio;
-                        //obj.NombreM = usuario.NombreM;
-                        //obj.NombreL = usuario.NombreL;
-                        obj.IdLocalidad = DatosUsuarios.IdLocalidad;
-                        obj.Correo = DatosUsuarios.Correo;
-                        obj.Telefono = DatosUsuarios.Telefono;
-
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                    Afectados = -1;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Afectados = 0;
+                int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)
+                && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
+                && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
+                && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio) && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad)
+                && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
+
+                if (nveces == 0)
+                {
+                    Usuarios obj = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(id)).First();
+                    obj.Nombre = DatosUsuarios.Nombre;
+                    obj.ApellidosP = DatosUsuarios.ApellidosP;
+                    obj.ApellidosM = DatosUsuarios.ApellidosM;
+                    obj.Password = DatosUsuarios.Password;
+                    obj.IdArea = DatosUsuarios.IdArea;
+                    obj.IdSubArea = DatosUsuarios.IdSubArea;
+                    obj.Foto = Convert.FromBase64String(cadF);
+                    obj.IdPerfil = DatosUsuarios.IdPerfil;
+                    obj.IdMunicipio = DatosUsuarios.IdMunicipio;
+                    //obj.NombreM = usuario.NombreM;
+                    //obj.NombreL = usuario.NombreL;
+                    obj.IdLocalidad = DatosUsuarios.IdLocalidad;
+                    obj.Correo = DatosUsuarios.Correo;
+                    obj.Telefono = DatosUsuarios.Telefono;
+
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
             }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Afectados = 0;
+            //}
             return Afectados;
         }
         public int EliminarUsuarios(long IdUsuarios)
