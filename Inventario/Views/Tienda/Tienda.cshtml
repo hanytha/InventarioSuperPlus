@@ -72,18 +72,18 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE TIENDA</h4>
+                    <h4>REGISTRO SUPERVICIÓN</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
-                            <h5>Paso 1</h5>
+                            <h4>Paso 1</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNombre">Nombre de la tienda<span class="required">*</span></label>
-                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre de la tienda" size="30" maxlength="100" type="text">
+                                        <input type="text" name="data[TxtNombre]" id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
@@ -91,21 +91,20 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNombreSuper">Nombre de el supervisor<span class="required">*</span></label>
-                                        <input id="TxtNombreSuper" name="data[TxtNombreSuper]" class="form-control  limpiar obligatorio" placeholder="Nombre de la tienda" size="30" maxlength="100" type="text">
+                                        <input type="text" name="data[TxtNombreSuper]" id="TxtNombreSuper" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbEstado">Estado<span class="required">*</span></label>
-                                        <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                        </select>
+                                        <label class="form-control-label" for="cmbEstado">Estado<span>*</span></label>
+                                        <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbMunicipio">Municipio<span class="required">*</span></label>
+                                        <label class="form-control-label" for="cmbMunicipio">Municipio<span>*</span></label>
                                         <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
@@ -113,58 +112,56 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbLocalidad">Localidad<span class="required">*</span></label>
+                                        <label class="form-control-label" for="cmbLocalidad">Localidad<span>*</span></label>
                                         <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
-
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <!--Los pasos del modal-->
-                            <h5>Paso 2</h5>
+                            <h4> Paso 2</h4>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
-                                        <input type="text" id="TxtDireccion" name="data[TxtDireccion]" class="form-control limpiar obligatorio" placeholder="Dirección">
+                                        <input type="text" name="data[TxtDireccion]" id="TxtDireccion" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCalle">Calle<span class="required">*</span></label>
-                                        <input type="text" id="TxtCalle" name="data[TxtCalle]" class="form-control limpiar obligatorio" placeholder="Dirección">
+                                        <input type="text" name="data[TxtCalle]" id="TxtCalle" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtCodigoPostal">Codigo Postal<span class="required">*</span></label>
-                                        <input id="TxtCodigoPostal" name="data[TxtCodigoPostal]" class="form-control  limpiar obligatorio" placeholder="Codigo Postal" size="30" maxlength="100" type="text">
+                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCodigoPostal]" id="TxtCodigoPostal" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-md-8">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumeroTelefono">Número de Telefono<span class="required">*</span></label>
-                                        <input type="text" id="TxtNumeroTelefono" name="data[TxtNumeroTelefono]" class="form-control  limpiar obligatorio" placeholder="Número de Telefono">
+                                        <label class="form-control-label" for="TxtNumeroTelefono">Número de teléfono<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtNumeroTelefono]" id="TxtNumeroTelefono" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtHoraApertura">Hora de apertura</label>
-                                        <input type="time" id="TxtHoraApertura" name="data[TxtHoraApertura]" class="form-control limpiar " placeholder="Hora de apertura">
+                                        <label class="form-control-label" for="TxtHoraApertura">Hora de apertura<span class="required">*</span></label>
+                                        <input type="time" name="data[TxtHoraApertura]" id="TxtHoraApertura" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtHoraCierre">Hora de cierre</span></label>
-                                        <input type="time" id="TxtHoraCierre" name="data[TxtHoraCierre]" class="form-control limpiar " placeholder="Hora de cierre">
+                                        <label class="form-control-label" for="TxtHoraCierre">Hora de cierre<span class="required">*</span></label>
+                                        <input type="time" name="data[TxtHoraCierre]" id="TxtHoraCierre" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
@@ -172,93 +169,90 @@
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h5> Paso 3</h5>
+                            <h4> Paso 3</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span class="required">*</span></label>
+                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span>*</span></label>
                                         <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtLider">Nombre del Lider<span class="required">*</span></label>
-                                        <input type="text" id="TxtLider" name="data[TxtLider]" class="form-control limpiar obligatorio" placeholder="Nombre del Lider">
+                                        <label class="form-control-label" for="TxtLider">Nombre Lider<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtLider]" id="TxtLider" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado1">Nombre del encargado 1</label>
-                                        <input type="text" id="TxtEncargado1" name="data[TxtEncargado1]" class="form-control limpiar " placeholder="Nombre del encargado 1">
+                                        <label class="form-control-label" for="TxtEncargado1">Nombre enacargado1<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado1]" id="TxtEncargado1" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado2">Nombre del encargado 2</label>
-                                        <input type="text" id="TxtEncargado2" name="data[TxtEncargado2]" class="form-control limpiar " placeholder="Nombre del encargado 2">
+                                        <label class="form-control-label" for="TxtEncargado2">Nombre enacargado2<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado2]" id="TxtEncargado2" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado3">Nombre del encargado 3</label>
-                                        <input type="text" id="TxtEncargado3" name="data[TxtEncargado3]" class="form-control limpiar " placeholder="Nombre del encargado 3">
-                                    </div>
-                                </div>
-                            </div>
-
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h5> Paso 4</h5>
+                            <h4> Paso 4</h4>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtAux1">Nombre del Auxiliar 1</label>
-                                        <input type="text" id="TxtAux1" name="data[TxtAux1]" class="form-control limpiar " placeholder="Nombre del encargado 1">
+                                        <label class="form-control-label" for="TxtEncargado3">Nombre enacargado3<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado3]" id="TxtEncargado3" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtAux2">Nombre del Auxiliar 2</label>
-                                        <input type="text" id="TxtAux2" name="data[TxtAux2]" class="form-control limpiar " placeholder="Nombre del encargado 2">
+                                        <label class="form-control-label" for="TxtAux1">Nombre Auxiliar1<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux1]" id="TxtAux1" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtAux3">Nombre del Auxiliar 3</label>
-                                        <input type="text" id="TxtAux3" name="data[TxtAux3]" class="form-control limpiar " placeholder="Nombre del encargado 3">
+                                        <label class="form-control-label" for="TxtAux2">Nombre Auxiliar2<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux2]" id="TxtAux2" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarTienda()">Guardar</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAux3">Nombre Auxiliar3<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux3]" id="TxtAux3" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button type="button" class="btn btn-success" onclick="GuardarTienda()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;

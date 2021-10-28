@@ -295,7 +295,7 @@ function EliminarTienda(id) {
         $.get("/Tienda/EliminarTienda/?Id=" + id, function (DatoTienda) {
             if (DatoTienda == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonExistenciasAlmacen();
+                CrearAcordeonTienda();
             } else {
                 alert("Ocurrio un error");
             }
