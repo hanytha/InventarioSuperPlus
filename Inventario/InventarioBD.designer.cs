@@ -1403,6 +1403,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCategorias;
 		
+		private string _Categoria;
+		
 		private string _NombreProveedor;
 		
 		private decimal _PrecioUnitarioPromedio;
@@ -1453,6 +1455,8 @@ namespace Inventario
     partial void OnIdMarcaChanged();
     partial void OnIdCategoriasChanging(System.Nullable<long> value);
     partial void OnIdCategoriasChanged();
+    partial void OnCategoriaChanging(string value);
+    partial void OnCategoriaChanged();
     partial void OnNombreProveedorChanging(string value);
     partial void OnNombreProveedorChanged();
     partial void OnPrecioUnitarioPromedioChanging(decimal value);
@@ -1618,6 +1622,26 @@ namespace Inventario
 					this._IdCategorias = value;
 					this.SendPropertyChanged("IdCategorias");
 					this.OnIdCategoriasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="VarChar(150)")]
+		public string Categoria
+		{
+			get
+			{
+				return this._Categoria;
+			}
+			set
+			{
+				if ((this._Categoria != value))
+				{
+					this.OnCategoriaChanging(value);
+					this.SendPropertyChanging();
+					this._Categoria = value;
+					this.SendPropertyChanged("Categoria");
+					this.OnCategoriaChanged();
 				}
 			}
 		}
@@ -9006,7 +9030,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HApertura", DbType="VarChar(13)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HApertura", DbType="VarChar(20)")]
 		public string HApertura
 		{
 			get
@@ -9026,7 +9050,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HCierre", DbType="VarChar(13)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HCierre", DbType="VarChar(20)")]
 		public string HCierre
 		{
 			get

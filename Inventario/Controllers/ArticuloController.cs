@@ -26,6 +26,7 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+                    p.Categoria,
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
                     p.Descripcion,
@@ -49,6 +50,7 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+                    p.Categoria,
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
                     p.Descripcion,
@@ -88,7 +90,8 @@ namespace Inventario.Controllers
                 else
                 {
                     int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa) 
-                    && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor) 
+                    && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
+                    && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
                     && p.Descripcion.Equals(DatosArticulo.Descripcion) 
                     && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
                     && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
@@ -99,6 +102,8 @@ namespace Inventario.Controllers
                     {
                         Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
                         obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
+                        obj.IdCategorias = DatosArticulo.IdCategorias;
+                        obj.Categoria = DatosArticulo.Categoria;
                         obj.NombreProveedor = DatosArticulo.NombreProveedor;
                         obj.Descripcion = DatosArticulo.Descripcion;
                         obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;

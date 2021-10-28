@@ -173,6 +173,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //Consulta 
+        public JsonResult BDCategorias()
+        {
+            var datos = InvBD.Categorias.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdCategorias,
+                    Nombre = p.Tipo
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 
