@@ -163,6 +163,16 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult BDSupervisor()
+        {
+            var datos = InvBD.Supervisor.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdSupervisor,
+                    Nombre= p.Nombre
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 

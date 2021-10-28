@@ -1,5 +1,6 @@
 ﻿LlenarCMBPrin();
 LlenarCMSupervicion();
+LlenarCMSupervisor();
 CrearAcordeonTienda();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonTienda() {
@@ -91,7 +92,8 @@ function abrirModal(id) {//la clase  Obligatorio
         $.get("/Tienda/ConsultaTienda/?Id=" + id, function (Data) {
             sessionStorage.setItem('IDTiend', Data[0].IdTienda);
             document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtNombreSuper").value = Data[0].NombreS;
+            document.getElementById("cmbSupervisor").value = Data[0].IdSupervisor;
+       
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
@@ -167,6 +169,15 @@ function LlenarCMSupervicion() {
     });
 }
 
+
+
+function LlenarCMSupervisor() {
+    $.get("/GLOBAL/BDSupervisor", function (data) {
+        llenarCombo(data, document.getElementById("cmbSupervisor"));
+    });
+}
+
+
 //funcion general para llenar los select
 function llenarCombo(data, control) {
 
@@ -188,7 +199,10 @@ function GuardarTienda() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdTienda = sessionStorage.getItem('IDTiend');
             var Nombre = document.getElementById("TxtNombre").value;
-            var NombreS = document.getElementById("TxtNombreSuper").value;
+
+            var IdSupervisor = document.getElementById("cmbSupervisor").value;
+            var TempSupervisor = document.getElementById("cmbSupervisor");
+            var NombreS = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
 
             var IdEstado = document.getElementById("cmbEstado").value;
             var TempEdo = document.getElementById("cmbEstado");
@@ -220,6 +234,7 @@ function GuardarTienda() {
             frm.append("IdTienda", IdTienda);
             frm.append("Nombre", Nombre);
             frm.append("NombreS", NombreS);
+            frm.append("IdSupervisor", IdSupervisor);
             frm.append("IdEstado", IdEstado);
             frm.append("Estado", Estado);
             frm.append("IdMunicipio", IdMunicipio);

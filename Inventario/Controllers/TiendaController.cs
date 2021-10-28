@@ -23,9 +23,9 @@ namespace Inventario.Controllers
                     p.IdTienda,
                     p.Nombre,
                     p.IdSupervisor,
+                    p.NombreS,
                     p.IdSupervision,
                     p.Unombre,
-                    p.NombreS,
                     p.LNombre,
                     p.E1Nombre,
                     p.E2Nombre,
@@ -58,9 +58,9 @@ namespace Inventario.Controllers
                     p.IdTienda,
                     p.Nombre,
                     p.IdSupervisor,
+                    p.NombreS,
                     p.IdSupervision,
                     p.Unombre,
-                    p.NombreS,
                     p.LNombre,
                     p.E1Nombre,
                     p.E2Nombre,
@@ -111,7 +111,7 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.Tienda.Where(p => p.Nombre.Equals(DatosTienda.Nombre) 
-                && p.NombreS.Equals(DatosTienda.NombreS)
+                && p.IdSupervisor.Equals(DatosTienda.IdSupervisor)
                 && p.IdEstado.Equals(DatosTienda.IdEstado)
                 && p.IdMunicipio.Equals(DatosTienda.IdMunicipio)
                 && p.IdLocalidad.Equals(DatosTienda.IdLocalidad)
@@ -137,6 +137,7 @@ namespace Inventario.Controllers
                     Tienda obj = InvBD.Tienda.Where(p => p.IdTienda.Equals(id)).First();
 
                     obj.Nombre = DatosTienda.Nombre;
+                    obj.IdSupervisor = DatosTienda.IdSupervisor;
                     obj.NombreS = DatosTienda.NombreS;
                     obj.IdEstado = DatosTienda.IdEstado;
                     obj.Estado = DatosTienda.Estado;
