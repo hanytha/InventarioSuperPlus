@@ -3,9 +3,20 @@ LlenarCMBPrin();
 
 var imagen64;
 CrearAcordeonUsuarios();
+
+
+$("#TxtFechaN").datepicker(
+    {
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    }
+);
+
+
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonUsuarios() {
-    $.get("/Usr/ConsultaUsuarios", function (Data) {
+    $.get("/Usuario/ConsultaUsuarios", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonUsuarios(Data, document.getElementById("accordion"));
     });

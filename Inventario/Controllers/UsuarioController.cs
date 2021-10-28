@@ -45,11 +45,11 @@ namespace Inventario.Controllers
         //        });
         //    return Json(usuario, JsonRequestBehavior.AllowGet);
         //}
-      
 
-        public JsonResult ConsultaUsuario()
+
+        public JsonResult ConsultaUsuario(long Id)
         {
-            var usuario = InvBD.Usuarios.Where(p => p.Estatus.Equals(1))
+            var usuario = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdUsuarios,
@@ -57,6 +57,8 @@ namespace Inventario.Controllers
                     p.Nombre,
                     p.ApellidosP,
                     p.ApellidosM,
+                    FOTOMOSTRAR = Convert.ToBase64String(p.Foto.ToArray()),
+                    FechaNaci = ((DateTime)p.FechaDeNacimiento).ToShortDateString(),
                     p.IdEstado,
                     p.IdMunicipio,
                     p.IdLocalidad,
@@ -81,7 +83,6 @@ namespace Inventario.Controllers
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
         }
-
 
 
         //consulta usuario por perfil
