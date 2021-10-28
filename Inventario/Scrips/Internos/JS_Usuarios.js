@@ -5,13 +5,16 @@ var imagen64;
 CrearAcordeonUsuarios();
 
 
-$("#TxtFechaN").datepicker(
-    {
-        dateFormat: "dd/mm/yy",
-        changeMonth: true,
-        changeYear: true
-    }
-);
+//$("#TxtFechaN").datepicker(
+//    {
+//        dateFormat: "dd/mm/yy",
+//        changeMonth: true,
+//        changeYear: true
+//    }
+//);
+
+
+
 
 
 //Crea el acordeón e inserta (los registros de la base de datos)
@@ -51,13 +54,16 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
+ 
+        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
+        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
+
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Password: </strong>" + Data[i].Password + "</div>";
         CodigoHTMLUsuarios += "</div>";
 
         //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
@@ -226,98 +232,6 @@ IDM.addEventListener("change", function () {
 });
 
 
-
-
-function Guardar() {
-    if (CamposObligatorios() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdUsuarios = sessionStorage.getItem('IdUsuarios');
-            var CURP = document.getElementById("TxtCURP").value;
-            var Nombre = document.getElementById("TxtNombre").value;
-            var ApellidoP = document.getElementById("TxtApellidoP").value;
-            var ApellidoM = document.getElementById("TxtApellidoM").value;
-            var RFC = document.getElementById("TxtFechaN").value;
-            var IdEstado = document.getElementById("cmbEstado").value;
-            var TempEdo = document.getElementById("cmbEstado");
-            var Estado = TempEdo.options[TempEdo.selectedIndex].text;
-            var IdMunicipio = document.getElementById("cmbMunicipio").value;
-            var TempMuni = document.getElementById("cmbMunicipio");
-            var Municipio = TempMuni.options[TempMuni.selectedIndex].text;
-            var IdLocalidad = document.getElementById("cmbLocalidad").value;
-            var TempLoca = document.getElementById("cmbLocalidad");
-            var Localidad = TempLoca.options[TempLoca.selectedIndex].text;
-            var NoSS = document.getElementById("TxtNSS").value;
-            var Telefono = document.getElementById("TxtTelefono").value;
-            var IDArea = document.getElementById("cmbArea").value;
-            var TempNA = document.getElementById("cmbArea");
-            var NombreA = TempNA.options[TempNA.selectedIndex].text;
-            var IDSubArea = document.getElementById("cmbSubArea").value;
-            var TempNSA = document.getElementById("cmbSubArea");
-            var NombreAS = TempNSA.options[TempNSA.selectedIndex].text;
-            var IDPerfil = document.getElementById("cmbPerfil").value;
-            var TempPerf = document.getElementById("cmbPerfil");
-            var Perfil = TempPerf.options[TempPerf.selectedIndex].text;
-            var Usuario = document.getElementById("TxtUsuario").value;
-            var TempEdo = document.getElementById("cmbSupervicion");
-            var Foto = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
-            var Password = document.getElementById("Txtpassword").value;
-
-            var frm = new FormData();
-            frm.append("IdUsuarios", IdUsuarios);
-            frm.append("CURP", CURP);
-            frm.append("Nombre", Nombre);
-            frm.append("ApellidoP", ApellidoP);
-            frm.append("ApellidoM", ApellidoM);
-            frm.append("FechaDeNacimiento", Telefono);
-            frm.append("RFC", RFC);
-            frm.append("IdEstado", IdEstado);
-            frm.append("Estado", Estado);
-            frm.append("IdMunicipio", IdMunicipio);
-            frm.append("Municipio", Municipio);
-            frm.append("IdLocalidad", IdLocalidad);
-            frm.append("Localidad", Localidad);
-            frm.append("NoSS", NoSS);
-            frm.append("Telefono", Telefono);
-            frm.append("IDArea", IDArea);
-            frm.append("NombreA", NombreA);
-            frm.append("IDSubArea", IDSubArea);
-            frm.append("NombreAS", NombreAS);
-            frm.append("IDPerfil", IDPerfil);
-            frm.append("Perfil", Perfil);
-            frm.append("Usuario", Usuario);
-            frm.append("cadF", Foto);
-            frm.append("Password", Password);
-
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Usuario/GuardarUsuario",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el supervidor");
-                    }
-                    else {
-                        alert("Se ejecutó correctamente");
-                        CrearAcordeonUsuarios();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
-        }
-    }
-}
-
-
-
-
-
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
     var pas1 = document.getElementById("Txtpassword").value;
@@ -344,16 +258,16 @@ function GuardarUsuario() {
                 var NoSS = document.getElementById("TxtNSS").value;
                 var Correo = document.getElementById("TxtCorreo").value;
                 var Telefono = document.getElementById("TxtTelefono").value;
-                var FNacimiento = document.getElementById("TxtFechaN").value;
+                var FechaDeNacimiento = document.getElementById("TxtFechaN").value;
                 var IdArea = document.getElementById("cmbArea").value;
                 var TempNA = document.getElementById("cmbArea");
-                var NombreA = TempNA.options[TempNA.selectedIndex].text;
+                var NArea = TempNA.options[TempNA.selectedIndex].text;
                 var IdSubArea = document.getElementById("cmbSubArea").value;
                 var TempNSA = document.getElementById("cmbSubArea");
-                var NombreAS = TempNSA.options[TempNSA.selectedIndex].text;
+                var NSArea = TempNSA.options[TempNSA.selectedIndex].text;
                 var IdPerfil = document.getElementById("cmbPerfil").value;
                 var TempPerf = document.getElementById("cmbPerfil");
-                var Perfil = TempPerf.options[TempPerf.selectedIndex].text;
+                var LvlPerfil = TempPerf.options[TempPerf.selectedIndex].text;
                 var Usuario = document.getElementById("TxtUsuario").value;
                 var Foto = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
                 if (Foto.endsWith('png')) {
@@ -381,13 +295,13 @@ function GuardarUsuario() {
                 frm.append("NoSS", NoSS);
                 frm.append("Correo", Correo);
                 frm.append("Telefono", Telefono);
-                frm.append("FNacimiento", FNacimiento);
+                frm.append("FechaDeNacimiento", FechaDeNacimiento);
                 frm.append("IdArea", IdArea);
-                frm.append("NombreA", NombreA);
+                frm.append("NArea", NArea);
                 frm.append("IdSubArea", IdSubArea);
-                frm.append("NombreAS", NombreAS);
+                frm.append("NSArea", NSArea);
                 frm.append("IdPerfil", IdPerfil);
-                frm.append("Perfil", Perfil);
+                frm.append("LvlPerfil", LvlPerfil);
                 frm.append("FechaIngreso", FechaIngreso);
                 frm.append("Usuario", Usuario);
                 frm.append("cadF", Foto);
@@ -418,7 +332,7 @@ function GuardarUsuario() {
         }
     }
     else {
-        alert("Ingrese nuevamente su contraseña")
+        alert("Su contraseña no coincide")
     }
 }
 

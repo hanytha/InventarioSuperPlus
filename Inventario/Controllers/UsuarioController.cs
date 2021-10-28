@@ -31,8 +31,15 @@ namespace Inventario.Controllers
                     p.NoSS,
                     p.Correo,
                     p.Telefono,
+                    p.Estado,
+                    p.Municipio,
+                    p.Localidad,
                     p.LvlPerfil,
-                    p.Usuario
+                    p.Password,
+                    p.FechaIngreso,
+                    p.Usuario,
+                    p.NArea,
+                    p.NSArea
                 });
             return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
@@ -58,7 +65,8 @@ namespace Inventario.Controllers
                     p.ApellidosP,
                     p.ApellidosM,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Foto.ToArray()),
-                    FechaNaci = ((DateTime)p.FechaDeNacimiento).ToShortDateString(),
+                 //   FechaDeNacimiento = ((DateTime)p.FechaDeNacimiento).ToShortDateString(),
+                    p.FechaDeNacimiento,
                     p.IdEstado,
                     p.IdMunicipio,
                     p.IdLocalidad,
@@ -77,9 +85,7 @@ namespace Inventario.Controllers
                     p.Municipio,
                     p.Localidad,
                     p.IdArea,
-                    p.IdSubArea,
-                    p.Area,
-                    p.SubArea
+                    p.IdSubArea
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
         }
