@@ -4170,6 +4170,8 @@ namespace Inventario
 		
 		private EntitySet<Proveedores> _Proveedores;
 		
+		private EntitySet<Tienda> _Tienda;
+		
 		private EntityRef<municipios> _municipios;
 		
     #region Definiciones de métodos de extensibilidad
@@ -4215,6 +4217,7 @@ namespace Inventario
 		public localidades()
 		{
 			this._Proveedores = new EntitySet<Proveedores>(new Action<Proveedores>(this.attach_Proveedores), new Action<Proveedores>(this.detach_Proveedores));
+			this._Tienda = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda), new Action<Tienda>(this.detach_Tienda));
 			this._municipios = default(EntityRef<municipios>);
 			OnCreated();
 		}
@@ -4576,6 +4579,19 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Tienda", Storage="_Tienda", ThisKey="id", OtherKey="IdLocalidad")]
+		public EntitySet<Tienda> Tienda
+		{
+			get
+			{
+				return this._Tienda;
+			}
+			set
+			{
+				this._Tienda.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_localidades", Storage="_municipios", ThisKey="municipio_id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public municipios municipios
 		{
@@ -4637,6 +4653,18 @@ namespace Inventario
 		}
 		
 		private void detach_Proveedores(Proveedores entity)
+		{
+			this.SendPropertyChanging();
+			entity.localidades = null;
+		}
+		
+		private void attach_Tienda(Tienda entity)
+		{
+			this.SendPropertyChanging();
+			entity.localidades = this;
+		}
+		
+		private void detach_Tienda(Tienda entity)
 		{
 			this.SendPropertyChanging();
 			entity.localidades = null;
@@ -4857,6 +4885,8 @@ namespace Inventario
 		
 		private EntitySet<Proveedores> _Proveedores;
 		
+		private EntitySet<Tienda> _Tienda;
+		
 		private EntityRef<estados> _estados;
 		
     #region Definiciones de métodos de extensibilidad
@@ -4879,6 +4909,7 @@ namespace Inventario
 		{
 			this._localidades = new EntitySet<localidades>(new Action<localidades>(this.attach_localidades), new Action<localidades>(this.detach_localidades));
 			this._Proveedores = new EntitySet<Proveedores>(new Action<Proveedores>(this.attach_Proveedores), new Action<Proveedores>(this.detach_Proveedores));
+			this._Tienda = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda), new Action<Tienda>(this.detach_Tienda));
 			this._estados = default(EntityRef<estados>);
 			OnCreated();
 		}
@@ -5013,6 +5044,19 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Tienda", Storage="_Tienda", ThisKey="id", OtherKey="IdMunicipio")]
+		public EntitySet<Tienda> Tienda
+		{
+			get
+			{
+				return this._Tienda;
+			}
+			set
+			{
+				this._Tienda.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="estados_municipios", Storage="_estados", ThisKey="estado_id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public estados estados
 		{
@@ -5086,6 +5130,18 @@ namespace Inventario
 		}
 		
 		private void detach_Proveedores(Proveedores entity)
+		{
+			this.SendPropertyChanging();
+			entity.municipios = null;
+		}
+		
+		private void attach_Tienda(Tienda entity)
+		{
+			this.SendPropertyChanging();
+			entity.municipios = this;
+		}
+		
+		private void detach_Tienda(Tienda entity)
 		{
 			this.SendPropertyChanging();
 			entity.municipios = null;
@@ -8492,6 +8548,10 @@ namespace Inventario
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
+		private EntityRef<localidades> _localidades;
+		
+		private EntityRef<municipios> _municipios;
+		
 		private EntityRef<Supervision> _Supervision;
 		
 		private EntityRef<Supervisor> _Supervisor;
@@ -8557,6 +8617,8 @@ namespace Inventario
 		public Tienda()
 		{
 			this._PedidosInternos = new EntitySet<PedidosInternos>(new Action<PedidosInternos>(this.attach_PedidosInternos), new Action<PedidosInternos>(this.detach_PedidosInternos));
+			this._localidades = default(EntityRef<localidades>);
+			this._municipios = default(EntityRef<municipios>);
 			this._Supervision = default(EntityRef<Supervision>);
 			this._Supervisor = default(EntityRef<Supervisor>);
 			OnCreated();
@@ -8881,6 +8943,10 @@ namespace Inventario
 			{
 				if ((this._IdMunicipio != value))
 				{
+					if (this._municipios.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIdMunicipioChanging(value);
 					this.SendPropertyChanging();
 					this._IdMunicipio = value;
@@ -8921,6 +8987,10 @@ namespace Inventario
 			{
 				if ((this._IdLocalidad != value))
 				{
+					if (this._localidades.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIdLocalidadChanging(value);
 					this.SendPropertyChanging();
 					this._IdLocalidad = value;
@@ -9100,6 +9170,74 @@ namespace Inventario
 			set
 			{
 				this._PedidosInternos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="localidades_Tienda", Storage="_localidades", ThisKey="IdLocalidad", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public localidades localidades
+		{
+			get
+			{
+				return this._localidades.Entity;
+			}
+			set
+			{
+				localidades previousValue = this._localidades.Entity;
+				if (((previousValue != value) 
+							|| (this._localidades.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._localidades.Entity = null;
+						previousValue.Tienda.Remove(this);
+					}
+					this._localidades.Entity = value;
+					if ((value != null))
+					{
+						value.Tienda.Add(this);
+						this._IdLocalidad = value.id;
+					}
+					else
+					{
+						this._IdLocalidad = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("localidades");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="municipios_Tienda", Storage="_municipios", ThisKey="IdMunicipio", OtherKey="id", IsForeignKey=true)]
+		public municipios municipios
+		{
+			get
+			{
+				return this._municipios.Entity;
+			}
+			set
+			{
+				municipios previousValue = this._municipios.Entity;
+				if (((previousValue != value) 
+							|| (this._municipios.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._municipios.Entity = null;
+						previousValue.Tienda.Remove(this);
+					}
+					this._municipios.Entity = value;
+					if ((value != null))
+					{
+						value.Tienda.Add(this);
+						this._IdMunicipio = value.id;
+					}
+					else
+					{
+						this._IdMunicipio = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("municipios");
+				}
 			}
 		}
 		
