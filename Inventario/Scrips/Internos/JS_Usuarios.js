@@ -13,10 +13,6 @@ CrearAcordeonUsuarios();
 //    }
 //);
 
-
-
-
-
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonUsuarios() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
@@ -319,7 +315,7 @@ function GuardarUsuario() {
                             alert("Ocurrio un error");
                         }
                         else if (data == -1) {
-                            alert("Ya existe el proveedor");
+                            alert("Ya existe el usuario");
                         }
                         else {
                             alert("Se ejecutó correctamente");

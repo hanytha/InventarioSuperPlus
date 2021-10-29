@@ -174,26 +174,48 @@ function CamposObligatorios() {
 
 
 
-//"Elimina" el área cambia el Estatus
-function EliminarSupervicion(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
+////"Elimina" el área cambia el Estatus
+//function EliminarSupervicion(id) {
+//    if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
-            if (DatoPagina == 1) {
+//        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
+//            if (DatoPagina == 1) {
+//                // alert("Se eliminó correctamente");
+//                Swal.fire(
+//                    'Deleted!',
+//                    'Se elimino correctamente.',
+//                    'success'
+//                )
+//                //  confirmarEliminar();
+//                CrearAcordeonPerfil();
+//            } else {
+//                alert("Ocurrio un error");
+//            }
+//        });
+//    }
+//}
+
+
+function EliminarSupervicion(id) {
+    if(confirm("¿Desea eliminar el registro?") == 1) {
+        $.get("/Supervision/EliminarSupervicion/?IdSupervision=" + id, function (DatoSupervicion) {
+            if (DatoSupervicion == 1) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'La supervisión se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
-                CrearAcordeonPerfil();
+                CrearAcordeonUsuarios();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }
 }
+
+
 
 
 //function LlenarCMBPRTienda() {

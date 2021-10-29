@@ -128,14 +128,11 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
+
 //Guarda los cambios y altas de los proveedores
 function GuardarPerfil() {
-    if (CamposObligatorios() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
-            var Perfil = document.getElementById("TxtPerfil").value;
-            var Nivel = document.getElementById("TxtNivel").value;
-          //  Se recorre el checkbox de permisos para buscar las casillas seleccionadas, se separan con "#" y se guardan en la base de datos
+ 
+        if (CamposObligatorios() == true) {
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
             let seleccionados = "";
             for (let i = 0; i < ChevPermisos.length; i++) {
@@ -144,36 +141,57 @@ function GuardarPerfil() {
                     seleccionados += "#";
                 }
             }
-            var Permisos = seleccionados.substring(0, seleccionados.length - 1);
-            var Comentarios = document.getElementById("TxtComentarios").value;
-           
-            var frm = new FormData();
-            frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
-            frm.append("Perfil", Perfil);
-            frm.append("Nivel", Nivel);
-            frm.append("Permisos", Permisos);
-            frm.append("Comentarios", Comentarios);
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Perfiles/GuardarPerfil",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el perfil");
-                    }
-                    else {
-                        alert("Se ejecuto correctamente");
-                        ConsultaPerfiles();
-                        document.getElementById("btnCancelar").click();
+            if (seleccionados == "") {
+
+                alert("Rellene el checkbox");
+            } else {
+            if (confirm("¿Desea aplicar los cambios?") == 1) {
+                var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
+                var Perfil = document.getElementById("TxtPerfil").value;
+                var Nivel = document.getElementById("TxtNivel").value;
+                //  Se recorre el checkbox de permisos para buscar las casillas seleccionadas, se separan con "#" y se guardan en la base de datos
+                var ChevPermisos = document.getElementsByClassName("checkbox-area");
+                let seleccionados = "";
+                for (let i = 0; i < ChevPermisos.length; i++) {
+                    if (ChevPermisos[i].checked == true) {
+                        seleccionados += ChevPermisos[i].id;
+                        seleccionados += "#";
                     }
                 }
-            });
+                var Permisos = seleccionados.substring(0, seleccionados.length - 1);
+                var Comentarios = document.getElementById("TxtComentarios").value;
+
+                var frm = new FormData();
+                frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
+                frm.append("Perfil", Perfil);
+                frm.append("Nivel", Nivel);
+                frm.append("Permisos", Permisos);
+                frm.append("Comentarios", Comentarios);
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/Perfiles/GuardarPerfil",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            //alert("Ocurrio un error");
+
+                            alert("Ocurrio un error");
+
+                        }
+                        else if (data == -1) {
+                            alert("Ya existe el perfil");
+                        }
+                        else {
+                            alert("Se ejecuto correctamente");
+                            ConsultaPerfiles();
+                            document.getElementById("btnCancelar").click();
+                        }
+                    }
+                });
+            }
         }
     }
 }
@@ -204,7 +222,7 @@ function EliminarPerfil(id) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'Se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
@@ -226,7 +244,7 @@ function MostrarPaginas() {
         codigoHtmlPagina += "<div class='row'>";
         for (var i = 0; i < Paginas.length; i++) {
             codigoHtmlPagina += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            codigoHtmlPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font'>" + Paginas[i].Descripcion + "</span>";
+            codigoHtmlPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font' >" + Paginas[i].Descripcion + "</span>";
             codigoHtmlPagina += "</div>";
         }
         codigoHtmlPagina += "</div>";
@@ -236,5 +254,17 @@ function MostrarPaginas() {
 
 
 
-
-
+//function Validarcheckbox() {
+//    var ChevPermisos = document.getElementsByClassName("checkbox-area");
+//    let seleccionados = "";
+//    for (let i = 0; i < ChevPermisos.length; i++) {
+//        if (ChevPermisos[i].checked == true) {
+//            seleccionados += ChevPermisos[i].id;
+//            seleccionados += "#";
+//        }
+//    }
+//    //if (seleccionados == "") {
+//    //    alert("Rellene el checkbox");
+//    //}
+  
+//}

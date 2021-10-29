@@ -117,25 +117,23 @@ namespace Inventario.Controllers
 
 
 
-        //Eliminar Compra
+        //Eliminar Supervision
         public int EliminarSupervicion(long Id)
         {
             int nregistradosAfectados = 0;
-            try
-            {//Consulta los datos y el primer Id que encuentra  lo compara
+            //try
+            //{//Consulta los datos y el primer Id que encuentra  lo compara
                 Supervision super = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id)).First();
                 super.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    nregistradosAfectados = 0;
+            //}
             return nregistradosAfectados;
         }
-
-
     }
 }
 
