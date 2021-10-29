@@ -1,7 +1,4 @@
-﻿
-
-
-ConsultaPerfiles();
+﻿ConsultaPerfiles();
 function ConsultaPerfiles() {
     $.get("/Perfiles/ConsultaPefiles", function (Data) {
         CrearTablaPerfiles(Data);
@@ -81,6 +78,7 @@ function CrearTablaPerfiles(Data) {
 
 
 
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     MostrarPaginas();
@@ -116,35 +114,21 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-//limpiar campos
-function LimpiarCampos() {
-    //Limpiar la casilla de texto
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }//Limpiar el campo de select
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
-    }
-}
-
 //Guarda los cambios y altas de los proveedores
 function GuardarPerfil() {
- 
-        if (CamposObligatorios() == true) {
-            var ChevPermisos = document.getElementsByClassName("checkbox-area");
-            let seleccionados = "";
-            for (let i = 0; i < ChevPermisos.length; i++) {
-                if (ChevPermisos[i].checked == true) {
-                    seleccionados += ChevPermisos[i].id;
-                    seleccionados += "#";
-                }
+    if (CamposObligatorios() == true) {
+        var ChevPermisos = document.getElementsByClassName("checkbox-area");
+        let seleccionados = "";
+        for (let i = 0; i < ChevPermisos.length; i++) {
+            if (ChevPermisos[i].checked == true) {
+                seleccionados += ChevPermisos[i].id;
+                seleccionados += "#";
             }
-            if (seleccionados == "") {
+        }
+        if (seleccionados == "") {
 
-                alert("Rellene el checkbox");
-            } else {
+            alert("Rellene el checkbox");
+        } else {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
                 var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
                 var Perfil = document.getElementById("TxtPerfil").value;
@@ -196,9 +180,21 @@ function GuardarPerfil() {
     }
 }
 
+
+//limpiar campos
+function LimpiarCampos() {
+    //Limpiar la casilla de texto
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }//Limpiar el campo de select
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
 //marca los campos obligatorios
 function CamposObligatorios() {
-
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -214,18 +210,15 @@ function CamposObligatorios() {
     }
     return exito;
 }
-//"Elimina" el área cambia el Estatus
+
+
+
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Perfiles/EliminarPerfil/?IdPerfilDeUsuario=" + id, function (DatoPagina) {
-            if (DatoPagina == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
+
+        $.get("/Perfiles/EliminarPerfil/?Id=" + id, function (DatoPerfil) {
+            if (DatoPerfil == 1) {
+                alert("Se elimino correctamente");
                 CrearAcordeonPerfil();
             } else {
                 alert("Ocurrio un error");
@@ -233,9 +226,6 @@ function EliminarPerfil(id) {
         });
     }
 }
-
-
-
 
 
 function MostrarPaginas() {
@@ -252,19 +242,3 @@ function MostrarPaginas() {
     });
 }
 
-
-
-//function Validarcheckbox() {
-//    var ChevPermisos = document.getElementsByClassName("checkbox-area");
-//    let seleccionados = "";
-//    for (let i = 0; i < ChevPermisos.length; i++) {
-//        if (ChevPermisos[i].checked == true) {
-//            seleccionados += ChevPermisos[i].id;
-//            seleccionados += "#";
-//        }
-//    }
-//    //if (seleccionados == "") {
-//    //    alert("Rellene el checkbox");
-//    //}
-  
-//}
