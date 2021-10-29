@@ -57,9 +57,10 @@
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-
-<div id="tabla" class="default "></div>
+<div id="tablaSupervicion"></div>
+<!-- Rellenar los registros de la base de datos en el accordión -->
 <div id="accordion"></div>
+
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -79,25 +80,24 @@
                         <fieldset>
                             <h4>Paso 1</h4>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomSuper">INGRESE EL NOMBRE DE LA SUPERVISIÓN<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNomSuper]" id="TxtNomSuper" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                        <label class="form-control-label" for="TxtNomSuper">Supervición<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNomSuper]" id="TxtNomSuper" class="form-control  limpiar obligatorio" placeholder="Nombre de la supervición">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNomUser">Usuario<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="Usuario">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomUser">INGRESE EL NOMBRE DE EL ENCARGADO<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="name@example.com">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtComentarios">Permisos<span class="required">*</span></label>
+                                        <label class="form-control-label" for="TxtComentarios">Tiendas<span class="required">*</span></label>
                                         <div id="divPagina"></div>
 
                                     </div>

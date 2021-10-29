@@ -50,9 +50,9 @@ namespace Inventario.Controllers
         public int GuardarPagina(Pagina DatosPagina)
         {
             int Afectados = 0;
-            //try
-            //{
-            long id = DatosPagina.IdPagina;
+            try
+            {
+                long id = DatosPagina.IdPagina;
             if (id.Equals(0))
             {
                 int nveces = InvBD.Pagina.Where(p => p.Descripcion.Equals(DatosPagina.Descripcion)).Count();
@@ -93,11 +93,11 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
             return Afectados;
         }
 

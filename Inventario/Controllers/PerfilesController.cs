@@ -51,9 +51,9 @@ namespace Inventario.Controllers
         public int GuardarPerfil(PerfilDeUsuario DatosPerfil)
         {
             int Afectados = 0;
-            //try
-            //{
-            long id = DatosPerfil.IdPerfilDeUsuario;
+            try
+            {
+                long id = DatosPerfil.IdPerfilDeUsuario;
             if (id.Equals(0))
             {
                 int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil)).Count();
@@ -88,11 +88,11 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
             return Afectados;
         }
 

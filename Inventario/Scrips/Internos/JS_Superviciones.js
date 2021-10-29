@@ -1,4 +1,37 @@
-﻿//LlenarCMBPRTienda();
+﻿
+//ConsultaSuperviciones();
+//function ConsultaSuperviciones() {
+//    $.get("/Supervision/ConsultaSuperviciones", function (Data) {
+//        CrearTablaSuperviciones(Data);
+//    }
+//    );
+//}
+
+//function CrearTablaSuperviciones(Data) {
+//    var CodigoHtmlTablaSuperviciones = "";
+//    CodigoHtmlTablaSuperviciones += "<table id='tablas' class='table table table-sm' >";
+//    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>TipoSupervicion</th><th>nombreUsuario</th><th>Tienda</th><th>Acción</thead>";
+//    CodigoHtmlTablaSuperviciones += "<tbody>";
+//    for (var i = 0; i < Data.length; i++) {
+//        CodigoHtmlTablaSuperviciones += "<tr>";
+//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].TipoSupervicion + "</td>";
+//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].nombreUsuario + "</td>";
+//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
+
+//        CodigoHtmlTablaSuperviciones += "<td>";
+//        CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+//        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].IdSupervision + ",this)'><i class='fas fa-eraser'></i></button>";
+
+//        CodigoHtmlTablaSuperviciones += "</td>";
+//        CodigoHtmlTablaSuperviciones += "</tr>";
+//    }
+//    CodigoHtmlTablaSuperviciones += "</tbody>";
+//    CodigoHtmlTablaSuperviciones += "</table>";
+//    document.getElementById("tablaSupervicion").innerHTML = CodigoHtmlTablaSuperviciones;
+//}
+
+
+
 CrearAcordeonSuperviciones();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonSuperviciones() {
@@ -46,6 +79,7 @@ function AcordeonSuperviciones(Data, CtrlSuper) {
     }
     CtrlSuper.innerHTML = CodigoHTMLAreas;
 }
+
 
 
 //Limpia la información y carga la informacion del proveedor
@@ -127,7 +161,7 @@ function GuardarSupervision() {
                         alert("Ocurrio un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe la supervición");
                     }
                     else {
                         alert("Se ejecuto correctamente");
@@ -173,57 +207,24 @@ function CamposObligatorios() {
 }
 
 
-
-////"Elimina" el área cambia el Estatus
-//function EliminarSupervicion(id) {
-//    if (confirm("¿Desea eliminar el registro?") == 1) {
-
-//        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
-//            if (DatoPagina == 1) {
-//                // alert("Se eliminó correctamente");
-//                Swal.fire(
-//                    'Deleted!',
-//                    'Se elimino correctamente.',
-//                    'success'
-//                )
-//                //  confirmarEliminar();
-//                CrearAcordeonPerfil();
-//            } else {
-//                alert("Ocurrio un error");
-//            }
-//        });
-//    }
-//}
-
-
 function EliminarSupervicion(id) {
-    if(confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Supervision/EliminarSupervicion/?IdSupervision=" + id, function (DatoSupervicion) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
             if (DatoSupervicion == 1) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'La supervisión se eliminó correctamente.',
+                    'Se elimino correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
-                CrearAcordeonUsuarios();
+                CrearAcordeonSuperviciones();
             } else {
-                alert("Ocurrió un error");
+                alert("Ocurrio un error");
             }
         });
     }
 }
-
-
-
-
-//function LlenarCMBPRTienda() {
-//    $.get("/GLOBAL/BDTienda", function (data) {
-//        llenarCombo(data, document.getElementById("cmbTienda"));
-//    });
-
-//}
 
 function MostrarTiendas() {
     $.get("/GLOBAL/BDTienda", function (Tiendas) {

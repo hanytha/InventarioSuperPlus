@@ -3,16 +3,65 @@
     ViewBag.Title = "Pedidosint";
 }
 <h2>Pedidos Internos</h2>
-<!-- Color del texto del modal -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--Mostrar los registros de la base de datos en el accordión-->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Botón del modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+
+<div id="tabla" class="default "></div>
 <div id="accordion"></div>
-
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -24,76 +73,76 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>PEDIDO INTERNO</h1>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
-                        <fieldset>
-                            <h2>PASO 1</h2>
-                            <div class="form-group">
-                                <label for="fName">INGRESE EL NOMBRE DEL ARTÍCULO</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">INGRESE LA CANTIDAD</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">SELESCCIONE LA UNIDAD DE MEDIDA</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>PIEZA</option>
-                                    <option>PAQUETE</option>
-                                    <option>METRO</option>
-                                </select>
-                            </div>
-                            <br>
-                            <div id="listas">
-                                <label for="fName">INGRESAR MÁS ARTÍCULOS</label>
-                            </div>
-                            <input type="button" class="btn btn-primary" id="add_field" value="adicionar">
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2> PASO 2</h2>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">INGRESE EL TIPO DE TIENDA</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>LOCAL</option>
-                                    <option>FORANEA</option>
-                                </select>
+                    <h1>Registro de pedidos Internos</h1>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">SELECCIONE EL NÚMERO DE TIENDA</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
+                                    <label class="form-control-label" for="TxtNumeroPedido">Número de Pedido<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorio" placeholder="Número de Pedido">
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h2>PASO 3</h2>
-                            <div class="form-group">
-                                <label for="fName">INGRESE EL NOMBRE DEL SUPERVISOR</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="">
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadSolicitada">Cantidad solicitada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadSolicitada" class="form-control limpiar obligatorio" placeholder="Cantidad solicitada">
+                                </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
-                        </fieldset>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadAprovada" class="form-control limpiar obligatorio" placeholder="Cantidad aprovada">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbArticulo">Articulo<span class="required">*</span></label>
+                                    <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbUnidadDeMedida">Unidad de medida<span class="required">*</span></label>
+                                    <select id="cmbUnidadDeMedida" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbMarca">Marca<span class="required">*</span></label>
+                                    <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTipoTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTipoTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="GuardarPedidosInt()">Guardar</button>
                     </form>
                 </div>
-                <!-- pie del modal-->
+                <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -103,4 +152,8 @@
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_PedidosInt.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/Plus/scripts.js"></script>

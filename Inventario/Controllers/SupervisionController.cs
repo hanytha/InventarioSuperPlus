@@ -31,22 +31,6 @@ namespace Inventario.Controllers
                 });
             return Json(superviciones, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaSupervicionesXTienda(long idSuper)
-        {
-            var super = InvBD.Supervision.Where(p => p.Estatus.Equals(1) && p.IdSupervision.Equals(idSuper))
-                .Select(p => new
-                {
-                    p.IdSupervision,
-                    p.TipoSupervicion,
-                    p.IdUsuario,
-                    p.IdAreas,
-                    p.Tienda,
-                    p.nombreUsuario,
-                    p.Estatus,
-
-                });
-            return Json(super, JsonRequestBehavior.AllowGet);
-        }
         public JsonResult ConsultaSupervicion(long Id)
         {
             var supervicion = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id))
@@ -67,9 +51,9 @@ namespace Inventario.Controllers
         public int GuardarSupervicion(Supervision DatosSupervicion)
         {
             int Afectados = 0;
-            //try
-            //{
-            long id = DatosSupervicion.IdSupervision;
+            try
+            {
+                long id = DatosSupervicion.IdSupervision;
             if (id.Equals(0))
             {
                 int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion)).Count();
@@ -103,39 +87,33 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
             return Afectados;
         }
 
-
-
-
-
-
-
-        //Eliminar Supervision
         public int EliminarSupervicion(long Id)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{//Consulta los datos y el primer Id que encuentra  lo compara
-                Supervision super = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id)).First();
-                super.Estatus = 0;//Cambia el estatus en 0
+            try
+            {//Consulta los datos y el primer Id que encuentra  lo compara
+                Supervision Sprv = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id)).First();
+                Sprv.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
-            //}
-            //catch (Exception ex)
-            //{
-            //    nregistradosAfectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
             return nregistradosAfectados;
         }
     }
 }
+
 
 
 
