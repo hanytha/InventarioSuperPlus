@@ -96,53 +96,13 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-
-
-        //Eliminar 
-        //        public int EliminarPerfil(long Id)
-        //        {
-        //            int nregistradosAfectados = 0;
-        //            try
-        //            {//Consulta los datos y el primer Id que encuentra  lo compara
-        //                PerfilDeUsuario perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id)).First();
-        //                perfil.Estatus = 0;//Cambia el estatus en 0
-        //                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-        //                nregistradosAfectados = 1;//Se pudo realizar
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                nregistradosAfectados = 0;
-        //            }
-        //            return nregistradosAfectados;
-        //        }
-        //    }
-        //}
-        //        public int EliminarPerfil(long IdPerfilDeUsuario)
-        //        {
-        //            int nregistradosAfectados = 0;
-        //            try
-        //            {//Consulta los datos y el primer Id que encuentra  lo compara
-        //                PerfilDeUsuario Perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(IdPerfilDeUsuario)).First();
-        //                Perfil.Estatus = 0;//Cambia el estatus en 0
-        //                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-        //                nregistradosAfectados = 1;//Se pudo realizar
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                nregistradosAfectados = 0;
-        //            }
-        //            return nregistradosAfectados;
-        //        }
-        //    }
-        //}
-
         public int EliminarPerfil(long Id)
         {
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                PerfilDeUsuario perfil = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id)).First();
-                perfil.Estatus = 0;//Cambia el estatus en 0
+                PerfilDeUsuario Pag = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Id)).First();
+                Pag.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
             }
@@ -152,6 +112,7 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+
     }
 }
 

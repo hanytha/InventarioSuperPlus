@@ -213,19 +213,26 @@ function CamposObligatorios() {
 
 
 
+
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-
-        $.get("/Perfiles/EliminarPerfil/?Id=" + id, function (DatoPerfil) {
-            if (DatoPerfil == 1) {
-                alert("Se elimino correctamente");
-                CrearAcordeonPerfil();
+        $.get("/Perfiles/EliminarPerfil/?Id=" + id, function (DatoPagina) {
+            if (DatoPagina == 1) {
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se elimino correctamente.',
+                    'success'
+                )
+                //  confirmarEliminar();
+                      ConsultaPerfiles();
             } else {
                 alert("Ocurrio un error");
             }
         });
     }
 }
+
 
 
 function MostrarPaginas() {
