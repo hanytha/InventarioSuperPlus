@@ -1,12 +1,13 @@
 ﻿
+
 CrearAcordeonPagina();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPagina() {
     $.get("/Pagina/ConsultaPaginas", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonPagina(Data, document.getElementById("accordion"));
     });
-    imagen64 = getBase64Image(document.getElementById("PBFoto"));
-}//Acordeón proveedores
+}
 function AcordeonPagina(Data, CtrlProveedores) {
     var CodigoHTMLPagina = "";
     for (var i = 0; i < Data.length; i++) {
@@ -48,6 +49,7 @@ function AcordeonPagina(Data, CtrlProveedores) {
     CtrlProveedores.innerHTML = CodigoHTMLPagina;
 }
 
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -61,64 +63,19 @@ function abrirModal(id) {//la clase  Obligatorio
         sessionStorage.setItem('IdPagina', 0);
     }
     else {
-        $.get("/Pagina/ConsultaPag/?Id=" + id, function (Data) {
+        $.get("/Supervisor/ConsultaSupervisor/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdPagina', Data[0].IdPagina);     //Variable de sesión
             document.getElementById("TxtAccion").value = Data[0].Accion;
             document.getElementById("TxtMensaje").value = Data[0].Mensaje;
             document.getElementById("TxtControlador").value = Data[0].Controlador;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtIconos").value = Data[0].Icono;
         });
     }
 }
-//limpiar campos
-function LimpiarCampos() {
-    //Limpiar la casilla de texto
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }//Limpiar el campo de select
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
-    }
-}
 
-
-function LlenarCMB() {
- 
-    $.get("/Pagina/BDPagina", function (data) {
-        llenarCombo(data, document.getElementById("cmbPadre"), true);
-    });
-}
-
-
-
-
-function llenarComboPaginas(data, control, primerElemento) {
-    var contenido = "";
-    if (primerElemento == true) {
-        contenido += "<option value=''>--Seleccione--</option>";
-    }
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
-    }
-    control.innerHTML = contenido;
-}
-
-
-
-
-function llenarCombo(data, control) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
-    }
-    control.innerHTML = contenido;
-}
 //Guarda los cambios y altas de los proveedores
 function GuardarPagina() {
     if (CamposObligatorios() == true) {
@@ -129,8 +86,8 @@ function GuardarPagina() {
 
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-          
-           // var Padre = document.getElementById("cmbTipo").value;
+
+            // var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
             frm.append("IdPagina", IdPagina);
@@ -164,6 +121,19 @@ function GuardarPagina() {
         }
     }
 }
+
+//limpiar campos
+function LimpiarCampos() {
+    //Limpiar la casilla de texto
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }//Limpiar el campo de select
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -181,10 +151,25 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
 //"Elimina" el área cambia el Estatus
+//function EliminarPagina(id) {
+//    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+//        $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
+//            if (DatoPagina == 1) {
+//                alert("Se elimino correctamente");
+//                CrearAcordeonSupervisores();
+//            } else {
+//                alert("Ocurrio un error");
+//            }
+//        });
+//    }
+//}
+
 function EliminarPagina(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Pagina/EliminarPagina/?IdPagina=" + id, function (DatoPagina) {
+        $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
             if (DatoPagina == 1) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
@@ -203,8 +188,30 @@ function EliminarPagina(id) {
 
 
 
+function LlenarCMB() {
+
+    $.get("/Pagina/BDPagina", function (data) {
+        llenarCombo(data, document.getElementById("cmbPadre"), true);
+    });
+}
 
 
+function llenarComboPaginas(data, control, primerElemento) {
+    var contenido = "";
+    if (primerElemento == true) {
+        contenido += "<option value=''>--Seleccione--</option>";
+    }
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
 
-
-
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
+}
