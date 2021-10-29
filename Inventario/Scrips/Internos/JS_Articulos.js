@@ -1,4 +1,5 @@
 ﻿var imagen64;
+LlenarCMCategoria();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonArticulos() {
@@ -32,6 +33,7 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + Data[i].NombreProveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + Data[i].PrecioUnitarioPromedio + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Categoria + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + Data[i].UnidadSAT + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + Data[i].ClaveSAT + "</div>";
         CodigoHTMLAreas += "</div>";
@@ -89,6 +91,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
+            document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
@@ -121,6 +124,11 @@ function GuardarArticulo() {
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
+
+            var IdCategorias = document.getElementById("cmbCategoria").value;
+            var TempSupervisor = document.getElementById("cmbCategoria");
+            var Categoria = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
+
             var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
@@ -135,6 +143,8 @@ function GuardarArticulo() {
             frm.append("NombreEmpresa", NombreEmpresa);
             frm.append("NombreProveedor", NombreProveedor);
             frm.append("Descripcion", Descripcion);
+            frm.append("IdCategorias", IdCategorias);
+            frm.append("Categoria", Categoria);
             frm.append("PrecioUnitarioPromedio", PrecioUnitarioPromedio);
             frm.append("UnidadSAT", UnidadSAT);
             frm.append("ClaveSAT", ClaveSAT);
@@ -206,3 +216,24 @@ function EliminarArticulo(id) {
         });
     }
 }
+
+
+function LlenarCMCategoria() {
+    $.get("/GLOBAL/BDCategorias", function (data) {
+        llenarCombo(data, document.getElementById("cmbCategoria"));
+    });
+}
+
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
