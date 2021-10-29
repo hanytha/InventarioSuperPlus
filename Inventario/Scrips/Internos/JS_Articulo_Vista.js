@@ -108,9 +108,10 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
     }
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
+    //Limpiar las imágenes
+    var controlesImg = document.getElementsByClassName("limpiarImg");
+    for (var i = 0; i < controlesImg.length; i++) {
+        controlesImg[i].value = null;
     }
 }
 

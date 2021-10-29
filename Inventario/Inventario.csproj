@@ -112,6 +112,7 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Entrada.js" />
@@ -232,6 +233,7 @@
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
+    <Content Include="Views\Articulo\Articulo_vista.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
