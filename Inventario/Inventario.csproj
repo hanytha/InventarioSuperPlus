@@ -154,6 +154,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\ArticuloVistaController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
@@ -233,7 +234,7 @@
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
-    <Content Include="Views\Articulo\Articulo_vista.cshtml" />
+    <Content Include="Views\ArticuloVista\ArticuloVista.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
