@@ -125,6 +125,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdImpuesto,
+                    Nombre = p.Impuestos
         
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);

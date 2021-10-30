@@ -28,6 +28,7 @@ namespace Inventario.Controllers
                     p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
+                    p.Impuesto,
                     p.IdImpuesto,
                     p.IdProveedor,
                     p.IdArticulo,
@@ -49,6 +50,7 @@ namespace Inventario.Controllers
                     p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
+                    p.Impuesto,
                     p.IdImpuesto,
                     p.IdProveedor,
                     p.IdArticulo,
@@ -89,6 +91,7 @@ namespace Inventario.Controllers
                 && p.FechaFinal.Equals(DatosCompra.FechaFinal)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
                 && p.Coste.Equals(DatosCompra.Coste)
+                && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -100,6 +103,8 @@ namespace Inventario.Controllers
                     obj.FechaFinal = DatosCompra.FechaFinal;
                     obj.ExitenciaActual = DatosCompra.ExitenciaActual;
                     obj.Coste = DatosCompra.Coste;
+                    obj.IdImpuesto = DatosCompra.IdImpuesto;
+                    obj.Impuesto = DatosCompra.Impuesto;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
