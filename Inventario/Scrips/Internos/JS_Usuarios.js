@@ -4,7 +4,6 @@ LlenarCMBPrin();
 var imagen64;
 CrearAcordeonUsuarios();
 
-
 //$("#TxtFechaN").datepicker(
 //    {
 //        dateFormat: "dd/mm/yy",
@@ -17,11 +16,47 @@ CrearAcordeonUsuarios();
 function CrearAcordeonUsuarios() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
+        AcordeonUsuarios(Data);
+    });
+  
+}
+function AcordeonUsuarios(Data) {
+    var CodigoHTMLUsuarios = "";
+    CodigoHTMLUsuarios += "<table id='tablas' class='table table table-sm' >";
+    CodigoHTMLUsuarios += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
+    CodigoHTMLUsuarios += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+       
+        CodigoHTMLUsuarios += "<tr>";
+        CodigoHTMLUsuarios += "<td>" + Data[i].CURP + "</td>";
+        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+        CodigoHTMLUsuarios += "<td>";
+
+        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLUsuarios += "</td>";
+        CodigoHTMLUsuarios += "</tr>";
+    }
+     CodigoHTMLUsuarios += "</tbody>";
+    CodigoHTMLUsuarios += "</table>";
+    document.getElementById("tablaUsuarios").innerHTML = CodigoHTMLUsuarios;
+}
+
+
+/*
+ * //Accordion de usuarios
+ *CrearAcordeonUsuarios();
+
+//Crea el acordeón e inserta (los registros de la base de datos)
+function CrearAcordeonUsuarios() {
+    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonUsuarios(Data, document.getElementById("accordion"));
     });
     imagen64 = getBase64Image(document.getElementById("PBFoto"));
 }
-function AcordeonUsuarios(Data, CtrlBonis) {
+function AcordeonUsuarios(Data, CtrlUsuarios) {
     var CodigoHTMLUsuarios = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
@@ -50,7 +85,7 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
-  
+
         CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
         CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
 
@@ -74,8 +109,10 @@ function AcordeonUsuarios(Data, CtrlBonis) {
         CodigoHTMLUsuarios += "</div>";
         CodigoHTMLUsuarios += "</div>";
     }
-    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
+    CtrlUsuarios.innerHTML = CodigoHTMLUsuarios;
 }
+
+*/
 
 
 

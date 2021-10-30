@@ -76,9 +76,6 @@ function CrearTablaPerfiles(Data) {
     document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
 }
 
-
-
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     MostrarPaginas();
