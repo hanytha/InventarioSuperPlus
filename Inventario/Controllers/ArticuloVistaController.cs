@@ -15,7 +15,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public void ConsultaDepartamentos()
+        public void ConsultaArticulos()
         {
             string Id = "";
             string nombre = "";
@@ -54,9 +54,9 @@ namespace Inventario.Controllers
                 {
                     if (cont== UltimoReg)
                     {
-                        //ConsultaUfecha = ConsultaUfecha.Where();
+                        //fecha =+ ConsultaUfecha. + ",";
                     }
-                    cont++;
+                       
                 }
 
 

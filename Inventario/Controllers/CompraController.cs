@@ -20,9 +20,9 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdCompra,
+                    p.NoCompra,
                     p.MetodoDePago,
                     p.ClaveProveedor,
-                    p.NoCompra,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.FechaFinal,
@@ -41,9 +41,9 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdCompra,
+                    p.NoCompra,
                     p.MetodoDePago,
                     p.ClaveProveedor,
-                    p.NoCompra,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.FechaFinal,
@@ -56,6 +56,86 @@ namespace Inventario.Controllers
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+        //Guardar los datos de la compra
+        public int GuardarCompra(Compra DatosCompra)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = DatosCompra.IdCompra;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.Compra.Where(p => p.NoCompra.Equals(DatosCompra.NoCompra)).Count();
+
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.Compra.InsertOnSubmit(DatosCompra);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.Compra.Where(p => p.NoCompra.Equals(DatosCompra.NoCompra)
+                && p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
+                && p.ClaveProveedor.Equals(DatosCompra.ClaveProveedor) 
+                && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
+                && p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
+                && p.FechaFinal.Equals(DatosCompra.FechaFinal)
+                && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
+                && p.Coste.Equals(DatosCompra.Coste)
+                ).Count();
+                if (nveces == 0)
+                {
+                    Compra obj = InvBD.Compra.Where(p => p.IdCompra.Equals(id)).First();
+                    obj.NoCompra = DatosCompra.NoCompra;
+                    obj.MetodoDePago = DatosCompra.MetodoDePago;
+                    obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
+                    obj.ExitenciaInicial = DatosCompra.ExitenciaInicial;
+                    obj.FechaFinal = DatosCompra.FechaFinal;
+                    obj.ExitenciaActual = DatosCompra.ExitenciaActual;
+                    obj.Coste = DatosCompra.Coste;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Afectados = 0;
+            //}
+            return Afectados;
+        }
+
+
+
+        //Eliminar Compra
+        public int EliminarCompra(long Id)
+        {
+            int nregistradosAfectados = 0;
+            try
+            {//Consulta los datos y el primer Id que encuentra  lo compara
+                Compra compra = InvBD.Compra.Where(p => p.IdCompra.Equals(Id)).First();
+                compra.Estatus = 0;//Cambia el estatus en 0
+                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+                nregistradosAfectados = 1;//Se pudo realizar
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
+            return nregistradosAfectados;
+        }
+
 
     }
 }

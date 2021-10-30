@@ -90,9 +90,9 @@
       <Column Name="MetodoDePago" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveProveedor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FechaFinal" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt" CanBeNull="true" />

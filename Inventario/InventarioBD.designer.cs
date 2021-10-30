@@ -2235,11 +2235,11 @@ namespace Inventario
 		
 		private System.Nullable<long> _NoCompra;
 		
-		private System.Nullable<System.DateTime> _FechaDeIngreso;
+		private string _FechaDeIngreso;
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
-		private System.Nullable<System.DateTime> _FechaFinal;
+		private string _FechaFinal;
 		
 		private System.Nullable<long> _ExitenciaActual;
 		
@@ -2275,11 +2275,11 @@ namespace Inventario
     partial void OnClaveProveedorChanged();
     partial void OnNoCompraChanging(System.Nullable<long> value);
     partial void OnNoCompraChanged();
-    partial void OnFechaDeIngresoChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaFinalChanging(string value);
     partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
@@ -2385,8 +2385,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date")]
-		public System.Nullable<System.DateTime> FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50)")]
+		public string FechaDeIngreso
 		{
 			get
 			{
@@ -2425,8 +2425,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date")]
-		public System.Nullable<System.DateTime> FechaFinal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50)")]
+		public string FechaFinal
 		{
 			get
 			{

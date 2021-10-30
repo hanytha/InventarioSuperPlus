@@ -21,7 +21,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdCompra + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdCompra + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<span >" + Data[i].MetodoDePago + "</span>";
+        CodigoHTMLAreas += "<span >" + Data[i].NoCompra + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
@@ -29,7 +29,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nombre de el lider de tienda: </strong>" + Data[i].ClaveProveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nombre encargado1: </strong>" + Data[i].NoCompra + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nombre encargado1: </strong>" + Data[i].MetodoDePago + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Nombre encargado2: </strong>" + Data[i].FechaDeIngreso + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
@@ -42,7 +42,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTienda(" + Data[i].IdCompra + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -67,22 +67,21 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDTiend', '0');
+        sessionStorage.setItem('IDExt', '0');
 
     }
     else {
 
-        $.get("/Tienda/ConsultaTienda/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IDTiend', Data[0].IdTienda);
-            document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtCodigoPostal").value = Data[0].CP;
-            document.getElementById("TxtNumeroTelefono").value = Data[0].Telefono;
-            document.getElementById("TxtHoraApertura").value = Data[0].HApertura;
-            document.getElementById("TxtHoraCierre").value = Data[0].HCierre;
-            document.getElementById("cmbSupervision").value = Data[0].IdSupervision;
-            document.getElementById("TxtAux1").value = Data[0].A1Nombre;
-            document.getElementById("TxtAux2").value = Data[0].A2Nombre;
-            document.getElementById("TxtAux3").value = Data[0].A3Nombre;
+        $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IDExt', Data[0].IdCompra);
+            document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
+            document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
+            document.getElementById("TxtClaveProveedor").value = Data[0].ClaveProveedor;
+            document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
+            document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
+            document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
+            document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
+            document.getElementById("TxtCoste").value = Data[0].Coste;
            
         });
     }
@@ -104,43 +103,34 @@ function LimpiarCampos() {
 
 
 //Guarda los cambios y altas de las áreas
-function GuardarTienda() {
+function GuardarCompra() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdTienda = sessionStorage.getItem('IDTiend');
-            var Nombre = document.getElementById("TxtNombre").value;
-            var CP = document.getElementById("TxtCodigoPostal").value;
-            var Telefono = document.getElementById("TxtNumeroTelefono").value;
-            var HApertura = document.getElementById("TxtHoraApertura").value;
-            var HCierre = document.getElementById("TxtHoraCierre").value;
-            var IdSupervision = document.getElementById("cmbSupervision").value;
-            var TempSuper = document.getElementById("cmbSupervision");
-            var Unombre = TempSuper.options[TempSuper.selectedIndex].text;  
-            var LNombre = document.getElementById("TxtLider").value;
-            var E1Nombre = document.getElementById("TxtEncargado1").value;
-            var E2Nombre = document.getElementById("TxtEncargado2").value;
-            var E3Nombre = document.getElementById("TxtEncargado3").value;
-            var A1Nombre = document.getElementById("TxtAux1").value;
-            var A2Nombre = document.getElementById("TxtAux2").value;
-            var A3Nombre = document.getElementById("TxtAux3").value;
+            var IdCompra = sessionStorage.getItem('IDExt');
+            var NoCompra = document.getElementById("TxtNoCompra").value;
+            var MetodoDePago = document.getElementById("TxtMetodo").value;
+            var ClaveProveedor = document.getElementById("TxtClaveProveedor").value;
+            var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
+            var FechaFinal = document.getElementById("TxtFechaFinal").value;
+            var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
+            var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
+            var Coste = document.getElementById("TxtCoste").value;
+
             var frm = new FormData();
-            frm.append("IdTienda", IdTienda);
-            frm.append("Nombre", Nombre);
-            frm.append("Unombre", Unombre);
-            frm.append("LNombre", LNombre);
-            frm.append("E1Nombre", E1Nombre);
-            frm.append("E2Nombre", E2Nombre);
-            frm.append("E3Nombre", E3Nombre);
-            frm.append("A1Nombre", A1Nombre);
-            frm.append("A2Nombre", A2Nombre);
-            frm.append("A3Nombre", A3Nombre);
-
-
+            frm.append("IdCompra", IdCompra);
+            frm.append("NoCompra", NoCompra);
+            frm.append("MetodoDePago", MetodoDePago);
+            frm.append("ClaveProveedor", ClaveProveedor);
+            frm.append("FechaDeIngreso", FechaDeIngreso);
+            frm.append("FechaFinal", FechaFinal);
+            frm.append("ExitenciaInicial", ExitenciaInicial);
+            frm.append("ExitenciaActual", ExitenciaActual);
+            frm.append("Coste", Coste);
 
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/Tienda/GuardarTienda",
+                url: "/Compra/GuardarCompra",
                 data: frm,
                 contentType: false,
                 processData: false,
@@ -149,11 +139,12 @@ function GuardarTienda() {
                         alert("Ocurrio un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el Tienda");
+                        alert("Ya existe el número de compra");
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonTienda();
+
+                        CrearAcordeonExistencia();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -182,13 +173,14 @@ function CamposObligatorios() {
 
 
 //"Elimina" el área cambia el Estatus
-function EliminarTienda(id) {
+function EliminarCompra(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Tienda/EliminarTienda/?Id=" + id, function (DatoTienda) {
+        $.get("/Compra/EliminarCompra/?Id=" + id, function (DatoTienda) {
             if (DatoTienda == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonTienda();
+
+                CrearAcordeonExistencia();
             } else {
                 alert("Ocurrio un error");
             }
