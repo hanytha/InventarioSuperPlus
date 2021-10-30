@@ -28,7 +28,7 @@ function AcordeonPagina(Data, CtrlProveedores) {
         CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPagina + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLPagina += "<div class='card-body'>";
         CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Mensaje: </strong>" + Data[i].Accion + "</div>";
+        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Acción: </strong>" + Data[i].Accion + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Controlador: </strong>" + Data[i].Controlador + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Icono: </strong>" + Data[i].Icono + "</div>";
         CodigoHTMLPagina += "</div>";
@@ -63,14 +63,13 @@ function abrirModal(id) {//la clase  Obligatorio
         sessionStorage.setItem('IdPagina', 0);
     }
     else {
-        $.get("/Supervisor/ConsultaSupervisor/?Id=" + id, function (Data) {
+        $.get("/Pagina/ConsultaPag/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdPagina', Data[0].IdPagina);     //Variable de sesión
             document.getElementById("TxtAccion").value = Data[0].Accion;
             document.getElementById("TxtMensaje").value = Data[0].Mensaje;
             document.getElementById("TxtControlador").value = Data[0].Controlador;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtIconos").value = Data[0].Icono;
         });
     }
@@ -106,13 +105,13 @@ function GuardarPagina() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe la pagina");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        alert("Se ejecutó correctamente");
                         CrearAcordeonPagina();
                         document.getElementById("btnCancelar").click();
                     }
@@ -174,7 +173,7 @@ function EliminarPagina(id) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'Se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
@@ -215,3 +214,12 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
+
+
+//Deshabilitar el clic externo para el modal del formulario.
+jQuery(document).ready(function () {
+    jQuery('[data-toggle="modal"]').each(function () {
+        jQuery(this).attr('data-backdrop', 'static');
+        jQuery(this).attr('data-keyboard', 'false');
+    });
+});
