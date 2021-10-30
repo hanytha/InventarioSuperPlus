@@ -1,4 +1,5 @@
 ﻿var imagen64;
+BloquearCTRL();
 LlenarCMCategoria();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
@@ -30,6 +31,7 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaSistema + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + Data[i].NombreProveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + Data[i].PrecioUnitarioPromedio + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
@@ -96,6 +98,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
+            document.getElementById("TxtFechaIngreso").value = Data[0].FechaSistema;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
         });
@@ -111,6 +114,13 @@ function LimpiarCampos() {
     var controlesSLT = document.getElementsByClassName("limpiarSelect");
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
+    }
+}
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
 
@@ -132,6 +142,7 @@ function GuardarArticulo() {
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
+            var FechaSistema = document.getElementById("TxtFechaIngreso").value;
 
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             if (Logo.endsWith('png')) {
@@ -148,6 +159,7 @@ function GuardarArticulo() {
             frm.append("UnidadSAT", UnidadSAT);
             frm.append("ClaveSAT", ClaveSAT);
             frm.append("Fecha", Fecha);
+            frm.append("FechaSistema", FechaSistema);
             frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({

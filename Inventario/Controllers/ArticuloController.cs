@@ -96,7 +96,8 @@ namespace Inventario.Controllers
                     && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
                     && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                     && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
-                    && p.Fecha.Equals(DatosArticulo.Fecha) 
+                    && p.Fecha.Equals(DatosArticulo.Fecha)
+                    && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
                     && p.Logo.Equals(DatosArticulo.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -106,10 +107,11 @@ namespace Inventario.Controllers
                         obj.Categoria = DatosArticulo.Categoria;
                         obj.NombreProveedor = DatosArticulo.NombreProveedor;
                         obj.Descripcion = DatosArticulo.Descripcion;
-                        obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
-                        obj.UnidadSAT = DatosArticulo.UnidadSAT;
+                       obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
+                       obj.UnidadSAT = DatosArticulo.UnidadSAT;
                        obj.ClaveSAT = DatosArticulo.ClaveSAT;
                        obj.Fecha = DatosArticulo.Fecha;
+                       obj.FechaSistema = DatosArticulo.FechaSistema;
                        obj.Logo = Convert.FromBase64String(cadF);
 
                     InvBD.SubmitChanges();
