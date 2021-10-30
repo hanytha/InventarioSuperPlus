@@ -1,120 +1,34 @@
-﻿
-LlenarCMBPrin();
+﻿LlenarCMBPrin();
 
 var imagen64;
-CrearAcordeonUsuarios();
-
-//$("#TxtFechaN").datepicker(
-//    {
-//        dateFormat: "dd/mm/yy",
-//        changeMonth: true,
-//        changeYear: true
-//    }
-//);
-
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonUsuarios() {
+ConsultaImpuesto();
+function ConsultaImpuesto() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonUsuarios(Data);
-    });
-  
-}
-function AcordeonUsuarios(Data) {
-    var CodigoHTMLUsuarios = "";
-    CodigoHTMLUsuarios += "<table id='tablas' class='table table table-sm' >";
-    CodigoHTMLUsuarios += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
-    CodigoHTMLUsuarios += "<tbody>";
-    for (var i = 0; i < Data.length; i++) {
-       
-        CodigoHTMLUsuarios += "<tr>";
-        CodigoHTMLUsuarios += "<td>" + Data[i].CURP + "</td>";
-        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
-        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
-        CodigoHTMLUsuarios += "<td>";
-
-        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLUsuarios += "</td>";
-        CodigoHTMLUsuarios += "</tr>";
+        CrearTablaImpuesto(Data);
     }
-     CodigoHTMLUsuarios += "</tbody>";
-    CodigoHTMLUsuarios += "</table>";
-    document.getElementById("tablaUsuarios").innerHTML = CodigoHTMLUsuarios;
+    );
 }
-
-
-/*
- * //Accordion de usuarios
- *CrearAcordeonUsuarios();
-
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonUsuarios() {
-    $.get("/Usuario/ConsultaUsuarios", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonUsuarios(Data, document.getElementById("accordion"));
-    });
-    imagen64 = getBase64Image(document.getElementById("PBFoto"));
-}
-function AcordeonUsuarios(Data, CtrlUsuarios) {
-    var CodigoHTMLUsuarios = "";
+function CrearTablaImpuesto(Data) {
+    var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
-        if (i < 1) {
-            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
-        }
-        else {
-            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
-        }
-        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
-        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
-        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
+        CodigoHtmlTablaCompra += "<tr>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].CURP + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Nombre + "</td>";
 
-        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
-        CodigoHTMLUsuarios += "</a>";
-        CodigoHTMLUsuarios += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLUsuarios += "<div class='card-body'>";
-        CodigoHTMLUsuarios += "<div class='row'>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
+        CodigoHtmlTablaCompra += "<td>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalUsuario'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
 
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
-
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
-        CodigoHTMLUsuarios += "</div>";
-
-        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
+        CodigoHtmlTablaCompra += "</td>";
+        CodigoHtmlTablaCompra += "</tr>";
     }
-    CtrlUsuarios.innerHTML = CodigoHTMLUsuarios;
+    CodigoHtmlTablaCompra += "</tbody>";
+    CodigoHtmlTablaCompra += "</table>";
+    document.getElementById("tablaImpuesto").innerHTML = CodigoHtmlTablaCompra;
 }
-
-*/
-
-
 
 //llena los combosprincipales
 function LlenarCMBPrin() {
@@ -128,6 +42,7 @@ function LlenarCMBPrin() {
         llenarCombo(data, document.getElementById("cmbPerfil"));
     });
 }
+
 
 //event Change index Areas para llenar el combobox SubAreas
 var IDA = document.getElementById("cmbArea");
@@ -153,9 +68,9 @@ IDM.addEventListener("change", function () {
 //funcion general para llenar los select
 function llenarCombo(data, control) {
     var contenido = "";
-  
-        contenido += "<option value='0'>--Seleccione--</option>";
-    
+
+    contenido += "<option value='0'>--Seleccione--</option>";
+
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
     }
@@ -247,7 +162,7 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-    
+
 }
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
@@ -415,9 +330,6 @@ function EliminarUsuario(id) {
         });
     }
 }
-
-
-
 
 
 

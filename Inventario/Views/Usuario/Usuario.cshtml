@@ -3,7 +3,6 @@
     ViewBag.Title = "Usuario";
 }
 
-<h2>Usuario</h2>
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
@@ -11,7 +10,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
+
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -51,19 +50,19 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
+<!--------------------------------------------MODAL USUARIOS-------------------------------------------------------------->
 <!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<div id="tablaUsuarios"></div>
-<!--Mostrar los registros en el accordion-->
-<div id="accordion"></div>
+<button onclick="editarModalUsuario(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuario">REGISTRAR COMPRA</button><!--Mostrar los registros en el accordion-->
+<!--Muestra la tabla compras-->
+<div id="tablaImpuesto" class="table"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalUsuario">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,15 +70,15 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
-                <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO DE USUARIOS</h1>
+                    <h4>REGISTRO COMPRA</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h4>Paso 1</h4>
+                            <!--Los pasos del modal-->
+                            <h4>PASO 1</h4>
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="form-group">
@@ -265,8 +264,8 @@
                             <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
                         </fieldset>
 
-                </form>
-            </div>
+                    </form>
+                </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
                     <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -277,15 +276,60 @@
 </div>
 <table>
 </table>
-<!--Hacer que el modal muestre los pasos por parte-->
+<!------------------------------------------------------------Modal impuesto--------------------------------------------------------------------------->
+<!-- Botón del modal-->
+<button onclick="editarModalImpuestos(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImpuesto">REGISTRAR IMPUESTO</button><!--Mostrar los registros en el accordion-->
+<!--Muestra la tabla compras-->
+
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalImpuesto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO DE IMPUESTOS</h4>
+                    <form id="regiration_form" novalidate method="post">
+                        <h4>Paso 1</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtImpuesto">Impuesto:<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtImpuesto]" id="TxtImpuesto" class="form-control  limpiar ObligatoriosImpuestos" placeholder="name@example.com">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtPorcentaje">Porcentaje:<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtPorcentaje]" id="TxtPorcentaje" class="form-control  limpiar ObligatoriosImpuestos" placeholder="Razón Social">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarImpuesto()">Guardar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;
     }
 </style>
+
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<script src="~/Scrips/jquery-ui.min.js"></script>
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Usuarios.js"></script>
@@ -293,6 +337,5 @@
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
-<script src="~/Scrips/General/JS_Botones.js"></script>
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
