@@ -1421,6 +1421,8 @@ namespace Inventario
 		
 		private string _FechaSistema;
 		
+		private string _Unidad;
+		
 		private int _Estatus;
 		
 		private EntitySet<PedidosExternos> _PedidosExternos;
@@ -1471,6 +1473,8 @@ namespace Inventario
     partial void OnFechaChanged();
     partial void OnFechaSistemaChanging(string value);
     partial void OnFechaSistemaChanged();
+    partial void OnUnidadChanging(string value);
+    partial void OnUnidadChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -1799,6 +1803,26 @@ namespace Inventario
 					this._FechaSistema = value;
 					this.SendPropertyChanged("FechaSistema");
 					this.OnFechaSistemaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(150)")]
+		public string Unidad
+		{
+			get
+			{
+				return this._Unidad;
+			}
+			set
+			{
+				if ((this._Unidad != value))
+				{
+					this.OnUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._Unidad = value;
+					this.SendPropertyChanged("Unidad");
+					this.OnUnidadChanged();
 				}
 			}
 		}

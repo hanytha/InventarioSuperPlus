@@ -1,6 +1,7 @@
 ﻿var imagen64;
 BloquearCTRL();
 LlenarCMCategoria();
+LlenarCMCUnidad();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonArticulos() {
@@ -42,6 +43,7 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Imagen: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Unidad + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -94,6 +96,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
+            document.getElementById("cmbUnidad").value = Data[0].Unidad;
             document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
@@ -137,13 +140,15 @@ function GuardarArticulo() {
             var IdCategorias = document.getElementById("cmbCategoria").value;
             var TempSupervisor = document.getElementById("cmbCategoria");
             var Categoria = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
+            var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
+            var TempSupervisor = document.getElementById("cmbUnidad");
+            var Unidad = TempSupervisor.options[TempSupervisor.selectedIndex].text; 
 
             var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
             var FechaSistema = document.getElementById("TxtFechaIngreso").value;
-
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             if (Logo.endsWith('png')) {
                 Logo = imagen64.replace("data:image/png;base64,", "");
@@ -155,6 +160,8 @@ function GuardarArticulo() {
             frm.append("Descripcion", Descripcion);
             frm.append("IdCategorias", IdCategorias);
             frm.append("Categoria", Categoria);
+            frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
+            frm.append("Unidad", Unidad);
             frm.append("PrecioUnitarioPromedio", PrecioUnitarioPromedio);
             frm.append("UnidadSAT", UnidadSAT);
             frm.append("ClaveSAT", ClaveSAT);
@@ -234,6 +241,13 @@ function LlenarCMCategoria() {
         llenarCombo(data, document.getElementById("cmbCategoria"));
     });
 }
+
+function LlenarCMCUnidad() {
+    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidad"));
+    });
+}
+
 
 
 //funcion general para llenar los select

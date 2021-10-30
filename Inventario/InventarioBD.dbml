@@ -65,6 +65,7 @@
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />
       <Association Name="Articulos_PedidosInternos" Member="PedidosInternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosInternos" />

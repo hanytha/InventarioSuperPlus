@@ -35,6 +35,7 @@ namespace Inventario.Controllers
                     p.Logo,
                     p.Fecha,
                     p.FechaSistema,
+                    p.Unidad,
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -58,6 +59,7 @@ namespace Inventario.Controllers
                     p.ClaveSAT,
                     p.Fecha,
                     p.FechaSistema,
+                    p.Unidad,
                     p.Estatus,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
 
@@ -98,6 +100,7 @@ namespace Inventario.Controllers
                     && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                     && p.Fecha.Equals(DatosArticulo.Fecha)
                     && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
+                    && p.Unidad.Equals(DatosArticulo.Unidad)
                     && p.Logo.Equals(DatosArticulo.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -107,12 +110,13 @@ namespace Inventario.Controllers
                         obj.Categoria = DatosArticulo.Categoria;
                         obj.NombreProveedor = DatosArticulo.NombreProveedor;
                         obj.Descripcion = DatosArticulo.Descripcion;
-                       obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
-                       obj.UnidadSAT = DatosArticulo.UnidadSAT;
-                       obj.ClaveSAT = DatosArticulo.ClaveSAT;
-                       obj.Fecha = DatosArticulo.Fecha;
-                       obj.FechaSistema = DatosArticulo.FechaSistema;
-                       obj.Logo = Convert.FromBase64String(cadF);
+                        obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
+                        obj.UnidadSAT = DatosArticulo.UnidadSAT;
+                        obj.ClaveSAT = DatosArticulo.ClaveSAT;
+                        obj.Fecha = DatosArticulo.Fecha;
+                        obj.FechaSistema = DatosArticulo.FechaSistema;
+                        obj.Unidad = DatosArticulo.Unidad;
+                        obj.Logo = Convert.FromBase64String(cadF);
 
                     InvBD.SubmitChanges();
                         Afectados = 1;
