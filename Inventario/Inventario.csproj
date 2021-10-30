@@ -116,6 +116,8 @@
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Entrada.js" />
+    <Content Include="Scrips\Internos\JS_Imp.js" />
+    <Content Include="Scrips\Internos\JS_Existencia.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
@@ -123,7 +125,6 @@
     <Content Include="Scrips\General\JS_Validaciones.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
-    <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_Entradas.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
@@ -157,6 +158,7 @@
     <Compile Include="Controllers\ArticuloVistaController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
@@ -167,7 +169,6 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
-    <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
     <Compile Include="Controllers\PedidosextController.cs" />
     <Compile Include="Controllers\PedidosintController.cs" />
@@ -229,12 +230,12 @@
     <Content Include="Views\Tienda\Tienda.cshtml" />
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
     <Content Include="Views\Configuracion\Configuracion.cshtml" />
-    <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
     <Content Include="Views\ArticuloVista\ArticuloVista.cshtml" />
+    <Content Include="Views\Compra\Compra.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

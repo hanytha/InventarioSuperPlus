@@ -24,23 +24,41 @@ namespace Inventario.Controllers
             String costo = "";
 
 
-            var articulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+            var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     ID = p.IdArticulos,
                     Nombre = p.NombreEmpresa
                 });
-            foreach (var art in articulo)
+            foreach (var art in ConsultaArticulo)
             {
 
                 Id += art.ID + ",";
                 nombre += art.Nombre + ",";
 
-                var ufecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.ID)).OrderByDescending(p => p.FechaDeIngreso)
+                var ConsultaUfecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.ID)&&p.ExitenciaActual>0).OrderByDescending(p => p.FechaDeIngreso)
                 .Select(p => new
                 {
+                    ultima = p.FechaDeIngreso,
+                    total = p.ExitenciaActual,
+                    Costo = p.Coste
 
                 });
+                string Fecha;
+                double Total=0;
+                double costos=0;
+                int cont = 0;
+                int UltimoReg = ConsultaUfecha.Count() - 1;
+                
+                foreach (var com in ConsultaUfecha)
+                {
+                    if (cont== UltimoReg)
+                    {
+                        //ConsultaUfecha = ConsultaUfecha.Where();
+                    }
+                    cont++;
+                }
+
 
             }
         }

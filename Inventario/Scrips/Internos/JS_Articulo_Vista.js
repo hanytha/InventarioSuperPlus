@@ -1,4 +1,4 @@
-﻿var imagen64;
+﻿ var imagen64;
 LlenarCMCategoria();
 
 ConsultaArticulo();
@@ -11,12 +11,12 @@ function ConsultaArticulo() {
 function CrearDivArticulo(Data) {
     var CodigoHtmlArticulo = "";
     CodigoHtmlArticulo += "<div id='container'>";
-    CodigoHtmlArticulo += "<div ><h4>Id</h4>";
-
+    CodigoHtmlArticulo += "<div><label><h6>ID </h6></label><label><h6>Nombre Empresa</h6></label></div>";
     CodigoHtmlArticulo += "<div>";
+
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticulo += "<div>";
-        CodigoHtmlArticulo += "<div class='row'>";
+        CodigoHtmlArticulo += "<div class='row row-cols-auto'>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div  class='col'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
@@ -36,7 +36,9 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreProveedor + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<button class='btn btn-primary btn-sm ' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<label>"
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
@@ -171,15 +173,6 @@ function GuardarArticulo() {
     }
 }
 
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
 
 //marca los campos obligatorios
 function CamposObligatorios() {

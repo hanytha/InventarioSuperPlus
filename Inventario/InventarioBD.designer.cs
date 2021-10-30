@@ -2233,17 +2233,17 @@ namespace Inventario
 		
 		private string _ClaveProveedor;
 		
-		private long _NoCompra;
+		private System.Nullable<long> _NoCompra;
 		
-		private System.DateTime _FechaDeIngreso;
+		private System.Nullable<System.DateTime> _FechaDeIngreso;
 		
-		private long _ExitenciaInicial;
+		private System.Nullable<long> _ExitenciaInicial;
 		
-		private System.DateTime _FechaFinal;
+		private System.Nullable<System.DateTime> _FechaFinal;
 		
-		private long _ExitenciaActual;
+		private System.Nullable<long> _ExitenciaActual;
 		
-		private long _Coste;
+		private System.Nullable<long> _Coste;
 		
 		private System.Nullable<long> _IdImpuesto;
 		
@@ -2273,17 +2273,17 @@ namespace Inventario
     partial void OnMetodoDePagoChanged();
     partial void OnClaveProveedorChanging(string value);
     partial void OnClaveProveedorChanged();
-    partial void OnNoCompraChanging(long value);
+    partial void OnNoCompraChanging(System.Nullable<long> value);
     partial void OnNoCompraChanged();
-    partial void OnFechaDeIngresoChanging(System.DateTime value);
+    partial void OnFechaDeIngresoChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaDeIngresoChanged();
-    partial void OnExitenciaInicialChanging(long value);
+    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(System.DateTime value);
+    partial void OnFechaFinalChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaFinalChanged();
-    partial void OnExitenciaActualChanging(long value);
+    partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
-    partial void OnCosteChanging(long value);
+    partial void OnCosteChanging(System.Nullable<long> value);
     partial void OnCosteChanged();
     partial void OnIdImpuestoChanging(System.Nullable<long> value);
     partial void OnIdImpuestoChanged();
@@ -2345,7 +2345,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaveProveedor", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaveProveedor", DbType="VarChar(50)")]
 		public string ClaveProveedor
 		{
 			get
@@ -2365,8 +2365,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompra", DbType="BigInt NOT NULL")]
-		public long NoCompra
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompra", DbType="BigInt")]
+		public System.Nullable<long> NoCompra
 		{
 			get
 			{
@@ -2385,8 +2385,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date NOT NULL")]
-		public System.DateTime FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaDeIngreso
 		{
 			get
 			{
@@ -2405,8 +2405,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt NOT NULL")]
-		public long ExitenciaInicial
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaInicial
 		{
 			get
 			{
@@ -2425,8 +2425,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date NOT NULL")]
-		public System.DateTime FechaFinal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaFinal
 		{
 			get
 			{
@@ -2445,8 +2445,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt NOT NULL")]
-		public long ExitenciaActual
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaActual
 		{
 			get
 			{
@@ -2465,8 +2465,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt NOT NULL")]
-		public long Coste
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt")]
+		public System.Nullable<long> Coste
 		{
 			get
 			{
