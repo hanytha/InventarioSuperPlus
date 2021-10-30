@@ -21,6 +21,7 @@ function CrearTablaImpuesto(Data) {
         CodigoHtmlTablaCompra += "<td>";
         CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalUsuario'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalImpuesto'><i class='fas fa-window-restore list__img'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";
         CodigoHtmlTablaCompra += "</tr>";
@@ -29,6 +30,20 @@ function CrearTablaImpuesto(Data) {
     CodigoHtmlTablaCompra += "</table>";
     document.getElementById("tablaImpuesto").innerHTML = CodigoHtmlTablaCompra;
 }
+
+
+
+BloquearCTRL();
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
+
+
+
 
 //llena los combosprincipales
 function LlenarCMBPrin() {
@@ -333,3 +348,63 @@ function EliminarUsuario(id) {
 
 
 
+
+//    //         //     //
+
+
+function abrirModalBloqueado(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IdUsuarioBloqueado', '0');
+    }
+    else {
+        $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
+
+            sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);
+
+            //Obtener los datos de los proveedores para permitir editar
+            sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);     //Variable de sesión
+
+            document.getElementById("TxtCurpBloqueado").value = Data[0].CURP;
+            document.getElementById("TxtNombreBloqueado").value = Data[0].Nombre;
+            document.getElementById("TxtApellidoPaternoBloqueado").value = Data[0].ApellidosP;
+            document.getElementById("TxtApellidoMaternoBloqueado").value = Data[0].ApellidosM;
+            document.getElementById("TxtFechaNBloqueado").value = Data[0].FechaDeNacimiento;
+            document.getElementById("TxtRFCBloqueado").value = Data[0].RFC;
+
+            document.getElementById("TxtCorreoBloqueado").value = Data[0].Correo;
+            document.getElementById("cmbNSSBloqueado").value = Data[0].NoSS;
+            document.getElementById("TxtTelBloqueado").value = Data[0].Telefono;
+            document.getElementById("TxtUsuarioBloqueado").value = Data[0].Usuario;
+            document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
+            document.getElementById("TxtPerfilBloqueado").value = Data[0].IdPerfil;
+            document.getElementById("cmbAreaBloqueado").value = Data[0].IdArea;
+
+            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
+            document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipioBloqueado"));
+                document.getElementById("cmbMunicipioBloqueado").value = Data[0].IdMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidadBloqueado"));
+                document.getElementById("cmbLocalidadBloqueado").value = Data[0].IdLocalidad;
+            });
+            $.get("/GLOBAL/BDSubAreas/?IDA=" + Data[0].IdArea, function (Subareas) {
+                llenarCombo(Subareas, document.getElementById("cmbSubAreaBloqueado"));
+                document.getElementById("cmbSubAreaBloqueado").value = Data[0].IdSubArea;
+            });
+
+            document.getElementById("Txtpassword").value = Data[0].Password;
+            document.getElementById("TxtConfirmacion").value = Data[0].Password;
+            document.getElementById("PBFotoBloqueado").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+
+        });
+    }
+}
