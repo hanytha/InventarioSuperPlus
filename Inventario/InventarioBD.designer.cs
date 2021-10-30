@@ -2601,13 +2601,13 @@ namespace Inventario
 		private void attach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
 		{
 			this.SendPropertyChanging();
-			entity.Compra = this;
+			entity.Compra1 = this;
 		}
 		
 		private void detach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
 		{
 			this.SendPropertyChanging();
-			entity.Compra = null;
+			entity.Compra1 = null;
 		}
 		
 		private void attach_TipoDeMovimientos(TipoDeMovimientos entity)
@@ -3504,11 +3504,11 @@ namespace Inventario
 		
 		private long _NoPedido;
 		
-		private System.DateTime _FechaDeIngreso;
+		private string _FechaDeIngreso;
 		
 		private long _ExitenciaInicial;
 		
-		private System.DateTime _FechaFinal;
+		private string _FechaFinal;
 		
 		private long _ExitenciaActual;
 		
@@ -3516,11 +3516,15 @@ namespace Inventario
 		
 		private string _TipoDeOperacion;
 		
+		private string _Compra;
+		
+		private string _FechaSistema;
+		
 		private int _Estatus;
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
-		private EntityRef<Compra> _Compra;
+		private EntityRef<Compra> _Compra1;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -3532,11 +3536,11 @@ namespace Inventario
     partial void OnIdCompraChanged();
     partial void OnNoPedidoChanging(long value);
     partial void OnNoPedidoChanged();
-    partial void OnFechaDeIngresoChanging(System.DateTime value);
+    partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(long value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(System.DateTime value);
+    partial void OnFechaFinalChanging(string value);
     partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(long value);
     partial void OnExitenciaActualChanged();
@@ -3544,6 +3548,10 @@ namespace Inventario
     partial void OnCosteChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
+    partial void OnCompraChanging(string value);
+    partial void OnCompraChanged();
+    partial void OnFechaSistemaChanging(string value);
+    partial void OnFechaSistemaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -3551,7 +3559,7 @@ namespace Inventario
 		public ExistenciaAlmacenG()
 		{
 			this._PedidosInternos = new EntitySet<PedidosInternos>(new Action<PedidosInternos>(this.attach_PedidosInternos), new Action<PedidosInternos>(this.detach_PedidosInternos));
-			this._Compra = default(EntityRef<Compra>);
+			this._Compra1 = default(EntityRef<Compra>);
 			OnCreated();
 		}
 		
@@ -3586,7 +3594,7 @@ namespace Inventario
 			{
 				if ((this._IdCompra != value))
 				{
-					if (this._Compra.HasLoadedOrAssignedValue)
+					if (this._Compra1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -3619,8 +3627,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="Date NOT NULL")]
-		public System.DateTime FechaDeIngreso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FechaDeIngreso
 		{
 			get
 			{
@@ -3659,8 +3667,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="Date NOT NULL")]
-		public System.DateTime FechaFinal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FechaFinal
 		{
 			get
 			{
@@ -3739,6 +3747,46 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Compra", DbType="VarChar(150)")]
+		public string Compra
+		{
+			get
+			{
+				return this._Compra;
+			}
+			set
+			{
+				if ((this._Compra != value))
+				{
+					this.OnCompraChanging(value);
+					this.SendPropertyChanging();
+					this._Compra = value;
+					this.SendPropertyChanged("Compra");
+					this.OnCompraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaSistema", DbType="VarChar(50)")]
+		public string FechaSistema
+		{
+			get
+			{
+				return this._FechaSistema;
+			}
+			set
+			{
+				if ((this._FechaSistema != value))
+				{
+					this.OnFechaSistemaChanging(value);
+					this.SendPropertyChanging();
+					this._FechaSistema = value;
+					this.SendPropertyChanged("FechaSistema");
+					this.OnFechaSistemaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
 		public int Estatus
 		{
@@ -3772,26 +3820,26 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_ExistenciaAlmacenG", Storage="_Compra", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Compra Compra
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_ExistenciaAlmacenG", Storage="_Compra1", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Compra Compra1
 		{
 			get
 			{
-				return this._Compra.Entity;
+				return this._Compra1.Entity;
 			}
 			set
 			{
-				Compra previousValue = this._Compra.Entity;
+				Compra previousValue = this._Compra1.Entity;
 				if (((previousValue != value) 
-							|| (this._Compra.HasLoadedOrAssignedValue == false)))
+							|| (this._Compra1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Compra.Entity = null;
+						this._Compra1.Entity = null;
 						previousValue.ExistenciaAlmacenG.Remove(this);
 					}
-					this._Compra.Entity = value;
+					this._Compra1.Entity = value;
 					if ((value != null))
 					{
 						value.ExistenciaAlmacenG.Add(this);
@@ -3801,7 +3849,7 @@ namespace Inventario
 					{
 						this._IdCompra = default(Nullable<long>);
 					}
-					this.SendPropertyChanged("Compra");
+					this.SendPropertyChanged("Compra1");
 				}
 			}
 		}

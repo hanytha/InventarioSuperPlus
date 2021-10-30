@@ -21,6 +21,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
+                    p.IdCompra,
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
@@ -28,6 +29,8 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
+                    p.Compra,
+                    p.FechaSistema,
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
@@ -37,6 +40,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
+                    p.IdCompra,
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
@@ -44,6 +48,8 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
+                    p.Compra,
+                    p.FechaSistema,
 
                 });
             return Json(almacen, JsonRequestBehavior.AllowGet);
@@ -73,15 +79,28 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido) && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial) && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual) && p.Coste.Equals(DatosAlmacen.Coste)).Count();
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido) 
+                && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
+                && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
+                && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+                && p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
+                && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
+                && p.FechaSistema.Equals(DatosAlmacen.FechaSistema)
+                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
+                && p.Coste.Equals(DatosAlmacen.Coste)).Count();
                 if (nveces == 0)
                 {
                     ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                     obj.NoPedido = DatosAlmacen.NoPedido;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
+                    obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
+                    obj.FechaFinal = DatosAlmacen.FechaFinal;
+                    obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
+                    obj.IdCompra = DatosAlmacen.IdCompra;
+                    obj.Compra = DatosAlmacen.Compra;
+                    obj.FechaSistema = DatosAlmacen.FechaSistema;
                     obj.Coste = DatosAlmacen.Coste;
-
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

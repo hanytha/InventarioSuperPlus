@@ -1,4 +1,5 @@
 ﻿BloquearCTRL();
+LlenarCMBCompra();
 CrearAcordeonExistenciasAlmacen();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistenciasAlmacen() {
@@ -28,17 +29,18 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaDeIngreso + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].ExitenciaInicial + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].ExitenciaActual + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Coste + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha : </strong>" + Data[i].FechaSistema + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Existencia Inicial: </strong>" + Data[i].ExitenciaInicial + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Ingreso: </strong>" + Data[i].FechaDeIngreso + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha Final: </strong>" + Data[i].FechaFinal + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TipoDeOperacion + "</div>";
         CodigoHTMLAreas += "</div>";
-
-        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
-
-
-        //CodigoHTMLAreas += "<button class='btn btn-info' onclick='MostrarOcultar(" + DatosProveedor[i].ID + ")'><i id='BtnMO" + DatosProveedor[i].Id + "' class='fas fa-chevron-circle-down'></i></button></div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Exitencia Inicial: </strong>" + Data[i].ExitenciaInicial + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Compra : </strong>" + Data[i].Compra + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Coste : </strong>" + Data[i].Coste + "</div>";
+        CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdExistenciaAlmacenG + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
@@ -78,9 +80,12 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
-            document.getElementById("TxtCosto").value = Data[0].Coste;
+            document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
+            document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
             document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
-
+            document.getElementById("cmbCompra").value = Data[0].IdCompra;
+            document.getElementById("TxtFechaSistema").value = Data[0].FechaSistema;
+            document.getElementById("TxtCosto").value = Data[0].Coste;
         });
     }
 }
@@ -111,22 +116,31 @@ function GuardarAlmacen() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IDGeneral');
-            var FechaDeIngreso = document.getElementById("TxtFechaIngreso").value;
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-            var Coste = document.getElementById("TxtCosto").value;
+            var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
+            var FechaFinal = document.getElementById("TxtFechaFinal").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
+            var IdCompra = document.getElementById("cmbCompra").value;
+            var TempEdo = document.getElementById("cmbCompra");
+            var Compra = TempEdo.options[TempEdo.selectedIndex].text;
+            var FechaSistema = document.getElementById("TxtFechaSistema").value;
+            var Coste = document.getElementById("TxtCosto").value;
           
 
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("NoPedido", NoPedido);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
-            frm.append("Coste", Coste);
+            frm.append("FechaDeIngreso", FechaDeIngreso);
+            frm.append("FechaFinal", FechaFinal);
             frm.append("TipoDeOperacion", TipoDeOperacion);
+            frm.append("IdCompra", IdCompra);
+            frm.append("Compra", Compra);
+            frm.append("FechaSistema", FechaSistema);
+            frm.append("Coste", Coste);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -186,3 +200,22 @@ function EliminarExistenciasG(id) {
     }
 }
 
+
+function LlenarCMBCompra() {
+    $.get("/GLOBAL/BDCompras", function (data) {
+        llenarCombo(data, document.getElementById("cmbCompra"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+
+}

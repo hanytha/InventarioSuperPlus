@@ -148,15 +148,17 @@
       <Column Name="IdExistenciaAlmacenG" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NoPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="FechaDeIngreso" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="FechaFinal" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFinal" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Compra" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="PedidosInternos" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="PedidosInternos" />
-      <Association Name="Compra_ExistenciaAlmacenG" Member="Compra" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Compra_ExistenciaAlmacenG" Member="Compra1" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">

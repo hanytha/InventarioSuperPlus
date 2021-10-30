@@ -84,7 +84,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaSistema">Fecha de Ingreso<span>*</span></label>
-                                        <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                        <input type="text" id="TxtFechaSistema" class="bloquear" name="data[TxtFechaSistema]" size="25" maxlength="100">
                                     </div>
                                 </div>
                             </div>
@@ -111,17 +111,39 @@
                                         <input type="text" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
                                         <input type="text" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="Razón Social">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaFinal">Fecha final<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFechaFinal]" id="TxtFechaFinal" class="form-control  limpiar obligatorio" placeholder="Razón Social">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtTipoOperacion">Tipo de Operación<span class="required">*</span></label>
                                         <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Razón Social">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbCompra">Número de compra<span>*</span></label>
+                                        <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio "></select>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +165,7 @@
 <script type="text/javascript">
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaIngreso').value = fecha;
+    document.getElementById('TxtFechaSistema').value = fecha;
 
 </script>
 <!------------------------------------------>

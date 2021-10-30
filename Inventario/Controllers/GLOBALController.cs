@@ -185,6 +185,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //Consulta 
+        public JsonResult BDCompras()
+        {
+            var datos = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdCompra,
+                    Nombre = p.NoCompra
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 
