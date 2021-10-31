@@ -371,6 +371,9 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);     //Variable de sesión
 
+
+            document.getElementById("cmbArBloqueado").value = Data[0].IdArea;
+
             document.getElementById("TxtCurpBloqueado").value = Data[0].CURP;
             document.getElementById("TxtNombreBloqueado").value = Data[0].Nombre;
             document.getElementById("TxtApellidoPaternoBloqueado").value = Data[0].ApellidosP;
@@ -384,7 +387,8 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             document.getElementById("TxtUsuarioBloqueado").value = Data[0].Usuario;
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
             document.getElementById("TxtPerfilBloqueado").value = Data[0].IdPerfil;
-            document.getElementById("cmbAreaBloqueado").value = Data[0].IdArea;
+            document.getElementById("cmbABloqueado").value = Data[0].IdArea;
+
 
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
@@ -401,8 +405,7 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
                 document.getElementById("cmbSubAreaBloqueado").value = Data[0].IdSubArea;
             });
 
-            document.getElementById("Txtpassword").value = Data[0].Password;
-            document.getElementById("TxtConfirmacion").value = Data[0].Password;
+
             document.getElementById("PBFotoBloqueado").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
         });

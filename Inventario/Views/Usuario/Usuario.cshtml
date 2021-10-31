@@ -57,7 +57,7 @@
 <!--Termina tarjeta-->
 <!--------------------------------------------MODAL USUARIOS-------------------------------------------------------------->
 <!-- Botón del modal-->
-<button onclick="editarModalUsuario(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuario">REGISTRAR COMPRA</button><!--Mostrar los registros en el accordion-->
+<button onclick="editarModalUsuario(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuario">REGISTRAR</button><!--Mostrar los registros en el accordion-->
 <!--Muestra la tabla compras-->
 <div id="tablaImpuesto" class="table"></div>
 <!-- Encabezado del Modal -->
@@ -277,9 +277,7 @@
 <table>
 </table>
 <!------------------------------------------------------------Modal impuesto--------------------------------------------------------------------------->
-<!-- Botón del modal-->
-<button onclick="editarModalImpuestos(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImpuesto">REGISTRAR IMPUESTO</button><!--Mostrar los registros en el accordion-->
-<!--Muestra la tabla compras-->
+
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalImpuesto">
@@ -293,7 +291,15 @@
                 <div class="modal-body">
                     <h1>Registro impuestos</h1>
                     <form id="regiration_form" novalidate method="post">
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="PBFotoBloqueado">Imagen</label>
+                                    <img id="PBFotoBloqueado" src="~/Assets/Imagenes/logo.png" width="155" height="155" alt="" />                                        <br />
+                                  
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -387,7 +393,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbNSSBloqueado">Número de Seguro Social<span class="required">*</span></label>
-                                    <select id="cmbNSSBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
+                                    <input type="text" name="data[cmbNSSBloqueado]" id="cmbNSSBloqueado" class="form-control  limpiar bloquear" placeholder="NSS">
                                 </div>
                             </div>
 
@@ -401,8 +407,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbAreaBloqueado">Área<span class="required">*</span></label>
-                                    <select id="cmbAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
+                                    <label class="form-control-label" for="cmbABloqueado">Área<span class="required">*</span></label>
+                                    <select id="cmbABloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -412,7 +418,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbArBloqueado">Ar<span class="required">*</span></label>
+                                    <input type="text" name="data[cmbArBloqueado]" id="cmbArBloqueado" class="form-control  limpiar bloquear" placeholder="Perfil">
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -428,15 +441,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="PBFotoBloqueado">Seleccione una foto</label>
-                                    <img id="PBFotoBloqueado" src="~/Assets/Imagenes/logo.png" width="155" height="155" alt="" />                                        <br />
-                                    <input id="PBFotoBloqueado" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
-                                </div>
-                            </div>
-                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
