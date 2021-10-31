@@ -100,7 +100,7 @@ namespace Inventario.Controllers
                     && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                     && p.Fecha.Equals(DatosArticulo.Fecha)
                     && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
-                    && p.Unidad.Equals(DatosArticulo.Unidad)
+                    && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
                     && p.Logo.Equals(DatosArticulo.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -115,7 +115,8 @@ namespace Inventario.Controllers
                         obj.ClaveSAT = DatosArticulo.ClaveSAT;
                         obj.Fecha = DatosArticulo.Fecha;
                         obj.FechaSistema = DatosArticulo.FechaSistema;
-                        obj.Unidad = DatosArticulo.Unidad;
+                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
+                    obj.Unidad = DatosArticulo.Unidad;
                         obj.Logo = Convert.FromBase64String(cadF);
 
                     InvBD.SubmitChanges();

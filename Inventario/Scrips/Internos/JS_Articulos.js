@@ -96,7 +96,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
-            document.getElementById("cmbUnidad").value = Data[0].Unidad;
+            document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
             document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
