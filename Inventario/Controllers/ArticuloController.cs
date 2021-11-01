@@ -32,10 +32,12 @@ namespace Inventario.Controllers
                     p.Descripcion,
                     p.UnidadSAT,
                     p.ClaveSAT,
-                    p.Logo,
                     p.Fecha,
                     p.FechaSistema,
                     p.Unidad,
+                    p.Area,
+                    p.Marca,
+                    p.Logo,
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -60,6 +62,8 @@ namespace Inventario.Controllers
                     p.Fecha,
                     p.FechaSistema,
                     p.Unidad,
+                    p.Area,
+                    p.Marca,
                     p.Estatus,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
 
@@ -101,6 +105,8 @@ namespace Inventario.Controllers
                     && p.Fecha.Equals(DatosArticulo.Fecha)
                     && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
                     && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
+                    && p.IdAreas.Equals(DatosArticulo.IdAreas)
+                    && p.IdMarca.Equals(DatosArticulo.IdMarca)
                     && p.Logo.Equals(DatosArticulo.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -115,8 +121,12 @@ namespace Inventario.Controllers
                         obj.ClaveSAT = DatosArticulo.ClaveSAT;
                         obj.Fecha = DatosArticulo.Fecha;
                         obj.FechaSistema = DatosArticulo.FechaSistema;
-                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
-                    obj.Unidad = DatosArticulo.Unidad;
+                        obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
+                        obj.Unidad = DatosArticulo.Unidad;
+                        obj.IdAreas = DatosArticulo.IdAreas;
+                        obj.Area = DatosArticulo.Area;
+                        obj.IdMarca = DatosArticulo.IdMarca;
+                        obj.Marca = DatosArticulo.Marca;
                         obj.Logo = Convert.FromBase64String(cadF);
 
                     InvBD.SubmitChanges();

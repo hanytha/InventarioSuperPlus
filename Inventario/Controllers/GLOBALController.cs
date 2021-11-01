@@ -196,6 +196,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //Consulta 
+        public JsonResult BDMarcas()
+        {
+            var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdMarca,
+                    Nombre = p.Nombre
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 

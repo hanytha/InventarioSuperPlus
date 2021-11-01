@@ -2,6 +2,8 @@
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
+LlenarCMCArea();
+LlenarCMCMarca();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonArticulos() {
@@ -24,7 +26,7 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdArticulos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdArticulos + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
         CodigoHTMLAreas += "<span >" + Data[i].NombreEmpresa + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
@@ -32,18 +34,22 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaSistema + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaSistema + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + Data[i].NombreProveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + Data[i].PrecioUnitarioPromedio + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Categoria + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + Data[i].UnidadSAT + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + Data[i].ClaveSAT + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Categoria: </strong>" + Data[i].Categoria + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + Data[i].UnidadSAT + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + Data[i].ClaveSAT + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Imagen: </strong>" + Data[i].Logo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Unidad + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Imagen: </strong>" + Data[i].Logo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidad + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].Area + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -102,6 +108,8 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtFechaIngreso").value = Data[0].FechaSistema;
+            document.getElementById("cmbArea").value = Data[0].IdAreas;
+            document.getElementById("cmbMarca").value = Data[0].IdMarca;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
         });
@@ -138,17 +146,25 @@ function GuardarArticulo() {
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var IdCategorias = document.getElementById("cmbCategoria").value;
-            var TempSupervisor = document.getElementById("cmbCategoria");
-            var Categoria = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
+            var TempCategoria = document.getElementById("cmbCategoria");
+            var Categoria = TempCategoria.options[TempCategoria.selectedIndex].text;  
             var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
-            var TempSupervisor = document.getElementById("cmbUnidad");
-            var Unidad = TempSupervisor.options[TempSupervisor.selectedIndex].text; 
+            var TempMedida = document.getElementById("cmbUnidad");
+            var Unidad = TempMedida.options[TempMedida.selectedIndex].text; 
 
             var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
             var FechaSistema = document.getElementById("TxtFechaIngreso").value;
+
+            var IdAreas = document.getElementById("cmbArea").value;
+            var TempArea = document.getElementById("cmbArea");
+            var Area = TempArea.options[TempArea.selectedIndex].text;
+            var IdMarca = document.getElementById("cmbMarca").value;
+            var TempMarca = document.getElementById("cmbMarca");
+            var Marca = TempMarca.options[TempMarca.selectedIndex].text; 
+
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             if (Logo.endsWith('png')) {
                 Logo = imagen64.replace("data:image/png;base64,", "");
@@ -167,6 +183,10 @@ function GuardarArticulo() {
             frm.append("ClaveSAT", ClaveSAT);
             frm.append("Fecha", Fecha);
             frm.append("FechaSistema", FechaSistema);
+            frm.append("IdAreas", IdAreas);
+            frm.append("Area", Area);
+            frm.append("IdMarca", IdMarca);
+            frm.append("Marca", Marca);
             frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
@@ -248,6 +268,19 @@ function LlenarCMCUnidad() {
     });
 }
 
+
+function LlenarCMCArea() {
+    $.get("/GLOBAL/BDAreas", function (data) {
+        llenarCombo(data, document.getElementById("cmbArea"));
+    });
+}
+
+
+function LlenarCMCMarca() {
+    $.get("/GLOBAL/BDMarcas", function (data) {
+        llenarCombo(data, document.getElementById("cmbMarca"));
+    });
+}
 
 
 //funcion general para llenar los select
