@@ -17,51 +17,61 @@ namespace Inventario.Controllers
         }
         public void ConsultaArticulos()
         {
-            string Id = "";
-            string nombre = "";
-            string fecha = "";
+            string id = "";
+            string Nombre = "";
+            string Fechas = "";
             String Stock = "";
-            String costo = "";
+            String Costos = "";
 
 
             var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    ID = p.IdArticulos,
-                    Nombre = p.NombreEmpresa
+                    Id = p.IdArticulos,
+                    nombre = p.NombreEmpresa
                 });
+
             foreach (var art in ConsultaArticulo)
             {
 
-                Id += art.ID + ",";
-                nombre += art.Nombre + ",";
+                id += art.Id + ",";
+                Nombre += art.nombre + ",";
 
-                var ConsultaUfecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.ID)&&p.ExitenciaActual>0).OrderByDescending(p => p.FechaDeIngreso)
-                .Select(p => new
-                {
-                    ultima = p.FechaDeIngreso,
-                    total = p.ExitenciaActual,
-                    Costo = p.Coste
 
-                });
-                string Fecha;
-                double SumaStock = 0;
-                double costos=0;
-                int cont = 0;
-                int UltimoReg = ConsultaUfecha.Count() - 1;
-
-                foreach (var com in ConsultaUfecha)
-                {
-                    //SumaStock = SumaStock + com.;
-
-                    if (cont==UltimoReg)
+                var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderByDescending(p => p.FechaDeIngreso)
+                    .Select(p => new
                     {
-                        costo += com.Costo + ",";
+                        fechaIngreso = p.FechaDeIngreso,
+                        stockActual = p.ExitenciaActual,
+                        costo = p.Coste
+                    });
+
+                foreach (var comp in consultaFecha)
+                {
+                    Fechas += comp.fechaIngreso + ",";
+                    Stock += comp.stockActual + ",";
+                    Costos += comp.costo + ",";
+
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int cont = 0;
+                    int SumaStock = 0;
+
+                    foreach (var stock in consultaFecha)
+                    {
+                        SumaStock = SumaStock + Stock.Length;
+
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+
+                        }
+                        cont++;
                     }
-                    cont++;
+
                 }
-     
+      
             }
         }
+
     }
 }

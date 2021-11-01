@@ -11,7 +11,13 @@ function ConsultaArticulo() {
 function CrearDivArticulo(Data) {
     var CodigoHtmlArticulo = "";
     CodigoHtmlArticulo += "<div id='container'>";
-    CodigoHtmlArticulo += "<div><label><h6>ID </h6></label><label><h6>Nombre Empresa</h6></label></div>";
+    CodigoHtmlArticulo += "<section id='contenedor_follow'>";
+    CodigoHtmlArticulo += "<hr class='solid'>"
+    CodigoHtmlArticulo += "<div class='icono'>ID</div> "
+    CodigoHtmlArticulo += "<div class='icono'>Nombre</div>"
+    CodigoHtmlArticulo += "<div class='icono'>Fecha</div>"
+    CodigoHtmlArticulo += "<div class='icono'>Costo</div>"
+    CodigoHtmlArticulo += "<div class='icono'>Stock</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
 
@@ -19,13 +25,10 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div>";
         CodigoHtmlArticulo += "<div class='row row-cols-auto'>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div  class='col'>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticulo += "<div class='col'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreEmpresa + "</div>"
-        CodigoHtmlArticulo += "</div>";
-        CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreProveedor + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreProveedor + "</div>"
@@ -51,7 +54,111 @@ function CrearDivArticulo(Data) {
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
 }
 
+//--------------------------------------------------------------------------------------------------
 
+ConsultaComprass();
+function ConsultaComprass() {
+    $.get("/Compra/ConsultasCompras", function (Data) {
+        CrearDivCompra(Data);
+    }
+    );
+}
+function CrearDivCompra(Data) {
+    var CodigoHtmlCompra = "";
+    CodigoHtmlCompra += "<div id='contenedor2'>";
+    CodigoHtmlCompra += "<section id='contenedor_follow'>";
+    CodigoHtmlCompra += "<hr class='solid2'>"
+    CodigoHtmlCompra += "<div class='icono'>ID</div> "
+    CodigoHtmlCompra += "<div class='icono'>MetodoDePago</div>"
+    CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
+      CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
+    CodigoHtmlCompra += "<hr class='solid2'>"
+    CodigoHtmlCompra += "<div>";
+
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlCompra += "<div>";
+        CodigoHtmlCompra += "<div class='row row-cols-auto'>";
+        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdCompra + "</div>"
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].MetodoDePago + "</div>"
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].NoCompra + "</div>"
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].ExitenciaInicial + "</div>"
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<label>"
+        CodigoHtmlCompra += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlCompra += "</label>"
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "</div>";
+        CodigoHtmlCompra += "</div>";
+
+    }
+
+    document.getElementById("contenedor2").innerHTML = CodigoHtmlCompra;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+ConsultaExistenciaAlmacen();
+function ConsultaExistenciaAlmacen() {
+    $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacenes", function (Data) {
+        CrearDivAlmacen(Data);
+    }
+    );
+}
+function CrearDivAlmacen(Data) {
+    var CodigoHtmlAlmacen = "";
+    CodigoHtmlAlmacen += "<div id='contenedor3'>";
+    CodigoHtmlAlmacen += "<section id='contenedor_follow'>";
+    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlAlmacen += "<div class='icono'>ID</div> "
+    CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
+    CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
+
+    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlAlmacen += "<div>";
+
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlAlmacen += "<div>";
+        CodigoHtmlAlmacen += "<div class='row row-cols-auto'>";
+        CodigoHtmlAlmacen += "<div class='col'>"
+        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].IdExistenciaAlmacenG + "</div>"
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "<div class='col'>"
+        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].TipoDeOperacion + "</div>"
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "<div class='col'>"
+        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].TipoDeOperacion + "</div>"
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "<div class='col'>"
+        CodigoHtmlAlmacen += "<label>"
+        CodigoHtmlAlmacen += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdExistenciaAlmacenG + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlAlmacen += "</label>"
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "</div>";
+        CodigoHtmlAlmacen += "</div>";
+
+    }
+
+    document.getElementById("contenedor3").innerHTML = CodigoHtmlAlmacen;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 
 //Logo

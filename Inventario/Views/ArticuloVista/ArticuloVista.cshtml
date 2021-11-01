@@ -58,10 +58,6 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
-
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -167,8 +163,53 @@
         </div>
     </div>
 </div>
+<!--Mostrar los registros en el accordion-->
 
 <div id="container"></div>
+
+
+<input type="checkbox" id="spoiler1">
+<label for="spoiler1"><i class="fas fa-angle-down"></i></label>
+<div id="contenedor2" class="spoiler"></div>
+
+<input type="checkbox" id="spoiler2">
+<label for="spoiler2"><i class="fas fa-angle-down"></i></label>
+<div id="contenedor3"  class="spoiler"></div>
+
+<style>
+    /* Ocultar botón radio */
+    input[id^="spoiler"] {
+        display: none;
+    }
+        /* Estilo botón clicable */
+        input[id^="spoiler"] + label {
+            display: block;
+            width: 20px;
+            margin: 0 auto;
+            padding: 5px 20px;
+            background: #F3C730;
+            cursor: pointer;
+        }
+        /* Estilo botón cuando su INPUT está seleccionado */
+        input[id^="spoiler"]:checked + label {
+            color: #333;
+            background: #029EEC;
+        }
+        /* Estilo caja SPOILER (inicialmente oculto) */
+        input[id^="spoiler"] ~ .spoiler {
+            width: 90%;
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin: 10px auto 0;
+        }
+        /* Estilo caja SPOILER cuando su INPUT está seleccionado */
+        input[id^="spoiler"]:checked + label + .spoiler {
+            height: auto;
+            opacity: 1;
+        }
+</style>
+
 
 
 
@@ -190,10 +231,20 @@
         };
     </script>*@
 
+<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<style>
+    #contenedor {
+        width: 300px;
+        height: auto;
+    }
 
-
-
-
+    #contenedor_follow div.icono {
+        display: inline-block;
+        width: 17%;
+        height: auto;
+        vertical-align: middle;
+    }
+</style>
 <!-------------------------------Estilo para la kline a de el encabeqado del los divs----------------------------------------->
 <style>
     body {
@@ -201,11 +252,28 @@
     }
     /* Solid border */
     hr.solid {
-        border-top: 3px solid #bbb;
+        border-top: 3px solid #D7DBDD;
     }
-
 </style>
 
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid2 {
+        border-top: 3px solid #00b0e6;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 3px solid #f1f507;
+    }
+</style>
 <!------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
