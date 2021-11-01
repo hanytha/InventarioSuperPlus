@@ -367,14 +367,10 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
     }
     else {
         $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
-
-            sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);
-
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);     //Variable de sesión
 
-
-            document.getElementById("cmbArBloqueado").value = Data[0].NArea;
+            //document.getElementById("cmbArBloqueado").value = Data[0].NArea;
 
             document.getElementById("TxtCurpBloqueado").value = Data[0].CURP;
             document.getElementById("TxtNombreBloqueado").value = Data[0].Nombre;
@@ -382,14 +378,8 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             document.getElementById("TxtApellidoMaternoBloqueado").value = Data[0].ApellidosM;
             document.getElementById("TxtFechaNBloqueado").value = Data[0].FechaDeNacimiento;
             document.getElementById("TxtRFCBloqueado").value = Data[0].RFC;
-
-            document.getElementById("TxtCorreoBloqueado").value = Data[0].Correo;
-            document.getElementById("cmbNSSBloqueado").value = Data[0].NoSS;
-            document.getElementById("TxtTelBloqueado").value = Data[0].Telefono;
-            document.getElementById("TxtUsuarioBloqueado").value = Data[0].Usuario;
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
-            document.getElementById("TxtPerfilBloqueado").value = Data[0].LvlPerfil;
-            document.getElementById("cmbABloqueado").value = Data[0].IdArea;
+
 
 
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
@@ -402,12 +392,17 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
                 llenarCombo(Localidades, document.getElementById("cmbLocalidadBloqueado"));
                 document.getElementById("cmbLocalidadBloqueado").value = Data[0].IdLocalidad;
             });
+            document.getElementById("TxtCorreoBloqueado").value = Data[0].Correo;
+            document.getElementById("cmbNSSBloqueado").value = Data[0].NoSS;
+            document.getElementById("TxtTelBloqueado").value = Data[0].Telefono;
+            document.getElementById("cmbArBloqueado").value = Data[0].NArea;
             $.get("/GLOBAL/BDSubAreas/?IDA=" + Data[0].IdArea, function (Subareas) {
                 llenarCombo(Subareas, document.getElementById("cmbSubAreaBloqueado"));
                 document.getElementById("cmbSubAreaBloqueado").value = Data[0].IdSubArea;
             });
 
-
+            document.getElementById("TxtPerfilBloqueado").value = Data[0].LvlPerfil;
+            document.getElementById("TxtUsuarioBloqueado").value = Data[0].Usuario;
             document.getElementById("PBFotoBloqueado").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
         });
