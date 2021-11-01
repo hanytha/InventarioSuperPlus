@@ -26,9 +26,13 @@ namespace Inventario.Controllers
                     p.CantidadAprobada,
                     p.Tipo,
                     p.IdUnidadDeMedida,
+                    p.UnidadDeMedida,
                     p.IdMarca,
+                    p.Marca,
                     p.IdTienda,
+                    p.Tienda,
                     p.IdArticulo,
+                    p.Articulo,
                     p.IdExistenciaAlmacenG,
                     p.Fecha
                 });
@@ -47,9 +51,13 @@ namespace Inventario.Controllers
                     p.CantidadAprobada,
                     p.Tipo,
                     p.IdUnidadDeMedida,
+                    p.UnidadDeMedida,
                     p.IdMarca,
+                    p.Marca,
                     p.IdTienda,
+                    p.Tienda,
                     p.IdArticulo,
+                    p.Articulo,
                     p.IdExistenciaAlmacenG,
                     p.Fecha
                 });
@@ -90,9 +98,12 @@ namespace Inventario.Controllers
                     obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
                     obj.Tipo = DatosPedidoInterno.Tipo;
                     obj.IdUnidadDeMedida = DatosPedidoInterno.IdUnidadDeMedida;
+                    obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoInterno.IdMarca;
+                    obj.Marca = DatosPedidoInterno.Marca;
                     obj.IdTienda = DatosPedidoInterno.IdTienda;
-                    obj.IdArticulo = DatosPedidoInterno.IdArticulo;
+                    obj.Tienda = DatosPedidoInterno.Tienda;
+                    obj.Articulo = DatosPedidoInterno.Articulo;
                     obj.Fecha = DatosPedidoInterno.Fecha;
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -118,8 +129,8 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                Supervisor super = InvBD.Supervisor.Where(p => p.IdSupervisor.Equals(Id)).First();
-                super.Estatus = 0;//Cambia el estatus en 0
+                PedidosInternos pedidosInternos = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id)).First();
+                pedidosInternos.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
             }

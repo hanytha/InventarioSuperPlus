@@ -66,7 +66,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdTienda,
-                     Nombre= p.Nombre
+                    Nombre = p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
@@ -107,16 +107,11 @@ namespace Inventario.Controllers
         }
 
 
-        //Consulta Paginas
-
-
-
-
         //consulta Tiendas
         public JsonResult BDTiendas()
         {
             var datos = InvBD.Tienda.Where(p => p.Estado.Equals(1))
-             
+
                 .Select(p => new
                 {
                     ID = p.IdTienda,
@@ -141,19 +136,37 @@ namespace Inventario.Controllers
 
 
 
+        public JsonResult BDArticulos()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreProveedor
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
-
-        //consulta Tiendas
+        //consulta Unidades de medida
         public JsonResult BDUnidadesMedida()
         {
             var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdUnidadDeMedida,
-                   Nombre= p.Unidad
+                    Nombre = p.Unidad
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult BDMarca()
+        {
+            var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdMarca,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
 
-   

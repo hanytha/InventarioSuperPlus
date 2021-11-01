@@ -77,10 +77,16 @@
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumeroPedido">Número de Pedido<span class="required">*</span></label>
+                            <div class="col-lg-6">
+                                <div class="form-group">    
+                                    <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
                                     <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorio" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadSolicitada">Cantidad solicitada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadSolicitada" class="form-control limpiar obligatorio" placeholder="Cantidad solicitada">
                                 </div>
                             </div>
                         </div>
@@ -88,14 +94,14 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadSolicitada">Cantidad solicitada<span class="required">*</span></label>
-                                    <input type="number" id="TxtCantidadSolicitada" class="form-control limpiar obligatorio" placeholder="Cantidad solicitada">
+                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadAprobada" class="form-control limpiar obligatorio" placeholder="Cantidad aprovada">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
-                                    <input type="number" id="TxtCantidadAprovada" class="form-control limpiar obligatorio" placeholder="Cantidad aprovada">
+                                    <label class="form-control-label" for="TxtTipo">Tipo<span class="required">*</span></label>
+                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
                                 </div>
                             </div>
                         </div>
@@ -129,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success" onclick="GuardarPedidosInt()">Guardar</button>
+                        <button type="button" class="btn btn-success" onclick="GuardarPedidoInterno()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del diálogo -->
@@ -156,4 +162,3 @@
 <script src="~/Scrips/Internos/JS_PedidosInt.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-<script src="~/Scrips/Plus/scripts.js"></script>
