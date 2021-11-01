@@ -1,34 +1,36 @@
 ﻿LlenarCMBPrin();
 
 var imagen64;
-ConsultaImpuesto();
-function ConsultaImpuesto() {
+ConsultaUsuarios();
+function ConsultaUsuarios() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
-        CrearTablaImpuesto(Data);
+        CrearTablaUsuarios(Data);
     }
     );
 }
-function CrearTablaImpuesto(Data) {
-    var CodigoHtmlTablaCompra = "";
-    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Acción</thead>";
-    CodigoHtmlTablaCompra += "<tbody>";
+function CrearTablaUsuarios(Data) {
+    var CodigoHtmlTablaUsuarios = "";
+    CodigoHtmlTablaUsuarios += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Telefono</th><th>Acción</thead>";
+    CodigoHtmlTablaUsuarios += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaCompra += "<tr>";
-        CodigoHtmlTablaCompra += "<td>" + Data[i].CURP + "</td>";
-        CodigoHtmlTablaCompra += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaUsuarios += "<tr>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].CURP + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalUsuario'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button>";
 
-        CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalUsuario'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalImpuesto'><i class='fas fa-window-restore list__img'></i></button>";
-
-        CodigoHtmlTablaCompra += "</td>";
-        CodigoHtmlTablaCompra += "</tr>";
+        CodigoHtmlTablaUsuarios += "</td>";
+        CodigoHtmlTablaUsuarios += "</tr>";
     }
-    CodigoHtmlTablaCompra += "</tbody>";
-    CodigoHtmlTablaCompra += "</table>";
-    document.getElementById("tablaImpuesto").innerHTML = CodigoHtmlTablaCompra;
+    CodigoHtmlTablaUsuarios += "</tbody>";
+    CodigoHtmlTablaUsuarios += "</table>";
+    document.getElementById("TablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
 }
 
 
@@ -195,7 +197,7 @@ IDM.addEventListener("change", function () {
 });
 
 
-//Guarda los cambios y altas de los proveedores
+//Guarda los cambios y altas de los proveedores 
 function GuardarUsuario() {
     var pas1 = document.getElementById("Txtpassword").value;
     var pas2 = document.getElementById("TxtConfirmacion").value;
@@ -386,7 +388,7 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             document.getElementById("TxtTelBloqueado").value = Data[0].Telefono;
             document.getElementById("TxtUsuarioBloqueado").value = Data[0].Usuario;
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
-            document.getElementById("TxtPerfilBloqueado").value = Data[0].IdPerfil;
+            document.getElementById("TxtPerfilBloqueado").value = Data[0].LvlPerfil;
             document.getElementById("cmbABloqueado").value = Data[0].IdArea;
 
 

@@ -65,7 +65,7 @@ namespace Inventario.Controllers
                     p.ApellidosP,
                     p.ApellidosM,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Foto.ToArray()),
-                 //   FechaDeNacimiento = ((DateTime)p.FechaDeNacimiento).ToShortDateString(),
+                    //   FechaDeNacimiento = ((DateTime)p.FechaDeNacimiento).ToShortDateString(),
                     p.FechaDeNacimiento,
                     p.IdEstado,
                     p.IdMunicipio,
@@ -147,29 +147,52 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)
+                && p.Nombre.Equals(DatosUsuarios.Nombre) && p.ApellidosP.Equals(DatosUsuarios.ApellidosP)
                 && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
+                && p.ApellidosM.Equals(DatosUsuarios.ApellidosM) && p.FechaDeNacimiento.Equals(DatosUsuarios.FechaDeNacimiento)
                 && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
                 && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio) && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad)
+                && p.RFC.Equals(DatosUsuarios.RFC) && p.NoSS.Equals(DatosUsuarios.NoSS)
+                && p.Correo.Equals(DatosUsuarios.Correo) && p.Telefono.Equals(DatosUsuarios.Telefono)
+                && p.Telefono.Equals(DatosUsuarios.Telefono) && p.LvlPerfil.Equals(DatosUsuarios.LvlPerfil)
+                && p.Usuario.Equals(DatosUsuarios.Usuario) && p.IdArea.Equals(DatosUsuarios.IdArea)
+                && p.IdSubArea.Equals(DatosUsuarios.IdSubArea) && p.NArea.Equals(DatosUsuarios.NArea)
+                && p.NSArea.Equals(DatosUsuarios.NSArea)
                 && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
 
                 if (nveces == 0)
                 {
                     Usuarios obj = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(id)).First();
+                    obj.CURP = DatosUsuarios.CURP;
                     obj.Nombre = DatosUsuarios.Nombre;
                     obj.ApellidosP = DatosUsuarios.ApellidosP;
                     obj.ApellidosM = DatosUsuarios.ApellidosM;
+                    obj.FechaDeNacimiento = DatosUsuarios.FechaDeNacimiento;
+                    obj.IdEstado = DatosUsuarios.IdEstado;
+                    obj.IdMunicipio = DatosUsuarios.IdMunicipio;
+                    obj.IdLocalidad = DatosUsuarios.IdLocalidad;
+                    obj.RFC = DatosUsuarios.RFC;
+                    obj.NoSS = DatosUsuarios.NoSS;
+                    obj.Correo = DatosUsuarios.Correo;
+                    obj.Telefono = DatosUsuarios.Telefono;
+                    obj.IdPerfil = DatosUsuarios.IdPerfil; 
+                    obj.LvlPerfil = DatosUsuarios.LvlPerfil;
+                    obj.Usuario = DatosUsuarios.Usuario;
+                    obj.FechaIngreso = DatosUsuarios.FechaIngreso;
+                    obj.Estado = DatosUsuarios.Estado;
+                    obj.Municipio = DatosUsuarios.Municipio;
+                    obj.Localidad = DatosUsuarios.Localidad;
                     obj.Password = DatosUsuarios.Password;
                     obj.IdArea = DatosUsuarios.IdArea;
                     obj.IdSubArea = DatosUsuarios.IdSubArea;
-                    obj.Foto = Convert.FromBase64String(cadF);
-                    obj.IdPerfil = DatosUsuarios.IdPerfil;
+                    obj.NArea = DatosUsuarios.NArea;
+                    obj.NSArea = DatosUsuarios.NSArea;
                     obj.IdMunicipio = DatosUsuarios.IdMunicipio;
                     //obj.NombreM = usuario.NombreM;
                     //obj.NombreL = usuario.NombreL;
+                    obj.IdEstado = DatosUsuarios.IdEstado;
                     obj.IdLocalidad = DatosUsuarios.IdLocalidad;
-                    obj.Correo = DatosUsuarios.Correo;
-                    obj.Telefono = DatosUsuarios.Telefono;
-
+                    obj.Foto = Convert.FromBase64String(cadF);
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

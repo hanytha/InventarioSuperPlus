@@ -59,7 +59,7 @@
 <!-- Botón del modal-->
 <button onclick="editarModalUsuario(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuario">REGISTRAR</button><!--Mostrar los registros en el accordion-->
 <!--Muestra la tabla compras-->
-<div id="tablaImpuesto" class="table"></div>
+<div id="TablaUsuarios" class="table"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalUsuario">
@@ -276,11 +276,11 @@
 </div>
 <table>
 </table>
-<!------------------------------------------------------------Modal impuesto--------------------------------------------------------------------------->
+<!------------------------------------------------------------Modal Bloqueado--------------------------------------------------------------------------->
 
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalImpuesto">
+    <div class="modal fade" id="ModalBloqueado">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -421,7 +421,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbArBloqueado">Ar<span class="required">*</span></label>
+                                    <label class="form-control-label" for="cmbArBloqueado">Area<span class="required">*</span></label>
                                     <input type="text" name="data[cmbArBloqueado]" id="cmbArBloqueado" class="form-control  limpiar bloquear" placeholder="Perfil">
                                 </div>
                             </div>
