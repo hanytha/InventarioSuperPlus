@@ -45,21 +45,22 @@ namespace Inventario.Controllers
 
                 });
                 string Fecha;
-                double Total=0;
+                double SumaStock = 0;
                 double costos=0;
                 int cont = 0;
                 int UltimoReg = ConsultaUfecha.Count() - 1;
-                
+
                 foreach (var com in ConsultaUfecha)
                 {
-                    if (cont== UltimoReg)
+                    //SumaStock = SumaStock + com.;
+
+                    if (cont==UltimoReg)
                     {
-                        //fecha =+ ConsultaUfecha. + ",";
+                        costo += com.Costo + ",";
                     }
-                       
+                    cont++;
                 }
-
-
+     
             }
         }
     }

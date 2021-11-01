@@ -12,6 +12,7 @@ function CrearDivArticulo(Data) {
     var CodigoHtmlArticulo = "";
     CodigoHtmlArticulo += "<div id='container'>";
     CodigoHtmlArticulo += "<div><label><h6>ID </h6></label><label><h6>Nombre Empresa</h6></label></div>";
+    CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
@@ -37,7 +38,7 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
