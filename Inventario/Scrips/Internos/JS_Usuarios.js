@@ -374,7 +374,7 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             sessionStorage.setItem('IdUsuarioBloqueado', Data[0].IdUsuarios);     //Variable de sesión
 
 
-            document.getElementById("cmbArBloqueado").value = Data[0].IdArea;
+            document.getElementById("cmbArBloqueado").value = Data[0].NArea;
 
             document.getElementById("TxtCurpBloqueado").value = Data[0].CURP;
             document.getElementById("TxtNombreBloqueado").value = Data[0].Nombre;

@@ -277,7 +277,6 @@
 <table>
 </table>
 <!------------------------------------------------------------Modal Bloqueado--------------------------------------------------------------------------->
-
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalBloqueado">
@@ -296,7 +295,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="PBFotoBloqueado">Imagen</label>
                                     <img id="PBFotoBloqueado" src="~/Assets/Imagenes/logo.png" width="155" height="155" alt="" />                                        <br />
-                                  
+
                                 </div>
                             </div>
                         </div>
@@ -405,24 +404,30 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbABloqueado">Área<span class="required">*</span></label>
                                     <select id="cmbABloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
-                                    <select id="cmbSubAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
-                                </div>
-                            </div>
+                            @*<div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
+                                        <select id="cmbSubAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
+                                    </div>
+                                </div>*@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbArBloqueado">Area<span class="required">*</span></label>
                                     <input type="text" name="data[cmbArBloqueado]" id="cmbArBloqueado" class="form-control  limpiar bloquear" placeholder="Perfil">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
+                                    <select id="cmbSubAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
                                 </div>
                             </div>
                         </div>
