@@ -26,12 +26,16 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+<<<<<<< HEAD
                     p.Categoria,
+=======
+>>>>>>> alma
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
                     p.Descripcion,
                     p.UnidadSAT,
                     p.ClaveSAT,
+<<<<<<< HEAD
                     p.Fecha,
                     p.FechaSistema,
                     p.Unidad,
@@ -39,6 +43,12 @@ namespace Inventario.Controllers
                     p.Marca,
                     p.Logo,
                     p.Estatus,
+=======
+                    p.Logo,
+                    p.Fecha,
+                    p.Estatus
+
+>>>>>>> alma
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
@@ -53,12 +63,16 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+<<<<<<< HEAD
                     p.Categoria,
+=======
+>>>>>>> alma
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
                     p.Descripcion,
                     p.UnidadSAT,
                     p.ClaveSAT,
+<<<<<<< HEAD
                     p.Fecha,
                     p.FechaSistema,
                     p.Unidad,
@@ -67,10 +81,16 @@ namespace Inventario.Controllers
                     p.Estatus,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
 
+=======
+                    p.Logo,
+                    p.Fecha,
+                    p.Estatus
+>>>>>>> alma
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
 
+<<<<<<< HEAD
         //Guardar los datos del proveedor
         public int GuardarArticulo(Articulos DatosArticulo, string cadF)
         {
@@ -144,6 +164,9 @@ namespace Inventario.Controllers
                 //}
                 return Afectados;
             }
+=======
+     
+>>>>>>> alma
 
             
         //Eliminar Compra

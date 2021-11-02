@@ -29,7 +29,8 @@ namespace Inventario.Controllers
         //consulta SubAreas
         public JsonResult BDSubAreas(long IDA)
         {
-            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdSubAreas.Equals(IDA))
+            // Consulta de todas las subareas activas que pertenezcan a dicha area para mostrarlo en el combo dependiendo de la área que se seleccione
+            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) &&  p.IdArea.Equals(IDA))
                 .Select(p => new
                 {
                     ID = p.IdSubAreas,
@@ -59,6 +60,32 @@ namespace Inventario.Controllers
 
         }
 
+<<<<<<< HEAD
+=======
+
+        public JsonResult BDTienda()
+        {
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdTienda,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDPagina()
+        {
+            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdPagina,
+                    Descripcion = p.Descripcion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+>>>>>>> alma
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -83,20 +110,22 @@ namespace Inventario.Controllers
         }
 
 
-        //Consulta Paginas
-        public JsonResult BDPagina()
+        //consulta Tiendas
+        public JsonResult BDTiendas()
         {
-            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+            var datos = InvBD.Tienda.Where(p => p.Estado.Equals(1))
+
                 .Select(p => new
                 {
-                    ID = p.IdPagina,
-                    Mensaje = p.Mensaje
+                    ID = p.IdTienda,
+                    p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
 
 
+<<<<<<< HEAD
         //consulta Tiendas
 
         //consulta Tiendas
@@ -121,9 +150,38 @@ namespace Inventario.Controllers
         }
         //consulta Tiendas
         public JsonResult BDImpuesto()
+=======
+
+        //consulta Supervición
+        public JsonResult BDSupervicion()
+        {
+            var datos = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdSupervision,
+                    Nombre = p.TipoSupervicion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public JsonResult BDArticulos()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreProveedor
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        //consulta Unidades de medida
+        public JsonResult BDUnidadesMedida()
+>>>>>>> alma
         {
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
+<<<<<<< HEAD
                     ID = p.IdImpuesto,
                     Nombre = p.Impuestos
         
@@ -147,10 +205,15 @@ namespace Inventario.Controllers
                     ID = p.IdCompra,
                
                   
+=======
+                    ID = p.IdUnidadDeMedida,
+                    Nombre = p.Unidad
+>>>>>>> alma
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+<<<<<<< HEAD
 
 
         //consulta Estados
@@ -198,16 +261,22 @@ namespace Inventario.Controllers
         }
         //Consulta 
         public JsonResult BDMarcas()
+=======
+        public JsonResult BDMarca()
+>>>>>>> alma
         {
             var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdMarca,
                     Nombre = p.Nombre
+<<<<<<< HEAD
 
+=======
+>>>>>>> alma
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
     }
 }
 
-   

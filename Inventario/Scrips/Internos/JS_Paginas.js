@@ -1,14 +1,13 @@
-﻿LlenarCMB();
+﻿
 
-var imagen64;
 CrearAcordeonPagina();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPagina() {
     $.get("/Pagina/ConsultaPaginas", function (Data) {
+        //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonPagina(Data, document.getElementById("accordion"));
     });
-    imagen64 = getBase64Image(document.getElementById("PBFoto"));
-}//Acordeón proveedores
+}
 function AcordeonPagina(Data, CtrlProveedores) {
     var CodigoHTMLPagina = "";
     for (var i = 0; i < Data.length; i++) {
@@ -29,7 +28,7 @@ function AcordeonPagina(Data, CtrlProveedores) {
         CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPagina + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLPagina += "<div class='card-body'>";
         CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Mensaje: </strong>" + Data[i].Accion + "</div>";
+        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Acción: </strong>" + Data[i].Accion + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Controlador: </strong>" + Data[i].Controlador + "</div>";
         CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Icono: </strong>" + Data[i].Icono + "</div>";
         CodigoHTMLPagina += "</div>";
@@ -49,6 +48,7 @@ function AcordeonPagina(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLPagina;
 }
+
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -74,53 +74,7 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-//limpiar campos
-function LimpiarCampos() {
-    //Limpiar la casilla de texto
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }//Limpiar el campo de select
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
-    }
-}
 
-
-function LlenarCMB() {
- 
-    $.get("/Pagina/BDPagina", function (data) {
-        llenarCombo(data, document.getElementById("cmbPadre"), true);
-    });
-}
-
-
-
-
-function llenarComboPaginas(data, control, primerElemento) {
-    var contenido = "";
-    if (primerElemento == true) {
-        contenido += "<option value=''>--Seleccione--</option>";
-    }
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
-    }
-    control.innerHTML = contenido;
-}
-
-
-
-
-function llenarCombo(data, control) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
-    }
-    control.innerHTML = contenido;
-}
 //Guarda los cambios y altas de los proveedores
 function GuardarPagina() {
     if (CamposObligatorios() == true) {
@@ -131,8 +85,8 @@ function GuardarPagina() {
 
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-          
-           // var Padre = document.getElementById("cmbTipo").value;
+
+            // var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
             frm.append("IdPagina", IdPagina);
@@ -151,19 +105,32 @@ function GuardarPagina() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe la pagina");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        alert("Se ejecutó correctamente");
                         CrearAcordeonPagina();
                         document.getElementById("btnCancelar").click();
                     }
                 }
             });
         }
+    }
+}
+
+//limpiar campos
+function LimpiarCampos() {
+    //Limpiar la casilla de texto
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }//Limpiar el campo de select
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
     }
 }
 //marca los campos obligatorios
@@ -183,15 +150,30 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
 //"Elimina" el área cambia el Estatus
+//function EliminarPagina(id) {
+//    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+//        $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
+//            if (DatoPagina == 1) {
+//                alert("Se elimino correctamente");
+//                CrearAcordeonSupervisores();
+//            } else {
+//                alert("Ocurrio un error");
+//            }
+//        });
+//    }
+//}
+
 function EliminarPagina(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Pagina/EliminarPagina/?IdPagina=" + id, function (DatoPagina) {
+        $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
             if (DatoPagina == 1) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'Se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
@@ -205,8 +187,39 @@ function EliminarPagina(id) {
 
 
 
+function LlenarCMB() {
+
+    $.get("/Pagina/BDPagina", function (data) {
+        llenarCombo(data, document.getElementById("cmbPadre"), true);
+    });
+}
 
 
+function llenarComboPaginas(data, control, primerElemento) {
+    var contenido = "";
+    if (primerElemento == true) {
+        contenido += "<option value=''>--Seleccione--</option>";
+    }
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Mensaje + "</option>";
+    }
+    control.innerHTML = contenido;
+}
 
 
-
+//Deshabilitar el clic externo para el modal del formulario.
+jQuery(document).ready(function () {
+    jQuery('[data-toggle="modal"]').each(function () {
+        jQuery(this).attr('data-backdrop', 'static');
+        jQuery(this).attr('data-keyboard', 'false');
+    });
+});

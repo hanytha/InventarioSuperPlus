@@ -1,5 +1,13 @@
-﻿MostrarPaginas();
-var imagen64;
+﻿ConsultaPerfiles();
+function ConsultaPerfiles() {
+    $.get("/Perfiles/ConsultaPefiles", function (Data) {
+        CrearTablaPerfiles(Data);
+    }
+    );
+}
+
+/*
+ 
 CrearAcordeonPerfil();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPerfil() {
@@ -43,11 +51,34 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
         CodigoHTMLPerfil += "</div>";
     }
     CtrlPerfiles.innerHTML = CodigoHTMLPerfil;
+}*/
+
+function CrearTablaPerfiles(Data) {
+    var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCompra += "<tr>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Perfil + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Nivel + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Comentarios + "</td>";
+
+        CodigoHtmlTablaCompra += "<td>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].IdPerfilDeUsuario + ",this)'><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaCompra += "</td>";
+        CodigoHtmlTablaCompra += "</tr>";
+    }
+    CodigoHtmlTablaCompra += "</tbody>";
+    CodigoHtmlTablaCompra += "</table>";
+    document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
 }
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-
+    MostrarPaginas();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -64,11 +95,90 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IdPerfilDeUsuario', Data[0].IdPerfilDeUsuario);     //Variable de sesión
             document.getElementById("TxtPerfil").value = Data[0].Perfil;
             document.getElementById("TxtNivel").value = Data[0].Nivel;
-            document.getElementById("TxtPermisos").value = Data[0].Permisos;
+            document.getElementById("divPagina").value = Data[0].Permisos;
+            //Se recorre el checkbox de permisos, separando las opciones concatenadas y se activan las casillas guardados
+            var activar = Data[0].Permisos.split('#');
+            var ChevPermisos = document.getElementsByClassName("checkbox-area");
+            for (let j = 0; j < activar.length; j++) {
+                for (let i = 0; i < ChevPermisos.length; i++) {
+                    if (ChevPermisos[i].id == activar[j]) {
+                        ChevPermisos[i].checked = true;
+                        break;
+                    }
+                }
+            }
             document.getElementById("TxtComentarios").value = Data[0].Comentarios;
         });
     }
 }
+//Guarda los cambios y altas de los proveedores
+function GuardarPerfil() {
+    if (CamposObligatorios() == true) {
+        var ChevPermisos = document.getElementsByClassName("checkbox-area");
+        let seleccionados = "";
+        for (let i = 0; i < ChevPermisos.length; i++) {
+            if (ChevPermisos[i].checked == true) {
+                seleccionados += ChevPermisos[i].id;
+                seleccionados += "#";
+            }
+        }
+        if (seleccionados == "") {
+
+            alert("Rellene el checkbox");
+        } else {
+            if (confirm("¿Desea aplicar los cambios?") == 1) {
+                var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
+                var Perfil = document.getElementById("TxtPerfil").value;
+                var Nivel = document.getElementById("TxtNivel").value;
+                //  Se recorre el checkbox de permisos para buscar las casillas seleccionadas, se separan con "#" y se guardan en la base de datos
+                var ChevPermisos = document.getElementsByClassName("checkbox-area");
+                let seleccionados = "";
+                for (let i = 0; i < ChevPermisos.length; i++) {
+                    if (ChevPermisos[i].checked == true) {
+                        seleccionados += ChevPermisos[i].id;
+                        seleccionados += "#";
+                    }
+                }
+                var Permisos = seleccionados.substring(0, seleccionados.length - 1);
+                var Comentarios = document.getElementById("TxtComentarios").value;
+
+                var frm = new FormData();
+                frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
+                frm.append("Perfil", Perfil);
+                frm.append("Nivel", Nivel);
+                frm.append("Permisos", Permisos);
+                frm.append("Comentarios", Comentarios);
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/Perfiles/GuardarPerfil",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            //alert("Ocurrio un error");
+
+                            alert("Ocurrio un error");
+
+                        }
+                        else if (data == -1) {
+                            alert("Ya existe el perfil");
+                        }
+                        else {
+                            alert("Se ejecuto correctamente");
+                            ConsultaPerfiles();
+                            document.getElementById("btnCancelar").click();
+                        }
+                    }
+                });
+            }
+        }
+    }
+}
+
+
+
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -81,50 +191,8 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
-//Guarda los cambios y altas de los proveedores
-function GuardarPerfil() {
-    if (CamposObligatorios() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdPerfilDeUsuario = sessionStorage.getItem('IdPerfilDeUsuario');
-            var Perfil = document.getElementById("TxtPerfil").value;
-            var Nivel = document.getElementById("TxtNivel").value;
-            var Permisos = document.getElementById("TxtPermisos").value;
-            var Comentarios = document.getElementById("TxtComentarios").value;
-           
-            var frm = new FormData();
-            frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
-            frm.append("Perfil", Perfil);
-            frm.append("Nivel", Nivel);
-            frm.append("Permisos", Permisos);
-            frm.append("Comentarios", Comentarios);
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Perfiles/GuardarPerfil",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el proveedor");
-                    }
-                    else {
-                        alert("Se ejecuto correctamente");
-                        CrearAcordeonPerfil();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
-        }
-    }
-}
-
 //marca los campos obligatorios
 function CamposObligatorios() {
-
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -140,10 +208,13 @@ function CamposObligatorios() {
     }
     return exito;
 }
-//"Elimina" el área cambia el Estatus
+
+
+
+
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Perfiles/EliminarPerfil/?IdPerfilDeUsuario=" + id, function (DatoPagina) {
+        $.get("/Perfiles/EliminarPerfil/?Id=" + id, function (DatoPagina) {
             if (DatoPagina == 1) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
@@ -152,7 +223,7 @@ function EliminarPerfil(id) {
                     'success'
                 )
                 //  confirmarEliminar();
-                CrearAcordeonPerfil();
+                      ConsultaPerfiles();
             } else {
                 alert("Ocurrio un error");
             }
@@ -162,23 +233,17 @@ function EliminarPerfil(id) {
 
 
 
-
-
 function MostrarPaginas() {
     $.get("/Pagina/BDPagina", function (Paginas) {
         var codigoHtmlPagina = "";
         codigoHtmlPagina += "<div class='row'>";
         for (var i = 0; i < Paginas.length; i++) {
-            CodigoHTMLPerfil += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            CodigoHTMLPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font'>" + Paginas[i].Descripcion + "</span>";
-            CodigoHTMLPagina += "</div>";
+            codigoHtmlPagina += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            codigoHtmlPagina += "<input type='checkbox' class = 'checkbox-area' id='" + Paginas[i].ID + "' ><span class='help-block text-muted small-font' >" + Paginas[i].Descripcion + "</span>";
+            codigoHtmlPagina += "</div>";
         }
-        CodigoHTMLPagina += "</div>";
+        codigoHtmlPagina += "</div>";
         document.getElementById("divPagina").innerHTML = codigoHtmlPagina;
     });
 }
-
-
-
-
 

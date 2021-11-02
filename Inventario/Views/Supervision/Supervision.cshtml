@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Supervision";
 }
 
@@ -58,9 +57,15 @@
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
+<<<<<<< HEAD
 
 <div id="tabla" class="default "></div>
+=======
+<div id="tablaSupervicion"></div>
+<!-- Rellenar los registros de la base de datos en el accordión -->
+>>>>>>> alma
 <div id="accordion"></div>
+
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -72,7 +77,11 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
+<<<<<<< HEAD
                     <h4>REGISTRO SUPERVICIÓN</h4>
+=======
+                    <h1>Registro Supervición</h1>
+>>>>>>> alma
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -80,6 +89,7 @@
                         <fieldset>
                             <h4>Paso 1</h4>
                             <div class="row">
+<<<<<<< HEAD
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNomSuper">INGRESE EL NOMBRE DE LA SUPERVISIÓN<span class="required">*</span></label>
@@ -92,18 +102,41 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNomUser">INGRESE EL NOMBRE DE EL ENCARGADO<span class="required">*</span></label>
                                         <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+=======
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNomSuper">Supervición<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNomSuper]" id="TxtNomSuper" class="form-control  limpiar obligatorio" placeholder="Nombre de la supervición">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNomUser">Usuario<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="Usuario">
+>>>>>>> alma
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="form-control-label" for="cmbTienda">Número de Tienda<span>*</span></label>
                                         <select id="cmbTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
+=======
+                                        <label class="form-control-label" for="TxtComentarios">Tiendas<span class="required">*</span></label>
+                                        <div id="divPagina"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" onclick="GuardarSupervision()">Guardar</button>
+>>>>>>> alma
                         </fieldset>
                     </form>
                 </div>
@@ -128,3 +161,8 @@
 <script src="~/Scrips/Internos/JS_Superviciones.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<<<<<<< HEAD
+=======
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+>>>>>>> alma

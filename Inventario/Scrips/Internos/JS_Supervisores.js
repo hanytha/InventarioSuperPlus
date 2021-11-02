@@ -1,4 +1,8 @@
 ﻿LlenarCMBPSupervicion();
+<<<<<<< HEAD
+=======
+
+>>>>>>> alma
 CrearAcordeonSupervisores();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonSupervisores() {
@@ -28,12 +32,22 @@ function AcordeonSupervisores(Data, CtrlBonis) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSupervisor + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+<<<<<<< HEAD
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Apellido Paterno: </strong>" + Data[i].ApellidoP + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellido Materno: </strong>" + Data[i].ApellidoM + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Télefono : </strong>" + Data[i].Telefono + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo : </strong>" + Data[i].Correo + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tipo de supervición: </strong>" + Data[i].TipoSupervision + "</div>";
         CodigoHTMLAreas += "</div>";
+=======
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].ApellidoP + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Giro del Proveedor: </strong>" + Data[i].ApellidoM + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Telefono + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Correo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].TipoSupervision + "</div>";
+        CodigoHTMLAreas += "</div>";
+
+>>>>>>> alma
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -176,6 +190,7 @@ function LlenarCMBPSupervicion() {
     $.get("/GLOBAL/BDSupervicion", function (data) {
         llenarCombo(data, document.getElementById("cmbSupervicion"));
     });
+<<<<<<< HEAD
 
     //funcion general para llenar los select
     function llenarCombo(data, control) {
@@ -187,10 +202,24 @@ function LlenarCMBPSupervicion() {
         }
         control.innerHTML = contenido;
     }
+=======
+>>>>>>> alma
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+<<<<<<< HEAD
+}
+
+=======
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+>>>>>>> alma
 
 
 }
-
-
-
-
