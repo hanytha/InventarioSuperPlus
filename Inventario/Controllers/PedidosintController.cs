@@ -15,9 +15,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
-
-=======
         public JsonResult ConsultaPedidosInternos()
         {
             var pedidosInt = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
@@ -143,7 +140,7 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
->>>>>>> alma
+
     }
 }
 

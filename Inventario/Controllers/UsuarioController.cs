@@ -15,9 +15,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
 
-=======
         //consulta general de los proveedores
         public JsonResult ConsultaUsuarios()
         {
@@ -227,7 +225,7 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
->>>>>>> alma
+
     }
 }
 

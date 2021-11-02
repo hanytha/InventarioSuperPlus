@@ -16,9 +16,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
-      
-=======
         public int IniciarUsuario(string User, string Password)
         {
             int solicitud = 0;
@@ -160,6 +157,6 @@ namespace Inventario.Controllers
             Session["Usuario"] = null;
             return RedirectToAction("Login");
         }
->>>>>>> alma
+
     }
 }

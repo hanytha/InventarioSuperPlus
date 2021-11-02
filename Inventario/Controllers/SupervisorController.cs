@@ -77,11 +77,9 @@ namespace Inventario.Controllers
             }
             else
             {
-<<<<<<< HEAD
+
                 int nveces = InvBD.Supervisor.Where(p => p.Nombre.Equals(DatosSupervisor.Nombre)  && p.ApellidoP.Equals(DatosSupervisor.ApellidoP) && p.ApellidoM.Equals(DatosSupervisor.ApellidoM) && p.Telefono.Equals(DatosSupervisor.Telefono)&&p.Correo.Equals(DatosSupervisor.Correo) && p.IdSupervision.Equals(DatosSupervisor.IdSupervision)).Count();
-=======
-                int nveces = InvBD.Supervisor.Where(p => p.Nombre.Equals(DatosSupervisor.Nombre) && p.ApellidoP.Equals(DatosSupervisor.ApellidoP) && p.ApellidoM.Equals(DatosSupervisor.ApellidoM) && p.Telefono.Equals(DatosSupervisor.Telefono) && p.Correo.Equals(DatosSupervisor.Correo) && p.IdSupervision.Equals(DatosSupervisor.IdSupervision)).Count();
->>>>>>> alma
+
                 if (nveces == 0)
                 {
                     Supervisor obj = InvBD.Supervisor.Where(p => p.IdSupervisor.Equals(id)).First();

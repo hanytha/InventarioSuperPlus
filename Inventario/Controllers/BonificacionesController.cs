@@ -15,10 +15,5 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> alma
     }
 }

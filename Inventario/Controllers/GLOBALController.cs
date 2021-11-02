@@ -60,8 +60,6 @@ namespace Inventario.Controllers
 
         }
 
-<<<<<<< HEAD
-=======
 
         public JsonResult BDTienda()
         {
@@ -83,9 +81,6 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
-
-
->>>>>>> alma
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -125,7 +120,7 @@ namespace Inventario.Controllers
 
 
 
-<<<<<<< HEAD
+
         //consulta Tiendas
 
         //consulta Tiendas
@@ -138,20 +133,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        //consulta Tiendas
-        public JsonResult BDTienda()
-        {
-            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdTienda,
-                    Nombre = p.Nombre
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-        //consulta Tiendas
-        public JsonResult BDImpuesto()
-=======
-
         //consulta Supervición
         public JsonResult BDSupervicion()
         {
@@ -174,47 +155,19 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-        //consulta Unidades de medida
-        public JsonResult BDUnidadesMedida()
->>>>>>> alma
-        {
+      //consulta Tiendas
+        public JsonResult BDImpuesto(){
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
-<<<<<<< HEAD
+
                     ID = p.IdImpuesto,
                     Nombre = p.Impuestos
         
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        //consulta Supervición
-        public JsonResult BDSupervicion()
-        {
-            var datos = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdSupervision,
-                    Nombre = p.TipoSupervicion
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult BDCompra()
-        {
-            var datos = InvBD.Compra.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdCompra,
-               
-                  
-=======
-                    ID = p.IdUnidadDeMedida,
-                    Nombre = p.Unidad
->>>>>>> alma
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
-<<<<<<< HEAD
-
+ 
+        
 
         //consulta Estados
         public JsonResult BDEstado()
@@ -261,18 +214,13 @@ namespace Inventario.Controllers
         }
         //Consulta 
         public JsonResult BDMarcas()
-=======
-        public JsonResult BDMarca()
->>>>>>> alma
+
         {
             var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdMarca,
                     Nombre = p.Nombre
-<<<<<<< HEAD
 
-=======
->>>>>>> alma
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

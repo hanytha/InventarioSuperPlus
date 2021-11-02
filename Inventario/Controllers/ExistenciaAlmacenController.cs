@@ -21,10 +21,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
-<<<<<<< HEAD
                     p.IdCompra,
-=======
->>>>>>> alma
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
@@ -43,10 +40,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
-<<<<<<< HEAD
                     p.IdCompra,
-=======
->>>>>>> alma
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
