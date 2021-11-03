@@ -43,21 +43,33 @@ namespace Inventario.Controllers
                     {
                         fechaIngreso = p.FechaDeIngreso,
                         stockActual = p.ExitenciaActual,
-                        costo = p.Coste
+                        //costo = p.Coste
+
                     });
+
+
 
                 foreach (var comp in consultaFecha)
                 {
                     Fechas += comp.fechaIngreso + ",";
                     Stock += comp.stockActual + ",";
-                    Costos += comp.costo + ",";
+                    //Costos += comp.costo + ",";
 
-                    int UltimoReg = consultaFecha.Count() - 1;
+
+                    var cosulFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.Coste)
+                          .Select(p => new
+                          {
+                              costo = p.Coste
+                          });
+                    int UltimoReg = cosulFecha.Count() - 1;
                     int cont = 0;
                     int SumaStock = 0;
 
-                    foreach (var stock in consultaFecha)
+
+                    foreach (var stock in cosulFecha)
                     {
+                        Costos = stock.costo + ",";
+
                         SumaStock = SumaStock + Stock.Length;
 
                         if (cont == UltimoReg)
@@ -67,10 +79,10 @@ namespace Inventario.Controllers
                         }
                         cont++;
                     }
-
                 }
-      
+
             }
+
         }
 
     }

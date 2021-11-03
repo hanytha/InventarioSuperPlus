@@ -21,7 +21,7 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdExistenciaAlmacenG + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
         CodigoHTMLAreas += "<span >" + Data[i].NoPedido + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";

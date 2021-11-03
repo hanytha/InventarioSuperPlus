@@ -115,7 +115,7 @@
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
-    <Content Include="Scrips\Internos\JS_Entrada.js" />
+    <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Imp.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
@@ -125,8 +125,6 @@
     <Content Include="Scrips\General\JS_Validaciones.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
-    <Content Include="Scrips\Internos\JS_Entradas.js" />
-    <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
@@ -173,6 +171,7 @@
     <Compile Include="Controllers\PedidosintController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
@@ -201,6 +200,9 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -229,6 +231,7 @@
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
     <Content Include="Views\ArticuloVista\ArticuloVista.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
+    <Content Include="Views\Prueba\Prueba.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -241,11 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
