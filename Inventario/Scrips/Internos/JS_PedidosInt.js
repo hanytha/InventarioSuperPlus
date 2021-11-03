@@ -1,5 +1,5 @@
 ﻿LlenarCMBPUnidadDeMedida();
-
+BloquearCTRL();
 CrearAcordeonPedidosInt();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPedidosInt() {
@@ -54,6 +54,12 @@ function AcordeonPedidosInt(Data, CtrlPedidosInt) {
     CtrlPedidosInt.innerHTML = CodigoHTMLPagina;
 }
 
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -71,6 +77,7 @@ function abrirModal(id) {//la clase  Obligatorio
         $.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);     //Variable de sesión
+            document.getElementById("TxtFechaIngreso").value = Data[0].Fecha;
             document.getElementById("TxtNumeroPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
             document.getElementById("TxtCantidadAprobada").value = Data[0].CantidadAprobada;
@@ -88,6 +95,7 @@ function GuardarPedidoInterno() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdPedidosInternos = sessionStorage.getItem('IdPedidosInternos');
+            var Fecha = document.getElementById("TxtFechaIngreso").value;
             var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
             var CantidadSolicitada = document.getElementById("TxtCantidadSolicitada").value;
             var CantidadAprobada = document.getElementById("TxtCantidadAprobada").value;
@@ -110,6 +118,7 @@ function GuardarPedidoInterno() {
 
             var frm = new FormData();
             frm.append("IdPedidosInternos", IdPedidosInternos);
+            frm.append("Fecha", Fecha);
             frm.append("NumeroPedido", NumeroPedido);
             frm.append("CantidadSolicitada", CantidadSolicitada);
             frm.append("CantidadAprobada", CantidadAprobada);
