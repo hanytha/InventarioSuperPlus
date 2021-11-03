@@ -202,7 +202,7 @@ function LlenarCMBPUnidadDeMedida() {
         llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
     });
   
-    $.get("/GLOBAL/BDMarca", function (data) {
+    $.get("/GLOBAL/BDMarcas", function (data) {
         llenarCombo(data, document.getElementById("cmbMarca"));
     });
     $.get("/GLOBAL/BDTienda", function (data) {

@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SuperPlus" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-<<<<<<< HEAD
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45\SQLEXPRESS;Initial Catalog=SuperPlus;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString" Provider="System.Data.SqlClient" />
-=======
   <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString" Provider="System.Data.SqlClient" />
->>>>>>> alma
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -71,21 +67,14 @@
       <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Area" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-<<<<<<< HEAD
       <Column Name="Marca" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-=======
->>>>>>> alma
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />
       <Association Name="Articulos_PedidosInternos" Member="PedidosInternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosInternos" />
       <Association Name="Articulos_TipoDeMovimientos" Member="TipoDeMovimientos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="TipoDeMovimientos" />
       <Association Name="Areas_Articulos" Member="Areas" ThisKey="IdAreas" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" />
       <Association Name="Categorias_Articulos" Member="Categorias" ThisKey="IdCategorias" OtherKey="IdCategorias" Type="Categorias" IsForeignKey="true" DeleteRule="CASCADE" />
-<<<<<<< HEAD
       <Association Name="Marca_Articulos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
-=======
-      <Association Name="Marca_Articulos" Member="Marca" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
->>>>>>> alma
       <Association Name="UnidadDeMedida_Articulos" Member="UnidadDeMedida" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>

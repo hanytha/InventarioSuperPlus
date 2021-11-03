@@ -31,24 +31,6 @@ namespace Inventario.Controllers
                 });
             return Json(superviciones, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult ConsultaSupervicionesXTienda(long idSuper)
-        {
-            var super = InvBD.Supervision.Where(p => p.Estatus.Equals(1) && p.IdSupervision.Equals(idSuper))
-                .Select(p => new
-                {
-                    p.IdSupervision,
-                    p.TipoSupervicion,
-                    p.IdUsuario,
-                    p.IdAreas,
-                    p.Tienda,
-                    p.nombreUsuario,
-                    p.Estatus,
-
-                });
-            return Json(super, JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult ConsultaSupervicion(long Id)
         {
             var supervicion = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id))
@@ -64,7 +46,6 @@ namespace Inventario.Controllers
 
                 });
             return Json(supervicion, JsonRequestBehavior.AllowGet);
-
         }
         //Guardar los datos de la compra
         public int GuardarSupervicion(Supervision DatosSupervicion)
@@ -73,39 +54,39 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosSupervicion.IdSupervision;
-            if (id.Equals(0))
-            {
-                int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion)).Count();
+                if (id.Equals(0))
+                {
+                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion)).Count();
 
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                if (nveces == 0)
-                {
-                    InvBD.Supervision.InsertOnSubmit(DatosSupervicion);
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
+                    // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                    if (nveces == 0)
+                    {
+                        InvBD.Supervision.InsertOnSubmit(DatosSupervicion);
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
                 else
                 {
-                    Afectados = -1;
+                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
+                    if (nveces == 0)
+                    {
+                        Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
+                        obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
+                        obj.Tienda = DatosSupervicion.Tienda;
+                        obj.nombreUsuario = DatosSupervicion.nombreUsuario;
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
-            }
-            else
-            {
-                int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
-                if (nveces == 0)
-                {
-                    Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
-                    obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
-                    obj.Tienda = DatosSupervicion.Tienda;
-                    obj.nombreUsuario = DatosSupervicion.nombreUsuario;
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
-            }
             }
             catch (Exception ex)
             {
@@ -130,8 +111,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
-
     }
 }
 

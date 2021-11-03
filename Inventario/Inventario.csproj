@@ -125,15 +125,11 @@
     <Content Include="Scrips\General\JS_Validaciones.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
-<<<<<<< HEAD
     <Content Include="Scrips\Internos\JS_Entradas.js" />
-=======
     <Content Include="Scrips\Internos\JS_Compra.js" />
->>>>>>> alma
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
-    <Content Include="Scrips\Internos\Usr.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Perfiles.js" />
@@ -183,7 +179,6 @@
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\TiposDeMovimientoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
-    <Compile Include="Controllers\UsrController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,13 +226,9 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen.cshtml" />
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
     <Content Include="Views\ArticuloVista\ArticuloVista.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
-=======
-    <Content Include="Views\Usr\Usr.cshtml" />
->>>>>>> alma
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
