@@ -81,6 +81,16 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult BDProveedor()
+        {
+            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -155,7 +165,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-      //consulta Tiendas
+
+        public JsonResult BDArticulosxNombreEmpresa()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //consulta Tiendas
         public JsonResult BDImpuesto(){
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {

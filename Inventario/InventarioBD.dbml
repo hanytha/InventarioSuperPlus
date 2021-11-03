@@ -238,15 +238,19 @@
       <Column Name="NumeroPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Marca_PedidosExternos" Member="Marca" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
+      <Association Name="Marca_PedidosExternos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
       <Association Name="Proveedores_PedidosExternos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
-      <Association Name="UnidadDeMedida_PedidosExternos" Member="UnidadDeMedida" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
+      <Association Name="UnidadDeMedida_PedidosExternos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PedidosInternos" Member="PedidosInternos">
