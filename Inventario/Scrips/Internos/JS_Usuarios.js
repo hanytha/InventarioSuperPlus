@@ -288,7 +288,7 @@ function GuardarUsuario() {
                         }
                         else {
                             alert("Se ejecutó correctamente");
-                            CrearAcordeonUsuarios();
+                            CrearTablaUsuarios();
                             document.getElementById("btnCancelar").click();
                         }
                     }

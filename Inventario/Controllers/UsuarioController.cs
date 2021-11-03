@@ -15,7 +15,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
         //consulta general de los proveedores
         public JsonResult ConsultaUsuarios()
         {
@@ -176,7 +175,7 @@ namespace Inventario.Controllers
                     obj.NoSS = DatosUsuarios.NoSS;
                     obj.Correo = DatosUsuarios.Correo;
                     obj.Telefono = DatosUsuarios.Telefono;
-                    obj.IdPerfil = DatosUsuarios.IdPerfil; 
+                    obj.IdPerfil = DatosUsuarios.IdPerfil;
                     obj.LvlPerfil = DatosUsuarios.LvlPerfil;
                     obj.Usuario = DatosUsuarios.Usuario;
                     obj.FechaIngreso = DatosUsuarios.FechaIngreso;
@@ -225,7 +224,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
     }
 }
 
