@@ -56,7 +56,7 @@ namespace Inventario.Controllers
                     //Costos += comp.costo + ",";
 
 
-                    var cosulFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.Coste)
+                    var cosulFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderByDescending(p => p.Coste)
                           .Select(p => new
                           {
                               costo = p.Coste
@@ -79,6 +79,8 @@ namespace Inventario.Controllers
                         }
                         cont++;
                     }
+
+                    var resultado = new { Nombre = Nombre.Length, Fechas = Fechas.Length, Stock = Stock.Length, Costos = Costos.Length };
                 }
 
             }

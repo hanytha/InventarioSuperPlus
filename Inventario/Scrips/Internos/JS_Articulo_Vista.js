@@ -126,7 +126,6 @@ function CrearDivAlmacen(Data) {
     CodigoHtmlAlmacen += "<div class='icono'>ID</div> "
     CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
     CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
-
     CodigoHtmlAlmacen += "<hr class='solid3'>"
     CodigoHtmlAlmacen += "<div>";
 

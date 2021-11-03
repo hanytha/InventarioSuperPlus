@@ -28,7 +28,7 @@ function AcordeonImpuestos(Data, CtrlImp) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdImpuesto + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + Data[i].Porcentaje + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Porcentaje: </strong>" + Data[i].Porcentaje + "</div>";
      
         CodigoHTMLAreas += "</div>";
 

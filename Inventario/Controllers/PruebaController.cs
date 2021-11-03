@@ -17,18 +17,28 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaCompras()
         {
+            //string totall="";
       
-            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.FechaDeIngreso)
+            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1)&& p.ExitenciaActual >0).OrderByDescending(p => p.FechaDeIngreso)
                 .Select(p => new
                 {
                     p.IdCompra,
-                    p.ExitenciaActual,
+         /*total=*/ p.ExitenciaActual,
                     p.FechaDeIngreso,
                     p.Coste,
 
                 });
 
+            //foreach (var comp in compra)
+            //{
+            //    if(comp.total>=1)
+            //    {
+            //        totall += comp.total + ",";
+            //    }
+            //}
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }
