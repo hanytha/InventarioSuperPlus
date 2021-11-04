@@ -72,7 +72,7 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>REGISTRO DE USUARIOS</h1>
+                    <h1>Registro Usuarios</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -136,7 +136,7 @@
                                         <label class="form-control-label" for="cmbEstado">Estado<span class="required">*</span></label>
                                         <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio">
                                             <option value="0">--Seleccione--</option>
-                                            @*@{
+                                            @{
                                                 if (Estados.idEstado != null)
                                                 {
                                                     for (int i = 0; i < Estados.idEstado.Count(); i++)
@@ -144,7 +144,7 @@
                                                         <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
                                                     }
                                                 }
-                                            }*@
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -351,7 +351,7 @@
                                     <label class="form-control-label" for="cmbEstadoBloqueado">Estado<span class="required">*</span></label>
                                     <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @{
+                                        @*@{
                                             if (Estados.idEstado != null)
                                             {
                                                 for (int i = 0; i < Estados.idEstado.Count(); i++)
@@ -359,7 +359,7 @@
                                                     <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
                                                 }
                                             }
-                                        }
+                                        }*@
                                     </select>
                                 </div>
                             </div>
@@ -474,3 +474,4 @@
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+

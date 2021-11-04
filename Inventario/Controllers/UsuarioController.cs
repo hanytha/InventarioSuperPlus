@@ -160,7 +160,7 @@ namespace Inventario.Controllers
                 && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
 
                 if (nveces == 0)
-                {
+                {//Datos que se guardan al modificar el registro
                     Usuarios obj = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(id)).First();
                     obj.Nombre = DatosUsuarios.Nombre;
                     obj.ApellidosP = DatosUsuarios.ApellidosP;

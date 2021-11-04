@@ -95,9 +95,9 @@ function BloquearCTRL() {
 
 //llena los combosprincipales
 function LlenarCMBPrin() {
-    $.get("/GLOBAL/BDEstado", function (data) {
-        llenarCombo(data, document.getElementById("cmbEstado"), true);
-    });
+    //$.get("/GLOBAL/BDEstado", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbEstado"), true);
+    //});
     $.get("/GLOBAL/BDAreas", function (data) {
         llenarCombo(data, document.getElementById("cmbArea"));
     });
@@ -156,8 +156,7 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-//Limpia la información y carga la informacion del proveedor
-//Limpia la información y carga la informacion del proveedor
+//Limpia la información y carga la informacion del usuario
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -454,6 +453,7 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
         });
     }
 }
+
 
 
 
