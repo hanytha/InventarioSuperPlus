@@ -15,77 +15,51 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public void ConsultaArticulos()
+        public JsonResult ConsultaArticulos()
         {
             string id = "";
             string Nombre = "";
-            string Fechas = "";
-            String Stock = "";
-            String Costos = "";
-
-
+            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
             var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     Id = p.IdArticulos,
                     nombre = p.NombreEmpresa
                 });
-
             foreach (var art in ConsultaArticulo)
             {
-
                 id += art.Id + ",";
                 Nombre += art.nombre + ",";
-
-
                 var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderByDescending(p => p.FechaDeIngreso)
                     .Select(p => new
                     {
                         fechaIngreso = p.FechaDeIngreso,
                         stockActual = p.ExitenciaActual,
-                        //costo = p.Coste
-
+                        costo = p.Coste
                     });
-
-
-
+                int UltimoReg = consultaFecha.Count() - 1;
+                int cont = 0;
+                int SumaStock = 0;
+                //DateTime FultCompra;                
                 foreach (var comp in consultaFecha)
                 {
-                    Fechas += comp.fechaIngreso + ",";
-                    Stock += comp.stockActual + ",";
-                    //Costos += comp.costo + ",";
-
-
-                    var cosulFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderByDescending(p => p.Coste)
-                          .Select(p => new
-                          {
-                              costo = p.Coste
-                          });
-                    int UltimoReg = cosulFecha.Count() - 1;
-                    int cont = 0;
-                    int SumaStock = 0;
-
-
-                    foreach (var stock in cosulFecha)
+                    SumaStock = (int)(SumaStock + comp.stockActual);
+                    if (cont == 0)
                     {
-                        Costos = stock.costo + ",";
-
-                        SumaStock = SumaStock + Stock.Length;
-
-                        if (cont == UltimoReg)
-                        {
-                            Fechas += comp.fechaIngreso + ",";
-
-                        }
-                        cont++;
+                        Costos += comp.costo + ",";
                     }
-
-                    var resultado = new { Nombre = Nombre.Length, Fechas = Fechas.Length, Stock = Stock.Length, Costos = Costos.Length };
+                    if (cont == UltimoReg)
+                    {
+                        Fechas += comp.fechaIngreso + ",";
+                    }
+                    cont++;
                 }
-
+                Stock += SumaStock + ",";
             }
-
+            var resultado = new { ID = id.Substring(0,id.Length-1),Nombre = Nombre.Substring(0,Nombre.Length-1), Fechas = Fechas.Substring(0,Fechas.Length-1), Stock = Stock.Substring(0,Stock.Length-1), Costos = Costos.Substring(0,Costos.Length-1) };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
     }
 }
