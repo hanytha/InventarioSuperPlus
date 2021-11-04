@@ -23,11 +23,11 @@ namespace Inventario.Controllers
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
             var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    Id = p.IdArticulos,
-                    nombre = p.NombreEmpresa
-                });
+            .Select(p => new
+            {
+                Id = p.IdArticulos,
+                nombre = p.NombreEmpresa
+            });
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
@@ -58,8 +58,9 @@ namespace Inventario.Controllers
                 }
                 Stock += SumaStock + ",";
             }
-            var resultado = new { ID = id.Substring(0,id.Length-1),Nombre = Nombre.Substring(0,Nombre.Length-1), Fechas = Fechas.Substring(0,Fechas.Length-1), Stock = Stock.Substring(0,Stock.Length-1), Costos = Costos.Substring(0,Costos.Length-1) };
+            var resultado = new { ID = id.Substring(0, id.Length ), Nombre = Nombre.Substring(0, Nombre.Length ), Fechas = Fechas.Substring(0, Fechas.Length ), Stock = Stock.Substring(0, Stock.Length ), Costos = Costos.Substring(0, Costos.Length ) };
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

@@ -19,7 +19,7 @@ namespace Inventario.Controllers
         {
             //string totall="";
       
-            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1)&& p.ExitenciaActual >0).OrderByDescending(p => p.FechaDeIngreso)
+            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1)&& p.ExitenciaActual >0).OrderBy(p => p.FechaDeIngreso)
                 .Select(p => new
                 {
                     p.IdCompra,

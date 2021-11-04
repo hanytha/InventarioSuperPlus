@@ -1,4 +1,4 @@
-﻿ var imagen64;
+﻿var imagen64;
 LlenarCMCategoria();
 
 ConsultaArticulo();
@@ -18,12 +18,13 @@ function CrearDivArticulo(Data) {
     CodigoHtmlArticulo += "<div class='icono'>Fecha</div>"
     CodigoHtmlArticulo += "<div class='icono'>Costo</div>"
     CodigoHtmlArticulo += "<div class='icono'>Stock</div>"
-    CodigoHtmlArticulo +="<hr class='solid'>"
+    CodigoHtmlArticulo += "<div class='icono'>Acción</div>"
+    CodigoHtmlArticulo += "<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlArticulo += "<div>";
-        CodigoHtmlArticulo += "<div class='row row-cols-auto'>";
+     
+        CodigoHtmlArticulo += "<div class='row row-cols-auto'  style='text-align:  center'>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div class='col'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
@@ -68,16 +69,18 @@ function CrearDivCompra(Data) {
     CodigoHtmlCompra += "<div id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlCompra += "<hr class='solid2'>"
-    CodigoHtmlCompra += "<div class='icono'>ID</div> "
+    CodigoHtmlCompra += "<div></div>"
+    CodigoHtmlCompra += "<div class='icono'>ID</div>"
     CodigoHtmlCompra += "<div class='icono'>MetodoDePago</div>"
     CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
-      CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
+    CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
+    CodigoHtmlCompra += "<div class='icono'>Acción</div>"
     CodigoHtmlCompra += "<hr class='solid2'>"
     CodigoHtmlCompra += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlCompra += "<div>";
-        CodigoHtmlCompra += "<div class='row row-cols-auto'>";
+        
+        CodigoHtmlCompra += "<div class='row row-cols-auto' style='text-align:  center'>";
         CodigoHtmlCompra += "<div class='col'>"
         CodigoHtmlCompra += "<div class='col'>" + Data[i].IdCompra + "</div>"
         CodigoHtmlCompra += "</div>";
@@ -123,15 +126,16 @@ function CrearDivAlmacen(Data) {
     CodigoHtmlAlmacen += "<div id='contenedor3'>";
     CodigoHtmlAlmacen += "<section id='contenedor_follow'>";
     CodigoHtmlAlmacen += "<hr class='solid3'>"
-    CodigoHtmlAlmacen += "<div class='icono'>ID</div> "
+    CodigoHtmlAlmacen += "<div class='icono'>ID</div>"
     CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
     CodigoHtmlAlmacen += "<div class='icono'>TipoDeOperacion</div>"
+    CodigoHtmlAlmacen += "<div class='icono'>Acción</div>"
     CodigoHtmlAlmacen += "<hr class='solid3'>"
     CodigoHtmlAlmacen += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlAlmacen += "<div>";
-        CodigoHtmlAlmacen += "<div class='row row-cols-auto'>";
+
+        CodigoHtmlAlmacen += "<div class='row row-cols-auto' style='text-align:  center'>";
         CodigoHtmlAlmacen += "<div class='col'>"
         CodigoHtmlAlmacen += "<div class='col'>" + Data[i].IdExistenciaAlmacenG + "</div>"
         CodigoHtmlAlmacen += "</div>";
@@ -231,7 +235,7 @@ function GuardarArticulo() {
 
             var IdCategorias = document.getElementById("cmbCategoria").value;
             var TempSupervisor = document.getElementById("cmbCategoria");
-            var Categoria = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
+            var Categoria = TempSupervisor.options[TempSupervisor.selectedIndex].text;
 
             var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
