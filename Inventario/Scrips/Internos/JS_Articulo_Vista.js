@@ -69,7 +69,7 @@ function CrearDivCompra(Data) {
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlCompra += "<hr class='solid2'>"
     CodigoHtmlCompra += "<div class='icono'>ID</div> "
-    CodigoHtmlCompra += "<div class='icono'>MetodoDePago</div>"
+    CodigoHtmlCompra += "<div class='icono'>Metodo DePago</div>"
     CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
       CodigoHtmlCompra += "<div class='icono'>NoCompra</div>"
     CodigoHtmlCompra += "<hr class='solid2'>"
