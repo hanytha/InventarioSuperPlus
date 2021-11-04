@@ -95,9 +95,9 @@ function BloquearCTRL() {
 
 //llena los combosprincipales
 function LlenarCMBPrin() {
-    //$.get("/GLOBAL/BDEstados", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbEstado"), true);
-    //});
+    $.get("/GLOBAL/BDEstado", function (data) {
+        llenarCombo(data, document.getElementById("cmbEstado"), true);
+    });
     $.get("/GLOBAL/BDAreas", function (data) {
         llenarCombo(data, document.getElementById("cmbArea"));
     });
@@ -157,25 +157,25 @@ btnFoto.onchange = function (e) {
     reader.readAsDataURL(file);
 }
 //Limpia la información y carga la informacion del proveedor
+//Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
     }
     if (id == 0) {
         LimpiarCampos();
         sessionStorage.setItem('IdUsuarios', '0');
+
     }
     else {
+
         $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
-
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);
-
-            //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);     //Variable de sesión
-
             document.getElementById("TxtCURP").value = Data[0].CURP;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtApellidoP").value = Data[0].ApellidosP;
@@ -213,6 +213,9 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
+
+
+
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -332,7 +335,7 @@ function GuardarUsuario() {
                             alert("Ya existe el proveedor");
                         }
                         else {
-                            alert("Se ejecuto correctamente");
+                            alert("Se ejecutó correctamente");
                             CrearAcordeonUsuarios();
                             document.getElementById("btnCancelar").click();
                         }

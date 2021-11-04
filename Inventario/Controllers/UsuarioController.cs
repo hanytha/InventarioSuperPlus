@@ -147,9 +147,16 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)
-                && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
+                  && p.Nombre.Equals(DatosUsuarios.Nombre) && p.ApellidosP.Equals(DatosUsuarios.ApellidosP)
+                         && p.ApellidosM.Equals(DatosUsuarios.ApellidosM) && p.FechaDeNacimiento.Equals(DatosUsuarios.FechaDeNacimiento)
+              && p.RFC.Equals(DatosUsuarios.RFC) && p.NoSS.Equals(DatosUsuarios.NoSS)
+                            && p.Correo.Equals(DatosUsuarios.Correo) && p.Telefono.Equals(DatosUsuarios.Telefono)
+                         && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
                 && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
-                && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio) && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad)
+                      && p.LvlPerfil.Equals(DatosUsuarios.LvlPerfil) && p.Usuario.Equals(DatosUsuarios.Usuario)
+                        && p.IdEstado.Equals(DatosUsuarios.IdEstado) && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio)
+                && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad) && p.Estado.Equals(DatosUsuarios.Estado)
+                  && p.Municipio.Equals(DatosUsuarios.Municipio) && p.Localidad.Equals(DatosUsuarios.Localidad)
                 && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
 
                 if (nveces == 0)
@@ -163,10 +170,14 @@ namespace Inventario.Controllers
                     obj.IdSubArea = DatosUsuarios.IdSubArea;
                     obj.Foto = Convert.FromBase64String(cadF);
                     obj.IdPerfil = DatosUsuarios.IdPerfil;
+                    obj.IdEstado = DatosUsuarios.IdEstado;
+                    obj.Estado = DatosUsuarios.Estado;
                     obj.IdMunicipio = DatosUsuarios.IdMunicipio;
+                    obj.Municipio = DatosUsuarios.Municipio;
                     //obj.NombreM = usuario.NombreM;
                     //obj.NombreL = usuario.NombreL;
                     obj.IdLocalidad = DatosUsuarios.IdLocalidad;
+                    obj.Localidad = DatosUsuarios.Localidad;
                     obj.Correo = DatosUsuarios.Correo;
                     obj.Telefono = DatosUsuarios.Telefono;
 
