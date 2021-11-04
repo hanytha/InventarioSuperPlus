@@ -2,85 +2,146 @@
 LlenarCMBPrin();
 
 var imagen64;
-CrearAcordeonUsuarios();
+imagen64 = getBase64Image(document.getElementById("PBFoto"));
+//CrearAcordeonUsuarios();
 
+////Crea el acordeón e inserta (los registros de la base de datos)
+//function CrearAcordeonUsuarios() {
+//    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+//        AcordeonUsuarios(Data, document.getElementById("accordion"));
+//    });
+//    imagen64 = getBase64Image(document.getElementById("PBFoto"));
+//}
+//function AcordeonUsuarios(Data, CtrlBonis) {
+//    var CodigoHTMLUsuarios = "";
+//    for (var i = 0; i < Data.length; i++) {
+//        if (i < 1) {
+//            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
+//        }
+//        else {
+//            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
+//        }
+//        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
+//        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
+//        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
+//        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+//        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+//        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
+//        CodigoHTMLUsuarios += "</a>";
+//        CodigoHTMLUsuarios += "</h5>";
+//        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+//        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+//        CodigoHTMLUsuarios += "<div class='card-body'>";
+//        CodigoHTMLUsuarios += "<div class='row'>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
 
-//$("#TxtFechaN").datepicker(
-//    {
-//        dateFormat: "dd/mm/yy",
-//        changeMonth: true,
-//        changeYear: true
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
+
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+
+//        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
 //    }
-//);
+//    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
+//}
 
 
+//CrearAcordeonUsuarios();
+
+////Crea el acordeón e inserta (los registros de la base de datos)
+//function CrearAcordeonUsuarios() {
+//    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+//        AcordeonUsuarios(Data);
+//    });
+//}
+
+//function AcordeonUsuarios(Data) {
+//    var CodigoHTMLUsuarios = "";
+//    CodigoHTMLUsuarios += "<table id='tablas' class='table table table-sm' >";
+//    CodigoHTMLUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Acción</thead>";
+//    CodigoHTMLUsuarios += "<tbody>";
+//    for (var i = 0; i < Data.length; i++) {
+//        CodigoHTMLUsuarios += "<tr>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].CURP + "</td>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+//        CodigoHTMLUsuarios += "<td>";
+   
+//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+//        CodigoHTMLUsuarios += "</td>";
+//        CodigoHTMLUsuarios += "</tr>";
+//    }
+
+//    CodigoHTMLUsuarios += "</tbody>";
+//    CodigoHTMLUsuarios += "</table>";
+//    document.getElementById("tablaPerfiles").innerHTML = CodigoHTMLUsuarios;
+//}
 
 
-
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonUsuarios() {
+ConsultaPerfiles();
+function ConsultaPerfiles() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonUsuarios(Data, document.getElementById("accordion"));
-    });
-    imagen64 = getBase64Image(document.getElementById("PBFoto"));
-}
-function AcordeonUsuarios(Data, CtrlBonis) {
-    var CodigoHTMLUsuarios = "";
-    for (var i = 0; i < Data.length; i++) {
-        if (i < 1) {
-            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
-        }
-        else {
-            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
-        }
-        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
-        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
-        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
-        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
-        CodigoHTMLUsuarios += "</a>";
-        CodigoHTMLUsuarios += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLUsuarios += "<div class='card-body'>";
-        CodigoHTMLUsuarios += "<div class='row'>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
-
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
-
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
-        CodigoHTMLUsuarios += "</div>";
-
-        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
-        CodigoHTMLUsuarios += "</div>";
+        CrearTablaPerfiles(Data);
     }
-    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
+    );
 }
+
+
+function CrearTablaPerfiles(Data) {
+    var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCompra += "<tr>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].CURP + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaCompra += "<td>" + Data[i].ApellidosP + "</td>";
+
+        CodigoHtmlTablaCompra += "<td>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaCompra += "</td>";
+        CodigoHtmlTablaCompra += "</tr>";
+    }
+    CodigoHtmlTablaCompra += "</tbody>";
+    CodigoHtmlTablaCompra += "</table>";
+    document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
+}
+
+
+
+
 
 BloquearCTRL();
 
@@ -335,7 +396,7 @@ function GuardarUsuario() {
                         }
                         else {
                             alert("Se ejecutó correctamente");
-                            CrearAcordeonUsuarios();
+                            ConsultaPerfiles();
                             document.getElementById("btnCancelar").click();
                         }
                     }
@@ -387,7 +448,7 @@ function EliminarUsuario(id) {
                     'success'
                 )
                 //  confirmarEliminar();
-                CrearAcordeonUsuarios();
+                ConsultaPerfiles();
             } else {
                 alert("Ocurrio un error");
             }
