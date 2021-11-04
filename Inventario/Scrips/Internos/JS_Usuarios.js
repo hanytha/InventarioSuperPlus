@@ -1,6 +1,5 @@
 ﻿
 LlenarCMBPrin();
-
 var imagen64;
 imagen64 = getBase64Image(document.getElementById("PBFoto"));
 //CrearAcordeonUsuarios();
@@ -107,40 +106,39 @@ imagen64 = getBase64Image(document.getElementById("PBFoto"));
 //}
 
 
-ConsultaPerfiles();
-function ConsultaPerfiles() {
+ConsultaUsuarios();
+function ConsultaUsuarios() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
-        CrearTablaPerfiles(Data);
+        CrearTablaUsuarios(Data);
     }
     );
 }
 
 
-function CrearTablaPerfiles(Data) {
-    var CodigoHtmlTablaCompra = "";
-    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido</th><th>Acción</thead>";
-    CodigoHtmlTablaCompra += "<tbody>";
+function CrearTablaUsuarios(Data) {
+    var CodigoHtmlTablaUsuarios = "";
+    CodigoHtmlTablaUsuarios += "<table id='tablas' class='table table table-sm' >";
+    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Teléfono</th><th>Acción</thead>";
+    CodigoHtmlTablaUsuarios += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaCompra += "<tr>";
-        CodigoHtmlTablaCompra += "<td>" + Data[i].CURP + "</td>";
-        CodigoHtmlTablaCompra += "<td>" + Data[i].Nombre + "</td>";
-        CodigoHtmlTablaCompra += "<td>" + Data[i].ApellidosP + "</td>";
+        CodigoHtmlTablaUsuarios += "<tr>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].CURP + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
 
-        CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
-
-        CodigoHtmlTablaCompra += "</td>";
-        CodigoHtmlTablaCompra += "</tr>";
+        CodigoHtmlTablaUsuarios += "<td>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+        CodigoHtmlTablaUsuarios += "</td>";
+        CodigoHtmlTablaUsuarios += "</tr>";
     }
-    CodigoHtmlTablaCompra += "</tbody>";
-    CodigoHtmlTablaCompra += "</table>";
-    document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
+    CodigoHtmlTablaUsuarios += "</tbody>";
+    CodigoHtmlTablaUsuarios += "</table>";
+    document.getElementById("tablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
 }
-
-
-
 
 
 BloquearCTRL();
@@ -305,6 +303,7 @@ IDM.addEventListener("change", function () {
 });
 
 
+
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
     var pas1 = document.getElementById("Txtpassword").value;
@@ -396,7 +395,7 @@ function GuardarUsuario() {
                         }
                         else {
                             alert("Se ejecutó correctamente");
-                            ConsultaPerfiles();
+                            ConsultaUsuarios();
                             document.getElementById("btnCancelar").click();
                         }
                     }
@@ -448,7 +447,7 @@ function EliminarUsuario(id) {
                     'success'
                 )
                 //  confirmarEliminar();
-                ConsultaPerfiles();
+                ConsultaUsuarios();
             } else {
                 alert("Ocurrio un error");
             }

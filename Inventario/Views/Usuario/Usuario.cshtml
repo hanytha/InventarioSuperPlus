@@ -59,7 +59,7 @@
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-<div id="tablaPerfiles"></div>
+<div id="tablaUsuarios"></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -351,7 +351,7 @@
                                     <label class="form-control-label" for="cmbEstadoBloqueado">Estado<span class="required">*</span></label>
                                     <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*@{
+                                        @{
                                             if (Estados.idEstado != null)
                                             {
                                                 for (int i = 0; i < Estados.idEstado.Count(); i++)
@@ -359,7 +359,7 @@
                                                     <option value="@Estados.idEstado[i]">@Estados.nombre[i]</option>
                                                 }
                                             }
-                                        }*@
+                                        }
                                     </select>
                                 </div>
                             </div>
