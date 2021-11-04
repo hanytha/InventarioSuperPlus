@@ -687,6 +687,8 @@ namespace Inventario
 		
 		private string _ApellidosM;
 		
+		private string _Usuario;
+		
 		private System.Data.Linq.Binary _Foto;
 		
 		private string _FechaDeNacimiento;
@@ -707,9 +709,7 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdPerfil;
 		
-		private System.Nullable<long> _LvlPerfil;
-		
-		private string _Usuario;
+		private string _LvlPerfil;
 		
 		private string _FechaIngreso;
 		
@@ -747,6 +747,8 @@ namespace Inventario
     partial void OnApellidosPChanged();
     partial void OnApellidosMChanging(string value);
     partial void OnApellidosMChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
     partial void OnFotoChanging(System.Data.Linq.Binary value);
     partial void OnFotoChanged();
     partial void OnFechaDeNacimientoChanging(string value);
@@ -767,10 +769,8 @@ namespace Inventario
     partial void OnTelefonoChanged();
     partial void OnIdPerfilChanging(System.Nullable<long> value);
     partial void OnIdPerfilChanged();
-    partial void OnLvlPerfilChanging(System.Nullable<long> value);
+    partial void OnLvlPerfilChanging(string value);
     partial void OnLvlPerfilChanged();
-    partial void OnUsuarioChanging(string value);
-    partial void OnUsuarioChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
     partial void OnPasswordChanging(string value);
@@ -895,6 +895,26 @@ namespace Inventario
 					this._ApellidosM = value;
 					this.SendPropertyChanged("ApellidosM");
 					this.OnApellidosMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
 				}
 			}
 		}
@@ -1099,8 +1119,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LvlPerfil", DbType="BigInt")]
-		public System.Nullable<long> LvlPerfil
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LvlPerfil", DbType="VarChar(50)")]
+		public string LvlPerfil
 		{
 			get
 			{
@@ -1115,26 +1135,6 @@ namespace Inventario
 					this._LvlPerfil = value;
 					this.SendPropertyChanged("LvlPerfil");
 					this.OnLvlPerfilChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
-		public string Usuario
-		{
-			get
-			{
-				return this._Usuario;
-			}
-			set
-			{
-				if ((this._Usuario != value))
-				{
-					this.OnUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._Usuario = value;
-					this.SendPropertyChanged("Usuario");
-					this.OnUsuarioChanged();
 				}
 			}
 		}
@@ -1635,7 +1635,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="VarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
 		public string Categoria
 		{
 			get
@@ -1655,7 +1655,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProveedor", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProveedor", DbType="VarChar(150)")]
 		public string NombreProveedor
 		{
 			get
@@ -6668,7 +6668,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comentarios", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comentarios", DbType="VarChar(150)")]
 		public string Comentarios
 		{
 			get

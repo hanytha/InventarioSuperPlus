@@ -23,6 +23,7 @@
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ApellidosP" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ApellidosM" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="FechaDeNacimiento" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -33,8 +34,7 @@
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="LvlPerfil" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LvlPerfil" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FechaIngreso" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
@@ -56,8 +56,8 @@
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Categoria" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="PrecioUnitarioPromedio" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -285,7 +285,7 @@
       <Column Name="Perfil" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Nivel" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Permisos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Comentarios" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Comentarios" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Pagina_PerfilDeUsuario" Member="Pagina" ThisKey="IdPagina" OtherKey="IdPagina" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
