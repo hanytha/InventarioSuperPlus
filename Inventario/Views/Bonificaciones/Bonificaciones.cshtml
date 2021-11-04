@@ -135,8 +135,108 @@
     </div>
 </div>
 
+<!----------------------------------------------------------->
+<div id="container"></div>
+<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<style>
+    #contenedor {
+        width: 300px;
+        height: auto;
+        text-align: center;
+    }
 
+    #contenedor_follow div.icono {
+        display: inline-block;
+        width: 15%;
+        height: auto;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 3px solid #D7DBDD;
+    }
+</style>
 
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid2 {
+        border-top: 3px solid #00b0e6;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 3px solid #f1f507;
+    }
+</style>
+
+<!------------------------------------------>
+<div class="titulo_boton">
+    <a style='cursor: pointer;' onClick="muestra_oculta('contenido')" title="" class="boton_mostrar">Desplegar</a>
+</div>
+
+<div id="contenido">
+    <div id="contenedor2"></div>
+</div>
+
+<style>
+    .titulo_boton {
+        float: left;
+        padding: 5px;
+        background-color: #097FF5;
+        width: 80px;
+        font-family: helvetica;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .boton_mostrar {
+        float: right;
+        font-size: 12px;
+        line-height: 20px;
+        color: #DE7217;
+    }
+
+    #contenido {
+        float: left;
+        clear: both;
+        border: 2px solid #e6e6e6;
+        margin-top: 2px;
+        padding: 5px;
+        width: 1000px;
+        overflow: auto;
+        font-family: helvetica;
+        font-size: 14px;
+        text-align: justify;
+    }
+</style>
+<script>
+
+    function muestra_oculta(id) {
+        if (document.getElementById) { //se obtiene el id
+            var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+            el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
+        }
+    }
+    window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+        muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+    }
+</script>
+
+<!---------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -147,7 +247,7 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Imp.js"></script>
+<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <script src="~/Scrips/Plus/scripts.js"></script>
