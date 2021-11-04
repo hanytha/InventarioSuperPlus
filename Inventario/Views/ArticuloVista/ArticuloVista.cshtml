@@ -163,17 +163,18 @@
         </div>
     </div>
 </div>
-
 <!--Mostrar los registros en el accordion-->
 
 <div id="container"></div>
+
+
 <input type="checkbox" id="spoiler1">
 <label for="spoiler1"><i class="fas fa-angle-down"></i></label>
 <div id="contenedor2" class="spoiler"></div>
 
 <input type="checkbox" id="spoiler2">
 <label for="spoiler2"><i class="fas fa-angle-down"></i></label>
-<div id="contenedor3" class="spoiler"></div>
+<div id="contenedor3"  class="spoiler"></div>
 
 <style>
     /* Ocultar botón radio */
@@ -209,24 +210,26 @@
         }
 </style>
 
-<!--------------------------------------------------------------------------------->
+z
 
 
-<!--------------------------------------------------------------------------------->
+@*<div id="container">
+        <button id="button">Cancelar</button>
+    </div>
 
+    <script>
+        var button = document.getElementById('button'); // Assumes element with id='button'
 
-<style>
-    div.container {
-        display: table;
-        width: 100%;
-        table-layout: fixed; /* For cells of equal size */
-    }
-
-    div.icono {
-        display: table-cell;
-        text-align: center;
-    }
-</style>
+        button.onclick = function () {
+            var div = document.getElementById('container');
+            if (div.style.display !== 'none') {
+                div.style.display = 'none';
+            }
+            else {
+                div.style.display = 'block';
+            }
+        };
+    </script>*@
 
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
@@ -237,12 +240,11 @@
 
     #contenedor_follow div.icono {
         display: inline-block;
-        width: 16%;
+        width: 15%;
         height: auto;
-        justify-content: space-evenly;
+        vertical-align: middle;
     }
 </style>
-
 <!-------------------------------Estilo para la kline a de el encabeqado del los divs----------------------------------------->
 <style>
     body {
