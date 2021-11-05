@@ -22,12 +22,10 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-                    p.IdCompra,
                     p.IdUnidadDeMedida,
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,
-                    p.Compra,
                     p.Descripcion,
                     p.Estatus
 
@@ -41,12 +39,10 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-                    p.IdCompra,
                     p.IdUnidadDeMedida,
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,
-                    p.Compra,
                     p.Descripcion,
                     p.Estatus
 
@@ -80,16 +76,14 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento)
                 && p.IdArticulos.Equals(DatosMovimiento.IdArticulos) 
-                && p.IdCompra.Equals(DatosMovimiento.IdCompra)
                 && p.IdUnidadDeMedida.Equals(DatosMovimiento.IdUnidadDeMedida) 
                 && p.Descripcion.Equals(DatosMovimiento.Descripcion) ).Count();
                 if (nveces == 0)
                 {
                     TipoDeMovimientos obj = InvBD.TipoDeMovimientos.Where(p => p.IdMovimientos.Equals(id)).First();
+                    obj.TipoDeMovimiento = DatosMovimiento.TipoDeMovimiento;
                     obj.IdArticulos = DatosMovimiento.IdArticulos;
                     obj.Articulo = DatosMovimiento.Articulo;
-                    obj.IdCompra = DatosMovimiento.IdCompra;
-                    obj.Compra = DatosMovimiento.Compra;
                     obj.IdUnidadDeMedida = DatosMovimiento.IdUnidadDeMedida;
                     obj.Unidades = DatosMovimiento.Unidades;
                     obj.Descripcion = DatosMovimiento.Descripcion;

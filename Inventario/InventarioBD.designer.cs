@@ -2325,8 +2325,6 @@ namespace Inventario
 		
 		private EntitySet<ExistenciaAlmacenG> _ExistenciaAlmacenG;
 		
-		private EntitySet<TipoDeMovimientos> _TipoDeMovimientos;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2364,7 +2362,6 @@ namespace Inventario
 		public Compra()
 		{
 			this._ExistenciaAlmacenG = new EntitySet<ExistenciaAlmacenG>(new Action<ExistenciaAlmacenG>(this.attach_ExistenciaAlmacenG), new Action<ExistenciaAlmacenG>(this.detach_ExistenciaAlmacenG));
-			this._TipoDeMovimientos = new EntitySet<TipoDeMovimientos>(new Action<TipoDeMovimientos>(this.attach_TipoDeMovimientos), new Action<TipoDeMovimientos>(this.detach_TipoDeMovimientos));
 			OnCreated();
 		}
 		
@@ -2661,19 +2658,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_TipoDeMovimientos", Storage="_TipoDeMovimientos", ThisKey="IdCompra", OtherKey="IdCompra")]
-		public EntitySet<TipoDeMovimientos> TipoDeMovimientos
-		{
-			get
-			{
-				return this._TipoDeMovimientos;
-			}
-			set
-			{
-				this._TipoDeMovimientos.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2701,18 +2685,6 @@ namespace Inventario
 		}
 		
 		private void detach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra1 = null;
-		}
-		
-		private void attach_TipoDeMovimientos(TipoDeMovimientos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra1 = this;
-		}
-		
-		private void detach_TipoDeMovimientos(TipoDeMovimientos entity)
 		{
 			this.SendPropertyChanging();
 			entity.Compra1 = null;
@@ -9505,8 +9477,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArticulos;
 		
-		private System.Nullable<long> _IdCompra;
-		
 		private System.Nullable<long> _IdUnidadDeMedida;
 		
 		private string _TipoDeMovimiento;
@@ -9515,15 +9485,11 @@ namespace Inventario
 		
 		private System.Nullable<int> _Unidades;
 		
-		private string _Compra;
-		
 		private string _Descripcion;
 		
 		private int _Estatus;
 		
 		private EntityRef<Articulos> _Articulos;
-		
-		private EntityRef<Compra> _Compra1;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -9533,8 +9499,6 @@ namespace Inventario
     partial void OnIdMovimientosChanged();
     partial void OnIdArticulosChanging(System.Nullable<long> value);
     partial void OnIdArticulosChanged();
-    partial void OnIdCompraChanging(System.Nullable<long> value);
-    partial void OnIdCompraChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnTipoDeMovimientoChanging(string value);
@@ -9543,8 +9507,6 @@ namespace Inventario
     partial void OnArticuloChanged();
     partial void OnUnidadesChanging(System.Nullable<int> value);
     partial void OnUnidadesChanged();
-    partial void OnCompraChanging(string value);
-    partial void OnCompraChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
     partial void OnEstatusChanging(int value);
@@ -9554,7 +9516,6 @@ namespace Inventario
 		public TipoDeMovimientos()
 		{
 			this._Articulos = default(EntityRef<Articulos>);
-			this._Compra1 = default(EntityRef<Compra>);
 			OnCreated();
 		}
 		
@@ -9602,30 +9563,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCompra", DbType="BigInt")]
-		public System.Nullable<long> IdCompra
-		{
-			get
-			{
-				return this._IdCompra;
-			}
-			set
-			{
-				if ((this._IdCompra != value))
-				{
-					if (this._Compra1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdCompraChanging(value);
-					this.SendPropertyChanging();
-					this._IdCompra = value;
-					this.SendPropertyChanged("IdCompra");
-					this.OnIdCompraChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
 		public System.Nullable<long> IdUnidadDeMedida
 		{
@@ -9646,7 +9583,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeMovimiento", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeMovimiento", DbType="VarChar(150)")]
 		public string TipoDeMovimiento
 		{
 			get
@@ -9702,26 +9639,6 @@ namespace Inventario
 					this._Unidades = value;
 					this.SendPropertyChanged("Unidades");
 					this.OnUnidadesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Compra", DbType="VarChar(150)")]
-		public string Compra
-		{
-			get
-			{
-				return this._Compra;
-			}
-			set
-			{
-				if ((this._Compra != value))
-				{
-					this.OnCompraChanging(value);
-					this.SendPropertyChanging();
-					this._Compra = value;
-					this.SendPropertyChanged("Compra");
-					this.OnCompraChanged();
 				}
 			}
 		}
@@ -9796,40 +9713,6 @@ namespace Inventario
 						this._IdArticulos = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("Articulos");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_TipoDeMovimientos", Storage="_Compra1", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Compra Compra1
-		{
-			get
-			{
-				return this._Compra1.Entity;
-			}
-			set
-			{
-				Compra previousValue = this._Compra1.Entity;
-				if (((previousValue != value) 
-							|| (this._Compra1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Compra1.Entity = null;
-						previousValue.TipoDeMovimientos.Remove(this);
-					}
-					this._Compra1.Entity = value;
-					if ((value != null))
-					{
-						value.TipoDeMovimientos.Add(this);
-						this._IdCompra = value.IdCompra;
-					}
-					else
-					{
-						this._IdCompra = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Compra1");
 				}
 			}
 		}

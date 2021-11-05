@@ -73,46 +73,38 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTROS TIPOS DE MOVIMIENTOS</h4>
+                    <h5>REGISTRO TIPOS DE MOVIMIENTOS</h5>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h4>Paso 1</h4>
+                            <h5>Paso 1</h5>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbTMovimiento">Tipos de movimiento<span>*</span></label>
-                                        <select id="cmbTMovimiento" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="TxtTMovimiento">Tipo de movimiento<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtTMovimiento]" id="TxtTMovimiento" class="form-control  limpiar obligatorio" placeholder="Descripción">
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripción">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbUnidades">Unidad de medida<span>*</span></label>
                                         <select id="cmbUnidades" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
                                         <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbCompra">Compra<span>*</span></label>
-                                        <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripción">
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +120,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!--Hacer que el modal muestre los pasos por parte-->

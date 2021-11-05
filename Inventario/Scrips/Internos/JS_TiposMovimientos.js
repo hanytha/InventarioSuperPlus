@@ -1,4 +1,5 @@
-﻿
+﻿LlenarCMBUnidad();
+LlenarCMBArticulo();
 CrearAcordeonTiposDeMovimiento();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonTiposDeMovimiento() {
@@ -29,9 +30,8 @@ function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidades + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Compra: </strong>" + Data[i].Compra + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descrippción: </strong>" + Data[i].Descripcion + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].IdUnidadDeMedida + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
         CodigoHTMLAreas += "</div>";
 
         CodigoHTMLAreas += "</div>";
@@ -70,7 +70,9 @@ function abrirModal(id) {//la clase  Obligatorio
         $.get("/TiposDeMovimiento/ConsultaTipoDeMovimiento/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDTDM', Data[0].IdMovimientos);
-            document.getElementById("TxtTipoDeMovimiento").value = Data[0].TipoDeMovimiento;
+            document.getElementById("TxtTMovimiento").value = Data[0].TipoDeMovimiento;
+            document.getElementById("cmbUnidades").value = Data[0].IdUnidadDeMedida;
+            document.getElementById("cmbArticulo").value = Data[0].IdArticulos;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
 
 
@@ -92,12 +94,6 @@ function LimpiarCampos() {
     }
 }
 
-function BloquearCTRL() {
-    var CTRL = document.getElementsByClassName("bloquear");
-    for (var i = 0; i < CTRL.length; i++) {
-        $("#" + CTRL[i].id).attr('disabled', 'disabled');
-    }
-}
 
 
 //Guarda los cambios y altas de las áreas
@@ -105,15 +101,27 @@ function GuardarTipoDeMovimiento() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdMovimientos = sessionStorage.getItem('IDTDM');
-            var TipoDeMovimiento = document.getElementById("TxtTipoDeMovimiento").value;
-            var Descripcion = document.getElementById("TxtDescripcion").value;
+            var TipoDeMovimiento = document.getElementById("TxtTMovimiento").value;
 
-          
+            var IdUnidadDeMedida = document.getElementById("cmbUnidades").value;
+            var TempUn = document.getElementById("cmbUnidades");
+            var Unidades = TempUn.options[TempUn.selectedIndex].text;
+
+            var IdArticulos = document.getElementById("cmbArticulo").value;
+            var TempArt = document.getElementById("cmbArticulo");
+            var Articulo = TempArt.options[TempArt.selectedIndex].text;
+   
+            var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var frm = new FormData();
             frm.append("IdMovimientos", IdMovimientos);
             frm.append("TipoDeMovimiento", TipoDeMovimiento);
+            frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
+            frm.append("Unidades", Unidades);
+            frm.append("IdArticulos", IdArticulos);
+            frm.append("Articulo", Articulo);
             frm.append("Descripcion", Descripcion);
+
 
             frm.append("Estatus", 1);
             $.ajax({
@@ -174,3 +182,28 @@ function EliminarTipoDeMovimiento(id) {
     }
 }
 
+function LlenarCMBUnidad() {
+    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidades"));
+    });
+}
+
+
+
+function LlenarCMBArticulo() {
+    $.get("/GLOBAL/BDArticulos", function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+}
+
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}

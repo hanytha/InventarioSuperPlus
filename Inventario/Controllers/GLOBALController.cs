@@ -224,6 +224,30 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //Consulta 
+        public JsonResult BDTMovimientos()
+
+        {
+            var datos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdMovimientos,
+                    Nombre = p.TipoDeMovimiento
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //Consulta 
+        public JsonResult BDCompra()
+
+        {
+            var datos = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdCompra,
+                    Nombre = p.MetodoDePago
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }
