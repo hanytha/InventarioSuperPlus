@@ -55,14 +55,14 @@ function CrearDivArticulo(Data) {
 
 //--------------------------------------------------------------------------------------------------
 
-ConsultaComprass();
-function ConsultaComprass() {
-    $.get("/Articulo/ConsultasArticulosXCompras", function (Data) {
-        CrearDivCompra(Data);
+ConsultaArticulos();
+function ConsultaArticulos() {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
+        CrearDiArticulo(Data);
     }
     );
 }
-function CrearDivCompra(Data) {
+function CrearDiArticulo(Data) {
     var CodigoHtmlCompra = "";
     CodigoHtmlCompra += "<div id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
@@ -79,16 +79,16 @@ function CrearDivCompra(Data) {
         CodigoHtmlCompra += "<div>";
         CodigoHtmlCompra += "<div class='row row-cols-auto'>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdCompra + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].MetodoDePago + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].NombreEmpresa + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].NoCompra + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].NombreProveedor + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].ExitenciaInicial + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].Fecha + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
         CodigoHtmlCompra += "<label>"
