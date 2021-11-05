@@ -40,7 +40,7 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary ' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
