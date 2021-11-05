@@ -204,6 +204,7 @@ function AcordeonSubAreas(Data, CtrlSub) {
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].Area + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>No de Subárea: </strong>" + Data[i].NoSubArea + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UNombre: </strong>" + Data[i].UNombre + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado1: </strong>" + Data[i].NEncargado1 + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado1: </strong>" + Data[i].TelefonoE1 + "</div>";
         CodigoHTMLAreas += "</div>";
@@ -259,6 +260,7 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
             document.getElementById("cmbArea").value = Data[0].IdArea;
             document.getElementById("TxtNombreSub").value = Data[0].Nombre;
             document.getElementById("TxtNumero").value = Data[0].NoSubArea;
+            document.getElementById("TxtUNombre").value = Data[0].UNombre;
             document.getElementById("TxtNombre1").value = Data[0].NEncargado1;
             document.getElementById("TxtTelefono1").value = Data[0].TelefonoE1;
             document.getElementById("TxtCorreo1").value = Data[0].CorreoE1;
@@ -284,6 +286,7 @@ function GuardarSubarea() {
             var Area = TempEdo.options[TempEdo.selectedIndex].text;
             var Nombre = document.getElementById("TxtNombreSub").value;
             var NoSubArea = document.getElementById("TxtNumero").value;
+            var UNombre = document.getElementById("TxtUNombre").value;
             var NEncargado1 = document.getElementById("TxtNombre1").value;
             var TelefonoE1 = document.getElementById("TxtTelefono1").value;
             var CorreoE1 = document.getElementById("TxtCorreo1").value;
@@ -300,6 +303,7 @@ function GuardarSubarea() {
             frm.append("Area", Area);
             frm.append("Nombre", Nombre);
             frm.append("NoSubArea", NoSubArea);
+            frm.append("UNombre", UNombre);
             frm.append("NEncargado1", NEncargado1);
             frm.append("TelefonoE1", TelefonoE1);
             frm.append("CorreoE1", CorreoE1);
