@@ -1,4 +1,4 @@
-﻿LlenarCMBPUnidadDeMedida();
+﻿LlenarCMBPrincipal();
 BloquearCTRL();
 CrearAcordeonPedidosInt();
 //Crea el acordeón e inserta (los registros de la base de datos)
@@ -9,51 +9,49 @@ function CrearAcordeonPedidosInt() {
     });
 }
 function AcordeonPedidosInt(Data, CtrlPedidosInt) {
-    var CodigoHTMLPagina = "";
+    var CodigoHTMLPedidosInt = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLPagina += "<div class='card m-b-0'>";
+            CodigoHTMLPedidosInt += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLPagina += "<div class='card m-b-0 border-top'>";
+            CodigoHTMLPedidosInt += "<div class='card m-b-0 border-top'>";
         } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLPagina += "<div class='card-header' id='heading" + Data[i].IdPedidosInternos + "'>";
-        CodigoHTMLPagina += "<h5 class='mb-0'>";
-        CodigoHTMLPagina += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidosInternos + "' class='collapsed'>";
-        CodigoHTMLPagina += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLPagina += "<span >" + Data[i].NumeroPedido + "</span>";
-        CodigoHTMLPagina += "</a>";
-        CodigoHTMLPagina += "</h5>";
+        CodigoHTMLPedidosInt += "<div class='card-header' id='heading" + Data[i].IdPedidosInternos + "'>";
+        CodigoHTMLPedidosInt += "<h5 class='mb-0'>";
+        CodigoHTMLPedidosInt += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidosInternos + "' class='collapsed'>";
+        CodigoHTMLPedidosInt += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodigoHTMLPedidosInt += "<span >" + Data[i].NumeroPedido + "</span>";
+        CodigoHTMLPedidosInt += "</a>";
+        CodigoHTMLPedidosInt += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLPagina += "<div class='card-body'>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>CantidadAprobada: </strong>" + Data[i].CantidadAprobada + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + Data[i].Tipo + "</div>";
-
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + Data[i].Tienda + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLPagina += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLPagina += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + Data[i].IdPedidosInternos + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
+        CodigoHTMLPedidosInt += "<div id='collapse" + Data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLPedidosInt += "<div class='card-body'>";
+        CodigoHTMLPedidosInt += "<div class='row'>";
+        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadAprobada: </strong>" + Data[i].CantidadAprobada + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + Data[i].Tipo + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + Data[i].Tienda + "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + Data[i].Articulo + "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "<div class='row'>";
+        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+        CodigoHTMLPedidosInt += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHTMLPedidosInt += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + Data[i].IdPedidosInternos + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
+        CodigoHTMLPedidosInt += "</div>";
     }
-    CtrlPedidosInt.innerHTML = CodigoHTMLPagina;
+    CtrlPedidosInt.innerHTML = CodigoHTMLPedidosInt;
 }
-
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -100,22 +98,18 @@ function GuardarPedidoInterno() {
             var CantidadSolicitada = document.getElementById("TxtCantidadSolicitada").value;
             var CantidadAprobada = document.getElementById("TxtCantidadAprobada").value;
             var Tipo = document.getElementById("TxtTipo").value;
-            var IdArticulo = document.getElementById("cmbArticulo").value;
-            var TempArticulo = document.getElementById("cmbArticulo");
-            var Articulo = TempArticulo.options[TempArticulo.selectedIndex].text;
-
             var IdUnidadDeMedida = document.getElementById("cmbUnidadDeMedida").value;
             var TempUnidadDeMedida = document.getElementById("cmbUnidadDeMedida");
             var UnidadDeMedida = TempUnidadDeMedida.options[TempUnidadDeMedida.selectedIndex].text;
-
             var IdMarca = document.getElementById("cmbMarca").value;
             var TempMarca = document.getElementById("cmbMarca");
             var Marca = TempMarca.options[TempMarca.selectedIndex].text;
-
             var IdTienda = document.getElementById("cmbTipoTienda").value;
             var TempTienda = document.getElementById("cmbTipoTienda");
             var Tienda = TempTienda.options[TempTienda.selectedIndex].text;
-
+            var IdArticulo = document.getElementById("cmbArticulo").value;
+            var TempArticulo = document.getElementById("cmbArticulo");
+            var Articulo = TempArticulo.options[TempArticulo.selectedIndex].text;
             var frm = new FormData();
             frm.append("IdPedidosInternos", IdPedidosInternos);
             frm.append("Fecha", Fecha);
@@ -123,14 +117,14 @@ function GuardarPedidoInterno() {
             frm.append("CantidadSolicitada", CantidadSolicitada);
             frm.append("CantidadAprobada", CantidadAprobada);
             frm.append("Tipo", Tipo);
-            frm.append("IdArticulo", IdArticulo);
-            frm.append("Articulo", Articulo);
             frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
             frm.append("UnidadDeMedida", UnidadDeMedida);
             frm.append("IdMarca", IdMarca);
             frm.append("Marca", Marca);
             frm.append("IdTienda", IdTienda);
             frm.append("Tienda", Tienda);
+            frm.append("IdArticulo", IdArticulo);
+            frm.append("Articulo", Articulo);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -193,7 +187,7 @@ function EliminarPedidoInterno(id) {
 
         $.get("/Pedidosint/EliminarPedidoInterno/?Id=" + id, function (DatoPedidosInt) {
             if (DatoPedidosInt == 1) {
-                alert("Se elimino correctamente");
+                alert("Se eliminó correctamente");
                 CrearAcordeonPedidosInt();
             } else {
                 alert("Ocurrio un error");
@@ -203,20 +197,21 @@ function EliminarPedidoInterno(id) {
 }
 
 
-function LlenarCMBPUnidadDeMedida() {
+function LlenarCMBPrincipal() {
     $.get("/GLOBAL/BDArticulos", function (data) {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
     $.get("/GLOBAL/BDUnidadesMedida", function (data) {
         llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
     });
-  
+
     $.get("/GLOBAL/BDMarcas", function (data) {
         llenarCombo(data, document.getElementById("cmbMarca"));
     });
     $.get("/GLOBAL/BDTienda", function (data) {
         llenarCombo(data, document.getElementById("cmbTipoTienda"));
     });
+
     //funcion general para llenar los select
     function llenarCombo(data, control) {
         var contenido = "";

@@ -106,7 +106,7 @@ namespace Inventario.Controllers
                     obj.Marca = DatosPedidoExterno.Marca;
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
-                    obj.Articulo = DatosPedidoExterno.Proveedor;
+                    obj.Articulo = DatosPedidoExterno.Articulo;
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     InvBD.SubmitChanges();
                     Afectados = 1;
