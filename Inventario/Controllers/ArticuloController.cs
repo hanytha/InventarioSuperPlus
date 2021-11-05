@@ -42,6 +42,35 @@ namespace Inventario.Controllers
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ConsultasArticulosXCompras(long idCompras)
+        {
+            var  articulosc= InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdCompra.Equals(idCompras))
+                .Select(p => new
+                {
+                    p.IdArticulos,
+                    p.NombreEmpresa,
+                    p.IdUnidadDeMedida,
+                    p.IdAreas,
+                    p.IdMarca,
+                    p. IdCompra,
+                    p.IdCategorias,
+                    p.Categoria,
+                    p.NombreProveedor,
+                    p.PrecioUnitarioPromedio,
+                    p.Descripcion,
+                    p.UnidadSAT,
+                    p.ClaveSAT,
+                    p.Fecha,
+                    p.FechaSistema,
+                    p.Unidad,
+                    p.Area,
+                    p.Marca,
+                    p.Logo,
+                    p.Estatus,
+
+                });
+            return Json(articulosc, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ConsultaArticulo(long Id)
         {
             var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
