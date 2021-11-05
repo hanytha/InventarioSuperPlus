@@ -66,7 +66,7 @@ namespace Inventario.Controllers
             long id = DatosPedidoExterno.IdPedidosExternos;
             if (id.Equals(0))
             {
-                int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
 
                 //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
@@ -84,6 +84,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
+                 
                  && p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
                   && p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
                    && p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
@@ -98,14 +99,14 @@ namespace Inventario.Controllers
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
+                  
                     obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
                     obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoExterno.IdMarca;
                     obj.Marca = DatosPedidoExterno.Marca;
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
-                    //obj.IdArticulo = DatosPedidoExterno.IdArticulo;
-                    obj.Articulo = DatosPedidoExterno.Articulo;
+                    obj.Articulo = DatosPedidoExterno.Proveedor;
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     InvBD.SubmitChanges();
                     Afectados = 1;
