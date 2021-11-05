@@ -2709,13 +2709,13 @@ namespace Inventario
 		private void attach_TipoDeMovimientos(TipoDeMovimientos entity)
 		{
 			this.SendPropertyChanging();
-			entity.Compra = this;
+			entity.Compra1 = this;
 		}
 		
 		private void detach_TipoDeMovimientos(TipoDeMovimientos entity)
 		{
 			this.SendPropertyChanging();
-			entity.Compra = null;
+			entity.Compra1 = null;
 		}
 	}
 	
@@ -9507,9 +9507,15 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCompra;
 		
+		private System.Nullable<long> _IdUnidadDeMedida;
+		
 		private string _TipoDeMovimiento;
 		
+		private string _Articulo;
+		
 		private System.Nullable<int> _Unidades;
+		
+		private string _Compra;
 		
 		private string _Descripcion;
 		
@@ -9517,7 +9523,7 @@ namespace Inventario
 		
 		private EntityRef<Articulos> _Articulos;
 		
-		private EntityRef<Compra> _Compra;
+		private EntityRef<Compra> _Compra1;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -9529,10 +9535,16 @@ namespace Inventario
     partial void OnIdArticulosChanged();
     partial void OnIdCompraChanging(System.Nullable<long> value);
     partial void OnIdCompraChanged();
+    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
+    partial void OnIdUnidadDeMedidaChanged();
     partial void OnTipoDeMovimientoChanging(string value);
     partial void OnTipoDeMovimientoChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
     partial void OnUnidadesChanging(System.Nullable<int> value);
     partial void OnUnidadesChanged();
+    partial void OnCompraChanging(string value);
+    partial void OnCompraChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
     partial void OnEstatusChanging(int value);
@@ -9542,7 +9554,7 @@ namespace Inventario
 		public TipoDeMovimientos()
 		{
 			this._Articulos = default(EntityRef<Articulos>);
-			this._Compra = default(EntityRef<Compra>);
+			this._Compra1 = default(EntityRef<Compra>);
 			OnCreated();
 		}
 		
@@ -9601,7 +9613,7 @@ namespace Inventario
 			{
 				if ((this._IdCompra != value))
 				{
-					if (this._Compra.HasLoadedOrAssignedValue)
+					if (this._Compra1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -9610,6 +9622,26 @@ namespace Inventario
 					this._IdCompra = value;
 					this.SendPropertyChanged("IdCompra");
 					this.OnIdCompraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
+		public System.Nullable<long> IdUnidadDeMedida
+		{
+			get
+			{
+				return this._IdUnidadDeMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadDeMedida != value))
+				{
+					this.OnIdUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._IdUnidadDeMedida = value;
+					this.SendPropertyChanged("IdUnidadDeMedida");
+					this.OnIdUnidadDeMedidaChanged();
 				}
 			}
 		}
@@ -9634,6 +9666,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidades", DbType="Int")]
 		public System.Nullable<int> Unidades
 		{
@@ -9650,6 +9702,26 @@ namespace Inventario
 					this._Unidades = value;
 					this.SendPropertyChanged("Unidades");
 					this.OnUnidadesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Compra", DbType="VarChar(150)")]
+		public string Compra
+		{
+			get
+			{
+				return this._Compra;
+			}
+			set
+			{
+				if ((this._Compra != value))
+				{
+					this.OnCompraChanging(value);
+					this.SendPropertyChanging();
+					this._Compra = value;
+					this.SendPropertyChanged("Compra");
+					this.OnCompraChanged();
 				}
 			}
 		}
@@ -9728,26 +9800,26 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_TipoDeMovimientos", Storage="_Compra", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Compra Compra
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_TipoDeMovimientos", Storage="_Compra1", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Compra Compra1
 		{
 			get
 			{
-				return this._Compra.Entity;
+				return this._Compra1.Entity;
 			}
 			set
 			{
-				Compra previousValue = this._Compra.Entity;
+				Compra previousValue = this._Compra1.Entity;
 				if (((previousValue != value) 
-							|| (this._Compra.HasLoadedOrAssignedValue == false)))
+							|| (this._Compra1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Compra.Entity = null;
+						this._Compra1.Entity = null;
 						previousValue.TipoDeMovimientos.Remove(this);
 					}
-					this._Compra.Entity = value;
+					this._Compra1.Entity = value;
 					if ((value != null))
 					{
 						value.TipoDeMovimientos.Add(this);
@@ -9757,7 +9829,7 @@ namespace Inventario
 					{
 						this._IdCompra = default(Nullable<long>);
 					}
-					this.SendPropertyChanged("Compra");
+					this.SendPropertyChanged("Compra1");
 				}
 			}
 		}

@@ -81,10 +81,30 @@
                         <fieldset>
                             <h4>Paso 1</h4>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtTipoDeMovimiento">Tipo de Movimiento<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTipoDeMovimiento]" id="TxtTipoDeMovimiento" class="form-control  limpiar obligatorio" placeholder="Tipo de movimiento">
+                                        <label class="form-control-label" for="cmbTMovimiento">Tipo de movimiento<span>*</span></label>
+                                        <select id="cmbTMovimiento" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbUnidades">Unidad de medida<span>*</span></label>
+                                        <select id="cmbUnidades" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
+                                        <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbCompra">Compra<span>*</span></label>
+                                        <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
@@ -96,6 +116,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <button type="button" class="btn btn-success" onclick="GuardarTipoDeMovimiento()">Guardar</button>
                         </fieldset>
                     </form>
