@@ -1,7 +1,7 @@
 ﻿
 ConsultaArticulo();
 function ConsultaArticulo() {
-    $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearDivArticulo(Data);
     }
     );
