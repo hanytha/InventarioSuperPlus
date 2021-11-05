@@ -14,6 +14,7 @@ namespace Inventario.Controllers
             return View();
         }
         //consulta general de los proveedores
+        //consulta general de los proveedores
         public JsonResult ConsultaProveedores()
         {
             var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
@@ -42,36 +43,10 @@ namespace Inventario.Controllers
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaProveedor(long Id)
-        {//Consulta específico mediante ID
-            var proveedor = InvBD.Proveedores.Where(p => p.Estatus.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdProveedores,
-                    p.Nombre,
-                    p.Correo,
-                    p.RazonSocial,
-                    p.ClaveInterbancaria,
-                    p.CodigoPostal,
-                    p.IdEstado,
-                    p.Estado,
-                    p.IdMunicipio,
-                    p.Municipio,
-                    p.IdLocalidad,
-                    p.Localidad,
-                    p.RFC,
-                    p.Direccion,
-                    p.Telefono,
-                    p.Banco,
-                    p.NumeroDeCuenta,
-                    p.UsoCFDI,
-                    p.Descripcion,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
-                });
-            return Json(proveedor, JsonRequestBehavior.AllowGet);
-        }
+
+       
          //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaProv(long Id)
+        public JsonResult ConsultaProveedor(long Id)
         {
             var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
@@ -170,7 +145,7 @@ namespace Inventario.Controllers
             }
             return Afectados;
         }
-        public int EliminarProveedor(long IdProveedores)
+        public int EliminarProveedores(long IdProveedores)
         {
             int nregistradosAfectados = 0;
             try
