@@ -83,13 +83,13 @@
                         </h5>
                         <div id="@Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonArea" style="">
                             <div class="card-body">
-                                <!--Boton para editar y agregar SUBAREAS-->   <button style="background-color:DarkTurquoise " class="btn btn-success" onclick="abrirModalSub(0,@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
+                                <!--Boton para editar y agregar SUBAREAS-->   <button style="float:right; background-color:DarkTurquoise " class="btn btn-success" onclick="abrirModalSub(0,@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>Jefe de área: </strong>@ModeloAreas.UNombre[i]</div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>UNombre: </strong>@ModeloAreas.UNombre[i]</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6"><strong>Correo: </strong>@ModeloAreas.Correo[i]</div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6"><strong>Teléfono: </strong>@ModeloAreas.Telefono[i]</div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>Correo: </strong>@ModeloAreas.Correo[i]</div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>Teléfono: </strong>@ModeloAreas.Telefono[i]</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 accordion" id="@AcordeonSubAreas">Espacio para las SubAreas</div>
