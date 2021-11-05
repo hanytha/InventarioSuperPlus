@@ -37,9 +37,9 @@ namespace Inventario.Controllers
         }
 
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaPedidoInterno(long Id)
+        public JsonResult ConsultaPedidoExterno(long Id)
         {
-            var pedidoExt = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(Id) && p.Estatus.Equals(1))
+            var pedidosExt = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdPedidosExternos,
@@ -55,7 +55,7 @@ namespace Inventario.Controllers
                     p.Articulo,
                     p.Fecha
                 });
-            return Json(pedidoExt, JsonRequestBehavior.AllowGet);
+            return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos de la compra
         public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
@@ -82,11 +82,21 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+                int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
+                && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
+                 && p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
+                  && p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
+                   && p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
+                    && p.Marca.Equals(DatosPedidoExterno.Marca)
+                     && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
+                      && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
+                       && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
+                        && p.Articulo.Equals(DatosPedidoExterno.Articulo)
+                          && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)
                 {
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
-                    obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
+                    //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
                     obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
                     obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
@@ -94,8 +104,8 @@ namespace Inventario.Controllers
                     obj.Marca = DatosPedidoExterno.Marca;
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
-                    obj.IdProveedor = DatosPedidoExterno.IdProveedor;
-                    obj.IdArticulo = DatosPedidoExterno.IdArticulo;
+                    //obj.IdArticulo = DatosPedidoExterno.IdArticulo;
+                    obj.Articulo = DatosPedidoExterno.Articulo;
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     InvBD.SubmitChanges();
                     Afectados = 1;

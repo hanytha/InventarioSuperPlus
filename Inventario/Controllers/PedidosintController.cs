@@ -88,11 +88,23 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)).Count();
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
+                && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
+                   && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada)
+                      && p.Tipo.Equals(DatosPedidoInterno.Tipo)
+                 && p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida)
+                  && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
+                   && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
+                    && p.Marca.Equals(DatosPedidoInterno.Marca)
+                     && p.IdTienda.Equals(DatosPedidoInterno.IdTienda)
+                      && p.Tienda.Equals(DatosPedidoInterno.Tienda)
+                       && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
+                        && p.Articulo.Equals(DatosPedidoInterno.Articulo)
+                          && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
                 if (nveces == 0)
                 {
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
-                    obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
+                    //obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
                     obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
                     obj.Tipo = DatosPedidoInterno.Tipo;

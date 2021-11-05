@@ -71,7 +71,7 @@ function abrirModal(id) {//la clase  Obligatorio
         sessionStorage.setItem('IdPedidosExternos', 0);
     }
     else {
-        $.get("/Pedidosext/ConsultaPedidosExternos/?Id=" + id, function (Data) {
+        $.get("/Pedidosext/ConsultaPedidoExterno/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IdPedidosExternos', Data[0].IdPedidosExternos);     //Variable de sesión
             document.getElementById("TxtFechaIngreso").value = Data[0].Fecha;
