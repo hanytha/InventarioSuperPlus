@@ -26,6 +26,7 @@ namespace Inventario.Controllers
          /*total=*/ p.ExitenciaActual,
                     p.FechaDeIngreso,
                     p.Coste,
+                    p.IdArticulo,
 
                 });
 

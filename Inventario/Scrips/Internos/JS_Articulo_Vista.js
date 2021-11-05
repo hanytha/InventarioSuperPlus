@@ -1,7 +1,7 @@
 ﻿
 ConsultaArticulo();
 function ConsultaArticulo() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Prueba/ConsultaCompras", function (Data) {
         CrearDivArticulo(Data);
     }
     );
@@ -12,10 +12,10 @@ function CrearDivArticulo(Data) {
     CodigoHtmlArticulo += "<section id='contenedor_follow'>";
     CodigoHtmlArticulo += "<hr class='solid'>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Nombre</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Existencia Actual</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha Ingreso</div>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>Costo</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Stock</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Costo</div>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
@@ -24,19 +24,19 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div>";
         CodigoHtmlArticulo += "<div class='row row-cols-auto '>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].IdCompra + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreProveedor + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].FechaDeIngreso + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreProveedor + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreProveedor + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
@@ -57,7 +57,7 @@ function CrearDivArticulo(Data) {
 
 ConsultaComprass();
 function ConsultaComprass() {
-    $.get("/Compra/ConsultasCompras", function (Data) {
+    $.get("/Articulo/ConsultasArticulosXCompras", function (Data) {
         CrearDivCompra(Data);
     }
     );
