@@ -39,8 +39,13 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col '>" + Data[i].Descripcion + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
+
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='Alternar(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "</label>"
+
+        CodigoHtmlArticulo += "<label>"
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
@@ -51,6 +56,12 @@ function CrearDivArticulo(Data) {
     }
 
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
+}
+
+//____________________________________________________
+function Alternar(Seccion) {
+    if (Seccion.style.display == "none") { Seccion.style.display = "" }
+    else { Seccion.style.display = "none" }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -65,15 +76,15 @@ function ConsultaArticulos() {
 }
 function CrearDiArticulo(Data) {
     var CodigoHtmlCompra = "";
-    CodigoHtmlCompra += "<div id='contenedor2'>";
+    CodigoHtmlCompra += "<div style='display:none'  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
-    CodigoHtmlCompra += "<hr class='solid2'>"
+    CodigoHtmlAlmacen += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div class='icono flexbox'>ID</div> "
     CodigoHtmlCompra += "<div class='icono flexbox'>Fecha de ingreso</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Existencia actual</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Coste</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Acción</div>"
-    CodigoHtmlCompra += "<hr class='solid2'>"
+    CodigoHtmlAlmacen += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div>";
 
 
@@ -87,12 +98,12 @@ function CrearDiArticulo(Data) {
         CodigoHtmlCompra += "<div class='col'>" + Data[i].FechaDeIngreso + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlCompra += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].Coste + "</div>"
+        CodigoHtmlCompra += "<div class='col '>" + Data[i].Coste + "</div>"
         CodigoHtmlCompra += "</div>";
-        CodigoHtmlCompra += "<div class='col'>"
+        CodigoHtmlCompra += "<div class='col '>"
         CodigoHtmlCompra += "<label>"
         CodigoHtmlCompra += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlCompra += "</label>"

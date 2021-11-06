@@ -61,6 +61,9 @@
 
 <div id="tabla" class="default "></div>
 <div id="accordion"></div>
+
+<!------------------------------------------------>
+<img src="~/Assets/Imagenes/logo.png" alt="30" width="110" height="30">
 <!-----------------------Mustra los div------------------------------------>
 <div id="container"></div>
 <!----------------------------------------------------------->
@@ -139,7 +142,6 @@
 </div>
 
 <!----------------------------------------------------------->
-<!----------------------------------------------------------->
 <div id="container"></div>
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
@@ -186,80 +188,6 @@
         border-top: 3px solid #f1f507;
     }
 </style>
-
-<!------------------------------------------>
-<!--<div class="titulo_boton">
-    <a style='cursor: pointer;' onClick="muestra_oculta('contenido')" title="" class="boton_mostrar">Desplegar</a>
-</div>
-
-<div id="contenido">
-    <div id="contenedor2"></div> <div id="contenedor3"></div>
-</div>
-
-<style>
-    .titulo_boton {
-        float: left;
-        padding: 5px;
-        background-color: #097FF5;
-        width: 80px;
-        font-family: helvetica;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .boton_mostrar {
-        float: right;
-        font-size: 12px;
-        line-height: 20px;
-        color: #DE7217;
-    }
-
-    #contenido {
-        float: left;
-        clear: both;
-        border: 2px solid #e6e6e6;
-        margin-top: 2px;
-        padding: 5px;
-        width: 1000px;
-        overflow: auto;
-        font-family: helvetica;
-        font-size: 14px;
-        text-align: justify;
-    }
-</style>
-<script>
-
-    function muestra_oculta(id) {
-        if (document.getElementById) { //se obtiene el id
-            var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
-            el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
-        }
-    }
-    window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
-        muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
-    }
-</script>-->
-<!---------------------------------------------------------->
-<!--<div class="flexbox">
-
-</div>
-
-<style>
-    .flexbox {
-        align-items: center;
-        display: flex;
-        height: 100px;
-        justify-content: center;
-        width: 200px;
-    }
-</style>-->
-<!------------------------------------------------------------------------------------------------------------>
-@*<button class='btn btn-outline-primary' data-toggle="collapse" data-target="#demo">Collapsible</button>
-
-    <div id="demo" class="collapse">
-        <div id="contenedor2"></div>
-    </div>*@
-
 <!------------------------------------------------------------------------------------------------------------>
 
 <button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar(seccion1)">
@@ -270,26 +198,21 @@
     <div id="contenedor3"></div>
 </div>
 
-<script>
-    function Alternar(Seccion) {
-        if (Seccion.style.display == "none") { Seccion.style.display = "" }
-        else { Seccion.style.display = "none" }
-    }
-</script>
 
 
-<!------------------------------------------------------------------------------------------------------------>
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-<script src="~/Scrips/Plus/scripts.js"></script>
+
+        <!------------------------------------------------------------------------------------------------------------>
+        <!--Hacer que el modal muestre los pasos por parte-->
+        <style type="text/css">
+            #regiration_form fieldset:not(:first-of-type) {
+                display: none;
+            }
+        </style>
+        <!--Script-->
+        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+        <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+        <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+        <script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
+        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+        <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+        <script src="~/Scrips/Plus/scripts.js"></script>
