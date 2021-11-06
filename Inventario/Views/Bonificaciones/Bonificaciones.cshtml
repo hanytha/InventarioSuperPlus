@@ -170,15 +170,7 @@
     }
 </style>
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid2 {
-        border-top: 3px solid #00b0e6;
-    }
-</style>
+
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -188,31 +180,35 @@
         border-top: 3px solid #f1f507;
     }
 </style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid4 {
+        border-top: 3px solid #0B94F8;
+    }
+</style>
 <!------------------------------------------------------------------------------------------------------------>
 
 <button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar(seccion1)">
-    Desplegar
 </button>
 <div id="seccion1" style="display:none">
-    <div id="contenedor2"></div>
     <div id="contenedor3"></div>
 </div>
 
-
-
-
-        <!------------------------------------------------------------------------------------------------------------>
-        <!--Hacer que el modal muestre los pasos por parte-->
-        <style type="text/css">
-            #regiration_form fieldset:not(:first-of-type) {
-                display: none;
-            }
-        </style>
-        <!--Script-->
-        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-        <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-        <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-        <script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
-        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-        <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-        <script src="~/Scrips/Plus/scripts.js"></script>
+<!------------------------------------------------------------------------------------------------------------>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/Plus/scripts.js"></script>

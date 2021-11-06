@@ -41,9 +41,8 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col'>"
 
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion1)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
-
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
@@ -58,11 +57,17 @@ function CrearDivArticulo(Data) {
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
 }
 
-//____________________________________________________
+//-----------------------------------------------------------------------------------
 function Alternar(Seccion) {
     if (Seccion.style.display == "none") { Seccion.style.display = "" }
     else { Seccion.style.display = "none" }
 }
+
+function Alternar2(Seccion) {
+    if (Seccion.style.display == "none") { Seccion.style.display = "" }
+    else { Seccion.style.display = "none" }
+}
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -76,7 +81,7 @@ function ConsultaArticulos() {
 }
 function CrearDiArticulo(Data) {
     var CodigoHtmlCompra = "";
-    CodigoHtmlCompra += "<div style='display:none'  id='contenedor2'>";
+    CodigoHtmlCompra += "<div  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlAlmacen += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div class='icono flexbox'>ID</div> "
@@ -135,12 +140,12 @@ function CrearDivAlmacen(Data) {
     var CodigoHtmlAlmacen = "";
     CodigoHtmlAlmacen += "<div id='contenedor3'>";
     CodigoHtmlAlmacen += "<section id='contenedor_follow'>";
-    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlAlmacen += "<hr class='solid4'>"
     CodigoHtmlAlmacen += "<div class='icono flexbox'>ID</div> "
     CodigoHtmlAlmacen += "<div class='icono flexbox'>TipoDeOperacion</div>"
     CodigoHtmlAlmacen += "<div class='icono flexbox'>TipoDeOperacion</div>"
     CodigoHtmlAlmacen += "<div class='icono flexbox'>Acción</div>"
-    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlAlmacen += "<hr class='solid4'>"
     CodigoHtmlAlmacen += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
