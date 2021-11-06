@@ -30,7 +30,7 @@ function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].IdUnidadDeMedida + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidades + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
         CodigoHTMLAreas += "</div>";
 
@@ -47,7 +47,6 @@ function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
     }
     CtrlAlmacen.innerHTML = CodigoHTMLAreas;
 }
-
 
 
 //Limpia la información y carga la informacion del proveedor

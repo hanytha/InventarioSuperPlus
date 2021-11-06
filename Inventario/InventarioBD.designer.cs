@@ -9483,7 +9483,7 @@ namespace Inventario
 		
 		private string _Articulo;
 		
-		private System.Nullable<int> _Unidades;
+		private string _Unidades;
 		
 		private string _Descripcion;
 		
@@ -9505,7 +9505,7 @@ namespace Inventario
     partial void OnTipoDeMovimientoChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
-    partial void OnUnidadesChanging(System.Nullable<int> value);
+    partial void OnUnidadesChanging(string value);
     partial void OnUnidadesChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
@@ -9623,8 +9623,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidades", DbType="Int")]
-		public System.Nullable<int> Unidades
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidades", DbType="VarChar(150)")]
+		public string Unidades
 		{
 			get
 			{
