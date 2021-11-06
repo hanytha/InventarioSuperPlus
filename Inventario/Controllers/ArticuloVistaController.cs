@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Inventario.Controllers
 {
     public class ArticuloVistaController : Controller
@@ -58,9 +59,17 @@ namespace Inventario.Controllers
                 }
                 Stock += SumaStock + ",";
             }
-            var resultado = new { ID = id.Substring(0, id.Length -1), Nombre = Nombre.Substring(0, Nombre.Length -1 ), Fechas = Fechas.Substring(0, Fechas.Length -1), Stock = Stock.Substring(0, Stock.Length -1), Costos = Costos.Substring(0, Costos.Length -1) };
+            var resultado = new { ID = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
     }
 }
+
+
+//public Articulos ConsultarArt()
+//{
+//    var consulta = from e in InvBD.Articulos
+//                   select e;
+
+//    return consulta.FirstOrDefault();
+//}

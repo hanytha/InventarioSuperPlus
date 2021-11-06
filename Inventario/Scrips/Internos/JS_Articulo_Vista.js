@@ -1,50 +1,46 @@
 ﻿
-//----------------------------------------------------------------------
 ConsultaArticulo();
 function ConsultaArticulo() {
-    $.get("/Prueba/ConsultaCompras", function (Data) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearDivArticulo(Data);
     }
     );
 }
 function CrearDivArticulo(Data) {
     var CodigoHtmlArticulo = "";
-    CodigoHtmlArticulo += "<div class='card' style='width: auto;'>"
-    CodigoHtmlArticulo += "<div class='card-body'>"
     CodigoHtmlArticulo += "<div id='container'>";
     CodigoHtmlArticulo += "<section id='contenedor_follow'>";
     CodigoHtmlArticulo += "<hr class='solid'>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Existencia Actual</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha Ingreso</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Costo</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Costo</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Nombre Empresa</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Precio Unitario Promedio</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Descripcion</div>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
-    CodigoHtmlArticulo += "<div>";
-    CodigoHtmlArticulo += "<div>";
+
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticulo += "<div>";
         CodigoHtmlArticulo += "<div class='row row-cols-auto '>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].IdCompra + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreEmpresa + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].FechaDeIngreso + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Fecha + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].PrecioUnitarioPromedio + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Descripcion + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='Alternar(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
@@ -59,9 +55,10 @@ function CrearDivArticulo(Data) {
 
 //--------------------------------------------------------------------------------------------------
 
+
 ConsultaArticulos();
 function ConsultaArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Compra/ConsultasCompras", function (Data) {
         CrearDiArticulo(Data);
     }
     );
@@ -72,9 +69,9 @@ function CrearDiArticulo(Data) {
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlCompra += "<hr class='solid2'>"
     CodigoHtmlCompra += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlCompra += "<div class='icono flexbox'>Metodo DePago</div>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>NoCompra</div>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>NoCompra</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox'>Fecha de ingreso</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox'>Existencia actual</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox'>Coste</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlCompra += "<hr class='solid2'>"
     CodigoHtmlCompra += "<div>";
@@ -84,16 +81,16 @@ function CrearDiArticulo(Data) {
         CodigoHtmlCompra += "<div>";
         CodigoHtmlCompra += "<div class='row row-cols-auto'>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdCompra + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].FechaDeIngreso + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].NombreProveedor + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].ExitenciaActual + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].Fecha + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].Coste + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
         CodigoHtmlCompra += "<label>"
