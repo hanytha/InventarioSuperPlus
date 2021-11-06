@@ -128,17 +128,17 @@
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCancelar"   class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!----------------------------------------------------------->
 
 <!----------------------------------------------------------->
 <div id="container"></div>
-
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
     #contenedor {
@@ -252,11 +252,28 @@
     }
 </style>-->
 <!------------------------------------------------------------------------------------------------------------>
-<button  class='btn btn-outline-primary' data-toggle="collapse" data-target="#demo">Collapsible</button>
+@*<button class='btn btn-outline-primary' data-toggle="collapse" data-target="#demo">Collapsible</button>
 
 <div id="demo" class="collapse">
-<div id="contenedor2"></div>
+    <div id="contenedor2"></div>
+</div>*@
+
+<!------------------------------------------------------------------------------------------------------------>
+
+<button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar(seccion1)">
+    Desplegar
+</button>
+<div id="seccion1" style="display:none">
+    <div id="contenedor2"></div>
+    <div id="contenedor3"></div>
 </div>
+
+<script>
+    function Alternar(Seccion) {
+        if (Seccion.style.display == "none") { Seccion.style.display = "" }
+        else { Seccion.style.display = "none" }
+    }
+</script>
 
 <!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->

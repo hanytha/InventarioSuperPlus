@@ -1,4 +1,5 @@
 ﻿
+//----------------------------------------------------------------------
 ConsultaArticulo();
 function ConsultaArticulo() {
     $.get("/Prueba/ConsultaCompras", function (Data) {
@@ -8,6 +9,8 @@ function ConsultaArticulo() {
 }
 function CrearDivArticulo(Data) {
     var CodigoHtmlArticulo = "";
+    CodigoHtmlArticulo += "<div class='card' style='width: auto;'>"
+    CodigoHtmlArticulo += "<div class='card-body'>"
     CodigoHtmlArticulo += "<div id='container'>";
     CodigoHtmlArticulo += "<section id='contenedor_follow'>";
     CodigoHtmlArticulo += "<hr class='solid'>"
@@ -19,7 +22,8 @@ function CrearDivArticulo(Data) {
     CodigoHtmlArticulo += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
-
+    CodigoHtmlArticulo += "<div>";
+    CodigoHtmlArticulo += "<div>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticulo += "<div>";
         CodigoHtmlArticulo += "<div class='row row-cols-auto '>";
@@ -74,6 +78,7 @@ function CrearDiArticulo(Data) {
     CodigoHtmlCompra += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlCompra += "<hr class='solid2'>"
     CodigoHtmlCompra += "<div>";
+
 
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlCompra += "<div>";
@@ -161,19 +166,8 @@ function CrearDivAlmacen(Data) {
 //--------------------------------------------------------------------------------------------------
 
 
-//Logo
-var btnFoto = document.getElementById("BtnFoto");
-btnFoto.onchange = function (e) {
-    var file = document.getElementById("BtnFoto").files[0];
-    var reader = new FileReader();
-    if (reader != null) {
-        reader.onloadend = function () {
-            var img = document.getElementById("PBFoto");
-            img.src = reader.result;
-        }
-    }
-    reader.readAsDataURL(file);
-}
+//---------------------------------------------------------------------------------------------
+
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
