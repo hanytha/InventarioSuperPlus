@@ -58,7 +58,7 @@ namespace Inventario.Controllers
                 }
                 Stock += SumaStock + ",";
             }
-            var Resultado = new { ID = id.Substring(0, id.Length -1), nombres = Nombre.Substring(0, Nombre.Length -1), fechaIngresos = Fechas.Substring(0, Fechas.Length -1), stockActuales = Stock.Substring(0, Stock.Length -1), costos = Costos.Substring(0, Costos.Length -1) };
+            var Resultado = new { ID = id.Substring(0, id.Length -1), Nombre = Nombre.Substring(0, Nombre.Length -1), Fechas = Fechas.Substring(0, Fechas.Length -1), Stock = Stock.Substring(0, Stock.Length -1), Costos = Costos.Substring(0, Costos.Length -1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
     }

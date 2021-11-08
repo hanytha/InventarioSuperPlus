@@ -27,12 +27,12 @@ namespace Inventario.Controllers
             .Select(p => new
             {
                 Id = p.IdArticulos,
-                nombre = p.NombreEmpresa
+                nombres = p.NombreEmpresa
             });
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
-                Nombre += art.nombre + ",";
+                Nombre += art.nombres + ",";
                 var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderByDescending(p => p.FechaDeIngreso)
                     .Select(p => new
                     {
@@ -59,17 +59,11 @@ namespace Inventario.Controllers
                 }
                 Stock += SumaStock + ",";
             }
-            var resultado = new { ID = id.Substring(0, id.Length -1), Nombre = Nombre.Substring(0, Nombre.Length -1), Fechas = Fechas.Substring(0, Fechas.Length -1), Stock = Stock.Substring(0, Stock.Length -1), Costos = Costos.Substring(0, Costos.Length -1) };
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            var Resultado = new { ID = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+
     }
 }
 
 
-//public Articulos ConsultarArt()
-//{
-//    var consulta = from e in InvBD.Articulos
-//                   select e;
-
-//    return consulta.FirstOrDefault();
-//}

@@ -1,7 +1,6 @@
-﻿
-ConsultaArticulo();
+﻿ConsultaArticulo();
 function ConsultaArticulo() {
-    $.get("/Bonificaciones/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearDivArticulo(Data);
     }
     );
@@ -13,9 +12,9 @@ function CrearDivArticulo(Data) {
     CodigoHtmlArticulo += "<hr class='solid'>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>ID</div> "
     CodigoHtmlArticulo += "<div class='icono flexbox'>Nombre Empresa</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Precio Unitario Promedio</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Descripcion</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha de ingreso</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Stock</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox'>Coste</div>"
     CodigoHtmlArticulo += "<div class='icono flexbox'>Acción</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
@@ -30,13 +29,13 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreEmpresa + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Fecha + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].FechaDeIngreso + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].PrecioUnitarioPromedio + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Descripcion + "</div>"
+        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
