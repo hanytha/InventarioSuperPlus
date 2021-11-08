@@ -41,7 +41,7 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col'>"
 
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion1)' ><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
@@ -63,6 +63,10 @@ function Alternar(Seccion) {
     else { Seccion.style.display = "none" }
 }
 
+function Alternar2(Seccion2) {
+    if (Seccion2.style.display == "none") { Seccion2.style.display = "" }
+    else { Seccion2.style.display = "none" }
+}
 
 
 //--------------------------------------------------------------------------------------------------
