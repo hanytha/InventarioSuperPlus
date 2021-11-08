@@ -39,7 +39,7 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>"
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
@@ -48,10 +48,10 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
-        CodigoHtmlArticulo += "</div>";
-        CodigoHtmlArticulo += "</div>";
-    }
 
+    }
+    CodigoHtmlArticulo += "</div>";
+    CodigoHtmlArticulo += "</div>";
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
 }
 

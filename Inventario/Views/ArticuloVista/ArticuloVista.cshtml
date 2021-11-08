@@ -3,7 +3,6 @@
     ViewBag.Title = "ArticuloVista";
 }
 
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,16 +49,25 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!----------------------------->
-<div id="tabla"></div>
+<!-------------------------------------------------------------------------------------------------------------->
+<img src="~/Assets/Imagenes/logo.png" alt="30" width="110" height="30">
+<!----------------------Mostrar el div principal-------------------------------------------------------------------->
+<div id="container"></div>
+<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
+<div id="seccion1" style="display:none">
+    <div id="contenedor3"></div>
+</div>
+<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
+    <div id="seccion2" style="display:none">
+        <div id="contenedor2"></div>
+    </div>
+<!--------------------------------------------------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -71,93 +79,61 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE ARTÍCULOS</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    <h4>REGISTRO DE BONIFICACIONES</h4>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <fieldset>
-                            <h4>Paso 1</h4>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                    </div>
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombre">Ingrese el nombre del artículo<span class="required">*</span></label>
+                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por elProveedor<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
+                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripción">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbUnidadM">Unidad de Medida<span class="required">*</span></label>
+                                    <select id="cmbUnidadM" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbCategoria">Categoría<span>*</span></label>
-                                        <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
+                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="Precio Unitario">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="Unidad SAT">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMarca">INGRESE LA MARCA DEL ARTÍCULO<span class="required">*</span></label>
+                                    <input id="TxtMarca" name="data[TxtMarca]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Clave SAT">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbCompra">Seleccione la compra<span class="required">*</span></label>
+                                    <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
-                            <!-- Agregar la imagen -->
-                            <div class="row">
-                                -
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="200" height="200" alt="" />
-                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
-                        </fieldset>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
                     </form>
                 </div>
-                <!-- pie del modal-->
+                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
@@ -165,74 +141,6 @@
         </div>
     </div>
 </div>
-<!--Mostrar los registros en el accordion-->
-
-<div id="container"></div>
-
-
-<input type="checkbox" id="spoiler1">
-<label for="spoiler1"><i class="fas fa-angle-down"></i></label>
-<div id="contenedor2" class="spoiler"></div>
-
-<input type="checkbox" id="spoiler2">
-<label for="spoiler2"><i class="fas fa-angle-down"></i></label>
-<div id="contenedor3" class="spoiler"></div>
-
-<style>
-    /* Ocultar botón radio */
-    input[id^="spoiler"] {
-        display: none;
-    }
-        /* Estilo botón clicable */
-        input[id^="spoiler"] + label {
-            display: block;
-            width: 20px;
-            margin: 0 auto;
-            padding: 5px 20px;
-            background: #F3C730;
-            cursor: pointer;
-        }
-        /* Estilo botón cuando su INPUT está seleccionado */
-        input[id^="spoiler"]:checked + label {
-            color: #333;
-            background: #029EEC;
-        }
-        /* Estilo caja SPOILER (inicialmente oculto) */
-        input[id^="spoiler"] ~ .spoiler {
-            width: 90%;
-            height: 0;
-            overflow: hidden;
-            opacity: 0;
-            margin: 10px auto 0;
-        }
-        /* Estilo caja SPOILER cuando su INPUT está seleccionado */
-        input[id^="spoiler"]:checked + label + .spoiler {
-            height: auto;
-            opacity: 1;
-        }
-</style>
-
-<!----------------------------------------------------------------------------------->
-
-<!---------------------------------------------------------------------------------->
-@*<div id="container">
-        <button id="button">Cancelar</button>
-    </div>
-
-    <script>
-        var button = document.getElementById('button'); // Assumes element with id='button'
-
-        button.onclick = function () {
-            var div = document.getElementById('container');
-            if (div.style.display !== 'none') {
-                div.style.display = 'none';
-            }
-            else {
-                div.style.display = 'block';
-            }
-        };
-    </script>*@
-
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
     #contenedor {
@@ -260,15 +168,7 @@
     }
 </style>
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid2 {
-        border-top: 3px solid #00b0e6;
-    }
-</style>
+
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -278,8 +178,17 @@
         border-top: 3px solid #f1f507;
     }
 </style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid4 {
+        border-top: 3px solid #0B94F8;
+    }
+</style>
 
-<!------------------------------------------>
+<!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -290,6 +199,8 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
+<script src="~/Scrips/Internos/JS_Prueba.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/Plus/scripts.js"></script>
+
