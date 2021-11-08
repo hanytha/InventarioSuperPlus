@@ -91,7 +91,7 @@ imagen64 = getBase64Image(document.getElementById("PBFoto"));
 //        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
 //        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
 //        CodigoHTMLUsuarios += "<td>";
-   
+
 //        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
 //        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
 //        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
@@ -513,8 +513,6 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
         });
     }
 }
-
-
 
 
 

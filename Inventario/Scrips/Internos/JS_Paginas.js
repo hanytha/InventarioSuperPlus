@@ -37,7 +37,7 @@ function AcordeonPagina(Data, CtrlProveedores) {
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLPagina += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPagina + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHTMLPagina += "<button class='btn btn-primary' onclick='abrirModalPagina(" + Data[i].IdPagina + ")' data-toggle='modal' data-target='#ModalPagina'><i class='fas fa-edit'></i></button>";
         CodigoHTMLPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + Data[i].IdPagina + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLPagina += "</div>";
         CodigoHTMLPagina += "</div>";
@@ -48,10 +48,8 @@ function AcordeonPagina(Data, CtrlProveedores) {
     }
     CtrlProveedores.innerHTML = CodigoHTMLPagina;
 }
-
-
 //Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase  Obligatorio
+function abrirModalPagina(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -74,7 +72,6 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-
 //Guarda los cambios y altas de los proveedores
 function GuardarPagina() {
     if (CamposObligatorios() == true) {
@@ -82,10 +79,8 @@ function GuardarPagina() {
             var IdPagina = sessionStorage.getItem('IdPagina');
             var Accion = document.getElementById("TxtAccion").value;
             var Mensaje = document.getElementById("TxtMensaje").value;
-
             var Controlador = document.getElementById("TxtControlador").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-
             // var Padre = document.getElementById("cmbTipo").value;
             var Icono = document.getElementById("TxtIconos").value;
             var frm = new FormData();
@@ -103,7 +98,6 @@ function GuardarPagina() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
-
                     if (data == 0) {
                         alert("Ocurrió un error");
                     }
@@ -120,7 +114,6 @@ function GuardarPagina() {
         }
     }
 }
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -150,7 +143,6 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
 //"Elimina" el área cambia el Estatus
 //function EliminarPagina(id) {
 //    if (confirm("¿Desea eliminar el registro?") == 1) {
@@ -165,7 +157,6 @@ function CamposObligatorios() {
 //        });
 //    }
 //}
-
 function EliminarPagina(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
@@ -184,17 +175,12 @@ function EliminarPagina(id) {
         });
     }
 }
-
-
-
 function LlenarCMB() {
 
     $.get("/Pagina/BDPagina", function (data) {
         llenarCombo(data, document.getElementById("cmbPadre"), true);
     });
 }
-
-
 function llenarComboPaginas(data, control, primerElemento) {
     var contenido = "";
     if (primerElemento == true) {
@@ -214,8 +200,6 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-
-
 //Deshabilitar el clic externo para el modal del formulario.
 jQuery(document).ready(function () {
     jQuery('[data-toggle="modal"]').each(function () {

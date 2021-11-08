@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Inventario.Controllers
 {
     public class PaginaController : Controller
@@ -30,7 +29,6 @@ namespace Inventario.Controllers
                 });
             return Json(paginas, JsonRequestBehavior.AllowGet);
         }
-
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaPag(long Id)
         {
@@ -53,46 +51,46 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosPagina.IdPagina;
-            if (id.Equals(0))
-            {
-                int nveces = InvBD.Pagina.Where(p => p.Descripcion.Equals(DatosPagina.Descripcion)).Count();
+                if (id.Equals(0))
+                {
+                    int nveces = InvBD.Pagina.Where(p => p.Descripcion.Equals(DatosPagina.Descripcion)).Count();
 
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                if (nveces == 0)
-                {
-                    InvBD.Pagina.InsertOnSubmit(DatosPagina);
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
+                    // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                    if (nveces == 0)
+                    {
+                        InvBD.Pagina.InsertOnSubmit(DatosPagina);
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
                 else
                 {
-                    Afectados = -1;
+                    int nveces = InvBD.Pagina.Where(p => p.Mensaje.Equals(DatosPagina.Mensaje) &&
+                    p.Accion.Equals(DatosPagina.Accion) &&
+                    p.Controlador.Equals(DatosPagina.Controlador) &&
+                    p.Descripcion.Equals(DatosPagina.Descripcion) &&
+                    p.Icono.Equals(DatosPagina.Icono)).Count();
+                    if (nveces == 0)
+                    {
+                        Pagina obj = InvBD.Pagina.Where(p => p.IdPagina.Equals(id)).First();
+                        obj.Mensaje = DatosPagina.Mensaje;
+                        obj.Accion = DatosPagina.Accion;
+                        obj.Controlador = DatosPagina.Controlador;
+                        obj.Descripcion = DatosPagina.Descripcion;
+                        obj.Icono = DatosPagina.Icono;
+
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
-            }
-            else
-            {
-                int nveces = InvBD.Pagina.Where(p => p.Mensaje.Equals(DatosPagina.Mensaje) &&
-                p.Accion.Equals(DatosPagina.Accion) &&
-                p.Controlador.Equals(DatosPagina.Controlador) && 
-                p.Descripcion.Equals(DatosPagina.Descripcion) &&
-                p.Icono.Equals(DatosPagina.Icono)).Count();
-                if (nveces == 0)
-                {
-                    Pagina obj = InvBD.Pagina.Where(p => p.IdPagina.Equals(id)).First();
-                    obj.Mensaje = DatosPagina.Mensaje;
-                    obj.Accion = DatosPagina.Accion;
-                    obj.Controlador = DatosPagina.Controlador;
-                    obj.Descripcion = DatosPagina.Descripcion;
-                    obj.Icono = DatosPagina.Icono;
-                   
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
-            }
             }
             catch (Exception ex)
             {
@@ -100,11 +98,6 @@ namespace Inventario.Controllers
             }
             return Afectados;
         }
-
-
-
-       
-
         public int EliminarPagina(long Id)
         {
             int nregistradosAfectados = 0;
@@ -121,13 +114,11 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
-
-
         public JsonResult BDPagina()
         {
             var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.IdPagina,
                     Descripcion = p.Descripcion
                 });

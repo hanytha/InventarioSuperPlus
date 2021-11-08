@@ -127,12 +127,7 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-        //consulta Tiendas
-
+       
         //consulta Tiendas
         public JsonResult BDUnidadesMedida()
         {
@@ -245,6 +240,44 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult BDPaginas()
+        {
+            // Consulta de todas las paginas activas
+            var datos = InvBD.Pagina.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdPagina,
+                    Nombre = p.Descripcion
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDPerfiles(long IDPAG)
+        {
+            // Consulta de todas los paginas activas que pertenezcan a dicho perfil para mostrar la pagina dependiendo del perfil al que pertenezca
+            var datos = InvBD.PerfilDeUsuario.Where(p => p.Estatus.Equals(1) && p.IdPagina.Equals(IDPAG))
+                .Select(p => new
+                {
+                    ID = p.IdPerfilDeUsuario,
+                    Nombre = p.Perfil
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //consulta los Usuarios activos, recibe el usuario y la contraseña y los compara para poder acceder
+        public JsonResult BDUsuarios(long Usuario, long Password)
+        {
+            var datos = InvBD.Usuarios.Where(p => p.Estatus.Equals(1) && p.Usuario.Equals(Usuario) && p.Password.Equals(Password))
+                .Select(p => new {
+                    ID = p.IdUsuarios,
+                    p.Usuario,
+                    p.Password,
+                    p.IdPerfil,
+                    p.LvlPerfil
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+   
     }
 }
 

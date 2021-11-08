@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Inventario.Controllers
 {
     public class PerfilesController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
-
         // GET: Perfiles
         public ActionResult Perfiles()
         {
@@ -31,7 +29,6 @@ namespace Inventario.Controllers
                 });
             return Json(perfiles, JsonRequestBehavior.AllowGet);
         }
-
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaPerfil(long Id)
         {
@@ -54,40 +51,39 @@ namespace Inventario.Controllers
             try
             {
                 long id = DatosPerfil.IdPerfilDeUsuario;
-            if (id.Equals(0))
-            {
-                int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil)).Count();
-
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                if (nveces == 0)
+                if (id.Equals(0))
                 {
-                    InvBD.PerfilDeUsuario.InsertOnSubmit(DatosPerfil);
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
+                    int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil)).Count();
+                    // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                    if (nveces == 0)
+                    {
+                        InvBD.PerfilDeUsuario.InsertOnSubmit(DatosPerfil);
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
                 else
                 {
-                    Afectados = -1;
+                    int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil) && p.Nivel.Equals(DatosPerfil.Nivel) && p.Permisos.Equals(DatosPerfil.Permisos) && p.Comentarios.Equals(DatosPerfil.Comentarios)).Count();
+                    if (nveces == 0)
+                    {
+                        PerfilDeUsuario obj = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(id)).First();
+                        obj.Perfil = DatosPerfil.Perfil;
+                        obj.Nivel = DatosPerfil.Nivel;
+                        obj.Permisos = DatosPerfil.Permisos;
+                        obj.Comentarios = DatosPerfil.Comentarios;
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
                 }
-            }
-            else
-            {
-                int nveces = InvBD.PerfilDeUsuario.Where(p => p.Perfil.Equals(DatosPerfil.Perfil) && p.Nivel.Equals(DatosPerfil.Nivel) && p.Permisos.Equals(DatosPerfil.Permisos) && p.Comentarios.Equals(DatosPerfil.Comentarios)).Count();
-                if (nveces == 0)
-                {
-                    PerfilDeUsuario obj = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(id)).First();
-                    obj.Perfil = DatosPerfil.Perfil;
-                    obj.Nivel = DatosPerfil.Nivel;
-                    obj.Permisos = DatosPerfil.Permisos;
-                    obj.Comentarios = DatosPerfil.Comentarios;
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
-            }
             }
             catch (Exception ex)
             {

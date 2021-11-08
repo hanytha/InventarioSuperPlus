@@ -125,8 +125,6 @@
     <Content Include="Scrips\General\JS_Validaciones.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\Internos\JS_Articulos.js" />
-    <Content Include="Scrips\Internos\JS_Entradas.js" />
-    <Content Include="Scrips\Internos\JS_Compra.js" />
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
@@ -188,10 +186,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
+    <Compile Include="Models\ModeloPerfiles.cs" />
     <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
+    <Compile Include="Models\ModeloUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

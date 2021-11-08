@@ -1,8 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Configuracion";
+    ViewBag.Title = "Usuario";
 }
-
+<h2>Usuario</h2>
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
@@ -53,16 +53,18 @@
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="abrirModalConf(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Configuracion">REGISTRAR CONFIFURACIÓN</button>
+
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR PERFILES</button>
+<div id="tablaPerfiles"></div>
+<button onclick="abrirModalPagina(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPagina">REGISTRAR PAGINAS</button>
 <!--Mostrar los registros en el accordion-->
-<div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="Configuracion">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -70,145 +72,203 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
-                <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>CONFIGURACIÓN</h4>
+                    <h1>Registro Usuarios</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h4>PASO 1</h4>
-                            <div class="form-group">
-                                <label for="fName">INGRESAR EL RFC</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="NOMBRE 1">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">INGRESAR EL NOMBRE DE LA EMPRESA</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="UNOMBRE 2">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">MISIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 2</h4>
-                            <div class="form-group">
-                                <label for="fName">VISIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">VALORES</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">DIRECCIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 3</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">TELÉFONO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN HOST</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            <h4>Paso 1</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
+                                        <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="RFC" size="15" maxlength="20" type="text">
+                                    </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 4</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">PUERTO</label>
-                                    <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">LOGO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">TEXTO DE EL LOGO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre de la empresa<span class="required">*</span></label>
+                                        <input id="TxtNombreEmpresa" name="data[TxtNombreEmpresa]" class="form-control  limpiar obligatorio" placeholder="Nombre de la empresa" size="10" maxlength="100" type="text">
+                                    </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 5</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">SESION ABIERTA</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtMisión">Misión<span class="required">*</span></label>
+                                        <input id="TxtMisión" name="data[TxtMisión]" class="form-control  limpiar obligatorio" placeholder="Misión" size="30" maxlength="100" type="text">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOPORT</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtVisión">Visión<span class="required">*</span></label>
+                                        <input id="TxtVisión" name="data[TxtMisión]" class="form-control  limpiar obligatorio" placeholder="Misión" size="30" maxlength="500" type="text">
+                                    </div>
                                 </div>
                             </div>
 
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h4> PASO 6</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOUSER</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOPASS</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN WEB</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            <h4>Paso 2</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtValores">Valores</label>
+                                        <input id="TxtValores" name="data[TxtValores]" class="form-control  limpiar obligatorio" placeholder="Valores" type="text">
+                                    </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
+                                        <input id="TxtDireccion" name="data[TxtDireccion]" class="form-control  limpiar obligatorio" placeholder="Dirección" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDireccionHost">Dirección Host<span class="required">*</span></label>
+                                        <input id="TxtDireccionHost" name="data[TxtDireccionHost]" class="form-control  limpiar obligatorio" placeholder="Dirección Host" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPuerto">Puerto<span class="required">*</span></label>
+                                        <input id="TxtPuerto" name="data[TxtPuerto]" class="form-control  limpiar obligatorio" placeholder="Puerto" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono">Teléfono</label>
+                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Teléfono" type="tel">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtSesionAbierta">Sesión Abierta<span class="required">*</span></label>
+                                        <input id="TxtSesionAbierta" name="data[TxtSesionAbierta]" class="form-control  limpiar obligatorio" placeholder="Sesión Abierta" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h4> PASO 7</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">DATO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO2</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO3</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO4</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
+                            <h4>Paso 3</h4>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="PBFoto">Seleccione el Logo</label>
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />                                        <br />
+                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                    </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtLogo">Texto del Logo<span class="required">*</span></label>
+                                        <input id="TxtLogo" name="data[TxtLogo]" class="form-control  limpiar obligatorio" placeholder="Texto del Logo" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtSerCorreo">SerCorreo</label>
+                                        <input id="TxtSerCorreo" name="data[TxtSerCorreo]" class="form-control limpiar obligatorio" placeholder="SerCorreo" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtSerCorreoPuerto">SerCorreoPuerto</label>
+                                        <input id="TxtSerCorreoPuerto" name="data[TxtSerCorreoPuerto]" class="form-control limpiar obligatorio" placeholder="SerCorreoPuerto" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4>Paso 4</h4>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtSerUser">SerUser</label>
+                                        <input id="TxtSerUser" name="data[TxtSerUser]" class="form-control limpiar obligatorio" placeholder="SerUser" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtSerPass">SerPuerto</label>
+                                        <input id="TxtSerPass" name="data[TxtSerPass]" class="form-control limpiar obligatorio" placeholder="SerPass" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDireccionWeB">Dirección Web</label>
+                                        <input id="TxtDireccionWeB" name="data[TxtDireccionWeB]" class="form-control limpiar obligatorio" placeholder="Dirección Web" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDato1">Dato 1</label>
+                                        <input id="TxtDato1" name="data[TxtDato1]" class="form-control limpiar obligatorio" placeholder="Dato 1" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDato2">Dato 2</label>
+                                        <input id="TxtDato2" name="data[TxtDato2]" class="form-control limpiar obligatorio" placeholder="Dato 2" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4>Paso 5</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDato3">Dato 3</label>
+                                        <input id="TxtDato3" name="data[TxtDato3]" class="form-control limpiar obligatorio" placeholder="Dato 3" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDato4">Dato 4</label>
+                                        <input id="TxtDato4" name="data[TxtDato4]" class="form-control limpiar obligatorio" placeholder="Dato 4" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -220,16 +280,14 @@
         </div>
     </div>
 </div>
+<table>
+</table>
 
-<!--------------------------------------------------------------------->
-<!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
+
+<!----------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalPagina">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -238,32 +296,115 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO CLASIFICACIÓN</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
-                        <fieldset>
-                            <!--Los pasos del modal-->
-
-                            <h4>PASO 1</h4>
-                            <div class="form-group">
-                                <label for="TxtClasificacion">Tipo de clasificación</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
+                    <h1>REGISTRO DE PAGINAS</h1>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
+                                    <input type="text" id="TxtAccion" class="form-control limpiar obligatorio" placeholder="Acción">
+                                </div>
                             </div>
-                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
-                        </fieldset>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
+                                    <input id="TxtControlador" class="form-control  limpiar obligatorio" placeholder="Controlador" maxlength="100" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
+                                    <input type="text" id="TxtMensaje" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Mensaje">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIconos">Icono<span class="required">*</span></label>
+                                    <input type="text" id="TxtIconos" class="form-control limpiar obligatorio" placeholder="Icono">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                    <input type="text" id="TxtDescripcion" class="form-control limpiar obligatorio" placeholder="Descripción">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
                     </form>
                 </div>
-                <!-- pie del modal-->
+                <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!---------------------------------------------------------------------->
+<!----------------------------------------------------------------------->
+div class="container">
+<div class="modal fade" id="ModalPerfiles">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                <h1>Registro de perfiles</h1>
+                <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <!-----formulario-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                <input type="text" id="TxtPerfil" class="form-control limpiar obligatorio" placeholder="Perfil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtComentarios">Permisos<span class="required">*</span></label>
+                                <div id="divPagina"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtComentarios">Comentarios<span class="required">*</span></label>
+                                <textarea id="TxtComentarios" required="required" class="form-control limpiar" name="TxtComentarios" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
+                </form>
+            </div>
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -272,9 +413,16 @@
 </style>
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<script src="~/Scrips/jquery-ui.min.js"></script>
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Paginas.js"></script>
+<script src="~/Scrips/Internos/JS_Perfiles.js"></script>
+
 <!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+

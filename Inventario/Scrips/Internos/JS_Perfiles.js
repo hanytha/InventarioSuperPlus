@@ -5,9 +5,8 @@ function ConsultaPerfiles() {
     }
     );
 }
-
 /*
- 
+
 CrearAcordeonPerfil();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPerfil() {
@@ -52,7 +51,6 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
     }
     CtrlPerfiles.innerHTML = CodigoHTMLPerfil;
 }*/
-
 function CrearTablaPerfiles(Data) {
     var CodigoHtmlTablaCompra = "";
     CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
@@ -63,11 +61,9 @@ function CrearTablaPerfiles(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Perfil + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Nivel + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Comentarios + "</td>";
-
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#ModalPerfiles'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].IdPerfilDeUsuario + ",this)'><i class='fas fa-eraser'></i></button>";
-
         CodigoHtmlTablaCompra += "</td>";
         CodigoHtmlTablaCompra += "</tr>";
     }
@@ -75,7 +71,6 @@ function CrearTablaPerfiles(Data) {
     CodigoHtmlTablaCompra += "</table>";
     document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
 }
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     MostrarPaginas();
@@ -123,7 +118,6 @@ function GuardarPerfil() {
             }
         }
         if (seleccionados == "") {
-
             alert("Rellene el checkbox");
         } else {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -141,7 +135,6 @@ function GuardarPerfil() {
                 }
                 var Permisos = seleccionados.substring(0, seleccionados.length - 1);
                 var Comentarios = document.getElementById("TxtComentarios").value;
-
                 var frm = new FormData();
                 frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
                 frm.append("Perfil", Perfil);
@@ -176,9 +169,6 @@ function GuardarPerfil() {
         }
     }
 }
-
-
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -208,10 +198,6 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
-
-
-
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Perfiles/EliminarPerfil/?Id=" + id, function (DatoPagina) {
@@ -230,9 +216,6 @@ function EliminarPerfil(id) {
         });
     }
 }
-
-
-
 function MostrarPaginas() {
     $.get("/Pagina/BDPagina", function (Paginas) {
         var codigoHtmlPagina = "";

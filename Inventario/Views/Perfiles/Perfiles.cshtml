@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Perfiles";
 }
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,20 +48,18 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR</button>
 <div id="tablaPerfiles"></div>
 <!-- Rellenar los registros de la base de datos en el accordión -->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalPerfiles">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,14 +86,12 @@
                                     <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtComentarios">Permisos<span class="required">*</span></label>
                                     <div id="divPagina"></div>
-
                                 </div>
                             </div>
                         </div>
@@ -108,7 +103,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <button type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
                     </form>
                 </div>
@@ -120,9 +114,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -137,6 +128,5 @@
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <script src="~/Scrips/Plus/scripts.js"></script>
-
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
