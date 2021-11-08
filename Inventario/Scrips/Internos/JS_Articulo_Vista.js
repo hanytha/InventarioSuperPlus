@@ -63,10 +63,6 @@ function Alternar(Seccion) {
     else { Seccion.style.display = "none" }
 }
 
-function Alternar2(Seccion) {
-    if (Seccion.style.display == "none") { Seccion.style.display = "" }
-    else { Seccion.style.display = "none" }
-}
 
 
 //--------------------------------------------------------------------------------------------------
@@ -83,13 +79,13 @@ function CrearDiArticulo(Data) {
     var CodigoHtmlCompra = "";
     CodigoHtmlCompra += "<div  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
-    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlCompra += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div class='icono flexbox'>ID</div> "
     CodigoHtmlCompra += "<div class='icono flexbox'>Fecha de ingreso</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Existencia actual</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Coste</div>"
     CodigoHtmlCompra += "<div class='icono flexbox'>Acción</div>"
-    CodigoHtmlAlmacen += "<hr class='solid3'>"
+    CodigoHtmlCompra += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div>";
 
 
