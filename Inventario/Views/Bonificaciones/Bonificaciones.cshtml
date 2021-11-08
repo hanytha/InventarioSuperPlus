@@ -57,16 +57,24 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
-
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
-
-<!------------------------------------------------>
+<!-------------------------------------------------------------------------------------------------------------->
 <img src="~/Assets/Imagenes/logo.png" alt="30" width="110" height="30">
-<!-----------------------Mustra los div------------------------------------>
+<!----------------------Mostrar el div principal-------------------------------------------------------------------->
 <div id="container"></div>
-<!----------------------------------------------------------->
+<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
+
+<button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar(seccion1)">
+</button>
+<div id="seccion1" style="display:none">
+    <div id="contenedor2"></div>
+</div>
+<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
+<button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar2(seccion2)">
+</button>
+<div id="seccion2" style="display:none">
+    <div id="contenedor3"></div>
+</div>
+<!--------------------------------------------------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -141,9 +149,6 @@
     </div>
 </div>
 
-<!----------------------------------------------------------->
-<div id="container"></div>
-
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
     #contenedor {
@@ -190,21 +195,6 @@
         border-top: 3px solid #0B94F8;
     }
 </style>
-<!------------------------------------------------------------------------------------------------------------>
-
-<button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar(seccion1)">
-</button>
-<div id="seccion1" style="display:none">
-    <div id="contenedor2"></div>
-</div>
-
-
-<button class='btn btn-outline-primary' style="cursor:s-resize" onClick="Alternar2(seccion2)">
-</button>
-<div id="seccion2" style="display:none">
-    <div id="contenedor3"></div>
-</div>
-
 
 <!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->

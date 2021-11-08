@@ -1,4 +1,5 @@
 ﻿LlenarCMBImpuesto();
+LlenarCMBArticulo();
 CrearAcordeonExistencia();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistencia() {
@@ -40,6 +41,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Coste : </strong>" + Data[i].Coste + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Impuesto: </strong>" + Data[i].Impuesto + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Impuesto: </strong>" + Data[i].Articulo + "</div>";
         CodigoHTMLAreas += "</div>";
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -77,6 +79,7 @@ function abrirModal(id) {//la clase  Obligatorio
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
+            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtClaveProveedor").value = Data[0].ClaveProveedor;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
@@ -85,7 +88,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCoste").value = Data[0].Coste;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-           
+
         });
     }
 }
@@ -111,6 +114,11 @@ function GuardarCompra() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNoCompra").value;
+
+            var IdArticulo = document.getElementById("cmbArticulo").value;
+            var TempArt = document.getElementById("cmbArticulo");
+            var Articulo = TempArt.options[TempArt.selectedIndex].text;
+
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var ClaveProveedor = document.getElementById("TxtClaveProveedor").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
@@ -126,6 +134,8 @@ function GuardarCompra() {
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
             frm.append("NoCompra", NoCompra);
+            frm.append("IdArticulo", IdArticulo);
+            frm.append("Articulo", Articulo);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("ClaveProveedor", ClaveProveedor);
             frm.append("FechaDeIngreso", FechaDeIngreso);
@@ -202,6 +212,14 @@ function LlenarCMBImpuesto() {
     $.get("/GLOBAL/BDImpuesto", function (data) {
         llenarCombo(data, document.getElementById("cmbImpuesto"));
     });
+}
+
+
+function LlenarCMBArticulo() {
+    $.get("/GLOBAL/BDArticulos", function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+}
 
     //funcion general para llenar los select
     function llenarCombo(data, control) {
@@ -215,4 +233,3 @@ function LlenarCMBImpuesto() {
     }
 
 
-}

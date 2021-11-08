@@ -1,7 +1,7 @@
 ﻿
 ConsultaArticulo();
 function ConsultaArticulo() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Bonificaciones/ConsultaArticulos", function (Data) {
         CrearDivArticulo(Data);
     }
     );
@@ -39,7 +39,6 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col '>" + Data[i].Descripcion + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
@@ -57,20 +56,17 @@ function CrearDivArticulo(Data) {
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
 }
 
-//-----------------------------------------------------------------------------------
+//---------------------------Funcion para desplegar la primera tabla--------------------------------------------------------
 function Alternar(Seccion) {
     if (Seccion.style.display == "none") { Seccion.style.display = "" }
     else { Seccion.style.display = "none" }
 }
-
+//---------------------------Funcion para desplegar la segunda tabla--------------------------------------------------------
 function Alternar2(Seccion2) {
     if (Seccion2.style.display == "none") { Seccion2.style.display = "" }
     else { Seccion2.style.display = "none" }
 }
-
-
 //--------------------------------------------------------------------------------------------------
-
 
 ConsultaArticulos();
 function ConsultaArticulos() {

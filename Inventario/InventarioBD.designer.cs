@@ -1403,8 +1403,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCategorias;
 		
-		private System.Nullable<long> _IdCompra;
-		
 		private string _Categoria;
 		
 		private string _NombreProveedor;
@@ -1461,8 +1459,6 @@ namespace Inventario
     partial void OnIdMarcaChanged();
     partial void OnIdCategoriasChanging(System.Nullable<long> value);
     partial void OnIdCategoriasChanged();
-    partial void OnIdCompraChanging(System.Nullable<long> value);
-    partial void OnIdCompraChanged();
     partial void OnCategoriaChanging(string value);
     partial void OnCategoriaChanged();
     partial void OnNombreProveedorChanging(string value);
@@ -1635,26 +1631,6 @@ namespace Inventario
 					this._IdCategorias = value;
 					this.SendPropertyChanged("IdCategorias");
 					this.OnIdCategoriasChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCompra", DbType="BigInt")]
-		public System.Nullable<long> IdCompra
-		{
-			get
-			{
-				return this._IdCompra;
-			}
-			set
-			{
-				if ((this._IdCompra != value))
-				{
-					this.OnIdCompraChanging(value);
-					this.SendPropertyChanging();
-					this._IdCompra = value;
-					this.SendPropertyChanged("IdCompra");
-					this.OnIdCompraChanged();
 				}
 			}
 		}
@@ -2321,6 +2297,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArticulo;
 		
+		private string _Articulo;
+		
 		private int _Estatus;
 		
 		private EntitySet<ExistenciaAlmacenG> _ExistenciaAlmacenG;
@@ -2355,6 +2333,8 @@ namespace Inventario
     partial void OnIdProveedorChanged();
     partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -2621,6 +2601,26 @@ namespace Inventario
 					this._IdArticulo = value;
 					this.SendPropertyChanged("IdArticulo");
 					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
 				}
 			}
 		}
