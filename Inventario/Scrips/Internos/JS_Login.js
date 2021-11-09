@@ -1,3 +1,4 @@
+//Login();
 //Ejecutando funciones
 document.getElementById("btn__iniciar-sesion").addEventListener("click", iniciarSesion);
 document.getElementById("btn__registrarse").addEventListener("click", register);
@@ -62,3 +63,27 @@ anchoPage();
 }
 
 
+//function Login() {
+//    var user = document.getElementById("TxtUser").value;
+//    var Pass = document.getElementById("TxtPassword").value;
+//    var Validar = document.getElementsByClassName("form-control");
+//    var val = 0;
+//    for (var i = 0; i < Validar.length; i++) {
+//        var Inf = Validar[i].value;
+//        if (Inf == '') {
+//            Validar[i].className += " border border-danger";
+//            val = val + 1;
+//        } else {
+//            Validar[i].className = "form-control";
+//        }
+//    }
+//    if (val == 0) {
+//        $.get("/Login/IniciarUsuario/?User=" + user + "&Password=" + Pass, function (Sesion) {
+//            if (Sesion == 1) {
+//                window.location = "/Index/Index";
+//            } else {
+//                alert("Haz ingresado datos incorrectos");
+//            }
+//        });
+//    }
+//}
