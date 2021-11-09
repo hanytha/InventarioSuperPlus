@@ -15,7 +15,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaArticulos()
+        public JsonResult ConsultasArticulos()
         {
             string id = "";
             string Nombre = "";

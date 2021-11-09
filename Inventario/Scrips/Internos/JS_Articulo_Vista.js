@@ -21,12 +21,12 @@ function CrearDivArticulo(Data) {
 
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticulo += "<div>";
-        CodigoHtmlArticulo += "<div class='row row-cols-auto '>";
+        CodigoHtmlArticulo += "<div class='row row-cols-auto'>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticulo += "<div class='col'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreEmpresa + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div class='col '>" + Data[i].FechaDeIngreso + "</div>"
@@ -37,9 +37,9 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "<div class='col'>"
         CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
         CodigoHtmlArticulo += "</div>";
-        CodigoHtmlArticulo += "<div class='col'>"
+        CodigoHtmlArticulo += "<div class='col '>"
         CodigoHtmlArticulo += "<label>"
-        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>"
+        CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
@@ -48,11 +48,11 @@ function CrearDivArticulo(Data) {
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "</div>";
-
+        CodigoHtmlArticulo += "</div>";
+        CodigoHtmlArticulo += "</div>";
     }
-    CodigoHtmlArticulo += "</div>";
-    CodigoHtmlArticulo += "</div>";
     document.getElementById("container").innerHTML = CodigoHtmlArticulo;
+
 }
 
 //---------------------------Funcion para desplegar la primera tabla--------------------------------------------------------
@@ -67,14 +67,14 @@ function Alternar2(Seccion2) {
 }
 //--------------------------------------------------------------------------------------------------
 
-ConsultaArticulos();
-function ConsultaArticulos() {
-    $.get("/Compra/ConsultasCompras", function (Data) {
-        CrearDiArticulo(Data);
+ConsultaTienda();
+function ConsultaTienda() {
+    $.get("/Tienda/ConsultaTiendas", function (Data) {
+        CrearDivTienda(Data);
     }
     );
 }
-function CrearDiArticulo(Data) {
+function CrearDivTienda(Data) {
     var CodigoHtmlCompra = "";
     CodigoHtmlCompra += "<div  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
@@ -92,20 +92,20 @@ function CrearDiArticulo(Data) {
         CodigoHtmlCompra += "<div>";
         CodigoHtmlCompra += "<div class='row row-cols-auto'>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].IdCompra + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].Nombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].FechaDeIngreso + "</div>"
+        CodigoHtmlCompra += "<div class='col'>" + Data[i].LNombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlCompra += "<div class='col '>" + Data[i].E1Nombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col '>" + Data[i].Coste + "</div>"
+        CodigoHtmlCompra += "<div class='col '>" + Data[i].Telefono + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col '>"
         CodigoHtmlCompra += "<label>"
-        CodigoHtmlCompra += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlCompra += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdTienda + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlCompra += "</label>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "</div>";
