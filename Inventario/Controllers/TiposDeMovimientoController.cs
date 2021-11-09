@@ -22,7 +22,6 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-                    p.IdCompra,
                     p.TipoDeMovimiento,
                     p.Descripcion,
                     p.Estatus,
@@ -37,7 +36,6 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-                    p.IdCompra,
                     p.TipoDeMovimiento,
                     p.Descripcion,
                     p.Estatus,

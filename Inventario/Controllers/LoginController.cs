@@ -46,6 +46,11 @@ namespace Inventario.Controllers
                             p.Telefono,
                             p.IdPerfil,
                             p.LvlPerfil,
+                            p.Estado,
+                            p.Municipio,
+                            p.Localidad,
+                            p.IdArea,
+                            p.IdSubArea,
                             p.NArea,
                             p.NSArea,
                             p.Usuario,
@@ -55,60 +60,118 @@ namespace Inventario.Controllers
 
                         Session["Usuario"] = DatosUsuario.IdUsuarios;
                         Accesos.Id = DatosUsuario.IdUsuarios;
-
+                        Accesos.CURP = DatosUsuario.CURP;
                         Accesos.Nombre = DatosUsuario.Nombre;
                         Accesos.ApellidosP = DatosUsuario.ApellidosP;
                         Accesos.ApellidosM = DatosUsuario.ApellidosM;
+                        Accesos.CURP = DatosUsuario.CURP;
+                        Accesos.Usuario = DatosUsuario.Usuario;
                         Accesos.Foto = "data:image/png;base64," + Convert.ToBase64String(DatosUsuario.Foto.ToArray());
-
-                        //Accesos.Sitio = DatosUsuario.IDSitio;
+                        Accesos.FechaDeNacimiento = DatosUsuario.FechaDeNacimiento;
+                        Accesos.IdEstado = DatosUsuario.IdEstado;
+                        Accesos.IdMunicipio = DatosUsuario.IdMunicipio;
+                        Accesos.IdLocalidad = DatosUsuario.IdLocalidad;
+                        Accesos.RFC = DatosUsuario.RFC;
+                        Accesos.NoSS = DatosUsuario.NoSS;
+                        Accesos.Correo = DatosUsuario.Correo;
+                        Accesos.Telefono = DatosUsuario.Telefono;
+                        Accesos.IdPerfil = DatosUsuario.IdPerfil;
+                        Accesos.LvlPerfil = DatosUsuario.LvlPerfil;
+                        Accesos.FechaIngreso = DatosUsuario.FechaIngreso;
+                        Accesos.Estado = DatosUsuario.Estado;
+                        Accesos.Municipio = DatosUsuario.Municipio;
+                        Accesos.Localidad = DatosUsuario.Localidad;
+                        Accesos.IdArea = DatosUsuario.IdArea;
+                        Accesos.IdSubArea = DatosUsuario.IdArea;
+                        Accesos.NArea = DatosUsuario.NArea;
+                        Accesos.NSArea = DatosUsuario.NSArea;
+                        Session["IDAsignacion"] = (long)DatosUsuario.IdArea;
+                        //Accesos.IDAsignacion = (long)DatosUsuario.IDAsignacion;
+                        //Session["IDSitio"] = (long)DatosUsuario.IDSitio;
+                        //Accesos.IDSitio = (long)DatosUsuario.IDSitio;
+                        ////Accesos.Sitio = DatosUsuario.IDSitio;
                         if (Accesos.IDAsignacion != 0)
                         {
-
-                            if (DatosUsuario.NSArea != "--Seleccione--")
+                            //    var Asignasion = InvBD.System_Inf_Asignacion.Where(p => p.IDAsignacion.Equals(DatosUsuario.IDAsignacion)).First();
+                            //    Accesos.Asignacion = Asignasion.Nombre;
+                            if (Accesos.IDAsignacion == 1)
                             {
-                                Accesos.NSArea = DatosUsuario.NSArea;
+                                var Sucursal = InvBD.Tienda.Where(p => p.IdTienda.Equals(DatosUsuario.IdArea)).First();
+                                //Accesos.Nombre = Sucursal.Nombre;
+                                Accesos.Tienda = DatosUsuario.Nombre.ToString();
                             }
-                            else
+                            else if (Accesos.IDAsignacion == 2)
                             {
-                                Accesos.NSArea = "";
+                                var Supervision = InvBD.Supervision.Where(p => p.IdSupervision.Equals(DatosUsuario.IdArea)).First();
+                                Accesos.Tienda = Supervision.Tienda;
+                                Accesos.IdArea = Supervision.IdSupervision;
                             }
+                            //else if (Accesos.IDAsignacion == 3) {
+                            //    Accesos.Sitio = "Oficina";
+                            //    Accesos.Tiendas = "";
+                            //}
+                            //else {
+                            //    Accesos.Sitio = "No tiene ninguna asignación";
+                            //    Accesos.Tiendas = "";
+                            //}
+                        }
+                        if (DatosUsuario.NArea != "--Seleccione--")
+                        {
+                            Accesos.NArea = DatosUsuario.NArea;
+                        }
+                        else
+                        {
+                            Accesos.NSArea = "";
+                        }
 
+                        //    if (DatosUsuario.CManejador != null) {
+                        //        Accesos.CManejador = DatosUsuario.CManejador;
+                        //    }
+                        //    else {
+                        //        Accesos.CManejador = "Aun no se le ha asignado una contraseña.";
+                        //    }
 
-                            var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
+                        //    if (DatosUsuario.CPlataforma != null) {
+                        //        Accesos.CPlataforma = DatosUsuario.CPlataforma;
+                        //    }
+                        //    else {
+                        //        Accesos.CPlataforma = "Aun no se le ha asignado una contraseña.";
+                        //}
+                        var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
 
-                            string[] abreviaturas = Permisos.Permisos.Split('$');
-                            int Filas = abreviaturas.GetLength(0);
-                            string[,] Paginas = new string[Filas, 3];
+                        string[] abreviaturas = Permisos.Permisos.Split('$');
+                        int Filas = abreviaturas.GetLength(0);
 
-                            Accesos.Perfil = Permisos.Perfil;
-                            Accesos.Accion = new List<string>();
-                            Accesos.Controlador = new List<string>();
-                            Accesos.Mensaje = new List<string>();
-                            Accesos.Icono = new List<string>();
+                        string[,] IdPagina = new string[Filas, 3];
+                        Accesos.Perfil = Permisos.Perfil;
+                        Accesos.Accion = new List<string>();
+                        Accesos.Controlador = new List<string>();
+                        Accesos.Mensaje = new List<string>();
+                        Accesos.Icono = new List<string>();
 
-                            for (int i = 0; i < Filas; i++)
-                            {
-                                var Pagina = InvBD.Pagina.Where(p => p.IdPagina.Equals(abreviaturas[i]))
-                                    .Select(p => new
-                                    {
-                                        p.Accion,
-                                        p.Controlador,
-                                        p.Mensaje,
-                                        p.Icono
-                                    });
-                                foreach (var item in Pagina)
+                        for (int i = 0; i < Filas; i++)
+                        {
+                            var Pagina = InvBD.Pagina.Where(p => p.IdPagina.Equals(abreviaturas[i]))
+                                .Select(p => new
                                 {
-                                    Accesos.Accion.Add(item.Accion);
-                                    Accesos.Controlador.Add(item.Controlador);
-                                    Accesos.Mensaje.Add(item.Mensaje);
-                                    //  Accesos.Icono.Add(item.Icono);
-                                }
+                                    p.Accion,
+                                    p.Controlador,
+                                    p.Mensaje,
+                                    p.Icono
+                                });
+                            foreach (var item in Pagina)
+                            {
+                                Accesos.Accion.Add(item.Accion);
+                                Accesos.Controlador.Add(item.Controlador);
+                                Accesos.Mensaje.Add(item.Mensaje);
+                                Accesos.Icono.Add(item.Icono);
                             }
                         }
                     }
                 }
             }
+
+
             catch (Exception ex)
             {
                 solicitud = 0;
@@ -116,6 +179,9 @@ namespace Inventario.Controllers
             return solicitud;
         }
         static readonly string password = "P455W0rd";
+
+        public int Filas { get; private set; }
+
         public static string Encrypt(string plainText)
         {
             if (plainText == null)
