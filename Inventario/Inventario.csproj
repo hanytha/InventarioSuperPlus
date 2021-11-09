@@ -115,7 +115,6 @@
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
-    <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Imp.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
