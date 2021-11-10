@@ -10,34 +10,34 @@ function CrearDivArticulo(Data) {
     CodigoHtmlArticulo += "<div id='container'>";
     CodigoHtmlArticulo += "<section id='contenedor_follow'>";
     CodigoHtmlArticulo += "<hr class='solid'>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Nombre Empresa</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Fecha de ingreso</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Stock</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Coste</div>"
-    CodigoHtmlArticulo += "<div class='icono flexbox'>Acción</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>ID</div> "
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>Nombre Empresa</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>Fecha de ingreso</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>Coste</div>"
+    CodigoHtmlArticulo += "<div class='icono flexbox Heading ml-auto'>Acción</div>"
     CodigoHtmlArticulo +="<hr class='solid'>"
     CodigoHtmlArticulo += "<div>";
 
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticulo += "<div>";
-        CodigoHtmlArticulo += "<div class='row row-cols-auto'>";
+        CodigoHtmlArticulo += "<div class='row row-cols-auto '>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col'>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticulo += "<div class='col Cell'>" + Data[i].IdArticulos + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col'>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlArticulo += "<div class='col Cell'>" + Data[i].NombreEmpresa + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].FechaDeIngreso + "</div>"
+        CodigoHtmlArticulo += "<div class='col Cell'>" + Data[i].FechaDeIngreso + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlArticulo += "<div class='col Cell'>" + Data[i].ExitenciaActual + "</div>"
         CodigoHtmlArticulo += "</div>";
         CodigoHtmlArticulo += "<div class='col'>"
-        CodigoHtmlArticulo += "<div class='col '>" + Data[i].Coste + "</div>"
+        CodigoHtmlArticulo += "<div class='col Cell'>" + Data[i].Coste + "</div>"
         CodigoHtmlArticulo += "</div>";
-        CodigoHtmlArticulo += "<div class='col '>"
+        CodigoHtmlArticulo += "<div class='col Cell'>"
         CodigoHtmlArticulo += "<label>"
         CodigoHtmlArticulo += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticulo += "</label>"
@@ -79,11 +79,11 @@ function CrearDivTienda(Data) {
     CodigoHtmlCompra += "<div  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlCompra += "<hr class='solid3'>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlCompra += "<div class='icono flexbox'>Fecha de ingreso</div>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>Existencia actual</div>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>Coste</div>"
-    CodigoHtmlCompra += "<div class='icono flexbox'>Acción</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox Heading'>ID</div> "
+    CodigoHtmlCompra += "<div class='icono flexbox Heading'>Fecha de ingreso</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox Heading'>Existencia actual</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox Heading'>Coste</div>"
+    CodigoHtmlCompra += "<div class='icono flexbox Heading'>Acción</div>"
     CodigoHtmlCompra += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div>";
 
@@ -92,18 +92,18 @@ function CrearDivTienda(Data) {
         CodigoHtmlCompra += "<div>";
         CodigoHtmlCompra += "<div class='row row-cols-auto'>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].Nombre + "</div>"
+        CodigoHtmlCompra += "<div class='col Cell'>" + Data[i].Nombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col'>" + Data[i].LNombre + "</div>"
+        CodigoHtmlCompra += "<div class='col Cell'>" + Data[i].LNombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col '>" + Data[i].E1Nombre + "</div>"
+        CodigoHtmlCompra += "<div class='col Cell'>" + Data[i].E1Nombre + "</div>"
         CodigoHtmlCompra += "</div>";
         CodigoHtmlCompra += "<div class='col'>"
-        CodigoHtmlCompra += "<div class='col '>" + Data[i].Telefono + "</div>"
+        CodigoHtmlCompra += "<div class='col Cell'>" + Data[i].Telefono + "</div>"
         CodigoHtmlCompra += "</div>";
-        CodigoHtmlCompra += "<div class='col '>"
+        CodigoHtmlCompra += "<div class='col Cell'>"
         CodigoHtmlCompra += "<label>"
         CodigoHtmlCompra += "<button title='Desplegar para mostrar' class='btn btn-outline-primary' onclick='editarModal(" + Data[i].IdTienda + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlCompra += "</label>"
@@ -136,10 +136,10 @@ function CrearDivAlmacen(Data) {
     CodigoHtmlAlmacen += "<div id='contenedor3'>";
     CodigoHtmlAlmacen += "<section id='contenedor_follow'>";
     CodigoHtmlAlmacen += "<hr class='solid4'>"
-    CodigoHtmlAlmacen += "<div class='icono flexbox'>ID</div> "
-    CodigoHtmlAlmacen += "<div class='icono flexbox'>TipoDeOperacion</div>"
-    CodigoHtmlAlmacen += "<div class='icono flexbox'>TipoDeOperacion</div>"
-    CodigoHtmlAlmacen += "<div class='icono flexbox'>Acción</div>"
+    CodigoHtmlAlmacen += "<div class='icono flexbox Heading'>ID</div> "
+    CodigoHtmlAlmacen += "<div class='icono flexbox Heading'>TipoDeOperacion</div>"
+    CodigoHtmlAlmacen += "<div class='icono flexbox Heading'>TipoDeOperacion</div>"
+    CodigoHtmlAlmacen += "<div class='icono flexbox Heading'>Acción</div>"
     CodigoHtmlAlmacen += "<hr class='solid4'>"
     CodigoHtmlAlmacen += "<div>";
 
@@ -147,13 +147,13 @@ function CrearDivAlmacen(Data) {
         CodigoHtmlAlmacen += "<div>";
         CodigoHtmlAlmacen += "<div class='row row-cols-auto'>";
         CodigoHtmlAlmacen += "<div class='col'>"
-        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].IdExistenciaAlmacenG + "</div>"
+        CodigoHtmlAlmacen += "<div class='col Cell'>" + Data[i].IdExistenciaAlmacenG + "</div>"
         CodigoHtmlAlmacen += "</div>";
         CodigoHtmlAlmacen += "<div class='col'>"
-        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].TipoDeOperacion + "</div>"
+        CodigoHtmlAlmacen += "<div class='col Cell'>" + Data[i].TipoDeOperacion + "</div>"
         CodigoHtmlAlmacen += "</div>";
         CodigoHtmlAlmacen += "<div class='col'>"
-        CodigoHtmlAlmacen += "<div class='col'>" + Data[i].TipoDeOperacion + "</div>"
+        CodigoHtmlAlmacen += "<div class='col Cell'>" + Data[i].TipoDeOperacion + "</div>"
         CodigoHtmlAlmacen += "</div>";
         CodigoHtmlAlmacen += "<div class='col'>"
         CodigoHtmlAlmacen += "<label>"

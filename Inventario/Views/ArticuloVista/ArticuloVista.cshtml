@@ -64,9 +64,9 @@
     <div id="contenedor3"></div>
 </div>
 <!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
-    <div id="seccion2" style="display:none">
-        <div id="contenedor2"></div>
-    </div>
+<div id="seccion2" style="display:none">
+    <div id="contenedor2"></div>
+</div>
 <!--------------------------------------------------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -94,7 +94,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
-                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="22" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
-                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Proveedor" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,38 @@
         border-top: 3px solid #0B94F8;
     }
 </style>
+<!-------------------------------------Estilo para separar los Div---------------------------------------------------------------------->
+<title>Como crear una tabla con divs</title>
+<style type="text/css">
 
+    .Table {
+        display: table;
+    }
+
+    .Title {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+
+    .Heading {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .Row {
+        display: table-row;
+    }
+
+    .Cell {
+        display: table-cell;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
 <!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
@@ -199,7 +230,7 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Prueba.js"></script>
+<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <script src="~/Scrips/Plus/scripts.js"></script>
