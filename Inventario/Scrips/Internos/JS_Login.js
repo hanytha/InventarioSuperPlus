@@ -82,7 +82,7 @@ function Login() {
             if (Sesion == 1) {
                 window.location = "/Index/Index";
             } else {
-                alert("Haz ingresado datos incorrectos");
+                alert("Datos incorrectos");
             }
         });
     }
