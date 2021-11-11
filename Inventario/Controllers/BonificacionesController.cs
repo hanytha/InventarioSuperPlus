@@ -46,7 +46,7 @@ namespace Inventario.Controllers
                 foreach (var comp in consultaFecha)
                 {
                     SumaStock = (int)(SumaStock + comp.stockActual);
-                    if (cont >= 0)
+                    if (cont == 0)
                     {
                         Costos += comp.costo + ",";
                     }

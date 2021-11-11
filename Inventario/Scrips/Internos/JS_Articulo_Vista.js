@@ -1,6 +1,7 @@
-﻿ConsultaArticuloComp();
+﻿
+ConsultaArticuloComp();
 function ConsultaArticuloComp() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Existencias/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
     }
     );
@@ -43,7 +44,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-info' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
+        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-primary' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -56,6 +57,7 @@ function CrearArticuloComp(Data) {
     document.getElementById("contenedor4").innerHTML = CodigoHtmlArticuloComp;
 
 }
+
 //---------------------------Funcion para desplegar la primera tabla--------------------------------------------------------
 function Alternar(Seccion) {
     if (Seccion.style.display == "none") { Seccion.style.display = "" }
