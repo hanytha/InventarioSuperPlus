@@ -58,160 +58,217 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h4>REGISTRO  MARCA</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+<!------------------------------------------------------------------------------------------------------------>
+<div id="contenedor1"></div>
+<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
+<div id="seccion1" style="display:none">
+    <div id="contenedor3"></div>
+</div>
+<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
+<div id="seccion2" style="display:none">
+    <div id="contenedor2"></div>
+</div>
+<!----------------------------------------------------------------------------------------------------------->
+<style>
+    contenedor2 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+    contenedor3 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+</style>
+<!--------------------------------------------------------------------------------------------------------------->
+    <!--Mostrar los registros en el accordion-->
+    <div id="tabla" class="default "></div>
+    <div id="accordion"></div>
+    <!-- Encabezado del Modal -->
+    <div class="container">
+        <div class="modal fade" id="dialogo1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
-                        <fieldset>
-                            <h4>Paso 1</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Nombre de la marca<span class="required">*</span></label>
-                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                    <!-- Contenido del modal -->
+                    <div class="modal-body">
+                        <h4>REGISTRO DE ARTÍCULOS</h4>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                            <fieldset>
+                                <h4>Paso 1</h4>
+                                <!--Insertar fecha-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span>*</span></label>
+                                            <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarMarca()">Guardar</button>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                <!--Termina-->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por elProveedor<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
+                                            <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
+                                            <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
+                                            <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                            <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
+                                            <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Agregar la imagen -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
+                                            <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />
+                                            <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                                <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- pie del modal-->
+                    <div class="modal-footer">
+                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!------------------------------------------------------->
-
-<a href="#modal" title="Políticas de privacidad" class="btn"><img src="https://s.yimg.com/fz/api/res/1.2/jtuckMbC_tLGqKSNQcoTSQ--~C/YXBwaWQ9c3JjaGRkO2g9NzUyO3E9ODA7dz0xMjAw/http://www.peceswiki.com/Imagenes/caracteristicas-de-los-peces.jpg" style="width: 70px"><img></a>
-<div id="modal">
-    <a href="#cerrar"></a>
-    <div id="modalContent">
-        <a href="#cerrar">X</a>
-        <h1 style="color: #f7be68; text-align:center;">Políticas de privacidad</h1>
-        <p style="text-align:center;">Contenido</p>
-    </div>
-</div>
-
-
-<style>
-    .btn {
-        position: relative;
-        font-size: 1.2em;
-        font-weight: 300;
-        color: #fff;
-        text-shadow: none;
-        border-radius: 0px;
-        background: #f7be68;
-        box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.22);
-        text-decoration: none;
-    }
-
-        .btn:hover {
-            background: #f5b14b;
-            box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.22);
-            color: #fff;
+    <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+    <style>
+        #contenedor {
+            width: 300px;
+            height: auto;
+            text-align: center;
         }
 
-    #modalContent {
-        position: absolute;
-        top: 30%;
-        left: 35%;
-        z-index: 6;
-        float: left;
-        margin: -2% 0px 0px -150px;
-        width: 700px;
-        color: #888888;
-        line-height: 22px;
-        padding: 15px;
-        border-radius: 5px;
-        background: #ffffff;
-        border: 1px solid #f7be68;
-        box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.22);
-    }
-
-    #modal {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        z-index: 5;
-        float: left;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.2);
-        display: none;
-        opacity: 0;
-    }
-
-        #modal > a {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            z-index: 1;
-            float: left;
-            width: 100%;
-            height: 100%;
+        #contenedor_follow div.icono {
+            display: inline-block;
+            width: 15%;
+            height: auto;
+            vertical-align: middle;
+            text-align: center;
         }
-
-    :target {
-        display: block !important;
-        opacity: 1 !important;
-    }
-
-    #modalContent > a {
-        position: absolute;
-        top: -4px;
-        right: -4px;
-        color: #fff;
-        border-radius: 2px;
-        background: #f7be68;
-        padding: 10px;
-        font-size: 30px;
-        text-decoration: none;
-    }
-</style>
-
-<!----------------------------------------------------------->
-
-@*<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-    .modal-header {
-        padding: 2px 16px;
-        background-color: #FFC300;
-        color: white;
-    }
-
-.modal-body {padding: 2px 16px;}
-
-    .modal-footer {
-        padding: 2px 16px;
-        background-color: #FFC300;
-        color: white;
-    }
-
-</style>*@
+    </style>
+    <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Solid border */
+        hr.solid {
+            border-top: 3px solid #D7DBDD;
+        }
+    </style>
 
 
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Solid border */
+        hr.solid3 {
+            border-top: 3px solid #f1f507;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Solid border */
+        hr.solid4 {
+            border-top: 3px solid #0B94F8;
+        }
+    </style>
+    <!---------------------------------------------------------------------------------------------------->
     <!--Hacer que el modal muestre los pasos por parte-->
     <style type="text/css">
         #regiration_form fieldset:not(:first-of-type) {
