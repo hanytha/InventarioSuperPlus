@@ -306,9 +306,11 @@ IDM.addEventListener("change", function () {
 
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
+   
     var pas1 = document.getElementById("Txtpassword").value;
     var pas2 = document.getElementById("TxtConfirmacion").value;
     if (pas1 == pas2) {
+
         if (CamposObligatorios() == true) {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
                 var IdUsuarios = sessionStorage.getItem('IdUsuarios');
@@ -513,6 +515,10 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
         });
     }
 }
+
+
+
+
 
 
 

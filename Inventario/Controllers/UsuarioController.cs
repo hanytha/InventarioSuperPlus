@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -57,6 +60,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaUsuario(long Id)
         {
             var usuario = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(Id) && p.Estatus.Equals(1))
+               
                 .Select(p => new
                 {
                     p.IdUsuarios,
@@ -88,6 +92,7 @@ namespace Inventario.Controllers
                     p.IdSubArea
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
+
         }
 
 
@@ -124,10 +129,13 @@ namespace Inventario.Controllers
         //Guardar los datos del proveedor
         public int GuardarUsuario(Usuarios DatosUsuarios, string cadF)
         {
+
+
             int Afectados = 0;
             //try
             //{
             long id = DatosUsuarios.IdUsuarios;
+
             if (id.Equals(0))
             {
                 //Guardar el Usuario cuando no exista uno con el mismo nombre en la base de datos
@@ -135,7 +143,10 @@ namespace Inventario.Controllers
                 if (nveces == 0)
                 {
                     DatosUsuarios.Foto = Convert.FromBase64String(cadF);
+                    //Encriptar la contraseña
+                    DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
                     InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -213,9 +224,49 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+
+
+        //La llave de la contraseña encriptada
+        static readonly string password = "P455W0rd";
+
+        public int Filas { get; private set; }
+        //Metodo para encriptar la contraseña
+        public static string Encrypt(string plainText)
+        {
+            if (plainText == null)
+            {
+                return null;
+            }
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            passwordBytes = SHA512.Create().ComputeHash(passwordBytes);
+            var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
+            return Convert.ToBase64String(bytesEncrypted);
+        }
+        private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+        {
+            byte[] encryptedBytes = null;
+            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (RijndaelManaged AES = new RijndaelManaged())
+                {
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    AES.KeySize = 256;
+                    AES.BlockSize = 128;
+                    AES.Key = key.GetBytes(AES.KeySize / 8);
+                    AES.IV = key.GetBytes(AES.BlockSize / 8);
+                    AES.Mode = CipherMode.CBC;
+                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                        cs.Close();
+                    }
+                    encryptedBytes = ms.ToArray();
+                }
+            }
+            return encryptedBytes;
+        }
     }
 }
-
-
-
 
