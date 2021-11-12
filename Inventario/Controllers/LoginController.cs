@@ -159,13 +159,13 @@ namespace Inventario.Controllers
                                     p.Mensaje,
                                     p.Icono
                                 });
-                            foreach (var item in Pagina)
-                            {
-                                Accesos.Accion.Add(item.Accion);
-                                Accesos.Controlador.Add(item.Controlador);
-                                Accesos.Mensaje.Add(item.Mensaje);
-                                Accesos.Icono.Add(item.Icono);
-                            }
+                            //foreach (var item in Pagina)
+                            //{
+                            //    Accesos.Accion.Add(item.Accion);
+                            //    Accesos.Controlador.Add(item.Controlador);
+                            //    Accesos.Mensaje.Add(item.Mensaje);
+                            //    Accesos.Icono.Add(item.Icono);
+                            //}
                         }
                     }
                 }

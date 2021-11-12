@@ -129,7 +129,8 @@ namespace Inventario.Controllers
         //Guardar los datos del proveedor
         public int GuardarUsuario(Usuarios DatosUsuarios, string cadF)
         {
-
+            //Encriptar la contraseña
+            DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
 
             int Afectados = 0;
             //try
@@ -225,7 +226,6 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-
         //La llave de la contraseña encriptada
         static readonly string password = "P455W0rd";
 
@@ -266,6 +266,35 @@ namespace Inventario.Controllers
                 }
             }
             return encryptedBytes;
+        }
+        //Funcion Desencriptar
+        public static byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        {
+            byte[] decryptedBytes = null;
+            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (RijndaelManaged AES = new RijndaelManaged())
+                {
+                    AES.KeySize = 256;
+                    AES.BlockSize = 128;
+
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    AES.Key = key.GetBytes(AES.KeySize / 8);
+                    AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+                    AES.Mode = CipherMode.CBC;
+
+                    using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
+                        cs.Close();
+                    }
+                    decryptedBytes = ms.ToArray();
+                }
+            }
+            return decryptedBytes;
         }
     }
 }
