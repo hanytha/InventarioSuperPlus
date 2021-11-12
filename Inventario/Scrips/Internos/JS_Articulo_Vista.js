@@ -1,60 +1,75 @@
 ﻿
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
-    $.get("/Existencias/ConsultaArticulos", function (Data) {
+    $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
-    }
-    );
+
+        let id = Data.id;
+        let ArrayId = id.split(',');
+        let Nombre = Data.Nombre;
+        let Arraynombre = Nombre.split(',');
+        let Fechas = Data.Fechas;
+        let Arrayfechas = Fechas.split(',');
+        let Stock = Data.Stock;
+        let Arraystock = Stock.split(',');
+        let Costos = Data.Costos;
+        let Arraycostos = Costos.split(',');
+
+        const Data = 
+            [
+
+                { Id: ArrayId[0], nombre: Arraynombre[0], fechas: Arrayfechas[0], stock: Arraystock[0], costos: Arraycostos[0].split(',') },
+                { Id: ArrayId[1], nombre: Arraynombre[1], fechas: Arrayfechas[1], stock: Arraystock[1], costos: Arraycostos[1].split(',') },
+                { Id: ArrayId[2], nombre: Arraynombre[2], fechas: Arrayfechas[2], stock: Arraystock[2], costos: Arraycostos[2].split(',') },
+                { Id: ArrayId[3], nombre: Arraynombre[3], fechas: Arrayfechas[3], stock: Arraystock[3], costos: Arraycostos[3].split(',') },
+                { Id: ArrayId[4], nombre: Arraynombre[4], fechas: Arrayfechas[4], stock: Arraystock[4], costos: Arraycostos[4].split(',') },
+                { Id: ArrayId[5], nombre: Arraynombre[5], fechas: Arrayfechas[5], stock: Arraystock[5], costos: Arraycostos[5].split(',') },
+            ]
+    });
+
 }
 
 function CrearArticuloComp(Data) {
     var CodigoHtmlArticuloComp = "";
-    CodigoHtmlArticuloComp += "<div id='contenedor4'>";
+    CodigoHtmlArticuloComp += "<div id='contenedor1'>";
     CodigoHtmlArticuloComp += "<section id='contenedor_follow'>";
-    CodigoHtmlArticuloComp += "<hr class='solid'>"
+    CodigoHtmlArticuloComp += "<hr class='solid'>";
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>ID</div> "
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Nombre Empresa</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Fecha de ingreso</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Costo</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>"
+    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
+
 
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].id + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Nombre + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].FechaDeIngreso + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Fechas + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Stock + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Coste + "</div>"
-        CodigoHtmlArticuloComp += "</div>";
-        CodigoHtmlArticuloComp += "<div class='col Cell'>"
-        CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
-        CodigoHtmlArticuloComp += "</label>"
-        CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-primary' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
-        CodigoHtmlArticuloComp += "</label>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Costos + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
-
+    
     }
-    document.getElementById("contenedor4").innerHTML = CodigoHtmlArticuloComp;
+    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
 }
 
@@ -124,9 +139,6 @@ function CrearDivTienda(Data) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-//--------------------------------------------------------------------------------------------------
-
 ConsultaExistenciaAlmacen();
 function ConsultaExistenciaAlmacen() {
     $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacenes", function (Data) {
@@ -174,40 +186,4 @@ function CrearDivAlmacen(Data) {
     document.getElementById("contenedor3").innerHTML = CodigoHtmlAlmacen;
 }
 
-//--------------------------------------------------------------------------------------------------
 
-
-//---------------------------------------------------------------------------------------------
-
-
-//Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
-    if (id == 0) {
-        LimpiarCampos();
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-
-        $.get("/Articulo/ConsultaArticulo/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDArt', Data[0].IdArticulos);
-            document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
-            document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
-            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
-            document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
-            document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
-            document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
-            document.getElementById("TxtFecha").value = Data[0].Fecha;
-            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-
-        });
-    }
-}

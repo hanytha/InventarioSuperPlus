@@ -151,7 +151,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdArticulos,
-                    Nombre = p.NombreProveedor
+                    Nombre = p.NombreEmpresa
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

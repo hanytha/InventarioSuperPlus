@@ -43,23 +43,24 @@ namespace Inventario.Controllers
                 int UltimoReg = consultaFecha.Count() - 1;
                 int cont = 0;
                 int SumaStock = 0;
-                //DateTime FultCompra;                
-                foreach (var comp in consultaFecha)
-                {
-                    SumaStock = (int)(SumaStock + comp.stockActual);
-                    if (cont == 0)
+
+                    //DateTime FultCompra;                
+                    foreach (var comp in consultaFecha)
                     {
-                        Costos += comp.costo + ",";
+                        SumaStock = (int)(SumaStock + comp.stockActual);
+                        if (cont == 0)
+                        {
+                            Costos += comp.costo + ",";
+                        }
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                        }
+                        cont++;
                     }
-                    if (cont == UltimoReg)
-                    {
-                        Fechas += comp.fechaIngreso + ",";
-                    }
-                    cont++;
-                }
-                Stock += SumaStock + ",";
+                    Stock += SumaStock + ",";
             }
-            var Resultado = new { ID = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
 
