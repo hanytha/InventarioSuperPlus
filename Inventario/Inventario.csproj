@@ -137,7 +137,6 @@
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />
     <Content Include="Scrips\Internos\JS_Login.js" />
-    <Content Include="Scrips\jquery-scrollLock.min.js" />
     <Content Include="Scrips\jquery-ui.min.js" />
     <Content Include="Scrips\jquery.min.js" />
     <Content Include="Scrips\jquery.scrollbar.min.js" />
