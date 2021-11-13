@@ -21,21 +21,21 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
 
-        let id = Data.id;
-        let ArrayId = id.split(',');
-        let Nombre = Data.Nombre;
-        let Arraynombre = Nombre.split(',');
-        let Fechas = Data.Fechas;
-        let Arrayfechas = Fechas.split(',');
-        let Stock = Data.Stock;
-        let Arraystock = Stock.split(',');
-        let Costos = Data.Costos;
-        let Arraycostos = Costos.split(',')
+    let id = Data.id;
+    let ArrayId = id.split(',');
+    let Nombre = Data.Nombre;
+    let Arraynombre = Nombre.split(',');
+    let Fechas = Data.Fechas;
+    let Arrayfechas = Fechas.split(',');
+    let Stock = Data.Stock;
+    let Arraystock = Stock.split(',');
+    let Costos = Data.Costos;
+    let Arraycostos = Costos.split(',');
 
     for (var i = 0; i < (ArrayId && Arraynombre && Arrayfechas && Arraystock && Arraycostos).length; i++) {
 
         CodigoHtmlArticuloComp += "<div>";
-        CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>";
+        CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<div class='col Cell'>" + ArrayId[i].id + "</div>"
         CodigoHtmlArticuloComp += "</div>";
