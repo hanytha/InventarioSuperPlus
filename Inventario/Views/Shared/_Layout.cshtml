@@ -21,6 +21,104 @@
     <!--link href="~/Content/all.min.css" rel="stylesheet" />-->
     <!-- Argon CSS -->
     <link href="~/Content/argon.css" rel="stylesheet" />
+    <!-------------Estilo Menú------------>
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #EAEBEF;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav {
+            width: 300px;
+        }
+
+        .nav__link {
+            color: #303440;
+            display: block;
+            padding: 17px 0;
+            text-decoration: none;
+        }
+
+        .nav__link--inside {
+            border-radius: 6px;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+            .nav__link--inside:hover {
+                background: #F6F8FA;
+            }
+
+        .list {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 0 16px 16px 0;
+            background: #fff;
+        }
+
+        .list__item {
+            list-style: none;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .list__item--click {
+            cursor: pointer;
+        }
+
+        .list__button {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .arrow .list__arrow {
+            transform: rotate(90deg);
+        }
+
+        .list__arrow {
+            margin-left: auto;
+            transition: transform .3s;
+        }
+
+        .list__show {
+            width: 80%;
+            margin-left: auto;
+            border-left: 2px solid #303440;
+            list-style: none;
+            transition: height .4s;
+            height: 0;
+        }
+
+        #menu a {
+            color: black
+        }
+
+        /* body {
+                background: #fafafa;
+                text-align: center;
+            }
+
+            .navbar-inner {
+                background: linear-gradient(#c8c8e3, #1cb5e0);
+                color: white;
+            }*/
+
+    </style>
 </head>
 <body>
     <!-- Sidenav -->
@@ -32,316 +130,80 @@
                 <img src="~/Assets/Imagenes/logo.png" />
             </a>
         </div>
-        <div class="navbar-inner">
-            <!-- Collapse -->
-            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                <!-- Nav items -->
-                <!-- Nav items -->
-                <ul class="navbar-nav">
-
-
-                    <li id="menu" class="list__item" style="cursor: pointer;">
-                        <div class="list__button">
-                            <i class="fas fa-home list__img"></i>
-
-                            @Html.ActionLink("Inicio", "Index", "Index")
-
-                        </div>
-                    </li>
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-cog list__img"></i>
-                            <a href="#" class="nav__link">Configuración</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Página", "Pagina", "Pagina")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Configuración", "Configuracion", "Configuracion")
-                            </li>
-
-
-                        </ul>
-
-                    </li>
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-users list__img"></i>
-                            <a href="#" class="nav__link">Usuarios</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Usuarios", "Usuario", "Usuario")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Perfiles de usuario", "Perfiles", "Perfiles")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="far fa-building list__img"></i>
-                            <a href="#" class="nav__link">Áreas</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Áreas", "Departamentos", "Departamentos")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Subáreas", "subArea", "subArea")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-box-open list__img"></i>
-                            <a href="#" class="nav__link">Artículos</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Artículos", "Articulo", "Articulo")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Existencias", "Existencias", "Existencias")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Existencias Almacen", "ExistenciaAlmacen", "ExistenciaAlmacen")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Entradas", "Entrada", "Entrada")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Clasificación", "Categoria", "Categoria")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Unidad de medida", "UnidadMedida", "UnidadMedida")
-                            </li>
-
-
-                        </ul>
-
-                    </li>
-
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-store list__img"></i>
-                            <a href="#" class="nav__link">Tiendas</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Tiendas", "Tienda", "Tienda")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Supervisión", "Supervision", "Supervision")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Supervisor", "Supervisor", "Supervisor")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-window-restore list__img"></i>
-                            <a href="#" class="nav__link">Pedidos</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li id="menu" class="list__inside">
-                                @Html.ActionLink("Pedidos externos", "Pedidosext", "Pedidosext")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Pedidos Internos", "Pedidosint", "Pedidosint")
-                            </li>
-                        </ul>
-
-                    </li>
-
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-user-friends list__img"></i>
-                            <a href="#" class="nav__link">Proveedores</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Proveedores", "Proveedores", "Proveedores")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Marca", "Marca", "Marca")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-shopping-cart list__img"></i>
-                            <a href="#" class="nav__link">Compra</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Compra", "Compra", "Compra")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Bonificaciones", "Bonificaciones", "Bonificaciones")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Impuestos", "Impuestos", "Impuestos")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                </ul>
-
-
+        <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+            <!--Cambiar el color de fondo a la tarjeta menu-->
+            <!-- Brand -->
+            <div class="sidenav-header  align-items-center">
+                <a class="navbar-brand" href="javascript:void(0)">
+                    <img src="~/Assets/Imagenes/logo.png" />
+                </a>
             </div>
-        </div>
+            <div class="navbar-inner">
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                    <!-- Nav items -->
+                    <!-- Nav items -->
 
-        <!-------------Estilo Menú------------>
-        <style>
+                    <aside class="left-sidebar" data-sidebarbg="skin5">
+                        <div class="scroll-sidebar">
+
+                            <!-- Sidebar navigation-->
+                            <nav class="sidebar-nav">
+                                @{
+                                    int Elemt = Accesos.Accion.Count();
+                                    for (int i = 0; i < Elemt; i++)
+                                    {
+                                        <ul id="sidebarnav">
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
+                                                    <i class='@Accesos.Icono[i]'></i>
+                                                    <span class="hide-menu">@Accesos.Mensaje[i]</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    }
+                                }
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
+            </div>
 
 
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+            <!------------------Script Menú-------------------->
+            @*<script>
+                    let listElements = document.querySelectorAll('.list__button--click');
 
-            body {
-                background: #EAEBEF;
-                font-family: 'Poppins', sans-serif;
-            }
+                    listElements.forEach(listElement => {
+                        listElement.addEventListener('click', () => {
 
-            .nav {
-                width: 300px;
-            }
+                            listElement.classList.toggle('arrow');
 
-            .nav__link {
-                color: #303440;
-                display: block;
-                padding: 17px 0;
-                text-decoration: none;
-            }
+                            let height = 0;
+                            let menu = listElement.nextElementSibling;
+                            if (menu.clientHeight == "0") {
+                                height = menu.scrollHeight;
+                            }
 
-            .nav__link--inside {
-                border-radius: 6px;
-                padding-left: 20px;
-                text-align: left;
-            }
+                            menu.style.height = `${height}px`;
 
-                .nav__link--inside:hover {
-                    background: #F6F8FA;
-                }
+                        })
+                    });
+                </script>*@
 
-            .list {
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-                border-radius: 0 16px 16px 0;
-                background: #fff;
-            }
+            <!-------------------------------------------------------------------->
+            <!-- Divider -->
+            <!-- Heading -->
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
 
-            .list__item {
-                list-style: none;
-                width: 100%;
-                text-align: center;
-                overflow: hidden;
-            }
+                </li>
+                <li class="nav-item">
 
-            .list__item--click {
-                cursor: pointer;
-            }
-
-            .list__button {
-                display: flex;
-                align-items: center;
-                gap: 1em;
-                width: 90%;
-                margin: 0 auto;
-            }
-
-            .arrow .list__arrow {
-                transform: rotate(90deg);
-            }
-
-            .list__arrow {
-                margin-left: auto;
-                transition: transform .3s;
-            }
-
-            .list__show {
-                width: 80%;
-                margin-left: auto;
-                border-left: 2px solid #303440;
-                list-style: none;
-                transition: height .4s;
-                height: 0;
-            }
-
-            #menu a {
-                color: black
-            }
-
-            /* body {
-                background: #fafafa;
-                text-align: center;
-            }
-
-            .navbar-inner {
-                background: linear-gradient(#c8c8e3, #1cb5e0);
-                color: white;
-            }*/
-
-        </style>
-        <!------------------Script Menú-------------------->
-        <script>
-            let listElements = document.querySelectorAll('.list__button--click');
-
-            listElements.forEach(listElement => {
-                listElement.addEventListener('click', () => {
-
-                    listElement.classList.toggle('arrow');
-
-                    let height = 0;
-                    let menu = listElement.nextElementSibling;
-                    if (menu.clientHeight == "0") {
-                        height = menu.scrollHeight;
-                    }
-
-                    menu.style.height = `${height}px`;
-
-                })
-            });
-        </script>
+                </li>
+            </ul>
+        </nav>
 
         <!-------------------------------------------------------------------->
         <!-- Divider -->
