@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Assets/Imagenes/logo.png" />
+    <title>@ViewBag.Title - Inventario - ASP.NET </title>
     <!-- IMPORTAR FONTAWESOME DIRECTAMENTE DESDE SU SERVIDOR -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!--  <link rel="stylesheet" href="[nombreCarpetaFontAwesome]/css/all.css">-->
@@ -122,6 +123,7 @@
 </head>
 <body>
     <!-- Sidenav -->
+
     <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
         <!--Cambiar el color de fondo a la tarjeta menu-->
         <!-- Brand -->
@@ -147,7 +149,7 @@
                     <aside class="left-sidebar" data-sidebarbg="skin5">
                         <div class="scroll-sidebar">
 
-                            <!-- Sidebar navigation-->
+                            <!--Crear el menú de opciones de manera dinaámica (Razor)-->
                             <nav class="sidebar-nav">
                                 @{
                                     int Elemt = Accesos.Accion.Count();
@@ -454,18 +456,21 @@
                 </div>
             </div>
         </nav>
-        <!-- Header -->
-        <!-- Mask -->
-        <!-- Cabecera del Layaut-->
-
-        @RenderBody()
-
-
+        <!-- Pie de Pagina-->
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p> Inventario |ASP.NET| &copy; @DateTime.Now.Year </p>
+                </footer>
+            </div>
+        </div>
 
         <!-- Pie de pagina -->
         <!--<footer class="footer">
-        <p>Contenido del pié de la página.</p>
-        /footer> -->
+    <p>Contenido del pié de la página.</p>
+    /footer> -->
     </div>
     <!-- Argon Scripts -->
     <!-- Script-->

@@ -20,7 +20,7 @@ namespace Inventario.Controllers
         {
             int solicitud = 0;
             try
-            {
+            {//Encriptar la contraseña recibida en la caja de texto(Ingresado por el usuario)
                 string ConSif = Encrypt(Password);
                 using (InventarioBDDataContext InvBD = new InventarioBDDataContext())
                 {

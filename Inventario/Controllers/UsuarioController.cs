@@ -84,7 +84,8 @@ namespace Inventario.Controllers
                     p.LvlPerfil,
                     p.Usuario,
                     p.FechaIngreso,
-                    p.Password,
+                    //p.Password,
+                    Password = Decrypt(p.Password),
                     p.Estado,
                     p.Municipio,
                     p.Localidad,
@@ -132,6 +133,9 @@ namespace Inventario.Controllers
             //Encriptar la contraseña
             DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
 
+            //Encriptar la contraseña
+           
+
             int Afectados = 0;
             //try
             //{
@@ -146,6 +150,7 @@ namespace Inventario.Controllers
                     DatosUsuarios.Foto = Convert.FromBase64String(cadF);
                     //Encriptar la contraseña
                     //DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
+
                     InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
 
                     InvBD.SubmitChanges();
@@ -228,20 +233,32 @@ namespace Inventario.Controllers
 
         //La llave de la contraseña encriptada
         static readonly string password = "P455W0rd";
-
-        public int Filas { get; private set; }
-        //Metodo para encriptar la contraseña
         public static string Encrypt(string plainText)
         {
             if (plainText == null)
             {
                 return null;
             }
+            // Get the bytes of the string
             var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
+            // Hash the password with SHA256
             passwordBytes = SHA512.Create().ComputeHash(passwordBytes);
             var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
             return Convert.ToBase64String(bytesEncrypted);
+        }
+        public static string Decrypt(string encryptedText)
+        {
+            if (encryptedText == null)
+            {
+                return null;
+            }
+            // Get the bytes of the string
+            var bytesToBeDecrypted = Convert.FromBase64String(encryptedText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            passwordBytes = SHA512.Create().ComputeHash(passwordBytes);
+            var bytesDecrypted = Decrypt(bytesToBeDecrypted, passwordBytes);
+            return Encoding.UTF8.GetString(bytesDecrypted);
         }
         private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
@@ -267,25 +284,20 @@ namespace Inventario.Controllers
             }
             return encryptedBytes;
         }
-        //Funcion Desencriptar
-        public static byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        private static byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
         {
             byte[] decryptedBytes = null;
-            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
+            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             using (MemoryStream ms = new MemoryStream())
             {
                 using (RijndaelManaged AES = new RijndaelManaged())
                 {
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
-
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
                     AES.IV = key.GetBytes(AES.BlockSize / 8);
-
                     AES.Mode = CipherMode.CBC;
-
                     using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
                     {
                         cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
@@ -298,4 +310,3 @@ namespace Inventario.Controllers
         }
     }
 }
-
