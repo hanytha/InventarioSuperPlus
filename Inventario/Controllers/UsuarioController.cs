@@ -145,7 +145,7 @@ namespace Inventario.Controllers
                 {
                     DatosUsuarios.Foto = Convert.FromBase64String(cadF);
                     //Encriptar la contraseña
-                    DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
+                    //DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
                     InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
 
                     InvBD.SubmitChanges();
