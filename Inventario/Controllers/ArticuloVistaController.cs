@@ -43,7 +43,9 @@ namespace Inventario.Controllers
                 int UltimoReg = consultaFecha.Count() - 1;
                 int cont = 0;
                 int SumaStock = 0;
-
+                //inicia
+                if (cont > 0)
+                {
                     //DateTime FultCompra;                
                     foreach (var comp in consultaFecha)
                     {
@@ -59,6 +61,14 @@ namespace Inventario.Controllers
                         cont++;
                     }
                     Stock += SumaStock + ",";
+                    //termina
+                }
+                else
+                {
+                    Costos += 0 + ",";
+                    Fechas += 12 / 11 / 2021 + ",";
+                    Stock += 0 + ",";
+                }
             }
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
