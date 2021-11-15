@@ -20,7 +20,7 @@
             <h3>Comercializadora Picaros</h3>
             <h3>de la Mixteca S.A. de C.V.</h3>
             <p>Regístrate para que puedas iniciar sesión</p>
-            <button id="btn__registrarse">Regístrarse</button>
+            <button id="btn__registrarse" class="btn btn-outline-primary">---</button>
         </div>
     </div>
 
@@ -28,10 +28,12 @@
     <div class="contenedor__login-register">
         <!--Login-->
         <form action="" class="formulario__login">
+           
+            <div align="center"> <img class="mb-4" src="~/Assets/Login/logotipo.svg" alt="" width="40" height="40"></div>
             <h2>Iniciar Sesión</h2>
-            <div class="input-group mw-100">
+            <div class="input-group m-lg-0">
                 <label for="TxtUser" class="sr-only">Usuario</label>
-                <span class="input-group-text bg-primary text-white" id="basic-addon1">
+                <span class="input-group-text bg-warning text-white" id="basic-addon1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
@@ -48,7 +50,8 @@
                 </span>
                 <input id="TxtPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
             </div>
-            <button id="btnEntrar" type="button" class="btn btn-success " onclick=" Login()">Acceder</button>
+            <button id="btnEntrar" type="button" class="btn btn-outline-warning" onclick=" Login()">Acceder</button>
+
         </form>
 
         <!--Register-->
