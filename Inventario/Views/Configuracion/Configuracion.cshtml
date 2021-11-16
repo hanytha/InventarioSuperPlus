@@ -56,7 +56,7 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModalConf(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Configuracion">REGISTRAR CONFIFURACIÓN</button>
-
+<div id="AcordeonConfiguracion"></div>
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR PERFILES</button>
 <div id="tablaPerfiles"></div>
 <button onclick="abrirModalPagina(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPagina">REGISTRAR PAGINAS</button>
@@ -221,10 +221,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDireccionWeB">Dirección Web</label>
                                         <input id="TxtDireccionWeB" name="data[TxtDireccionWeB]" class="form-control limpiar obligatorio" placeholder="Dirección Web" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTipo">Tipo</label>
+                                        <input id="TxtTipo" name="data[TxtTipo]" class="form-control limpiar obligatorio" placeholder="Tipo" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -419,6 +425,7 @@ div class="container">
 
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Configuraciones.js"></script>
 <script src="~/Scrips/Internos/JS_Paginas.js"></script>
 
 <script src="~/Scrips/Internos/JS_Perfiles.js"></script>
