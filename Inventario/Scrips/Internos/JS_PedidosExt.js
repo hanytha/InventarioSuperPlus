@@ -1,56 +1,56 @@
 ﻿LlenarCMBPrincipal();
 BloquearCTRL();
+
 CrearAcordeonPedidosExt();
-//Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPedidosExt() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonPedidosExt(Data, document.getElementById("accordion"));
+    $.get("/Pedidosext/ConsultaPedidosExternos", function (IncidenciasArea) {
+        AcordeonPedidosExt(IncidenciasArea, document.getElementById("accordion"));
     });
 }
-function AcordeonPedidosExt(Data, CtrlPedidosInt) {
-    var CodigoHTMLPagina = "";
-    for (var i = 0; i < Data.length; i++) {
+
+//Crea la información basica de las insidencias
+function AcordeonPedidosExt(data, IDo) {
+    var CodHtml = "";
+    for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodigoHTMLPagina += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLPagina += "<div class='card m-b-0 border-top'>";
-        } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLPagina += "<div class='card-header' id='heading" + Data[i].IdPedidosExternos + "'>";
-        CodigoHTMLPagina += "<h5 class='mb-0'>";
-        CodigoHTMLPagina += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidosExternos + "' class='collapsed'>";
-        CodigoHTMLPagina += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLPagina += "<span >" + Data[i].NumeroPedido + "</span>";
-        CodigoHTMLPagina += "</a>";
-        CodigoHTMLPagina += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPedidosExternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLPagina += "<div class='card-body'>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
-
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Provedor: </strong>" + Data[i].Proveedor + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLPagina += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPedidosExternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLPagina += "<button class='btn btn-danger' onclick='EliminarPedidoExterno(" + Data[i].IdPedidosExternos + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
+            CodHtml += "<div class='card m-b-0 border-top'>";
+        }
+        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosExternos + "'>";
+        CodHtml += "<h5 class='mb-0'>";
+        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosExternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
+        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodHtml += "<span >" + data[i].NumeroPedido + "</span>";
+        CodHtml += "</a>";
+        CodHtml += "</h5>";
+        CodHtml += "<div id='collapse" + data[i].IdPedidosExternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodHtml += "<div class='card-body'>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad de Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + data[i].Proveedor + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + data[i].Fecha + "</div>";
+        CodHtml += "</div >";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosExternos + "," + data[i].IdPedidosExternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoExterno(" + data[i].IdPedidosExternos + "," + data[i].IdPedidosExternos + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
     }
-    CtrlPedidosInt.innerHTML = CodigoHTMLPagina;
+    IDo.innerHTML = CodHtml;
 }
+
+
+
+
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -79,8 +79,8 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
             document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
             document.getElementById("cmbMarca").value = Data[0].IdMarca;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         });
     }
 }
