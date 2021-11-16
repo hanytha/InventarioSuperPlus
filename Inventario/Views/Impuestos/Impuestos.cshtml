@@ -2,15 +2,13 @@
 @{
     ViewBag.Title = "Impuestos";
 }
-
-<!--Titulo-->
-<link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-
+<link rel="stylesheet" href="estilos.css">
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -54,63 +52,69 @@
         </div>
     </div>
 </div>
+
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImpuesto">REGISTRAR</button><!--Mostrar los registros en el accordion-->
-<!--Muestra la tabla compras-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+
 <div id="tablaImpuesto" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalImpuesto">
+    <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" onclick="return confirmarAccesoURL()"><i class="fas fa-times-circle"></i></button>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE IMPUESTOS</h4>
+                    <h5>REGISTRO DE IMPUESTOS</h5>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h4>Paso 1</h4>
+                            <h5>Paso 1</h5>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtImpuesto">Impuesto:<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtImpuesto]" id="TxtImpuesto" class="form-control  limpiar ObligatoriosImpuestos" placeholder="IVA">
+                                        <label class="form-control-label" for="TxtImpuesto">Impuesto<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtImpuesto]" id="TxtImpuesto" class="form-control  limpiar obligatorio" placeholder="IVA">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtPorcentaje">Porcentaje:<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPorcentaje]" id="TxtPorcentaje" class="form-control  limpiar ObligatoriosImpuestos" placeholder="3">
+                                        <label class="form-control-label" for="TxtPorcentaje">Porcentaje<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtPorcentaje]" id="TxtPorcentaje" class="form-control  limpiar obligatorio" placeholder="3">
                                     </div>
                                 </div>
                             </div>
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarImpuesto()">Guardar</button>
+                            <button type="button" class="btn btn-success" onclick="GuardarImpuesto()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
+                <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Impuestos.js"></script>
-<!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
-
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

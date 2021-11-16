@@ -16,7 +16,7 @@ function CrearTablaImpuesto(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Porcentaje + "</td>";
 
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#ModalImpuesto'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarImpuesto(" + Data[i].IdImpuesto + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";

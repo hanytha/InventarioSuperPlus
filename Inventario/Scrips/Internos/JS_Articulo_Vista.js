@@ -1,5 +1,4 @@
-﻿
-ConsultaArticuloComp();
+﻿ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
@@ -18,6 +17,7 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Costo</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
+    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
 
@@ -32,8 +32,10 @@ function CrearArticuloComp(Data) {
     let Costos = Data.Costos;
     let Arraycostos = Costos.split(',');
 
-    for (var i = 0; i < (ArrayId && Arraynombre && Arrayfechas && Arraystock && Arraycostos).length; i++) {
+    let sub = Object(ArrayId , Arraynombre , Arrayfechas , Arraystock , Arraycostos);
+  
 
+    for (var i = 0; i < sub.length; i++) {
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
         CodigoHtmlArticuloComp += "<div class='col'>"
@@ -93,6 +95,7 @@ function CrearDivTienda(Data) {
     CodigoHtmlCompra += "<div class='icono flexbox Heading'>Acción</div>"
     CodigoHtmlCompra += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div>";
+
 
 
     for (var i = 0; i < Data.length; i++) {
