@@ -17,10 +17,10 @@ function AcordeonArticulos(Data, CtrlArti) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdArticulos + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";

@@ -63,12 +63,12 @@
 
         if (ModeloAreas.IdAreas != null)
         {
-            string Classe = "card m-b-0";
+            string Classe = "card m-b-0 list-group list-group-flush  mb-1";
             for (var i = 0; i < ModeloAreas.IdAreas.Count(); i++)
             {
                 if (i > 0)
                 {
-                    Classe = "card m-b-0 border-top";
+                    Classe = "card m-b-0 list-group list-group-flush  mb-1";
                 }
                 string Collapse = "collapse" + ModeloAreas.IdAreas[i], IDTabla = "Tabla_Depto_" + ModeloAreas.IdAreas[i];
                 string Heading = "heading" + ModeloAreas.IdAreas[i], Badge = "Badge" + ModeloAreas.IdAreas[i];

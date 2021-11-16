@@ -12,12 +12,12 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-        CodigoHTMLAreas += "<div class='card-header bg-transparent border-light ' id='heading" + Data[i].IdExistenciaAlmacenG+ "'>";
+        CodigoHTMLAreas += "<div class='card-header bg-transparent border-light' id='heading" + Data[i].IdExistenciaAlmacenG+ "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdExistenciaAlmacenG + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
