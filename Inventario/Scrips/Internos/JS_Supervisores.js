@@ -30,21 +30,14 @@ function AcordeonSupervisores(data, IDo) {
         CodHtml += "<div class='card-body'>";
         CodHtml += "<div class='row'>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Apellido paterno: </strong>" + data[i].ApellidoP + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Apellido Materno: </strong>" + data[i].ApellidoM + "</div>";
-        CodHtml += "</div>";
-        CodHtml += "<div class='row'>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'></div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + data[i].Telefono + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Apellido Materno: </strong>" + data[i].ApellidoM + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Correo: </strong>" + data[i].Correo + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo de Supervision: </strong>" + data[i].TipoSupervision + "</div>";
-        CodHtml += "</div>";
-        CodHtml += "<div class='row'>";
-        CodHtml += "<div class='col-md-9 col-sm-9 col-xs-9'><strong>Posibles soluciones: </strong></div >";
         CodHtml += "</div >";
         CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdSupervisor + "," + data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-
         CodHtml += "<button class='btn btn-danger' onclick='EliminarSupervisor(" + data[i].IdSupervisor + "," + data[i].IdSupervisor + ",this)'><i class='fas fa-eraser'></i></button>";
         CodHtml += "</div>";
         CodHtml += "</div>";
