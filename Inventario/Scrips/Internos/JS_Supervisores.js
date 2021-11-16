@@ -43,8 +43,8 @@ function AcordeonSupervisores(data, IDo) {
         CodHtml += "<div class='row'>";
         CodHtml += "<div class='col-md-9 col-sm-9 col-xs-9'><strong>Posibles soluciones: </strong></div >";
         CodHtml += "</div >";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdSupervisor + "," + data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
 
-        CodHtml += "<button class='btn btn-primary' onclick='AbrirModalIncidencia(" + data[i].IdSupervisor + "," + data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodHtml += "<button class='btn btn-danger' onclick='EliminarSupervisor(" + data[i].IdSupervisor + "," + data[i].IdSupervisor + ",this)'><i class='fas fa-eraser'></i></button>";
         CodHtml += "</div>";
         CodHtml += "</div>";

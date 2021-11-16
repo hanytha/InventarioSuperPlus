@@ -1,53 +1,54 @@
 ﻿
 
 CrearAcordeonPagina();
-//Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPagina() {
-    $.get("/Pagina/ConsultaPaginas", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonPagina(Data, document.getElementById("accordion"));
+    $.get("/Pagina/ConsultaPaginas", function (IncidenciasArea) {
+        AcordeonPagina(IncidenciasArea, document.getElementById("accordion"));
     });
 }
-function AcordeonPagina(Data, CtrlProveedores) {
-    var CodigoHTMLPagina = "";
-    for (var i = 0; i < Data.length; i++) {
+
+//Crea la información basica de las insidencias
+function AcordeonPagina(data, IDo) {
+    var CodHtml = "";
+    for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodigoHTMLPagina += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLPagina += "<div class='card m-b-0 border-top'>";
-        } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLPagina += "<div class='card-header' id='heading" + Data[i].IdPagina + "'>";
-        CodigoHTMLPagina += "<h5 class='mb-0'>";
-        CodigoHTMLPagina += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPagina + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPagina + "' class='collapsed'>";
-        CodigoHTMLPagina += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLPagina += "<span >" + Data[i].Mensaje + "</span>";
-        CodigoHTMLPagina += "</a>";
-        CodigoHTMLPagina += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLPagina += "<div id='collapse" + Data[i].IdPagina + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLPagina += "<div class='card-body'>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Acción: </strong>" + Data[i].Accion + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Controlador: </strong>" + Data[i].Controlador + "</div>";
-        CodigoHTMLPagina += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Icono: </strong>" + Data[i].Icono + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='row'>";
-        CodigoHTMLPagina += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripcion: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLPagina += "<button class='btn btn-primary' onclick='abrirModalPagina(" + Data[i].IdPagina + ")' data-toggle='modal' data-target='#ModalPagina'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + Data[i].IdPagina + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
-        CodigoHTMLPagina += "</div>";
+            CodHtml += "<div class='card m-b-0 border-top'>";
+        }
+        CodHtml += "<div class='card-header' id='heading" + data[i].IdPagina + "'>";
+        CodHtml += "<h5 class='mb-0'>";
+        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPagina + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPagina + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPagina + "' class='collapsed'>";
+        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodHtml += "<span >" + data[i].Mensaje + "</span>";
+        CodHtml += "</a>";
+        CodHtml += "</h5>";
+        CodHtml += "<div id='collapse" + data[i].IdPagina + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodHtml += "<div class='card-body'>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Apellido paterno: </strong>" + data[i].Accion + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Apellido Materno: </strong>" + data[i].Controlador + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'></div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + data[i].Icono + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Correo: </strong>" + data[i].Descripcion + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div >";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModalPagina(" + data[i].IdPagina + "," + data[i].IdPagina + ")' data-toggle='modal' data-target='#ModalPagina'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarPagina(" + data[i].IdPagina + "," + data[i].IdPagina + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
     }
-    CtrlProveedores.innerHTML = CodigoHTMLPagina;
+    IDo.innerHTML = CodHtml;
 }
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModalPagina(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -150,7 +151,7 @@ function CamposObligatorios() {
 //        $.get("/Pagina/EliminarPagina/?Id=" + id, function (DatoPagina) {
 //            if (DatoPagina == 1) {
 //                alert("Se elimino correctamente");
-//                CrearAcordeonSupervisores();
+//                CrearAcordeonPagina();
 //            } else {
 //                alert("Ocurrio un error");
 //            }
