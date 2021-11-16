@@ -1,57 +1,56 @@
 ﻿LlenarCMBPrincipal();
 BloquearCTRL();
 CrearAcordeonPedidosInt();
-//Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonPedidosInt() {
-    $.get("/Pedidosint/ConsultaPedidosInternos", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonPedidosInt(Data, document.getElementById("accordion"));
+    $.get("/Pedidosint/ConsultaPedidosInternos", function (IncidenciasArea) {
+        AcordeonPedidosInt(IncidenciasArea, document.getElementById("accordion"));
     });
 }
-function AcordeonPedidosInt(Data, CtrlPedidosInt) {
-    var CodigoHTMLPedidosInt = "";
-    for (var i = 0; i < Data.length; i++) {
+
+//Crea la información basica de las insidencias
+function AcordeonPedidosInt(data, IDo) {
+    var CodHtml = "";
+    for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodigoHTMLPedidosInt += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLPedidosInt += "<div class='card m-b-0 border-top'>";
-        } //Obtener los registros de la base de datos para mostrarlo en el accordión
-        CodigoHTMLPedidosInt += "<div class='card-header' id='heading" + Data[i].IdPedidosInternos + "'>";
-        CodigoHTMLPedidosInt += "<h5 class='mb-0'>";
-        CodigoHTMLPedidosInt += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidosInternos + "' class='collapsed'>";
-        CodigoHTMLPedidosInt += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLPedidosInt += "<span >" + Data[i].NumeroPedido + "</span>";
-        CodigoHTMLPedidosInt += "</a>";
-        CodigoHTMLPedidosInt += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLPedidosInt += "<div id='collapse" + Data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLPedidosInt += "<div class='card-body'>";
-        CodigoHTMLPedidosInt += "<div class='row'>";
-        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadAprobada: </strong>" + Data[i].CantidadAprobada + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + Data[i].Tipo + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + Data[i].Tienda + "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "<div class='row'>";
-        CodigoHTMLPedidosInt += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLPedidosInt += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHTMLPedidosInt += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + Data[i].IdPedidosInternos + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
-        CodigoHTMLPedidosInt += "</div>";
+            CodHtml += "<div class='card m-b-0 border-top'>";
+        }
+        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosInternos + "'>";
+        CodHtml += "<h5 class='mb-0'>";
+        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosInternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
+        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodHtml += "<span >" + data[i].NumeroPedido + "</span>";
+        CodHtml += "</a>";
+        CodHtml += "</h5>";
+        CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodHtml += "<div class='card-body'>";
+        CodHtml += "<div class='row'>";
+        
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad aprobada: </strong>" + data[i].CantidadAprobada + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+       
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
+        CodHtml += "</div >";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
     }
-    CtrlPedidosInt.innerHTML = CodigoHTMLPedidosInt;
+    IDo.innerHTML = CodHtml;
 }
+
+
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
