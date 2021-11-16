@@ -412,17 +412,81 @@ div class="container">
     }
 </style>
 <!--Script-->
+
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+
 <script src="~/Scrips/jquery-ui.min.js"></script>
+
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Paginas.js"></script>
+
 <script src="~/Scrips/Internos/JS_Perfiles.js"></script>
 
 <!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<script>
+    ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
+    (function () {
+        var template = null
+        $('.modal').on('show.bs.modal', function (event) {
+            if (template == null) {//Valores nulos
+                template = $(this).html()
+
+            } else {
+                $(this).html(template)
+                //Recetear el formulario iniciando del paso 1
+                $(document).ready(function () {
+                    var current = 1, current_step, next_step, steps;
+                    steps = $("fieldset").length;
+                    $(".next").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().next();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(++current);
+                    });
+                    $(".previous").click(function () {
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().prev();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(--current);
+                    });
+                    setProgressBar(current);
+                    // Cambiar la acción de la barra de progreso
+                    function setProgressBar(curStep) {
+                        var percent = parseFloat(100 / steps) * curStep;
+                        percent = percent.toFixed();
+                        $(".progress-bar")
+                            .css("width", percent + "%")
+                            .html(percent + "%");
+                    }
+                    //Termina Recetear el formulario
+                });
+            }
+ 
+        })
+    })()
+    //Deshabilitar el clic externo para el modal del formulario.
+    jQuery(document).ready(function () {
+        jQuery('[data-toggle="modal"]').each(function () {
+            jQuery(this).attr('data-backdrop', 'static');
+            jQuery(this).attr('data-keyboard', 'false');
+        });
+    });
+
+    jQuery(document).ready(function () {
+        jQuery('[data-toggle="modal"]').each(function () {
+            jQuery(this).attr('data-backdrop', 'static');
+            jQuery(this).attr('data-keyboard', 'false');
+        });
+    });
+
+</script>
