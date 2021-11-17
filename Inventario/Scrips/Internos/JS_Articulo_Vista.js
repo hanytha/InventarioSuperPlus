@@ -17,7 +17,6 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Costo</div>"
     CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
 
@@ -32,26 +31,28 @@ function CrearArticuloComp(Data) {
     let Costos = Data.Costos;
     let Arraycostos = Costos.split(',');
 
-    let sub = Object(ArrayId , Arraynombre , Arrayfechas , Arraystock , Arraycostos);
-  
+    //let a = Object.assign([ArrayId], [Arraynombre], [Arrayfechas], [Arraystock], [Arraycostos]);
 
-    for (var i = 0; i < sub.length; i++) {
+    //var resul = [{ ArrayId }, { Arraynombre } , { Arrayfechas } , { Arraystock } , { Arraycostos }];
+    //let sub = (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos);
+
+    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos ).length; i++) {
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + ArrayId[i].id + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + ArrayId[i]+ "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraynombre[i].Nombre + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraynombre[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arrayfechas[i].Fechas + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arrayfechas[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraystock[i].Stock + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraystock[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraycostos[i].Costos + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraycostos[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";

@@ -12,16 +12,16 @@ function AcordeonExistencia(Data, CtrlExt) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdCompra + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdCompra + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdCompra + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='fas fa-stream' aria-hidden='true'><label></label></i>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>"; 
         CodigoHTMLAreas += "<span >" + Data[i].NoCompra + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
