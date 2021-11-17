@@ -151,7 +151,6 @@ function GuardarPerfil() {
                     success: function (data) {
                         if (data == 0) {
                             //alert("Ocurrio un error");
-
                             alert("Ocurrio un error");
 
                         }
