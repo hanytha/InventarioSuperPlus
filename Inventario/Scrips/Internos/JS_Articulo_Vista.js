@@ -11,12 +11,12 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<div id='contenedor1'>";
     CodigoHtmlArticuloComp += "<section id='contenedor_follow'>";
     CodigoHtmlArticuloComp += "<hr class='solid'>";
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>ID</div> "
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Nombre Empresa</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Fecha de ingreso</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Costo</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>";
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>ID</div> "
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Nombre Empresa</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Fecha de ingreso</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Stock</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Costo</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono '>Acción</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
 
@@ -31,11 +31,6 @@ function CrearArticuloComp(Data) {
     let Costos = Data.Costos;
     let Arraycostos = Costos.split(',');
 
-    //let a = Object.assign([ArrayId], [Arraynombre], [Arrayfechas], [Arraystock], [Arraycostos]);
-
-    //var resul = [{ ArrayId }, { Arraynombre } , { Arrayfechas } , { Arraystock } , { Arraycostos }];
-    //let sub = (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos);
-
     for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos ).length; i++) {
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
@@ -46,13 +41,18 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraynombre[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arrayfechas[i] + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col  Cell'>" + Arrayfechas[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraystock[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraycostos[i] + "</div>"
+        CodigoHtmlArticuloComp += "</div>";
+        CodigoHtmlArticuloComp += "<div class='col'>"
+        CodigoHtmlArticuloComp += "<label>"
+        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-outline-primary'><i class='fas fa-angle-down'></i></button>"
+        CodigoHtmlArticuloComp += "</label"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
