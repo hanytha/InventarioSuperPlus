@@ -56,7 +56,8 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>DirWeb: </strong>" + data[i].DirWeb + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
-        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModalConf(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ")' data-toggle='modal' data-target='#Configuracion'><i class='fas fa-edit'></i></button> ";
+
         CodHtml += "<button class='btn btn-danger' onclick='EliminarConfiguracion(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ",this)'><i class='fas fa-eraser'></i></button>";
         CodHtml += "</div>";
         CodHtml += "</div>";
@@ -67,4 +68,71 @@ function AcordeonProveedores(data, IDo) {
     IDo.innerHTML = CodHtml;
 }
 
+
+
+//Foto
+var btnFoto = document.getElementById("BtnFoto");
+btnFoto.onchange = function (e) {
+    var file = document.getElementById("BtnFoto").files[0];
+    var reader = new FileReader();
+    if (reader != null) {
+        reader.onloadend = function () {
+            var img = document.getElementById("PBFoto");
+            img.src = reader.result;
+        }
+    }
+    reader.readAsDataURL(file);
+}
+//Limpia la información y carga la informacion del usuario
+function abrirModalConf(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IdConfiguracion', '0');
+
+    }
+    else {
+
+        $.get("/Configuracion/ConsultaConfiguracion/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IdConfiguracion', Data[0].IdConfiguracion);
+
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
+            document.getElementById("TxtMisión").value = Data[0].Vision;
+            document.getElementById("TxtVisión").value = Data[0].Mision;
+            document.getElementById("TxtValores").value = Data[0].Valores;
+
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
+
+            document.getElementById("TxtDireccionHost").value = Data[0].DireccionHost;
+
+            document.getElementById("TxtPuerto").value = Data[0].Puerto;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtSesionAbierta").value = Data[0].SesionAbierta;
+
+            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+            document.getElementById("TxtLogo").value = Data[0].LogoTexto;
+            document.getElementById("TxtSerCorreo").value = Data[0].SerCorreo;
+            document.getElementById("TxtSerCorreoPuerto").value = Data[0].SerCorreoPort;
+            document.getElementById("TxtSerUser").value = Data[0].SerCorreoUser;
+
+            document.getElementById("TxtSerPass").value = Data[0].SerCorreoPass;
+            document.getElementById("TxtDireccionWeB").value = Data[0].DirWeb;
+            document.getElementById("TxtTipo").value = Data[0].Tipo;
+            document.getElementById("TxtDato1").value = Data[0].Dato1;
+            document.getElementById("TxtDato2").value = Data[0].Dato2;
+
+            document.getElementById("TxtDato3").value = Data[0].Dato4;
+            document.getElementById("TxtDato4").value = Data[0].Descripcion;
+
+        });
+    }
+}
 
