@@ -71,7 +71,7 @@
             </div>
             <div id="Paginas_System" class="card-body">
                 <!--Inserta tabla de las Páginas-->
-                Muestra las paginas dadas de alta en el sistema.
+                Actualmente no hay ningún registro.
             </div>
         </div>
     </div>
@@ -87,11 +87,11 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalPerfil(0)" type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
+                <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">Agregar</button>
             </div>
             <div id="Paginas_Perfiles" class="card-body">
                 <!--Inserta tabla de las Páginas-->
-                Muestra los perfiles registrados en la plataforma.
+                Actualmente no hay ningún registro.
             </div>
         </div>
     </div>
@@ -107,11 +107,11 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
+                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
             </div>
             <div id="Paginas_Configuracion" class="card-body">
                 <!--Inserta tabla de las Páginas-->
-                Muestra la configuración general del sistema.
+                Actualmente no hay ningún registro.
             </div>
 
         </div>
@@ -164,8 +164,8 @@
                     </div>
                     <br />
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">GUARDAR</button>
-                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPagina()">Guardar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
 </div>
 <!--**************************************************************************************************************************-->
 <div class="container">
-    <div class="modal fade" id="ModalSystem_Perfil">
+    <div class="modal fade" id="ModalPerfiles">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -183,39 +183,43 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-
-                    <div align="center">  <h1>Registro de perfiles</h1></div>
-
-
+                    <h1>Registro de perfiles</h1>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
-                        <div class="row ">
-                            <div class="col-md-6 col-sm-12 col-xs-8 justify-content-end">
-                                <span class="help-block text-muted small-font">Nivel</span>
-                                <input type="number" id="TxtNivel" class="form-control limpiar PerfilObligatorio" placeholder="##" />
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                                <span class="help-block text-muted small-font">Perfil</span>
-                                <input type="text" id="TxtPerfil" class="form-control limpiar PerfilObligatorio" placeholder="Nombre del perfil" />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                    <input type="text" id="TxtPerfil" class="form-control limpiar obligatorio" placeholder="Perfil">
+                                </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
-                                <span class="help-block text-muted small-font">Permisos</span>
-                                <div id="TblPaginas">Se inserta una tabla con las páginas ya agregadas a la BD</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                    <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                                </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
-                                <span class="help-block text-muted small-font">Descripción</span>
-                                <textarea type="text" id="TxtComentarios" class="form-control limpiar" rows="3" wrap="soft" placeholder="Inserte una breve descripción del perfil."></textarea>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtComentarios">Permisos<span class="required">*</span></label>
+                                    <div id="divPagina"></div>
+                                </div>
                             </div>
                         </div>
-                        <br />
-                        <div class="modal-footer">
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">GUARDAR</button>
-                            <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtComentarios">Comentarios<span class="required">*</span></label>
+                                    <textarea id="TxtComentarios" required="required" class="form-control limpiar" name="TxtComentarios" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                                </div>
+                            </div>
                         </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
+                        @*<button type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>*@
                     </form>
                 </div>
                 <!-- pie del diálogo -->
