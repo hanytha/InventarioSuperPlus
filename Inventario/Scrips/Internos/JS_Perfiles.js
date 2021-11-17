@@ -1,7 +1,7 @@
-﻿ConsultaPerfiles();
-function ConsultaPerfiles() {
+﻿MostrarPerfiles();
+function MostrarPerfiles() {
     $.get("/Perfiles/ConsultaPefiles", function (Data) {
-        CrearTablaPerfiles(Data);
+        CrearPaginas_Perfiles(Data);
     }
     );
 }
@@ -51,7 +51,7 @@ function AcordeonPerfil(Data, CtrlPerfiles) {
     }
     CtrlPerfiles.innerHTML = CodigoHTMLPerfil;
 }*/
-function CrearTablaPerfiles(Data) {
+function CrearPaginas_Perfiles(Data) {
     var CodigoHtmlTablaCompra = "";
     CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm' >";
     CodigoHtmlTablaCompra += " <thead class='thead-dark'><tr><th>Perfil</th><th>Nivel</th><th>Comentarios</th><th>Acción</thead>";
@@ -62,14 +62,14 @@ function CrearTablaPerfiles(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Nivel + "</td>";
         CodigoHtmlTablaCompra += "<td>" + Data[i].Comentarios + "</td>";
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#ModalPerfiles'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdPerfilDeUsuario + ")' data-toggle='modal' data-target='#ModalSystem_Perfil'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].IdPerfilDeUsuario + ",this)'><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaCompra += "</td>";
         CodigoHtmlTablaCompra += "</tr>";
     }
     CodigoHtmlTablaCompra += "</tbody>";
     CodigoHtmlTablaCompra += "</table>";
-    document.getElementById("tablaPerfiles").innerHTML = CodigoHtmlTablaCompra;
+    document.getElementById("Paginas_Perfiles").innerHTML = CodigoHtmlTablaCompra;
 }
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -90,7 +90,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IdPerfilDeUsuario', Data[0].IdPerfilDeUsuario);     //Variable de sesión
             document.getElementById("TxtPerfil").value = Data[0].Perfil;
             document.getElementById("TxtNivel").value = Data[0].Nivel;
-            document.getElementById("divPagina").value = Data[0].Permisos;
+            document.getElementById("TblPaginas").value = Data[0].Permisos;
             //Se recorre el checkbox de permisos, separando las opciones concatenadas y se activan las casillas guardados
             var activar = Data[0].Permisos.split('#');
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
@@ -160,7 +160,7 @@ function GuardarPerfil() {
                         }
                         else {
                             alert("Se ejecuto correctamente");
-                            ConsultaPerfiles();
+                            MostrarPerfiles();
                             document.getElementById("btnCancelar").click();
                         }
                     }
@@ -209,7 +209,7 @@ function EliminarPerfil(id) {
                     'success'
                 )
                 //  confirmarEliminar();
-                      ConsultaPerfiles();
+                MostrarPerfiles();
             } else {
                 alert("Ocurrio un error");
             }
@@ -226,7 +226,7 @@ function MostrarPaginas() {
             codigoHtmlPagina += "</div>";
         }
         codigoHtmlPagina += "</div>";
-        document.getElementById("divPagina").innerHTML = codigoHtmlPagina;
+        document.getElementById("TblPaginas").innerHTML = codigoHtmlPagina;
     });
 }
 

@@ -53,13 +53,13 @@
 </div>
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR</button>
-<div id="tablaPerfiles"></div>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">REGISTRAR</button>
+<div id="Paginas_Perfiles"></div>
 <!-- Rellenar los registros de la base de datos en el accordión -->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalPerfiles">
+    <div class="modal fade" id="ModalSystem_Perfil">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,42 +68,39 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Registro de perfiles</h1>
+
+                    <div align="center">  <h1>Registro de perfiles</h1></div>
+
+
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
-                                    <input type="text" id="TxtPerfil" class="form-control limpiar obligatorio" placeholder="Perfil">
-                                </div>
+                        <div class="row ">
+                            <div class="col-md-6 col-sm-12 col-xs-8 justify-content-end">
+                                <span class="help-block text-muted small-font">Nivel</span>
+                                <input type="number" id="TxtNivel" class="form-control limpiar PerfilObligatorio" placeholder="##" />
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
+                                <span class="help-block text-muted small-font">Perfil</span>
+                                <input type="text" id="TxtPerfil" class="form-control limpiar PerfilObligatorio" placeholder="Nombre del perfil" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
-                                    <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
-                                </div>
+                        <div class="row ">
+                            <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
+                                <span class="help-block text-muted small-font">Permisos</span>
+                                <div id="TblPaginas">Se inserta una tabla con las páginas ya agregadas a la BD</div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtComentarios">Permisos<span class="required">*</span></label>
-                                    <div id="divPagina"></div>
-                                </div>
+                        <div class="row ">
+                            <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
+                                <span class="help-block text-muted small-font">Descripción</span>
+                                <textarea type="text" id="TxtComentarios" class="form-control limpiar" rows="3" wrap="soft" placeholder="Inserte una breve descripción del perfil."></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtComentarios">Comentarios<span class="required">*</span></label>
-                                    <textarea id="TxtComentarios" required="required" class="form-control limpiar" name="TxtComentarios" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
-                                </div>
-                            </div>
+                        <br />
+                        <div class="modal-footer">
+                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">GUARDAR</button>
+                            <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                         </div>
-                        <button type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del diálogo -->
