@@ -187,6 +187,7 @@
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
     <Compile Include="Models\ModeloUsuario.cs" />
+    <Compile Include="Models\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

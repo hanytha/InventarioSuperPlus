@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class UsuarioController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -60,7 +63,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaUsuario(long Id)
         {
             var usuario = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(Id) && p.Estatus.Equals(1))
-               
+
                 .Select(p => new
                 {
                     p.IdUsuarios,
@@ -134,7 +137,7 @@ namespace Inventario.Controllers
             DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
 
             //Encriptar la contraseña
-           
+
 
             int Afectados = 0;
             //try

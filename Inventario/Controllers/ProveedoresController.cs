@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class ProveedoresController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -44,8 +47,8 @@ namespace Inventario.Controllers
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
 
-       
-         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
+
+        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProveedor(long Id)
         {
             var proveedores = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
@@ -96,18 +99,18 @@ namespace Inventario.Controllers
                 }
                 else
                 {
-                    int nveces = InvBD.Proveedores.Where(p =>p.Correo.Equals(DatosProveedor.Correo) 
-                    && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) 
-                    && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) 
-                    && p.IdEstado.Equals(DatosProveedor.IdEstado) 
-                    && p.IdMunicipio.Equals(DatosProveedor.IdMunicipio) 
-                    && p.IdLocalidad.Equals(DatosProveedor.IdLocalidad) 
-                    && p.Direccion.Equals(DatosProveedor.Direccion) 
-                    && p.Telefono.Equals(DatosProveedor.Telefono) 
-                    && p.Banco.Equals(DatosProveedor.Banco) 
-                    && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) 
-                    && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) 
-                    && p.Descripcion.Equals(DatosProveedor.Descripcion) 
+                    int nveces = InvBD.Proveedores.Where(p => p.Correo.Equals(DatosProveedor.Correo)
+                    && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria)
+                    && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal)
+                    && p.IdEstado.Equals(DatosProveedor.IdEstado)
+                    && p.IdMunicipio.Equals(DatosProveedor.IdMunicipio)
+                    && p.IdLocalidad.Equals(DatosProveedor.IdLocalidad)
+                    && p.Direccion.Equals(DatosProveedor.Direccion)
+                    && p.Telefono.Equals(DatosProveedor.Telefono)
+                    && p.Banco.Equals(DatosProveedor.Banco)
+                    && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta)
+                    && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI)
+                    && p.Descripcion.Equals(DatosProveedor.Descripcion)
                     && p.Logo.Equals(DatosProveedor.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -161,6 +164,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-    } 
+    }
 }
 

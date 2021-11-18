@@ -10,7 +10,7 @@
         <div class="card-header" id="headingOne">
             <h5 class="mb-0">
                 <a data-toggle="collapse" data-target="#collapsePaginas" aria-expanded="true" aria-controls="collapseOne">
-                    <em class="fas fa-file-alt" aria-hidden="true"></em>
+                    <em class="m-r-5 fas fa-file-code" aria-hidden="true"></em>
                     <span>Páginas</span>
                 </a>
             </h5>
@@ -30,7 +30,7 @@
         <div class="card-header" id="headingTwo">
             <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <i class="fas fa-user-tie" aria-hidden="true"></i>
+                    <i class="m-r-5 fas fa-user-secret" aria-hidden="true"></i>
                     <span>Perfiles</span>
                 </a>
             </h5>
@@ -38,7 +38,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
+                <button onclick="AModalPerfil(0)" type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
             </div>
             <div id="Paginas_Perfiles" class="card-body">
                 <!--Inserta tabla de las Páginas-->
@@ -50,7 +50,7 @@
         <div class="card-header" id="headingThree">
             <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <i class="m-r-5 fas fa-cog list__im" aria-hidden="true"></i>
+                    <i class="m-r-5 fas fa-cogs" aria-hidden="true"></i>
                     <span>Configuración</span>
                 </a>
             </h5>
@@ -58,7 +58,7 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
+                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
             </div>
             <div id="Paginas_Configuracion" class="card-body">
                 <!--Inserta tabla de las Páginas-->
@@ -82,7 +82,7 @@
                     <div class="row ">
                         <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
                             <span class="help-block text-muted small-font">ID Página</span>
-                            <input type="text" id="TxtIDPagina" class="form-control limpiar bloquear" placeholder="Id" />
+                            <input type="text" id="TxtIDPagina" class="form-control limpiar" placeholder="ID" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
                         </div>
@@ -115,8 +115,8 @@
                     </div>
                     <br />
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPagina()">Guardar</button>
-                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">GUARDAR</button>
+                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                     </div>
                 </div>
             </div>
@@ -134,18 +134,14 @@
             </div>
             <div class="modal-body">
                 <div class="panel-heading ">
-
                     <div class="row ">
                         <div class="col-md-3 col-sm-12 col-xs-12 justify-content-end">
                             <span class="help-block text-muted small-font">ID Perfil</span>
-                            <input type="text" id="TxtIDPerfil" class="form-control limpiar bloquear" placeholder="Id" />
+                            <input type="text" id="TxtIDPerfil" class="form-control limpiar" placeholder="ID" />
                         </div>
-                    </div>
-                    <div class="row ">
-                       
                         <div class="col-md-3 col-sm-12 col-xs-8 justify-content-end">
                             <span class="help-block text-muted small-font">Nivel</span>
-                            <input type="number" id="TxtNivel" class="form-control limpiar PerfilObligatorio" placeholder="Nivel" />
+                            <input type="number" id="TxtNivel" class="form-control limpiar PerfilObligatorio" placeholder="##" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
                             <span class="help-block text-muted small-font">Perfil</span>
@@ -166,8 +162,8 @@
                     </div>
                     <br />
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>
-                        <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">GUARDAR</button>
+                        <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                     </div>
                 </div>
             </div>
@@ -183,8 +179,11 @@
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Configuraciones.js"></script>
 <script src="~/Scrips/Internos/JS_Paginas.js"></script>
+
 <script src="~/Scrips/Internos/JS_Perfiles.js"></script>
+
 <!--Validacion del formulario-->
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->

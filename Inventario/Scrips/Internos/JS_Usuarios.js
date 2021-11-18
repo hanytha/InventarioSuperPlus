@@ -230,7 +230,7 @@ function abrirModal(id) {//la clase  Obligatorio
         sessionStorage.setItem('IdUsuarios', '0');
     }
     else {
- 
+
         $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);
             document.getElementById("TxtCURP").value = Data[0].CURP;
@@ -305,7 +305,7 @@ IDM.addEventListener("change", function () {
 
 //Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
-   
+
     var pas1 = document.getElementById("Txtpassword").value;
     var pas2 = document.getElementById("TxtConfirmacion").value;
     if (pas1 == pas2) {
@@ -495,7 +495,7 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
                 llenarCombo(Localidades, document.getElementById("cmbLocalidadBloqueado"));
                 document.getElementById("cmbLocalidadBloqueado").value = Data[0].IdLocalidad;
-            }); 
+            });
             document.getElementById("TxtCorreoBloqueado").value = Data[0].Correo;
             document.getElementById("cmbNSSBloqueado").value = Data[0].NoSS;
             document.getElementById("TxtTelBloqueado").value = Data[0].Telefono;
@@ -521,48 +521,48 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
 
 function Usuario(id) {
 
-    if (id ==dialogo1) {
-    (function () {
-        var template = null
-        $('.modal').on('show.bs.modal', function (event) {
-            if (template == null) {//Valores nulos
-                template = $(this).html()
+    if (id == dialogo1) {
+        (function () {
+            var template = null
+            $('.modal').on('show.bs.modal', function (event) {
+                if (template == null) {//Valores nulos
+                    template = $(this).html()
 
-            } else {
-                $(this).html(template)
-                //Recetear el formulario iniciando del paso 1
-                $(document).ready(function () {
-                    var current = 1, current_step, next_step, steps;
-                    steps = $("fieldset").length;
-                    $(".next").click(function () {
-                        current_step = $(this).parent();
-                        next_step = $(this).parent().next();
-                        next_step.show();
-                        current_step.hide();
-                        setProgressBar(++current);
+                } else {
+                    $(this).html(template)
+                    //Recetear el formulario iniciando del paso 1
+                    $(document).ready(function () {
+                        var current = 1, current_step, next_step, steps;
+                        steps = $("fieldset").length;
+                        $(".next").click(function () {
+                            current_step = $(this).parent();
+                            next_step = $(this).parent().next();
+                            next_step.show();
+                            current_step.hide();
+                            setProgressBar(++current);
+                        });
+                        $(".previous").click(function () {
+                            current_step = $(this).parent();
+                            next_step = $(this).parent().prev();
+                            next_step.show();
+                            current_step.hide();
+                            setProgressBar(--current);
+                        });
+                        setProgressBar(current);
+                        // Cambiar la acción de la barra de progreso
+                        function setProgressBar(curStep) {
+                            var percent = parseFloat(100 / steps) * curStep;
+                            percent = percent.toFixed();
+                            $(".progress-bar")
+                                .css("width", percent + "%")
+                                .html(percent + "%");
+                        }
+                        //Termina Recetear el formulariode usuarios
                     });
-                    $(".previous").click(function () {
-                        current_step = $(this).parent();
-                        next_step = $(this).parent().prev();
-                        next_step.show();
-                        current_step.hide();
-                        setProgressBar(--current);
-                    });
-                    setProgressBar(current);
-                    // Cambiar la acción de la barra de progreso
-                    function setProgressBar(curStep) {
-                        var percent = parseFloat(100 / steps) * curStep;
-                        percent = percent.toFixed();
-                        $(".progress-bar")
-                            .css("width", percent + "%")
-                            .html(percent + "%");
-                    }
-                    //Termina Recetear el formulariode usuarios
-                });
-            }
-         
-        })
-    })()
+                }
+
+            })
+        })()
 
     }
 }

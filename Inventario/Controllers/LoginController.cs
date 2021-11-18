@@ -177,10 +177,11 @@ namespace Inventario.Controllers
             }
             return solicitud;
         }
+        //La llave de la contraseña encriptada
         static readonly string password = "P455W0rd";
 
         public int Filas { get; private set; }
-
+        //Metodo de seguridad: cifrar y descifrar contraseñas en la base de datos con el método de encriptación (Advanced Encryption Standard (AES)),también conocido como Rijndael Encryption
         public static string Encrypt(string plainText)
         {
             if (plainText == null)

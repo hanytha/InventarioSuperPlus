@@ -48,18 +48,6 @@ function AModalPaginas(ID) {
         });
     }
 }
-
-
-BloquearCTRL();
-
-function BloquearCTRL() {
-    var CTRL = document.getElementsByClassName("bloquear");
-    for (var i = 0; i < CTRL.length; i++) {
-        $("#" + CTRL[i].id).attr('disabled', 'disabled');
-    }
-}
-
-
 //Guarda los cambios o la nuevas áreas
 function GuardarPagina() {
     if (ObligatoriosPagina() == true) {

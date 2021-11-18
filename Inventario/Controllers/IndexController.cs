@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,7 @@ using Inventario;
 
 namespace Inventario.Controllers
 {
+    [Seguridad]
     public class IndexController : Controller
     {
         // GET: Index

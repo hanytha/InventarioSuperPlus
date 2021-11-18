@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class PedidosextController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -84,7 +87,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
-                 
+
                  && p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
                   && p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
                    && p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
@@ -99,7 +102,7 @@ namespace Inventario.Controllers
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
-                  
+
                     obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
                     obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoExterno.IdMarca;
