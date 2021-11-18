@@ -108,207 +108,208 @@
     }
 </div>
 <!-- Encabezado del Modal -->
-<div class="modal fade" id="dialogo1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-            </div>
-            <!-- Contenido del modal -->
-            <div class="modal-body">
-
-                <form id="regiration_form" novalidate method="post">
-
-                    <!--Los pasos del modal-->
-                    <h4>Paso 1: Información de la Área</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtNombre">Área<span class="required">*</span></label>
-                                <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="R.H" size="30" maxlength="100" type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtUsuario">Usuario<span class="required">*</span></label>
-                                <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar obligatorio" placeholder="Usuario" size="30" maxlength="100" type="text">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtCorreo">Email address<span class="required">*</span></label>
-                                <input type="email" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
-                                <input type="number" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio" placeholder="+52953678902">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtCarpeta">Carpeta<span class="required">*</span></label>
-                                <input id="TxtCarpeta" name="data[TxtCarpeta]" class="form-control  limpiar obligatorio" placeholder="Carpeta" size="30" maxlength="100" type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
-
-                </form>
-            </div>
-            <!-- pie del modal-->
-            <div class="modal-footer">
-                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!---------------------------------Abrir Modal SubArea--------------------------------------------------->
-<div class="modal fade" id="dialogo">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-            </div>
-            <!-- Contenido del modal -->
-            <div class="modal-body">
-                <h4>SUBÁREAS</h4>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
-                <form id="regiration_form" novalidate method="post">
-                    <fieldset>
-                        <h4>Paso 1: Información de la subÁrea</h4>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+
+                    <form id="regiration_form" novalidate method="post">
+
+                        <!--Los pasos del modal-->
+                        <h4>Paso 1: Información de la Área</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombre">Área<span class="required">*</span></label>
+                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="R.H" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtUsuario">Usuario<span class="required">*</span></label>
+                                    <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar obligatorio" placeholder="Usuario" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
-                                    <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect bloquear ObligatoriosSub"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombreSub">Nombre de la  Subárea<span class="required">*</span></label>
-                                    <input id="TxtNombreSub" name="data[TxtNombreSub]" class="form-control  limpiar ObligatoriosSub" placeholder="Nombre de la subárea" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumero">Número de la Subárea<span class="required">*</span></label>
-                                    <input id="TxtNumero" name="data[TxtNumero]" class="form-control  limpiar ObligatoriosSub" placeholder="1" size="30" maxlength="100" type="number">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtUNombre">UNombre<span class="required">*</span></label>
-                                    <input id="TxtUNombre" name="data[TxtUNombre]" class="form-control  limpiar ObligatoriosSub" placeholder="UNombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombre1">Nombre del encargado 1<span class="required">*</span></label>
-                                    <input id="TxtNombre1" name="data[TxtNombre1]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado1" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono1">Teléfono del encargado 1<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtTelefono1]" id="TxtTelefono1" class="form-control  limpiar ObligatoriosSub" placeholder="+52953548765">
+                                    <label class="form-control-label" for="TxtCorreo">Email address<span class="required">*</span></label>
+                                    <input type="email" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo1">Correo  del  encargado 1<span class="required">*</span></label>
-                                    <input type="email" name="data[TxtCorreo1]" id="TxtCorreo1" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
+                                    <input type="number" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio" placeholder="+52953678902">
                                 </div>
                             </div>
                         </div>
-                        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                    </fieldset>
-                    <fieldset>
-                        <h4> Paso 2: Información del usuario</h4>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombre2">Nombre del encargado 2<span class="required">*</span></label>
-                                    <input id="TxtNombre2" name="data[TxtNombre2]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado2" size="30" maxlength="100" type="text">
+                                    <label class="form-control-label" for="TxtCarpeta">Carpeta<span class="required">*</span></label>
+                                    <input id="TxtCarpeta" name="data[TxtCarpeta]" class="form-control  limpiar obligatorio" placeholder="Carpeta" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono2">Teléfono del encargado 2<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtTelefono2]" id="TxtTelefono2" class="form-control  limpiar ObligatoriosSub" placeholder="+5293472342">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo2">Correo  del encargado 2<span class="required">*</span></label>
-                                    <input type="email" name="data[TxtCorreo2]" id="TxtCorreo2" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombre3">Nombre del encargado 3<span class="required">*</span></label>
-                                    <input id="TxtNombre3" name="data[TxtNombre3]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado3" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono3">Teléfono del encargado 3<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtTelefono3]" id="TxtTelefono3" class="form-control  limpiar ObligatoriosSub" placeholder="+52783324">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo3">Correo  del encargado 3<span class="required">*</span></label>
-                                    <input type="email" name="data[TxtCorreo3]" id="TxtCorreo3" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
-                                </div>
-                            </div>
-                        </div>
-                        <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                        <button id="btnGuardar" type="button" class="btn btn-success " onclick="GuardarSubarea()">Guardar</button>
-                    </fieldset>
-                </form>
-            </div>
-            <!-- pie del modal-->
-            <div class="modal-footer">
-                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!---------------------------------Abrir Modal SubArea--------------------------------------------------->
+<div class="container">
+    <div class="modal fade" id="dialogo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>SUBÁREAS</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post">
+                        <fieldset>
+                            <h4>Paso 1: Información de la subÁrea</h4>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect bloquear ObligatoriosSub"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreSub">Nombre de la  Subárea<span class="required">*</span></label>
+                                        <input id="TxtNombreSub" name="data[TxtNombreSub]" class="form-control  limpiar ObligatoriosSub" placeholder="Nombre de la subárea" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumero">Número de la Subárea<span class="required">*</span></label>
+                                        <input id="TxtNumero" name="data[TxtNumero]" class="form-control  limpiar ObligatoriosSub" placeholder="1" size="30" maxlength="100" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUNombre">UNombre<span class="required">*</span></label>
+                                        <input id="TxtUNombre" name="data[TxtUNombre]" class="form-control  limpiar ObligatoriosSub" placeholder="UNombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre1">Nombre del encargado 1<span class="required">*</span></label>
+                                        <input id="TxtNombre1" name="data[TxtNombre1]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado1" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono1">Teléfono del encargado 1<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono1]" id="TxtTelefono1" class="form-control  limpiar ObligatoriosSub" placeholder="+52953548765">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo1">Correo  del  encargado 1<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo1]" id="TxtCorreo1" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4> Paso 2: Información del usuario</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre2">Nombre del encargado 2<span class="required">*</span></label>
+                                        <input id="TxtNombre2" name="data[TxtNombre2]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado2" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono2">Teléfono del encargado 2<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono2]" id="TxtTelefono2" class="form-control  limpiar ObligatoriosSub" placeholder="+5293472342">
+                                    </div>
+                                </div>
 
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo2">Correo  del encargado 2<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo2]" id="TxtCorreo2" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre3">Nombre del encargado 3<span class="required">*</span></label>
+                                        <input id="TxtNombre3" name="data[TxtNombre3]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado3" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono3">Teléfono del encargado 3<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono3]" id="TxtTelefono3" class="form-control  limpiar ObligatoriosSub" placeholder="+52783324">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo3">Correo  del encargado 3<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo3]" id="TxtCorreo3" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                            <button type="button" class="btn btn-success" onclick="GuardarSubarea()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!---------------------------------Termina Modal SubArea--------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -318,12 +319,7 @@
 <!--Script-->
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>
-<!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Departamentos.js"></script>
-<!--Validacion del formulario-->
-<!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 

@@ -172,9 +172,6 @@ function EliminarDepartamento(id) {
         });
     }
 }
-
-
-
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
 function CrearAcordeonSubAreas(IdArea) {

@@ -112,6 +112,7 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\Prueba.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
@@ -157,6 +158,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
+    <Compile Include="Controllers\ConsultaXCompraController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\ExistenciaAlmacenController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
@@ -243,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ConsultaXCompra\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
