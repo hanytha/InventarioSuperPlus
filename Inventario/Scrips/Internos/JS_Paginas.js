@@ -59,7 +59,7 @@ function GuardarPagina() {
             var Icono = document.getElementById("TxtIcono").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var frm = new FormData();
-            frm.append("IdPagina", IDPagina); 
+            frm.append("IdPagina", IDPagina);
             frm.append("Mensaje", Mensaje);
             frm.append("Accion", Accion);
             frm.append("Controlador", Controlador);

@@ -84,16 +84,16 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-        //}
-        //catch (Exception ex)
-        //{
-        //    Afectados = 0;
-        //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    Afectados = 0;
+            //}
             return Afectados;
         }
 
-    //Eliminia la área
-    public int EliminarPagina(long IdPagina)
+        //Eliminia la área
+        public int EliminarPagina(long IdPagina)
         {
             int Afectado = 0;
             try

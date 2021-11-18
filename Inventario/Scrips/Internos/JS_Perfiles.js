@@ -40,8 +40,8 @@ function AModalPerfil(ID) {
             document.getElementById("TxtIDPerfil").value = DatosPerfil[0].ID;
             document.getElementById("TxtNivel").value = DatosPerfil[0].Nivel;
             document.getElementById("TxtPerfil").value = DatosPerfil[0].Nombre;
-            //****************************************************************************
-            var activar = DatosPerfil[0].Permisos.split('$');
+            //--------
+            var activar = DatosPerfil[0].Permisos.split('#');
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
             for (let j = 0; j < activar.length; j++) {
                 for (let i = 0; i < ChevPermisos.length; i++) {
@@ -51,7 +51,7 @@ function AModalPerfil(ID) {
                     }
                 }
             }
-            //****************************************************************************
+            //---
             document.getElementById("TxtComentarios").value = DatosPerfil[0].Comentarios;
         });
     }
@@ -68,13 +68,13 @@ function GuardarPerfil() {
             for (let i = 0; i < ChevPermisos.length; i++) {
                 if (ChevPermisos[i].checked == true) {
                     seleccionados += ChevPermisos[i].id;
-                    seleccionados += "$";
+                    seleccionados += "#";
                 }
             }
             var Permisos = seleccionados.substring(0, seleccionados.length - 1);
             var Comentarios = document.getElementById("TxtComentarios").value;
             var frm = new FormData();
-            frm.append("IDPerfil", IDPerfil);
+            frm.append("IdPerfilDeUsuario", IDPerfil);
             frm.append("Perfil", Perfil);
             frm.append("Nivel", Nivel);
             frm.append("Permisos", Permisos);
