@@ -20,87 +20,83 @@
     <style>
 
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #EAEBEF;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .nav {
-            width: 300px;
-        }
-
-        .nav__link {
-            color: #303440;
-            display: block;
-            padding: 17px 0;
-            text-decoration: none;
-        }
-
-        .nav__link--inside {
-            border-radius: 6px;
-            padding-left: 20px;
-            text-align: left;
-        }
-
-            .nav__link--inside:hover {
-                background: #F6F8FA;
-            }
-
-        .list {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 0 16px 16px 0;
-            background: #fff;
-        }
-
-        .list__item {
-            list-style: none;
-            width: 100%;
-            text-align: center;
+        .CardPerfil {
+            position: relative;
+            width: 500px;
+            height: 452px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            border-radius: .3rem;
             overflow: hidden;
         }
 
-        .list__item--click {
-            cursor: pointer;
-        }
-
-        .list__button {
-            display: flex;
+        .CardPerfil_Header {
+            position: relative;
+            height: 120px;
+            text-align: center;
             align-items: center;
-            gap: 1em;
-            width: 90%;
-            margin: 0 auto;
         }
 
-        .arrow .list__arrow {
-            transform: rotate(90deg);
+        .CardPerfil_Header_Fondo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
-        .list__arrow {
-            margin-left: auto;
-            transition: transform .3s;
+        .CardPerfil_Header_FPerfil {
+            position: absolute;
+            top: 50px;
+            left: 195px;
+            border-radius: 50%;
+            border: 5px solid white;
+            background-color: white;
         }
 
-        .list__show {
-            width: 80%;
-            margin-left: auto;
-            border-left: 2px solid #303440;
-            list-style: none;
-            transition: height .4s;
-            height: 0;
+        .CardBody {
+            position: absolute;
+            top: 200px;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            margin-bottom: 1rem;
+            /*border-bottom: 2px solid gainsboro;*/
         }
 
-        #menu a {
-            color: black
+        .CardBody_Text {
+            margin: 0;
+            margin-bottom: .5em;
+        }
+
+        .Info {
+            text-align: center;
+        }
+
+        .CardBody_Text_Claro {
+            color: hsl(227, 10%, 46%);
+        }
+
+        .CardFooter_PCPay {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .CardFooter_IUSA {
+            position: absolute;
+            bottom: 80px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .CardFooter_Stats {
+            display: inline-block;
+            margin: 0 0.5em;
+            width: 130px;
+            text-align: center;
         }
 
         /* body {
@@ -112,7 +108,7 @@
                 background: linear-gradient(#c8c8e3, #1cb5e0);
                 color: white;
             }*/
-
+        
     </style>
 </head>
 <body>
@@ -125,7 +121,8 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img class="mb-4" src="~/Assets/Login/logotipo.svg" alt="" width="70" height="70">
+                @*<img class="mb-4" src="~/Assets/Login/logotipo.svg" alt="" width="70" height="70">*@
+                <img id="logotip" src="~/Assets/Login/logotipo.svg" width="75" height="50" />
             </a>
         </div>
         <div class="navbar-inner">
@@ -133,31 +130,34 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
 
-                <aside class="left-sidebar" data-sidebarbg="skin5">
-                    <div class="scroll-sidebar">
 
-                        <!--Crear el menú de opciones de manera dinaámica (Razor)-->
-                        <nav class="sidebar-nav">
-                            @{
-                                int Elemt = Accesos.Accion.Count();
-                                for (int i = 0; i < Elemt; i++)
-                                {
-                                    <ul id="sidebarnav">
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
-                                                <i class='@Accesos.Icono[i]'></i>
-                                                <span class="hide-menu">@Accesos.Mensaje[i]</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+       
+
+                    <aside class="left-sidebar" data-sidebarbg="skin5">
+                        <div class="scroll-sidebar">
+
+                            <!--Crear el menú de opciones de manera dinaámica (Razor)-->
+                            <nav class="sidebar-nav">
+                                @{
+                                    int Elemt = Accesos.Accion.Count();
+                                    for (int i = 0; i < Elemt; i++)
+                                    {
+                                        <ul id="sidebarnav">
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
+                                                    <i class='@Accesos.Icono[i]'></i>
+                                                    <span class="hide-menu">@Accesos.Mensaje[i]</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    }
                                 }
-                            }
-                        </nav>
-                    </div>
-                </aside>
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
             </div>
-        </div>
-
+ 
 
         <!------------------Script Menú-------------------->
         @*<script>
@@ -193,7 +193,7 @@
                 </li>
             </ul>*@
     </nav>
-
+    
     <!-------------------------------------------------------------------->
     <!-- Divider -->
     <!-- Heading -->
@@ -208,251 +208,133 @@
         </ul>*@
 
     <!-- Main content -->
-    <div class="main-content" id="panel">
-        <!-- Topnav -->
-        <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Search form -->
-                    <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-                        <div class="form-group mb-0">
-                            <div class="input-group input-group-alternative input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                </div>
-                                <input class="form-control" placeholder="Buscar" type="text">
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Search form -->
+                <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+                    <div class="form-group mb-0">
+                        <div class="input-group input-group-alternative input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
                             </div>
+                            <input class="form-control" placeholder="Buscar" type="text">
                         </div>
-                        <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </form>
-                    <!-- Navbar links -->
-                    <ul class="navbar-nav align-items-center  ml-md-auto ">
-                        <li class="nav-item d-xl-none">
-                            <!-- Sidenav toggler -->
-                            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                </div>
+                    </div>
+                    <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </form>
+                <div class="preloader">
+                    <div class="lds-ripple">
+                        <div class="lds-pos"></div>
+                        <div class="lds-pos"></div>
+                    </div>
+                </div>
+                <div id="main-wrapper">
+                    <header class="topbar" data-navbarbg="skin5">
+                        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                            <div class="navbar-header" data-logobg="skin5" style="text-align: center">
+                                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                                <a class="navbar-brand" href='@Url.Action("Inicio", "Inicio")'>
+                                    <b class="logo-icon p-l-10" id="Logotipo">
+                                        @*<img id="logotip" src="~/Assets/Login/logotipo.svg" width="75" height="50" />*@
+                                    </b>
+                                </a>
+                                <!-- Toggle which is visible on mobile only -->
+                                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                             </div>
-                        </li>
-                        <li class="nav-item d-sm-none">
-                            <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                                <i class="ni ni-zoom-split-in"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
+                            <!-- End Logo -->
+                            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                                <!-- toggle and nav items -->
+                                <ul class="navbar-nav float-left mr-auto">
+                                    <li class="nav-item d-none d-md-block">
+                                        <a class="nav-link sidebartoggler waves-effect waves-light" onclick="icono('logotip','/Assets/Login/logotipo.svg','/Assets/Imagenes/Logo.png');" href="javascript:void(0)" data-sidebartype="mini-sidebar">
 
-                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                                <!-- Dropdown header -->
-                                <div class="px-3 py-3">
-                                    <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
-                                </div>
-                                <!-- List group -->
-                                <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-
-                                                <img alt="Image placeholder" src="~/Assets/Imagenes/logo.png" class="avatar rounded-circle">
-
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                            </div>
+                                            <i class="mdi mdi-menu font-24 text-white"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Right side toggle and nav items -->
+                                <ul class="navbar-nav float-left">
+                                    <!-- Comment -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-bell font-24"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="~/Assets/Imagenes/logo.png" class="avatar rounded-circle">
-
+                                    </li>
+                                    <!-- End Comment -->
+                                    <!-- User profile -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @{<img src=@Accesos.Foto alt="user" class="rounded-circle" width="50" />}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="ti-user m-r-5 m-l-5"></i> Perfil</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Mensajes</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>Mi Información</a>
+                                                <a class="dropdown-item" href='@Url.Action("logout", "Login")'><i class="fa fa-power-off m-r-5 m-l-5"></i>Salir</a>
+                                                <div class="dropdown-divider"></div>
                                             </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="~/Assets/Imagenes/logo.png" class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>5 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="~/Assets/Imagenes/logo.png" class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="~/Assets/Imagenes/logo.png" class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">SUPER PLUS</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </li>}
+                                    </ul>}
                                 </div>
-                                <!-- View all -->
-                                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
-                                <div class="row shortcuts px-4">
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                                            <i class="ni ni-calendar-grid-58"></i>
-                                        </span>
-                                        <small>Calendar</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                                            <i class="ni ni-email-83"></i>
-                                        </span>
-                                        <small>Email</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                                            <i class="ni ni-credit-card"></i>
-                                        </span>
-                                        <small>Payments</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                                            <i class="ni ni-books"></i>
-                                        </span>
-                                        <small>Reports</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                                            <i class="ni ni-pin-3"></i>
-                                        </span>
-                                        <small>Maps</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                                            <i class="ni ni-basket"></i>
-                                        </span>
-                                        <small>Shop</small>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="media align-items-center">
-
-                                    <div class="media-body  ml-2  d-none d-lg-block">
-
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu  dropdown-menu-right ">
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome!</h6>
-                                </div>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-single-02"></i>
-                                    <span>My profile</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-support-16"></i>
-                                    <span>Support</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-user-run"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                            </nav>
+                        </header>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <!-- Pie de Pagina-->
-        <div class="page-wrapper">
-            <div class="container-fluid">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p> Inventario |ASP.NET| &copy; @DateTime.Now.Year </p>
+    </nav>
+    <!-- Pie de Pagina-->
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p> Inventario |ASP.NET| &copy; @DateTime.Now.Year </p>
+
+            </footer>
+        </div>
+    </div>
+    <div>
+    @*  *@
+    <div id="ModalPerfil" class="modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <article class="CardPerfil">
+                    <header class="CardPerfil_Header">
+                        <img src="~/Assets/Internal/Fondo.jpg" alt="Fondo" class="CardPerfil_Header_Fondo" />
+                        @{<img src=@Accesos.Foto class="CardPerfil_Header_FPerfil" alt="Foto perfil" />}
+                    </header>
+                </article>
+                <section class="CardBody">
+                    @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br>Nombre</span></p>}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-4 col-xs-4">
+                            @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br>Puesto</span></p>}
+                        </div>
+                        @*<div class="col-md-6 col-sm-4 col-xs-4">
+                            @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
+                        </div>*@
+                    </div>
+                </section>
+                <footer class="CardFooter_IUSA">
+                    <div id="DatosIUSA"></div>
+                </footer>
+                <footer class="CardFooter_PCPay">
+                    <div id="DatosPCPay"></div>
                 </footer>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- Pie de pagina -->
         <!--<footer class="footer">
@@ -461,7 +343,7 @@
     </div>
     <!-- Argon Scripts -->
     <!-- Script-->
-    <script src="~/Scrips/argon.js"></script>-->
+    <script src="~/Scrips/argon.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scrips/bootstrap-datepicker.min.js"></script>
     <script src="~/Scrips/bootstrap.min.js"></script>
