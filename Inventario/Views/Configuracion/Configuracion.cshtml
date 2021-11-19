@@ -38,7 +38,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalPerfil(0)" type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
+                <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
             </div>
             <div id="Paginas_Perfiles" class="card-body">
                 <!--Inserta tabla de las Páginas-->
@@ -58,7 +58,7 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Boton modal páginas-->
-                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
+                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
             </div>
             <div id="Paginas_Configuracion" class="card-body">
                 <!--Inserta tabla de las Páginas-->
@@ -81,44 +81,59 @@
                 <div class="panel-heading ">
                     <div class="row ">
                         <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">ID Página</span>
+                            <label class="help-block text-muted small-font">ID Página</label>
                             <input type="text" id="TxtIDPagina" class="form-control limpiar" placeholder="ID" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
                         </div>
                     </div>
-                    <div class="row ">
-                        <div class="col-md-6 col-sm-12 col-xs-8 justify-content-end">
-                            <span class="help-block text-muted small-font">Texto a mostrar</span>
-                            <input type="text" id="TxtMensaje" class="form-control limpiar PaginaObligatorio" placeholder="Mensaje" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
+                                <input id="TxtMensaje" class="form-control  limpiar obligatorio" placeholder="Mensaje" maxlength="100" type="text">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Acción</span>
-                            <input type="text" id="TxtAccion" class="form-control limpiar PaginaObligatorio" placeholder="Accion" />
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Controlador</span>
-                            <input type="text" id="TxtControlador" class="form-control limpiar PaginaObligatorio" placeholder="Controlador" />
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Icono</span>
-                            <input type="text" id="TxtIcono" class="form-control limpiar PaginaObligatorio" placeholder="Icono" />
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
+                                <input type="text" id="TxtAccion" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Acción">
+                            </div>
                         </div>
                     </div>
-                    <div class="row ">
-                        <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Descripción</span>
-                            <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="6" wrap="soft" placeholder="Inserte una breve descripción de la página"></textarea>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
+                                <input id="TxtControlador" class="form-control  limpiar obligatorio" placeholder="Controlador" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtIcono">Icono<span class="required">*</span></label>
+                                <input type="text" id="TxtIcono" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Icono">
+                            </div>
                         </div>
                     </div>
-                    <br />
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="2" wrap="soft" placeholder="Agrega una descripción de la página..."></textarea>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">GUARDAR</button>
-                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
+                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -139,30 +154,56 @@
                             <span class="help-block text-muted small-font">ID Perfil</span>
                             <input type="text" id="TxtIDPerfil" class="form-control limpiar" placeholder="ID" />
                         </div>
-                        <div class="col-md-3 col-sm-12 col-xs-8 justify-content-end">
-                            <span class="help-block text-muted small-font">Nivel</span>
-                            <input type="number" id="TxtNivel" class="form-control limpiar PerfilObligatorio" placeholder="##" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Perfil</span>
-                            <input type="text" id="TxtPerfil" class="form-control limpiar PerfilObligatorio" placeholder="Nombre del perfil" />
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                <input type="text" id="TxtPerfil" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Nombre del perfil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                <input type="text" id="TxtPerfil" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Nombre del perfil">
+                            </div>
                         </div>
                     </div>
                     <div class="row ">
-                        <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Permisos</span>
-                            <div id="TblPaginas">Se inserta una tabla con las páginas ya agregadas a la BD</div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TblPaginas">Nivel<span class="required">*</span></label>
+                                <div id="TblPaginas">Se inserta una tabla con las páginas ya agregadas a la BD</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row ">
-                        <div class="col-md-12 col-sm-12 col-xs-12 justify-content-end">
-                            <span class="help-block text-muted small-font">Descripción</span>
-                            <textarea type="text" id="TxtComentarios" class="form-control limpiar" rows="3" wrap="soft" placeholder="Inserte una breve descripción del perfil."></textarea>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtComentarios">Descripción<span class="required">*</span></label>
+                                <textarea type="text" id="TxtComentarios" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega una descripción del perfil..."></textarea>
+                            </div>
                         </div>
                     </div>
+
                     <br />
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">GUARDAR</button>
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
                         <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                     </div>
                 </div>
