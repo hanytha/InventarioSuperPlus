@@ -54,7 +54,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a><div style='display: none;'>....... el contenido a ocultar ......</div>"
+        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a><div style='display: none;'><div class='card text-dark bg-info mb-3' style='height: 30vh; width: 1200px;'><p>uno dos dsd sdsds sds dsds dsds </p></di></div>"
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -66,7 +66,7 @@ function CrearArticuloComp(Data) {
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
 }
-//-------------------------------------------------------------------------------
+//---------------------------Funcion para desplegar Tabla----------------------------------------------------
 
 function Desplegar(cual) {
     var c = cual.nextSibling;
@@ -77,18 +77,11 @@ function Desplegar(cual) {
     }
     return false;
 }
-//---------------------------Funcion para desplegar la primera tabla--------------------------------------------------------
-function Alternar(Seccion) {
-    if (Seccion.style.display == "none") { Seccion.style.display = "" }
-    else { Seccion.style.display = "none" }
-}
-//---------------------------Funcion para desplegar la segunda tabla--------------------------------------------------------
-function Alternar2(Seccion2) {
-    if (Seccion2.style.display == "none") { Seccion2.style.display = "" }
-    else { Seccion2.style.display = "none" }
-}
 
 //-----------------------------------------------------------------------------------
+
+/*
+
 ConsultaTienda();
 function ConsultaTienda() {
     $.get("/Tienda/ConsultaTiendas", function (Data) {
@@ -98,7 +91,7 @@ function ConsultaTienda() {
 }
 function CrearDivTienda(Data) {
     var CodigoHtmlCompra = "";
-    CodigoHtmlCompra += "<div  id='contenedo2'>";
+    CodigoHtmlCompra += "<div  id='contenedor2'>";
     CodigoHtmlCompra += "<section id='contenedor_follow'>";
     CodigoHtmlCompra += "<hr class='solid3'>"
     CodigoHtmlCompra += "<div class='icono flexbox Heading'>Nombre</div> "
@@ -136,7 +129,7 @@ function CrearDivTienda(Data) {
     document.getElementById("contenedor2").innerHTML = CodigoHtmlCompra;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 ConsultaExistenciaAlmacen();
 function ConsultaExistenciaAlmacen() {
@@ -185,5 +178,34 @@ function CrearDivAlmacen(Data) {
     document.getElementById("contenedor3").innerHTML = CodigoHtmlAlmacen;
 }
 
-//--------------------------------------------------------------------------------------------------
+*/
 
+
+
+ConsultaMarcas();
+function ConsultaMarcas() {
+    $.get("/Marca/ConsultaMarcas", function (Data) {
+        CrearTablaMarcas(Data);
+    }
+    );
+}
+function CrearTablaMarcas(Data) {
+    var CodigoHtmlTablaMarcas = "";
+    CodigoHtmlTablaMarcas += "<table id='tablas' class='table table table-sm'>";
+    CodigoHtmlTablaMarcas += "<thead><tr><th>Nombre</th><th>Acción</thead>";
+    CodigoHtmlTablaMarcas += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaMarcas += "<tr>";
+        CodigoHtmlTablaMarcas += "<td>" + Data[i].Nombre + "</td>";
+
+        CodigoHtmlTablaMarcas += "<td>";
+        CodigoHtmlTablaMarcas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdMarca + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaMarcas += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].IdMarca + ",this)'><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaMarcas += "</td>";
+        CodigoHtmlTablaMarcas += "</tr>";
+    }
+    CodigoHtmlTablaMarcas += "</tbody>";
+    CodigoHtmlTablaMarcas += "</table>";
+    document.getElementById("tabla").innerHTML = CodigoHtmlTablaMarcas;
+}
