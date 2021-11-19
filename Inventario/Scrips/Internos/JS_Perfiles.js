@@ -25,6 +25,15 @@ function CrearTablaPerfiles(InfPerfiles) {
     CodigoHtmlTablaPerfiles += "</table>";
     document.getElementById("Paginas_Perfiles").innerHTML = CodigoHtmlTablaPerfiles;
 }
+
+BloquearCTRL();
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 //limpia y llenas los campor del modal si es para la edición
 function AModalPerfil(ID) {
     var CtrlObligatorio = document.getElementsByClassName("PerfilObligatorio");

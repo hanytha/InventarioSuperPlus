@@ -27,6 +27,15 @@ function CrearTablaPaginas(InfPaginas) {
     CodigoHtmlTablaPagina += "</table>";
     document.getElementById("Paginas_System").innerHTML = CodigoHtmlTablaPagina;
 }
+
+BloquearCTRL();
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 //limpia y llenas los campor del modal si es para la edición
 function AModalPaginas(ID) {
     var controlesObligatorio = document.getElementsByClassName("PaginaObligatorio");
