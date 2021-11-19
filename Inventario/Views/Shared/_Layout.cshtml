@@ -211,7 +211,7 @@
                                     <ul id="sidebarnav">
                                         <li class="sidebar-item">
                                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
-                                                <i class='@Accesos.Icono[i]'></i>
+                                                <i class='@Accesos.Icono[i]' style="font-size: 21px; "></i> <!--Tamaño de los íconos del menú-->
                                                 <span class="hide-menu">@Accesos.Mensaje[i]</span>
                                             </a>
                                         </li>
@@ -225,11 +225,6 @@
         </div>
 
     </nav>
-
-
-
-
-
 
     <!-- Main content -->
     <!--<div class="main-content" id="panel">-->
@@ -251,9 +246,6 @@
             <span aria-hidden="true">×</span>
         </button>
     </form>-->
-
-
-
 
     <div class="main-content" id="panel">
         <!-- Topnav -->
@@ -484,7 +476,7 @@
                                         <!-- Right side toggle and nav items -->
                                         <ul class="navbar-nav float-left">
                                             <!-- Comment -->
-                                            <li class="nav-item dropdown">
+                                            @*<li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-bell font-24"></i>
                                                 </a>
@@ -493,20 +485,18 @@
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
                                                 </div>
-                                            </li>
+                                            </li>*@
                                             <!-- End Comment -->
-                                            <!-- User profile -->
+                                            <!-- Perfil de usuario: Obciones al presionar la foto de perfil-->
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     @{<img src=@Accesos.Foto alt="user" class="rounded-circle" width="50" />}
                                                     </a>
-                                                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                                        <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="ti-user m-r-5 m-l-5"></i> Perfil</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Mensajes</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i>Mi Información</a>
-                                                        <a class="dropdown-item" href='@Url.Action("logout", "Login")'><i class="fa fa-power-off m-r-5 m-l-5"></i>Salir</a>
-                                                        <div class="dropdown-divider"></div>
-                                                    </div>
+                                                <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                                    <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="fas fa-users list__img" style="font-size: 20px; color: dodgerblue;"></i> Perfil</a>
+                                                    <a class="dropdown-item" href='@Url.Action("logout", "Login")'><i class="fa fa-power-off m-r-5 m-l-5" style="font-size: 20px; color: red;"></i>Salir</a>
+                                                    <div class="dropdown-divider"></div>
+                                                </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -567,7 +557,7 @@
                 </div>
             </div>
         </div>
-
+    <!--Obterner la información que se mostrará en el perfil del usuario con razor-->
         <div id="ModalPerfil" class="modal" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
