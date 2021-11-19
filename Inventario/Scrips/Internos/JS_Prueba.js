@@ -54,7 +54,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp +=  "<a onclick='return GuardarMarca(this);' href='javascript:void(0);'>Desplegar</a><div style='display: none;'>....... el contenido a ocultar ......</div>"
+        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a><div style='display: none;'>....... el contenido a ocultar ......</div>"
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -68,7 +68,7 @@ function CrearArticuloComp(Data) {
 }
 //-------------------------------------------------------------------------------
 
-function GuardarMarca(cual) {
+function Desplegar(cual) {
     var c = cual.nextSibling;
     if (c.style.display == 'none') {
         c.style.display = 'block';
