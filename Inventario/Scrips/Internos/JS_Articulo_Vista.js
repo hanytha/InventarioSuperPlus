@@ -31,7 +31,10 @@ function CrearArticuloComp(Data) {
     let Costos = Data.Costos;
     let Arraycostos = Costos.split(',');
 
-    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos ).length; i++) {
+
+
+    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
+
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
         CodigoHtmlArticuloComp += "<div class='col'>"
@@ -51,7 +54,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button  class='collapsible  btn btn-primary'><i class='fas fa - angle - down'></i></button>"
+        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='collapsible  btn btn-primary'></button>";
         CodigoHtmlArticuloComp += "</label>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -63,7 +66,6 @@ function CrearArticuloComp(Data) {
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
    
 }
-
 //----------------------------------------------------------------------------------------
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -80,9 +82,6 @@ for (i = 0; i < coll.length; i++) {
         }
     });
 }
-
-
-
 
 //----------------------------------------------------------------------------------------------
 
@@ -143,3 +142,4 @@ function CrearArticulo(Data) {
     document.getElementById("contenedor3").innerHTML = CodigoHtmlArticulo;
 
 }
+

@@ -15,44 +15,27 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaComprasArt()
+        public JsonResult ConsultaCategorias()
         {
-            string Id = "";
-            string Clave = "";
-            string Numero = "";
-            string Idcom = "";
-            var ConsultaArticulo = InvBD.Compra.Where(p => p.Estatus.Equals(1))
-            .Select(p => new
-            {
-                id = p.IdCompra,
-                NCompra = p.NoCompra,
-                Clave = p.ClaveProveedor
-            });
-            foreach (var art in ConsultaArticulo)
-            {
-                Clave += art.NCompra + ",";
-                Numero += art.Clave + ",";
-                Id += art.id + ",";
-
-
-                var consultaCom = InvBD.Compra.Where(p => p.IdCompra.Equals(art.id) && p.IdArticulo > 0)
-                    .Select(p => new
-                    {
-                        IdArt = p.IdArticulo
-                    });
-                int cont = 0;
-                int UltimoReg = consultaCom.Count() - 1;
-                foreach (var com in consultaCom)
-
-                if (cont == UltimoReg)
+            var Categorias = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
                 {
-                        Idcom += com.IdArt + ",";
-                }
-            }
-            var Resultado = new { Id = Id.Substring(0, Id.Length - 1), Clave = Clave.Substring(0, Clave.Length - 1), Numero = Numero.Substring(0, Numero.Length - 1), Idcom = Idcom.Substring(0, Idcom.Length - 1) };
-            return Json(Resultado, JsonRequestBehavior.AllowGet);
+                    p.IdCompra,
+                    p.NoCompra,
+                    p.IdArticulo,
+                });
+            return Json(Categorias, JsonRequestBehavior.AllowGet);
         }
-        
+        public JsonResult ConsultaCategoria(long Id)
+        {
+            var Categoria = InvBD.Compra.Where(p => p.IdCompra.Equals(Id) && p.IdArticulo.Equals(p.IdArticulo))
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    p.NoCompra,
+                    p.IdArticulo,
+                });
+            return Json(Categoria, JsonRequestBehavior.AllowGet);
+        }
     }
-
 }

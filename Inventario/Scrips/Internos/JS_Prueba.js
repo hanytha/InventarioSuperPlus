@@ -1,68 +1,82 @@
-﻿
-ConsultaArticuloComp();
+﻿ConsultaArticuloComp();
 function ConsultaArticuloComp() {
-    $.get("/Prueba/ConsultaArticulos", function (Data) {
+    $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
-    }
-    );
+    });
+
 }
 
 function CrearArticuloComp(Data) {
     var CodigoHtmlArticuloComp = "";
     CodigoHtmlArticuloComp += "<div id='contenedor1'>";
     CodigoHtmlArticuloComp += "<section id='contenedor_follow'>";
-    CodigoHtmlArticuloComp += "<hr class='solid'>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>ID</div> "
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Nombre Empresa</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Fecha de ingreso</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Stock</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Costo</div>"
-    CodigoHtmlArticuloComp += "<div class='icono flexbox Heading ml-auto'>Acción</div>"
+    CodigoHtmlArticuloComp += "<hr class='solid'>";
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>ID</div> "
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Nombre Empresa</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Fecha de ingreso</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Stock</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Costo</div>"
+    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono '>Acción</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>"
     CodigoHtmlArticuloComp += "<div>";
 
-    for (var i = 0; i < Data.length; i++) {
+    let id = Data.id;
+    let ArrayId = id.split(',');
+    let Nombre = Data.Nombre;
+    let Arraynombre = Nombre.split(',');
+    let Fechas = Data.Fechas;
+    let Arrayfechas = Fechas.split(',');
+    let Stock = Data.Stock;
+    let Arraystock = Stock.split(',');
+    let Costos = Data.Costos;
+    let Arraycostos = Costos.split(',');
+
+
+
+    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
+
         CodigoHtmlArticuloComp += "<div>";
-        CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>";
+        CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div  class='col Cell'>" + Data[i].IdArticulos + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + ArrayId[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].NombreEmpresa + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraynombre[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].FechaDeIngreso + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col  Cell'>" + Arrayfechas[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].ExitenciaActual + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraystock[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Data[i].Coste + "</div>"
+        CodigoHtmlArticuloComp += "<div class='col Cell'>" + Arraycostos[i] + "</div>"
         CodigoHtmlArticuloComp += "</div>";
-        CodigoHtmlArticuloComp += "<div class='col Cell'>"
-
+        CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button  title='Desplegar para mostrar' class='btn btn-warning' style='cursor:s-resize' onClick='Alternar2(seccion2)' ><i class='fas fa-angle-down'></i></button>";
-        CodigoHtmlArticuloComp += "<div style=' width: 500px;  height: 200px; ' id='contenedor2'></div>"
+        CodigoHtmlArticuloComp +=  "<a onclick='return GuardarMarca(this);' href='javascript:void(0);'>Desplegar</a><div style='display: none;'>....... el contenido a ocultar ......</div>"
         CodigoHtmlArticuloComp += "</label>"
-
-        CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Desplegar para mostrar' class='btn btn-primary' style='cursor:s-resize' onClick='Alternar(seccion1)' ><i class='fas fa-angle-down'></i></button>";
-        CodigoHtmlArticuloComp += "</label>"
-
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
-
     }
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
-}
 
+}
 //-------------------------------------------------------------------------------
 
+function GuardarMarca(cual) {
+    var c = cual.nextSibling;
+    if (c.style.display == 'none') {
+        c.style.display = 'block';
+    } else {
+        c.style.display = 'none';
+    }
+    return false;
+}
 //---------------------------Funcion para desplegar la primera tabla--------------------------------------------------------
 function Alternar(Seccion) {
     if (Seccion.style.display == "none") { Seccion.style.display = "" }

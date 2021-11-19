@@ -60,15 +60,7 @@
 <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!------------------------------------------------------------------------------------------------------------>
 <div id="contenedor1"></div>
-<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
-<div id="seccion1" style="display:none">
-    <div id="contenedor3"></div>
-</div>
-<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
-<div id="seccion2" style="display:none">
-    <div id="contenedor2"></div>
-</div>
-<!----------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------>
 <style>
     contenedor2 {
         width: 900px;
@@ -76,6 +68,7 @@
         margin: 16px;
         padding: 16px;
     }
+
     contenedor3 {
         width: 900px;
         height: 450px;
@@ -84,204 +77,204 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-    <!--Mostrar los registros en el accordion-->
-    <div id="tabla" class="default "></div>
-    <div id="accordion"></div>
-    <!-- Encabezado del Modal -->
-    <div class="container">
-        <div class="modal fade" id="dialogo1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+<!--Mostrar los registros en el accordion-->
+<div id="tabla" class="default "></div>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO DE ARTÍCULOS</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <!-- Contenido del modal -->
-                    <div class="modal-body">
-                        <h4>REGISTRO DE ARTÍCULOS</h4>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                            <fieldset>
-                                <h4>Paso 1</h4>
-                                <!--Insertar fecha-->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span>*</span></label>
-                                            <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
-                                        </div>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <fieldset>
+                            <h4>Paso 1</h4>
+                            <!--Insertar fecha-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span>*</span></label>
+                                        <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
                                     </div>
                                 </div>
-                                <!--Termina-->
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
-                                            <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                        </div>
+                            </div>
+                            <!--Termina-->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por elProveedor<span class="required">*</span></label>
-                                            <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por elProveedor<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                            <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
-                                            <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
-                                            <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
+                                        <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
-                                            <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
-                                            <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
+                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-                                <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                            </fieldset>
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
-                                            <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
-                                            <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
-                                            <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
-                                            <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                        </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
                                     </div>
                                 </div>
-                                <!-- Agregar la imagen -->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
-                                            <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />
-                                            <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
-                                        </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
                                     </div>
                                 </div>
-                                <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                                <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <!-- pie del modal-->
-                    <div class="modal-footer">
-                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
+                                        <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Agregar la imagen -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />
+                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button type="button" class="btn btn-success" onclick="GuardarMarca()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
-    <style>
-        #contenedor {
-            width: 300px;
-            height: auto;
-            text-align: center;
-        }
+<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<style>
+    #contenedor {
+        width: 300px;
+        height: auto;
+        text-align: center;
+    }
 
-        #contenedor_follow div.icono {
-            display: inline-block;
-            width: 15%;
-            height: auto;
-            vertical-align: middle;
-            text-align: center;
-        }
-    </style>
-    <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Solid border */
-        hr.solid {
-            border-top: 3px solid #D7DBDD;
-        }
-    </style>
+    #contenedor_follow div.icono {
+        display: inline-block;
+        width: 15%;
+        height: auto;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 3px solid #D7DBDD;
+    }
+</style>
 
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Solid border */
-        hr.solid3 {
-            border-top: 3px solid #f1f507;
-        }
-    </style>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Solid border */
-        hr.solid4 {
-            border-top: 3px solid #0B94F8;
-        }
-    </style>
-    <!---------------------------------------------------------------------------------------------------->
-    <!--Hacer que el modal muestre los pasos por parte-->
-    <style type="text/css">
-        #regiration_form fieldset:not(:first-of-type) {
-            display: none;
-        }
-    </style>
-    <!--Script-->
-    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-    <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-    <script src="~/Scrips/Internos/JS_Prueba.js"></script>
-    <!--Validacion del formulario-->
-    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-    <!--Scripts de la tarjeta y el botón-->
-    <link href="~/Content/tarjeta.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 3px solid #f1f507;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid4 {
+        border-top: 3px solid #0B94F8;
+    }
+</style>
+<!---------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Prueba.js"></script>
+<!--Validacion del formulario-->
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--Scripts de la tarjeta y el botón-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
 
