@@ -519,50 +519,50 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
 
 
 
-function Usuario(id) {
+//function Usuario(id) {
 
-    if (id == dialogo1) {
-        (function () {
-            var template = null
-            $('.modal').on('show.bs.modal', function (event) {
-                if (template == null) {//Valores nulos
-                    template = $(this).html()
+//    if (id == dialogo1) {
+//        (function () {
+//            var template = null
+//            $('.modal').on('show.bs.modal', function (event) {
+//                if (template == null) {//Valores nulos
+//                    template = $(this).html()
 
-                } else {
-                    $(this).html(template)
-                    //Recetear el formulario iniciando del paso 1
-                    $(document).ready(function () {
-                        var current = 1, current_step, next_step, steps;
-                        steps = $("fieldset").length;
-                        $(".next").click(function () {
-                            current_step = $(this).parent();
-                            next_step = $(this).parent().next();
-                            next_step.show();
-                            current_step.hide();
-                            setProgressBar(++current);
-                        });
-                        $(".previous").click(function () {
-                            current_step = $(this).parent();
-                            next_step = $(this).parent().prev();
-                            next_step.show();
-                            current_step.hide();
-                            setProgressBar(--current);
-                        });
-                        setProgressBar(current);
-                        // Cambiar la acción de la barra de progreso
-                        function setProgressBar(curStep) {
-                            var percent = parseFloat(100 / steps) * curStep;
-                            percent = percent.toFixed();
-                            $(".progress-bar")
-                                .css("width", percent + "%")
-                                .html(percent + "%");
-                        }
-                        //Termina Recetear el formulariode usuarios
-                    });
-                }
+//                } else {
+//                    $(this).html(template)
+//                    //Recetear el formulario iniciando del paso 1
+//                    $(document).ready(function () {
+//                        var current = 1, current_step, next_step, steps;
+//                        steps = $("fieldset").length;
+//                        $(".next").click(function () {
+//                            current_step = $(this).parent();
+//                            next_step = $(this).parent().next();
+//                            next_step.show();
+//                            current_step.hide();
+//                            setProgressBar(++current);
+//                        });
+//                        $(".previous").click(function () {
+//                            current_step = $(this).parent();
+//                            next_step = $(this).parent().prev();
+//                            next_step.show();
+//                            current_step.hide();
+//                            setProgressBar(--current);
+//                        });
+//                        setProgressBar(current);
+//                        // Cambiar la acción de la barra de progreso
+//                        function setProgressBar(curStep) {
+//                            var percent = parseFloat(100 / steps) * curStep;
+//                            percent = percent.toFixed();
+//                            $(".progress-bar")
+//                                .css("width", percent + "%")
+//                                .html(percent + "%");
+//                        }
+//                        //Termina Recetear el formulariode usuarios
+//                    });
+//                }
 
-            })
-        })()
+//            })
+//        })()
 
-    }
-}
+//    }
+//}
