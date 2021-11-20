@@ -62,7 +62,7 @@ function register() {
     }
 }
 
-
+//Validación del Login
 function Login() {
     var user = document.getElementById("TxtUser").value;
     var Pass = document.getElementById("TxtPassword").value;
