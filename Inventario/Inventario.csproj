@@ -180,6 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Proveedores.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
     <Compile Include="Models\ModeloPerfiles.cs" />

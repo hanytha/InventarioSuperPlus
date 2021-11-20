@@ -30,7 +30,7 @@ namespace Inventario.Controllers
         public JsonResult BDSubAreas(long IDA)
         {
             // Consulta de todas las subareas activas que pertenezcan a dicha area para mostrarlo en el combo dependiendo de la área que se seleccione
-            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) &&  p.IdArea.Equals(IDA))
+            var datos = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdArea.Equals(IDA))
                 .Select(p => new
                 {
                     ID = p.IdSubAreas,
@@ -127,14 +127,14 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-       
+
         //consulta Tiendas
         public JsonResult BDUnidadesMedida()
         {
             var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdUnidadDeMedida,
-                   Nombre= p.Unidad
+                    Nombre = p.Unidad
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
@@ -171,18 +171,19 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
         //consulta Tiendas
-        public JsonResult BDImpuesto(){
+        public JsonResult BDImpuesto()
+        {
             var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
 
                     ID = p.IdImpuesto,
                     Nombre = p.Impuestos
-        
+
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
- 
-        
+
+
 
         //consulta Estados
         public JsonResult BDEstado()
@@ -200,7 +201,7 @@ namespace Inventario.Controllers
             var datos = InvBD.Supervisor.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdSupervisor,
-                    Nombre= p.Nombre
+                    Nombre = p.Nombre
 
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
@@ -277,7 +278,57 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-   
+
+
+
+        //-----
+
+        public JsonResult BDProv()
+        {
+            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult BDArt(int IDProv)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))
+                .Select(p => new
+                {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreProveedor
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDUnidadM(int IDAr)
+        {
+            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdArticulo.Equals(IDAr))
+                .Select(p => new
+                {
+                    ID = p.IdUnidadDeMedida,
+                    Nombre = p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        //public JsonResult BDMarca(int IDArt)
+        //{
+        //    var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDArt))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdMarca,
+        //            Nombre = p.Nombre
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+        //-----
+
+
     }
 }
 

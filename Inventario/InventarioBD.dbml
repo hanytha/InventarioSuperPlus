@@ -69,6 +69,7 @@
       <Column Name="Area" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="Marca" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />
       <Association Name="Articulos_PedidosInternos" Member="PedidosInternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosInternos" />
       <Association Name="Articulos_TipoDeMovimientos" Member="TipoDeMovimientos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="TipoDeMovimientos" />
@@ -119,7 +120,7 @@
       <Column Name="Telefono" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="DireccionHost" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Puerto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="LogoTexto" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="SesionAbierta" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SerCorreo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
@@ -132,6 +133,7 @@
       <Column Name="Dato3" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Dato4" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dato1" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Pagina_Configuracion" Member="Pagina" ThisKey="IdPagina" OtherKey="IdPagina" Type="Pagina" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -425,6 +427,8 @@
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />
       <Association Name="UnidadDeMedida_PedidosExternos" Member="PedidosExternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosExternos" />
       <Association Name="UnidadDeMedida_PedidosInternos" Member="PedidosInternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosInternos" />

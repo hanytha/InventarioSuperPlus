@@ -1429,6 +1429,8 @@ namespace Inventario
 		
 		private int _Estatus;
 		
+		private System.Nullable<long> _IdProveedor;
+		
 		private EntitySet<PedidosExternos> _PedidosExternos;
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
@@ -1485,6 +1487,8 @@ namespace Inventario
     partial void OnMarcaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanged();
     #endregion
 		
 		public Articulos()
@@ -1891,6 +1895,26 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
 				}
 			}
 		}
@@ -2719,7 +2743,7 @@ namespace Inventario
 		
 		private int _Puerto;
 		
-		private string _Logo;
+		private System.Data.Linq.Binary _Logo;
 		
 		private string _LogoTexto;
 		
@@ -2744,6 +2768,8 @@ namespace Inventario
 		private string _Dato4;
 		
 		private int _Estatus;
+		
+		private System.Data.Linq.Binary _Dato1;
 		
 		private EntityRef<Pagina> _Pagina;
 		
@@ -2773,7 +2799,7 @@ namespace Inventario
     partial void OnDireccionHostChanged();
     partial void OnPuertoChanging(int value);
     partial void OnPuertoChanged();
-    partial void OnLogoChanging(string value);
+    partial void OnLogoChanging(System.Data.Linq.Binary value);
     partial void OnLogoChanged();
     partial void OnLogoTextoChanging(string value);
     partial void OnLogoTextoChanged();
@@ -2799,6 +2825,8 @@ namespace Inventario
     partial void OnDato4Changed();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
+    partial void OnDato1Changing(System.Data.Linq.Binary value);
+    partial void OnDato1Changed();
     #endregion
 		
 		public Configuracion()
@@ -3031,8 +3059,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarChar(MAX)")]
-		public string Logo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Logo
 		{
 			get
 			{
@@ -3287,6 +3315,26 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dato1", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Dato1
+		{
+			get
+			{
+				return this._Dato1;
+			}
+			set
+			{
+				if ((this._Dato1 != value))
+				{
+					this.OnDato1Changing(value);
+					this.SendPropertyChanging();
+					this._Dato1 = value;
+					this.SendPropertyChanged("Dato1");
+					this.OnDato1Changed();
 				}
 			}
 		}
@@ -9750,6 +9798,10 @@ namespace Inventario
 		
 		private int _Estatus;
 		
+		private System.Nullable<long> _IdArticulo;
+		
+		private string _Articulo;
+		
 		private EntitySet<Articulos> _Articulos;
 		
 		private EntitySet<PedidosExternos> _PedidosExternos;
@@ -9766,6 +9818,10 @@ namespace Inventario
     partial void OnUnidadChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
     #endregion
 		
 		public UnidadDeMedida()
@@ -9832,6 +9888,46 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(50)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
 				}
 			}
 		}
