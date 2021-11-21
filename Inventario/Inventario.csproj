@@ -190,12 +190,9 @@
     <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\UsersVM.cs" />
-=======
     <Compile Include="Models\ModeloUsuario.cs" />
     <Compile Include="Models\Seguridad.cs" />
->>>>>>> alma
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
