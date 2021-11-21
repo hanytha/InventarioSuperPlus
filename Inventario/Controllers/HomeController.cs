@@ -6,6 +6,8 @@ using Inventario.Models;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class HomeController : Controller
     {
         // GET: Home

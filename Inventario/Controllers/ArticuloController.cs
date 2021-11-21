@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +7,12 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class ArticuloController : Controller
-    {//conexion con DB
+    {
+      
+        //conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
 
         // GET: Articulo

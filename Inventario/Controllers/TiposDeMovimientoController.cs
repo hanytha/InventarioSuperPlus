@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class TiposDeMovimientoController : Controller
     {
         //conexion con DB
@@ -22,10 +25,7 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-<<<<<<< HEAD
                     p.IdUnidadDeMedida,
-=======
->>>>>>> alma
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,
@@ -42,10 +42,7 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
-<<<<<<< HEAD
                     p.IdUnidadDeMedida,
-=======
->>>>>>> alma
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,

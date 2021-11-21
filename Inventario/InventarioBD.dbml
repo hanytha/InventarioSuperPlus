@@ -56,7 +56,7 @@
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Categoria" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="PrecioUnitarioPromedio" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
@@ -70,6 +70,7 @@
       <Column Name="Marca" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Articulos_PedidosExternos" Member="PedidosExternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosExternos" />
       <Association Name="Articulos_PedidosInternos" Member="PedidosInternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosInternos" />
       <Association Name="Articulos_TipoDeMovimientos" Member="TipoDeMovimientos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="TipoDeMovimientos" />
@@ -203,6 +204,8 @@
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Marca_Articulos" Member="Articulos" ThisKey="IdMarca" OtherKey="IdMarca" Type="Articulos" />
       <Association Name="Marca_PedidosExternos" Member="PedidosExternos" ThisKey="IdMarca" OtherKey="IdMarca" Type="PedidosExternos" />
       <Association Name="Marca_PedidosInternos" Member="PedidosInternos" ThisKey="IdMarca" OtherKey="IdMarca" Type="PedidosInternos" />

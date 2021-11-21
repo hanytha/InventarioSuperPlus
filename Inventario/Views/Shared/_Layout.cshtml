@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="20x20" href="~/Assets/Login/logotipo.svg"  />
+    <link rel="icon" type="image/png" sizes="20x20" href="~/Assets/Login/logotipo.svg" />
 
     <title>@ViewBag.Title - Inventario - ASP.NET </title>
     <!-- IMPORTAR FONTAWESOME DIRECTAMENTE DESDE SU SERVIDOR -->
@@ -190,206 +190,13 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-<<<<<<< HEAD
-                <img src="~/Assets/Imagenes/logo.png"/>
-=======
                 <img class="mb-4" src="~/Assets/Login/logotipo.svg" alt="" width="70" height="70">
->>>>>>> alma
             </a>
         </div>
         <div class="navbar-inner">
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
-<<<<<<< HEAD
-                <!-- Nav items -->
-                <ul class="navbar-nav">
-
-
-                    <li id="menu" class="list__item" style="cursor: pointer;">
-                        <div class="list__button">
-                            <i class="fas fa-home list__img"></i>
-
-                            @Html.ActionLink("Inicio", "Index", "Index")
-
-                        </div>
-                    </li>
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-cog list__img"></i>
-                            <a href="#" class="nav__link">Configuración</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Página", "Pagina", "Pagina")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Configuración", "Configuracion", "Configuracion")
-                            </li>
-
-
-                        </ul>
-
-                    </li>
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-users list__img"></i>
-                            <a href="#" class="nav__link">Usuarios</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Usuarios", "Usuario", "Usuario")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Perfiles de usuario", "Perfiles", "Perfiles")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="far fa-building list__img"></i>
-                            <a href="#" class="nav__link">Áreas</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Áreas", "Departamentos", "Departamentos")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Subáreas", "subArea", "subArea")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-box-open list__img"></i>
-                            <a href="#" class="nav__link">Artículos</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Artículos", "Articulo", "Articulo")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Existencias", "Existencias", "Existencias")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Existencias Almacen", "ExistenciaAlmacen", "ExistenciaAlmacen")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Clasificación", "Categoria", "Categoria")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Unidad de medida", "UnidadMedida", "UnidadMedida")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Tipos de movimiento", "TiposDeMovimiento", "TiposDeMovimiento")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Compras", "ArticuloVista", "ArticuloVista")
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-store list__img"></i>
-                            <a href="#" class="nav__link">Tiendas</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Tiendas", "Tienda", "Tienda")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Supervisión", "Supervision", "Supervision")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Supervisor", "Supervisor", "Supervisor")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-window-restore list__img"></i>
-                            <a href="#" class="nav__link">Pedidos</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-
-                        <ul class="list__show">
-                            <li id="menu" class="list__inside">
-                                @Html.ActionLink("Pedidos externos", "Pedidosext", "Pedidosext")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Pedidos Internos", "Pedidosint", "Pedidosint")
-                            </li>
-                        </ul>
-
-                    </li>
-
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-user-friends list__img"></i>
-                            <a href="#" class="nav__link">Proveedores</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Proveedores", "Proveedores", "Proveedores")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Marca", "Marca", "Marca")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li id="menu" class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <i class="fas fa-shopping-cart list__img"></i>
-                            <a href="#" class="nav__link">Compra</a>
-                            <i class="fas fa-chevron-right list__arrow"></i>
-                        </div>
-                        <ul class="list__show">
-                            <li class="list__inside">
-                                @Html.ActionLink("Compra", "Compra", "Compra")
-                            </li>
-                            <li class="list__inside">
-                                @Html.ActionLink("Bonificaciones", "Bonificaciones", "Bonificaciones")
-                            </li>
-
-                            <li class="list__inside">
-                                @Html.ActionLink("Impuestos", "Impuestos", "Impuestos")
-                            </li>
-                        </ul>
-
-                    </li>
-
-                </ul>
-
-=======
->>>>>>> alma
 
                 <aside class="left-sidebar" data-sidebarbg="skin5">
                     <div class="scroll-sidebar">
@@ -475,7 +282,7 @@
                         </li>
                         <li class="nav-item d-sm-none">
                             <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                                <i class="fas fa-search"></i>
+                                <i class="ni ni-zoom-split-in"></i>
                             </a>
                         </li>
                         <div class="preloader">
@@ -511,33 +318,33 @@
                                         <ul class="navbar-nav float-left">
                                             <!-- Comment -->
                                             @*<li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-bell font-24"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </li>*@
+                                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="mdi mdi-bell font-24"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </li>*@
                                             <!-- End Comment -->
                                             <!-- Perfil de usuario: Obciones al presionar la foto de perfil-->
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     @{<img src=@Accesos.Foto alt="user" class="rounded-circle" width="50" />}
                                                     </a>
-                                                <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                                    <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="fas fa-users list__img" style="font-size: 20px; color: dodgerblue;"></i> Perfil</a>
-                                                    <a class="dropdown-item" href='@Url.Action("logout", "Login")'><i class="fa fa-power-off m-r-5 m-l-5" style="font-size: 20px; color: red;"></i>Salir</a>
-                                                    <div class="dropdown-divider"></div>
-                                                </div>
+                                                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                                        <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="fas fa-users list__img" style="font-size: 20px; color: dodgerblue;"></i> Perfil</a>
+                                                        <a class="dropdown-item" href='@Url.Action("logout", "Login")'><i class="fa fa-power-off m-r-5 m-l-5" style="font-size: 20px; color: red;"></i>Salir</a>
+                                                        <div class="dropdown-divider"></div>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
-                                </nav>
-                            </header>
-                        </div>
-                        
+                                    </nav>
+                                </header>
+                            </div>
+
                         </ul>
                         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                             <li class="nav-item dropdown">
@@ -591,7 +398,7 @@
                 </div>
             </div>
         </div>
-    <!--Obterner la información que se mostrará en el perfil del usuario con razor-->
+        <!--Obterner la información que se mostrará en el perfil del usuario con razor-->
         <div id="ModalPerfil" class="modal" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -599,81 +406,47 @@
                         <header class="CardPerfil_Header">
                             <img src="~/Assets/Internal/Fondo.jpg" alt="Fondo" class="CardPerfil_Header_Fondo" />
                             @{<img src=@Accesos.Foto class="CardPerfil_Header_FPerfil" alt="Foto perfil" />}
-                            </header>
-                        </article>
-                        <section class="CardBody">
-                            @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br>Nombre</span></p>}
-                            <div class="row">
-                                <div class="col-md-6 col-sm-4 col-xs-4">
-                                    @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br>Puesto</span></p>}
-                                </div>
-                                @*<div class="col-md-6 col-sm-4 col-xs-4">
-                                        @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
-                                    </div>*@
+                        </header>
+                    </article>
+                    <section class="CardBody">
+                        @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br>Nombre</span></p>}
+                        <div class="row">
+                            <div class="col-md-6 col-sm-4 col-xs-4">
+                                @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br>Puesto</span></p>}
                             </div>
-                        </section>
-                        <footer class="CardFooter_IUSA">
-                            <div id="DatosIUSA"></div>
-                        </footer>
-                        <footer class="CardFooter_PCPay">
-                            <div id="DatosPCPay"></div>
-                        </footer>
-                    </div>
+                            @*<div class="col-md-6 col-sm-4 col-xs-4">
+                                    @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
+                                </div>*@
+                        </div>
+                    </section>
+                    <footer class="CardFooter_IUSA">
+                        <div id="DatosIUSA"></div>
+                    </footer>
+                    <footer class="CardFooter_PCPay">
+                        <div id="DatosPCPay"></div>
+                    </footer>
                 </div>
             </div>
-<<<<<<< HEAD
-        </nav>
-        <!-- Header -->
-        <!-- Mask -->
-        <!-- Cabecera del Layaut-->
-
-        @RenderBody()
-
-
+        </div>
 
         <!-- Pie de pagina -->
         <!--<footer class="footer">
         <p>Contenido del pié de la página.</p>
         /footer> -->
-    </div>
-    <!-- Argon Scripts -->
-    <!-- Script-->
-    <script src="~/Scrips/argon.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scrips/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scrips/bootstrap.min.js"></script>
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <!--  <script src="~/Scrips/jquery-scrollLock.min.js"></script>  -->
-    <!--  <script src="~/Scrips/jquery-ui.min.js"></script> -->
-    <script src="~/Scrips/jquery.min.js"></script>
-    <script src="~/Scrips/jquery.scrollbar.min.js"></script>
-    <script src="~/Scrips/js.cookie.js"></script>
-    <!--Importar iconos-->
-    <!-- <script src="/js/all.js"></script> -->
+        <!-- Argon Scripts -->
+        <!-- Script-->
+        <script src="~/Scrips/argon.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <script src="~/Scrips/bootstrap-datepicker.min.js"></script>
+        <script src="~/Scrips/bootstrap.min.js"></script>
 
-</body>
-=======
-      
-            <!-- Pie de pagina -->
-            <!--<footer class="footer">
-            <p>Contenido del pié de la página.</p>
-            /footer> -->
-    
-            <!-- Argon Scripts -->
-            <!-- Script-->
-            <script src="~/Scrips/argon.js"></script>-->
-            <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-            <script src="~/Scrips/bootstrap-datepicker.min.js"></script>
-            <script src="~/Scrips/bootstrap.min.js"></script>
+        <!--  <script src="~/Scrips/jquery-scrollLock.min.js"></script>  -->
+        <!--  <script src="~/Scrips/jquery-ui.min.js"></script> -->
+        <script src="~/Scrips/jquery.min.js"></script>
+        <script src="~/Scrips/jquery.scrollbar.min.js"></script>
+        <script src="~/Scrips/js.cookie.js"></script>
+        <!--Importar iconos-->
+        <!-- <script src="/js/all.js"></script> -->
 
-            <!--  <script src="~/Scrips/jquery-scrollLock.min.js"></script>  -->
-            <!--  <script src="~/Scrips/jquery-ui.min.js"></script> -->
-            <script src="~/Scrips/jquery.min.js"></script>
-            <script src="~/Scrips/jquery.scrollbar.min.js"></script>
-            <script src="~/Scrips/js.cookie.js"></script>
-            <!--Importar iconos-->
-            <!-- <script src="/js/all.js"></script> -->
-
-        </body>
->>>>>>> alma
-    </html>
+    </body>
+</html>
