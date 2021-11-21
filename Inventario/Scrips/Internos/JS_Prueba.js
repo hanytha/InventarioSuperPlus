@@ -54,7 +54,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
         CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a>";
-        CodigoHtmlArticuloComp += "<div style='display: none;'><div class='container'style='height: 50vh; width: 1200px;'><table border='1'><tbody><tr><td></td><th>A</th><th>B</th></tr><tr><th>1</th><td>A1</td><td>B1</td></tr><tr><th>2</th><td>A2</td><td>B2</td></tr></tbody></table></div></div>";
+        CodigoHtmlArticuloComp += "<div style='display: none;'><div class='container'style='height: 50vh; width: 1200px;'><table border='1'><tbody><tr><td ></td><th>A</th><th>B</th></tr><tr><th>1</th><td>"+ ArrayId[i] +"</td><td>B1</td></tr><tr><th>2</th><td>A2</td><td>B2</td></tr></tbody></table></div></div>";
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -77,10 +77,6 @@ function Desplegar(cual) {
     }
     return false;
 }
-
-//-----------------------------------
-
-
 //----------------------------------
 //ConsultaArticuloCompra();
 //function ConsultaArticuloCompra() {

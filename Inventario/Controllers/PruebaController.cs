@@ -68,6 +68,7 @@ namespace Inventario.Controllers
                 else
                 {
                     Costos += "0" + ",";
+
                     Fechas += "2010-08-10" + ",";
                     Stock += "0" + ",";
                 }
