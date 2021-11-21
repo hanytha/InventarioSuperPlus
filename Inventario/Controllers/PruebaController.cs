@@ -15,153 +15,67 @@ namespace Inventario.Controllers
         {
             return View();
         }
-         public JsonResult ConsultaArticulos()
+        public JsonResult ConsultaArticulos()
         {
-            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdArticulos,
-                    p.NombreEmpresa,
-                    p.IdUnidadDeMedida,
-                    p.IdAreas,
-                    p.IdMarca,
-                    p.IdCategorias,
-                    p.Categoria,
-                    p.NombreProveedor,
-                    p.PrecioUnitarioPromedio,
-                    p.Descripcion,
-                    p.UnidadSAT,
-                    p.ClaveSAT,
-                    p.Fecha,
-                    p.FechaSistema,
-                    p.Unidad,
-                    p.Area,
-                    p.Marca,
-                    p.Logo,
-                    p.Estatus,
-                });
-            return Json(articulos, JsonRequestBehavior.AllowGet);
-        }
-       
-        public JsonResult ConsultaArticulo(long Id)
-        {
-            var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdArticulos,
-                    p.NombreEmpresa,
-                    p.IdUnidadDeMedida,
-                    p.IdAreas,
-                    p.IdMarca,
-                    p.IdCategorias,
-                    p.Categoria,
-                    p.NombreProveedor,
-                    p.PrecioUnitarioPromedio,
-                    p.Descripcion,
-                    p.UnidadSAT,
-                    p.ClaveSAT,
-                    p.Fecha,
-                    p.FechaSistema,
-                    p.Unidad,
-                    p.Area,
-                    p.Marca,
-                    p.Estatus,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
-                    
-                });
-            return Json(articulo, JsonRequestBehavior.AllowGet);
-        }
+            string id = "";
+            string Nombre = "";
+            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
 
-        //Guardar los datos del proveedor
-        public int GuardarArticulo(Articulos DatosArticulo, string cadF)
-        {
-            int Afectados = 0;
+            var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+            .Select(p => new
+            {
+                Id = p.IdArticulos,
+                nombres = p.NombreEmpresa
+            });
+            foreach (var art in ConsultaArticulo)
+            {
+                id += art.Id + ",";
+                Nombre += art.nombres + ",";
+                var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdCompra)
+                    .Select(p => new
+                    {
+                        fechaIngreso = p.FechaDeIngreso,
+                        stockActual = p.ExitenciaActual,
+                        costo = p.Coste,
+                    });
 
-                long id = DatosArticulo.IdArticulos;
-                if (id.Equals(0))
+                if (consultaFecha.Count() > 0)
                 {
-                    //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
-                    int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
-                    if (nveces == 0)
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int cont = 0;
+                    int SumaStock = 0;
+                    //inicia
+                    //DateTime FultCompra;                
+                    foreach (var comp in consultaFecha)
                     {
-                    DatosArticulo.Logo = Convert.FromBase64String(cadF);
-                        InvBD.Articulos.InsertOnSubmit(DatosArticulo);
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
+
+                        SumaStock = (int)(SumaStock + comp.stockActual);
+                        if (cont == 0)
+                        {
+                            Costos += comp.costo + ",";
+                        }
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                        }
+                        cont++;
                     }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                    Stock += SumaStock + ",";
+                    //termina
                 }
                 else
                 {
-                    int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa) 
-                    && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
-                    && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
-                    && p.Descripcion.Equals(DatosArticulo.Descripcion) 
-                    && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
-                    && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
-                    && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
-                    && p.Fecha.Equals(DatosArticulo.Fecha)
-                    && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
-                    && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
-                    && p.IdAreas.Equals(DatosArticulo.IdAreas)
-                    && p.IdMarca.Equals(DatosArticulo.IdMarca)
-                    && p.Logo.Equals(DatosArticulo.Logo)).Count();
-                    if (nveces == 0)
-                    {
-                        Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
-                        obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
-                        obj.IdCategorias = DatosArticulo.IdCategorias;
-                        obj.Categoria = DatosArticulo.Categoria;
-                        obj.NombreProveedor = DatosArticulo.NombreProveedor;
-                        obj.Descripcion = DatosArticulo.Descripcion;
-                        obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
-                        obj.UnidadSAT = DatosArticulo.UnidadSAT;
-                        obj.ClaveSAT = DatosArticulo.ClaveSAT;
-                        obj.Fecha = DatosArticulo.Fecha;
-                        obj.FechaSistema = DatosArticulo.FechaSistema;
-                        obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
-                        obj.Unidad = DatosArticulo.Unidad;
-                        obj.IdAreas = DatosArticulo.IdAreas;
-                        obj.Area = DatosArticulo.Area;
-                        obj.IdMarca = DatosArticulo.IdMarca;
-                        obj.Marca = DatosArticulo.Marca;
-                        obj.Logo = Convert.FromBase64String(cadF);
-
-                    InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
+                    Costos += "0" + ",";
+                    Fechas += "2010-08-10" + ",";
+                    Stock += "0" + ",";
                 }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Afectados = 0;
-                //}
-                return Afectados;
             }
-        //Eliminar Compra
-            public int EliminarArticulo(long Id)
-        {
-            int nregistradosAfectados = 0;
-            try
-            {//Consulta los datos y el primer Id que encuentra  lo compara
-                Articulos articul = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id)).First();
-                articul.Estatus = 0;//Cambia el estatus en 0
-                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-                nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
-            return nregistradosAfectados;
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+
 
     }
 }

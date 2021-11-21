@@ -1,6 +1,6 @@
 ﻿ConsultaArticuloComp();
 function ConsultaArticuloComp() {
-    $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
+    $.get("/Prueba/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
     });
 
@@ -32,7 +32,6 @@ function CrearArticuloComp(Data) {
     let Arraycostos = Costos.split(',');
 
 
-
     for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
 
         CodigoHtmlArticuloComp += "<div>";
@@ -54,7 +53,8 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a><div style='display: none;'><div class='card text-dark bg-info mb-3' style='height: 30vh; width: 1200px;'><p>uno dos dsd sdsds sds dsds dsds </p></di></div>"
+        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a>";
+        CodigoHtmlArticuloComp += "<div style='display: none;'><div class='container'style='height: 50vh; width: 1200px;'><table border='1'><tbody><tr><td></td><th>A</th><th>B</th></tr><tr><th>1</th><td>A1</td><td>B1</td></tr><tr><th>2</th><td>A2</td><td>B2</td></tr></tbody></table></div></div>";
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -66,8 +66,8 @@ function CrearArticuloComp(Data) {
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
 }
-//---------------------------Funcion para desplegar Tabla----------------------------------------------------
 
+//-------------------------------
 function Desplegar(cual) {
     var c = cual.nextSibling;
     if (c.style.display == 'none') {
@@ -78,9 +78,61 @@ function Desplegar(cual) {
     return false;
 }
 
-//-----------------------------------------------------------------------------------
+//-----------------------------------
 
-/*
+
+//----------------------------------
+//ConsultaArticuloCompra();
+//function ConsultaArticuloCompra() {
+//    $.get("/ArticuloVista/ConsultaArticulos", function (Data) {
+//        CrearArticuloCompra(Data);
+//    });
+
+//}
+
+//function CrearArticuloCompra(Data) {
+//    var CodigoHtmlArticuloComp = "";
+//    CodigoHtmlArticuloComp += "<div id='contenedor8'>";
+//    CodigoHtmlArticuloComp += "<section id='contenedor_follow'>";
+//    CodigoHtmlArticuloComp += "<hr class='solid'>";
+//    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>ID</div> "
+//    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono'>Nombre Empresa</div>"
+//    CodigoHtmlArticuloComp += "<div class='col-3 Heading icono '>Acción</div>";
+//    CodigoHtmlArticuloComp += "<hr class='solid'>"
+//    CodigoHtmlArticuloComp += "<div>";
+
+
+//    let IdComXart = Data.IdComXart;
+//    let ArrayIdComXart = IdComXart.split(',');
+//    let Nombres = Data.Nombres;
+//    let ArrayNombres = Nombres.split(',');
+
+//    for (var i = 0; i < (ArrayIdComXart, ArrayNombres).length; i++) {
+
+//        CodigoHtmlArticuloComp += "<div>";
+//        CodigoHtmlArticuloComp += "<div class='row row-cols-auto '>"
+//        CodigoHtmlArticuloComp += "<div class='col'>"
+//        CodigoHtmlArticuloComp += "<div class='col Cell'>" + IdComXart[i] + "</div>"
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "<div class='col'>"
+//        CodigoHtmlArticuloComp += "<div class='col Cell'>" + ArrayNombres[i] + "</div>"
+//        CodigoHtmlArticuloComp += "</div>";
+     
+//        CodigoHtmlArticuloComp += "<div class='col'>"
+//        CodigoHtmlArticuloComp += "<label>"
+//        CodigoHtmlArticuloComp += "<a onclick='return Desplegar(this);' href='javascript:void(0);'><button title='Desplegar para mostrar' class='btn btn-outline-primary'>Dsplegar</button></a><div style='display: none;'><div class='container'style='height: 30vh; width: 1200px;'><div id='tabla'><p>unonuon</p></di></div>"
+//        CodigoHtmlArticuloComp += "</label>"
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//    }
+//    document.getElementById("contenedor8").innerHTML = CodigoHtmlArticuloComp;
+
+//}
+//---------------------------Funcion para desplegar Tabla----------------------------------------------------
 
 ConsultaTienda();
 function ConsultaTienda() {
@@ -126,11 +178,11 @@ function CrearDivTienda(Data) {
 
     }
 
-    document.getElementById("contenedor2").innerHTML = CodigoHtmlCompra;
+    document.getElementById("contenedor2") = CodigoHtmlCompra;
 }
 
 
-
+/*
 ConsultaExistenciaAlmacen();
 function ConsultaExistenciaAlmacen() {
     $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacenes", function (Data) {
@@ -180,7 +232,9 @@ function CrearDivAlmacen(Data) {
 
 */
 
+//---------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------
 
 ConsultaMarcas();
 function ConsultaMarcas() {
@@ -209,3 +263,6 @@ function CrearTablaMarcas(Data) {
     CodigoHtmlTablaMarcas += "</table>";
     document.getElementById("tabla").innerHTML = CodigoHtmlTablaMarcas;
 }
+
+
+//---------------------------------------------------
