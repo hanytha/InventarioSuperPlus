@@ -1,186 +1,137 @@
 ﻿
-CrearAcordeonConfiguraciones();
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonConfiguraciones() {
-    $.get("/Configuracion/ConsultaConfiguraciones", function (DatosConfiguracion) {
-        //Accordeon(DatosConfiguracion, document.getElementById("accordion"));
-        AcordeonConfiguraciones(DatosConfiguracion, document.getElementById("accordion"));
+
+CrearAcordeonProveedores();
+function CrearAcordeonProveedores() {
+    $.get("/Configuracion/ConsultaConfiguraciones", function (IncidenciasArea) {
+        AcordeonProveedores(IncidenciasArea, document.getElementById("AcordeonConfiguracion"));
     });
 }
-function AcordeonConfiguraciones(DatosConfiguracion, CtrlConfiguracion) {
-    var CodigoHTMLConfiguracion = "";
-    for (var i = 0; i < DatosConfiguracion.length; i++) {
+
+//Crea la información basica de las insidencias
+function AcordeonProveedores(data, IDo) {
+    var CodHtml = "";
+    for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodigoHTMLConfiguracion += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0'>";
         }
         else {
-            CodigoHTMLConfiguracion += "<div class='card m-b-0 border-top'>";
+            CodHtml += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLConfiguracion += "<div class='card-header' id='heading" + DatosConfiguracion[i].Id + "'>";
-        CodigoHTMLConfiguracion += "<h5 class='mb-0'>";
-        CodigoHTMLConfiguracion += "<a  data-toggle='collapse' data-target='#collapse" + DatosConfiguracion[i].Id + "' aria-expanded='false' aria-controls='collapse" + DatosConfiguracion[i].Id + "' class='collapsed'>";
-        //CodigoHTMLConfiguracion += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLConfiguracion += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLConfiguracion += "<span >" + DatosConfiguracion[i].NombreEmpresa + "</span>";
-        CodigoHTMLConfiguracion += "</a>";
-        CodigoHTMLConfiguracion += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLConfiguracion += "<div id='collapse" + DatosConfiguracion[i].Id + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-        CodigoHTMLConfiguracion += "<div class='card-body'>";
-        CodigoHTMLConfiguracion += "<div class='row'>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>RFC: </strong>" + DatosConfiguracion[i].RFC + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Vision: </strong>" + DatosConfiguracion[i].Vision + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Mision: </strong>" + DatosConfiguracion[i].Mision + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Valores: </strong>" + DatosConfiguracion[i].Valores + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Direccion: </strong>" + DatosConfiguracion[i].Direccion + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + DatosConfiguracion[i].Telefono + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>DireccionHost: </strong>" + DatosConfiguracion[i].DireccionHost + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Puerto: </strong>" + DatosConfiguracion[i].Puerto + "</div>";
-         CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Logo: </strong>" + DatosConfiguracion[i].Logo + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>LogoTexto: </strong>" + DatosConfiguracion[i].LogoTexto + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>Sesion Abierta: </strong>" + DatosConfiguracion[i].SesionAbierta + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-12 col-sm-6 col-xs-6'><strong>SerCorreo: </strong>" + DatosConfiguracion[i].SerCorreo + "</div>";
- 
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>SerCorreoPort: </strong>" + DatosConfiguracion[i].SerCorreoPort + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>SerCorreoUser: </strong>" + DatosConfiguracion[i].SerCorreoUser + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>SerCorreoPass: </strong>" + DatosConfiguracion[i].SerCorreoPass + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>DirWeb: </strong>" + DatosConfiguracion[i].DirWeb + "</div>";
+        CodHtml += "<div class='card-header' id='heading" + data[i].IdConfiguracion + "'>";
+        CodHtml += "<h5 class='mb-0'>";
+        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdConfiguracion + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdConfiguracion + "' aria-expanded='false' aria-controls='collapse" + data[i].IdConfiguracion + "' class='collapsed'>";
+        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        CodHtml += "<span >" + data[i].NombreEmpresa + "</span>";
+        CodHtml += "</a>";
+        CodHtml += "</h5>";
+        CodHtml += "<div id='collapse" + data[i].IdConfiguracion + "' class='collapse' aria-labelledby='headingOne' data-parent='#AcordeonConfiguracion' style=''>";
+        CodHtml += "<div class='card-body'>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RFC: </strong>" + data[i].RFC + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Vision: </strong>" + data[i].Vision + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Mision: </strong>" + data[i].Mision + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Valores: </strong>" + data[i].Valores + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Direccion: </strong>" + data[i].Direccion + "</div>";
 
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + DatosConfiguracion[i].Tipo + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Dato2: </strong>" + DatosConfiguracion[i].Dato2 + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Dato3: </strong>" + DatosConfiguracion[i].Dato3 + "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dato4: </strong>" + DatosConfiguracion[i].Dato4 + "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLConfiguracion += "<button class='btn btn-success' onclick='AbrirMProveedores(" + DatosConfiguracion[i].Id + ")' data-toggle='modal' data-target='#Proveedores'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLConfiguracion += "<button class='btn btn-danger' onclick='EliminarConfiguaciones(" + DatosConfiguracion[i].Id + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
-        CodigoHTMLConfiguracion += "</div>";
+
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Dato2: </strong>" + data[i].Dato2 + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'></div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + data[i].Telefono + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + data[i].DireccionHost + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Mision: </strong>" + data[i].Puerto + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Logo: </strong>" + data[i].Logo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>LogoTexto: </strong>" + data[i].LogoTexto + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Dato3: </strong>" + data[i].Dato3 + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Dato4: </strong>" + data[i].Dato4 + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>SesionAbierta: </strong>" + data[i].SesionAbierta + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>SerCorreo: </strong>" + data[i].SerCorreo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>SerCorreoPort: </strong>" + data[i].SerCorreoPort + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>SerCorreoUser: </strong>" + data[i].SerCorreoUser + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>SerCorreoPass: </strong>" + data[i].SerCorreoPass + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>DirWeb: </strong>" + data[i].DirWeb + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModalConf(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ")' data-toggle='modal' data-target='#Configuracion'><i class='fas fa-edit'></i></button> ";
+
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarConfiguracion(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
     }
-    CtrlConfiguracion.innerHTML = CodigoHTMLConfiguracion;
+    IDo.innerHTML = CodHtml;
 }
 
-//Limpia la información y carga la informacion del proveedor
-function AbrirMProveedores(id) {//la clase AreaObligatorio
-    var controlesObligatorio = document.getElementsByClassName("AreaObligatorio");
-    for (var i = 0; i < controlesObligatorio.length; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("border-danger");//Cambia los bordes lo las casillas a color rojo
+
+
+//Foto
+var btnFoto = document.getElementById("BtnFoto");
+btnFoto.onchange = function (e) {
+    var file = document.getElementById("BtnFoto").files[0];
+    var reader = new FileReader();
+    if (reader != null) {
+        reader.onloadend = function () {
+            var img = document.getElementById("PBFoto");
+            img.src = reader.result;
+        }
+    }
+    reader.readAsDataURL(file);
+}
+//Limpia la información y carga la informacion del usuario
+function abrirModalConf(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
     }
     if (id == 0) {
-        Limpiar();
+        LimpiarCampos();
+        sessionStorage.setItem('IdConfiguracion', '0');
+
     }
     else {
-        $.get("/Proveedores/ConsultaProveedor/?Id=" + Id, function (DatosConfiguracion) {
-            document.getElementById("TxtId").value = DatosConfiguracion[0].Id;
-            document.getElementById("TxtRFC").value = DatosConfiguracion[0].RFC;
-            document.getElementById("TxtVision").value = DatosConfiguracion[0].Vision;
-            document.getElementById("TxtMision").value = DatosConfiguracion[0].Mision;
-            document.getElementById("TxtPuerto").value = DatosConfiguracion[0].Puerto;
-            document.getElementById("TxtSerCorreoPort").value = DatosConfiguracion[0].SerCorreoPort;
-            document.getElementById("cmbPuertoHost").value = DatosConfiguracion[0].PuertoHost;
-            document.getElementById("cmbValores").value = DatosConfiguracion[0].Valores;
-            document.getElementById("cmbTipoTexto").value = DatosConfiguracion[0].TipoTexto;
-            document.getElementById("TxtRFC").value = DatosConfiguracion[0].RFC;
-            document.getElementById("TxtPuerto").value = DatosConfiguracion[0].Puerto;
-            document.getElementById("TxtSerCorreoPort").value = DatosConfiguracion[0].SerCorreoPort;
-            document.getElementById("TxtSerCorreo").value = DatosConfiguracion[0].SerCorreo;
-            document.getElementById("TxtSerCorreoUser").value = DatosConfiguracion[0].SerCorreoUser;
-            document.getElementById("TxtSerCorreoPass").value = DatosConfiguracion[0].SerCorreoPass;
-            document.getElementById("TxtDireccionHost").value = DatosConfiguracion[0].DireccionHost;
-            document.getElementById("TxtDirWeb").value = DatosConfiguracion[0].DirWeb;
-            document.getElementById("TxtTipo").value = DatosConfiguracion[0].Tipo;
-        });
-    }
 
+        $.get("/Configuracion/ConsultaConfiguracion/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IdConfiguracion', Data[0].IdConfiguracion);
 
-}
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
+            document.getElementById("TxtMisión").value = Data[0].Vision;
+            document.getElementById("TxtVisión").value = Data[0].Mision;
+            document.getElementById("TxtValores").value = Data[0].Valores;
 
-//Guarda los cambios y altas de las áreas
-function GuardarProveedor() {
-    if (Obligatorios("Proveedor") == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var Id = document.getElementById("TxtId").value;
-            var RFC = document.getElementById("TxtRFC").value;
-            var Vision = document.getElementById("TxtVision").value;
-            var Mision = document.getElementById("TxtMision").value;
-            var Puerto = document.getElementById("TxtPuerto").value;
-            var SerCorreoPort = document.getElementById("TxtSerCorreoPort").value;
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
 
-            var PuertoHost = document.getElementById("TxtPuertoHost").value;
-            var Valores = document.getElementById("TxtValores").value;
-            var TipoTexto = document.getElementById("TxtTipoTexto").value;
-            var RFC = document.getElementById("RFC").value;
-            var Puerto = document.getElementById("TxtPuerto").value;
-            var SerCorreoPort = document.getElementById("TxtSerCorreoPort").value;
+            document.getElementById("TxtDireccionHost").value = Data[0].DireccionHost;
 
-            ///var temUser = document.getElementById("cmbEncargado");
-            //var URFC = temUser.options[temUser.selectedIndex].text;
+            document.getElementById("TxtPuerto").value = Data[0].Puerto;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtSesionAbierta").value = Data[0].SesionAbierta;
 
-            var SerCorreo = document.getElementById("TxtSerCorreo").value;
-            var SerCorreoUser = document.getElementById("TxtSerCorreoUser").value;
-            var SerCorreoPass = document.getElementById("TxtSerCorreoPass").value;
-            var DireccionHost = document.getElementById("TxtDireccionHost").value;
-            var DirWeb = document.getElementById("TxtDirWeb").value;
-            var Tipo = document.getElementById("TxtTipo").value;
-            var frm = new FormData();
-            frm.append("Id", Id);
-            frm.append("RFC", RFC);
-            frm.append("Vision", Vision);
-            frm.append("Mision", Mision);
-            frm.append("Puerto", Puerto);
-            frm.append("SerCorreoPort", SerCorreoPort);
-            frm.append("PuertoHost", Mision);
-            frm.append("Valores", Valores);
-            frm.append("SerCorreoPort", SerCorreoPort);
-            frm.append("RFC", RFC);
-            frm.append("Puerto", Puerto);
-            frm.append("SerCorreoPort", SerCorreoPort);
-            frm.append("SerCorreo", SerCorreo);
-            frm.append("SerCorreoUser", SerCorreoUser);
-            frm.append("SerCorreoPass", SerCorreoPass);
-            frm.append("DireccionHost", DireccionHost);
-            frm.append("DirWeb", DirWeb);
-            frm.append("Tipo", Tipo);
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Proveedores/GuardarProveedor",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el proveedor");
-                    }
-                    else {
-                        alert("Se ejecuto correctamente");
-                        CrearAcordeonConfiguraciones();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
-        }
-    }
-}
-//"Elimina" el área cambia el Estatus
-function EliminarConfiguaciones(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
+            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+            document.getElementById("TxtLogo").value = Data[0].LogoTexto;
+            document.getElementById("TxtSerCorreo").value = Data[0].SerCorreo;
+            document.getElementById("TxtSerCorreoPuerto").value = Data[0].SerCorreoPort;
+            document.getElementById("TxtSerUser").value = Data[0].SerCorreoUser;
 
-        $.get("/Configuracion/EliminarProveedor/?Id=" + id, function (DatoProveedor) {
-            if (DatoProveedor == 1) {
-                alert("Se elimino correctamente");
-                CrearAcordeonConfiguraciones();
-            } else {
-                alert("Ocurrio un error");
-            }
+            document.getElementById("TxtSerPass").value = Data[0].SerCorreoPass;
+            document.getElementById("TxtDireccionWeB").value = Data[0].DirWeb;
+            document.getElementById("TxtTipo").value = Data[0].Tipo;
+            document.getElementById("TxtDato1").value = Data[0].Dato1;
+            document.getElementById("TxtDato2").value = Data[0].Dato2;
+
+            document.getElementById("TxtDato3").value = Data[0].Dato4;
+            document.getElementById("TxtDato4").value = Data[0].Descripcion;
+
         });
     }
 }

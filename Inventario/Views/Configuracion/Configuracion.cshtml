@@ -1,59 +1,71 @@
 ﻿
 @{
-    ViewBag.Title = "Configuracion";
+    ViewBag.Title = "Configuración";
 }
+<h2>Configuracion</h2>
 
-<!--Titulo-->
-<link href="~/Content/Tabla.css" rel="stylesheet" />
-<link href="~/Content/CObligatorios.css" rel="stylesheet" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
-<div class="contenedor">
-    <div class="contenedor hero">
-        <div class="contenedor-cards">
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
+<div class="accordion" id="accordionConfiguracion">
+    <!--Div de las páginas-->
+    <div class="card m-b-0">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <a data-toggle="collapse" data-target="#collapsePaginas" aria-expanded="true" aria-controls="collapseOne">
+                    <em class="m-r-5 fas fa-file-code" aria-hidden="true"></em>
+                    <span>Páginas</span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapsePaginas" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionConfiguracion">
+            <div class="card-body">
+                <!--Botón modal páginas-->
+                <button onclick="AModalPaginas(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Pagina">Agregar</button>
             </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
+            <div id="Paginas_System" class="card-body">
+                <!--Inserta tabla de las Páginas-->
+                No hay ninguna pagina dada de alta en el sistema.
             </div>
         </div>
     </div>
-</div>
+    <div class="card m-b-0 border-top">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="m-r-5 fas fa-user-secret" aria-hidden="true"></i>
+                    <span>Perfiles</span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
+            <div class="card-body">
+                <!--Boton modal páginas-->
+                <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
+            </div>
+            <div id="Paginas_Perfiles" class="card-body">
+                <!--Inserta tabla de las Páginas-->
+                No hay ningun perfil registrado en la plataforma.
+            </div>
+        </div>
+    </div>
+    <div class="card m-b-0 border-top">
+        <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <i class="m-r-5 fas fa-cogs" aria-hidden="true"></i>
+                    <span>Configuración</span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
+            <div class="card-body">
+                <!--Boton modal páginas-->
+                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
+            </div>
+            <div id="Paginas_Configuracion" class="card-body">
+                <!--Inserta tabla de las Páginas-->
+                Muestra la configuración general del sistema.
+            </div>
 
+<<<<<<< HEAD
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
@@ -75,206 +87,234 @@
                     <h4>CONFIGURACIÓN</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+=======
+        </div>
+    </div>
+</div>
+<!--**************************************************************************************************************************-->
+<!--Pagínas-->
+<div id="ModalSystem_Pagina" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Página</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="panel-heading ">
+             
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtIDPagina">ID Página<span class="required">*</span></label>
+                                <input type="text" id="TxtIDPagina" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                            </div>
+                        </div>
+>>>>>>> alma
                     </div>
-                    <form id="regiration_form" novalidate method="post">
-                        <fieldset>
-                            <h4>PASO 1</h4>
-                            <div class="form-group">
-                                <label for="fName">INGRESAR EL RFC</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="NOMBRE 1">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">INGRESAR EL NOMBRE DE LA EMPRESA</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="UNOMBRE 2">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">MISIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 2</h4>
-                            <div class="form-group">
-                                <label for="fName">VISIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">VALORES</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <div class="form-group">
-                                <label for="fName">DIRECCIÓN</label>
-                                <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 3</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">TELÉFONO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN HOST</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 4</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">PUERTO</label>
-                                    <input type="number" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">LOGO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">TEXTO DE EL LOGO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 5</h4>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">SESION ABIERTA</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOPORT</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                            </div>
 
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 6</h4>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOUSER</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">SERCORREOPASS</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DIRECCIÓN WEB</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
+                                <label class="form-control-label" for="TxtMensaje">Mensaje<span class="required">*</span></label>
+                                <input id="TxtMensaje" class="form-control  limpiar obligatorio" placeholder="Mensaje" maxlength="100" type="text">
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="button" name="data[password]" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> PASO 7</h4>
+                        </div>
+                        <div class="col-lg-6">
                             <div class="form-group">
-                                <div class="form-group">
-                                    <label for="fName">DATO</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO2</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO3</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fName">DATO4</label>
-                                    <input type="text" class="form-control" name="data[fName]" id="fName" placeholder="ESTADO INICIAL">
-                                </div>
+                                <label class="form-control-label" for="TxtAccion">Acción<span class="required">*</span></label>
+                                <input type="text" id="TxtAccion" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Acción">
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Enviar" id="submit_data" />
-                        </fieldset>
-                    </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtControlador">Controlador<span class="required">*</span></label>
+                                <input id="TxtControlador" class="form-control  limpiar obligatorio" placeholder="Controlador" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtIcono">Icono<span class="required">*</span></label>
+                                <input type="text" id="TxtIcono" class="form-control  limpiar" maxlength="100" placeholder="Icono">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="2" wrap="soft" placeholder="Agrega una descripción de la página..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
+                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--**************************************************************************************************************************-->
+<!--Perfiles-->
+<div id="ModalSystem_Perfil" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="panel-heading ">
+                
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtIDPerfil">ID<span class="required">*</span></label>
+                                <input type="text" id="TxtIDPerfil" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                <input type="text" id="TxtPerfil" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Nombre del perfil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNivel">Nivel<span class="required">*</span></label>
+                                <input id="TxtNivel" class="form-control  limpiar obligatorio" placeholder="Nivel" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
+                                <input type="text" id="TxtPerfil" class="form-control  limpiar obligatorio" maxlength="100" placeholder="Nombre del perfil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TblPaginas">Nivel<span class="required">*</span></label>
+                                <div id="TblPaginas">Se inserta una tabla con las páginas ya agregadas a la BD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtComentarios">Descripción<span class="required">*</span></label>
+                                <textarea type="text" id="TxtComentarios" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega una descripción del perfil..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="modal-footer">
+                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
+                        <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!--------------------------------------------------------------------->
-<!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h4>REGISTRO CLASIFICACIÓN</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
-                        <fieldset>
-                            <!--Los pasos del modal-->
+<script src="~/Scrips/jquery.min.js"></script>
 
-                            <h4>PASO 1</h4>
-                            <div class="form-group">
-                                <label for="TxtClasificacion">Tipo de clasificación</label>
-                                <input type="text" class="form-control limpiar obligatorio" name="data[TxtClasificacion]" id="TxtClasificacion" placeholder="Clasificación">
-                            </div>
-                            <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!---------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<script src="~/Scrips/jquery-ui.min.js"></script>
+
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Configuraciones.js"></script>
+<script src="~/Scrips/Internos/JS_Paginas.js"></script>
+
+<script src="~/Scrips/Internos/JS_Perfiles.js"></script>
+
 <!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+@*<script>
+        ////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
+        (function () {
+            var template = null
+            $('.modal').on('show.bs.modal', function (event) {
+                if (template == null) {//Valores nulos
+                    template = $(this).html()
+
+                } else {
+                    $(this).html(template)
+                    //Recetear el formulario iniciando del paso 1
+                    $(document).ready(function () {
+                        var current = 1, current_step, next_step, steps;
+                        steps = $("fieldset").length;
+                        $(".next").click(function () {
+                            current_step = $(this).parent();
+                            next_step = $(this).parent().next();
+                            next_step.show();
+                            current_step.hide();
+                            setProgressBar(++current);
+                        });
+                        $(".previous").click(function () {
+                            current_step = $(this).parent();
+                            next_step = $(this).parent().prev();
+                            next_step.show();
+                            current_step.hide();
+                            setProgressBar(--current);
+                        });
+                        setProgressBar(current);
+                        // Cambiar la acción de la barra de progreso
+                        function setProgressBar(curStep) {
+                            var percent = parseFloat(100 / steps) * curStep;
+                            percent = percent.toFixed();
+                            $(".progress-bar")
+                                .css("width", percent + "%")
+                                .html(percent + "%");
+                        }
+                        //Termina Recetear el formulario
+                    });
+                }
+
+            })
+        })()
+        //Deshabilitar el clic externo para el modal del formulario.
+        jQuery(document).ready(function () {
+            jQuery('[data-toggle="modal"]').each(function () {
+                jQuery(this).attr('data-backdrop', 'static');
+                jQuery(this).attr('data-keyboard', 'false');
+            });
+        });
+
+        jQuery(document).ready(function () {
+            jQuery('[data-toggle="modal"]').each(function () {
+                jQuery(this).attr('data-backdrop', 'static');
+                jQuery(this).attr('data-keyboard', 'false');
+            });
+        });
+
+    </script>*@

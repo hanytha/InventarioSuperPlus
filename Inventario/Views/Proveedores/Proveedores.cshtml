@@ -2,14 +2,64 @@
 @{
     ViewBag.Title = "Proveedores";
 }
-<link href="~/Content/CObligatorios.css" rel="stylesheet" />
-<h2>Proveedores</h2>
 
+<h2>Proveedores</h2>
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
+<div id="tablaUsuarios"></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -21,58 +71,61 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
-                <!-- crearemos un DIV con la clase “progress” que será el artífice para la animación del paso a paso.-->
                 <div class="modal-body">
-                    <h1>REGISTRO DE PROVEEDORES</h1>
+                    <h1>Registro Proveedores</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioProveedor()">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <!--Los pasos del modal-->
-                            <h2>Paso 1</h2>
+                            <h4>Paso 1</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNombre">Nombre del proveedor<span class="required">*</span></label>
-                                        <input id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
+                                        <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre del proveedor" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="Txtcorreo">Email address<span class="required">*</span></label>
-                                        <input type="email" id="Txtcorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                        <label class="form-control-label" for="Txtcorreo">Correo<span class="required">*</span></label>
+                                        <input id="Txtcorreo" name="data[Txtcorreo]" class="form-control  limpiar obligatorio" placeholder="name@example.com" size="15" maxlength="20" type="text">
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtRazonSocial">Razón Social<span class="required">*</span></label>
-                                        <input type="text" id="TxtRazonSocial" class="form-control  limpiar obligatorio" placeholder="Razón Social">
+                                        <input id="TxtRazonSocial" name="data[TxtRazonSocial]" class="form-control  limpiar obligatorio" placeholder="Razón Social" size="5" maxlength="150" type="text">
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtClaveInterbancaria">Clave Interbancaria<span class="required">*</span></label>
-                                        <input type="text" id="TxtClaveInterbancaria" class="form-control  limpiar obligatorio" placeholder="Clave Interbancaria">
+                                        <input id="TxtClaveInterbancaria" name="data[TxtClaveInterbancaria]" class="form-control  limpiar obligatorio" placeholder="Clave Interbancaria" size="30" maxlength="100" type="text">
                                     </div>
-
                                 </div>
-                                <div class="col-lg-4">
+
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
-                                        <input type="text" id="TxtCodigoPostal" class="form-control limpiar obligatorio" placeholder="Código Postal">
+                                        <input id="TxtCodigoPostal" name="data[TxtCodigoPostal]" class="form-control  limpiar obligatorio" placeholder="Código Postal" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
+
                         <fieldset>
-                            <h2> Paso 2</h2>
+                            <h4>Paso 2</h4>
+
+
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -106,100 +159,108 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
-                                        <input type="text" id="TxtDireccion" class="form-control limpiar obligatorio" placeholder="Dirección">
+                                        <label class="form-control-label" for="TxtDireccion">Dirección</label>
+                                        <input id="TxtDireccion" name="data[TxtDireccion]" class="form-control  limpiar obligatorio" placeholder="Dirección" type="text">
                                     </div>
                                 </div>
                             </div>
+
+
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
+
+
                         <fieldset>
-                            <h2> Paso 3</h2>
+                            <h4>Paso 3</h4>
+
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtRFC">RFC del Emisor<span class="required">*</span></label>
-                                        <input type="text" id="TxtRFC" class="form-control limpiar obligatorio" placeholder="RFC">
+                                        <label class="form-control-label" for="TxtRFC">RFC</label>
+                                        <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="RFC" type="text">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
-                                        <input type="tel" id="TxtTelefono" class="form-control limpiar obligatorio" placeholder="Teléfono">
+                                        <label class="form-control-label" for="TxtTelefono">Teléfono</label>
+                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Teléfono" type="tel">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtBanco">Nombre del Banco<span class="required">*</span></label>
-                                        <input type="text" id="TxtBanco" class="form-control limpiar obligatorio" placeholder="Banco">
+                                        <label class="form-control-label" for="TxtBanco">Banco</label>
+                                        <input id="TxtBanco" name="data[TxtBanco]" class="form-control  limpiar obligatorio" placeholder="Banco" type="text">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNumeroDeCuenta">Número de Cuenta<span class="required">*</span></label>
-                                        <input type="text" id="TxtNumeroDeCuenta" class="form-control limpiar obligatorio" placeholder="Número de Cuenta">
+                                        <input type="text" class="form-control limpiar obligatorio" id="TxtNumeroDeCuenta" name="data[TxtNumeroDeCuenta]" placeholder="Número de Cuenta">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
+
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI<span class="required">*</span></label>
-                                        <input type="text" id="TxtUsoCFDI" class="form-control limpiar obligatorio" placeholder="UsoCFDI">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomenclatura">Nomenclatura<span class="required">*</span></label>
-                                        <input type="text" id="TxtNomenclatura" class="form-control limpiar obligatorio" placeholder="Nomenclatura">
+                                        <input id="TxtUsoCFDI" name="data[TxtUsoCFDI]" class="form-control  limpiar obligatorio" placeholder="UsoCFDI" size="15" maxlength="20" type="text">
                                     </div>
                                 </div>
                             </div>
+
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
+
                         <fieldset>
-                            <h2> Paso 4</h2>
+
+                            <h4>Paso 4</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <textarea id="TxtDescripcion" required="required" class="form-control limpiar obligatorio" name="TxtDescripcion" data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="100" data-parsley-minlength-message="Ingrese una descripción.." data-parsley-validation-threshold="10"></textarea>
+                                        <input id="TxtDescripcion" name="data[TxtDescripcion]" class="form-control  limpiar obligatorio" placeholder="Descripción" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
-                            <!-- Agregar la imagen -->
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="200" height="200" alt="" />
-
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />                                        <br />
                                         <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
                                     </div>
                                 </div>
                             </div>
+
+
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-                            <!--  <button id="btnGuardar" type="submit" value="Submit" class="btn btn-success" onclick="GuardarProveedor()">Guardar</button>
-    -->
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarProveedor()">Guardar</button>
                         </fieldset>
+
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="return confirmarAccesoURL()" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<table>
+</table>
+
 
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
@@ -208,12 +269,16 @@
     }
 </style>
 <!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion,Navegación del formulario de paso siguiente y anterior mediante jQuery.-->
-<script src="~/Scrips/Internos/JS_Proveedores.js"></script> <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<script src="~/Scrips/jquery-ui.min.js"></script>
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Proveedores.js"></script>
 <!--Validacion del formulario-->
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<script src="~/Scrips/Plus/scripts.js"></script>
-<script src="~/Scrips/General/JS_Botones.js"></script>
+<!--Scripts de la tarjeta y el botón-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<script src="~/Scrips/General/JS_Botones.js"></script>

@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Pagina";
 }
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,21 +48,18 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<button onclick="abrirModalPagina(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPagina">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-
 <div id="tabla" class="default "></div>
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
+    <div class="modal fade" id="ModalPagina">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,7 +68,7 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE SUPERVISORES</h4>
+                    <h1>REGISTRO E PÁGINAS</h1>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
                         <div class="row">
@@ -113,7 +109,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <button type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
                     </form>
                 </div>
@@ -125,9 +120,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -142,6 +134,5 @@
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <script src="~/Scrips/Plus/scripts.js"></script>
-
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

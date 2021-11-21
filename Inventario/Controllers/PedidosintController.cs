@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class PedidosintController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -33,7 +36,6 @@ namespace Inventario.Controllers
                     p.Tienda,
                     p.IdArticulo,
                     p.Articulo,
-                    p.IdExistenciaAlmacenG,
                     p.Fecha
                 });
             return Json(pedidosInt, JsonRequestBehavior.AllowGet);
@@ -42,7 +44,7 @@ namespace Inventario.Controllers
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaPedidoInterno(long Id)
         {
-            var pedidoInt = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id) && p.Estatus.Equals(1))
+            var pedidosInt = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdPedidosInternos,
@@ -58,10 +60,9 @@ namespace Inventario.Controllers
                     p.Tienda,
                     p.IdArticulo,
                     p.Articulo,
-                    p.IdExistenciaAlmacenG,
                     p.Fecha
                 });
-            return Json(pedidoInt, JsonRequestBehavior.AllowGet);
+            return Json(pedidosInt, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos de la compra
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
@@ -74,7 +75,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)).Count();
 
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
                     InvBD.PedidosInternos.InsertOnSubmit(DatosPedidoInterno);
@@ -88,21 +89,32 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido) && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada) && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada) && p.Tipo.Equals(DatosPedidoInterno.Tipo) && p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida) && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
-                && p.IdTienda.Equals(DatosPedidoInterno.IdTienda) && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo) && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
+                && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
+                   && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada)
+                   && p.Tipo.Equals(DatosPedidoInterno.Tipo)
+                 && p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida)
+                  && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
+                   && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
+                    && p.Marca.Equals(DatosPedidoInterno.Marca)
+                     && p.IdTienda.Equals(DatosPedidoInterno.IdTienda)
+                      && p.Tienda.Equals(DatosPedidoInterno.Tienda)
+                       && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
+                        && p.Articulo.Equals(DatosPedidoInterno.Articulo)
+                          && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
                 if (nveces == 0)
                 {
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
-                    obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
+                    //obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-                    obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
+                    obj.CantidadAprobada = DatosPedidoInterno.CantidadSolicitada;
                     obj.Tipo = DatosPedidoInterno.Tipo;
-                    obj.IdUnidadDeMedida = DatosPedidoInterno.IdUnidadDeMedida;
+                    obj.IdUnidadDeMedida = DatosPedidoInterno.CantidadAprobada;
                     obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoInterno.IdMarca;
                     obj.Marca = DatosPedidoInterno.Marca;
                     obj.IdTienda = DatosPedidoInterno.IdTienda;
-                    obj.Tienda = DatosPedidoInterno.Tienda;
+                    obj.IdArticulo = DatosPedidoInterno.IdArticulo;
                     obj.Articulo = DatosPedidoInterno.Articulo;
                     obj.Fecha = DatosPedidoInterno.Fecha;
                     InvBD.SubmitChanges();
@@ -129,8 +141,8 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             try
             {//Consulta los datos y el primer Id que encuentra  lo compara
-                PedidosInternos pedidosInternos = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id)).First();
-                pedidosInternos.Estatus = 0;//Cambia el estatus en 0
+                PedidosInternos PedidosInternos = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id)).First();
+                PedidosInternos.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar
             }

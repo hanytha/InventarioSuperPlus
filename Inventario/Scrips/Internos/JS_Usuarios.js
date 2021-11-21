@@ -1,6 +1,111 @@
-﻿LlenarCMBPrin();
-
+﻿
+LlenarCMBPrin();
 var imagen64;
+imagen64 = getBase64Image(document.getElementById("PBFoto"));
+//CrearAcordeonUsuarios();
+
+////Crea el acordeón e inserta (los registros de la base de datos)
+//function CrearAcordeonUsuarios() {
+//    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+//        AcordeonUsuarios(Data, document.getElementById("accordion"));
+//    });
+//    imagen64 = getBase64Image(document.getElementById("PBFoto"));
+//}
+//function AcordeonUsuarios(Data, CtrlBonis) {
+//    var CodigoHTMLUsuarios = "";
+//    for (var i = 0; i < Data.length; i++) {
+//        if (i < 1) {
+//            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
+//        }
+//        else {
+//            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
+//        }
+//        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
+//        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
+//        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
+//        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+//        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+//        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
+//        CodigoHTMLUsuarios += "</a>";
+//        CodigoHTMLUsuarios += "</h5>";
+//        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+//        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+//        CodigoHTMLUsuarios += "<div class='card-body'>";
+//        CodigoHTMLUsuarios += "<div class='row'>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
+
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
+
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+
+//        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//        CodigoHTMLUsuarios += "</div>";
+//    }
+//    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
+//}
+
+
+//CrearAcordeonUsuarios();
+
+////Crea el acordeón e inserta (los registros de la base de datos)
+//function CrearAcordeonUsuarios() {
+//    $.get("/Usuario/ConsultaUsuarios", function (Data) {
+//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+//        AcordeonUsuarios(Data);
+//    });
+//}
+
+//function AcordeonUsuarios(Data) {
+//    var CodigoHTMLUsuarios = "";
+//    CodigoHTMLUsuarios += "<table id='tablas' class='table table table-sm' >";
+//    CodigoHTMLUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Acción</thead>";
+//    CodigoHTMLUsuarios += "<tbody>";
+//    for (var i = 0; i < Data.length; i++) {
+//        CodigoHTMLUsuarios += "<tr>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].CURP + "</td>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
+//        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+//        CodigoHTMLUsuarios += "<td>";
+
+//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+//        CodigoHTMLUsuarios += "</td>";
+//        CodigoHTMLUsuarios += "</tr>";
+//    }
+
+//    CodigoHTMLUsuarios += "</tbody>";
+//    CodigoHTMLUsuarios += "</table>";
+//    document.getElementById("tablaPerfiles").innerHTML = CodigoHTMLUsuarios;
+//}
+
+
 ConsultaUsuarios();
 function ConsultaUsuarios() {
     $.get("/Usuario/ConsultaUsuarios", function (Data) {
@@ -8,10 +113,12 @@ function ConsultaUsuarios() {
     }
     );
 }
+
+
 function CrearTablaUsuarios(Data) {
     var CodigoHtmlTablaUsuarios = "";
     CodigoHtmlTablaUsuarios += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Telefono</th><th>Acción</thead>";
+    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Teléfono</th><th>Acción</thead>";
     CodigoHtmlTablaUsuarios += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaUsuarios += "<tr>";
@@ -20,19 +127,18 @@ function CrearTablaUsuarios(Data) {
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
-        CodigoHtmlTablaUsuarios += "<td>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalUsuario'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button>";
 
+        CodigoHtmlTablaUsuarios += "<td>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
         CodigoHtmlTablaUsuarios += "</td>";
         CodigoHtmlTablaUsuarios += "</tr>";
     }
     CodigoHtmlTablaUsuarios += "</tbody>";
     CodigoHtmlTablaUsuarios += "</table>";
-    document.getElementById("TablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
+    document.getElementById("tablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
 }
-
 
 
 BloquearCTRL();
@@ -46,10 +152,9 @@ function BloquearCTRL() {
 
 
 
-
 //llena los combosprincipales
 function LlenarCMBPrin() {
-    //$.get("/GLOBAL/BDEstados", function (data) {
+    //$.get("/GLOBAL/BDEstado", function (data) {
     //    llenarCombo(data, document.getElementById("cmbEstado"), true);
     //});
     $.get("/GLOBAL/BDAreas", function (data) {
@@ -59,7 +164,6 @@ function LlenarCMBPrin() {
         llenarCombo(data, document.getElementById("cmbPerfil"));
     });
 }
-
 
 //event Change index Areas para llenar el combobox SubAreas
 var IDA = document.getElementById("cmbArea");
@@ -97,7 +201,6 @@ function llenarCombo(data, control) {
 
 
 
-
 //Foto
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
@@ -111,26 +214,25 @@ btnFoto.onchange = function (e) {
     }
     reader.readAsDataURL(file);
 }
-//Limpia la información y carga la informacion del proveedor
+//Limpia la información y carga la informacion del usuario
 function abrirModal(id) {//la clase  Obligatorio
+
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
     }
     if (id == 0) {
         LimpiarCampos();
         sessionStorage.setItem('IdUsuarios', '0');
     }
     else {
+
         $.get("/Usuario/ConsultaUsuario/?Id=" + id, function (Data) {
-
             sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);
-
-            //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IdUsuarios', Data[0].IdUsuarios);     //Variable de sesión
-
             document.getElementById("TxtCURP").value = Data[0].CURP;
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("TxtApellidoP").value = Data[0].ApellidosP;
@@ -168,6 +270,9 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
+
+
+
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -197,11 +302,14 @@ IDM.addEventListener("change", function () {
 });
 
 
-//Guarda los cambios y altas de los proveedores 
+
+//Guarda los cambios y altas de los proveedores
 function GuardarUsuario() {
+
     var pas1 = document.getElementById("Txtpassword").value;
     var pas2 = document.getElementById("TxtConfirmacion").value;
     if (pas1 == pas2) {
+
         if (CamposObligatorios() == true) {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
                 var IdUsuarios = sessionStorage.getItem('IdUsuarios');
@@ -284,11 +392,11 @@ function GuardarUsuario() {
                             alert("Ocurrio un error");
                         }
                         else if (data == -1) {
-                            alert("Ya existe el usuario");
+                            alert("Ya existe el proveedor");
                         }
                         else {
                             alert("Se ejecutó correctamente");
-                            CrearAcordeonUsuarios();
+                            ConsultaUsuarios();
                             document.getElementById("btnCancelar").click();
                         }
                     }
@@ -340,7 +448,7 @@ function EliminarUsuario(id) {
                     'success'
                 )
                 //  confirmarEliminar();
-                CrearAcordeonUsuarios();
+                ConsultaUsuarios();
             } else {
                 alert("Ocurrio un error");
             }
@@ -349,12 +457,11 @@ function EliminarUsuario(id) {
 }
 
 
-
-
 //    //         //     //
 
 
 function abrirModalBloqueado(id) {//la clase  Obligatorio
+
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -379,9 +486,6 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaNBloqueado").value = Data[0].FechaDeNacimiento;
             document.getElementById("TxtRFCBloqueado").value = Data[0].RFC;
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
-
-
-
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstadoBloqueado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
@@ -408,3 +512,57 @@ function abrirModalBloqueado(id) {//la clase  Obligatorio
         });
     }
 }
+
+
+
+
+
+
+
+//function Usuario(id) {
+
+//    if (id == dialogo1) {
+//        (function () {
+//            var template = null
+//            $('.modal').on('show.bs.modal', function (event) {
+//                if (template == null) {//Valores nulos
+//                    template = $(this).html()
+
+//                } else {
+//                    $(this).html(template)
+//                    //Recetear el formulario iniciando del paso 1
+//                    $(document).ready(function () {
+//                        var current = 1, current_step, next_step, steps;
+//                        steps = $("fieldset").length;
+//                        $(".next").click(function () {
+//                            current_step = $(this).parent();
+//                            next_step = $(this).parent().next();
+//                            next_step.show();
+//                            current_step.hide();
+//                            setProgressBar(++current);
+//                        });
+//                        $(".previous").click(function () {
+//                            current_step = $(this).parent();
+//                            next_step = $(this).parent().prev();
+//                            next_step.show();
+//                            current_step.hide();
+//                            setProgressBar(--current);
+//                        });
+//                        setProgressBar(current);
+//                        // Cambiar la acción de la barra de progreso
+//                        function setProgressBar(curStep) {
+//                            var percent = parseFloat(100 / steps) * curStep;
+//                            percent = percent.toFixed();
+//                            $(".progress-bar")
+//                                .css("width", percent + "%")
+//                                .html(percent + "%");
+//                        }
+//                        //Termina Recetear el formulariode usuarios
+//                    });
+//                }
+
+//            })
+//        })()
+
+//    }
+//}

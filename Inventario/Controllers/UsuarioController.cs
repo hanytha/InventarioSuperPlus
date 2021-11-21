@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Inventario.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Lamar al método de seguridad
+    [Seguridad]
     public class UsuarioController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -15,7 +21,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
         //consulta general de los proveedores
         public JsonResult ConsultaUsuarios()
         {
@@ -58,6 +63,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaUsuario(long Id)
         {
             var usuario = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(Id) && p.Estatus.Equals(1))
+
                 .Select(p => new
                 {
                     p.IdUsuarios,
@@ -81,7 +87,8 @@ namespace Inventario.Controllers
                     p.LvlPerfil,
                     p.Usuario,
                     p.FechaIngreso,
-                    p.Password,
+                    //p.Password,
+                    Password = Decrypt(p.Password),
                     p.Estado,
                     p.Municipio,
                     p.Localidad,
@@ -89,6 +96,7 @@ namespace Inventario.Controllers
                     p.IdSubArea
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
+
         }
 
 
@@ -125,10 +133,17 @@ namespace Inventario.Controllers
         //Guardar los datos del proveedor
         public int GuardarUsuario(Usuarios DatosUsuarios, string cadF)
         {
+            //Encriptar la contraseña
+            DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
+
+            //Encriptar la contraseña
+
+
             int Afectados = 0;
             //try
             //{
             long id = DatosUsuarios.IdUsuarios;
+
             if (id.Equals(0))
             {
                 //Guardar el Usuario cuando no exista uno con el mismo nombre en la base de datos
@@ -136,7 +151,11 @@ namespace Inventario.Controllers
                 if (nveces == 0)
                 {
                     DatosUsuarios.Foto = Convert.FromBase64String(cadF);
+                    //Encriptar la contraseña
+                    //DatosUsuarios.Password = Encrypt(DatosUsuarios.Password);
+
                     InvBD.Usuarios.InsertOnSubmit(DatosUsuarios);
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -149,51 +168,40 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)
                 && p.Nombre.Equals(DatosUsuarios.Nombre) && p.ApellidosP.Equals(DatosUsuarios.ApellidosP)
-                && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
                 && p.ApellidosM.Equals(DatosUsuarios.ApellidosM) && p.FechaDeNacimiento.Equals(DatosUsuarios.FechaDeNacimiento)
-                && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
-                && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio) && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad)
                 && p.RFC.Equals(DatosUsuarios.RFC) && p.NoSS.Equals(DatosUsuarios.NoSS)
                 && p.Correo.Equals(DatosUsuarios.Correo) && p.Telefono.Equals(DatosUsuarios.Telefono)
-                && p.Telefono.Equals(DatosUsuarios.Telefono) && p.LvlPerfil.Equals(DatosUsuarios.LvlPerfil)
-                && p.Usuario.Equals(DatosUsuarios.Usuario) && p.IdArea.Equals(DatosUsuarios.IdArea)
-                && p.IdSubArea.Equals(DatosUsuarios.IdSubArea) && p.NArea.Equals(DatosUsuarios.NArea)
-                && p.NSArea.Equals(DatosUsuarios.NSArea)
+                && p.IdArea.Equals(DatosUsuarios.IdArea) && p.IdSubArea.Equals(DatosUsuarios.IdSubArea)
+                && p.IdPerfil.Equals(DatosUsuarios.IdPerfil) && p.IdEstado.Equals(DatosUsuarios.IdEstado)
+                && p.LvlPerfil.Equals(DatosUsuarios.LvlPerfil) && p.Usuario.Equals(DatosUsuarios.Usuario)
+                && p.IdEstado.Equals(DatosUsuarios.IdEstado) && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio)
+                && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad) && p.Estado.Equals(DatosUsuarios.Estado)
+                && p.Municipio.Equals(DatosUsuarios.Municipio) && p.Localidad.Equals(DatosUsuarios.Localidad)
                 && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
 
                 if (nveces == 0)
-                {
+                {//Datos que se guardan al modificar el registro
                     Usuarios obj = InvBD.Usuarios.Where(p => p.IdUsuarios.Equals(id)).First();
-                    obj.CURP = DatosUsuarios.CURP;
                     obj.Nombre = DatosUsuarios.Nombre;
                     obj.ApellidosP = DatosUsuarios.ApellidosP;
                     obj.ApellidosM = DatosUsuarios.ApellidosM;
-                    obj.FechaDeNacimiento = DatosUsuarios.FechaDeNacimiento;
-                    obj.IdEstado = DatosUsuarios.IdEstado;
-                    obj.IdMunicipio = DatosUsuarios.IdMunicipio;
-                    obj.IdLocalidad = DatosUsuarios.IdLocalidad;
-                    obj.RFC = DatosUsuarios.RFC;
-                    obj.NoSS = DatosUsuarios.NoSS;
-                    obj.Correo = DatosUsuarios.Correo;
-                    obj.Telefono = DatosUsuarios.Telefono;
-                    obj.IdPerfil = DatosUsuarios.IdPerfil; 
-                    obj.LvlPerfil = DatosUsuarios.LvlPerfil;
-                    obj.Usuario = DatosUsuarios.Usuario;
-                    obj.FechaIngreso = DatosUsuarios.FechaIngreso;
-                    obj.Estado = DatosUsuarios.Estado;
-                    obj.Municipio = DatosUsuarios.Municipio;
-                    obj.Localidad = DatosUsuarios.Localidad;
                     obj.Password = DatosUsuarios.Password;
                     obj.IdArea = DatosUsuarios.IdArea;
                     obj.IdSubArea = DatosUsuarios.IdSubArea;
-                    obj.NArea = DatosUsuarios.NArea;
-                    obj.NSArea = DatosUsuarios.NSArea;
+                    obj.Foto = Convert.FromBase64String(cadF);
+                    obj.IdPerfil = DatosUsuarios.IdPerfil;
+                    obj.LvlPerfil = DatosUsuarios.LvlPerfil;
+                    obj.IdEstado = DatosUsuarios.IdEstado;
+                    obj.Estado = DatosUsuarios.Estado;
                     obj.IdMunicipio = DatosUsuarios.IdMunicipio;
+                    obj.Municipio = DatosUsuarios.Municipio;
                     //obj.NombreM = usuario.NombreM;
                     //obj.NombreL = usuario.NombreL;
-                    obj.IdEstado = DatosUsuarios.IdEstado;
                     obj.IdLocalidad = DatosUsuarios.IdLocalidad;
-                    obj.Foto = Convert.FromBase64String(cadF);
+                    obj.Localidad = DatosUsuarios.Localidad;
+                    obj.Correo = DatosUsuarios.Correo;
+                    obj.Telefono = DatosUsuarios.Telefono;
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -226,6 +234,82 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+        //La llave de la contraseña encriptada
+        static readonly string password = "P455W0rd";
+        public static string Encrypt(string plainText)
+        {
+            if (plainText == null)
+            {
+                return null;
+            }
+            // Get the bytes of the string
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            // Hash the password with SHA256
+            passwordBytes = SHA512.Create().ComputeHash(passwordBytes);
+            var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
+            return Convert.ToBase64String(bytesEncrypted);
+        }
+        public static string Decrypt(string encryptedText)
+        {
+            if (encryptedText == null)
+            {
+                return null;
+            }
+            // Get the bytes of the string
+            var bytesToBeDecrypted = Convert.FromBase64String(encryptedText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            passwordBytes = SHA512.Create().ComputeHash(passwordBytes);
+            var bytesDecrypted = Decrypt(bytesToBeDecrypted, passwordBytes);
+            return Encoding.UTF8.GetString(bytesDecrypted);
+        }
+        private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+        {
+            byte[] encryptedBytes = null;
+            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (RijndaelManaged AES = new RijndaelManaged())
+                {
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    AES.KeySize = 256;
+                    AES.BlockSize = 128;
+                    AES.Key = key.GetBytes(AES.KeySize / 8);
+                    AES.IV = key.GetBytes(AES.BlockSize / 8);
+                    AES.Mode = CipherMode.CBC;
+                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                        cs.Close();
+                    }
+                    encryptedBytes = ms.ToArray();
+                }
+            }
+            return encryptedBytes;
+        }
+        private static byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        {
+            byte[] decryptedBytes = null;
+            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (RijndaelManaged AES = new RijndaelManaged())
+                {
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    AES.KeySize = 256;
+                    AES.BlockSize = 128;
+                    AES.Key = key.GetBytes(AES.KeySize / 8);
+                    AES.IV = key.GetBytes(AES.BlockSize / 8);
+                    AES.Mode = CipherMode.CBC;
+                    using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
+                        cs.Close();
+                    }
+                    decryptedBytes = ms.ToArray();
+                }
+            }
+            return decryptedBytes;
+        }
     }
 }
-

@@ -1,8 +1,8 @@
-//<<<<<<< HEAD
-//﻿//Confirmacion para cerrar el modal de registro
-////Cuadro de diálogo de confirmación en JavaScript
+﻿//<<<<<<< HEAD
+//ï»¿//Confirmacion para cerrar el modal de registro
+////Cuadro de diÃ¡logo de confirmaciÃ³n en JavaScript
 //function confirmarAccesoURL() {
-//    return confirm("¿Está seguro que desea salir de modal?");
+//    return confirm("Â¿EstÃ¡ seguro que desea salir de modal?");
 //=======
 ///*import $ from 'jquery';
 //import ParsleyUtils from './utils';
@@ -150,7 +150,7 @@
 //*/
 
 
-////Funci�n para regresar el formulario del modal al inicio al presionar el bot�n cancelar////
+////Función para regresar el formulario del modal al inicio al presionar el botón cancelar////
 (function () {
     var template = null
     $('.modal').on('show.bs.modal', function (event) {
@@ -178,7 +178,7 @@
                     setProgressBar(--current);
                 });
                 setProgressBar(current);
-                // Cambiar la acci�n de la barra de progreso
+                // Cambiar la acción de la barra de progreso
                 function setProgressBar(curStep) {
                     var percent = parseFloat(100 / steps) * curStep;
                     percent = percent.toFixed();
@@ -189,7 +189,7 @@
                 //Termina Recetear el formulario
             });
         }
-        // Cragar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
+        // Cargar nuevamente el combo box de Estado, Municipio y Localidad al volver a empezar el proceso del formulario
 
         //event Change index Estados para llenar el combobox Municipios
         var IDE = document.getElementById("cmbEstado");
@@ -217,6 +217,6 @@ jQuery(document).ready(function () {
 
 
 //function confirmarAccesoURL() {
-//    return confirm("�Est� seguro que desea salir de modal?");
+//    return confirm("¿Está seguro que desea salir de modal?");
 
 //}

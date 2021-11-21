@@ -22,7 +22,10 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
+<<<<<<< HEAD
                     p.IdUnidadDeMedida,
+=======
+>>>>>>> alma
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,
@@ -39,7 +42,10 @@ namespace Inventario.Controllers
                 {
                     p.IdMovimientos,
                     p.IdArticulos,
+<<<<<<< HEAD
                     p.IdUnidadDeMedida,
+=======
+>>>>>>> alma
                     p.TipoDeMovimiento,
                     p.Articulo,
                     p.Unidades,

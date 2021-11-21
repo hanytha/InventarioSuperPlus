@@ -3,14 +3,16 @@
     ViewBag.Title = "Usuario";
 }
 
+<h2>Usuario</h2>
 <!--Titulo-->
+
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-
+<link rel="stylesheet" href="estilos.css">
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -50,19 +52,19 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
 <!--Termina tarjeta-->
-<!--------------------------------------------MODAL USUARIOS-------------------------------------------------------------->
 <!-- Botón del modal-->
-<button onclick="editarModalUsuario(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuario">REGISTRAR</button><!--Mostrar los registros en el accordion-->
-<!--Muestra la tabla compras-->
-<div id="TablaUsuarios" class="table"></div>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+<div id="tablaUsuarios"></div>
+<div id="accordion"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalUsuario">
+    <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,22 +73,21 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Registro de Usuarios</h1>
+                    <h1>Registro Usuarios</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <!--Los pasos del modal-->
-                            <h4>PASO 1</h4>
+                            <h4>Paso 1</h4>
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCURP">Clave Única de Registro de Población<span class="required">*</span></label>
                                         <input id="TxtCURP" name="data[TxtCURP]" class="form-control  limpiar obligatorio" placeholder="CURP" size="15" maxlength="20" type="text">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNombre">Nombre<span class="required">*</span></label>
                                         <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
@@ -123,13 +124,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
-
                         <fieldset>
                             <h4>Paso 2</h4>
-
-
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -172,8 +170,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
 
 
@@ -220,15 +218,15 @@
                                 </div>
                             </div>
 
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
 
                         <fieldset>
 
                             <h4>Paso 4</h4>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtUsuario">Usuario</label>
                                         <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control limpiar obligatorio" placeholder="Usuario" type="text">
@@ -239,7 +237,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="PBFoto">Seleccione una foto</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="155" height="155" alt="" />                                        <br />
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logotipo.png" width="150" height="150" alt="" />
+                                        <br />
                                         <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
                                     </div>
                                 </div>
@@ -260,7 +259,7 @@
                                 </div>
                             </div>
 
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
                             <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
                         </fieldset>
 
@@ -276,6 +275,7 @@
 </div>
 <table>
 </table>
+
 <!------------------------------------------------------------Modal Bloqueado--------------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -288,13 +288,13 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Información General de Usuarios</h1>
+                    <h1>Información General</h1>
                     <form id="regiration_form" novalidate method="post">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="PBFotoBloqueado">Imagen</label>
-                                    <img id="PBFotoBloqueado" src="~/Assets/Imagenes/logo.png" width="155" height="155" alt="" />             
+                                    <img id="PBFotoBloqueado" src="~/Assets/Imagenes/logotipo.png" width="155" height="155" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -350,6 +350,7 @@
                                     <label class="form-control-label" for="cmbEstadoBloqueado">Estado<span class="required">*</span></label>
                                     <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
+                                        <!--Aquí se está ocupando razor para mostrar los estados desde la base de datos-->
                                         @{
                                             if (Estados.idEstado != null)
                                             {
@@ -406,12 +407,12 @@
                                     <select id="cmbABloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
                                 </div>
                             </div>-->
-                            @*<div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
-                                        <select id="cmbSubAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
-                                    </div>
-                                </div>*@
+                        @*<div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
+                                    <select id="cmbSubAreaBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
+                                </div>
+                            </div>*@
                         <!--</div>-->
                         <div class="row">
                             <div class="col-md-6">
@@ -453,7 +454,7 @@
     </div>
 </div>
 
-
+<!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;
@@ -462,12 +463,22 @@
 
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+
+<script src="~/Scrips/jquery-ui.min.js"></script>
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+
 <script src="~/Scrips/Internos/JS_Usuarios.js"></script>
+
 <!--Validacion del formulario-->
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<!--<script src="~/Scrips/js.cookie.js"></script>--> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
+
+
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@*<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>*@
+
+
+
