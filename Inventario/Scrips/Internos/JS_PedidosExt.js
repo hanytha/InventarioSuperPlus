@@ -48,9 +48,8 @@ function AcordeonPedidosExt(data, IDo) {
     IDo.innerHTML = CodHtml;
 }
 
-//--------------
 
-//--------------
+
 
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
@@ -58,7 +57,6 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
-
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -79,22 +77,10 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaIngreso").value = Data[0].Fecha;
             document.getElementById("TxtNumeroPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
-            //document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
             document.getElementById("cmbMarca").value = Data[0].IdMarca;
-            //document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbProveedor").value = Data[0].IdEstado;
-
-            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
-            document.getElementById("cmbProveedor").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDArt/?IDProv=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbArticulo"));
-                document.getElementById("cmbArticulo").value = Data[0].IdMunicipio;
-            });
-            $.get("/GLOBAL/BDUnidadM/?IDAr=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbUnidadDeMedida"));
-                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdLocalidad;
-            });
+            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         });
     }
 }
@@ -205,38 +191,20 @@ function EliminarPedidoExterno(id) {
 }
 
 
-var IDProv = document.getElementById("cmbProveedor");
-IDProv.addEventListener("change", function () {
-    $.get("/GLOBAL/BDArt/?IDProv=" + IDProv.value, function (data) {
+function LlenarCMBPrincipal() {
+    $.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
-});
-//event Change index Municipio para llenar el combo box Municipios
-var IDAr = document.getElementById("cmbArticulo");
-IDAr.addEventListener("change", function () {
-    $.get("/GLOBAL/BDUnidadM/?IDAr=" + IDAr.value, function (data) {
+    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
         llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
     });
-});
-
-function LlenarCMBPrincipal() {
-    $.get("/GLOBAL/BDProv", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"), true);
-    });
-    //$.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArticulo"));
-    //});
-    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    //});
 
     $.get("/GLOBAL/BDMarcas", function (data) {
         llenarCombo(data, document.getElementById("cmbMarca"));
     });
-
-    //$.get("/GLOBAL/BDProveedor", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbProveedor"));
-    //});
+    $.get("/GLOBAL/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
 
     //funcion general para llenar los select
     function llenarCombo(data, control) {
@@ -249,27 +217,5 @@ function LlenarCMBPrincipal() {
         control.innerHTML = contenido;
     }
 
-
-    var IDProv = document.getElementById("cmbProveedor");
-    IDProv.addEventListener("change", function () {
-        $.get("/GLOBAL/BDArt/?IDProv=" + IDProv.value, function (data) {
-            llenarCombo(data, document.getElementById("cmbArticulo"));
-        });
-    });
-    //event Change index Municipio para llenar el combo box Municipios
-    var IDAr = document.getElementById("cmbArticulo");
-    IDAr.addEventListener("change", function () {
-        $.get("/GLOBAL/BDUnidadM/?IDAr=" + IDAr.value, function (data) {
-            llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-        });
-    });
-
-    //var IDAr = document.getElementById("cmbMarca");
-    //IDAr.addEventListener("change", function () {
-    //    $.get("/GLOBAL/BDMarca/?IDArt=" + IDAr.value, function (data) {
-    //        llenarCombo(data, document.getElementById("cmbMarca"));
-    //    });
-    //});
 }
-
 
