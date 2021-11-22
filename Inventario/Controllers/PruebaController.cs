@@ -25,7 +25,6 @@ namespace Inventario.Controllers
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
-
             var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
             .Select(p => new
             {
@@ -79,7 +78,30 @@ namespace Inventario.Controllers
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ConsultaCompra(long Id)
+        {
+            var compra = InvBD.Compra.Where(p => p.IdCompra.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    p.NoCompra,
+                    p.MetodoDePago,
+                    p.ClaveProveedor,
+                    p.FechaDeIngreso,
+                    p.ExitenciaInicial,
+                    p.FechaFinal,
+                    p.ExitenciaActual,
+                    p.Coste,
+                    p.Impuesto,
+                    p.Articulo,
+                    p.IdImpuesto,
+                    p.IdProveedor,
+                    p.IdArticulo,
 
+                });
+            return Json(compra, JsonRequestBehavior.AllowGet);
+
+        }
 
     }
 }
