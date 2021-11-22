@@ -166,7 +166,7 @@ function abrirModal(id) {//la clase  Obligatorio
 
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
+            $.get("/GLOBAL/BDUnidadM/?IDE=" + Data[0].IdEstado, function (Municipios) {
                 llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
                 document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
             });

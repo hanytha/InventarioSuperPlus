@@ -1,4 +1,5 @@
-﻿LlenarCMBPrincipal();
+﻿//LlenarCMBPrincipal();
+LlenarCMBPrin();
 BloquearCTRL();
 
 CrearAcordeonPedidosExt();
@@ -58,6 +59,50 @@ function BloquearCTRL() {
     }
 }
 
+
+//llena los combosprincipales
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"), true);
+    });
+    //$.get("/GLOBAL/BDAreas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbArea"));
+    //});
+    //$.get("/Usuario/ConsultaPerfiles", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbPerfil"));
+    //});
+}
+
+
+
+var IDP = document.getElementById("cmbProveedor");
+IDP.addEventListener("change", function () {
+    $.get("/GLOBAL/BDArt/?IDP=" + IDP.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+});
+//event Change index Municipio para llenar el combo box Municipios
+var IDAR = document.getElementById("cmbArticulo");
+IDAR.addEventListener("change", function () {
+    $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+    });
+});
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+    var contenido = "";
+
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -77,10 +122,19 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaIngreso").value = Data[0].Fecha;
             document.getElementById("TxtNumeroPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
-            document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
-            document.getElementById("cmbMarca").value = Data[0].IdMarca;
-            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            //document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            //document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            //document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            });
+            $.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
+                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdArticulo;
+            });
         });
     }
 }
@@ -191,31 +245,31 @@ function EliminarPedidoExterno(id) {
 }
 
 
-function LlenarCMBPrincipal() {
-    $.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
-        llenarCombo(data, document.getElementById("cmbArticulo"));
-    });
-    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
-        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    });
+//function LlenarCMBPrincipal() {
+//    $.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
+//        llenarCombo(data, document.getElementById("cmbArticulo"));
+//    });
+//    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
+//        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+//    });
 
-    $.get("/GLOBAL/BDMarcas", function (data) {
-        llenarCombo(data, document.getElementById("cmbMarca"));
-    });
-    $.get("/GLOBAL/BDProveedor", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"));
-    });
+//    $.get("/GLOBAL/BDMarcas", function (data) {
+//        llenarCombo(data, document.getElementById("cmbMarca"));
+//    });
+//    $.get("/GLOBAL/BDProveedor", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
 
-    //funcion general para llenar los select
-    function llenarCombo(data, control) {
-        var contenido = "";
-        contenido += "<option value='0'>--Seleccione--</option>";
+//    //funcion general para llenar los select
+//    function llenarCombo(data, control) {
+//        var contenido = "";
+//        contenido += "<option value='0'>--Seleccione--</option>";
 
-        for (var i = 0; i < data.length; i++) {
-            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-        }
-        control.innerHTML = contenido;
-    }
+//        for (var i = 0; i < data.length; i++) {
+//            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+//        }
+//        control.innerHTML = contenido;
+//    }
 
-}
+//}
 

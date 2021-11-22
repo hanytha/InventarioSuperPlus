@@ -318,27 +318,100 @@ namespace Inventario.Controllers
         }
 
 
-        public JsonResult BDArt(int IDProv)
+
+
+
+
+        ///////////////
+
+        public JsonResult BDPro()
         {
-            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))
+            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public JsonResult BDArt(int IDP)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
                 .Select(p => new
                 {
-                    ID = p.IdArticulos,
+                    ID = p.IdProveedor,
                     Nombre = p.NombreProveedor
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult BDUnidadM(int IDAr)
+        public JsonResult BDUnidad()
         {
-            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdArticulo.Equals(IDAr))
-                .Select(p => new
-                {
+            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
                     ID = p.IdUnidadDeMedida,
                     Nombre = p.Unidad
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+
+        public JsonResult BDUnidadM(int IDAR)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdUnidadDeMedida.Equals(IDAR))
+                .Select(p => new
+                {
+                    ID = p.IdArticulos,
+                    Nombre = p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //public JsonResult BDMarca(int IDART)
+        //{
+        //    var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDART))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdArticulos,
+        //            Nombre = p.Marca
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
+
+
+
+
+
+        ///
+
+
+
+
+        //public JsonResult BDArt(int IDProv)
+        //{
+        //    var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdArticulos,
+        //            Nombre = p.NombreProveedor
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public JsonResult BDUnidadM(int IDAr)
+        //{
+        //    var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdArticulo.Equals(IDAr))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdUnidadDeMedida,
+        //            Nombre = p.Unidad
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
 
         //public JsonResult BDMarca(int IDArt)
         //{
