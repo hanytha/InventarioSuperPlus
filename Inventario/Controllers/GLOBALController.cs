@@ -370,16 +370,16 @@ namespace Inventario.Controllers
         }
 
 
-        //public JsonResult BDMarca(int IDART)
-        //{
-        //    var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDART))
-        //        .Select(p => new
-        //        {
-        //            ID = p.IdArticulos,
-        //            Nombre = p.Marca
-        //        });
-        //    return Json(datos, JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult BDMarca(int IDART)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDART))
+                .Select(p => new
+                {
+                    ID = p.IdArticulos,
+                    Nombre = p.Marca
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
 
 

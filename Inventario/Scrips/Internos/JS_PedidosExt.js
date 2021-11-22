@@ -89,6 +89,14 @@ IDAR.addEventListener("change", function () {
     });
 });
 
+
+var IDART = document.getElementById("cmbArticulo");
+IDART.addEventListener("change", function () {
+    $.get("/GLOBAL/BDMarca/?IDART=" + IDART.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbMarca"));
+    });
+});
+
 //funcion general para llenar los select
 function llenarCombo(data, control) {
     var contenido = "";
@@ -133,7 +141,12 @@ function abrirModal(id) {//la clase  Obligatorio
             });
             $.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
                 llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
-                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdArticulo;
+                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            });
+
+            $.get("/GLOBAL/BDMarca/?IDAR=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbMarca"));
+                document.getElementById("cmbMarca").value = Data[0].IdMarca;
             });
         });
     }
@@ -183,7 +196,7 @@ function GuardarPedidoExterno() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe el pedido");
