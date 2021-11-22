@@ -7,9 +7,9 @@ LlenarCMCMarca();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (IncidenciasArea) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonArticulos(IncidenciasArea, document.getElementById("accordion"));
+        AcordeonArticulos(Data, document.getElementById("accordion"));
     });
     imagen64 = getBase64Image(document.getElementById("PBFoto"));
 }
@@ -22,17 +22,15 @@ function AcordeonArticulos(Data, CtrlArti) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-
-
         CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdArticulos + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a onclick='MostrarProcedimientos(" + Data[i].IdArticulos + ");' data-toggle='collapse' data-target='#collapse" + Data[i].IdArticulos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdArticulos + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdArticulos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdArticulos + "' class='collapsed'>";
+
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
         CodigoHTMLAreas += "<span >" + Data[i].NombreEmpresa + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
-
 
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos  + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";

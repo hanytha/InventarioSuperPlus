@@ -74,14 +74,14 @@
                 string Heading = "heading" + ModeloAreas.IdAreas[i], Badge = "Badge" + ModeloAreas.IdAreas[i];
                 string AcordeonSubAreas = "Acorden" + ModeloAreas.IdAreas[i];
                 <div class="@Classe">
-                    <div class="card-header" id="@Heading">
+                    <div class="card-header" id="@Heading'(@ModeloAreas.IdAreas[i])'">
                         <h5 class="mb-0">
-                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Collapse" aria-expanded="false" aria-controls="Collapse" class="collapsed">
+                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])"  data-toggle="collapse" data-target="#@Collapse'(@ModeloAreas.IdAreas[i])'" aria-expanded="false" aria-controls="Collapse'(@ModeloAreas.IdAreas[i])'" class="collapsed">
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                 <span>@ModeloAreas.Nombre[i] </span><span id="@Badge" class="badge badge-danger"></span>
                             </a>
                         </h5>
-                        <div id="@Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonArea" style="">
+                        <div id="@Collapse'(@ModeloAreas.IdAreas[i])'" class="collapse" aria-labelledby="headingOne" data-parent="#AcordArea" style="">
                             <div class="card-body">
                                 <!--Boton para editar y agregar SUBAREAS-->   <button style="float:right; background-color:dodgerblue " class="btn btn-success" onclick="abrirModalSub(0,@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
                                 <div class="row">
