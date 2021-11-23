@@ -2,19 +2,18 @@
 @{
     ViewBag.Title = "Configuración";
 }
-<h2>Configuracion</h2>
+<h3>Configuracion</h3>
 
 <div class="accordion" id="accordionConfiguracion">
     <!--Div de las páginas-->
     <div class="card m-b-0">
-        <div class="card-header" id="headingOne">
+       
             <h5 class="mb-0">
                 <a data-toggle="collapse" data-target="#collapsePaginas" aria-expanded="true" aria-controls="collapseOne">
                     <em class="m-r-5 fas fa-file-code" aria-hidden="true"></em>
                     <span>Páginas</span>
                 </a>
             </h5>
-        </div>
         <div id="collapsePaginas" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Botón modal páginas-->
@@ -27,7 +26,7 @@
         </div>
     </div>
     <div class="card m-b-0 border-top">
-        <div class="card-header" id="headingTwo">
+       
             <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <i class="m-r-5 fas fa-user-secret" aria-hidden="true"></i>
@@ -45,9 +44,9 @@
                 No hay ningun perfil registrado en la plataforma.
             </div>
         </div>
-    </div>
+  
     <div class="card m-b-0 border-top">
-        <div class="card-header" id="headingThree">
+       
             <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <i class="m-r-5 fas fa-cogs" aria-hidden="true"></i>
@@ -62,11 +61,11 @@
             </div>
             <div id="Paginas_Configuracion" class="card-body">
                 <!--Inserta tabla de las Páginas-->
-                Muestra la configuración general del sistema.
+                Configuración general del sistema.
             </div>
 
         </div>
-    </div>
+   
 </div>
 <!--**************************************************************************************************************************-->
 <!--Pagínas-->
@@ -74,8 +73,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Página</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Registro de Páginas</h2>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
             </div>
             <div class="modal-body">
                 <div class="panel-heading ">
@@ -129,7 +128,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPagina()">Guardar</button>
+                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPagina()">Guardar</button>
                         <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -144,8 +143,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Perfil</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Registro de Perfiles</h2>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
             </div>
             <div class="modal-body">
                 <div class="panel-heading ">
@@ -208,7 +207,7 @@
 
                     <br />
                     <div class="modal-footer">
-                        <button id="btnGuardar" type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>
+                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>
                         <button id="btnCancelarPerfil" type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                     </div>
                 </div>

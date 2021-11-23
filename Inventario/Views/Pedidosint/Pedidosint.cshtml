@@ -68,12 +68,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h2 class="modal-title">Registro de pedidos Internos</h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Registro de pedidos Internos</h1>
+                    @*<h1>Registro de pedidos Internos</h1>*@
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
                         <div class="row">
@@ -143,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success" onclick="GuardarPedidoInterno()">Guardar</button>
+                        <button type="button" class="btn btn-primary" onclick="GuardarPedidoInterno()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del diálogo -->
