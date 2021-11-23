@@ -79,10 +79,19 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
             document.getElementById("TxtCantidadAprobada").value = Data[0].CantidadAprobada;
             document.getElementById("TxtTipo").value = Data[0].Tipo;
-            document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
-            document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            //document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            //document.getElementById("cmbMarca").value = Data[0].IdMarca;
             document.getElementById("cmbTipoTienda").value = Data[0].IdTienda;
             document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            $.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
+                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            });
+
+            $.get("/GLOBAL/BDMarca/?IDAR=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbMarca"));
+                document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            });
         });
     }
 }
@@ -197,18 +206,35 @@ function EliminarPedidoInterno(id) {
 
 
 function LlenarCMBPrincipal() {
-    $.get("/GLOBAL/BDArticulos", function (data) {
+    $.get("/GLOBAL/BDArticulosEmpresa", function (data) {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
-    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
-        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    });
+    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+    //});
 
-    $.get("/GLOBAL/BDMarcas", function (data) {
-        llenarCombo(data, document.getElementById("cmbMarca"));
-    });
+    //$.get("/GLOBAL/BDMarcas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbMarca"));
+    //});
     $.get("/GLOBAL/BDTienda", function (data) {
         llenarCombo(data, document.getElementById("cmbTipoTienda"));
+    });
+
+
+    //event Change index Articulo para llenar el combo box Unidad de medida
+    var IDAR = document.getElementById("cmbArticulo");
+    IDAR.addEventListener("change", function () {
+        $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
+            llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+        });
+    });
+
+
+    var IDART = document.getElementById("cmbArticulo");
+    IDART.addEventListener("change", function () {
+        $.get("/GLOBAL/BDMarca/?IDART=" + IDART.value, function (data) {
+            llenarCombo(data, document.getElementById("cmbMarca"));
+        });
     });
 
     //funcion general para llenar los select

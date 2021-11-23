@@ -316,14 +316,7 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-        ///////////////
-
+        ///////////////Pedidos Externos///////////////////
         public JsonResult BDPro()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
@@ -333,9 +326,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
         public JsonResult BDArt(int IDP)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
@@ -346,84 +336,45 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult BDUnidad()
-        {
-            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdUnidadDeMedida,
-                    Nombre = p.Unidad
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public JsonResult BDUnidadM(int IDAR)
-        {
-            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdUnidadDeMedida.Equals(IDAR))
-                .Select(p => new
-                {
-                    ID = p.IdArticulos,
-                    Nombre = p.Unidad
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public JsonResult BDMarca(int IDART)
-        {
-            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDART))
-                .Select(p => new
-                {
-                    ID = p.IdArticulos,
-                    Nombre = p.Marca
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-
-
-
-        ///
-
-
-
-
-        //public JsonResult BDArt(int IDProv)
+        //public JsonResult BDUnidad()
         //{
-        //    var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))
-        //        .Select(p => new
-        //        {
-        //            ID = p.IdArticulos,
-        //            Nombre = p.NombreProveedor
-        //        });
-        //    return Json(datos, JsonRequestBehavior.AllowGet);
-        //}
-
-        //public JsonResult BDUnidadM(int IDAr)
-        //{
-        //    var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdArticulo.Equals(IDAr))
-        //        .Select(p => new
-        //        {
+        //    var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new {
         //            ID = p.IdUnidadDeMedida,
         //            Nombre = p.Unidad
         //        });
         //    return Json(datos, JsonRequestBehavior.AllowGet);
         //}
-
-        //public JsonResult BDMarca(int IDArt)
-        //{
-        //    var datos = InvBD.Marca.Where(p => p.Estatus.Equals(1) && p.IdMarca.Equals(IDArt))
-        //        .Select(p => new
-        //        {
-        //            ID = p.IdMarca,
-        //            Nombre = p.Nombre
-        //        });
-        //    return Json(datos, JsonRequestBehavior.AllowGet);
-        //}
-        //-----
+        public JsonResult BDUnidadM(int IDAR)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
+                .Select(p => new
+                {
+                    ID = p.IdUnidadDeMedida,
+                    Nombre = p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDMarca(int IDART)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDART))
+                .Select(p => new
+                {
+                    ID = p.IdMarca,
+                    Nombre = p.Marca
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        /////////////////////Pedidos Internos/////////////////////
+        public JsonResult BDArticulosEmpresa()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

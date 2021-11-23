@@ -81,7 +81,7 @@ IDP.addEventListener("change", function () {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
 });
-//event Change index Municipio para llenar el combo box Municipios
+//event Change index Articulo para llenar el combo box Unidad de medida
 var IDAR = document.getElementById("cmbArticulo");
 IDAR.addEventListener("change", function () {
     $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
