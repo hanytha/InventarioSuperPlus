@@ -85,17 +85,8 @@ namespace Inventario.Controllers
                 {
                     p.IdCompra,
                     p.NoCompra,
-                    p.MetodoDePago,
                     p.ClaveProveedor,
-                    p.FechaDeIngreso,
-                    p.ExitenciaInicial,
-                    p.FechaFinal,
-                    p.ExitenciaActual,
-                    p.Coste,
-                    p.Impuesto,
                     p.Articulo,
-                    p.IdImpuesto,
-                    p.IdProveedor,
                     p.IdArticulo,
 
                 });
