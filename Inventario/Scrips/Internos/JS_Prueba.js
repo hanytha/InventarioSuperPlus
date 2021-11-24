@@ -45,7 +45,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable" + ArrayId[i] + "'>Abrir</button>";
+        CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable" + ArrayId[i] + "'>Ver</button>";
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -74,18 +74,20 @@ function Desplegar(id) {
                 var uno = "";
                 uno += "<div id='desplegable'  class='collapse'>";
                 uno += "<div class='row'>";
+                uno += "<hr class='solid'>";
                 uno += "<div class='col-sm'>" + Data[i].IdArticulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
-                uno += "</div>"
-                uno += "</div>"
-            }            
-            uno += "</div>"
+                uno += "<hr class='solid'>";
+                uno += "</div>";
+                uno += "</div>";
+            }
+            uno += "</div>";
+            let compraArticulo = "";
+            compraArticulo += id + desplegable;
 
-            let CompraArticulo = " " + desplegable + "" + id;
-
-            document.getElementById("desplegable" + id).innerHTML = uno; 
+            document.getElementById("desplegable" + id).innerHTML = uno;
         }); 
     }
 }

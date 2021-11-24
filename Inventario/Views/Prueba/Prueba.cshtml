@@ -60,6 +60,7 @@
 <div id="contenedor1"></div>
 
 <div id="desplegable"></div>
+
 @*<div id="desplegable" class="collapse"></div>*@
 <!----------Mostrar datos del artículo por Id----------------->
 @*<div class="container">
@@ -111,6 +112,7 @@
 <!--Mostrar los registros en el accordion-->
 <div id="accordion"></div>
 <!-- Encabezado del Modal -->
+<!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -121,129 +123,187 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE ARTÍCULOS</h4>
+                    <h4>REGISTRO TIENDA</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
                             <h4>Paso 1</h4>
-                            <!--Insertar fecha-->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span>*</span></label>
-                                        <input type="text" id="TxtFechaIngreso" class="bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Termina-->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                        <label class="form-control-label" for="TxtNombre">Nombre de la tienda<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNombre]" id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="Plus_1">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por elProveedor<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
+                                        <label class="form-control-label" for="cmbSupervisor">Supervisor<span>*</span></label>
+                                        <select id="cmbSupervisor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
-                                        <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="cmbEstado">Estado<span>*</span></label>
+                                        <select id="cmbEstado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
-                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="cmbMunicipio">Municipio<span>*</span></label>
+                                        <select id="cmbMunicipio" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                        <label class="form-control-label" for="cmbLocalidad">Localidad<span>*</span></label>
+                                        <select id="cmbLocalidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
-                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
-                                        <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Agregar la imagen -->
+                            <h4> Paso 2</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="PBFoto">Seleccione el logo</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logo.png" width="150" height="150" alt="" />
-                                        <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
+                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtDireccion]" id="TxtDireccion" class="form-control  limpiar obligatorio" placeholder="PRV TRUJANO 121 , CENTRO , OAXACA , OAX ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCalle">Calle<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCalle]" id="TxtCalle" class="form-control  limpiar obligatorio" placeholder="calle">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCodigoPostal]" id="TxtCodigoPostal" class="form-control  limpiar obligatorio" placeholder="6784">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumeroTelefono">Número de teléfono<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtNumeroTelefono]" id="TxtNumeroTelefono" class="form-control  limpiar obligatorio" placeholder="+529523453">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtHoraApertura">Hora de apertura<span class="required">*</span></label>
+                                        <input type="time" name="data[TxtHoraApertura]" id="TxtHoraApertura" class="form-control  limpiar obligatorio" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtHoraCierre">Hora de cierre<span class="required">*</span></label>
+                                        <input type="time" name="data[TxtHoraCierre]" id="TxtHoraCierre" class="form-control  limpiar obligatorio" placeholder="">
                                     </div>
                                 </div>
                             </div>
                             <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button type="button" class="btn btn-success" onclick="GuardarMarca()">Guardar</button>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4> Paso 3</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span>*</span></label>
+                                        <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtLider">Nombre Lider<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtLider]" id="TxtLider" class="form-control  limpiar obligatorio" placeholder="Lider">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado1">Nombre enacargado1<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado1]" id="TxtEncargado1" class="form-control  limpiar obligatorio" placeholder="Encargado1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado2">Nombre enacargado2<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado2]" id="TxtEncargado2" class="form-control  limpiar obligatorio" placeholder="Encargado2">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4> Paso 4</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtEncargado3">Nombre enacargado3<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtEncargado3]" id="TxtEncargado3" class="form-control  limpiar obligatorio" placeholder="Encargado3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAux1">Nombre Auxiliar1<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux1]" id="TxtAux1" class="form-control  limpiar obligatorio" placeholder="Aux1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAux2">Nombre Auxiliar2<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux2]" id="TxtAux2" class="form-control  limpiar obligatorio" placeholder="Aux2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtAux3">Nombre Auxiliar3<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtAux3]" id="TxtAux3" class="form-control  limpiar obligatorio" placeholder="Aux3">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button type="button" class="btn btn-success" onclick="GuardarTienda()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCancelar" class="btn btn-danger text-reset" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!---------------------------------------------------------->
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
 <style>
