@@ -1,14 +1,17 @@
 ﻿
-@{
+<!--@{
     ViewBag.Title = "Perfiles";
 }
+<h2 class="form-control-label" style="font-size: 20px;">
+    PERFILES
+</h2>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
+<!--<link rel="stylesheet" href="estilos.css">
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -50,28 +53,32 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR</button>
-<div id="Paginas_Perfiles"></div>
+<!--<button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPerfiles">REGISTRAR</button>
+<div id="Paginas_Perfiles"></div>-->
 <!-- Rellenar los registros de la base de datos en el accordión -->
-<div id="accordion"></div>
+<!--<div id="accordion"></div>-->
 <!-- Encabezado del Modal -->
-<div class="container">
+<!--<div class="container">
     <div class="modal fade" id="ModalPerfiles">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">Registro de pedidos Internos</h2>
+                       <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE PERFILES
+                        </label>
+                    </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-                </div>
+                </div>-->
                 <!-- Contenido del modal -->
-                <div class="modal-body">
+                <!--<div class="modal-body">-->
                     @*<h1>Registro de perfiles</h1>*@
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <!--<form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">-->
                         <!-----formulario-->
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtPerfil">Perfil<span class="required">*</span></label>
@@ -103,31 +110,31 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>
+                        <button id="btnGuardar" type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>-->
                         @*<button type="button" class="btn btn-success" onclick="GuardarPerfil()">Guardar</button>*@
                     </form>
-                </div>
+                </div>-->
                 <!-- pie del diálogo -->
-                <div class="modal-footer">
+                <!--<div class="modal-footer">
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
+<!--<style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;
     }
-</style>
+</style>-->
 <!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery.min.js"></script>-->  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Perfiles.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-<script src="~/Scrips/Plus/scripts.js"></script>
+<!--<script src="~/Scrips/Internos/JS_Perfiles.js"></script>
+<script src="~/Scrips/js.cookie.js"></script>--> <!--Recorrer los pasos del modal-->
+<!--<link href="~/Content/tarjeta.css" rel="stylesheet" />--><!--Estlos aplicados a la tarjetam de inicio-->
+<!--<script src="~/Scrips/Plus/scripts.js"></script>-->
 <!--sweetalert2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->

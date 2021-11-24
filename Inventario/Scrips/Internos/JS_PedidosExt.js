@@ -4,8 +4,8 @@ BloquearCTRL();
 
 CrearAcordeonPedidosExt();
 function CrearAcordeonPedidosExt() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (IncidenciasArea) {
-        AcordeonPedidosExt(IncidenciasArea, document.getElementById("accordion"));
+    $.get("/Pedidosext/ConsultaPedidosExternos", function (data) {
+        AcordeonPedidosExt(data, document.getElementById("accordion"));
     });
 }
 

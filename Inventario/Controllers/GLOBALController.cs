@@ -370,25 +370,12 @@ namespace Inventario.Controllers
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
-                    ID = p.IdUnidadDeMedida,
+                    ID = p.IdArticulos,
                     Nombre = p.NombreEmpresa
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
 
-        public JsonResult BDUnidad(long IDArt)
-        {
-            // Consulta de todas las subareas activas que pertenezcan a dicha area para mostrarlo en el combo dependiendo de la área que se seleccione
-            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdUnidadDeMedida.Equals(IDArt))
-                .Select(p => new
-                {
-                    ID = p.IdUnidadDeMedida,
-                    Nombre = p.Unidad
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }
-

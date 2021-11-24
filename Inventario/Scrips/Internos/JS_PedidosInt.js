@@ -27,14 +27,14 @@ function AcordeonPedidosInt(data, IDo) {
         CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodHtml += "<div class='card-body'>";
         CodHtml += "<div class='row'>";
-        
+
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad aprobada: </strong>" + data[i].CantidadAprobada + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
-       
+
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
@@ -57,47 +57,6 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
-
-
-function LlenarCMBPrincipal() {
-    $.get("/GLOBAL/BDArticulosEmpresa", function (data) {
-        llenarCombo(data, document.getElementById("cmbArticulo"));
-    });
-    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    //});
-
-    //$.get("/GLOBAL/BDMarcas", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbMarca"));
-    //});
-    $.get("/GLOBAL/BDTienda", function (data) {
-        llenarCombo(data, document.getElementById("cmbTipoTienda"));
-    });
-
-}
-
-
-var IDArt = document.getElementById("cmbArticulo");
-IDArt.addEventListener("change", function () {
-    $.get("/GLOBAL/BDUnidad/?IDArt=" + IDArt.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    });
-});
-
-
-//funcion general para llenar los select
-function llenarCombo(data, control) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-    }
-    control.innerHTML = contenido;
-}
-
-
-
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -124,11 +83,15 @@ function abrirModal(id) {//la clase  Obligatorio
             //document.getElementById("cmbMarca").value = Data[0].IdMarca;
             document.getElementById("cmbTipoTienda").value = Data[0].IdTienda;
             document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
-            $.get("/GLOBAL/BDUnidad/?IDArt=" + Data[0].IdUnidadDeMedida, function (UnidadDeMedida) {
-                llenarCombo(UnidadDeMedida, document.getElementById("cmbUnidadDeMedida"));
+            $.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
                 document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
             });
-     
+
+            $.get("/GLOBAL/BDMarca/?IDAR=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbMarca"));
+                document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            });
         });
     }
 }
@@ -240,3 +203,50 @@ function EliminarPedidoInterno(id) {
         });
     }
 }
+
+
+function LlenarCMBPrincipal() {
+    $.get("/GLOBAL/BDArticulosEmpresa", function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+    //});
+
+    //$.get("/GLOBAL/BDMarcas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbMarca"));
+    //});
+    $.get("/GLOBAL/BDTienda", function (data) {
+        llenarCombo(data, document.getElementById("cmbTipoTienda"));
+    });
+
+
+    //event Change index Articulo para llenar el combo box Unidad de medida
+    var IDAR = document.getElementById("cmbArticulo");
+    IDAR.addEventListener("change", function () {
+        $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
+            llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+        });
+    });
+
+
+    var IDART = document.getElementById("cmbArticulo");
+    IDART.addEventListener("change", function () {
+        $.get("/GLOBAL/BDMarca/?IDART=" + IDART.value, function (data) {
+            llenarCombo(data, document.getElementById("cmbMarca"));
+        });
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+}
+

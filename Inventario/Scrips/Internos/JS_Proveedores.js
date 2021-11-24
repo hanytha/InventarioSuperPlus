@@ -5,8 +5,8 @@ imagen64 = getBase64Image(document.getElementById("PBFoto"));
 
 CrearAcordeonProveedores();
 function CrearAcordeonProveedores() {
-    $.get("/Proveedores/ConsultaProveedores", function (IncidenciasArea) {
-        AcordeonProveedores(IncidenciasArea, document.getElementById("accordion"));
+    $.get("/Proveedores/ConsultaProveedores", function (data) {
+        AcordeonProveedores(data, document.getElementById("accordion"));
     });
 }
 
