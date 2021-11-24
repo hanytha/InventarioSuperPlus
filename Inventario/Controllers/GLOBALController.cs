@@ -349,7 +349,7 @@ namespace Inventario.Controllers
 
 
 
-        ///Pedidos Internos////
+        //////Consultas Pedidos Internos////
         public JsonResult BDUnidadM(int IDAR)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
@@ -370,7 +370,7 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        /////////////////////Pedidos Internos/////////////////////
+     
         public JsonResult BDArticulosEmpresa()
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))

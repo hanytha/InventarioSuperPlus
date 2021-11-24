@@ -205,6 +205,8 @@
                 llenarCombo(data, document.getElementById("cmbLocalidad"));
             });
         });
+
+
     })
 })()
 //Deshabilitar el clic externo para el modal del formulario.
