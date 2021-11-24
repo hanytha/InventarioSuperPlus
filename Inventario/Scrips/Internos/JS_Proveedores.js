@@ -5,8 +5,8 @@ imagen64 = getBase64Image(document.getElementById("PBFoto"));
 
 CrearAcordeonProveedores();
 function CrearAcordeonProveedores() {
-    $.get("/Proveedores/ConsultaProveedores", function (data) {
-        AcordeonProveedores(data, document.getElementById("accordion"));
+    $.get("/Proveedores/ConsultaProveedores", function (IncidenciasArea) {
+        AcordeonProveedores(IncidenciasArea, document.getElementById("accordion"));
     });
 }
 
@@ -25,7 +25,7 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdProveedores + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdProveedores + "' aria-expanded='false' aria-controls='collapse" + data[i].IdProveedores + "' class='collapsed'>";
         CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         //CodHtml += "<i class='m-r-5 fas fa-clipboard-list' style='font - size: 100px; color: red;' aria-hidden='true'></i>";
-     
+
         CodHtml += "<span >" + data[i].Nombre + "</span>";
         CodHtml += "</a>";
         CodHtml += "</h5>";
@@ -166,7 +166,7 @@ function abrirModal(id) {//la clase  Obligatorio
 
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDUnidadM/?IDE=" + Data[0].IdEstado, function (Municipios) {
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
                 llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
                 document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
             });

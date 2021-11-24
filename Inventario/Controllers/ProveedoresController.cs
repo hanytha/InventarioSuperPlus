@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Inventario.Controllers
 {
-    //Llamar al método de seguridad
+    //Lamar al método de seguridad
     [Seguridad]
     public class ProveedoresController : Controller
     {//conexion con DB

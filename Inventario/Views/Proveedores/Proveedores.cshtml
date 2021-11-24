@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "Proveedores";
 }
-<h2 class="form-control-label" style="font-size: 20px;">
-    PROVEEDORES
-</h2>
+
 <h2>Proveedores</h2>
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
@@ -69,16 +67,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">
-                        <label class="form-control-label" style="font-size: 18px;">
-                            REGISTRO DE PROVEEDORES
-                        </label>
-                    </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    @*<h1>Registro Proveedores</h1>*@
+                    <h1>Registro Proveedores</h1>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -125,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
 
                         <fieldset>
@@ -176,8 +170,8 @@
                             </div>
 
 
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
 
 
@@ -223,8 +217,8 @@
                                 </div>
                             </div>
 
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
 
                         <fieldset>
@@ -250,8 +244,8 @@
                             </div>
 
 
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-primary " onclick=" GuardarProveedor()">Guardar</button>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarProveedor()">Guardar</button>
                         </fieldset>
 
                     </form>

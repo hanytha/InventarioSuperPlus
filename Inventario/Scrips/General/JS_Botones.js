@@ -207,6 +207,24 @@
         });
 
 
+
+
+
+        //Foto
+        var btnFoto = document.getElementById("BtnFoto");
+        btnFoto.onchange = function (e) {
+            var file = document.getElementById("BtnFoto").files[0];
+            var reader = new FileReader();
+            if (reader != null) {
+                reader.onloadend = function () {
+                    var img = document.getElementById("PBFoto");
+                    img.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(file);
+        }
+
+
     })
 })()
 //Deshabilitar el clic externo para el modal del formulario.
