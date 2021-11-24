@@ -331,10 +331,11 @@ namespace Inventario.Controllers
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
                 .Select(p => new
                 {
-                    ID = p.IdProveedor,
+                    ID = p.IdArticulos,
                     Nombre = p.NombreProveedor
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
+
         }
         //public JsonResult BDUnidad()
         //{
@@ -345,6 +346,10 @@ namespace Inventario.Controllers
         //        });
         //    return Json(datos, JsonRequestBehavior.AllowGet);
         //}
+
+
+
+        ///Pedidos Internos////
         public JsonResult BDUnidadM(int IDAR)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
