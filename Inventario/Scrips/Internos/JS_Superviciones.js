@@ -10,7 +10,7 @@ function ConsultaSuperviciones() {
 function CrearTablaSuperviciones(Data) {
     var CodigoHtmlTablaSuperviciones = "";
     CodigoHtmlTablaSuperviciones += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>TipoSupervicion</th><th>nombreUsuario</th><th>Tienda</th><th>Acción</thead>";
+    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>Tipo de Supervisión</th><th>nombre del Usuario</th><th>Tienda</th><th>Acción</thead>";
     CodigoHtmlTablaSuperviciones += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaSuperviciones += "<tr>";

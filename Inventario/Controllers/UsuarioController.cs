@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-    //Lamar al método de seguridad
+    //Llamar al método de seguridad
     [Seguridad]
     public class UsuarioController : Controller
     {//conexion con DB

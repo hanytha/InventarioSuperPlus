@@ -31,7 +31,7 @@ function AcordeonPedidosExt(data, IDo) {
         CodHtml += "<div class='row'>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad de Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + data[i].Articulo + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
