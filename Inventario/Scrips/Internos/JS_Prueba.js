@@ -1,4 +1,5 @@
-﻿ConsultaArticuloComp();
+﻿//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
+ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
@@ -45,22 +46,22 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'>Ver</button>";
+        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>"; 
         CodigoHtmlArticuloComp += "</label>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
-        //------------------------Despliega la segunda tabla----------------------------------------------------------
+        //------------------------Despliega el segundo grid----------------------------------------------------------
         CodigoHtmlArticuloComp += "<div class='row'>";
         CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
         CodigoHtmlArticuloComp += "</div>";
-        //-------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------Termina----------------------------------------------------------------------------
     }
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
 }
 
-//-----------------------------------Desplegar-----------------
+//----------------------------Crea el grid a desplegar con el botón con la funciíon de desplegar------------------------------------
 function Desplegar(id) {
 
     if (id == 0) {
