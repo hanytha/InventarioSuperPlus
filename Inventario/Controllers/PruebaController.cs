@@ -80,7 +80,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaCompra(long Id)
         {
-            var compra = InvBD.Compra.Where(p => p.IdCompra.Equals(Id))
+            var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id))
                 .Select(p => new
                 {
                     p.IdCompra,
