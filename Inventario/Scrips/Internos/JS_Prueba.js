@@ -43,14 +43,18 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>"
+        CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
         CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'>Ver</button>";
-        CodigoHtmlArticuloComp += "<div id='desplegable" + ArrayId[i] + "' class='collapse'></div>"
-        CodigoHtmlArticuloComp += "</label>"
+        CodigoHtmlArticuloComp += "</label>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
+        //------------------------Despliega la segunda tabla----------------------------------------------------------
+        CodigoHtmlArticuloComp += "<div class='row'>";
+        CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
+        CodigoHtmlArticuloComp += "</div>";
+        //-------------------------------------------------------------------------------------------------------------------
     }
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
@@ -65,23 +69,18 @@ function Desplegar(id) {
     else {
 
         $.get("/Prueba/ConsultaCompra/?Id=" + id, function (Data) {
-            //document.getElementById("TxtIdArtCompra").value = Data[0].IdArticulo;
-            //document.getElementById("TxtNombreCom").value = Data[0].Articulo;
-            //document.getElementById("TxtNumCom").value = Data[0].NoCompra;
-            //document.getElementById("TxtClaveP").value = Data[0].ClaveProveedor;
-
-
+            var uno = "";
+            //---Encabezado del grid---------
+            uno += "<hr class='solid4'>";
+            uno += "<div class='row'>";
+            uno += "<div class='col-sm'>ID</div>";
+            uno += "<div class='col-sm'>Artículo</div>";
+            uno += "<div class='col-sm'>NoCompra </div>";
+            uno += "<div class='col-sm'>Clave</div>";
+            uno += "</div>";
+            uno += "<hr class='solid4'>";
             for (var i = 0; i < Data.length; i++) {
-                var uno = "";
-                //---Encabezado del grid---------
-                uno += "<hr class='solid4'>";
-                uno += "<div class='row'>";
-                uno += "<div class='col-sm'>ID</div>";
-                uno += "<div class='col-sm'>Artículo</div>";
-                uno += "<div class='col-sm'>NoCompra </div>";
-                uno += "<div class='col-sm'>Clave</div>";
-                uno += "</div>";
-                uno += "<hr class='solid4'>";
+             
                 //----Cuerpo del grid-------------
                 uno += "<div class='row'>";
                 uno += "<div class='col-sm'>" + Data[i].IdArticulo + "</div>";
@@ -91,8 +90,9 @@ function Desplegar(id) {
                 uno += "</div>";
             }
             uno += "</div>";
+            uno += "</br>";
+            uno += "</br>";
             let compraArticulo = "desplegable" + id ;
-            
             document.getElementById(compraArticulo).innerHTML = uno;
         }); 
     }
