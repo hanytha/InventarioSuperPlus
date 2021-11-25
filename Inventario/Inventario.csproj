@@ -110,6 +110,7 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\JS_PedidoExtPrueba.js" />
     <Content Include="Scrips\Internos\Prueba.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
@@ -163,6 +164,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
+    <Compile Include="Controllers\PedidoExtPruebaController.cs" />
     <Compile Include="Controllers\PedidosextController.cs" />
     <Compile Include="Controllers\PedidosintController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
@@ -183,6 +185,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloPedidoExtPrueba.cs" />
     <Compile Include="Models\Proveedores.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
@@ -232,6 +235,7 @@
     <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\Prueba\Prueba.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\PedidoExtPrueba\PedidoExtPrueba.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

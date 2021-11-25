@@ -1,0 +1,325 @@
+﻿@using Inventario.Models;
+@{
+    ViewBag.Title = "PedidoExtPrueba";
+}
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en el accordion-->
+
+<div id="tabla" class="default "></div>
+<div id="accordion">
+    @{
+
+        if (ModeloAreas.IdAreas != null)
+        {
+            string Classe = "card m-b-0 list-group list-group-flush  mb-1";
+            for (var i = 0; i < ModeloAreas.IdAreas.Count(); i++)
+            {
+                if (i > 0)
+                {
+                    Classe = "card m-b-0 list-group list-group-flush  mb-1";
+                }
+                string Collapse = "collapse" + ModeloAreas.IdAreas[i], IDTabla = "Tabla_Depto_" + ModeloAreas.IdAreas[i];
+                string Heading = "heading" + ModeloAreas.IdAreas[i], Badge = "Badge" + ModeloAreas.IdAreas[i];
+                string AcordeonSubAreas = "Acorden" + ModeloAreas.IdAreas[i];
+                <div class="@Classe">
+                    <div class="card-header" id="@Heading">
+                        <h5 class="mb-0">
+                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Collapse" aria-expanded="false" aria-controls="Collapse" class="collapsed">
+                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                <span>@ModeloAreas.Nombre[i] </span><span id="@Badge" class="badge badge-danger"></span>
+                            </a>
+                        </h5>
+                        <div id="@Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonArea" style="">
+                            <div class="card-body">
+                                <!--Boton para editar y agregar SUBAREAS-->   <button style="float:right; background-color:dodgerblue " class="btn btn-success" onclick="abrirModalSub(0,@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo"><i class="fas fa-plus"></i></button>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>UNombre: </strong>@ModeloAreas.UNombre[i]</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>Correo: </strong>@ModeloAreas.Correo[i]</div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"><strong>Teléfono: </strong>@ModeloAreas.Telefono[i]</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 accordion" id="@AcordeonSubAreas">Espacio para las SubAreas</div>
+                                </div>
+                                <div class="row">
+                                    @*<div id="@IDTabla" class="col-md-12 col-sm-12 col-xs-12">Espacio para las Incidencias por área</div>*@
+                                    <button class="btn btn-success" onclick="abrirModal(@ModeloAreas.IdAreas[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" onclick="EliminarDepartamento(@ModeloAreas.IdAreas[i],this)"><i class="fas fa-eraser"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+
+                    <form id="regiration_form" novalidate method="post">
+
+                        <!--Los pasos del modal-->
+                        <h4>Paso 1: Información de la Área</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombre">Área<span class="required">*</span></label>
+                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="R.H" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtUsuario">Usuario<span class="required">*</span></label>
+                                    <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar obligatorio" placeholder="Usuario" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCorreo">Email address<span class="required">*</span></label>
+                                    <input type="email" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
+                                    <input type="number" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio" placeholder="+52953678902">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCarpeta">Carpeta<span class="required">*</span></label>
+                                    <input id="TxtCarpeta" name="data[TxtCarpeta]" class="form-control  limpiar obligatorio" placeholder="Carpeta" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="GuardarDepartamento()">Guardar</button>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------------------------------Abrir Modal SubArea--------------------------------------------------->
+<div class="container">
+    <div class="modal fade" id="dialogo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>SUBÁREAS</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post">
+                        <fieldset>
+                            <h4>Paso 1: Información de la subÁrea</h4>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect bloquear ObligatoriosSub"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreSub">Nombre de la  Subárea<span class="required">*</span></label>
+                                        <input id="TxtNombreSub" name="data[TxtNombreSub]" class="form-control  limpiar ObligatoriosSub" placeholder="Nombre de la subárea" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumero">Número de la Subárea<span class="required">*</span></label>
+                                        <input id="TxtNumero" name="data[TxtNumero]" class="form-control  limpiar ObligatoriosSub" placeholder="1" size="30" maxlength="100" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUNombre">UNombre<span class="required">*</span></label>
+                                        <input id="TxtUNombre" name="data[TxtUNombre]" class="form-control  limpiar ObligatoriosSub" placeholder="UNombre" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre1">Nombre del encargado 1<span class="required">*</span></label>
+                                        <input id="TxtNombre1" name="data[TxtNombre1]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado1" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono1">Teléfono del encargado 1<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono1]" id="TxtTelefono1" class="form-control  limpiar ObligatoriosSub" placeholder="+52953548765">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo1">Correo  del  encargado 1<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo1]" id="TxtCorreo1" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4> Paso 2: Información del usuario</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre2">Nombre del encargado 2<span class="required">*</span></label>
+                                        <input id="TxtNombre2" name="data[TxtNombre2]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado2" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono2">Teléfono del encargado 2<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono2]" id="TxtTelefono2" class="form-control  limpiar ObligatoriosSub" placeholder="+5293472342">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo2">Correo  del encargado 2<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo2]" id="TxtCorreo2" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombre3">Nombre del encargado 3<span class="required">*</span></label>
+                                        <input id="TxtNombre3" name="data[TxtNombre3]" class="form-control  limpiar ObligatoriosSub" placeholder="Encargado3" size="30" maxlength="100" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono3">Teléfono del encargado 3<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtTelefono3]" id="TxtTelefono3" class="form-control  limpiar ObligatoriosSub" placeholder="+52783324">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo3">Correo  del encargado 3<span class="required">*</span></label>
+                                        <input type="email" name="data[TxtCorreo3]" id="TxtCorreo3" class="form-control  limpiar ObligatoriosSub" placeholder="name@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Previo" />
+                            <button type="button" class="btn btn-success" onclick="GuardarSubarea()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------------------------------Termina Modal SubArea--------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>
+<script src="~/Scrips/Internos/JS_PedidoExtPrueba.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
+
