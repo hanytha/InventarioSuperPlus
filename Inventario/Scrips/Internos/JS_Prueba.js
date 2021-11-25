@@ -45,7 +45,8 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable" + ArrayId[i] + "'>Ver</button>";
+        CodigoHtmlArticuloComp += "<button class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'>Ver</button>";
+        CodigoHtmlArticuloComp += "<div id='desplegable" + ArrayId[i] + "' class='collapse'></div>"
         CodigoHtmlArticuloComp += "</label>"
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -72,7 +73,6 @@ function Desplegar(id) {
 
             for (var i = 0; i < Data.length; i++) {
                 var uno = "";
-                uno += "<div id='desplegable'  class='collapse'>";
                 uno += "<div class='row'>";
                 uno += "<hr class='solid'>";
                 uno += "<div class='col-sm'>" + Data[i].IdArticulo + "</div>";
@@ -81,13 +81,11 @@ function Desplegar(id) {
                 uno += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
                 uno += "<hr class='solid'>";
                 uno += "</div>";
-                uno += "</div>";
             }
             uno += "</div>";
-            let compraArticulo = "";
-            compraArticulo += id + desplegable;
-
-            document.getElementById("desplegable" + id).innerHTML = uno;
+            let compraArticulo = "desplegable" + id ;
+            
+            document.getElementById(compraArticulo).innerHTML = uno;
         }); 
     }
 }
