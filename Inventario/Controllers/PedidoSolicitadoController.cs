@@ -22,7 +22,7 @@ namespace Inventario.Controllers
             var subareas = InvBD.PedidoSolicitado.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdPedidoExterno,
+                    p.IdPedidoSolicitado,
                     p.CantidadSolicitada,
                     p.IdUnidadDeMedida,
                     p.UnidadDeMedida,
@@ -32,15 +32,15 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.IdArticulo,
                     p.Articulo,
+                    p.IdPedidoExterno,
+                    p.NumeroPedido,
                     p.Estatus
-
-
                 });
             return Json(subareas, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultasSubAreasXAreas(long IdPedidoExterno)
+        public JsonResult ConsultasSubAreasXAreas(long idArea)
         {
-            var subareas = InvBD.PedidoSolicitado.Where(p => p.Estatus.Equals(1)&&p.IdPedidoExterno.Equals(IdPedidoExterno))
+            var subareas = InvBD.PedidoSolicitado.Where(p => p.Estatus.Equals(1)&&p.IdPedidoSolicitado.Equals(idArea))
                 .Select(p => new
                 {
                     p.IdPedidoSolicitado,
@@ -62,20 +62,24 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaSubArea(long id)
         {
-            var subarea = InvBD.PedidoSolicitado.Where(p => p.IdPedidoExterno.Equals(id) && p.Estatus.Equals(1))
+            var subarea = InvBD.SubAreas.Where(p => p.IdSubAreas.Equals(id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdPedidoExterno,
-                    p.CantidadSolicitada,
-                    p.IdUnidadDeMedida,
-                    p.UnidadDeMedida,
-                    p.IdMarca,
-                    p.Marca,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.Estatus
+                    p.IdSubAreas,
+                    p.IdArea,
+                    p.Area,
+                    p.Nombre,
+                    p.UNombre,
+                    p.NoSubArea,
+                    p.NEncargado1,
+                    p.TelefonoE1,
+                    p.CorreoE1,
+                    p.NEncargado2,
+                    p.TelefonoE2,
+                    p.CorreoE2,
+                    p.NEncargado3,
+                    p.TelefonoE3,
+                    p.CorreoE3
                 });
             return Json(subarea, JsonRequestBehavior.AllowGet);
         }

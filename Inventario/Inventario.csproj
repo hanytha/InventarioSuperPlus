@@ -170,6 +170,7 @@
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\PruebaController.cs" />
+    <Compile Include="Controllers\PedidoSolicitadoController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />

@@ -1,13 +1,13 @@
 ﻿LlenarCMBPrin();
-CrearAcordeonPedidoExtPrueba();
+CrearAcordeonDepartamentos();
 //Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonPedidoExtPrueba() {
-    //$.get("/PedidoExtPrueba/ConsultaPedidoExtPrueba", function (Data) {
+function CrearAcordeonDepartamentos() {
+    //$.get("/Departamentos/ConsultaDepartamentos", function (Data) {
     //    //Accordeon(DatosProveedor, document.getElementById("accordion"));
-    //    AcordeonPedidoExtPrueba(Data, document.getElementById("accordion"));
+    //    AcordeonDepartamentos(Data, document.getElementById("accordion"));
     //});
 }
-function AcordeonPedidoExtPrueba(Data, CtrlAlmacen) {
+function AcordeonDepartamentos(Data, CtrlAlmacen) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
         if (i < 1) {
@@ -16,16 +16,16 @@ function AcordeonPedidoExtPrueba(Data, CtrlAlmacen) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 border-top'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdAreas + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdPedidosExternos + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdAreas + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdAreas + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidosExternos + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
         CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdAreas + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdPedidosExternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UNombre : </strong>" + Data[i].UNombre + "</div>";
@@ -35,8 +35,8 @@ function AcordeonPedidoExtPrueba(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdAreas + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarDepartamento(" + Data[i].IdAreas + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdPedidosExternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarDepartamento(" + Data[i].IdPedidosExternos + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -66,7 +66,7 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     else {
 
-        $.get("/PedidoExtPrueba/ConsultaDepartamento/?Id=" + id, function (Data) {
+        $.get("/Departamentos/ConsultaDepartamento/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDDepartamento', Data[0].IdAreas);
             document.getElementById("TxtNombre").value = Data[0].Nombre;
@@ -116,7 +116,7 @@ function GuardarDepartamento() {
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/PedidoExtPrueba/GuardarDepartamento",
+                url: "/Departamentos/GuardarDepartamento",
                 data: frm,
                 contentType: false,
                 processData: false,
@@ -129,7 +129,7 @@ function GuardarDepartamento() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonPedidoExtPrueba();
+                        CrearAcordeonDepartamentos();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -162,10 +162,10 @@ function CamposObligatorios(clase) {
 function EliminarDepartamento(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/PedidoExtPrueba/EliminarDepartamento/?Id=" + id, function (DatoDepartamento) {
+        $.get("/Departamentos/EliminarDepartamento/?Id=" + id, function (DatoDepartamento) {
             if (DatoDepartamento == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonPedidoExtPrueba();
+                CrearAcordeonDepartamentos();
             } else {
                 alert("Ocurrio un error");
             }
@@ -174,9 +174,9 @@ function EliminarDepartamento(id) {
 }
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
-function CrearAcordeonSubAreas(IdArea) {
-    $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
-        AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
+function CrearAcordeonSubAreas(IdPedidoExterno) {
+    $.get("/PedidoSolicitado/ConsultasSubAreasXAreas/?idArea=" + IdPedidoExterno, function (Data) {
+        AcordeonSubAreas(Data, document.getElementById("Acorden" + IdPedidoExterno));
     });
 }
 function AcordeonSubAreas(Data, CtrlSub) {
@@ -188,38 +188,38 @@ function AcordeonSubAreas(Data, CtrlSub) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdSubAreas + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdPedidoSolicitado + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdSubAreas + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdSubAreas + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidoSolicitado + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidoSolicitado + "' class='collapsed'>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
-        CodigoHTMLAreas += "<span >" + Data[i].Nombre + "</span>";
+        CodigoHTMLAreas += "<span >" + Data[i].Articulo + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdSubAreas + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdPedidoSolicitado + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].Area + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>No de Subárea: </strong>" + Data[i].NoSubArea + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UNombre: </strong>" + Data[i].UNombre + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado1: </strong>" + Data[i].NEncargado1 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado1: </strong>" + Data[i].TelefonoE1 + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor1: </strong>" + Data[i].Proveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>NumeroPedido: </strong>" + Data[i].NumeroPedido + "</div>";
         CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encargado1: </strong>" + Data[i].CorreoE1 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado2: </strong>" + Data[i].NEncargado2 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado2: </strong>" + Data[i].TelefonoE2 + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encargado2: </strong>" + Data[i].CorreoE2 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado3: </strong>" + Data[i].NEncargado3 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado3: </strong>" + Data[i].TelefonoE3 + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encragado3: </strong>" + Data[i].CorreoE3 + "</div>";
+        //CodigoHTMLAreas += "<div class='row'>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encargado1: </strong>" + Data[i].CorreoE1 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado2: </strong>" + Data[i].NEncargado2 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado2: </strong>" + Data[i].TelefonoE2 + "</div>";
+        //CodigoHTMLAreas += "</div>";
+        //CodigoHTMLAreas += "<div class='row'>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encargado2: </strong>" + Data[i].CorreoE2 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado3: </strong>" + Data[i].NEncargado3 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado3: </strong>" + Data[i].TelefonoE3 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encragado3: </strong>" + Data[i].CorreoE3 + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button  style='background-color:dodgerblue'  class='btn btn-success'  onclick='abrirModalSub(" + Data[i].IdSubAreas + ")' data-toggle='modal' data-target='#dialogo'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarSubarea(" + Data[i].IdSubAreas + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button  style='background-color:dodgerblue'  class='btn btn-success'  onclick='abrirModalSub(" + Data[i].IdPedidoSolicitado + ")' data-toggle='modal' data-target='#dialogo'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarSubarea(" + Data[i].IdPedidoSolicitado + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
