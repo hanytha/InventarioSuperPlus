@@ -6814,11 +6814,11 @@ namespace Inventario
 		
 		private string _Articulo;
 		
-		private string _IdPedidoExterno;
+		private System.Nullable<long> _IdPedidoExterno;
 		
 		private System.Nullable<int> _NumeroPedido;
 		
-		private int _Estatus;
+		private System.Nullable<int> _Estatus;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -6844,11 +6844,11 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
-    partial void OnIdPedidoExternoChanging(string value);
+    partial void OnIdPedidoExternoChanging(System.Nullable<long> value);
     partial void OnIdPedidoExternoChanged();
     partial void OnNumeroPedidoChanging(System.Nullable<int> value);
     partial void OnNumeroPedidoChanged();
-    partial void OnEstatusChanging(int value);
+    partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
     #endregion
 		
@@ -7057,8 +7057,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidoExterno", DbType="NChar(10)")]
-		public string IdPedidoExterno
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidoExterno", DbType="BigInt")]
+		public System.Nullable<long> IdPedidoExterno
 		{
 			get
 			{
@@ -7097,8 +7097,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
-		public int Estatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
 		{
 			get
 			{

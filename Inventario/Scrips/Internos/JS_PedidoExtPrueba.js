@@ -1,4 +1,51 @@
-﻿LlenarCMBPrin();
+﻿BloquearCTRL();
+function CrearAcordeonSubAreas(IdPedidoSolicitado) {
+    $.get("/PedidoSolicitado/ConsultasSubAreasXAreas/?idArea=" + IdPedidoSolicitado, function (Data) {
+        AcordeonSubAreas(Data, document.getElementById("Acorden" + IdPedidoSolicitado));
+    });
+}
+function AcordeonSubAreas(Data, CtrlSub) {
+    var CodigoHTMLAreas = "";
+    for (var i = 0; i < Data.length; i++) {
+        if (i < 1) {
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+        }
+        else {
+            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+        }
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdPedidoSolicitado + "'>";
+        CodigoHTMLAreas += "<h5 class='mb-0'>";
+        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdPedidoSolicitado + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdPedidoSolicitado + "' class='collapsed'>";
+        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
+        CodigoHTMLAreas += "<span >" + Data[i].Articulo + "</span>";
+        CodigoHTMLAreas += "</a>";
+        CodigoHTMLAreas += "</h5>";
+        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdPedidoSolicitado + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div class='card-body'>";
+        CodigoHTMLAreas += "<div class='row'>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + Data[i].Articulo + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>NumeroPedido: </strong>" + Data[i].NumeroPedido + "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='row'>";
+
+        CodigoHTMLAreas += "<button  style='background-color:dodgerblue'  class='btn btn-success'  onclick='abrirModalSub(" + Data[i].IdPedidoSolicitado + ")' data-toggle='modal' data-target='#dialogo'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarSubarea(" + Data[i].IdPedidoSolicitado + ",this)' ><i class='fas fa-eraser'></i></button>";
+        //CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "</div>";
+    }
+    CtrlSub.innerHTML = CodigoHTMLAreas;
+}
+
+LlenarCMBPrin();
 CrearAcordeonDepartamentos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonDepartamentos() {
@@ -6,7 +53,7 @@ function CrearAcordeonDepartamentos() {
     //    //Accordeon(DatosProveedor, document.getElementById("accordion"));
     //    AcordeonDepartamentos(Data, document.getElementById("accordion"));
     //});
-}
+} 
 function AcordeonDepartamentos(Data, CtrlAlmacen) {
     var CodigoHTMLAreas = "";
     for (var i = 0; i < Data.length; i++) {
@@ -48,6 +95,67 @@ function AcordeonDepartamentos(Data, CtrlAlmacen) {
 }
 
 
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
+
+
+//llena los combosprincipales
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"), true);
+    });
+    //$.get("/GLOBAL/BDAreas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbArea"));
+    //});
+    //$.get("/Usuario/ConsultaPerfiles", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbPerfil"));
+    //});
+}
+
+
+
+var IDP = document.getElementById("cmbProveedor");
+IDP.addEventListener("change", function () {
+    $.get("/GLOBAL/BDArt/?IDP=" + IDP.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+});
+//event Change index Articulo para llenar el combo box Unidad de medida
+var IDAR = document.getElementById("cmbArticulo");
+IDAR.addEventListener("change", function () {
+    $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+    });
+});
+
+
+var IDART = document.getElementById("cmbArticulo");
+IDART.addEventListener("change", function () {
+    $.get("/GLOBAL/BDMarca/?IDART=" + IDART.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbMarca"));
+    });
+});
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+    var contenido = "";
+
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
+
+
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -61,22 +169,37 @@ function abrirModal(id) {//la clase  Obligatorio
     LimpiarCampos();
     if (id == 0) {
 
-        sessionStorage.setItem('IDDepartamento', '0');
+        sessionStorage.setItem('IdPedidosExternos', 0);
 
     }
     else {
 
-        $.get("/Departamentos/ConsultaDepartamento/?Id=" + id, function (Data) {
+        $.get("/Pedidosext/ConsultaPedidoExterno/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDDepartamento', Data[0].IdAreas);
-            document.getElementById("TxtNombre").value = Data[0].Nombre;
-            document.getElementById("TxtUsuario").value = Data[0].UNombre;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            document.getElementById("TxtCarpeta").value = Data[0].Carpeta;
+            sessionStorage.setItem('IdPedidosExternos', Data[0].IdPedidosExternos);     //Variable de sesión
+            document.getElementById("TxtFechaIngreso").value = Data[0].Fecha;
+            document.getElementById("TxtNumeroPedido").value = Data[0].NumeroPedido;
+            //document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
+            //document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            //document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            //document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            });
+            //$.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
+            //    llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
+            //    document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            //});
 
 
-
+            //$.get("/GLOBAL/BDMarca/?IDAR=" + Data[0].IdArticulo, function (Articulos) {
+            //    llenarCombo(Articulos, document.getElementById("cmbMarca"));
+            //    document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            //});
+        
         });
     }
 }
@@ -96,7 +219,7 @@ function LimpiarCampos() {
 
 
 //Guarda los cambios y altas de las áreas
-function GuardarDepartamento() {
+function GuardarDepartamento() { 
     if (CamposObligatorios("Area") == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdAreas = sessionStorage.getItem('IDDepartamento');
@@ -175,7 +298,7 @@ function EliminarDepartamento(id) {
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
 function CrearAcordeonSubAreas(IdPedidoExterno) {
-    $.get("/PedidoSolicitado/ConsultasSubAreasXAreas/?idArea=" + IdPedidoExterno, function (Data) {
+    $.get("/PedidoSolicitado/ConsultasPedidos/?idPedido=" + IdPedidoExterno, function (Data) {
         AcordeonSubAreas(Data, document.getElementById("Acorden" + IdPedidoExterno));
     });
 }
@@ -199,12 +322,12 @@ function AcordeonSubAreas(Data, CtrlSub) {
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdPedidoSolicitado + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>CantidadSolicitada: </strong>" + Data[i].CantidadSolicitada + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UnidadDeMedida: </strong>" + Data[i].UnidadDeMedida + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor1: </strong>" + Data[i].Proveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>NumeroPedido: </strong>" + Data[i].NumeroPedido + "</div>";
-        CodigoHTMLAreas += "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].CantidadSolicitada + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>No de Subárea: </strong>" + Data[i].NoSubArea + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>UNombre: </strong>" + Data[i].UNombre + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado1: </strong>" + Data[i].NEncargado1 + "</div>";
+        //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Télefono encargado1: </strong>" + Data[i].TelefonoE1 + "</div>";
+        //CodigoHTMLAreas += "</div>";
         //CodigoHTMLAreas += "<div class='row'>";
         //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Correo encargado1: </strong>" + Data[i].CorreoE1 + "</div>";
         //CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre encargado2: </strong>" + Data[i].NEncargado2 + "</div>";
@@ -229,7 +352,6 @@ function AcordeonSubAreas(Data, CtrlSub) {
     }
     CtrlSub.innerHTML = CodigoHTMLAreas;
 }
-
 
 
 //Limpia la información y carga la informacion del proveedor
@@ -337,7 +459,7 @@ function GuardarSubarea() {
 }
 
 //limpiar campos
-function LimpiarCamposSub() {
+function LimpiarCamposSub() { 
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
