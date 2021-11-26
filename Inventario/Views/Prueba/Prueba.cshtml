@@ -8,6 +8,7 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
 <link rel="stylesheet" href="estilos.css">
@@ -81,22 +82,7 @@
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
                             <h4>Paso 1</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Nombre de la tienda<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombre]" id="TxtNombre" class="form-control  limpiar obligatorio" placeholder="Plus_1">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbSupervisor">Supervisor<span>*</span></label>
-                                        <select id="cmbSupervisor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -122,109 +108,7 @@
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h4> Paso 2</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDireccion]" id="TxtDireccion" class="form-control  limpiar obligatorio" placeholder="PRV TRUJANO 121 , CENTRO , OAXACA , OAX ">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCalle">Calle<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtCalle]" id="TxtCalle" class="form-control  limpiar obligatorio" placeholder="calle">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCodigoPostal]" id="TxtCodigoPostal" class="form-control  limpiar obligatorio" placeholder="6784">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumeroTelefono">Número de teléfono<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtNumeroTelefono]" id="TxtNumeroTelefono" class="form-control  limpiar obligatorio" placeholder="+529523453">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtHoraApertura">Hora de apertura<span class="required">*</span></label>
-                                        <input type="time" name="data[TxtHoraApertura]" id="TxtHoraApertura" class="form-control  limpiar obligatorio" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtHoraCierre">Hora de cierre<span class="required">*</span></label>
-                                        <input type="time" name="data[TxtHoraCierre]" id="TxtHoraCierre" class="form-control  limpiar obligatorio" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4> Paso 3</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbSupervision">Supervisión<span>*</span></label>
-                                        <select id="cmbSupervision" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtLider">Nombre Lider<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtLider]" id="TxtLider" class="form-control  limpiar obligatorio" placeholder="Lider">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado1">Nombre enacargado1<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtEncargado1]" id="TxtEncargado1" class="form-control  limpiar obligatorio" placeholder="Encargado1">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado2">Nombre enacargado2<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtEncargado2]" id="TxtEncargado2" class="form-control  limpiar obligatorio" placeholder="Encargado2">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
                             <h4> Paso 4</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtEncargado3">Nombre enacargado3<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtEncargado3]" id="TxtEncargado3" class="form-control  limpiar obligatorio" placeholder="Encargado3">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtAux1">Nombre Auxiliar1<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtAux1]" id="TxtAux1" class="form-control  limpiar obligatorio" placeholder="Aux1">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -262,7 +146,7 @@
     }
     /* Solid border */
     hr.solid {
-        border-top: 3px solid #D7DBDD;
+        border-top: 4px solid #D7DBDD;
     }
 </style>
 
@@ -273,7 +157,7 @@
     }
     /* Solid border */
     hr.solid3 {
-        border-top: 3px solid #f1f507;
+        border-top: 1px solid #f1f507;
     }
 </style>
 <style>
@@ -286,20 +170,21 @@
     }
 </style>
 
-<!---------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Prueba.js"></script>
-<!--Validacion del formulario-->
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
 
+    <!---------------------------------------------------------------------------------------------------->
+    <!--Hacer que el modal muestre los pasos por parte-->
+    <style type="text/css">
+        #regiration_form fieldset:not(:first-of-type) {
+            display: none;
+        }
+    </style>
+    <!--Script-->
+    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+    <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+    <script src="~/Scrips/Internos/JS_Prueba.js"></script>
+    <!--Validacion del formulario-->
+    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+    <!--Scripts de la tarjeta y el botón-->
+    <link href="~/Content/tarjeta.css" rel="stylesheet" />
+    <!----------------Exportar-------------------------->

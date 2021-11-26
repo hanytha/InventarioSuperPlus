@@ -72,7 +72,7 @@ namespace Inventario.Controllers
             long id = DatosCompra.IdCompra;
             if (id.Equals(0))
             {
-                int nveces = InvBD.Compra.Where(p => p.NoCompra.Equals(DatosCompra.NoCompra)).Count();
+                int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)).Count();
 
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
@@ -88,13 +88,13 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Compra.Where(p => p.NoCompra.Equals(DatosCompra.NoCompra)
+                int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
                 && p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
                 && p.ClaveProveedor.Equals(DatosCompra.ClaveProveedor) 
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
-                && p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
-                && p.FechaFinal.Equals(DatosCompra.FechaFinal)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
+                && p.FechaFinal.Equals(DatosCompra.FechaFinal)
+                && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.Coste.Equals(DatosCompra.Coste)
                 && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
                 && p.IdArticulo.Equals(DatosCompra.IdArticulo)

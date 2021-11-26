@@ -78,6 +78,7 @@ namespace Inventario.Controllers
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
         public JsonResult ConsultaCompra(long Id)
         {
             var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id)).OrderByDescending(p => p.FechaDeIngreso)
@@ -91,26 +92,25 @@ namespace Inventario.Controllers
                     p.Coste,
                     p.IdArticulo,
 
-
                 });
+
             return Json(compra, JsonRequestBehavior.AllowGet);
 
         }
-        public JsonResult ConsultaIDArticulo(long Id)
-        {
-            var articuloss = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
+        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos-----------------
+        public JsonResult ConsultaCategorias(long No)
+        { 
+            var compra = InvBD.Compra.Where(p => p.NoCompra.Equals(No))
                 .Select(p => new
-                {
-                  p.Unidad,
-                  p.Area,
-                  p.Categoria,
-                  p.PrecioUnitarioPromedio,
-
-
+                { 
+                    p.NoCompra,
+                    p.Articulo,
+                    p.FechaDeIngreso,
+                    p.ClaveProveedor,
+                    p.Coste,
                 });
-            return Json(articuloss, JsonRequestBehavior.AllowGet);
 
+            return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
     }
 }
