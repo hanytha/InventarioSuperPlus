@@ -24,7 +24,7 @@ namespace Inventario.Controllers
             ModeloPedidoExtPrueba.NumeroPedido = new List<int>();
             //ModeloPedidoExtPrueba.Fecha = new List<string>();
 
-            var departamentos = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1))
+            var departamentos = InvBD.Pedidos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdPedidosExternos,

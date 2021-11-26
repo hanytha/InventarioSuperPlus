@@ -69,12 +69,18 @@ namespace Inventario
     partial void InsertPagina(Pagina instance);
     partial void UpdatePagina(Pagina instance);
     partial void DeletePagina(Pagina instance);
+    partial void InsertPedidos(Pedidos instance);
+    partial void UpdatePedidos(Pedidos instance);
+    partial void DeletePedidos(Pedidos instance);
     partial void InsertPedidosExternos(PedidosExternos instance);
     partial void UpdatePedidosExternos(PedidosExternos instance);
     partial void DeletePedidosExternos(PedidosExternos instance);
     partial void InsertPedidosInternos(PedidosInternos instance);
     partial void UpdatePedidosInternos(PedidosInternos instance);
     partial void DeletePedidosInternos(PedidosInternos instance);
+    partial void InsertPedidoSolicitado(PedidoSolicitado instance);
+    partial void UpdatePedidoSolicitado(PedidoSolicitado instance);
+    partial void DeletePedidoSolicitado(PedidoSolicitado instance);
     partial void InsertPerfilDeUsuario(PerfilDeUsuario instance);
     partial void UpdatePerfilDeUsuario(PerfilDeUsuario instance);
     partial void DeletePerfilDeUsuario(PerfilDeUsuario instance);
@@ -235,6 +241,14 @@ namespace Inventario
 			}
 		}
 		
+		public System.Data.Linq.Table<Pedidos> Pedidos
+		{
+			get
+			{
+				return this.GetTable<Pedidos>();
+			}
+		}
+		
 		public System.Data.Linq.Table<PedidosExternos> PedidosExternos
 		{
 			get
@@ -248,6 +262,14 @@ namespace Inventario
 			get
 			{
 				return this.GetTable<PedidosInternos>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PedidoSolicitado> PedidoSolicitado
+		{
+			get
+			{
+				return this.GetTable<PedidoSolicitado>();
 			}
 		}
 		
@@ -1395,23 +1417,27 @@ namespace Inventario
 		
 		private string _NombreEmpresa;
 		
+		private string _NombreProveedor;
+		
+		private System.Nullable<long> _IdProveedor;
+		
+		private string _Proveedor;
+		
 		private System.Nullable<long> _IdUnidadDeMedida;
 		
 		private string _Unidad;
-		
-		private System.Nullable<long> _IdAreas;
-		
-		private string _Area;
 		
 		private System.Nullable<long> _IdMarca;
 		
 		private string _Marca;
 		
+		private System.Nullable<long> _IdAreas;
+		
+		private string _Area;
+		
 		private System.Nullable<long> _IdCategorias;
 		
 		private string _Categoria;
-		
-		private string _NombreProveedor;
 		
 		private decimal _PrecioUnitarioPromedio;
 		
@@ -1426,10 +1452,6 @@ namespace Inventario
 		private string _Fecha;
 		
 		private string _FechaSistema;
-		
-		private System.Nullable<long> _IdProveedor;
-		
-		private string _Proveedor;
 		
 		private int _Estatus;
 		
@@ -1455,24 +1477,28 @@ namespace Inventario
     partial void OnIdArticulosChanged();
     partial void OnNombreEmpresaChanging(string value);
     partial void OnNombreEmpresaChanged();
+    partial void OnNombreProveedorChanging(string value);
+    partial void OnNombreProveedorChanged();
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanged();
+    partial void OnProveedorChanging(string value);
+    partial void OnProveedorChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
     partial void OnUnidadChanged();
-    partial void OnIdAreasChanging(System.Nullable<long> value);
-    partial void OnIdAreasChanged();
-    partial void OnAreaChanging(string value);
-    partial void OnAreaChanged();
     partial void OnIdMarcaChanging(System.Nullable<long> value);
     partial void OnIdMarcaChanged();
     partial void OnMarcaChanging(string value);
     partial void OnMarcaChanged();
+    partial void OnIdAreasChanging(System.Nullable<long> value);
+    partial void OnIdAreasChanged();
+    partial void OnAreaChanging(string value);
+    partial void OnAreaChanged();
     partial void OnIdCategoriasChanging(System.Nullable<long> value);
     partial void OnIdCategoriasChanged();
     partial void OnCategoriaChanging(string value);
     partial void OnCategoriaChanged();
-    partial void OnNombreProveedorChanging(string value);
-    partial void OnNombreProveedorChanged();
     partial void OnPrecioUnitarioPromedioChanging(decimal value);
     partial void OnPrecioUnitarioPromedioChanged();
     partial void OnDescripcionChanging(string value);
@@ -1487,10 +1513,6 @@ namespace Inventario
     partial void OnFechaChanged();
     partial void OnFechaSistemaChanging(string value);
     partial void OnFechaSistemaChanged();
-    partial void OnIdProveedorChanging(System.Nullable<long> value);
-    partial void OnIdProveedorChanged();
-    partial void OnProveedorChanging(string value);
-    partial void OnProveedorChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -1547,6 +1569,66 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProveedor", DbType="VarChar(150)")]
+		public string NombreProveedor
+		{
+			get
+			{
+				return this._NombreProveedor;
+			}
+			set
+			{
+				if ((this._NombreProveedor != value))
+				{
+					this.OnNombreProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NombreProveedor = value;
+					this.SendPropertyChanged("NombreProveedor");
+					this.OnNombreProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(50)")]
+		public string Proveedor
+		{
+			get
+			{
+				return this._Proveedor;
+			}
+			set
+			{
+				if ((this._Proveedor != value))
+				{
+					this.OnProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._Proveedor = value;
+					this.SendPropertyChanged("Proveedor");
+					this.OnProveedorChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
 		public System.Nullable<long> IdUnidadDeMedida
 		{
@@ -1587,50 +1669,6 @@ namespace Inventario
 					this._Unidad = value;
 					this.SendPropertyChanged("Unidad");
 					this.OnUnidadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreas", DbType="BigInt")]
-		public System.Nullable<long> IdAreas
-		{
-			get
-			{
-				return this._IdAreas;
-			}
-			set
-			{
-				if ((this._IdAreas != value))
-				{
-					if (this._Areas.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdAreasChanging(value);
-					this.SendPropertyChanging();
-					this._IdAreas = value;
-					this.SendPropertyChanged("IdAreas");
-					this.OnIdAreasChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(10)")]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this.OnAreaChanging(value);
-					this.SendPropertyChanging();
-					this._Area = value;
-					this.SendPropertyChanged("Area");
-					this.OnAreaChanged();
 				}
 			}
 		}
@@ -1679,6 +1717,50 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreas", DbType="BigInt")]
+		public System.Nullable<long> IdAreas
+		{
+			get
+			{
+				return this._IdAreas;
+			}
+			set
+			{
+				if ((this._IdAreas != value))
+				{
+					if (this._Areas.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdAreasChanging(value);
+					this.SendPropertyChanging();
+					this._IdAreas = value;
+					this.SendPropertyChanged("IdAreas");
+					this.OnIdAreasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(10)")]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this.OnAreaChanging(value);
+					this.SendPropertyChanging();
+					this._Area = value;
+					this.SendPropertyChanged("Area");
+					this.OnAreaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategorias", DbType="BigInt")]
 		public System.Nullable<long> IdCategorias
 		{
@@ -1719,26 +1801,6 @@ namespace Inventario
 					this._Categoria = value;
 					this.SendPropertyChanged("Categoria");
 					this.OnCategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProveedor", DbType="VarChar(150)")]
-		public string NombreProveedor
-		{
-			get
-			{
-				return this._NombreProveedor;
-			}
-			set
-			{
-				if ((this._NombreProveedor != value))
-				{
-					this.OnNombreProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._NombreProveedor = value;
-					this.SendPropertyChanged("NombreProveedor");
-					this.OnNombreProveedorChanged();
 				}
 			}
 		}
@@ -1879,46 +1941,6 @@ namespace Inventario
 					this._FechaSistema = value;
 					this.SendPropertyChanged("FechaSistema");
 					this.OnFechaSistemaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
-		public System.Nullable<long> IdProveedor
-		{
-			get
-			{
-				return this._IdProveedor;
-			}
-			set
-			{
-				if ((this._IdProveedor != value))
-				{
-					this.OnIdProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._IdProveedor = value;
-					this.SendPropertyChanged("IdProveedor");
-					this.OnIdProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(50)")]
-		public string Proveedor
-		{
-			get
-			{
-				return this._Proveedor;
-			}
-			set
-			{
-				if ((this._Proveedor != value))
-				{
-					this.OnProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._Proveedor = value;
-					this.SendPropertyChanged("Proveedor");
-					this.OnProveedorChanged();
 				}
 			}
 		}
@@ -5443,6 +5465,188 @@ namespace Inventario
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Pedidos")]
+	public partial class Pedidos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _IdPedidosExternos;
+		
+		private int _NumeroPedido;
+		
+		private string _Fecha;
+		
+		private string _IdProveedor;
+		
+		private string _Proveedor;
+		
+		private System.Nullable<int> _Estatus;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdPedidosExternosChanging(long value);
+    partial void OnIdPedidosExternosChanged();
+    partial void OnNumeroPedidoChanging(int value);
+    partial void OnNumeroPedidoChanged();
+    partial void OnFechaChanging(string value);
+    partial void OnFechaChanged();
+    partial void OnIdProveedorChanging(string value);
+    partial void OnIdProveedorChanged();
+    partial void OnProveedorChanging(string value);
+    partial void OnProveedorChanged();
+    partial void OnEstatusChanging(System.Nullable<int> value);
+    partial void OnEstatusChanged();
+    #endregion
+		
+		public Pedidos()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidosExternos", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdPedidosExternos
+		{
+			get
+			{
+				return this._IdPedidosExternos;
+			}
+			set
+			{
+				if ((this._IdPedidosExternos != value))
+				{
+					this.OnIdPedidosExternosChanging(value);
+					this.SendPropertyChanging();
+					this._IdPedidosExternos = value;
+					this.SendPropertyChanged("IdPedidosExternos");
+					this.OnIdPedidosExternosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroPedido", DbType="Int NOT NULL")]
+		public int NumeroPedido
+		{
+			get
+			{
+				return this._NumeroPedido;
+			}
+			set
+			{
+				if ((this._NumeroPedido != value))
+				{
+					this.OnNumeroPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._NumeroPedido = value;
+					this.SendPropertyChanged("NumeroPedido");
+					this.OnNumeroPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50)")]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this.OnFechaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha = value;
+					this.SendPropertyChanged("Fecha");
+					this.OnFechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="NChar(10)")]
+		public string IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string Proveedor
+		{
+			get
+			{
+				return this._Proveedor;
+			}
+			set
+			{
+				if ((this._Proveedor != value))
+				{
+					this.OnProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._Proveedor = value;
+					this.SendPropertyChanged("Proveedor");
+					this.OnProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PedidosExternos")]
 	public partial class PedidosExternos : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -6559,6 +6763,356 @@ namespace Inventario
 						this._IdUnidadDeMedida = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("UnidadDeMedida1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PedidoSolicitado")]
+	public partial class PedidoSolicitado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _IdPedidoSolicitado;
+		
+		private System.Nullable<int> _CantidadSolicitada;
+		
+		private System.Nullable<long> _IdUnidadDeMedida;
+		
+		private string _UnidadDeMedida;
+		
+		private System.Nullable<long> _IdMarca;
+		
+		private string _Marca;
+		
+		private System.Nullable<long> _IdProveedor;
+		
+		private string _Proveedor;
+		
+		private System.Nullable<long> _IdArticulo;
+		
+		private string _Articulo;
+		
+		private string _IdPedidoExterno;
+		
+		private System.Nullable<int> _NumeroPedido;
+		
+		private int _Estatus;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdPedidoSolicitadoChanging(long value);
+    partial void OnIdPedidoSolicitadoChanged();
+    partial void OnCantidadSolicitadaChanging(System.Nullable<int> value);
+    partial void OnCantidadSolicitadaChanged();
+    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
+    partial void OnIdUnidadDeMedidaChanged();
+    partial void OnUnidadDeMedidaChanging(string value);
+    partial void OnUnidadDeMedidaChanged();
+    partial void OnIdMarcaChanging(System.Nullable<long> value);
+    partial void OnIdMarcaChanged();
+    partial void OnMarcaChanging(string value);
+    partial void OnMarcaChanged();
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanged();
+    partial void OnProveedorChanging(string value);
+    partial void OnProveedorChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
+    partial void OnIdPedidoExternoChanging(string value);
+    partial void OnIdPedidoExternoChanged();
+    partial void OnNumeroPedidoChanging(System.Nullable<int> value);
+    partial void OnNumeroPedidoChanged();
+    partial void OnEstatusChanging(int value);
+    partial void OnEstatusChanged();
+    #endregion
+		
+		public PedidoSolicitado()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidoSolicitado", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdPedidoSolicitado
+		{
+			get
+			{
+				return this._IdPedidoSolicitado;
+			}
+			set
+			{
+				if ((this._IdPedidoSolicitado != value))
+				{
+					this.OnIdPedidoSolicitadoChanging(value);
+					this.SendPropertyChanging();
+					this._IdPedidoSolicitado = value;
+					this.SendPropertyChanged("IdPedidoSolicitado");
+					this.OnIdPedidoSolicitadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadSolicitada", DbType="Int")]
+		public System.Nullable<int> CantidadSolicitada
+		{
+			get
+			{
+				return this._CantidadSolicitada;
+			}
+			set
+			{
+				if ((this._CantidadSolicitada != value))
+				{
+					this.OnCantidadSolicitadaChanging(value);
+					this.SendPropertyChanging();
+					this._CantidadSolicitada = value;
+					this.SendPropertyChanged("CantidadSolicitada");
+					this.OnCantidadSolicitadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
+		public System.Nullable<long> IdUnidadDeMedida
+		{
+			get
+			{
+				return this._IdUnidadDeMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadDeMedida != value))
+				{
+					this.OnIdUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._IdUnidadDeMedida = value;
+					this.SendPropertyChanged("IdUnidadDeMedida");
+					this.OnIdUnidadDeMedidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnidadDeMedida", DbType="VarChar(50)")]
+		public string UnidadDeMedida
+		{
+			get
+			{
+				return this._UnidadDeMedida;
+			}
+			set
+			{
+				if ((this._UnidadDeMedida != value))
+				{
+					this.OnUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._UnidadDeMedida = value;
+					this.SendPropertyChanged("UnidadDeMedida");
+					this.OnUnidadDeMedidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMarca", DbType="BigInt")]
+		public System.Nullable<long> IdMarca
+		{
+			get
+			{
+				return this._IdMarca;
+			}
+			set
+			{
+				if ((this._IdMarca != value))
+				{
+					this.OnIdMarcaChanging(value);
+					this.SendPropertyChanging();
+					this._IdMarca = value;
+					this.SendPropertyChanged("IdMarca");
+					this.OnIdMarcaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Marca", DbType="VarChar(50)")]
+		public string Marca
+		{
+			get
+			{
+				return this._Marca;
+			}
+			set
+			{
+				if ((this._Marca != value))
+				{
+					this.OnMarcaChanging(value);
+					this.SendPropertyChanging();
+					this._Marca = value;
+					this.SendPropertyChanged("Marca");
+					this.OnMarcaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(50)")]
+		public string Proveedor
+		{
+			get
+			{
+				return this._Proveedor;
+			}
+			set
+			{
+				if ((this._Proveedor != value))
+				{
+					this.OnProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._Proveedor = value;
+					this.SendPropertyChanged("Proveedor");
+					this.OnProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(50)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidoExterno", DbType="NChar(10)")]
+		public string IdPedidoExterno
+		{
+			get
+			{
+				return this._IdPedidoExterno;
+			}
+			set
+			{
+				if ((this._IdPedidoExterno != value))
+				{
+					this.OnIdPedidoExternoChanging(value);
+					this.SendPropertyChanging();
+					this._IdPedidoExterno = value;
+					this.SendPropertyChanged("IdPedidoExterno");
+					this.OnIdPedidoExternoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroPedido", DbType="Int")]
+		public System.Nullable<int> NumeroPedido
+		{
+			get
+			{
+				return this._NumeroPedido;
+			}
+			set
+			{
+				if ((this._NumeroPedido != value))
+				{
+					this.OnNumeroPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._NumeroPedido = value;
+					this.SendPropertyChanged("NumeroPedido");
+					this.OnNumeroPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
+		public int Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
 				}
 			}
 		}
