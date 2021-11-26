@@ -44,14 +44,16 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
+        //-----------------Botón para desplegar la primera tabla--------------
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
         CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>"; 
         CodigoHtmlArticuloComp += "</label>";
         CodigoHtmlArticuloComp += "</div>";
+        //-------------Termina----------------------------------------
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
-        //------------------------Despliega el segundo grid----------------------------------------------------------
+        //------------------------Despliega primer grid-----------------------------------------------------------------------
         CodigoHtmlArticuloComp += "<div class='row'>";
         CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
         CodigoHtmlArticuloComp += "</div>";
@@ -78,24 +80,35 @@ function Desplegar(id) {
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Clave Proveedor</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
+            uno += "<div class='col-sm'>Precio Unitario Promedeio</div>";
+            uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
             uno += "<hr class='solid4'>";
             for (var i = 0; i < Data.length; i++) {
-             
                 //----Cuerpo del grid-------------
                 uno += "<div class='row'>";
                 uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                //-----------------Botón para desplegar la segunda tabla-----------------------
+                uno += "<div class='col-sm'>"
+                uno += "<label>"
+                uno += "<button title='Clic para desplegar' class='btn btn-outline-warning' onclick='Desplegar(" + Data[i].IdArticulo + ")' type='button' data-toggle='collapse' data-target='#desplegable" + Data[i].IdArticulo + "' aria-expanded='false' aria-controls='desplegable(" + Data[i].IdArticulo + ")'><i class='fas fa-angle-down'></i></button>";
+                uno += "</label>"
+                uno += "</div>";
+                //-------------------Termina-------------------------
                 uno += "</div>";
             }
             uno += "</div>";
             uno += "</br>";
             uno += "</br>";
+
             let compraArticulo = "desplegable" + id ;
             document.getElementById(compraArticulo).innerHTML = uno;
         }); 
     }
 }
 
+//----------------------- Función que crea el segundo grid para desplegar-------------------------------

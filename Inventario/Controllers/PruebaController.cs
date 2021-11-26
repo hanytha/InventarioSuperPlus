@@ -88,11 +88,27 @@ namespace Inventario.Controllers
                     p.ClaveProveedor,
                     p.Articulo,
                     p.FechaDeIngreso,
+                    p.Coste,
                     p.IdArticulo,
 
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult ConsultaIDArticulo(long Id)
+        {
+            var articuloss = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
+                .Select(p => new
+                {
+                  p.Unidad,
+                  p.Area,
+                  p.Categoria,
+                  p.PrecioUnitarioPromedio,
+
+
+                });
+            return Json(articuloss, JsonRequestBehavior.AllowGet);
 
         }
 
