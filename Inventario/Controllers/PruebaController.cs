@@ -80,14 +80,16 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaCompra(long Id)
         {
-            var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id))
+            var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id)).OrderByDescending(p => p.FechaDeIngreso)
                 .Select(p => new
                 {
                     p.IdCompra,
                     p.NoCompra,
                     p.ClaveProveedor,
                     p.Articulo,
+                    p.FechaDeIngreso,
                     p.IdArticulo,
+
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);

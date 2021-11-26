@@ -74,20 +74,20 @@ function Desplegar(id) {
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
             uno += "<div class='row'>";
-            uno += "<div class='col-sm'>ID</div>";
+            uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
-            uno += "<div class='col-sm'>NoCompra </div>";
-            uno += "<div class='col-sm'>Clave</div>";
+            uno += "<div class='col-sm'>Clave Proveedor</div>";
+            uno += "<div class='col-sm'>Fecha de Ingreso</div>";
             uno += "</div>";
             uno += "<hr class='solid4'>";
             for (var i = 0; i < Data.length; i++) {
              
                 //----Cuerpo del grid-------------
                 uno += "<div class='row'>";
-                uno += "<div class='col-sm'>" + Data[i].IdArticulo + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
                 uno += "</div>";
             }
             uno += "</div>";
