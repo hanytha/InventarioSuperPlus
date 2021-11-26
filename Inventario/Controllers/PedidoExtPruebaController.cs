@@ -11,46 +11,42 @@ namespace Inventario.Controllers
     public class PedidoExtPruebaController : Controller
     {
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
-   
+
         // GET: PedidoExtPrueba
         public ActionResult PedidoExtPrueba()
         {
             return View();
         }
-        public void ConsultaDepartamentos()
+        public void ConsultaPedidos()
         {
-            ModeloPedidoExtPrueba ModeloPedidoExtPrueba = new ModeloPedidoExtPrueba();
-            ModeloPedidoExtPrueba.IdAreas = new List<long>();
-            ModeloPedidoExtPrueba.Nombre = new List<string>();
-            ModeloPedidoExtPrueba.IDUsuario = new List<long>();
-            ModeloPedidoExtPrueba.UNombre = new List<string>();
-            ModeloPedidoExtPrueba.Correo = new List<string>();
-            ModeloPedidoExtPrueba.Telefono = new List<long>();
-            ModeloPedidoExtPrueba.Carpeta = new List<string>();
-            var departamentos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+            ModeloPedidoExtPrueba modeloPedidoExtPrueba = new ModeloPedidoExtPrueba();
+            ModeloPedidoExtPrueba.IdPedidosExternos = new List<long>();
+            ModeloPedidoExtPrueba.NumeroPedido = new List<int>();
+            //ModeloPedidoExtPrueba.Fecha = new List<string>();
+
+            var departamentos = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdAreas,
-                    p.Nombre,
-                    p.UNombre,
-                    p.Correo,
-                    p.Telefono,
-                    p.Carpeta
+                    p.IdPedidosExternos,
+                    p.NumeroPedido
+                    //p.UNombre,
+                    //p.Correo,
+                    //p.Telefono,
+                    //p.Carpeta
                 });
             foreach (var area in departamentos)
             {
-                ModeloPedidoExtPrueba.IdAreas.Add(area.IdAreas);
-                ModeloPedidoExtPrueba.Nombre.Add(area.Nombre);
-                ModeloPedidoExtPrueba.UNombre.Add(area.UNombre);
-                ModeloPedidoExtPrueba.Correo.Add(area.Correo);
-                ModeloPedidoExtPrueba.Telefono.Add(area.Telefono);
-                ModeloPedidoExtPrueba.Carpeta.Add(area.Carpeta);
+                ModeloPedidoExtPrueba.IdPedidosExternos.Add(area.IdPedidosExternos);
+                ModeloPedidoExtPrueba.NumeroPedido.Add((int)area.NumeroPedido);
+                //ModeloAreas.UNombre.Add(area.UNombre);
+                //ModeloAreas.Correo.Add(area.Correo);
+                //ModeloAreas.Telefono.Add(area.Telefono);
+                //ModeloAreas.Carpeta.Add(area.Carpeta);
             }
         }
-
         public JsonResult ConsultaDepartamento(long Id)
         {
-            var departamento = InvBD.Areas.Where(p => p.IdAreas.Equals(Id))
+            var pedido = InvBD.Areas.Where(p => p.IdAreas.Equals(Id))
                 .Select(p => new
                 {
                     p.IdAreas,
@@ -60,7 +56,7 @@ namespace Inventario.Controllers
                     p.Telefono,
                     p.Carpeta
                 });
-            return Json(departamento, JsonRequestBehavior.AllowGet);
+            return Json(pedido, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos de la compra
         public int GuardarDepartamento(Areas DatosAreas)
