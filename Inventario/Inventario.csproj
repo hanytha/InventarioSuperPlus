@@ -106,17 +106,11 @@
     <Content Include="Global.asax" />
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
-    <Content Include="Scrips\General\buttons.html5.min.js" />
-    <Content Include="Scrips\General\dataTables.buttons.min.js" />
     <Content Include="Scrips\General\jquery.dataTables.min.js" />
-    <Content Include="Scrips\General\jszip.min.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
-    <Content Include="Scrips\General\pdfmake.js" />
-    <Content Include="Scrips\General\pdfmake.min.js" />
-    <Content Include="Scrips\General\vfs_fonts.js" />
     <Content Include="Scrips\Internos\Prueba.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />

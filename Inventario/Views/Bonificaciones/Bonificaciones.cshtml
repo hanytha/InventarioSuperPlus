@@ -57,6 +57,7 @@
     </div>
 </div>
 <!--Termina tarjeta-------------------------------------------------------------------->
+<!----------Tabla de ejemplo para Copiar, exportar a excel, pdf y formato para imprimir------------------------------>
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
@@ -153,7 +154,7 @@
         </tr>
     </tfoot>
 </table>
-
+<!------------Scripts para los botones de copiar, exportar a pdf, excel e imprimir------------------------>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
@@ -161,17 +162,21 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
+<!-----------------------------Funcion para los botones de copiar, exportar a pdf, excel e imprimir -------------------------------->
 <script type="text/javascript">
     $('#example').DataTable({
         dom: 'Bfrti',
         buttons: [
-            'copy'
-           
+            'copy',
+            'pdf',
+            'excel',
+            'print'
         ]
     });
 </script>
-
+<!-----------------------------Termina----------------------------------------->
 <!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
