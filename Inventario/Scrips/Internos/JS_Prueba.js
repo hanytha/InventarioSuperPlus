@@ -71,7 +71,7 @@ function Desplegar(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaCompra/?Id=" + id, function (Data) {
+        $.get("/Prueba/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
             var uno = "";
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
@@ -117,7 +117,6 @@ function Desplegar(id) {
         }); 
     }
 }
-
 //----------------------- Función que crea el segundo grid para desplegar-------------------------------
 
 function Desplegar2(no) {
@@ -140,9 +139,8 @@ function Desplegar2(no) {
             dos += "</div>";
             dos += "<hr class='solid3'>";
 
-
-
             for (var i = 0; i < Data.length; i++) {
+              
                 //----Cuerpo del grid-------------
                 dos += "<div class='row'>";
                 dos += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
@@ -155,7 +153,7 @@ function Desplegar2(no) {
             dos += "</div>";
             dos += "</br>";
             dos += "</br>";
-
+           
             let numero = "desplegable2" + no;
             document.getElementById(numero).innerHTML = dos;
         });
