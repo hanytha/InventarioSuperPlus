@@ -106,7 +106,7 @@ namespace Inventario.Controllers
                     p.NoCompra,
                     p.Articulo,
                     p.FechaDeIngreso,
-                    p.ClaveProveedor,
+                    p.MetodoDePago,
                     p.Coste,
                 });
 

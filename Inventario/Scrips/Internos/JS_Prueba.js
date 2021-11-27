@@ -134,7 +134,7 @@ function Desplegar2(no) {
             dos += "<div class='col-sm'>NoCompra</div>";
             dos += "<div class='col-sm'>Artículo</div>";
             dos += "<div class='col-sm'>Fecha de Ingreso</div>";
-            dos += "<div class='col-sm'>Clave Proveedor</div>";
+            dos += "<div class='col-sm'>Forma de pago</div>";
             dos += "<div class='col-sm'>Costo</div>";
             dos += "</div>";
             dos += "<hr class='solid3'>";
@@ -146,7 +146,7 @@ function Desplegar2(no) {
                 dos += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].MetodoDePago + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Coste + "</div>";
                 dos += "</div>";
             }
