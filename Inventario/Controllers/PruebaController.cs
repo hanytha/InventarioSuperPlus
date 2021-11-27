@@ -78,29 +78,29 @@ namespace Inventario.Controllers
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
-        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
-        public JsonResult ConsultaCompra(long Id)
-        {
-            var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id)).OrderByDescending(p => p.FechaDeIngreso)
-                .Select(p => new
-                {
-                    p.IdCompra,
-                    p.NoCompra,
-                    p.ClaveProveedor,
-                    p.Articulo,
-                    p.FechaDeIngreso,
-                    p.Coste,
-                    p.IdArticulo,
+        ////-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        //public JsonResult ConsultaCompra(long Id)
+        //{
+        //    var compra = InvBD.Compra.Where(p => p.IdArticulo.Equals(Id)).OrderByDescending(p => p.FechaDeIngreso)
+        //        .Select(p => new
+        //        {
+        //            p.IdCompra,
+        //            p.NoCompra,
+        //            p.ClaveProveedor,
+        //            p.Articulo,
+        //            p.FechaDeIngreso,
+        //            p.Coste,
+        //            p.IdArticulo,
 
-                });
+        //        });
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
 
-        }
+        //}
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos-----------------
-        public JsonResult ConsultaCategorias(long No)
+        public JsonResult ConsultaNumCompra(long No)
         {
-            var compra = InvBD.Compra.Where(p => p.NoCompra.Equals(No))
+            var compra = InvBD.Compra.Where(p => p.NoCompra.Equals(No)&& p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.NoCompra,
@@ -118,7 +118,7 @@ namespace Inventario.Controllers
             var compras = from comprs in InvBD.Compra
                          join provedor in InvBD.Proveedores
                          on comprs.IdProveedor equals provedor.IdProveedores
-                         where comprs.IdArticulo.Equals(Id) 
+                         where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
                          select new
                          {
                              IdCompra = comprs.IdCompra,

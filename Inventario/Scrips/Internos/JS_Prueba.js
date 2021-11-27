@@ -79,7 +79,7 @@ function Desplegar(id) {
             uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            uno += "<div class='col-sm'>Clave Proveedor</div>";
+            uno += "<div class='col-sm'>Proveedor</div>";
             uno += "<div class='col-sm'>Costo</div>";
             uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
@@ -126,7 +126,7 @@ function Desplegar2(no) {
     }
     else {
 
-        $.get("/Prueba/ConsultaCategorias/?No=" + no, function (Data) {
+        $.get("/Prueba/ConsultaNumCompra/?No=" + no, function (Data) {
             var dos = "";
             //---Encabezado del grid---------
             dos += "<hr class='solid3'>";

@@ -1,5 +1,6 @@
 ﻿LlenarCMBImpuesto();
 LlenarCMBArticulo();
+LlenarCMBProveedor();
 CrearAcordeonExistencia();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistencia() {
@@ -30,7 +31,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Compra: </strong>" + Data[i].NoCompra + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Clave de el proveedor: </strong>" + Data[i].ClaveProveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].ClaveProveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Método De Pago: </strong>" + Data[i].MetodoDePago + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Ingreso: </strong>" + Data[i].FechaDeIngreso +
             "</div>";
@@ -82,7 +83,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
             document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
-            document.getElementById("TxtClaveProveedor").value = Data[0].ClaveProveedor;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
             document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
@@ -121,7 +122,11 @@ function GuardarCompra() {
             var Articulo = TempArt.options[TempArt.selectedIndex].text;
 
             var MetodoDePago = document.getElementById("TxtMetodo").value;
-            var ClaveProveedor = document.getElementById("TxtClaveProveedor").value;
+
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempPro = document.getElementById("cmbProveedor");
+            var ClaveProveedor = TempPro.options[TempPro.selectedIndex].text
+
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var FechaFinal = document.getElementById("TxtFechaFinal").value;
             var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
@@ -138,6 +143,7 @@ function GuardarCompra() {
             frm.append("IdArticulo", IdArticulo);
             frm.append("Articulo", Articulo);
             frm.append("MetodoDePago", MetodoDePago);
+            frm.append("IdProveedor", IdProveedor);
             frm.append("ClaveProveedor", ClaveProveedor);
             frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("FechaFinal", FechaFinal);
@@ -221,6 +227,13 @@ function LlenarCMBArticulo() {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
 }
+
+function LlenarCMBProveedor() {
+    $.get("/GLOBAL/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+}
+
 
     //funcion general para llenar los select
     function llenarCombo(data, control) {
