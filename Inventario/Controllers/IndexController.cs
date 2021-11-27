@@ -14,8 +14,7 @@ namespace Inventario.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            PedidoExtPruebaController pedido = new PedidoExtPruebaController();
-            pedido.ConsultaPedidos();
+           
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
             //Al entrar en el inicio se cargen los estados
