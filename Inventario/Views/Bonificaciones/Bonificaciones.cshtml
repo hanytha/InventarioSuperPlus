@@ -7,6 +7,10 @@
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!----------------------------------------------------------------------------------->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
 <link rel="stylesheet" href="estilos.css">
@@ -52,140 +56,121 @@
         </div>
     </div>
 </div>
-<!--Termina tarjeta-->
-<!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!----------------------Mostrar el div principal-------------------------------------------------------------------->
-<div id="container"></div>
-<div id="accordion"></div>
-<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
-<div id="seccion1" style="display:none">
-    <div id="contenedor3"></div>
-</div>
-<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
-<div id="seccion2" style="display:none">
-    <div id="contenedor2"></div>
-</div>
-<!--------------------------------------------------------------------------------------------------------------->
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h4>REGISTRO DE BONIFICACIONES</h4>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombre">Ingrese el nombre del artículo<span class="required">*</span></label>
-                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
-                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbUnidadM">Unidad de Medida<span class="required">*</span></label>
-                                    <select id="cmbUnidadM" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
-                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtMarca">INGRESE LA MARCA DEL ARTÍCULO<span class="required">*</span></label>
-                                    <input id="TxtMarca" name="data[TxtMarca]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbCompra">Seleccione la compra<span class="required">*</span></label>
-                                    <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
-                    </form>
-                </div>
-                <!-- pie del diálogo -->
-                <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!---------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
-<style>
-    #contenedor {
-        width: 300px;
-        height: auto;
-        text-align: center;
-    }
+<!--Termina tarjeta-------------------------------------------------------------------->
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+        </tr>
+        <tr>
+            <td>Garrett Winters</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>63</td>
+            <td>2011/07/25</td>
+            <td>$170,750</td>
+        </tr>
+        <tr>
+            <td>Ashton Cox</td>
+            <td>Junior Technical Author</td>
+            <td>San Francisco</td>
+            <td>66</td>
+            <td>2009/01/12</td>
+            <td>$86,000</td>
+        </tr>
+        <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>22</td>
+            <td>2012/03/29</td>
+            <td>$433,060</td>
+        </tr>
+        <tr>
+            <td>Airi Satou</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>33</td>
+            <td>2008/11/28</td>
+            <td>$162,700</td>
+        </tr>
+        <tr>
+            <td>Brielle Williamson</td>
+            <td>Integration Specialist</td>
+            <td>New York</td>
+            <td>61</td>
+            <td>2012/12/02</td>
+            <td>$372,000</td>
+        </tr>
+        <tr>
+            <td>Herrod Chandler</td>
+            <td>Sales Assistant</td>
+            <td>San Francisco</td>
+            <td>59</td>
+            <td>2012/08/06</td>
+            <td>$137,500</td>
+        </tr>
+        <tr>
+            <td>Rhona Davidson</td>
+            <td>Integration Specialist</td>
+            <td>Tokyo</td>
+            <td>55</td>
+            <td>2010/10/14</td>
+            <td>$327,900</td>
+        </tr>
+        <tr>
+            <td>Donna Snider</td>
+            <td>Customer Support</td>
+            <td>New York</td>
+            <td>27</td>
+            <td>2011/01/25</td>
+            <td>$112,000</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+</table>
 
-    #contenedor_follow div.icono {
-        display: inline-block;
-        width: 15%;
-        height: auto;
-        vertical-align: middle;
-        text-align: center;
-    }
-</style>
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid {
-        border-top: 3px solid #D7DBDD;
-    }
-</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
 
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 3px solid #f1f507;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid4 {
-        border-top: 3px solid #0B94F8;
-    }
-</style>
+<script type="text/javascript">
+    $('#example').DataTable({
+        dom: 'Bfrti',
+        buttons: [
+            'copy'
+           
+        ]
+    });
+</script>
 
 <!------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
