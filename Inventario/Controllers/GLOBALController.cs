@@ -302,12 +302,8 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-        //-----
-
-        public JsonResult BDProv()
+        //Consulta 
+        public JsonResult BDPro()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
@@ -316,8 +312,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
         public JsonResult BDArt(int IDProv)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))

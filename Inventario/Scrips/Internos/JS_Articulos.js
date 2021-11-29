@@ -2,6 +2,7 @@
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
+LlenarCMCProveedores();
 LlenarCMCArea();
 LlenarCMCMarca();
 CrearAcordeonArticulos();
@@ -38,6 +39,7 @@ function AcordeonArticulos(Data, CtrlArti) {
 
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaSistema + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + Data[i].NombreProveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + Data[i].PrecioUnitarioPromedio + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Categoria: </strong>" + Data[i].Categoria + "</div>";
@@ -102,6 +104,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDArt', Data[0].IdArticulos);
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
@@ -145,6 +148,11 @@ function GuardarArticulo() {
             var IdArticulos = sessionStorage.getItem('IDArt');
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
+
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempProvedor = document.getElementById("cmbProveedor");
+            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;  
+
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var IdCategorias = document.getElementById("cmbCategoria").value;
@@ -174,6 +182,8 @@ function GuardarArticulo() {
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
+            frm.append("IdProveedor", IdProveedor);
+            frm.append("Proveedor", Proveedor);
             frm.append("NombreProveedor", NombreProveedor);
             frm.append("Descripcion", Descripcion);
             frm.append("IdCategorias", IdCategorias);
@@ -270,6 +280,11 @@ function LlenarCMCUnidad() {
     });
 }
 
+function LlenarCMCProveedores() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+}
 
 function LlenarCMCArea() {
     $.get("/GLOBAL/BDAreas", function (data) {

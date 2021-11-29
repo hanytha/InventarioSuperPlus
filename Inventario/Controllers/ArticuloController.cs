@@ -31,6 +31,8 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+                    p.IdProveedor,
+                    p.Proveedor,
                     p.Categoria,
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
@@ -59,6 +61,8 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
+                    p.IdProveedor,
+                    p.Proveedor,
                     p.Categoria,
                     p.NombreProveedor,
                     p.PrecioUnitarioPromedio,
@@ -102,6 +106,8 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)
                 && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
                 && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
+                && p.IdProveedor.Equals(DatosArticulo.IdProveedor)
+                && p.Proveedor.Equals(DatosArticulo.Proveedor)
                 && p.Descripcion.Equals(DatosArticulo.Descripcion)
                 && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
@@ -117,6 +123,8 @@ namespace Inventario.Controllers
                     Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
                     obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
                     obj.IdCategorias = DatosArticulo.IdCategorias;
+                    obj.IdProveedor = DatosArticulo.IdProveedor;
+                    obj.Proveedor = DatosArticulo.Proveedor;
                     obj.Categoria = DatosArticulo.Categoria;
                     obj.NombreProveedor = DatosArticulo.NombreProveedor;
                     obj.Descripcion = DatosArticulo.Descripcion;
