@@ -1,6 +1,6 @@
 ﻿LlenarCMBImpuesto();
 LlenarCMBArticulo();
-LlenarCMBProveedores()
+LlenarCMBProveedores();
 CrearAcordeonExistencia();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistencia() {
@@ -43,7 +43,7 @@ function AcordeonExistencia(Data, CtrlExt) {
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Coste : </strong>" + Data[i].Coste + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Impuesto: </strong>" + Data[i].Impuesto + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Proveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
         CodigoHTMLAreas += "</div>";
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";

@@ -1,4 +1,5 @@
-﻿//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
+﻿cmbProveedor();
+//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
@@ -79,8 +80,8 @@ function Desplegar(id) {
             uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            uno += "<div class='col-sm'>Proveedor</div>";
             uno += "<div class='col-sm'>Costo</div>";
+            uno += "<div class='col-sm'>Proveedor</div>";
             uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
             uno += "<hr class='solid4'>";
@@ -93,9 +94,10 @@ function Desplegar(id) {
                 uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].ClaveProveedor + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                //-----------------Botón para desplegar la segunda tabla-----------------------
+                //--------------------------------------------------------------------------------
+                uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
+                //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
                 uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra + ")'><i class='fas fa-angle-down'></i></button>";
@@ -116,6 +118,59 @@ function Desplegar(id) {
             document.getElementById(compraArticulo).innerHTML = uno;
         }); 
     }
+}
+//----------------Abrir modal Proveedor--------------------------------------------------------
+
+//Limpia la información y carga la informacion del proveedor
+function abrirModal(id) {//la clase  Obligatorio
+    if (id == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+    else {
+
+        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+            //Obtener los datos de los proveedores para permitir editar
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtClabe").value = Data[0].Clabe;
+
+        });
+    }
+}
+//-----------------------------------------------------------
+//limpiar campos
+function LimpiarCamposSub() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+function cmbProveedor() {
+    $.get("/GLOBAL/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+
+    //funcion general para llenar los select
+    function llenarCombo(data, control) {
+        var contenido = "";
+        contenido += "<option value='0'>--Seleccione--</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+
 }
 //----------------------- Función que crea el segundo grid para desplegar-------------------------------
 

@@ -56,14 +56,16 @@
 </div>
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR</button>
+<button  onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
 <div id="contenedor1"></div>
 <!------------------------------------------------Modal------------------------------------------------------------------>
+
+<!---->
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalCategoria">
+    <div class="modal fade" id="ModalProveedor">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,64 +74,49 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO CLASIFICACIÓN</h4>
+                    <h5>Pedidos</h5>
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
                         <!--Los pasos del modal-->
-
-                        <h4>PASO 1</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect" ></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                    <input id="TxtCorreo" name="data[TxtCorreo]" class="form-control  limpiar" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
+                                    <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                    <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtClabe">Clabe Interbancaria<span class="required">*</span></label>
+                                    <input id="TxtClabe" name="data[TxtClabe]" class="form-control  limpiar" placeholder="Papeleria" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                    <label class="form-control-label" for="TxtClasificacion">Artículo(s)<span class="required"></span></label>
                                 </div>
                             </div>
                         </div>
@@ -152,8 +139,8 @@
     /* Solid border */
     hr.solid {
         border-top: 4px solid #D7DBDD;
-
     }
+
     .D1 {
         background-color: #EBEBEB;
     }
