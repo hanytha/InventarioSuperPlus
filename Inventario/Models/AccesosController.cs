@@ -45,8 +45,11 @@ namespace Inventario.Models
 
         public static long IDAsignacion { get; set; }
         public static string Asignacion { get; set; }
-        public static string Tienda { get; set; }
-
+        public static string Tiendas { get; set; }
+        public static string CManejador { get; set; }
+        public static string CPlataforma { get; set; }
+        public static long IDSitio { get; set; }
+        public static string Sitio { get; set; }
         public static long? IdSubArea { get; internal set; }
 
         public static long IdSupervision { get; set; }

@@ -1,0 +1,53 @@
+﻿@using Inventario.Models;
+
+
+@{
+    ViewBag.Title = "Tiendas de la supervisión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/magnific-popup.css" rel="stylesheet" />*@
+<h2>Tiendas de la supervisión</h2>
+
+<div class="accordion" id="AcordeonSucursales">
+    @{
+        if (TiendasSupervision.IdTienda!= null)
+        {
+            int NSucursales = TiendasSupervision.IdTienda.Count();
+            string InsrtClases = "card m-b-0";
+            for (int i = 0; i < NSucursales; i++)
+            {
+                if (i == 0)
+                {
+                    InsrtClases = "card m-b-0";
+                }
+                else
+                {
+                    InsrtClases = "card m-b-0  border-top";
+                }
+                string Colapse = "Collapse_Sucursa_" + @TiendasSupervision.IdTienda[i];
+                string Header = "Heading_Sucursa_" + @TiendasSupervision.IdTienda[i];
+                string IDAcordeon = "Acordeon_Sucursal_" + @TiendasSupervision.IdTienda[i] + "_Deptos";
+                string BadgeDepto = "Badge_Sucursal_" + @TiendasSupervision.IdTienda[i];
+                <div class="@InsrtClases">
+                    <div class="card-header" id="@Header">
+                        <h4 class="mb-0">
+                            <a onclick="llenarBadges(@TiendasSupervision.IdTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                <i class="m-r-5 mdi mdi-store" aria-hidden="true"></i>
+                                <span>@TiendasSupervision.Nombre[i]</span><span id="@BadgeDepto" class="badge badge-danger"></span>
+                            </a>
+                        </h4>
+                       
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+
+<script src="~/Scrips/jquery.min.js"></script>
+@*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
+@*<script src="~/Scripts/meg.init.js"></script>*@
+<script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+
+

@@ -1,16 +1,19 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Supervision";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2 class="form-control-label" style="font-size: 20px;">
     SUPERVISIÓN
 </h2>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+@*<meta name="viewport" content="width=device-width, initial-scale=1">*@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
+@*<link rel="stylesheet" href="estilos.css">*@
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -93,10 +96,18 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtNomUser">Usuario<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="Usuario">
+                                        </div>
+                                    </div>*@
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomUser">Usuario<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNomUser]" id="TxtNomUser" class="form-control  limpiar obligatorio" placeholder="Usuario">
+                                        <label class="form-control-label" for="cmbEncargado">Encargado<span class="required">*</span></label>
+                                        <select id="cmbEncargado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +142,8 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Superviciones.js"></script>
+@*<script src="~/Scrips/Internos/JS_Superviciones.js"></script>*@
+<script src="~/Scrips/Internos/JS_Supervision.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <!--sweetalert2-->

@@ -111,6 +111,9 @@
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_PedidoExtPrueba.js" />
+    <Content Include="Scrips\Internos\JS_Supervision.js" />
+    <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
+    <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\Prueba.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
@@ -127,7 +130,6 @@
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
-    <Content Include="Scrips\Internos\JS_Superviciones.js" />
     <Content Include="Scrips\Internos\JS_Perfiles.js" />
     <Content Include="Scrips\Internos\JS_SubAreas.js" />
     <Content Include="Scrips\Internos\JS_PedidosExt.js" />
@@ -135,7 +137,6 @@
     <Content Include="Scrips\Internos\JS_Tienda.js" />
     <Content Include="Scrips\Internos\JS_Configuraciones.js" />
     <Content Include="Scrips\Internos\JS_Usuarios.js" />
-    <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_Impuestos.js" />
     <Content Include="Scrips\Internos\JS_Departamentos.js" />
     <Content Include="Scrips\Internos\JS_Login.js" />
@@ -164,14 +165,13 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
-    <Compile Include="Controllers\PedidoExtPruebaController.cs" />
     <Compile Include="Controllers\PedidosextController.cs" />
     <Compile Include="Controllers\PedidosintController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\PruebaController.cs" />
-    <Compile Include="Controllers\PedidoSolicitadoController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
+    <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
@@ -186,7 +186,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModeloPedidoExtPrueba.cs" />
     <Compile Include="Models\Proveedores.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
@@ -194,6 +193,8 @@
     <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
+    <Compile Include="Models\Sucursales.cs" />
+    <Compile Include="Models\TiendasSupervision.cs" />
     <Compile Include="Models\UsersVM.cs" />
     <Compile Include="Models\ModeloUsuario.cs" />
     <Compile Include="Models\Seguridad.cs" />
@@ -217,14 +218,12 @@
     <Content Include="Views\Bonificaciones\Bonificaciones.cshtml" />
     <Content Include="Views\Existencias\Existencias.cshtml" />
     <Content Include="Views\Impuestos\Impuestos.cshtml" />
-    <Content Include="Views\Marca\Marca.cshtml" />
+    <Content Include="Views\Marca\SucursalesSupervision.cshtml" />
     <Content Include="Views\Pagina\Pagina.cshtml" />
     <Content Include="Views\Pedidosext\Pedidosext.cshtml" />
     <Content Include="Views\Pedidosint\Pedidosint.cshtml" />
     <Content Include="Views\Perfiles\Perfiles.cshtml" />
     <Content Include="Views\Proveedores\Proveedores.cshtml" />
-    <Content Include="Views\Supervision\Supervision.cshtml" />
-    <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <Content Include="Views\Tienda\Tienda.cshtml" />
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
     <Content Include="Views\Configuracion\Configuracion.cshtml" />
@@ -237,6 +236,11 @@
     <Content Include="Views\Prueba\Prueba.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\PedidoExtPrueba\PedidoExtPrueba.cshtml" />
+    <Content Include="Views\Marca\Marca.cshtml" />
+    <Content Include="Views\subArea\subArea - Copia.cshtml" />
+    <Content Include="Views\Supervision\Supervision.cshtml" />
+    <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
+    <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

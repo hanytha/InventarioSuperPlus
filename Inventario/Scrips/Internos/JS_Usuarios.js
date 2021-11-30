@@ -1,5 +1,6 @@
 ﻿
 LlenarCMBPrin();
+
 var imagen64;
 imagen64 = getBase64Image(document.getElementById("PBFoto"));
 //CrearAcordeonUsuarios();
@@ -112,6 +113,14 @@ function ConsultaUsuarios() {
         CrearTablaUsuarios(Data);
     }
     );
+
+    $.get("/Usuario/Asignasion", function (DatosAsignasion) {
+        if (DatosAsignasion.length !== 0) {
+            llenarCombo(DatosAsignasion, document.getElementById("cmbAsignacion"));
+        } else {
+            alert("No hay datos en la tabla Asignasión.");
+        }
+    });
 }
 
 
@@ -186,6 +195,49 @@ IDM.addEventListener("change", function () {
         llenarCombo(data, document.getElementById("cmbLocalidad"));
     });
 });
+
+var Asigna = document.getElementById("cmbAsignacion");
+Asigna.addEventListener("change", function () {
+    Sitio(Asigna.value, 0);
+});
+
+
+
+function Sitio(IDAsignacion, IDSitio) {
+       //Mostrar la opcion ofina al seleccionar la opcion 3(Oficina)
+    if (IDAsignacion == 3) {
+        let DatosOficina = [{ "ID": 1, "Nombre": "Oficina" }];
+        llenarCombo(DatosOficina, document.getElementById("cmbSitio"));
+        document.getElementById("cmbSitio").value = IDSitio;
+    }
+       //Mostrar todas las superviciones registradas al seleccionar la opcion 2(Supervisión)
+    else if (IDAsignacion == 2) {
+        $.get("/GLOBAL/BDSupervision", function (DatosSupervisiones) {
+            if (DatosSupervisiones.length !== 0) {
+                llenarCombo(DatosSupervisiones, document.getElementById("cmbSitio"));
+                document.getElementById("cmbSitio").value = IDSitio;
+            }
+            else {
+                alert("No hay datos en la tabla Supervision.");
+            }
+        });
+    }
+        //Mostrar todas las tiendas registradas al seleccionar la opcion 1(Tienda)
+    else if (IDAsignacion == 1) {
+        $.get("/GLOBAL/BDTiendaSuper", function (DatosTiendas) {
+            if (DatosTiendas.length !== 0) {
+                llenarCombo(DatosTiendas, document.getElementById("cmbSitio"));
+                document.getElementById("cmbSitio").value = IDSitio;
+            }
+            else {
+                alert("No hay datos en la tabla Tiendas.");
+            }
+        });
+    }
+
+
+}
+
 //funcion general para llenar los select
 function llenarCombo(data, control) {
     var contenido = "";
@@ -267,6 +319,8 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtConfirmacion").value = Data[0].Password;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
+            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+            Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
         });
     }
 }
@@ -342,6 +396,17 @@ function GuardarUsuario() {
                 var TempPerf = document.getElementById("cmbPerfil");
                 var LvlPerfil = TempPerf.options[TempPerf.selectedIndex].text;
                 var Usuario = document.getElementById("TxtUsuario").value;
+
+                var IdAsignacion = document.getElementById("cmbAsignacion").value;
+                var TempAsignacion = document.getElementById("cmbAsignacion");
+                var NombreAsignacion = TempAsignacion.options[TempAsignacion.selectedIndex].text;
+
+                var IdSitio = document.getElementById("cmbSitio").value;
+                var TempSitio = document.getElementById("cmbSitio");
+                var NombreSitio = TempSitio.options[TempSitio.selectedIndex].text;
+
+                //var IdAsignacion = document.getElementById("cmbAsignacion").value;
+                var IdSitio = document.getElementById("cmbSitio").value;
                 var Foto = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
                 if (Foto.endsWith('png')) {
                     Foto = imagen64.replace("data:image/png;base64,", "");
@@ -377,6 +442,10 @@ function GuardarUsuario() {
                 frm.append("LvlPerfil", LvlPerfil);
                 frm.append("FechaIngreso", FechaIngreso);
                 frm.append("Usuario", Usuario);
+                frm.append("IdAsignacion", IdAsignacion);
+                frm.append("NombreAsignacion", NombreAsignacion);
+                frm.append("IdSitio", IdSitio);
+                frm.append("NombreSitio", NombreSitio);
                 frm.append("cadF", Foto);
                 frm.append("password", password);
                 frm.append("Estatus", 1);

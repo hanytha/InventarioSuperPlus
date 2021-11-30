@@ -55,6 +55,10 @@ namespace Inventario.Controllers
                             p.NSArea,
                             p.Usuario,
                             p.FechaIngreso,
+                            p.IdAsignacion,
+                            p.NombreAsignacion,
+                            p.IdSitio,
+                            p.NombreSitio,
                             p.Password
                         }).First();
 
@@ -82,62 +86,71 @@ namespace Inventario.Controllers
                         Accesos.Municipio = DatosUsuario.Municipio;
                         Accesos.Localidad = DatosUsuario.Localidad;
                         Accesos.IdArea = DatosUsuario.IdArea;
-                        Accesos.IdSubArea = DatosUsuario.IdArea;
+                        Accesos.IdSubArea = DatosUsuario.IdSubArea;
                         Accesos.NArea = DatosUsuario.NArea;
                         Accesos.NSArea = DatosUsuario.NSArea;
-                        Session["IDAsignacion"] = (long)DatosUsuario.IdArea;
-                        //Accesos.IDAsignacion = (long)DatosUsuario.IDAsignacion;
-                        //Session["IDSitio"] = (long)DatosUsuario.IDSitio;
-                        //Accesos.IDSitio = (long)DatosUsuario.IDSitio;
-                        ////Accesos.Sitio = DatosUsuario.IDSitio;
+
+
+                        Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
+                        Accesos.IDAsignacion = (long)DatosUsuario.IdAsignacion;
+                        Session["IDSitio"] = (long)DatosUsuario.IdPerfil;
+                        Accesos.IDSitio = (long)DatosUsuario.IdSitio;
+                        //Accesos.Sitio = DatosUsuario.IDSitio;
                         if (Accesos.IDAsignacion != 0)
                         {
-                            //    var Asignasion = InvBD.System_Inf_Asignacion.Where(p => p.IDAsignacion.Equals(DatosUsuario.IDAsignacion)).First();
-                            //    Accesos.Asignacion = Asignasion.Nombre;
+                            var Asignasion = InvBD.Asignacion.Where(p => p.IdAsignacion.Equals(DatosUsuario.IdAsignacion)).First();
+                            Accesos.Asignacion = Asignasion.Nombre;
                             if (Accesos.IDAsignacion == 1)
                             {
-                                var Sucursal = InvBD.Tienda.Where(p => p.IdTienda.Equals(DatosUsuario.IdArea)).First();
-                                //Accesos.Nombre = Sucursal.Nombre;
-                                Accesos.Tienda = DatosUsuario.Nombre.ToString();
+                                var Sucursal = InvBD.Tienda.Where(p => p.IdTienda.Equals(DatosUsuario.IdSitio)).First();
+                                Accesos.Sitio = Sucursal.Nombre;
+                                Accesos.Tiendas = DatosUsuario.IdSitio.ToString();
                             }
                             else if (Accesos.IDAsignacion == 2)
                             {
-                                var Supervision = InvBD.Supervision.Where(p => p.IdSupervision.Equals(DatosUsuario.IdArea)).First();
-                                Accesos.Tienda = Supervision.Tienda;
-                                Accesos.IdArea = Supervision.IdSupervision;
+                                var Supervision = InvBD.Supervision.Where(p => p.IdSupervision.Equals(DatosUsuario.IdSitio)).First();
+                                Accesos.Tiendas = Supervision.Tienda;
+                                Accesos.Sitio = Supervision.TipoSupervicion;
                             }
-                            //else if (Accesos.IDAsignacion == 3) {
-                            //    Accesos.Sitio = "Oficina";
-                            //    Accesos.Tiendas = "";
-                            //}
-                            //else {
-                            //    Accesos.Sitio = "No tiene ninguna asignación";
-                            //    Accesos.Tiendas = "";
-                            //}
+                            else if (Accesos.IDAsignacion == 3)
+                            {
+                                Accesos.Sitio = "Oficina";
+                                Accesos.Tiendas = "";
+                            }
+                            else
+                            {
+                                Accesos.Sitio = "No tiene ninguna asignación";
+                                Accesos.Tiendas = "";
+                            }
                         }
-                        if (DatosUsuario.NArea != "--Seleccione--")
+                        if (DatosUsuario.NSArea != "--Seleccione--")
                         {
-                            Accesos.NArea = DatosUsuario.NArea;
+                            Accesos.NSArea = DatosUsuario.NSArea;
                         }
                         else
                         {
                             Accesos.NSArea = "";
                         }
 
-                        //    if (DatosUsuario.CManejador != null) {
-                        //        Accesos.CManejador = DatosUsuario.CManejador;
-                        //    }
-                        //    else {
-                        //        Accesos.CManejador = "Aun no se le ha asignado una contraseña.";
-                        //    }
+                        //if (DatosUsuario.CManejador != null)
+                        //{
+                        //    Accesos.CManejador = DatosUsuario.CManejador;
+                        //}
+                        //else
+                        //{
+                        //    Accesos.CManejador = "Aun no se le ha asignado una contraseña de la plataforma FRONT.";
+                        //}
 
-                        //    if (DatosUsuario.CPlataforma != null) {
-                        //        Accesos.CPlataforma = DatosUsuario.CPlataforma;
-                        //    }
-                        //    else {
-                        //        Accesos.CPlataforma = "Aun no se le ha asignado una contraseña.";
+                        //if (DatosUsuario.CPlataforma != null)
+                        //{
+                        //    Accesos.CPlataforma = DatosUsuario.CPlataforma;
+                        //}
+                        //else
+                        //{
+                        //    Accesos.CPlataforma = "Aun no se le ha asignado una contraseña de la plataforma MTCenter.";
                         //}
                         var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
+
 
                         string[] IdPaginas = Permisos.Permisos.Split('#');
                         int Filas = IdPaginas.GetLength(0);

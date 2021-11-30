@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Inventario.Controllers
 {
     //Lamar al método de seguridad
-    [Seguridad]
+
     public class ProveedoresController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();

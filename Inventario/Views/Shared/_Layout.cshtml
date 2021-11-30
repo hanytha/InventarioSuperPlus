@@ -103,6 +103,7 @@
             width: 130px;
             text-align: center;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -428,26 +429,26 @@
                         <header class="CardPerfil_Header">
                             <img src="~/Assets/Login/bg4.jpg" alt="Fondo" class="CardPerfil_Header_Fondo" />
                             @{<img src=@Accesos.Foto class="CardPerfil_Header_FPerfil" alt="Foto perfil" />}
-                            </header>
-                        </article>
-                        <section class="CardBody">
-                            @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br>Nombre</span></p>}
-                            <div class="row">
-                                <div class="col-md-6 col-sm-4 col-xs-4">
-                                    @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br>Puesto</span></p>}
-                                </div>
-                                @*<div class="col-md-6 col-sm-4 col-xs-4">
-                        @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
-                    </div>*@
+                        </header>
+                    </article>
+                    <section class="CardBody">
+                        @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br>Nombre</span></p>}
+                        <div class="row">
+                            <div class="col-md-6 col-sm-4 col-xs-4">
+                                @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br>Puesto</span></p>}
                             </div>
-                        </section>
-                        <footer class="CardFooter_IUSA">
-                            <div id="DatosIUSA"></div>
-                        </footer>
-                        <footer class="CardFooter_PCPay">
-                            <div id="DatosPCPay"></div>
-                        </footer>
-                    </div>
+                            @*<div class="col-md-6 col-sm-4 col-xs-4">
+                                    @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
+                                </div>*@
+                        </div>
+                    </section>
+                    <footer class="CardFooter_IUSA">
+                        <div id="DatosIUSA"></div>
+                    </footer>
+                    <footer class="CardFooter_PCPay">
+                        <div id="DatosPCPay"></div>
+                    </footer>
+                </div>
             </div>
         </div>
 
@@ -459,11 +460,9 @@
         <!-- Script-->
         <script src="~/Scrips/argon.js"></script>
         <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-        <script src="~/Scrips/bootstrap-datepicker.min.js"></script>
+
         <script src="~/Scrips/bootstrap.min.js"></script>
 
-        <!--  <script src="~/Scrips/jquery-scrollLock.min.js"></script>  -->
-        <!--  <script src="~/Scrips/jquery-ui.min.js"></script> -->
         <script src="~/Scrips/jquery.min.js"></script>
         <script src="~/Scrips/jquery.scrollbar.min.js"></script>
         <script src="~/Scrips/js.cookie.js"></script>

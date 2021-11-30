@@ -25,7 +25,6 @@ namespace Inventario.Controllers
                     p.IdCompra,
                     p.NoCompra,
                     p.MetodoDePago,
-                    p.ClaveProveedor,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.FechaFinal,
@@ -48,7 +47,6 @@ namespace Inventario.Controllers
                     p.IdCompra,
                     p.NoCompra,
                     p.MetodoDePago,
-                    p.ClaveProveedor,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.FechaFinal,
@@ -90,7 +88,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Compra.Where(p => p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
-                && p.ClaveProveedor.Equals(DatosCompra.ClaveProveedor) 
+                //&& p.ClaveProveedor.Equals(DatosCompra.ClaveProveedor) 
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
                 && p.FechaFinal.Equals(DatosCompra.FechaFinal)
