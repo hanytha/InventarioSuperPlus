@@ -14,7 +14,7 @@ namespace Inventario.Controllers
         // GET: Index
         public ActionResult Index()
         {
-   
+
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
             //Al entrar en el inicio se cargen los estados

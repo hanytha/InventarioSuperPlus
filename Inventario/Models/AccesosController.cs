@@ -6,6 +6,8 @@ namespace Inventario.Models
 
     public class Accesos
     {
+
+        //Modelo que se ocupa para mostrar las paginas según los perfiles
         public static string Perfil { get; set; }
         public static List<string> Accion { get; set; }
         public static List<string> Controlador { get; set; }

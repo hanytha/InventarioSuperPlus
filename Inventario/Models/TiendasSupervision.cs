@@ -4,7 +4,11 @@ namespace Inventario.Models
 {
     public class TiendasSupervision
     {
+
         public static List<long> IdTienda { get; set; }
+
+        public static List<long> IDTienda { get; set; }
+
         public static List<string> Nombre { get; set; }
         public static List<string> LNombre { get; set; }
         public static List<string> E1Nombre { get; set; }
