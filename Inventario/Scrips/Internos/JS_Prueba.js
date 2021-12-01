@@ -1,5 +1,4 @@
-﻿
-//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
+﻿//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
@@ -95,7 +94,7 @@ function Desplegar(id) {
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                //--------------------------------------------------------------------------------
+                //-----------------------------Abre el modal deacuerdo con el proveedor---------------------------------------------------
                 uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
@@ -105,7 +104,7 @@ function Desplegar(id) {
                 uno += "</div>";
                 //-------------------Termina-------------------------
                 uno += "</div>";
-                //-----------------------------------------
+                //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 uno += "<div class='row'>";
                 uno += "<div class='col'><div id='desplegable2" + Data[i].NoCompra + "' class='collapse'></div></div>";
                 uno += "</div>";
@@ -151,7 +150,6 @@ function MostrarArticulos(id) {
         $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
             var TablaArticulo = "";
             TablaArticulo += "<div class='row'>";
-
             let ID = Data.ID;
             let ArrayID = ID.split(',');
             let Articulo = Data.Articulo;
@@ -173,7 +171,6 @@ function MostrarArticulos(id) {
         });
     }
 }
-
 //-----------------------------limpiar campos---------------------
 function LimpiarCamposSub() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -204,10 +201,8 @@ function cmbProveedor() {
 
 
 }
-//----------------------- Función que crea el segundo grid para desplegar-------------------------------
-
+//------------- Función que crea el segundo grid para desplegar que se despliega por numero de compra-----------------------------
 function Desplegar2(no) {
-
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
