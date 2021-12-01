@@ -17,18 +17,21 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-        CodigoHTMLAreas += "<div class='card-header bg-transparent border-light' id='heading" + Data[i].IdExistenciaAlmacenG+ "'>";
+
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdExistenciaAlmacenG + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdExistenciaAlmacenG + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdExistenciaAlmacenG + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapsed'>";
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
         CodigoHTMLAreas += "<span >" + Data[i].NoPedido + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
+
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdExistenciaAlmacenG + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
+
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha : </strong>" + Data[i].FechaSistema + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Existencia Inicial: </strong>" + Data[i].ExitenciaInicial + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
@@ -70,7 +73,7 @@ function abrirModal(id) {//la clase  Obligatorio
     if (id == 0) {
         LimpiarCampos();
         sessionStorage.setItem('IDGeneral', '0');
-      
+
     }
     else {
 
@@ -127,7 +130,7 @@ function GuardarAlmacen() {
             var Compra = TempEdo.options[TempEdo.selectedIndex].text;
             var FechaSistema = document.getElementById("TxtFechaSistema").value;
             var Coste = document.getElementById("TxtCosto").value;
-          
+
 
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);

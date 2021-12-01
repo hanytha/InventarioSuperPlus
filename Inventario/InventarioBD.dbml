@@ -84,6 +84,13 @@
       <Association Name="UnidadDeMedida_Articulos" Member="UnidadDeMedida" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Asignacion" Member="Asignacion">
+    <Type Name="Asignacion">
+      <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Categorias" Member="Categorias">
     <Type Name="Categorias">
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -166,6 +173,8 @@
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Compra" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdTienda" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tienda" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="PedidosInternos" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="PedidosInternos" />
       <Association Name="Compra_ExistenciaAlmacenG" Member="Compra1" ThisKey="IdCompra" OtherKey="IdCompra" Type="Compra" IsForeignKey="true" DeleteRule="CASCADE" />
@@ -435,13 +444,6 @@
       <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />
       <Association Name="UnidadDeMedida_PedidosExternos" Member="PedidosExternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosExternos" />
       <Association Name="UnidadDeMedida_PedidosInternos" Member="PedidosInternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosInternos" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Asignacion" Member="Asignacion">
-    <Type Name="Asignacion">
-      <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

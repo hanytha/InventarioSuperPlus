@@ -1,4 +1,6 @@
-﻿using Inventario.Models;
+﻿
+
+using Inventario.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +84,7 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido) 
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
                 && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
