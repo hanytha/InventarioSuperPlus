@@ -134,5 +134,152 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+        //Supervision *****************************************************************************************************************************
+        public JsonResult BDSupervisionTiendas()
+        {
+            var datos = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Accesos.IDSitio) && p.IdUsuario.Equals(Accesos.Id))
+                .Select(p => new
+                {
+                    ID = p.IdSupervision,
+                    Nombre = p.TipoSupervicion,
+                    p.IdUsuario,
+                    p.Tienda
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public void CargarSucursales()
+        {
+            Sucursales Sucursal = new Sucursales();
+            Sucursales.IDTienda = new List<long>();
+            Sucursales.NoTienda = new List<long>();
+            Sucursales.Nombre = new List<string>();
+            Sucursales.LNombre = new List<string>();
+            Sucursales.E1Nombre = new List<string>();
+            Sucursales.E2Nombre = new List<string>();
+            Sucursales.E3Nombre = new List<string>();
+            Sucursales.A1Nombre = new List<string>();
+            Sucursales.A2Nombre = new List<string>();
+            Sucursales.A3Nombre = new List<string>();
+            Sucursales.Estado = new List<string>();
+            Sucursales.Municipio = new List<string>();
+            Sucursales.Localidad = new List<string>();
+            Sucursales.Calle = new List<string>();
+            Sucursales.CP = new List<long>();
+            Sucursales.Telefono = new List<long>();
+            Sucursales.Latitud = new List<string>();
+            Sucursales.Longitud = new List<string>();
+            Sucursales.HApertura = new List<string>();
+            Sucursales.HCierre = new List<string>();
+            Sucursales.IUSACodigo = new List<string>();
+            Sucursales.IUSAUsuario = new List<string>();
+            Sucursales.IUSAContraseña = new List<string>();
+            Sucursales.PCPAYUsuario = new List<string>();
+            Sucursales.PCPAYContraseña = new List<string>();
+            Sucursales.NoServicioLuz = new List<string>();
+            Sucursales.Estatus = new List<int>();
+
+            var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+            .Select(p => new
+            {
+                p.IdTienda,
+                p.Nombre,
+                p.LNombre,
+                p.E1Nombre,
+                p.E2Nombre,
+                p.E3Nombre,
+                p.A1Nombre,
+                p.A2Nombre,
+                p.A3Nombre,
+                p.Estado,
+                p.Municipio,
+                p.Localidad,
+                p.Calle,
+                p.CP,
+                p.Telefono,
+                p.HApertura,
+                p.HCierre,
+                p.Estatus
+            });
+            foreach (var Suc in Tienda)
+            {
+                Sucursales.IDTienda.Add(Suc.IdTienda);
+                Sucursales.Nombre.Add(Suc.Nombre);
+                Sucursales.LNombre.Add(Suc.LNombre);
+                if (Suc.E1Nombre != "--Seleccione--")
+                {
+                    Sucursales.E1Nombre.Add(Suc.E1Nombre);
+                }
+                else
+                {
+                    Sucursales.E1Nombre.Add("");
+                }
+                if (Suc.E2Nombre != "--Seleccione--")
+                {
+                    Sucursales.E2Nombre.Add(Suc.E2Nombre);
+                }
+                else
+                {
+                    Sucursales.E2Nombre.Add("");
+                }
+                if (Suc.E3Nombre != "--Seleccione--")
+                {
+                    Sucursales.E3Nombre.Add(Suc.E3Nombre);
+                }
+                else
+                {
+                    Sucursales.E3Nombre.Add("");
+                }
+                if (Suc.A1Nombre != "--Seleccione--")
+                {
+                    Sucursales.A1Nombre.Add(Suc.A1Nombre);
+                }
+                else
+                {
+                    Sucursales.A1Nombre.Add("");
+                }
+                if (Suc.A2Nombre != "--Seleccione--")
+                {
+                    Sucursales.A2Nombre.Add(Suc.A2Nombre);
+                }
+                else
+                {
+                    Sucursales.A2Nombre.Add("");
+                }
+                if (Suc.A3Nombre != "--Seleccione--")
+                {
+                    Sucursales.A3Nombre.Add(Suc.A3Nombre);
+                }
+                else
+                {
+                    Sucursales.A3Nombre.Add("");
+                }
+                Sucursales.Estado.Add(Suc.Estado);
+                Sucursales.Municipio.Add(Suc.Municipio);
+                Sucursales.Localidad.Add(Suc.Localidad);
+                Sucursales.Calle.Add(Suc.Calle);
+                Sucursales.CP.Add(Suc.CP);
+                Sucursales.Telefono.Add(Suc.Telefono);
+                Sucursales.Estatus.Add(Convert.ToInt32(Suc.Estatus));
+               
+                if (Suc.HApertura != null)
+                {
+                    Sucursales.HApertura.Add(Suc.HApertura);
+                }
+                else
+                {
+                    Sucursales.HApertura.Add("");
+
+                }
+                if (Suc.HCierre != null)
+                {
+                    Sucursales.HCierre.Add(Suc.HCierre);
+                }
+                else
+                {
+                    Sucursales.HCierre.Add("");
+                }
+               
+            }
+        }
     }
 }

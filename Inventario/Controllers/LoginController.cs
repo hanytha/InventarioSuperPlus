@@ -93,7 +93,7 @@ namespace Inventario.Controllers
 
                         Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                         Accesos.IDAsignacion = (long)DatosUsuario.IdAsignacion;
-                        Session["IDSitio"] = (long)DatosUsuario.IdPerfil;
+                        Session["IDSitio"] = (long)DatosUsuario.IdSitio;
                         Accesos.IDSitio = (long)DatosUsuario.IdSitio;
                         //Accesos.Sitio = DatosUsuario.IDSitio;
                         if (Accesos.IDAsignacion != 0)
