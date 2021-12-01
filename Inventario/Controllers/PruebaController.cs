@@ -118,35 +118,15 @@ namespace Inventario.Controllers
             return Json(compras, JsonRequestBehavior.AllowGet);
 
         }
-        ////-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
-        //public JsonResult ConsultaProve(long Id)
-        //{
-        //    var compra = InvBD.Compra.Where(p => p.IdProveedor.Equals(Id) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.NoCompra,
-        //            p.Articulo,
-        //            p.FechaDeIngreso,
-        //            p.MetodoDePago,
-        //            p.Coste,
-        //            p.IdArticulo,
-        //            p.Proveedor,
-        //            p.IdProveedor
-        //        });
-
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-        //}
-        //--------------------------------------------------
         //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var comps = from comprs in InvBD.Compra
                           join provedor in InvBD.Proveedores
                       on comprs.IdProveedor equals provedor.IdProveedores
-                          where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+                          where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1) 
                           select new
                           {
-                             
                               Articulo = comprs.Articulo,
                               IdArticulo = comprs.IdArticulo,
                               IdProveedor = provedor.IdProveedores,
@@ -162,28 +142,17 @@ namespace Inventario.Controllers
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
-        //--------------------------------------------------------
-        public JsonResult ConsultaCompraJoinProveer(long Id)
+        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos-----------------
+        public JsonResult ConsultaArtProveedores(long IdP)
         {
-            var compras = from comprs in InvBD.Compra
-                          join provedor in InvBD.Proveedores
-                      on comprs.IdProveedor equals provedor.IdProveedores
-                          where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
-                          select new
-                          {
-                              FechaDeIngreso = comprs.FechaDeIngreso,
-                              NoCompra = comprs.NoCompra,
-                              Articulo = comprs.Articulo,
-                              Coste = comprs.Coste,
-                              IdArticulo = comprs.IdArticulo,
-                              IdProveedor = provedor.IdProveedores,
-                              Proveedor = provedor.Nombre,
+            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
+                .Select(p => new
+                {
+                    Nombre = p.Articulo,
+                    ID = p.IdArticulo,        
+                });
 
-                          };
-
-
-            return Json(compras, JsonRequestBehavior.AllowGet);
-
+            return Json(compra, JsonRequestBehavior.AllowGet);
         }
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()

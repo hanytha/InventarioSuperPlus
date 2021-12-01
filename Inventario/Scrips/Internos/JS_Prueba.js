@@ -121,27 +121,52 @@ function Desplegar(id) {
 }
 //----------------Abrir modal Proveedor--------------------------------------------------------
 
-//Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase  Obligatorio
+function abrirModal(id) {
+    cmbProveedor();
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
 
     }
     else {
-
-        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+      
+        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {     
+            document.getElementById("cmbProveedor").value = id;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
-
+    
+            MostrarArticulos(id);
         });
     }
 }
-//-----------------------------------------------------------
-//limpiar campos
+//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
+function MostrarArticulos(id) {
+
+    if (id == 0) {
+        sessionStorage.setItem('IDt', '0');
+    }
+    else {
+
+        $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row'>";
+
+            for (var i = 0; i < Data.length; i++) {
+
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'>" + Data[i].Nombre + "</span>";
+                TablaArticulo += "</div>";
+            }
+            TablaArticulo += "</div>";
+
+            let tabla = "TblArticulos" + id;
+
+            document.getElementById(tabla).innerHTML = TablaArticulo;
+        });
+    }
+}
+//-----------------------------limpiar campos---------------------
 function LimpiarCamposSub() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -152,8 +177,7 @@ function LimpiarCamposSub() {
         controlesSLT[i].value = "0";
     }
 }
-
-//-----------------------------------------------------------------------------------------
+//-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function cmbProveedor() {
     $.get("/GLOBAL/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
