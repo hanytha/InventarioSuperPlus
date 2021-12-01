@@ -152,26 +152,28 @@ function MostrarArticulos(id) {
             var TablaArticulo = "";
             TablaArticulo += "<div class='row'>";
 
-            for (var i = 0; i < Data.length; i++) {
+            let ID = Data.ID;
+            let ArrayID = ID.split(',');
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+
+            for (var i = 0; i < (ArrayArticulo, ArrayID).length; i++) {
 
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'>" + Data[i].Nombre + "</span>";
+                TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulo[i] + "</span>";
                 TablaArticulo += "</div>";
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>";
-                TablaArticulo += "<input type='number' class='heckbox-articulos redondeado' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' class='heckbox-articulos redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>";
                 TablaArticulo += "</div>";
-                
             }
             TablaArticulo += "</div>";
-
-           
-
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
 }
+
 //-----------------------------limpiar campos---------------------
 function LimpiarCamposSub() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -185,7 +187,7 @@ function LimpiarCamposSub() {
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function cmbProveedor() {
-    $.get("/GLOBAL/BDProveedor", function (data) {
+    $.get("/Prueba/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 

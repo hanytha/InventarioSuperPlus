@@ -142,19 +142,32 @@ namespace Inventario.Controllers
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
-        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos-----------------
+        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
         public JsonResult ConsultaArtProveedores(long IdP)
         {
+            string Articulo = "";
+            string ID = "";
             var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
                     Nombre = p.Articulo,
-                    ID = p.IdArticulo,        
+                    Id = p.IdArticulo,
                 });
+            foreach (var ap in compra)
+            {
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
+                var elementos = compra;
+                if (ap.Nombre == ap.Nombre)
+                {
+                    Articulo += ap.Nombre + ",";
+                    ID += ap.Id + ",";
+                }
+            }
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulo = Articulo.Substring(0, Articulo.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
-        //----------------------Lenar el combobox--------------------------
+
+        //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
