@@ -14,7 +14,7 @@ namespace Inventario.Controllers
         // GET: Index
         public ActionResult Index()
         {
-
+            //Obtener las consultas del controlador de departamentos
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
             departamento.CargarSucursales();
@@ -23,7 +23,7 @@ namespace Inventario.Controllers
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();
             cargarEstados.BDEstados();
-            //DPto.Clases_Departamentos();
+            //Cargar las tiendas cuando el usuario que inicia sesión es un supervisor(Visualizar solo las tiendas que son asignadas a ese supervisor)
             if (Accesos.IDAsignacion == 1) { }
             else if (Accesos.IDAsignacion == 2)
             {

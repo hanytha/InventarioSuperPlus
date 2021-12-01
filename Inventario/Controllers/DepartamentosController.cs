@@ -134,7 +134,7 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-        //Supervision *****************************************************************************************************************************
+        //Obtener las tiendas de la supervisión en SucursalesSupervisión.cshtml-------
         public JsonResult BDSupervisionTiendas()
         {
             var datos = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Accesos.IDSitio) && p.IdUsuario.Equals(Accesos.Id))
