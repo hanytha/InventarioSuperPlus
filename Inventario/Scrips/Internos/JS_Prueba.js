@@ -1,4 +1,4 @@
-﻿cmbProveedor();
+﻿
 //-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
@@ -157,12 +157,18 @@ function MostrarArticulos(id) {
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'>" + Data[i].Nombre + "</span>";
                 TablaArticulo += "</div>";
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>";
+                TablaArticulo += "<input type='number' class='heckbox-articulos redondeado' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>";
+                TablaArticulo += "</div>";
+                
             }
             TablaArticulo += "</div>";
 
-            let tabla = "TblArticulos" + id;
+           
 
-            document.getElementById(tabla).innerHTML = TablaArticulo;
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
 }

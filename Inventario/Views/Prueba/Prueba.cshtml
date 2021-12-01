@@ -56,12 +56,11 @@
 </div>
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
-<button  onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
 <div id="contenedor1"></div>
 <!------------------------------------------------Modal------------------------------------------------------------------>
-
 <!---->
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -117,7 +116,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">Artículos del proveedor</div> 
+                                    <div id="TblArticulos">Artículos del proveedor</div>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +165,18 @@
         border-top: 1px solid #0B94F8;
     }
 </style>
+<!------------------------------------Estilos para los inputs de los pedidos en el modal--------------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        width: 100px
+    }
 
-<!---------------------------------------------------------------------------------------------------->
+    .confondo {
+        background-color: #def;
+    }
+</style>
+<!----------------------------------------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {

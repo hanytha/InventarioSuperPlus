@@ -154,7 +154,7 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-        //----------------------Lenar el combobox----------------------------
+        //----------------------Lenar el combobox--------------------------
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
