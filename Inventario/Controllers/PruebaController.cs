@@ -145,26 +145,13 @@ namespace Inventario.Controllers
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
         public JsonResult ConsultaArtProveedores(long IdP)
         {
-            string Articulo = "";
-            string ID = "";
             var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
                     Nombre = p.Articulo,
-                    Id = p.IdArticulo,
+                    ID = p.IdArticulo,
                 });
-            foreach (var ap in compra)
-            {
-                int cont = 0;
-                if (cont != IdP)
-                {
-                    Articulo += ap.Nombre + ",";
-                    ID += ap.Id + ",";
-                }
-
-            }
-            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulo = Articulo.Substring(0, Articulo.Length - 1) };
-            return Json(compras, JsonRequestBehavior.AllowGet);
+            return Json(compra, JsonRequestBehavior.AllowGet);
         }
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
@@ -173,6 +160,16 @@ namespace Inventario.Controllers
                 .Select(p => new {
                     ID = p.IdProveedores,
                     Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //----------------------Lenar el combobox----------------------------
+        public JsonResult BDUnidad()
+        {
+            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdUnidadDeMedida,
+                    Nombre = p.Unidad
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
