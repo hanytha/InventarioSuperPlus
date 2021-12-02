@@ -281,5 +281,29 @@ namespace Inventario.Controllers
                
             }
         }
+
+        ///--------------Join Tabla---
+
+        public JsonResult BDArtExist()
+        {
+            var datos = from Articulos in InvBD.Articulos
+                        join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                        on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+
+                        where Articulos.IdArticulos.Equals(Accesos.IDSitio)
+                        select new
+                        {
+                            ID = Articulos.IdArticulos,
+                            Nombre = Articulos.NombreEmpresa,
+                            IdArticulos = Articulos.IdArticulos,
+                            IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                            IdSitio = ExistenciaAlmacenG.IdSitio,
+                            FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+
+                        };
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

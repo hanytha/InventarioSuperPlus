@@ -116,7 +116,7 @@ namespace Inventario.Controllers
         }
 
         //--------------------Controlador SucursalesSupervision--------------------
-public ActionResult SucursalesSupervision()
+        public ActionResult SucursalesSupervision()
         {
             return View();
         }
@@ -259,23 +259,64 @@ public ActionResult SucursalesSupervision()
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
 
-            var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
-            .Select(p => new
-            {
-                Id = p.IdArticulos,
-                nombres = p.NombreEmpresa
-            });
+            //var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+            //.Select(p => new
+            //{
+            //    Id = p.IdArticulos,
+            //    nombres = p.NombreEmpresa
+            //});
+
+
+            var ConsultaArticulo = from Articulos in InvBD.Articulos
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+                                   where ExistenciaAlmacenG.IdAsignacion.Equals(2)
+                                   select new
+                                   {
+                                       Id = Articulos.IdArticulos,
+                                       nombres = Articulos.NombreEmpresa,
+                                       IdArticulos = Articulos.IdArticulos,
+                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                                       IdSitio = ExistenciaAlmacenG.IdSitio,
+                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                   };
+
+            //var ConsultaArticulo = from Articulos in InvBD.Articulos
+            //                       join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+            //                       on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+
+                                   //                       where Articulos.IdArticulos.Equals(Accesos.IDSitio)
+                                   //                       select new
+                                   //                       {
+                                   //                           Id = Articulos.IdArticulos,
+                                   //                           nombres = Articulos.NombreEmpresa,
+                                   //                           IdArticulos = Articulos.IdArticulos,
+                                   //                           IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                                   //                           IdSitio = ExistenciaAlmacenG.IdSitio,
+                                   //                           FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+
+                                   //                       };
+
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
-                var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdCompra)
-                    .Select(p => new
-                    {
-                        fechaIngreso = p.FechaDeIngreso,
-                        stockActual = p.ExitenciaActual,
-                        costo = p.Coste,
-                    });
+                //var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdCompra)
+                //    .Select(p => new
+                //    {
+                //        fechaIngreso = p.FechaDeIngreso,
+                //        stockActual = p.ExitenciaActual,
+                //        costo = p.Coste,
+                //    });
+
+
+                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdArticulo)
+                   .Select(p => new
+                   {
+                       fechaIngreso = p.FechaDeIngreso,
+                       stockActual = p.ExitenciaActual,
+                       costo = p.Coste,
+                   });
 
                 if (consultaFecha.Count() > 0)
                 {
