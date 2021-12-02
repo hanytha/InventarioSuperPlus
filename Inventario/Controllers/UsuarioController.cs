@@ -119,6 +119,17 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+        //public JsonResult AsignasionExistencia()
+        //{
+        //    var datos = InvBD.Asignacion.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdAsignacion,
+        //            Nombre = p.Nombre
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
         //consulta usuario por perfil
         public JsonResult ConsultaUsuarioPerfil(long IDPerf)
         {

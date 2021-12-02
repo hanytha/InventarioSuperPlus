@@ -7,6 +7,14 @@ function CrearAcordeonExistenciasAlmacen() {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonExistenciasAlmacen(Data, document.getElementById("accordion"));
     });
+    //Cargar las opciones de asignación en el bombo
+    //$.get("/Usuario/AsignasionExistencia", function (DatosAsignasion) {
+    //    if (DatosAsignasion.length !== 0) {
+    //        llenarCombo(DatosAsignasion, document.getElementById("cmbAsignacion"));
+    //    } else {
+    //        alert("No hay datos en la tabla Asignasión.");
+    //    }
+    //});
 }
 function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
     var CodigoHTMLAreas = "";
@@ -32,7 +40,6 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
 
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha : </strong>" + Data[i].FechaSistema + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Existencia Inicial: </strong>" + Data[i].ExitenciaInicial + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Ingreso: </strong>" + Data[i].FechaDeIngreso + "</div>";
@@ -83,12 +90,16 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
-            document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
+            //document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
             document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
             document.getElementById("cmbCompra").value = Data[0].IdCompra;
-            document.getElementById("TxtFechaSistema").value = Data[0].FechaSistema;
+            document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtCosto").value = Data[0].Coste;
+            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+            document.getElementById("cmbSitio").value = Data[0].IDSitio;
+            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+            Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
         });
     }
 }
@@ -122,29 +133,39 @@ function GuardarAlmacen() {
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-            var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var FechaFinal = document.getElementById("TxtFechaFinal").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
             var IdCompra = document.getElementById("cmbCompra").value;
             var TempEdo = document.getElementById("cmbCompra");
             var Compra = TempEdo.options[TempEdo.selectedIndex].text;
-            var FechaSistema = document.getElementById("TxtFechaSistema").value;
+            var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
             var Coste = document.getElementById("TxtCosto").value;
+            var IdAsignacion = document.getElementById("cmbAsignacion").value;
+            //var TempAsignacion = document.getElementById("cmbAsignacion");
+            //var NombreAsignacion = TempAsignacion.options[TempAsignacion.selectedIndex].text;
+
+            var IdSitio = document.getElementById("cmbSitio").value;
+            //var TempSitio = document.getElementById("cmbSitio");
+            //var NombreSitio = TempSitio.options[TempSitio.selectedIndex].text;
 
 
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("NoPedido", NoPedido);
+            frm.append("NoPedido", NoPedido); 
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("FechaFinal", FechaFinal);
             frm.append("TipoDeOperacion", TipoDeOperacion);
             frm.append("IdCompra", IdCompra);
-            frm.append("Compra", Compra);
-            frm.append("FechaSistema", FechaSistema);
+            //frm.append("Compra", Compra);
+            //frm.append("FechaSistema", FechaSistema);
             frm.append("Coste", Coste);
-            frm.append("Estatus", 1);
+            frm.append("IdAsignacion", IdAsignacion);
+            //frm.append("NombreAsignacion", NombreAsignacion);
+            frm.append("IdSitio", IdSitio);
+            //frm.append("NombreSitio", NombreSitio);
+            //frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
                 url: "/ExistenciaAlmacen/GuardarAlmacen",
@@ -156,7 +177,7 @@ function GuardarAlmacen() {
                         alert("Ocurrio un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe la existencia");
                     }
                     else {
                         alert("Se ejecuto correctamente");
@@ -222,3 +243,53 @@ function LlenarCMBCompra() {
 
 
 }
+
+var Asigna = document.getElementById("cmbAsignacion");
+Asigna.addEventListener("change", function () {
+    Sitio(Asigna.value, 0);
+});
+
+
+
+//(SITIO)Opciones según la selección
+function Sitio(IDAsignacion, IDSitio) {
+    //Mostrar la opcion oficina al seleccionar la opcion 3(Oficina)
+    if (IDAsignacion == 1) {
+        $.get("/GLOBAL/Areas", function (DatosDepartamento) {
+            if (DatosDepartamento.length !== 0) {
+                llenarCombo(DatosDepartamento, document.getElementById("cmbSitio"));
+                document.getElementById("cmbSitio").value = IDSitio;
+            }
+            else {
+                alert("No hay datos en la tabla Supervision.");
+            }
+        });
+    }
+
+    //Mostrar todas las tiendas registradas al seleccionar la opcion 1(Tienda)
+    else if (IDAsignacion == 2) {
+        $.get("/GLOBAL/BDTiendaSuper", function (DatosTiendas) {
+            if (DatosTiendas.length !== 0) {
+                llenarCombo(DatosTiendas, document.getElementById("cmbSitio"));
+                document.getElementById("cmbSitio").value = IDSitio;
+            }
+            else {
+                alert("No hay datos en la tabla Tiendas.");
+            }
+        });
+    }
+
+}
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+    var contenido = "";
+
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+

@@ -393,6 +393,18 @@ namespace Inventario.Controllers
             return Json(DatosSupervisiones, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult Areas()
+        {
+            var DatosDepartamento = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(DatosDepartamento, JsonRequestBehavior.AllowGet);
+        }
+
         //Consulta para obtener todas las tiendas al seleccionar la opcion 1(Tienda) en Usuarios
         public JsonResult BDTiendaSuper()
         {

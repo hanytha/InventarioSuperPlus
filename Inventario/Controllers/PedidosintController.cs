@@ -108,9 +108,9 @@ namespace Inventario.Controllers
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-                    obj.CantidadAprobada = DatosPedidoInterno.CantidadSolicitada;
+                    obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
                     obj.Tipo = DatosPedidoInterno.Tipo;
-                    obj.IdUnidadDeMedida = DatosPedidoInterno.CantidadAprobada;
+                    obj.IdUnidadDeMedida = DatosPedidoInterno.IdUnidadDeMedida;
                     obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoInterno.IdMarca;
                     obj.Marca = DatosPedidoInterno.Marca;
