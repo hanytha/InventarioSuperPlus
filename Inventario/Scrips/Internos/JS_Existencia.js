@@ -1,6 +1,7 @@
 ﻿LlenarCMBImpuesto();
 LlenarCMBArticulo();
 LlenarCMBProveedores();
+LlenarCMBUnidades();
 CrearAcordeonExistencia();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonExistencia() {
@@ -40,10 +41,12 @@ function AcordeonExistencia(Data, CtrlExt) {
             "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha Final: </strong>" + Data[i].FechaFinal + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidad + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Coste : </strong>" + Data[i].Coste + "</div>";
         CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Impuesto: </strong>" + Data[i].Impuesto + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
+      
+    
         CodigoHTMLAreas += "</div>";
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
@@ -89,8 +92,9 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCoste").value = Data[0].Coste;
+            document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-
+   
         });
     }
 }
@@ -132,6 +136,10 @@ function GuardarCompra() {
             var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
             var Coste = document.getElementById("TxtCoste").value;
 
+            var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
+            var TempUni = document.getElementById("cmbUnidad");
+            var Unidad = TempUni.options[TempUni.selectedIndex].text;
+
             var IdImpuesto = document.getElementById("cmbImpuesto").value;
             var TempEdo = document.getElementById("cmbImpuesto");
             var Impuesto = TempEdo.options[TempEdo.selectedIndex].text;
@@ -149,6 +157,8 @@ function GuardarCompra() {
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);
+            frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
+            frm.append("Unidad", Unidad);
             frm.append("IdImpuesto", IdImpuesto);
             frm.append("Impuesto", Impuesto);
 
@@ -234,7 +244,11 @@ function LlenarCMBProveedores() {
     });
 }
 
-
+function LlenarCMBUnidades() {
+    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidad"));
+    });
+}
 
     //funcion general para llenar los select
     function llenarCombo(data, control) {

@@ -1,4 +1,5 @@
-﻿//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
+﻿
+//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
@@ -122,6 +123,7 @@ function Desplegar(id) {
 
 function abrirModal(id) {
     cmbProveedor();
+
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
 
@@ -140,6 +142,7 @@ function abrirModal(id) {
     }
 }
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
+
 function MostrarArticulos(id) {
 
     if (id == 0) {
@@ -150,21 +153,30 @@ function MostrarArticulos(id) {
         $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
             var TablaArticulo = "";
             TablaArticulo += "<div class='row'>";
+
             let ID = Data.ID;
             let ArrayID = ID.split(',');
             let Articulo = Data.Articulo;
             let ArrayArticulo = Articulo.split(',');
 
             for (var i = 0; i < (ArrayArticulo, ArrayID).length; i++) {
-
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                //-------Crea los chex-box------------------------------------------------
+                TablaArticulo += "<ul class='list-group list-group-horizontal'>"
+                TablaArticulo += "<li class='list-group-item '>";
                 TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulo[i] + "</span>";
-                TablaArticulo += "</div>";
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "</li>";
+                //----------Crea los input para determinar la cantidad-------------------------------
+                TablaArticulo += "<li class='list-group-item'>";
                 TablaArticulo += "<label>";
                 TablaArticulo += "<input type='number' class='heckbox-articulos redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>";
-                TablaArticulo += "</div>";
+                TablaArticulo += "</li>";
+                //-------Crea el combobox para seleccionar la unidad de medida----------------------
+                TablaArticulo += "<li class='list-group-item'>";
+                TablaArticulo += "<select id='LlenarCMCUnidad" + ArrayID[i] + "' class='form-dropdown'></select><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</li>";
+                TablaArticulo += "</ul>";
+   
             }
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
@@ -216,7 +228,7 @@ function Desplegar2(no) {
             dos += "<div class='col-sm'>NoCompra</div>";
             dos += "<div class='col-sm'>Artículo</div>";
             dos += "<div class='col-sm'>Fecha de Ingreso</div>";
-            dos += "<div class='col-sm'>Forma de pago</div>";
+            dos += "<div class='col-sm'>Unidad de medida</div>";
             dos += "<div class='col-sm'>Costo</div>";
             dos += "</div>";
             dos += "<hr class='solid3'>";
@@ -228,7 +240,7 @@ function Desplegar2(no) {
                 dos += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].MetodoDePago + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Coste + "</div>";
                 dos += "</div>";
             }

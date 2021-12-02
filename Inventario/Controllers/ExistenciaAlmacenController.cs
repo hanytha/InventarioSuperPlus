@@ -18,25 +18,24 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaExistenciaAlmacenes()
-        {
-            var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdExistenciaAlmacenG,
-                    p.IdCompra,
-                    p.NoPedido,
-                    p.FechaDeIngreso,
-                    p.ExitenciaInicial,
-                    p.FechaFinal,
-                    p.ExitenciaActual,
-                    p.Coste,
-                    p.TipoDeOperacion,
-                    p.Compra,
-                    p.FechaSistema,
-                });
-            return Json(Almacenes, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult ConsultaExistenciaAlmacenes()
+        //{
+        //    var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdExistenciaAlmacenG,
+        //            p.IdCompra,
+        //            p.NoPedido,
+        //            p.FechaDeIngreso,
+        //            p.ExitenciaInicial,
+        //            p.FechaFinal,
+        //            p.ExitenciaActual,
+        //            p.Coste,
+        //            p.TipoDeOperacion,
+        //            p.Compra,
+        //        });
+        //    return Json(Almacenes, JsonRequestBehavior.AllowGet);
+        //}
         public JsonResult ConsultaExistenciaAlmacen(long Id)
         {
             var almacen = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
@@ -52,7 +51,6 @@ namespace Inventario.Controllers
                     p.Coste,
                     p.TipoDeOperacion,
                     p.Compra,
-                    p.FechaSistema,
 
                 });
             return Json(almacen, JsonRequestBehavior.AllowGet);
@@ -88,7 +86,6 @@ namespace Inventario.Controllers
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 && p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                && p.FechaSistema.Equals(DatosAlmacen.FechaSistema)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.Coste.Equals(DatosAlmacen.Coste)).Count();
                 if (nveces == 0)
@@ -102,7 +99,6 @@ namespace Inventario.Controllers
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
                     obj.IdCompra = DatosAlmacen.IdCompra;
                     obj.Compra = DatosAlmacen.Compra;
-                    obj.FechaSistema = DatosAlmacen.FechaSistema;
                     obj.Coste = DatosAlmacen.Coste;
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -121,23 +117,5 @@ namespace Inventario.Controllers
         }
 
 
-
-        //Eliminar Compra
-        public int EliminarAlmacen(long Id)
-        {
-            int nregistradosAfectados = 0;
-            try
-            {//Consulta los datos y el primer Id que encuentra  lo compara
-                ExistenciaAlmacenG almacenG = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id)).First();
-                almacenG.Estatus = 0;//Cambia el estatus en 0
-                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-                nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
-            return nregistradosAfectados;
-        }
     }
 }

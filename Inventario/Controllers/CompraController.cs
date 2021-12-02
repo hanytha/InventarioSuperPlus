@@ -36,6 +36,8 @@ namespace Inventario.Controllers
                     p.IdImpuesto,
                     p.IdProveedor,
                     p.IdArticulo,
+                    p.IdUnidadDeMedida,
+                    p.Unidad,
 
                 });
             return Json(compras, JsonRequestBehavior.AllowGet);
@@ -59,6 +61,8 @@ namespace Inventario.Controllers
                     p.IdImpuesto,
                     p.IdProveedor,
                     p.IdArticulo,
+                    p.IdUnidadDeMedida,
+                    p.Unidad
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
@@ -98,6 +102,7 @@ namespace Inventario.Controllers
                 && p.Coste.Equals(DatosCompra.Coste)
                 && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
                 && p.IdArticulo.Equals(DatosCompra.IdArticulo)
+                && p.IdUnidadDeMedida.Equals(DatosCompra.IdUnidadDeMedida)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -115,6 +120,8 @@ namespace Inventario.Controllers
                     obj.Impuesto = DatosCompra.Impuesto;
                     obj.IdArticulo = DatosCompra.IdArticulo;
                     obj.Articulo = DatosCompra.Articulo;
+                    obj.IdUnidadDeMedida = DatosCompra.IdUnidadDeMedida;
+                    obj.Unidad = DatosCompra.Unidad;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -130,8 +137,6 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
-
-
 
         //Eliminar Compra
         public int EliminarCompra(long Id)

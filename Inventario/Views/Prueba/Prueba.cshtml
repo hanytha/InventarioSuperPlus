@@ -57,15 +57,14 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
-<!--Mostrar los registros en el accordion-->
+
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
 <div id="contenedor1"></div>
 <!------------------------------------------------Modal------------------------------------------------------------------>
-<!---->
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalProveedor">
-        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
@@ -74,7 +73,7 @@
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     <h5>Pedidos</h5>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
+                    <form id="regiration_form" novalidate method="post">
                         <!--Los pasos del modal-->
                         <div class="row">
                             <div class="col-md-12">

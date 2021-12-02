@@ -109,7 +109,6 @@ namespace Inventario.Controllers
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
                     obj.CantidadAprobada = DatosPedidoInterno.CantidadSolicitada;
                     obj.Tipo = DatosPedidoInterno.Tipo;
-                    obj.IdUnidadDeMedida = DatosPedidoInterno.CantidadAprobada;
                     obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoInterno.IdMarca;
                     obj.Marca = DatosPedidoInterno.Marca;

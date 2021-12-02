@@ -87,7 +87,7 @@ namespace Inventario.Controllers
                     p.NoCompra,
                     p.Articulo,
                     p.FechaDeIngreso,
-                    p.MetodoDePago,
+                    p.Unidad,
                     p.Coste,
                 });
 
@@ -155,18 +155,17 @@ namespace Inventario.Controllers
                 });
             foreach (var ap in compra)
             {
-
-                var elementos = compra;
-                if (ap.Nombre == ap.Nombre)
+                int cont = 0;
+                if (cont != IdP)
                 {
                     Articulo += ap.Nombre + ",";
                     ID += ap.Id + ",";
                 }
+
             }
             var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulo = Articulo.Substring(0, Articulo.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
-
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
         {
