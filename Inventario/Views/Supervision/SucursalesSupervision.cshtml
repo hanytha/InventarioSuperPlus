@@ -12,7 +12,7 @@
 <!-- Botón del modal-->
 <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!------------------------------------------------------------------------------------------------------------>
-<div id="contenedor1"></div>
+@*<div id="contenedor1"></div>*@
 <!------------------------------------------------>
 <style>
     contenedor2 {
@@ -64,9 +64,10 @@
                         <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
 
-                                <div class="row">
-                                    <h5>Subtitulo</h5>
-                                </div>
+                                @*<div class="row">*@
+                                    @*<h5>Subtitulo</h5>*@
+                                    <div id="contenedor1"></div>
+                                @*</div>*@
                                 @*<div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6"><strong>Lider: </strong>@TiendasSupervision.LNombre[i]  </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E1Nombre[i]</div>
@@ -120,7 +121,7 @@
 </div>
 
 <!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
-<!--<style>
+<style>
     #contenedor {
         width: 300px;
         height: auto;
@@ -134,9 +135,9 @@
         vertical-align: middle;
         text-align: center;
     }
-</style>-->
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<!--<style>
+</style>
+@*-----------------------------Estilo para la linea en el encabezado del los divs---------------------------------------*@
+<style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
@@ -164,7 +165,7 @@
     hr.solid4 {
         border-top: 3px solid #0B94F8;
     }
-</style>-->
+</style>
 
 <script src="~/Scrips/jquery.min.js"></script>
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
