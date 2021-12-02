@@ -110,6 +110,8 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\JS_Supervision.js" />
+    <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\Prueba.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />

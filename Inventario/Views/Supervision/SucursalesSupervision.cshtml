@@ -9,9 +9,33 @@
 @*<link href="~/Content/magnific-popup.css" rel="stylesheet" />*@
 <h2>Tiendas de la supervisión</h2>
 
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!------------------------------------------------------------------------------------------------------------>
+<div id="contenedor1"></div>
+<!------------------------------------------------>
+<style>
+    contenedor2 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    contenedor3 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+</style>
+<!--------------------------------------------------------------------------------------------------------------->
+<!--Mostrar los registros en el accordion-->
+<div id="accordion"></div>
+
 <div class="accordion" id="AcordeonSucursales">
     @{
-        if (TiendasSupervision.IdTienda!= null)
+        if (TiendasSupervision.IdTienda != null)
         {
             int NSucursales = TiendasSupervision.IdTienda.Count();
             string InsrtClases = "card m-b-0";
@@ -44,47 +68,47 @@
                                     <h5>Subtitulo</h5>
                                 </div>
                                 @*<div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Lider: </strong>@TiendasSupervision.LNombre[i]  </div>
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E1Nombre[i]</div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E2Nombre[i]</div>
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E3Nombre[i]</div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A1Nombre[i]</div>
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A2Nombre[i]</div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A3Nombre[i]</div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12"><strong>Dirección</strong></div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-sm-6 col-xs-6"><strong>Estado: </strong>@TiendasSupervision.Estado[i]</div>
-            <div class="col-md-7 col-sm-6 col-xs-6"><strong>Municipio: </strong>@TiendasSupervision.Municipio[i]  </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-6 col-xs-6"><strong>Localidas: </strong>@TiendasSupervision.Localidad[i]  </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-6 col-xs-6"><strong>Calle: </strong>@TiendasSupervision.Calle[i]  </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-6"><strong>Teléfono: </strong>@TiendasSupervision.Telefono[i]  </div>
-            <div class="col-md-3 col-sm-6 col-xs-6"><strong>Apertura: </strong>@TiendasSupervision.HApertura[i]</div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-6"><strong>C.p.: </strong>    @TiendasSupervision.CP[i]  </div>
-        </div>*@
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Lider: </strong>@TiendasSupervision.LNombre[i]  </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E1Nombre[i]</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E2Nombre[i]</div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Encargado: </strong>@TiendasSupervision.E3Nombre[i]</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A1Nombre[i]</div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A2Nombre[i]</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6"><strong>Auxiliar: </strong>@TiendasSupervision.A3Nombre[i]</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12"><strong>Dirección</strong></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-6 col-xs-6"><strong>Estado: </strong>@TiendasSupervision.Estado[i]</div>
+                                        <div class="col-md-7 col-sm-6 col-xs-6"><strong>Municipio: </strong>@TiendasSupervision.Municipio[i]  </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-6 col-xs-6"><strong>Localidas: </strong>@TiendasSupervision.Localidad[i]  </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-6 col-xs-6"><strong>Calle: </strong>@TiendasSupervision.Calle[i]  </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-6 col-xs-6"><strong>Teléfono: </strong>@TiendasSupervision.Telefono[i]  </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6"><strong>Apertura: </strong>@TiendasSupervision.HApertura[i]</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-6 col-xs-6"><strong>C.p.: </strong>    @TiendasSupervision.CP[i]  </div>
+                                    </div>*@
 
 
                                 @*<br />
-        <hr size="8px" color="gray" />
-        <div class="row">
-            <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
-        </div>*@
+                                    <hr size="8px" color="gray" />
+                                    <div class="row">
+                                        <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
+                                    </div>*@
 
                             </div>
                         </div>
@@ -95,6 +119,52 @@
     }
 </div>
 
+<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<!--<style>
+    #contenedor {
+        width: 300px;
+        height: auto;
+        text-align: center;
+    }
+
+    #contenedor_follow div.icono {
+        display: inline-block;
+        width: 15%;
+        height: auto;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>-->
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<!--<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 3px solid #D7DBDD;
+    }
+</style>
+
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 3px solid #f1f507;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid4 {
+        border-top: 3px solid #0B94F8;
+    }
+</style>-->
 
 <script src="~/Scrips/jquery.min.js"></script>
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
