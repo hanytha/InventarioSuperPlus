@@ -79,7 +79,7 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)).Count();
 
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-                if (nveces == 0)
+                if (nveces >= 0)
                 {
                     InvBD.Compra.InsertOnSubmit(DatosCompra);
                     InvBD.SubmitChanges();

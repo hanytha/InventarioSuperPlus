@@ -138,6 +138,7 @@ function abrirModal(id) {
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
+
     
             MostrarArticulos(id);
         });
@@ -145,40 +146,110 @@ function abrirModal(id) {
 }
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 //***************************************************
-    function MostrarArticulos(id) {
+//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
+function MostrarArticulos(id) {
 
-        if (id == 0) {
-            sessionStorage.setItem('IDt', '0');
-        }
-        else {
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
 
-            $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
-                var TablaArticulo = "";
-                TablaArticulo += "<div class='row'>";
+        $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row'>";
 
-                for (var i = 0; i < Data.length; i++) {
+            let ID = Data.ID;
+            let ArrayID = ID.split(',');
+            let Articulos = Data.Articulos;
+            let ArrayArticulos = Articulos.split(',');
+
+
+            for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
                 //-------Crea los chex-box------------------------------------------------
-                    TablaArticulo += "<ul class='list-group'>"
-                    TablaArticulo += "<li class='list-group-item '>";
-                    TablaArticulo += "<input type='checkbox' class='heckbox-articulos' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'>" + Data[i].Nombre + "</span>";
-                    TablaArticulo += "</li>";
+                TablaArticulo += "<ul class='list-group'>"
+                TablaArticulo += "<li class='list-group-item '>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+                TablaArticulo += "</li>";
+                //----------Crea los input para determinar la cantidad-------------------------------
+                TablaArticulo += "<li class='list-group-item'>";
+                TablaArticulo += "<label>";
+                TablaArticulo += "<input type='number' class='redondeado' id='input-cantidad" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>";
+                TablaArticulo += "</li>";
                 //-------Crea el combobox para seleccionar la unidad de medida----------------------
-                    TablaArticulo += "<li class='list-group-item'>";
-                    TablaArticulo += "<select><option>-Seleccione-</option><option></optio>Paquete(s)<option></optio>Litro(s)<option></optio>Metro(s)</select>";
-                    TablaArticulo += "</li>";
-               //----------Crea los input para determinar la cantidad-------------------------------
-                    TablaArticulo += "<li class='list-group-item'>";
-                    TablaArticulo += "<label>";
-                    TablaArticulo += "<input type='number' class='heckbox-articulos redondeado' id='" + Data[i].ID + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</label>";
-                    TablaArticulo += "</li>";
-                    TablaArticulo += "</ul>";
+                TablaArticulo += "<li class='list-group-item'>";
+                TablaArticulo += "<select><option>-Seleccione-</option><option>Caja(s)</option><option>Paquete(s)</option><option>Litro(s)</option></select>";
+                TablaArticulo += "</li>";
+                TablaArticulo += "</ul>";
+            }
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+        });
+    }
+}
+//----------------------Guardar datos de los pedidos-------------------
+function GuardarPedidoExterno() {
+
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempProvedor = document.getElementById("cmbProveedor");
+            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;  
+
+            var Correo = document.getElementById("TxtCorreo").value;
+            var RFC = document.getElementById("TxtRFC").value;
+            var Telefono = document.getElementById("TxtTelefono").value;
+            var Clabe = document.getElementById("TxtClabe").value;
+            var NumeroPedido = document.getElementById("TxtNumPedido").value;
+            var Fecha = document.getElementById("TxtFechaSistema").value;
+
+            var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
+            let seleccionados = "";
+            for (let i = 0; i < ChevPedidos.length; i++) {
+                if (ChevPedidos[i].checked == true) {
+                    seleccionados += ChevPedidos[i].id;
+                    seleccionados += "#";
                 }
-                TablaArticulo += "</div>";
-                document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+            }
+            var Articulo = seleccionados.substring(0, seleccionados.length - 1);
+
+
+            var frm = new FormData();
+            frm.append("IdPedidosExternos", IdPedidosExternos);
+            frm.append("IdProveedor", IdProveedor);
+            frm.append("Proveedor", Proveedor);
+            frm.append("Correo", Correo);
+            frm.append("RFC", RFC);
+            frm.append("Telefono", Telefono);
+            frm.append("Clabe", Clabe);
+            frm.append("Articulo", Articulo);
+            frm.append("NumeroPedido", NumeroPedido);
+            frm.append("Fecha", Fecha);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Prueba/GuardarPedidoExterno",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Ocurrio un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe el perfil");
+                    }
+                    else {
+                        alert("Se guardaron los datos correctamente.");
+                        MostrarPerfiles();
+                        document.getElementById("btnCancelarPerfil").click();
+                    }
+                }
             });
         }
-    }
+    
+}
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function cmbProveedor() {
     $.get("/Prueba/BDProveedor", function (data) {

@@ -143,16 +143,37 @@ namespace Inventario.Controllers
 
         }
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
-        public JsonResult ConsultaArtProveedores(long IdP)
+        public JsonResult ConsultaArtProveedores( long IdP )
         {
+            string Articulos = "";
+            string ID = "";
             var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
-                    Nombre = p.Articulo,
-                    ID = p.IdArticulo,
+                    Articulo = p.Articulo,
+                    Id = p.IdArticulo,
                 });
-            return Json(compra, JsonRequestBehavior.AllowGet);
+            foreach (var ap in compra)
+            {
+                int Afectados = 0;
+                int nveces = InvBD.Compra.Where(p => ap.Id.Equals(ap)).Count();
+
+                if (nveces == 0)
+                {
+                    Articulos += ap.Articulo + ",";
+                    ID += ap.Id + ",";
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+
+            }
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
+
+
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
         {
@@ -172,6 +193,78 @@ namespace Inventario.Controllers
                     Nombre = p.Unidad
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //-------Guardar Combo-box de selección---------Pedidos externos------------------------------------------------
+        public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = DatosPedidoExterno.IdPedidosExternos;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+
+                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces >= 0)
+                {
+                    InvBD.PedidosExternos.InsertOnSubmit(DatosPedidoExterno);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
+                && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
+                 && p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
+                 && p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
+                 && p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
+                 && p.Marca.Equals(DatosPedidoExterno.Marca)
+                 && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
+                 && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
+                 && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
+                 && p.Articulo.Equals(DatosPedidoExterno.Articulo)
+                 && p.RFC.Equals(DatosPedidoExterno.RFC)
+                 && p.Correo.Equals(DatosPedidoExterno.Correo)
+                 && p.Telefono.Equals(DatosPedidoExterno.Telefono)
+                 && p.Clabe.Equals(DatosPedidoExterno.Clabe)
+                 && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
+                if (nveces == 0)
+                {
+                    PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
+                    //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
+                    obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
+                    obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
+                    obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
+                    obj.IdMarca = DatosPedidoExterno.IdMarca;
+                    obj.Marca = DatosPedidoExterno.Marca;
+                    obj.IdProveedor = DatosPedidoExterno.IdProveedor;
+                    obj.Proveedor = DatosPedidoExterno.Proveedor;
+                    obj.Articulo = DatosPedidoExterno.Articulo;
+                    obj.RFC = DatosPedidoExterno.RFC;
+                    obj.Correo = DatosPedidoExterno.Correo;
+                    obj.Telefono = DatosPedidoExterno.Telefono;
+                    obj.Clabe = DatosPedidoExterno.Clabe;
+                    obj.Fecha = DatosPedidoExterno.Fecha;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Afectados = 0;
+            //}
+            return Afectados;
         }
     }
 }
