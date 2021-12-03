@@ -253,7 +253,7 @@
     <Type Name="PedidosExternos">
       <Column Name="IdPedidosExternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CantidadSolicitada" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
       <Column Name="IdUnidadDeMedida" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -261,7 +261,7 @@
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Articulo" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

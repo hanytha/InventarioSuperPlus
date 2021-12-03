@@ -1,5 +1,4 @@
-﻿
-//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
+﻿//-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
@@ -123,9 +122,7 @@ function Desplegar(id) {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------Abrir modal Proveedor--------------------------------------------------------
 function abrirModal(id) {
-    cmbProveedor();
-
-
+    LlenarCMCProveedores();
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
 
@@ -139,7 +136,6 @@ function abrirModal(id) {
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
 
-    
             MostrarArticulos(id);
         });
     }
@@ -168,17 +164,15 @@ function MostrarArticulos(id) {
                 //-------Crea los chex-box------------------------------------------------
                 TablaArticulo += "<ul class='list-group'>"
                 TablaArticulo += "<li class='list-group-item '>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
                 TablaArticulo += "</li>";
                 //----------Crea los input para determinar la cantidad-------------------------------
                 TablaArticulo += "<li class='list-group-item'>";
-                TablaArticulo += "<label>";
-                TablaArticulo += "<input type='number' class='redondeado' id='input-cantidad" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>";
+                TablaArticulo += "<input type='number' class='input-cantidad redondeado' id='" + ArrayID[i] + "'>";
                 TablaArticulo += "</li>";
                 //-------Crea el combobox para seleccionar la unidad de medida----------------------
                 TablaArticulo += "<li class='list-group-item'>";
-                TablaArticulo += "<select><option>-Seleccione-</option><option>Caja(s)</option><option>Paquete(s)</option><option>Litro(s)</option></select>";
+                TablaArticulo += "<select id='LlenarCMCUnidad' style='width: 100 %' class='form-control limpiarSelect'></select>";
                 TablaArticulo += "</li>";
                 TablaArticulo += "</ul>";
             }
@@ -203,7 +197,7 @@ function GuardarPedidoExterno() {
             var Clabe = document.getElementById("TxtClabe").value;
             var NumeroPedido = document.getElementById("TxtNumPedido").value;
             var Fecha = document.getElementById("TxtFechaSistema").value;
-
+            //---------------------------------------------------------------------------
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
             let seleccionados = "";
             for (let i = 0; i < ChevPedidos.length; i++) {
@@ -213,7 +207,7 @@ function GuardarPedidoExterno() {
                 }
             }
             var Articulo = seleccionados.substring(0, seleccionados.length - 1);
-
+            //----------------------------------------------------------------------------
 
             var frm = new FormData();
             frm.append("IdPedidosExternos", IdPedidosExternos);
@@ -242,21 +236,22 @@ function GuardarPedidoExterno() {
                     }
                     else {
                         alert("Se guardaron los datos correctamente.");
-                        MostrarPerfiles();
+                      
                         document.getElementById("btnCancelarPerfil").click();
                     }
                 }
             });
         }
-    
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-function cmbProveedor() {
+function LlenarCMCProveedores() {
     $.get("/Prueba/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 
-    //funcion general para llenar los select
+}
+
+//funcion general para llenar los select
     function llenarCombo(data, control) {
         var contenido = "";
         contenido += "<option value='0'>--Seleccione--</option>";
@@ -266,7 +261,7 @@ function cmbProveedor() {
         }
         control.innerHTML = contenido;
     }
-}
+
 //*********************************************************************************************************************************
 //*********************************************************************************************************************************
 //------------- Función que crea el segundo grid para desplegar que se despliega por numero de compra-----------------------------

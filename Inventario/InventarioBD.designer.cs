@@ -5742,7 +5742,7 @@ namespace Inventario
 		
 		private System.Nullable<int> _NumeroPedido;
 		
-		private System.Nullable<int> _CantidadSolicitada;
+		private string _CantidadSolicitada;
 		
 		private System.Nullable<int> _IdUnidadDeMedida;
 		
@@ -5788,7 +5788,7 @@ namespace Inventario
     partial void OnIdPedidosExternosChanged();
     partial void OnNumeroPedidoChanging(System.Nullable<int> value);
     partial void OnNumeroPedidoChanged();
-    partial void OnCantidadSolicitadaChanging(System.Nullable<int> value);
+    partial void OnCantidadSolicitadaChanging(string value);
     partial void OnCantidadSolicitadaChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<int> value);
     partial void OnIdUnidadDeMedidaChanged();
@@ -5869,8 +5869,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadSolicitada", DbType="Int")]
-		public System.Nullable<int> CantidadSolicitada
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadSolicitada", DbType="VarChar(350)")]
+		public string CantidadSolicitada
 		{
 			get
 			{
@@ -6045,7 +6045,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(250)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(350)")]
 		public string Articulo
 		{
 			get

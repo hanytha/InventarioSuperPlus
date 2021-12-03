@@ -152,6 +152,7 @@ namespace Inventario.Controllers
                 {
                     Articulo = p.Articulo,
                     Id = p.IdArticulo,
+                    Unidad = p.IdUnidadDeMedida,
                 });
             foreach (var ap in compra)
             {
