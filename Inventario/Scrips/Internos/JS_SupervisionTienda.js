@@ -62,7 +62,7 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Costo</div>";
+    //CodigoHtmlArticuloComp += "<div class='col-sm'>Costo</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
     CodigoHtmlArticuloComp += "</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -77,11 +77,11 @@ function CrearArticuloComp(Data) {
     let Arrayfechas = Fechas.split(',');
     let Stock = Data.Stock;
     let Arraystock = Stock.split(',');
-    let Costos = Data.Costos;
-    let Arraycostos = Costos.split(',');
+    //let Costos = Data.Costos;
+    //let Arraycostos = Costos.split(',');
 
 
-    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
+    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock/*, Arraycostos*/).length; i++) {
 
         CodigoHtmlArticuloComp += "<div>";
         CodigoHtmlArticuloComp += "<div class='row'>";
@@ -89,7 +89,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
+        //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
         //-----------------Botón para desplegar la primera tabla--------------
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
@@ -125,7 +125,7 @@ function Desplegar(id) {
             uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            uno += "<div class='col-sm'>Costo</div>";
+            //uno += "<div class='col-sm'>Costo</div>";
             uno += "<div class='col-sm'>Proveedor</div>";
             uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
