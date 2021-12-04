@@ -123,8 +123,8 @@ function Desplegar(id) {
 //----------------Abrir modal Proveedor--------------------------------------------------------
 function abrirModal(id) {
     LlenarCMCProveedores();
+    LimpiarCampos();
     if (id == 0) {
-        LimpiarCampos();
         sessionStorage.setItem('IDG', '0');
 
     }
