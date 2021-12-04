@@ -272,37 +272,11 @@ namespace Inventario.Controllers
                                            FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
                                        };
 
-
-
-            //}
-            //var ConsultaArticulo = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-            //                       join Articulos in InvBD.Articulos
-            //                       on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
-            //                       where ExistenciaAlmacenG.IdSitio.Equals(TiendasSupervision.IDTienda)
-            //                       select new
-            //                       {
-            //                           Id = Articulos.IdArticulos,
-            //                           nombres = Articulos.NombreEmpresa,
-            //                           IdArticulos = Articulos.IdArticulos,
-            //                           IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-            //                           IdSitio = ExistenciaAlmacenG.IdSitio,
-            //                           FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
-
-            //                       };
-
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
-                //var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdCompra)
-                //    .Select(p => new
-                //    {
-                //        fechaIngreso = p.FechaDeIngreso,
-                //        stockActual = p.ExitenciaActual,
-                //        costo = p.Coste,
-                //    });
-
-
+              
                 var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdArticulo)
                   //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(TiendasSupervision.IDTienda)).OrderBy(p => p.IdArticulo)
 
@@ -349,61 +323,152 @@ namespace Inventario.Controllers
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
 
-        //Obtener los articulos de la tienda-------
-        //CargarSucursalesXSupervision()
-        public int CargarArticulosXTienda()
+        //Obtener las tiendas de la supervisión en SucursalesSupervisión.cshtml-------
+        public JsonResult BDSupervisionTiendas()
         {
-            int Encontrados = 0;
-            string[] Articulos = Accesos.Sitio.Split('#');
-            ModeloExistAlm.IdExistenciaAlmacenG = new List<long>();
-            ModeloExistAlm.NoPedido = new List<long>();
-            ModeloExistAlm.FechaDeIngreso = new List<String>();
-            ModeloExistAlm.ExitenciaInicial = new List<long>();
-            ModeloExistAlm.FechaFinal = new List<String>();
-            ModeloExistAlm.ExitenciaActual = new List<long>();
-            ModeloExistAlm.Coste = new List<long>();
-            ModeloExistAlm.TipoDeOperacion = new List<string>();
-            ModeloExistAlm.IdCompra = new List<long>();
-            ModeloExistAlm.IdAsignacion = new List<long>();
-            ModeloExistAlm.IdSitio = new List<long>();
-            ModeloExistAlm.IdArticulo = new List<long>();
-            ModeloExistAlm.NombreEmpresa = new List<string>();
-
-            for (int i = 0; i < Articulos.Length; i++)
-            {
-                var Art = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Articulos[i]))
+            var datos = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Accesos.IDSitio) && p.IdUsuario.Equals(Accesos.Id))
                 .Select(p => new
                 {
-                    p.IdExistenciaAlmacenG,
-                    p.NoPedido,
-                    p.FechaDeIngreso,
-                    p.ExitenciaInicial,
-                    p.FechaFinal,
-                    p.ExitenciaActual,
-                    p.Coste,
-                    p.TipoDeOperacion,
-                    p.IdCompra,
-                    p.IdAsignacion,
-                    p.IdSitio,
-                    p.IdArticulo
-                }).First();
-                ModeloExistAlm.IdExistenciaAlmacenG.Add(Art.IdExistenciaAlmacenG);
-                ModeloExistAlm.NoPedido.Add(Art.NoPedido);
-                ModeloExistAlm.FechaDeIngreso.Add(Art.FechaDeIngreso);
-                ModeloExistAlm.ExitenciaInicial.Add(Art.ExitenciaInicial);
-                ModeloExistAlm.FechaFinal.Add(Art.FechaFinal);
-                ModeloExistAlm.ExitenciaActual.Add(Art.ExitenciaActual);
-                ModeloExistAlm.Coste.Add(Art.Coste);
-                ModeloExistAlm.TipoDeOperacion.Add(Art.TipoDeOperacion);
-                ModeloExistAlm.IdCompra.Add(Convert.ToInt32(Art.IdCompra));
-                ModeloExistAlm.IdAsignacion.Add(Convert.ToInt32(Art.IdAsignacion));
-                ModeloExistAlm.IdSitio.Add(Convert.ToInt32(Art.IdSitio));
-                ModeloExistAlm.IdArticulo.Add(Convert.ToInt32(Art.IdArticulo));
-     
-            }
-            return Encontrados;
+                    ID = p.IdSupervision,
+                    Nombre = p.TipoSupervicion,
+                    p.IdUsuario,
+                    p.Tienda
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        public void CargarSucursales()
+        {
+            Sucursales Sucursal = new Sucursales();
+            Sucursales.IDTienda = new List<long>();
+            Sucursales.NoTienda = new List<long>();
+            Sucursales.Nombre = new List<string>();
+            Sucursales.LNombre = new List<string>();
+            Sucursales.E1Nombre = new List<string>();
+            Sucursales.E2Nombre = new List<string>();
+            Sucursales.E3Nombre = new List<string>();
+            Sucursales.A1Nombre = new List<string>();
+            Sucursales.A2Nombre = new List<string>();
+            Sucursales.A3Nombre = new List<string>();
+            Sucursales.Estado = new List<string>();
+            Sucursales.Municipio = new List<string>();
+            Sucursales.Localidad = new List<string>();
+            Sucursales.Calle = new List<string>();
+            Sucursales.CP = new List<long>();
+            Sucursales.Telefono = new List<long>();
+            Sucursales.Latitud = new List<string>();
+            Sucursales.Longitud = new List<string>();
+            Sucursales.HApertura = new List<string>();
+            Sucursales.HCierre = new List<string>();
+            Sucursales.IUSACodigo = new List<string>();
+            Sucursales.IUSAUsuario = new List<string>();
+            Sucursales.IUSAContraseña = new List<string>();
+            Sucursales.PCPAYUsuario = new List<string>();
+            Sucursales.PCPAYContraseña = new List<string>();
+            Sucursales.NoServicioLuz = new List<string>();
+            Sucursales.Estatus = new List<int>();
 
+            var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+            .Select(p => new
+            {
+                p.IdTienda,
+                p.Nombre,
+                p.LNombre,
+                p.E1Nombre,
+                p.E2Nombre,
+                p.E3Nombre,
+                p.A1Nombre,
+                p.A2Nombre,
+                p.A3Nombre,
+                p.Estado,
+                p.Municipio,
+                p.Localidad,
+                p.Calle,
+                p.CP,
+                p.Telefono,
+                p.HApertura,
+                p.HCierre,
+                p.Estatus
+            });
+            foreach (var Suc in Tienda)
+            {
+                Sucursales.IDTienda.Add(Suc.IdTienda);
+                Sucursales.Nombre.Add(Suc.Nombre);
+                Sucursales.LNombre.Add(Suc.LNombre);
+                if (Suc.E1Nombre != "--Seleccione--")
+                {
+                    Sucursales.E1Nombre.Add(Suc.E1Nombre);
+                }
+                else
+                {
+                    Sucursales.E1Nombre.Add("");
+                }
+                if (Suc.E2Nombre != "--Seleccione--")
+                {
+                    Sucursales.E2Nombre.Add(Suc.E2Nombre);
+                }
+                else
+                {
+                    Sucursales.E2Nombre.Add("");
+                }
+                if (Suc.E3Nombre != "--Seleccione--")
+                {
+                    Sucursales.E3Nombre.Add(Suc.E3Nombre);
+                }
+                else
+                {
+                    Sucursales.E3Nombre.Add("");
+                }
+                if (Suc.A1Nombre != "--Seleccione--")
+                {
+                    Sucursales.A1Nombre.Add(Suc.A1Nombre);
+                }
+                else
+                {
+                    Sucursales.A1Nombre.Add("");
+                }
+                if (Suc.A2Nombre != "--Seleccione--")
+                {
+                    Sucursales.A2Nombre.Add(Suc.A2Nombre);
+                }
+                else
+                {
+                    Sucursales.A2Nombre.Add("");
+                }
+                if (Suc.A3Nombre != "--Seleccione--")
+                {
+                    Sucursales.A3Nombre.Add(Suc.A3Nombre);
+                }
+                else
+                {
+                    Sucursales.A3Nombre.Add("");
+                }
+                Sucursales.Estado.Add(Suc.Estado);
+                Sucursales.Municipio.Add(Suc.Municipio);
+                Sucursales.Localidad.Add(Suc.Localidad);
+                Sucursales.Calle.Add(Suc.Calle);
+                Sucursales.CP.Add(Suc.CP);
+                Sucursales.Telefono.Add(Suc.Telefono);
+                Sucursales.Estatus.Add(Convert.ToInt32(Suc.Estatus));
 
+                if (Suc.HApertura != null)
+                {
+                    Sucursales.HApertura.Add(Suc.HApertura);
+                }
+                else
+                {
+                    Sucursales.HApertura.Add("");
+
+                }
+                if (Suc.HCierre != null)
+                {
+                    Sucursales.HCierre.Add(Suc.HCierre);
+                }
+                else
+                {
+                    Sucursales.HCierre.Add("");
+                }
+
+            }
+        }
     }
 }

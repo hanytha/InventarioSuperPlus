@@ -17,9 +17,11 @@ namespace Inventario.Controllers
             //Obtener las consultas del controlador de departamentos
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
-            departamento.CargarSucursales();
+            //Obtener las consultas del controlador de Supervisión
+            SupervisionController TiendaSupervision = new SupervisionController();
+            //Cargar las tiendas al iniciar sesión
+            TiendaSupervision.CargarSucursales();
         
-
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();
