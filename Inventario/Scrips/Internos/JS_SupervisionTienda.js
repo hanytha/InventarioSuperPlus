@@ -45,9 +45,9 @@ function llenarCombo(DAtos, control) {
 ////----------Tabla------------////
 
 //-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
-ConsultaArticuloComp();
-function ConsultaArticuloComp() {
-    $.get("/Supervision/ConsultaArticulos", function (Data) {
+
+function ConsultaArticuloComp(IDTienda) {
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
         CrearArticuloComp(Data);
     });
 

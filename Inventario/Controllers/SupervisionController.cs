@@ -124,7 +124,7 @@ namespace Inventario.Controllers
         {
             int Encontrados = 0;
             string[] Sucursales = Accesos.Tiendas.Split('#');
-            TiendasSupervision.IdTienda = new List<long>();
+            TiendasSupervision.IDTienda = new List<long>();
 
             TiendasSupervision.Nombre = new List<string>();
             TiendasSupervision.LNombre = new List<string>();
@@ -167,7 +167,7 @@ namespace Inventario.Controllers
                     p.HCierre,
                     p.Estatus
                 }).First();
-                TiendasSupervision.IdTienda.Add(Tienda.IdTienda);
+                TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
                 TiendasSupervision.Nombre.Add(Tienda.Nombre);
                 TiendasSupervision.LNombre.Add(Tienda.LNombre);
                 if (Tienda.E1Nombre != "--Seleccione--")
@@ -251,33 +251,34 @@ namespace Inventario.Controllers
 
         //---------------Tabla de las tiendas---------------
 
-        public JsonResult ConsultaArticulos()
+        public JsonResult ConsultaArticulos(long IDTienda)
         {
             string id = "";
             string Nombre = "";
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
-            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
+
+                var ConsultaArticulo = from Articulos in InvBD.Articulos
+                                       join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                       on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+                                       where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
+                                       select new
+                                       {
+                                           Id = Articulos.IdArticulos,
+                                           nombres = Articulos.NombreEmpresa,
+                                           IdArticulos = Articulos.IdArticulos,
+                                           IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                                           IdSitio = ExistenciaAlmacenG.IdSitio,
+                                           FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                       };
 
 
-            var ConsultaArticulo = from Articulos in InvBD.Articulos
-                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-                                   where ExistenciaAlmacenG.IdAsignacion.Equals(2)
-                                   select new
-                                   {
-                                       Id = Articulos.IdArticulos,
-                                       nombres = Articulos.NombreEmpresa,
-                                       IdArticulos = Articulos.IdArticulos,
-                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                                       IdSitio = ExistenciaAlmacenG.IdSitio,
-                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
-                                   };
 
+            //}
             //var ConsultaArticulo = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
             //                       join Articulos in InvBD.Articulos
             //                       on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
-            //                       where ExistenciaAlmacenG.IdSitio.Equals(TiendasSupervision.IdTienda)
+            //                       where ExistenciaAlmacenG.IdSitio.Equals(TiendasSupervision.IDTienda)
             //                       select new
             //                       {
             //                           Id = Articulos.IdArticulos,
@@ -302,12 +303,14 @@ namespace Inventario.Controllers
                 //    });
 
 
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdArticulo)
+                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdArticulo)
+                  //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(TiendasSupervision.IDTienda)).OrderBy(p => p.IdArticulo)
+
                    .Select(p => new
                    {
                        fechaIngreso = p.FechaDeIngreso,
                        stockActual = p.ExitenciaActual,
-                       //costo = p.Coste,
+                      
                    });
 
                 if (consultaFecha.Count() > 0)
