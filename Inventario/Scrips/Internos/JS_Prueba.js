@@ -175,18 +175,15 @@ function MostrarArticulos(id) {
             for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
           //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
                 TablaArticulo += "</div>";
 
        //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
-
-      
-
             }
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
@@ -221,19 +218,17 @@ function GuardarPedidoExterno() {
                 }
             }
             var Articulo = seleccionados.substring(0, seleccionados.length - 1);
-// //------------------------Guardar checkbox de los artículos seleccionados----------------------------------
-          // var NumPedidos = document.getElementsByClassName("input-cantidad");
-          //  let llenar = "";
-          //  for (let i = 0; i < NumPedidos.length; i++) {
-          //      if (NumPedidos[i] > 0) {
-          //          llenar += NumPedidos[i].id;
-          //         llenar += "#";
-          //     }
-          // }
-          //var CantidadSolicitada = llenar.substring(0, llenar.length - 1);
-////------------------------------------------------------------------------------------------------------
-
-
+//------------------------Guardar checkbox de los artículos seleccionados----------------------------------
+           var NumPedidos = document.getElementsByClassName("input-cantidad");
+            let llenar = "";
+            for (let i = 0; i < NumPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1) {
+                    llenar += NumPedidos[i].value;
+                  llenar += "#";
+               }
+           }
+          var CantidadSolicitada = llenar.substring(0, llenar.length - 1);
+//------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdPedidosExternos", IdPedidosExternos);
             frm.append("IdProveedor", IdProveedor);
@@ -244,7 +239,7 @@ function GuardarPedidoExterno() {
             frm.append("Clabe", Clabe);
             frm.append("Articulo", Articulo);
             frm.append("NumeroPedido", NumeroPedido);
-            //frm.append("CantidadSolicitada", CantidadSolicitada);
+            frm.append("CantidadSolicitada", CantidadSolicitada);
             frm.append("Fecha", Fecha);
             frm.append("Estatus", 1);
             $.ajax({
