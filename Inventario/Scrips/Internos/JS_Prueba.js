@@ -64,7 +64,7 @@ function CrearArticuloComp(Data) {
 }
 //*********************************************************************************************************************************
 //*********************************************************************************************************************************
-//----------------------------Crea el grid a desplegar con el botón con la funciíon de desplegar------------------------------------
+//----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
 
     if (id == 0) {
@@ -141,7 +141,6 @@ function abrirModal(id) {
         });
     }
 }
-
 //-------limpiar campos del Modal-formulario------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -154,7 +153,7 @@ function LimpiarCampos() {
     }
 }
 
-//***************************************************
+//************************************************************************************************
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 function MostrarArticulos(id) {
 
@@ -164,29 +163,30 @@ function MostrarArticulos(id) {
     else {
 
         $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row'>";
 
             let ID = Data.ID;
             let ArrayID = ID.split(',');
             let Articulos = Data.Articulos;
             let ArrayArticulos = Articulos.split(',');
 
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+
             for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-                //-------Crea los chex-box------------------------------------------------
-                TablaArticulo += "<ul class='list-group'>"
-                TablaArticulo += "<li class='list-group-item '>";
+          //-------Crea los chex-box-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
-                TablaArticulo += "</li>";
-                //----------Crea los input para determinar la cantidad-------------------------------
-                TablaArticulo += "<li class='list-group-item'>";
-                TablaArticulo += "<input type='number' class='input-cantidad redondeado' id='" + ArrayID[i] + "'>";
-                TablaArticulo += "</li>";
-                //-------Crea el combobox para seleccionar la unidad de medida----------------------
-                TablaArticulo += "<li class='list-group-item'>";
-                TablaArticulo += "<select id='LlenarCMCUnidad' style='width: 100 %' class='form-control limpiarSelect'></select>";
-                TablaArticulo += "</li>";
-                TablaArticulo += "</ul>";
+                TablaArticulo += "</div>";
+
+       //-------Crea los input-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+      
+
             }
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
@@ -194,7 +194,8 @@ function MostrarArticulos(id) {
     }
 }
 
-//----------------------Guardar datos de los pedidos-------------------
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoExterno() {
 
         if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -210,7 +211,7 @@ function GuardarPedidoExterno() {
             var Clabe = document.getElementById("TxtClabe").value;
             var NumeroPedido = document.getElementById("TxtNumPedido").value;
             var Fecha = document.getElementById("TxtFechaSistema").value;
-            //---------------------------------------------------------------------------
+        //------------------------Guardar checkbox de los artículos seleccionados----------------------------------
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
             let seleccionados = "";
             for (let i = 0; i < ChevPedidos.length; i++) {
@@ -220,7 +221,18 @@ function GuardarPedidoExterno() {
                 }
             }
             var Articulo = seleccionados.substring(0, seleccionados.length - 1);
-            //----------------------------------------------------------------------------
+// //------------------------Guardar checkbox de los artículos seleccionados----------------------------------
+          // var NumPedidos = document.getElementsByClassName("input-cantidad");
+          //  let llenar = "";
+          //  for (let i = 0; i < NumPedidos.length; i++) {
+          //      if (NumPedidos[i] > 0) {
+          //          llenar += NumPedidos[i].id;
+          //         llenar += "#";
+          //     }
+          // }
+          //var CantidadSolicitada = llenar.substring(0, llenar.length - 1);
+////------------------------------------------------------------------------------------------------------
+
 
             var frm = new FormData();
             frm.append("IdPedidosExternos", IdPedidosExternos);
@@ -232,6 +244,7 @@ function GuardarPedidoExterno() {
             frm.append("Clabe", Clabe);
             frm.append("Articulo", Articulo);
             frm.append("NumeroPedido", NumeroPedido);
+            //frm.append("CantidadSolicitada", CantidadSolicitada);
             frm.append("Fecha", Fecha);
             frm.append("Estatus", 1);
             $.ajax({
