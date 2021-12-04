@@ -284,25 +284,95 @@ namespace Inventario.Controllers
 
         ///--------------Join Tabla---
 
-        public JsonResult BDArtExist()
+        //public JsonResult BDArtExist()
+        //{
+        //    var datos = from Articulos in InvBD.Articulos
+        //                join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+        //                on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+
+        //                where Articulos.IdArticulos.Equals(Accesos.IDSitio)
+        //                select new
+        //                {
+        //                    ID = Articulos.IdArticulos,
+        //                    Nombre = Articulos.NombreEmpresa,
+        //                    IdArticulos = Articulos.IdArticulos,
+        //                    IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+        //                    IdSitio = ExistenciaAlmacenG.IdSitio,
+        //                    FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+
+        //                };
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
+        //Obtener los articulos de las tiendas-------
+        //BDSupervisionTiendas
+
+        //----
+        public JsonResult BDTiendaArt()
         {
-            var datos = from Articulos in InvBD.Articulos
-                        join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-                        on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-
-                        where Articulos.IdArticulos.Equals(Accesos.IDSitio)
-                        select new
-                        {
-                            ID = Articulos.IdArticulos,
-                            Nombre = Articulos.NombreEmpresa,
-                            IdArticulos = Articulos.IdArticulos,
-                            IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                            IdSitio = ExistenciaAlmacenG.IdSitio,
-                            FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
-
-                        };
+            var datos = InvBD.ExistenciaAlmacenG.Where(p => p.IdSitio.Equals(Accesos.IDSitio))
+                .Select(p => new
+                {
+                    ID = p.IdSitio,
+                    Nombre = p.IdSitio
+                  
+                });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+        public void CargarArticulos()
+        {
+            ModeloExistAlm ModeloExistAlm = new ModeloExistAlm();
+            ModeloExistAlm.IdExistenciaAlmacenG = new List<long>();
+            ModeloExistAlm.NoPedido = new List<long>();
+            ModeloExistAlm.FechaDeIngreso = new List<string>();
+            ModeloExistAlm.ExitenciaInicial = new List<long>();
+            ModeloExistAlm.FechaFinal = new List<string>();
+            ModeloExistAlm.ExitenciaActual = new List<long>();
+            ModeloExistAlm.Coste = new List<long>();
+            ModeloExistAlm.TipoDeOperacion = new List<string>();
+            ModeloExistAlm.NombreEmpresa = new List<string>();
+            ModeloExistAlm.IdCompra = new List<long>();
+            ModeloExistAlm.IdAsignacion = new List<long>();
+            ModeloExistAlm.IdSitio = new List<long>();
+            ModeloExistAlm.IdArticulo = new List<long>();
+           
+
+            var Existencia = InvBD.ExistenciaAlmacenG
+            .Select(p => new
+            {
+                p.IdExistenciaAlmacenG,
+                p.NoPedido,
+                p.FechaDeIngreso,
+                p.ExitenciaInicial,
+                p.FechaFinal,
+                p.ExitenciaActual,
+                p.Coste,
+                p.TipoDeOperacion,
+                p.IdCompra,
+                p.IdAsignacion,
+                p.IdSitio,
+                p.IdArticulo
+            });
+            foreach (var Ext in Existencia)
+            {
+                ModeloExistAlm.IdExistenciaAlmacenG.Add(Ext.IdExistenciaAlmacenG);
+                ModeloExistAlm.NoPedido.Add(Ext.NoPedido);
+                ModeloExistAlm.FechaDeIngreso.Add(Ext.FechaDeIngreso);
+                ModeloExistAlm.ExitenciaInicial.Add(Ext.ExitenciaInicial);
+                ModeloExistAlm.FechaFinal.Add(Ext.FechaFinal);
+                ModeloExistAlm.ExitenciaActual.Add(Ext.ExitenciaActual);
+                ModeloExistAlm.Coste.Add(Ext.Coste);
+                ModeloExistAlm.TipoDeOperacion.Add(Ext.TipoDeOperacion);
+                ModeloExistAlm.IdAsignacion.Add(Convert.ToInt32(Ext.IdAsignacion));
+                ModeloExistAlm.IdArticulo.Add(Convert.ToInt32(Ext.IdArticulo));
+                ModeloExistAlm.IdSitio.Add(Convert.ToInt32(Ext.IdSitio));
+                ModeloExistAlm.IdCompra.Add(Convert.ToInt32(Ext.IdCompra));
+                
+
+            }
+        }
+
 
 
     }

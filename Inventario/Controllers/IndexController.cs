@@ -18,6 +18,7 @@ namespace Inventario.Controllers
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
             departamento.CargarSucursales();
+        
 
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
@@ -31,12 +32,12 @@ namespace Inventario.Controllers
                 {
                     SupervisionController Super = new SupervisionController();
                     Super.CargarSucursalesXSupervision();
+            
                 }
             }
+
             return View();
 
-
-           
         }
     }
 }

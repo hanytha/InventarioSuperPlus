@@ -259,13 +259,6 @@ namespace Inventario.Controllers
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
 
-            //var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
-            //.Select(p => new
-            //{
-            //    Id = p.IdArticulos,
-            //    nombres = p.NombreEmpresa
-            //});
-
 
             var ConsultaArticulo = from Articulos in InvBD.Articulos
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
@@ -281,21 +274,20 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
                                    };
 
-            //var ConsultaArticulo = from Articulos in InvBD.Articulos
-            //                       join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-            //                       on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+            //var ConsultaArticulo = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+            //                       join Articulos in InvBD.Articulos
+            //                       on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
+            //                       where ExistenciaAlmacenG.IdSitio.Equals(TiendasSupervision.IdTienda)
+            //                       select new
+            //                       {
+            //                           Id = Articulos.IdArticulos,
+            //                           nombres = Articulos.NombreEmpresa,
+            //                           IdArticulos = Articulos.IdArticulos,
+            //                           IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+            //                           IdSitio = ExistenciaAlmacenG.IdSitio,
+            //                           FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
 
-                                   //                       where Articulos.IdArticulos.Equals(Accesos.IDSitio)
-                                   //                       select new
-                                   //                       {
-                                   //                           Id = Articulos.IdArticulos,
-                                   //                           nombres = Articulos.NombreEmpresa,
-                                   //                           IdArticulos = Articulos.IdArticulos,
-                                   //                           IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                                   //                           IdSitio = ExistenciaAlmacenG.IdSitio,
-                                   //                           FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
-
-                                   //                       };
+            //                       };
 
             foreach (var art in ConsultaArticulo)
             {
@@ -315,7 +307,7 @@ namespace Inventario.Controllers
                    {
                        fechaIngreso = p.FechaDeIngreso,
                        stockActual = p.ExitenciaActual,
-                       costo = p.Coste,
+                       //costo = p.Coste,
                    });
 
                 if (consultaFecha.Count() > 0)
@@ -329,10 +321,10 @@ namespace Inventario.Controllers
                     {
 
                         SumaStock = (int)(SumaStock + comp.stockActual);
-                        if (cont == 0)
-                        {
-                            Costos += comp.costo + ",";
-                        }
+                        //if (cont == 0)
+                        //{
+                        //    Costos += comp.costo + ",";
+                        //}
                         if (cont == UltimoReg)
                         {
                             Fechas += comp.fechaIngreso + ",";
@@ -344,14 +336,69 @@ namespace Inventario.Controllers
                 }
                 else
                 {
-                    Costos += "0" + ",";
+                    //Costos += "0" + ",";
 
                     Fechas += "2010-08-10" + ",";
                     Stock += "0" + ",";
                 }
             }
-            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1)};
             return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        //Obtener los articulos de la tienda-------
+        //CargarSucursalesXSupervision()
+        public int CargarArticulosXTienda()
+        {
+            int Encontrados = 0;
+            string[] Articulos = Accesos.Sitio.Split('#');
+            ModeloExistAlm.IdExistenciaAlmacenG = new List<long>();
+            ModeloExistAlm.NoPedido = new List<long>();
+            ModeloExistAlm.FechaDeIngreso = new List<String>();
+            ModeloExistAlm.ExitenciaInicial = new List<long>();
+            ModeloExistAlm.FechaFinal = new List<String>();
+            ModeloExistAlm.ExitenciaActual = new List<long>();
+            ModeloExistAlm.Coste = new List<long>();
+            ModeloExistAlm.TipoDeOperacion = new List<string>();
+            ModeloExistAlm.IdCompra = new List<long>();
+            ModeloExistAlm.IdAsignacion = new List<long>();
+            ModeloExistAlm.IdSitio = new List<long>();
+            ModeloExistAlm.IdArticulo = new List<long>();
+            ModeloExistAlm.NombreEmpresa = new List<string>();
+
+            for (int i = 0; i < Articulos.Length; i++)
+            {
+                var Art = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Articulos[i]))
+                .Select(p => new
+                {
+                    p.IdExistenciaAlmacenG,
+                    p.NoPedido,
+                    p.FechaDeIngreso,
+                    p.ExitenciaInicial,
+                    p.FechaFinal,
+                    p.ExitenciaActual,
+                    p.Coste,
+                    p.TipoDeOperacion,
+                    p.IdCompra,
+                    p.IdAsignacion,
+                    p.IdSitio,
+                    p.IdArticulo
+                }).First();
+                ModeloExistAlm.IdExistenciaAlmacenG.Add(Art.IdExistenciaAlmacenG);
+                ModeloExistAlm.NoPedido.Add(Art.NoPedido);
+                ModeloExistAlm.FechaDeIngreso.Add(Art.FechaDeIngreso);
+                ModeloExistAlm.ExitenciaInicial.Add(Art.ExitenciaInicial);
+                ModeloExistAlm.FechaFinal.Add(Art.FechaFinal);
+                ModeloExistAlm.ExitenciaActual.Add(Art.ExitenciaActual);
+                ModeloExistAlm.Coste.Add(Art.Coste);
+                ModeloExistAlm.TipoDeOperacion.Add(Art.TipoDeOperacion);
+                ModeloExistAlm.IdCompra.Add(Convert.ToInt32(Art.IdCompra));
+                ModeloExistAlm.IdAsignacion.Add(Convert.ToInt32(Art.IdAsignacion));
+                ModeloExistAlm.IdSitio.Add(Convert.ToInt32(Art.IdSitio));
+                ModeloExistAlm.IdArticulo.Add(Convert.ToInt32(Art.IdArticulo));
+     
+            }
+            return Encontrados;
         }
 
 
