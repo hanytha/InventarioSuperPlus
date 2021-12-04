@@ -143,7 +143,7 @@ namespace Inventario.Controllers
 
         }
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
-        public JsonResult ConsultaArtProveedores( long IdP )
+        public JsonResult ConsultaArtProveedores(long IdP )
         {
             string Articulos = "";
             string ID = "";
@@ -152,13 +152,14 @@ namespace Inventario.Controllers
                 {
                     Articulo = p.Articulo,
                     Id = p.IdArticulo,
-                    Unidad = p.IdUnidadDeMedida,
+
                 });
             foreach (var ap in compra)
             {
                 int Afectados = 0;
-                int nveces = InvBD.Compra.Where(p => ap.Id.Equals(ap)).Count();
 
+                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+            
                 if (nveces == 0)
                 {
                     Articulos += ap.Articulo + ",";

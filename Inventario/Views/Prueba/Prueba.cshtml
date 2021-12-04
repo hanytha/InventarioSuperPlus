@@ -61,76 +61,78 @@
 <div id="contenedor1"></div>
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="ModalProveedor">
-        <div class="modal-dialog modal-dialog-scrollable ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Pedidos</h5>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post">
-                        <!--Los pasos del modal-->
-                        <!--Termina-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect"></select>
-                                </div>
+
+<div class="modal" id="ModalProveedor" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pedidos</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                <div class="panel-heading ">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                <select id="cmbProveedor"  style="width: 100%"  class="form-control limpiarSelect"></select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                    <input id="TxtCorreo" name="data[TxtCorreo]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
-                                    <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                <input id="TxtCorreo" name="data[TxtCorreo]" class="form-control  limpiar" size="30" maxlength="100" type="text">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                    <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClabe">Clabe Interbancaria<span class="required">*</span></label>
-                                    <input id="TxtClabe" name="data[TxtClabe]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
-                                    <input id="TxtNumPedido" name="data[TxtNumPedido]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaSistema">Fecha de Ingreso<span>*</span></label>
-                                    <input type="text" id="TxtFechaSistema" class="form-control bloquear" name="data[TxtFechaSistema]" size="10" maxlength="100">
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
+                                <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar" size="30" maxlength="100" type="text">
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">Artículos del proveedor</div>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar" size="30" maxlength="100" type="text">
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtClabe">Clabe Interbancaria<span class="required">*</span></label>
+                                <input id="TxtClabe" name="data[TxtClabe]" class="form-control  limpiar" size="30" maxlength="100" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
+                                <input id="TxtNumPedido" name="data[TxtNumPedido]" class="form-control  limpiar" size="30" maxlength="100" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtFechaSistema">Fecha de Ingreso<span class="required">*</span></label>
+                                <input id="TxtFechaSistema" name="data[TxtFechaSistema]" class="form-control  limpiar" size="30" maxlength="100" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                <div id="TblArticulos">Artículo(s) del proveedor</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
@@ -141,6 +143,7 @@
         </div>
     </div>
 </div>
+
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {

@@ -124,13 +124,14 @@ function Desplegar(id) {
 function abrirModal(id) {
     LlenarCMCProveedores();
     if (id == 0) {
+        LimpiarCampos();
         sessionStorage.setItem('IDG', '0');
 
     }
     else {
       
-        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {     
-            document.getElementById("cmbProveedor").value = id;
+        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
@@ -140,7 +141,19 @@ function abrirModal(id) {
         });
     }
 }
-//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
+
+//-------limpiar campos del Modal-formulario------------
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
 //***************************************************
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 function MostrarArticulos(id) {
@@ -158,7 +171,6 @@ function MostrarArticulos(id) {
             let ArrayID = ID.split(',');
             let Articulos = Data.Articulos;
             let ArrayArticulos = Articulos.split(',');
-
 
             for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
                 //-------Crea los chex-box------------------------------------------------
@@ -181,6 +193,7 @@ function MostrarArticulos(id) {
         });
     }
 }
+
 //----------------------Guardar datos de los pedidos-------------------
 function GuardarPedidoExterno() {
 
@@ -302,17 +315,5 @@ function Desplegar2(no) {
             let numero = "desplegable2" + no;
             document.getElementById(numero).innerHTML = dos;
         });
-    }
-}
-
-//-----------------------------limpiar campos---------------------
-function LimpiarCamposSub() {
-    var controlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < controlesTXT.length; i++) {
-        controlesTXT[i].value = "";
-    }
-    var controlesSLT = document.getElementsByClassName("limpiarSelect");
-    for (var i = 0; i < controlesSLT.length; i++) {
-        controlesSLT[i].value = "0";
     }
 }
