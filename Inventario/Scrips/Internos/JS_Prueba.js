@@ -208,7 +208,7 @@ function GuardarPedidoExterno() {
             var Clabe = document.getElementById("TxtClabe").value;
             var NumeroPedido = document.getElementById("TxtNumPedido").value;
             var Fecha = document.getElementById("TxtFechaSistema").value;
-        //------------------------Guardar checkbox de los artículos seleccionados----------------------------------
+        //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
             let seleccionados = "";
             for (let i = 0; i < ChevPedidos.length; i++) {
@@ -218,7 +218,7 @@ function GuardarPedidoExterno() {
                 }
             }
             var Articulo = seleccionados.substring(0, seleccionados.length - 1);
-//------------------------Guardar checkbox de los artículos seleccionados----------------------------------
+//------------------------Guarda la cantidad de artículos solicitados----------------------------------
            var NumPedidos = document.getElementsByClassName("input-cantidad");
             let llenar = "";
             for (let i = 0; i < NumPedidos.length; i++) {
