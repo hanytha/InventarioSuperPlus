@@ -105,7 +105,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1503,7 +1503,6 @@ namespace Inventario
 		private string _NombreEmpresa;
 		
 		private string _NombreProveedor;
-<<<<<<< HEAD
 		
 		private System.Nullable<long> _IdProveedor;
 		
@@ -1511,15 +1510,6 @@ namespace Inventario
 		
 		private System.Nullable<int> _IdUnidadDeMedida;
 		
-=======
-		
-		private System.Nullable<long> _IdProveedor;
-		
-		private string _Proveedor;
-		
-		private System.Nullable<long> _IdUnidadDeMedida;
-		
->>>>>>> alma
 		private string _Unidad;
 		
 		private System.Nullable<long> _IdMarca;
@@ -1578,11 +1568,7 @@ namespace Inventario
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
-<<<<<<< HEAD
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<int> value);
-=======
-    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
->>>>>>> alma
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
     partial void OnUnidadChanged();
@@ -1728,13 +1714,8 @@ namespace Inventario
 			}
 		}
 		
-<<<<<<< HEAD
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="Int")]
 		public System.Nullable<int> IdUnidadDeMedida
-=======
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
-		public System.Nullable<long> IdUnidadDeMedida
->>>>>>> alma
 		{
 			get
 			{
@@ -1803,8 +1784,6 @@ namespace Inventario
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Marca", DbType="VarChar(150)")]
 		public string Marca
-<<<<<<< HEAD
-=======
 		{
 			get
 			{
@@ -1869,76 +1848,6 @@ namespace Inventario
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategorias", DbType="BigInt")]
 		public System.Nullable<long> IdCategorias
->>>>>>> alma
-		{
-			get
-			{
-				return this._Marca;
-			}
-			set
-			{
-				if ((this._Marca != value))
-				{
-					this.OnMarcaChanging(value);
-					this.SendPropertyChanging();
-					this._Marca = value;
-					this.SendPropertyChanged("Marca");
-					this.OnMarcaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreas", DbType="BigInt")]
-		public System.Nullable<long> IdAreas
-		{
-			get
-			{
-				return this._IdAreas;
-			}
-			set
-			{
-				if ((this._IdAreas != value))
-				{
-					if (this._Areas.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdAreasChanging(value);
-					this.SendPropertyChanging();
-					this._IdAreas = value;
-					this.SendPropertyChanged("IdAreas");
-					this.OnIdAreasChanged();
-				}
-			}
-		}
-		
-<<<<<<< HEAD
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(10)")]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this.OnAreaChanging(value);
-					this.SendPropertyChanging();
-					this._Area = value;
-					this.SendPropertyChanged("Area");
-					this.OnAreaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategorias", DbType="BigInt")]
-		public System.Nullable<long> IdCategorias
-=======
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitarioPromedio", DbType="Decimal(18,0) NOT NULL")]
-		public decimal PrecioUnitarioPromedio
->>>>>>> alma
 		{
 			get
 			{
@@ -2309,12 +2218,7 @@ namespace Inventario
 					}
 					else
 					{
-<<<<<<< HEAD
 						this._IdUnidadDeMedida = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("UnidadDeMedida");
-=======
-						this._IdUnidadDeMedida = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("UnidadDeMedida");
 				}
@@ -2375,117 +2279,6 @@ namespace Inventario
 		{
 			this.SendPropertyChanging();
 			entity.Articulos = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Asignacion")]
-	public partial class Asignacion : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _IdAsignacion;
-		
-		private string _Nombre;
-		
-		private System.Nullable<int> _Estatus;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdAsignacionChanging(long value);
-    partial void OnIdAsignacionChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnEstatusChanging(System.Nullable<int> value);
-    partial void OnEstatusChanged();
-    #endregion
-		
-		public Asignacion()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAsignacion", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long IdAsignacion
-		{
-			get
-			{
-				return this._IdAsignacion;
-			}
-			set
-			{
-				if ((this._IdAsignacion != value))
-				{
-					this.OnIdAsignacionChanging(value);
-					this.SendPropertyChanging();
-					this._IdAsignacion = value;
-					this.SendPropertyChanged("IdAsignacion");
-					this.OnIdAsignacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50)")]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
-		public System.Nullable<int> Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this.OnEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._Estatus = value;
-					this.SendPropertyChanged("Estatus");
-					this.OnEstatusChanged();
->>>>>>> alma
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -2748,15 +2541,9 @@ namespace Inventario
 		private string _MetodoDePago;
 		
 		private System.Nullable<long> _IdProveedor;
-<<<<<<< HEAD
 		
 		private string _Proveedor;
 		
-=======
-		
-		private string _Proveedor;
-		
->>>>>>> alma
 		private System.Nullable<long> _NoCompra;
 		
 		private string _FechaDeIngreso;
@@ -4139,11 +3926,8 @@ namespace Inventario
 		private System.Nullable<long> _IdSitio;
 		
 		private System.Nullable<long> _IdArticulo;
-<<<<<<< HEAD
 		
 		private string _NombreEmpresa;
-=======
->>>>>>> alma
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
@@ -4177,11 +3961,8 @@ namespace Inventario
     partial void OnIdSitioChanged();
     partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
-<<<<<<< HEAD
     partial void OnNombreEmpresaChanging(string value);
     partial void OnNombreEmpresaChanged();
-=======
->>>>>>> alma
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4431,7 +4212,6 @@ namespace Inventario
 					this._IdArticulo = value;
 					this.SendPropertyChanged("IdArticulo");
 					this.OnIdArticuloChanged();
-<<<<<<< HEAD
 				}
 			}
 		}
@@ -4452,8 +4232,6 @@ namespace Inventario
 					this._NombreEmpresa = value;
 					this.SendPropertyChanged("NombreEmpresa");
 					this.OnNombreEmpresaChanged();
-=======
->>>>>>> alma
 				}
 			}
 		}
@@ -6580,11 +6358,7 @@ namespace Inventario
 		
 		private string _Tipo;
 		
-<<<<<<< HEAD
 		private int _IdUnidadDeMedida;
-=======
-		private long _IdUnidadDeMedida;
->>>>>>> alma
 		
 		private string _UnidadDeMedida;
 		
@@ -6630,11 +6404,7 @@ namespace Inventario
     partial void OnCantidadAprobadaChanged();
     partial void OnTipoChanging(string value);
     partial void OnTipoChanged();
-<<<<<<< HEAD
     partial void OnIdUnidadDeMedidaChanging(int value);
-=======
-    partial void OnIdUnidadDeMedidaChanging(long value);
->>>>>>> alma
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadDeMedidaChanging(string value);
     partial void OnUnidadDeMedidaChanged();
@@ -6768,13 +6538,8 @@ namespace Inventario
 			}
 		}
 		
-<<<<<<< HEAD
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="Int NOT NULL")]
 		public int IdUnidadDeMedida
-=======
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt NOT NULL")]
-		public long IdUnidadDeMedida
->>>>>>> alma
 		{
 			get
 			{
@@ -7176,11 +6941,7 @@ namespace Inventario
 					}
 					else
 					{
-<<<<<<< HEAD
 						this._IdUnidadDeMedida = default(int);
-=======
-						this._IdUnidadDeMedida = default(long);
->>>>>>> alma
 					}
 					this.SendPropertyChanged("UnidadDeMedida1");
 				}

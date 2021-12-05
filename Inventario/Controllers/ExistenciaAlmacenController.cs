@@ -20,7 +20,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
         //public JsonResult ConsultaExistenciaAlmacenes()
         //{
         //    var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
@@ -39,7 +38,7 @@ namespace Inventario.Controllers
         //        });
         //    return Json(Almacenes, JsonRequestBehavior.AllowGet);
         //}
-=======
+
         public JsonResult ConsultaExistenciaAlmacenes()
         {
             var Almacenes = InvBD.ExistenciaAlmacenG
@@ -63,7 +62,6 @@ namespace Inventario.Controllers
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
->>>>>>> alma
         public JsonResult ConsultaExistenciaAlmacen(long Id)
         {
             var almacen = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
@@ -78,16 +76,13 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
-<<<<<<< HEAD
                     p.Compra,
-=======
                     //p.Compra,
                     p.IdAsignacion,
                     //p.NombreAsignacion,
                     p.IdSitio,
                     //p.NombreSitio,
                     //p.FechaSistema,
->>>>>>> alma
 
                 });
             return Json(almacen, JsonRequestBehavior.AllowGet);
@@ -123,10 +118,6 @@ namespace Inventario.Controllers
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 && p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-<<<<<<< HEAD
-=======
-                //&& p.FechaSistema.Equals(DatosAlmacen.FechaSistema)
->>>>>>> alma
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
 
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
@@ -146,10 +137,6 @@ namespace Inventario.Controllers
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
                     obj.IdCompra = DatosAlmacen.IdCompra;
                     obj.Compra = DatosAlmacen.Compra;
-<<<<<<< HEAD
-=======
-                    //obj.FechaSistema = DatosAlmacen.FechaSistema;
->>>>>>> alma
                     obj.Coste = DatosAlmacen.Coste;
 
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
@@ -172,10 +159,6 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-
-<<<<<<< HEAD
-=======
-
         //Eliminar Compra
         //public int EliminarAlmacen(long Id)
         //{
@@ -193,6 +176,5 @@ namespace Inventario.Controllers
         //    }
         //    return nregistradosAfectados;
         //}
->>>>>>> alma
     }
 }
