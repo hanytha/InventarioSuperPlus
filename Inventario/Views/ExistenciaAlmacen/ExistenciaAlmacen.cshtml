@@ -85,6 +85,15 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaSistema">Fecha de Ingreso<span>*</span></label>
                                         <input type="text" id="TxtFechaSistema" class="form-control bloquear" name="data[TxtFechaSistema]" size="25" maxlength="100">
+<<<<<<< HEAD
+=======
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaFinal">Fecha final<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFechaFinal]" id="TxtFechaFinal" class="form-control  limpiar obligatorio" placeholder="Fecha final">
+>>>>>>> alma
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +101,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumCompra">Número de compra<span class="required">*</span></label>
+                                        <label class="form-control-label" for="TxtNumCompra">Número de pedido<span class="required">*</span></label>
                                         <input type="number" name="data[TxtNumCompra]" id="TxtNumCompra" class="form-control  limpiar obligatorio" placeholder="1">
                                     </div>
                                 </div>
@@ -118,21 +127,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
+                            <!--<div class="row">-->
+                                @*<div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
                                         <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
                                     </div>
-                                </div>
+                                </div>*@
 
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaFinal">Fecha final<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaFinal]" id="TxtFechaFinal" class="form-control  limpiar obligatorio" placeholder="Fecha final">
-                                    </div>
-                                </div>
-                            </div>
+                                
+                            <!--</div>-->
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -144,6 +148,25 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbCompra">Número de compra<span>*</span></label>
                                         <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio "></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbAsignacion">Asignación<span class="required">*</span></label>
+                                        <select id="cmbAsignacion" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                            <option value="0">--Seleccione--</option>
+                                            <option value="1">--Oficina--</option>
+                                            <option value="2">--Tienda--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbSitio">Sitio<span class="required">*</span></label>
+                                        <select id="cmbSitio" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                        </select>
                                     </div>
                                 </div>
                             </div>

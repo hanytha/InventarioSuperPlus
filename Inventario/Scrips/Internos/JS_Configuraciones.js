@@ -1,9 +1,9 @@
 ﻿
 
-CrearAcordeonProveedores();
-function CrearAcordeonProveedores() {
-    $.get("/Configuracion/ConsultaConfiguraciones", function (IncidenciasArea) {
-        AcordeonProveedores(IncidenciasArea, document.getElementById("AcordeonConfiguracion"));
+CrearAcordeonConfiguraciones();
+function CrearAcordeonConfiguraciones() {
+    $.get("/Configuracion/ConsultaConfiguraciones", function (data) {
+        AcordeonProveedores(data, document.getElementById("AcordeonConfiguracion"));
     });
 }
 

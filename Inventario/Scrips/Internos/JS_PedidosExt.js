@@ -1,10 +1,11 @@
-﻿LlenarCMBPrincipal();
+﻿//LlenarCMBPrincipal();
+LlenarCMBPrin();
 BloquearCTRL();
 
 CrearAcordeonPedidosExt();
 function CrearAcordeonPedidosExt() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (IncidenciasArea) {
-        AcordeonPedidosExt(IncidenciasArea, document.getElementById("accordion"));
+    $.get("/Pedidosext/ConsultaPedidosExternos", function (data) {
+        AcordeonPedidosExt(data, document.getElementById("accordion"));
     });
 }
 
@@ -30,7 +31,7 @@ function AcordeonPedidosExt(data, IDo) {
         CodHtml += "<div class='row'>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad de Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + data[i].Articulo + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
@@ -48,9 +49,8 @@ function AcordeonPedidosExt(data, IDo) {
     IDo.innerHTML = CodHtml;
 }
 
-//--------------
 
-//--------------
+
 
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
@@ -58,6 +58,57 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
+
+
+//llena los combosprincipales
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"), true);
+    });
+    //$.get("/GLOBAL/BDAreas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbArea"));
+    //});
+    //$.get("/Usuario/ConsultaPerfiles", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbPerfil"));
+    //});
+}
+
+
+
+var IDP = document.getElementById("cmbProveedor");
+IDP.addEventListener("change", function () {
+    $.get("/GLOBAL/BDArt/?IDP=" + IDP.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+});
+//event Change index Articulo para llenar el combo box Unidad de medida
+var IDAR = document.getElementById("cmbArticulo");
+IDAR.addEventListener("change", function () {
+    $.get("/GLOBAL/BDUnidadM/?IDAR=" + IDAR.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+    });
+});
+
+
+var IDART = document.getElementById("cmbArticulo");
+IDART.addEventListener("change", function () {
+    $.get("/GLOBAL/BDMarca/?IDART=" + IDART.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbMarca"));
+    });
+});
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+    var contenido = "";
+
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
 
 
 //Limpia la información y carga la informacion del proveedor
@@ -80,20 +131,22 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNumeroPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtCantidadSolicitada").value = Data[0].CantidadSolicitada;
             //document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
-            document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            //document.getElementById("cmbMarca").value = Data[0].IdMarca;
             //document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbProveedor").value = Data[0].IdEstado;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
-            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
-            document.getElementById("cmbProveedor").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDArt/?IDProv=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbArticulo"));
-                document.getElementById("cmbArticulo").value = Data[0].IdMunicipio;
+            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             });
-            $.get("/GLOBAL/BDUnidadM/?IDAr=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbUnidadDeMedida"));
-                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdLocalidad;
+            $.get("/GLOBAL/BDUnidadM/?IDM=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbUnidadDeMedida"));
+                document.getElementById("cmbUnidadDeMedida").value = Data[0].IdUnidadDeMedida;
+            });
+
+            $.get("/GLOBAL/BDMarca/?IDAR=" + Data[0].IdArticulo, function (Articulos) {
+                llenarCombo(Articulos, document.getElementById("cmbMarca"));
+                document.getElementById("cmbMarca").value = Data[0].IdMarca;
             });
         });
     }
@@ -143,7 +196,7 @@ function GuardarPedidoExterno() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe el pedido");
@@ -205,71 +258,31 @@ function EliminarPedidoExterno(id) {
 }
 
 
-var IDProv = document.getElementById("cmbProveedor");
-IDProv.addEventListener("change", function () {
-    $.get("/GLOBAL/BDArt/?IDProv=" + IDProv.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbArticulo"));
-    });
-});
-//event Change index Municipio para llenar el combo box Municipios
-var IDAr = document.getElementById("cmbArticulo");
-IDAr.addEventListener("change", function () {
-    $.get("/GLOBAL/BDUnidadM/?IDAr=" + IDAr.value, function (data) {
-        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    });
-});
+//function LlenarCMBPrincipal() {
+//    $.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
+//        llenarCombo(data, document.getElementById("cmbArticulo"));
+//    });
+//    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
+//        llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
+//    });
 
-function LlenarCMBPrincipal() {
-    $.get("/GLOBAL/BDProv", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"), true);
-    });
-    //$.get("/GLOBAL/BDArticulosxNombreEmpresa", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArticulo"));
-    //});
-    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-    //});
+//    $.get("/GLOBAL/BDMarcas", function (data) {
+//        llenarCombo(data, document.getElementById("cmbMarca"));
+//    });
+//    $.get("/GLOBAL/BDProveedor", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
 
-    $.get("/GLOBAL/BDMarcas", function (data) {
-        llenarCombo(data, document.getElementById("cmbMarca"));
-    });
+//    //funcion general para llenar los select
+//    function llenarCombo(data, control) {
+//        var contenido = "";
+//        contenido += "<option value='0'>--Seleccione--</option>";
 
-    //$.get("/GLOBAL/BDProveedor", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbProveedor"));
-    //});
+//        for (var i = 0; i < data.length; i++) {
+//            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+//        }
+//        control.innerHTML = contenido;
+//    }
 
-    //funcion general para llenar los select
-    function llenarCombo(data, control) {
-        var contenido = "";
-        contenido += "<option value='0'>--Seleccione--</option>";
-
-        for (var i = 0; i < data.length; i++) {
-            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-        }
-        control.innerHTML = contenido;
-    }
-
-
-    var IDProv = document.getElementById("cmbProveedor");
-    IDProv.addEventListener("change", function () {
-        $.get("/GLOBAL/BDArt/?IDProv=" + IDProv.value, function (data) {
-            llenarCombo(data, document.getElementById("cmbArticulo"));
-        });
-    });
-    //event Change index Municipio para llenar el combo box Municipios
-    var IDAr = document.getElementById("cmbArticulo");
-    IDAr.addEventListener("change", function () {
-        $.get("/GLOBAL/BDUnidadM/?IDAr=" + IDAr.value, function (data) {
-            llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
-        });
-    });
-
-    //var IDAr = document.getElementById("cmbMarca");
-    //IDAr.addEventListener("change", function () {
-    //    $.get("/GLOBAL/BDMarca/?IDArt=" + IDAr.value, function (data) {
-    //        llenarCombo(data, document.getElementById("cmbMarca"));
-    //    });
-    //});
-}
-
+//}
 

@@ -175,7 +175,7 @@ function EliminarDepartamento(id) {
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
 function CrearAcordeonSubAreas(IdArea) {
-    $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
+    $.get("/PedidoSolicitado/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
         AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
     });
 }

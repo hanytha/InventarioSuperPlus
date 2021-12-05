@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "Usuario";
 }
-
-<h2>Usuario</h2>
+<h2 class="form-control-label" style="font-size: 20px;">
+    USUARIO
+</h2>
 <!--Titulo-->
 
 <link href="~/Content/Tabla.css" rel="stylesheet" />
@@ -68,12 +69,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE USUARIOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Registro Usuarios</h1>
+                    @*<h1>Registro Usuarios</h1>*@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -99,7 +104,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtApellidoP">Apelido Paterno<span class="required">*</span></label>
-                                        <input id="TxtApellidoP" name="data[TxtApellidoP]" class="form-control  limpiar obligatorio" placeholder="Apellido paterno" size="15" maxlength="20" type="text">
+                                        <input id="TxtApellidoP" name="data[TxtApellidoP]" class="form-control  limpiar obligatorio" placeholder="Apellido Paterno" size="15" maxlength="20" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -121,6 +126,20 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtRFC">RFC</label>
                                         <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="RFC" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNSS">Número de Seguro Social<span class="required">*</span></label>
+                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" placeholder="NSS" size="15" maxlength="20" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono">Número de teléfono<span class="required">*</span></label>
+                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Número de teléfono" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -166,34 +185,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCorreo">Correo electrónico<span class="required">*</span></label>
-                                        <input type="email" class="form-control limpiar obligatorio" id="TxtCorreo" name="data[Txtemail]" placeholder="Email">
+                                        <input type="email" class="form-control limpiar obligatorio" id="TxtCorreo" name="data[Txtemail]" placeholder="name@example.com">
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
-                        </fieldset>
-
-
-                        <fieldset>
-                            <h4>Paso 3</h4>
-
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNSS">Número de Seguro Social<span class="required">*</span></label>
-                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" placeholder="NSS" size="15" maxlength="20" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Número de teléfono<span class="required">*</span></label>
-                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Número de teléfono" size="30" maxlength="100" type="text">
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -208,6 +203,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                        </fieldset>
+
+
+                        <fieldset>
+                            <h4>Paso 3</h4>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -217,16 +219,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
-                        </fieldset>
-
-                        <fieldset>
-
-                            <h4>Paso 4</h4>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtUsuario">Usuario</label>
                                         <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control limpiar obligatorio" placeholder="Usuario" type="text">
@@ -243,7 +237,27 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <h4>Paso 4</h4>
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbAsignacion">Asignación<span class="required">*</span></label>
+                                        <select id="cmbAsignacion" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbSitio">Sitio<span class="required">*</span></label>
+                                        <select id="cmbSitio" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -261,14 +275,12 @@
 
                             <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
                             <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
+                            <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </fieldset>
 
                     </form>
                 </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -283,12 +295,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            INFORMACIÓN GENERAL DE LOS USUARIOS
+                        </label>
+                    </h2>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h1>Información General</h1>
+                    @*<h1>Información General</h1>*@
                     <form id="regiration_form" novalidate method="post">
                         <div class="row">
                             <div class="col-md-12">
@@ -401,12 +416,12 @@
                             </div>
                         </div>
                         <!--<div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbABloqueado">Área<span class="required">*</span></label>
-                                    <select id="cmbABloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
-                                </div>
-                            </div>-->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="cmbABloqueado">Área<span class="required">*</span></label>
+                                <select id="cmbABloqueado" style="width: 100%" class="form-control limpiarSelect bloquear"></select>
+                            </div>
+                        </div>-->
                         @*<div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbSubAreaBloqueado">SubArea<span class="required">*</span></label>
@@ -431,24 +446,40 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtPerfilBloqueado">Perfil:<span class="required">*</span></label>
+                                    <label class="form-control-label" for="TxtPerfilBloqueado">Perfil<span class="required">*</span></label>
                                     <input type="text" name="data[TxtPerfilBloqueado]" id="TxtPerfilBloqueado" class="form-control  limpiar bloquear" placeholder="Perfil">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtUsuarioBloqueado">Usuario:<span class="required">*</span></label>
+                                    <label class="form-control-label" for="TxtUsuarioBloqueado">Usuario<span class="required">*</span></label>
                                     <input type="text" name="data[TxtUsuarioBloqueado]" id="TxtUsuarioBloqueado" class="form-control  limpiar bloquear" placeholder="Usuario">
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbAsignacionBloqueado">Asignación<span class="required">*</span></label>
+                                    <select id="cmbAsignacionBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbSitioBloqueado">Sitio<span class="required">*</span></label>
+                                    <select id="cmbSitioBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
+                @*<div class="modal-footer">
+                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>*@
             </div>
         </div>
     </div>

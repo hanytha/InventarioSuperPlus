@@ -1,0 +1,132 @@
+﻿@using Inventario.Models;
+
+
+
+@{
+    ViewBag.Title = "Tiendas de la supervisión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/magnific-popup.css" rel="stylesheet" />*@
+<h2>Tiendas de la supervisión</h2>
+
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!------------------------------------------------------------------------------------------------------------>
+@*<div id="contenedor1"></div>*@
+<!------------------------------------------------>
+<style>
+    contenedor2 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    contenedor3 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+</style>
+<!--------------------------------------------------------------------------------------------------------------->
+<!--Mostrar los registros en el accordion-->
+<div id="accordion"></div>
+
+<div class="accordion" id="AcordeonSucursales">
+    @{
+        if (TiendasSupervision.IDTienda != null)
+        {
+            int NSucursales = TiendasSupervision.IDTienda.Count();
+          
+            string InsrtClases = "card m-b-0";
+            for (int i = 0; i < NSucursales; i++)
+            {
+                if (i == 0)
+                {
+                    InsrtClases = "card m-b-0";
+                }
+                else
+                {
+                    InsrtClases = "card m-b-0  border-top";
+                }
+                string Colapse = "Collapse_Sucursa_" + @TiendasSupervision.IDTienda[i];
+                string Header = "Heading_Sucursa_" + @TiendasSupervision.IDTienda[i];
+                string IDAcordeon = "Acordeon_Sucursal_" + @TiendasSupervision.IDTienda[i] + "_Deptos";
+                string BadgeDepto = "Badge_Sucursal_" + @TiendasSupervision.IDTienda[i];
+                <div class="@InsrtClases">
+                    <div class="card-header" id="@Header">
+                        <h4 class="mb-0">
+                            <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                <i class="m-r-5 mdi mdi-store" aria-hidden="true"></i>
+                                <span>@TiendasSupervision.Nombre[i]</span><span id="@BadgeDepto" class="badge badge-danger"></span>
+                            </a>
+                        </h4>
+                        <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                            <div class="card-body">
+
+                                <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
+                                <div id="contenedor1"></div>
+                             
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<style>
+    #contenedor {
+        width: 300px;
+        height: auto;
+        text-align: center;
+    }
+
+    #contenedor_follow div.icono {
+        display: inline-block;
+        width: 15%;
+        height: auto;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+@*-----------------------------Estilo para la linea en el encabezado del los divs---------------------------------------*@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 3px solid #D7DBDD;
+    }
+</style>
+
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 3px solid #f1f507;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid4 {
+        border-top: 3px solid #0B94F8;
+    }
+</style>
+
+<script src="~/Scrips/jquery.min.js"></script>
+@*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
+@*<script src="~/Scripts/meg.init.js"></script>*@
+<script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+

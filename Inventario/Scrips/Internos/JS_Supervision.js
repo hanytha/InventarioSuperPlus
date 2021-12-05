@@ -1,16 +1,50 @@
-
+﻿//LlenarCMBPSupervicion();
 ConsultaSuperviciones();
+
+
+
 function ConsultaSuperviciones() {
+
+    $.get("/Usuario/BDUsrPfl/?IDPerfil=" + 9, function (data) {
+        if (data.length != 0) {
+            llenarCombo(data, document.getElementById("cmbEncargado"));
+        }
+        else {
+            alert("No hay datos que mostrar Supervisores");
+        }
+    });
+
     $.get("/Supervision/ConsultaSuperviciones", function (Data) {
-        CrearTablaSuperviciones(Data);
-    }
-    );
+        if (Data.length != 0) {
+            CrearTablaSuperviciones(Data);
+        }
+        else {
+            alert("No hay datos que mostrar Supervision");
+        }
+    });
+
+
+    $.get("/GLOBAL/BDTiendas", function (InfSucursales) {
+        var TablaSucursales = "";
+        TablaSucursales += "<div class='row'>";
+        for (var i = 0; i < InfSucursales.length; i++) {
+            TablaSucursales += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaSucursales += "<input type='checkbox' class='checkbox-Sucursal' id='" + InfSucursales[i].ID + "' ><span class='help-block text-muted small-font'>" + InfSucursales[i].Nombre + "</span>";
+            TablaSucursales += "</div>";
+        }
+        TablaSucursales += "</div>";
+        document.getElementById("divPagina").innerHTML = TablaSucursales;
+    });
 }
+
+
+
+
 
 function CrearTablaSuperviciones(Data) {
     var CodigoHtmlTablaSuperviciones = "";
     CodigoHtmlTablaSuperviciones += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>TipoSupervicion</th><th>nombreUsuario</th><th>Tienda</th><th>Acción</thead>";
+    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>Tipo de Supervisión</th><th>nombre del Usuario</th><th>Tienda</th><th>Acción</thead>";
     CodigoHtmlTablaSuperviciones += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaSuperviciones += "<tr>";
@@ -90,7 +124,7 @@ function abrirModal(id) {//la clase  Obligatorio
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+        controlesObligatorio[i].parentNode.classList.remove("border-danger"); //Cambia los bordes lo las casillas a color rojo
 
     }
     if (id == 0) {
@@ -104,8 +138,10 @@ function abrirModal(id) {//la clase  Obligatorio
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDSuper', Data[0].IdSupervision);
             document.getElementById("TxtNomSuper").value = Data[0].TipoSupervicion;
-            document.getElementById("TxtNomUser").value = Data[0].nombreUsuario;
-            document.getElementById("divPagina").value = Data[0].Tienda;
+            //document.getElementById("TxtNomUser").value = Data[0].nombreUsuario;
+            document.getElementById("cmbEncargado").value = Data[0].IdUsuario;
+         
+            //document.getElementById("divPagina").value = Data[0].Tienda;
             //Se recorre el checkbox de permisos, separando las opciones concatenadas y se activan las casillas guardados
             var activar = Data[0].Tienda.split('#');
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
@@ -128,7 +164,7 @@ function abrirModal(id) {//la clase  Obligatorio
 //Guarda los cambios y altas de las áreas
 function GuardarSupervision() {
 
-    if (CamposObligatorios() == true) {
+    if (CamposObligatorios("Supervision") == true) {
         var ChevPermisos = document.getElementsByClassName("checkbox-area");
         let seleccionados = "";
         for (let i = 0; i < ChevPermisos.length; i++) {
@@ -144,7 +180,10 @@ function GuardarSupervision() {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
                 var IdSupervision = sessionStorage.getItem('IDSuper');
                 var TipoSupervicion = document.getElementById("TxtNomSuper").value;
-                var nombreUsuario = document.getElementById("TxtNomUser").value;
+                //var nombreUsuario = document.getElementById("TxtNomUser").value;
+                var IdUsuario = document.getElementById("cmbEncargado").value;
+                var temUser = document.getElementById("cmbEncargado");
+                var nombreUsuario = temUser.options[temUser.selectedIndex].text;
                 var ChevPermisos = document.getElementsByClassName("checkbox-area");
                 let seleccionados = "";
                 for (let i = 0; i < ChevPermisos.length; i++) {
@@ -159,6 +198,7 @@ function GuardarSupervision() {
                 var frm = new FormData();
                 frm.append("IdSupervision", IdSupervision);
                 frm.append("TipoSupervicion", TipoSupervicion);
+                frm.append("IdUsuario", IdUsuario);
                 frm.append("nombreUsuario", nombreUsuario);
 
                 frm.append("Tienda", Tienda);
@@ -196,10 +236,34 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
     }
+    var ChevPermisos = document.getElementsByClassName("checkbox-Sucursal");
+    for (let i = 0; i < ChevPermisos.length; i++) {
+        ChevPermisos[i].checked = false;
+    }
     var controlesSLT = document.getElementsByClassName("limpiarSelect");
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
+    /*Bloquear controles */
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
+
+function Obligatorios(NoClase) {
+    let exito = true;
+    let CtrlObligatorio = document.getElementsByClassName(NoClase);
+    for (let i = 0; i < CtrlObligatorio.length; i++) {
+        if (CtrlObligatorio[i].value == "") {
+            exito = false;
+            CtrlObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            CtrlObligatorio[i].classList.remove("border-danger");
+        }
+    }
+    return exito;
 }
 
 
@@ -219,6 +283,42 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
+
+
+//function Obligatorios(NoClase) {
+//    let exito = true;
+//    let CtrlObligatorio = document.getElementsByClassName(NoClase);
+//    for (let i = 0; i < CtrlObligatorio.length; i++) {
+//        if (CtrlObligatorio[i].value == "") {
+//            exito = false;
+//            CtrlObligatorio[i].classList.add("border-danger");
+//        }
+//        else {
+//            CtrlObligatorio[i].classList.remove("border-danger");
+//        }
+//    }
+//    return exito;
+//}
+//function Limpiar() {
+//    var controlesTXT = document.getElementsByClassName("limpiar");
+//    for (var i = 0; i < controlesTXT.length; i++) {
+//        controlesTXT[i].value = "";
+//    }
+//    var ChevPermisos = document.getElementsByClassName("checkbox-Sucursal");
+//    for (let i = 0; i < ChevPermisos.length; i++) {
+//        ChevPermisos[i].checked = false;
+//    }
+//    var controlesCMB = document.getElementsByClassName("SelectCLS");
+//    for (var i = 0; i < controlesCMB.length; i++) {
+//        document.getElementById(controlesCMB[i].id).value = 0;
+//    }
+//    /*Bloquear controles */
+//    var CTRL = document.getElementsByClassName("bloquear");
+//    for (var i = 0; i < CTRL.length; i++) {
+//        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+//    }
+//}
 
 
 function EliminarSupervicion(id) {
@@ -253,4 +353,38 @@ function MostrarTiendas() {
         document.getElementById("divPagina").innerHTML = CodHTML;
     });
 }
+
+
+
+//Funcion para llenar los combos
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
+//function LlenarCMBPSupervicion() {
+//    $.get("/Usuario/BDUsrPfl", function (data) {
+//        llenarCombo(data, document.getElementById("cmbEncargado"));
+//    });
+
+//    //funcion general para llenar los select
+//    function llenarCombo(data, control) {
+//        var contenido = "";
+//        contenido += "<option value='0'>--Seleccione--</option>";
+
+//        for (var i = 0; i < data.length; i++) {
+//            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+//        }
+//        control.innerHTML = contenido;
+//    }
+
+
+//}
+
+
 

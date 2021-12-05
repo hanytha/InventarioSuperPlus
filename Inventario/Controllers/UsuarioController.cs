@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-    //Lamar al método de seguridad
+    //Llamar al método de seguridad
     [Seguridad]
     public class UsuarioController : Controller
     {//conexion con DB
@@ -45,7 +45,12 @@ namespace Inventario.Controllers
                     p.FechaIngreso,
                     p.Usuario,
                     p.NArea,
-                    p.NSArea
+                    p.NSArea,
+                    p.IdAsignacion,
+                    p.NombreAsignacion,
+                    p.IdSitio,
+                    p.NombreSitio
+
                 });
             return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
@@ -93,12 +98,37 @@ namespace Inventario.Controllers
                     p.Municipio,
                     p.Localidad,
                     p.IdArea,
-                    p.IdSubArea
+                    p.IdSubArea,
+                    p.IdAsignacion,
+                    p.NombreAsignacion,
+                    p.IdSitio,
+                    p.NombreSitio
                 });
             return Json(usuario, JsonRequestBehavior.AllowGet);
 
         }
 
+        public JsonResult Asignasion()
+        {
+            var datos = InvBD.Asignacion.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdAsignacion,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        //public JsonResult AsignasionExistencia()
+        //{
+        //    var datos = InvBD.Asignacion.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdAsignacion,
+        //            Nombre = p.Nombre
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
 
         //consulta usuario por perfil
         public JsonResult ConsultaUsuarioPerfil(long IDPerf)
@@ -177,6 +207,8 @@ namespace Inventario.Controllers
                 && p.IdEstado.Equals(DatosUsuarios.IdEstado) && p.IdMunicipio.Equals(DatosUsuarios.IdMunicipio)
                 && p.IdLocalidad.Equals(DatosUsuarios.IdLocalidad) && p.Estado.Equals(DatosUsuarios.Estado)
                 && p.Municipio.Equals(DatosUsuarios.Municipio) && p.Localidad.Equals(DatosUsuarios.Localidad)
+                      && p.IdAsignacion.Equals(DatosUsuarios.IdAsignacion) && p.NombreAsignacion.Equals(DatosUsuarios.NombreAsignacion)
+                && p.IdSitio.Equals(DatosUsuarios.IdSitio) && p.NombreSitio.Equals(DatosUsuarios.NombreSitio)
                 && p.Foto.Equals(DatosUsuarios.Foto) && p.Telefono.Equals(DatosUsuarios.Telefono)).Count();
 
                 if (nveces == 0)
@@ -201,7 +233,10 @@ namespace Inventario.Controllers
                     obj.Localidad = DatosUsuarios.Localidad;
                     obj.Correo = DatosUsuarios.Correo;
                     obj.Telefono = DatosUsuarios.Telefono;
-
+                    obj.IdAsignacion = DatosUsuarios.IdAsignacion;
+                    obj.NombreAsignacion = DatosUsuarios.NombreAsignacion;
+                    obj.IdSitio = DatosUsuarios.IdSitio;
+                    obj.NombreSitio = DatosUsuarios.NombreSitio;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -310,6 +345,60 @@ namespace Inventario.Controllers
                 }
             }
             return decryptedBytes;
+        }
+
+        public JsonResult BDUserPerfil(long IDPerfil)
+        {
+            var datos = InvBD.Usuarios.Where(p => p.IdPerfil.Equals(IDPerfil) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdUsuarios,
+                    p.Nombre,
+                    p.ApellidosP,
+                    p.ApellidosM
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //public JsonResult BDUsrPfl(long IdPerfil)
+        //{
+        //    var datos = InvBD.Usuarios.Where(p => p.IdPerfil.Equals(IdPerfil) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdUsuarios,
+        //            p.Nombre,
+        //            p.ApellidosP,
+        //            p.ApellidosM
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
+
+        public JsonResult BDUsrPfl()
+        {
+            var datos = InvBD.Usuarios.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdUsuarios,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+        public JsonResult UsuariosXTienda(long IDTienda)
+        {
+            var UsuariosSitio = InvBD.Usuarios.Where(p => p.IdArea.Equals(1) && p.IdSubArea.Equals(IDTienda) && p.Estatus.Equals(1))/////////////////////////////
+                .Select(p => new
+                {
+                    ID = p.IdUsuarios,
+                    Nombre = p.Nombre + " " + p.ApellidosP + " " + p.ApellidosM
+                });
+            return Json(UsuariosSitio, JsonRequestBehavior.AllowGet);
         }
     }
 }

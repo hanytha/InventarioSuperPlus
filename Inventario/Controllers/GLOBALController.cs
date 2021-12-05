@@ -312,17 +312,44 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+<<<<<<< HEAD
         public JsonResult BDArt(int IDProv)
+=======
+        ///////////////Pedidos Externos///////////////////
+        public JsonResult BDPro()
+>>>>>>> alma
         {
-            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDProv))
+            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDArt(int IDP)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
                 .Select(p => new
                 {
                     ID = p.IdArticulos,
                     Nombre = p.NombreProveedor
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
-        }
 
+        }
+        //public JsonResult BDUnidad()
+        //{
+        //    var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new {
+        //            ID = p.IdUnidadDeMedida,
+        //            Nombre = p.Unidad
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
+
+
+<<<<<<< HEAD
         //public JsonResult BDUnidadM(int IDAr)
         //{
         //    var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1) && p.IdArticulo.Equals(IDAr))
@@ -345,6 +372,80 @@ namespace Inventario.Controllers
         //    return Json(datos, JsonRequestBehavior.AllowGet);
         //}
         //-----
+=======
+        //////Consultas Pedidos Internos////
+        public JsonResult BDUnidadM(int IDAR)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
+                .Select(p => new
+                {
+                    ID = p.IdUnidadDeMedida,
+                    Nombre = p.Unidad
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDMarca(int IDART)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDART))
+                .Select(p => new
+                {
+                    ID = p.IdMarca,
+                    Nombre = p.Marca
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+     
+        public JsonResult BDArticulosEmpresa()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        //Consulta para obtener todas las superviciones  al seleccionar la opcion 2(Tienda) en Usuarios
+        public JsonResult BDSupervision()
+        {
+            var DatosSupervisiones = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdSupervision,
+                    Nombre = p.TipoSupervicion
+                });
+            return Json(DatosSupervisiones, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult Areas()
+        {
+            var DatosDepartamento = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(DatosDepartamento, JsonRequestBehavior.AllowGet);
+        }
+
+        //Consulta para obtener todas las tiendas al seleccionar la opcion 1(Tienda) en Usuarios
+        public JsonResult BDTiendaSuper()
+        {
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdTienda,
+                    p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+>>>>>>> alma
     }
 }
+
+
+
+
+
 

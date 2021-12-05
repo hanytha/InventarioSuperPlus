@@ -4,8 +4,8 @@
 
 CrearAcordeonSupervisores();
 function CrearAcordeonSupervisores() {
-    $.get("/Supervisor/ConsultaSupervisores", function (IncidenciasArea) {
-        AcordeonSupervisores(IncidenciasArea, document.getElementById("accordion"));
+    $.get("/Supervisor/ConsultaSupervisores", function (data) {
+        AcordeonSupervisores(data, document.getElementById("accordion"));
     });
 }
 

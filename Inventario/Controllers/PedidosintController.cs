@@ -1,4 +1,5 @@
-﻿using Inventario.Models;
+﻿
+using Inventario.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-    //Lamar al método de seguridad
+    //Llamar al método de seguridad
     [Seguridad]
     public class PedidosintController : Controller
     {//conexion con DB
@@ -107,8 +108,12 @@ namespace Inventario.Controllers
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-                    obj.CantidadAprobada = DatosPedidoInterno.CantidadSolicitada;
+                    obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
                     obj.Tipo = DatosPedidoInterno.Tipo;
+<<<<<<< HEAD
+=======
+                    obj.IdUnidadDeMedida = DatosPedidoInterno.IdUnidadDeMedida;
+>>>>>>> alma
                     obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     obj.IdMarca = DatosPedidoInterno.IdMarca;
                     obj.Marca = DatosPedidoInterno.Marca;

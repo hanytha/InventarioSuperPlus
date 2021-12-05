@@ -25,7 +25,7 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdProveedores + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdProveedores + "' aria-expanded='false' aria-controls='collapse" + data[i].IdProveedores + "' class='collapsed'>";
         CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         //CodHtml += "<i class='m-r-5 fas fa-clipboard-list' style='font - size: 100px; color: red;' aria-hidden='true'></i>";
-     
+
         CodHtml += "<span >" + data[i].Nombre + "</span>";
         CodHtml += "</a>";
         CodHtml += "</h5>";
