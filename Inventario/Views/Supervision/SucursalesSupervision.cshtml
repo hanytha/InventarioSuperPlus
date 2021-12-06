@@ -50,27 +50,29 @@
                 {
                     InsrtClases = "card m-b-0  border-top";
                 }
-                string Colapse = "Collapse_Sucursa_" + @TiendasSupervision.IDTienda[i];
-                string Header = "Heading_Sucursa_" + @TiendasSupervision.IDTienda[i];
-                string IDAcordeon = "Acordeon_Sucursal_" + @TiendasSupervision.IDTienda[i] + "_Deptos";
-                string BadgeDepto = "Badge_Sucursal_" + @TiendasSupervision.IDTienda[i];
+                string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
+                string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
-                    <div class="card-header" id="@Header">
+                    <div class="card-header" id="@titulo">
                         <h4 class="mb-0">
                             <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
                                 <i class="m-r-5 mdi mdi-store" aria-hidden="true"></i>
-                                <span>@TiendasSupervision.Nombre[i]</span><span id="@BadgeDepto" class="badge badge-danger"></span>
+                                <span>@TiendasSupervision.Nombre[i]</span><span id="@contenedor1"></span>
                             </a>
                         </h4>
                         <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
-
-                                <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
-                                <div id="contenedor1"></div>
-                             
-
+                                <h5>Subtitulo @TiendasSupervision.Nombre[i] <div id="contenedor1"[i]></div></h5>
+                                @*<div id="contenedor1"></div>*@
+                                <div class="row">
+                                    <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">Tabla</div>
+                                </div>
+                                
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             }
