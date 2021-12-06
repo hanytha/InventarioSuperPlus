@@ -47,7 +47,7 @@ function CrearArticuloComp(Data) {
         //-----------------Botón para desplegar la primera tabla--------------
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>"; 
+        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>";
         CodigoHtmlArticuloComp += "</label>";
         CodigoHtmlArticuloComp += "</div>";
         //-------------Termina----------------------------------------
@@ -86,7 +86,7 @@ function Desplegar(id) {
             uno += "</div>";
             uno += "<hr class='solid4'>";
 
-            
+
 
             for (var i = 0; i < Data.length; i++) {
                 //----Cuerpo del grid-------------
@@ -114,9 +114,9 @@ function Desplegar(id) {
             uno += "</br>";
             uno += "</br>";
 
-            let compraArticulo = "desplegable" + id ;
+            let compraArticulo = "desplegable" + id;
             document.getElementById(compraArticulo).innerHTML = uno;
-        }); 
+        });
     }
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -129,7 +129,7 @@ function abrirModal(id) {
 
     }
     else {
-      
+
         $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
@@ -173,12 +173,12 @@ function MostrarArticulos(id) {
             TablaArticulo += "<div class='row row-cols-auto'>";
 
             for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-          //-------Crea los chex-box-------------------------------------------------------------------------
+                //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
                 TablaArticulo += "</div>";
 
-       //-------Crea los input-------------------------------------------------------------------------
+                //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
@@ -195,74 +195,79 @@ function MostrarArticulos(id) {
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoExterno() {
 
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+    if (confirm("¿Desea aplicar los cambios?") == 1) {
 
-            var IdProveedor = document.getElementById("cmbProveedor").value;
-            var TempProvedor = document.getElementById("cmbProveedor");
-            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;  
+        var NumPedidos = document.getElementsByClassName("input-cantidad");
+        let llenar = "";
 
-            var Correo = document.getElementById("TxtCorreo").value;
-            var RFC = document.getElementById("TxtRFC").value;
-            var Telefono = document.getElementById("TxtTelefono").value;
-            var Clabe = document.getElementById("TxtClabe").value;
-            var NumeroPedido = document.getElementById("TxtNumPedido").value;
-            var Fecha = document.getElementById("TxtFechaSistema").value;
-        //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-            var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
-            let seleccionados = "";
-            for (let i = 0; i < ChevPedidos.length; i++) {
-                if (ChevPedidos[i].checked == true) {
-                    seleccionados += ChevPedidos[i].id;
-                    seleccionados += "#";
+
+        for (let i = 0; i < NumPedidos.length; i++) {
+            if (NumPedidos[i].value >= 1) {
+                llenar += NumPedidos[i].value;
+                llenar += "#";
+                
+                var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+                var IdProveedor = document.getElementById("cmbProveedor").value;
+                var TempProvedor = document.getElementById("cmbProveedor");
+                var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+
+                var Correo = document.getElementById("TxtCorreo").value;
+                var RFC = document.getElementById("TxtRFC").value;
+                var Telefono = document.getElementById("TxtTelefono").value;
+                var Clabe = document.getElementById("TxtClabe").value;
+                var NumeroPedido = document.getElementById("TxtNumPedido").value;
+                var Fecha = document.getElementById("TxtFechaSistema").value;
+                //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
+                var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
+                let seleccionados = "";
+                for (let i = 0; i < ChevPedidos.length; i++) {
+                    if (ChevPedidos[i].checked == true) {
+                        seleccionados += ChevPedidos[i].id;
+                        seleccionados += "#";
+                    }
                 }
+                var Articulo = seleccionados.substring(0, seleccionados.length - 1);
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var CantidadSolicitada = NumPedidos[i].value;
+                //------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                frm.append("IdPedidosExternos", IdPedidosExternos);
+                frm.append("IdProveedor", IdProveedor);
+                frm.append("Proveedor", Proveedor);
+                frm.append("Correo", Correo);
+                frm.append("RFC", RFC);
+                frm.append("Telefono", Telefono);
+                frm.append("Clabe", Clabe);
+                frm.append("Articulo", Articulo);
+                frm.append("NumeroPedido", NumeroPedido);
+                frm.append("CantidadSolicitada", CantidadSolicitada);
+                frm.append("Fecha", Fecha);
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/Prueba/GuardarPedidoExterno",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            alert("Ocurrio un error");
+                        }
+                        else if (data == -1) {
+                            alert("Ya existe el perfil");
+                        }
+                        else {
+                            alert("Se guardaron los datos correctamente.");
+
+                            document.getElementById("btnCancelarPerfil").click();
+                        }
+                    }
+                });
+
             }
-            var Articulo = seleccionados.substring(0, seleccionados.length - 1);
-//------------------------Guarda la cantidad de artículos solicitados----------------------------------
-           var NumPedidos = document.getElementsByClassName("input-cantidad");
-            let llenar = "";
-            for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1) {
-                    llenar += NumPedidos[i].value;
-                  llenar += "#";
-               }
-           }
-          var CantidadSolicitada = llenar.substring(0, llenar.length - 1);
-//------------------------------------------------------------------------------------------------------
-            var frm = new FormData();
-            frm.append("IdPedidosExternos", IdPedidosExternos);
-            frm.append("IdProveedor", IdProveedor);
-            frm.append("Proveedor", Proveedor);
-            frm.append("Correo", Correo);
-            frm.append("RFC", RFC);
-            frm.append("Telefono", Telefono);
-            frm.append("Clabe", Clabe);
-            frm.append("Articulo", Articulo);
-            frm.append("NumeroPedido", NumeroPedido);
-            frm.append("CantidadSolicitada", CantidadSolicitada);
-            frm.append("Fecha", Fecha);
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Prueba/GuardarPedidoExterno",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        alert("Ocurrio un error");
-                    }
-                    else if (data == -1) {
-                        alert("Ya existe el perfil");
-                    }
-                    else {
-                        alert("Se guardaron los datos correctamente.");
-                      
-                        document.getElementById("btnCancelarPerfil").click();
-                    }
-                }
-            });
         }
+    }
+
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
@@ -273,15 +278,15 @@ function LlenarCMCProveedores() {
 }
 
 //funcion general para llenar los select
-    function llenarCombo(data, control) {
-        var contenido = "";
-        contenido += "<option value='0'>--Seleccione--</option>";
+function llenarCombo(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
 
-        for (var i = 0; i < data.length; i++) {
-            contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-        }
-        control.innerHTML = contenido;
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
     }
+    control.innerHTML = contenido;
+}
 
 //*********************************************************************************************************************************
 //*********************************************************************************************************************************
@@ -306,7 +311,7 @@ function Desplegar2(no) {
             dos += "<hr class='solid3'>";
 
             for (var i = 0; i < Data.length; i++) {
-              
+
                 //----Cuerpo del grid-------------
                 dos += "<div class='row'>";
                 dos += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
@@ -319,7 +324,7 @@ function Desplegar2(no) {
             dos += "</div>";
             dos += "</br>";
             dos += "</br>";
-           
+
             let numero = "desplegable2" + no;
             document.getElementById(numero).innerHTML = dos;
         });
