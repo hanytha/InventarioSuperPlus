@@ -203,12 +203,9 @@ function GuardarPedidoExterno() {
         let seleccionados = "";
 
         for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true ) {
+            if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
                 llenar += NumPedidos[i].value;
-                llenar += "#";
                 seleccionados += ChevPedidos[i].id;
-                seleccionados += "#";
-
 
                 var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                 var IdProveedor = document.getElementById("cmbProveedor").value;
@@ -222,12 +219,11 @@ function GuardarPedidoExterno() {
                 var NumeroPedido = document.getElementById("TxtNumPedido").value;
                 var Fecha = document.getElementById("TxtFechaSistema").value;
                 //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-           
                 var Articulo = ChevPedidos[i].id;
                 //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                 var CantidadSolicitada = NumPedidos[i].value;
                 //------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
+               var frm = new FormData();
                 frm.append("IdPedidosExternos", IdPedidosExternos);
                 frm.append("IdProveedor", IdProveedor);
                 frm.append("Proveedor", Proveedor);
@@ -256,13 +252,13 @@ function GuardarPedidoExterno() {
                         else {
                             alert("Se guardaron los datos correctamente.");
 
-                            document.getElementById("btnCancelarPerfil").click();
                         }
                     }
                 });
-
+        
             }
         }
+
     }
 
 }
