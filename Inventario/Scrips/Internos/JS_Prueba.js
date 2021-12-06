@@ -199,13 +199,17 @@ function GuardarPedidoExterno() {
 
         var NumPedidos = document.getElementsByClassName("input-cantidad");
         let llenar = "";
+        var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
+        let seleccionados = "";
 
-
-        for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1) {
+        for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
+            if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true ) {
                 llenar += NumPedidos[i].value;
                 llenar += "#";
-                
+                seleccionados += ChevPedidos[i].id;
+                seleccionados += "#";
+
+
                 var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                 var IdProveedor = document.getElementById("cmbProveedor").value;
                 var TempProvedor = document.getElementById("cmbProveedor");
@@ -218,15 +222,8 @@ function GuardarPedidoExterno() {
                 var NumeroPedido = document.getElementById("TxtNumPedido").value;
                 var Fecha = document.getElementById("TxtFechaSistema").value;
                 //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-                var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
-                let seleccionados = "";
-                for (let i = 0; i < ChevPedidos.length; i++) {
-                    if (ChevPedidos[i].checked == true) {
-                        seleccionados += ChevPedidos[i].id;
-                        seleccionados += "#";
-                    }
-                }
-                var Articulo = seleccionados.substring(0, seleccionados.length - 1);
+           
+                var Articulo = ChevPedidos[i].id;
                 //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                 var CantidadSolicitada = NumPedidos[i].value;
                 //------------------------------------------------------------------------------------------------------
