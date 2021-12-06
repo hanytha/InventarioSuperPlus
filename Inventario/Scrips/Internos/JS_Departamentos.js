@@ -60,9 +60,9 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     LimpiarCampos();
     if (id == 0) {
-       
+
         sessionStorage.setItem('IDDepartamento', '0');
-      
+
     }
     else {
 
@@ -76,7 +76,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtCarpeta").value = Data[0].Carpeta;
 
 
-           
+
         });
     }
 }
@@ -175,7 +175,7 @@ function EliminarDepartamento(id) {
 //-------------Scrips SUBÁREAS------------------
 BloquearCTRL();
 function CrearAcordeonSubAreas(IdArea) {
-    $.get("/PedidoSolicitado/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
+    $.get("/Subarea/ConsultasSubAreasXAreas/?idArea=" + IdArea, function (Data) {
         AcordeonSubAreas(Data, document.getElementById("Acorden" + IdArea));
     });
 }
@@ -247,7 +247,7 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     }
     LimpiarCampos();
     if (idSubarea == 0) {
-       
+
         sessionStorage.setItem('IDSb', idSubarea);
         document.getElementById("cmbArea").value = idArea;
     }

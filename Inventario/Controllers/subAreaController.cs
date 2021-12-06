@@ -41,7 +41,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultasSubAreasXAreas(long idArea)
         {
-            var subareas = InvBD.SubAreas.Where(p => p.Estatus.Equals(1)&&p.IdArea.Equals(idArea))
+            var subareas = InvBD.SubAreas.Where(p => p.Estatus.Equals(1) && p.IdArea.Equals(idArea))
                 .Select(p => new
                 {
                     p.IdSubAreas,
@@ -112,17 +112,17 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.SubAreas.Where(p => p.Nombre.Equals(DatosSub.Nombre)
-                && p.IdArea.Equals(DatosSub.IdArea) 
+                && p.IdArea.Equals(DatosSub.IdArea)
                 && p.NoSubArea.Equals(DatosSub.NoSubArea)
                 && p.UNombre.Equals(DatosSub.UNombre)
-                && p.NEncargado1.Equals(DatosSub.NEncargado1) 
+                && p.NEncargado1.Equals(DatosSub.NEncargado1)
                 && p.TelefonoE1.Equals(DatosSub.TelefonoE1)
-                && p.CorreoE1.Equals(DatosSub.CorreoE1) 
-                && p.NEncargado2.Equals(DatosSub.NEncargado2) 
-                && p.TelefonoE2.Equals(DatosSub.TelefonoE2) 
-                && p.CorreoE2.Equals(DatosSub.CorreoE2) 
-                && p.NEncargado3.Equals(DatosSub.NEncargado3) 
-                && p.TelefonoE3.Equals(DatosSub.TelefonoE3) 
+                && p.CorreoE1.Equals(DatosSub.CorreoE1)
+                && p.NEncargado2.Equals(DatosSub.NEncargado2)
+                && p.TelefonoE2.Equals(DatosSub.TelefonoE2)
+                && p.CorreoE2.Equals(DatosSub.CorreoE2)
+                && p.NEncargado3.Equals(DatosSub.NEncargado3)
+                && p.TelefonoE3.Equals(DatosSub.TelefonoE3)
                 && p.CorreoE3.Equals(DatosSub.CorreoE3)).Count();
                 if (nveces == 0)
                 {
@@ -178,6 +178,5 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
     }
 }

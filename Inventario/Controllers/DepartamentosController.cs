@@ -38,13 +38,13 @@ namespace Inventario.Controllers
                     p.Telefono,
                     p.Carpeta
                 });
-            foreach(var area in departamentos)
+            foreach (var area in departamentos)
             {
                 ModeloAreas.IdAreas.Add(area.IdAreas);
                 ModeloAreas.Nombre.Add(area.Nombre);
                 ModeloAreas.UNombre.Add(area.UNombre);
                 ModeloAreas.Correo.Add(area.Correo);
-               ModeloAreas.Telefono.Add(area.Telefono);
+                ModeloAreas.Telefono.Add(area.Telefono);
                 ModeloAreas.Carpeta.Add(area.Carpeta);
             }
         }
@@ -133,7 +133,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-     
 
     }
 }
