@@ -196,7 +196,7 @@ function MostrarArticulos(id) {
 function GuardarPedidoExterno() {
 
     if (confirm("¿Desea aplicar los cambios?") == 1) {
-
+        //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
         var NumPedidos = document.getElementsByClassName("input-cantidad");
         let llenar = "";
         var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
@@ -206,7 +206,7 @@ function GuardarPedidoExterno() {
             if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
                 llenar += NumPedidos[i].value;
                 seleccionados += ChevPedidos[i].id;
-
+        //------------Termina---------------------------------------------
                 var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                 var IdProveedor = document.getElementById("cmbProveedor").value;
                 var TempProvedor = document.getElementById("cmbProveedor");

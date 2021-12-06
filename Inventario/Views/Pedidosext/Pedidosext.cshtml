@@ -2,11 +2,6 @@
 @{
     ViewBag.Title = "Pedidosext";
 }
-
-<h2 class="form-control-label" style="font-size: 20px;">
-    PEDIDOS EXTERNOS
-</h2>
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +76,7 @@
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     @*<h1>Registro de pedidos Externos</h1>*@
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <form id="regiration_form" novalidate method="post">
                         <!-----formulario-->
                         <div class="row">
                             <div class="col-md-6">
@@ -101,25 +96,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
-                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                        @*<option value="0">--Seleccione--</option>
-                                        @{
-                                            if (Proveedores.idProveedor != null)
-                                            {
-                                                for (int i = 0; i < Proveedores.idProveedor.Count(); i++)
-                                                {
-                                                    <option value="@Proveedores.idProveedor[i]">@Proveedores.Nombre[i]</option>
-                                                }
-                                            }
-                                        }*@
-                                    </select>
+                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
 
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

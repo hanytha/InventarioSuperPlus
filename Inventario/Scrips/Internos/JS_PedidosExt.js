@@ -14,14 +14,15 @@ function AcordeonPedidosExt(data, IDo) {
     var CodHtml = "";
     for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodHtml += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodHtml += "<div class='card m-b-0 border-top'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosExternos + "'>";
         CodHtml += "<h5 class='mb-0'>";
-        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosExternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
+        CodHtml += "<a data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
+
         CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
         CodHtml += "<span >" + data[i].NumeroPedido + "</span>";
         CodHtml += "</a>";
