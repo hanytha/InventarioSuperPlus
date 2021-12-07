@@ -100,7 +100,7 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra + ")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra +")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
@@ -159,10 +159,7 @@ function MostrarArticulos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
     }
 
     if (id == 0) {
@@ -170,26 +167,20 @@ function MostrarArticulos(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
-
-            let ID = Data.ID;
-            let ArrayID = ID.split(',');
-            let Articulos = Data.Articulos;
-            let ArrayArticulos = Articulos.split(',');
-
+        $.get("/Prueba/ConsultaIdPro/?IdP=" + id, function (Data) {
+       //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
 
-            for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-                //-------Crea los chex-box-------------------------------------------------------------------------
+            for (var i = 0; i < Data.length; i++) {
+    //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'>" + Data[i].Articulo + "</span>";
                 TablaArticulo += "</div>";
-
                 //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulo + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -258,23 +249,19 @@ function GuardarPedidoExterno() {
                             else if (data == -1) {
                                 alert("Ya existe el perfil");
                             }
-                            else {
-                                alert("Se guardaron los datos correctamente.");
 
-                            }
                         }
                     });
 
                 }
             }
-
+            alert("Se guardaron los datos correctamente.");
         }
     }
 
 }
 
-//******************************************************************************************************
-//marca los campos obligatorios
+//---------Función para marcar los campos como obigatorios--------------------------------------------------------
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -290,8 +277,6 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
-
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
     $.get("/Prueba/BDProveedor", function (data) {
