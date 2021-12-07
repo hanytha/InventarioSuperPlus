@@ -195,49 +195,49 @@ function Desplegar(id) {
     else {
 
         $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?Id=" + id, function (Data) {
-            var uno = "";
+            var DespXArt = "";
             //---Encabezado del grid---------
-            uno += "<hr class='solid4'>";
-            uno += "<div class='row'>";
-            uno += "<div class='col-sm'>NoPedido</div>";
-            uno += "<div class='col-sm'>Artículo</div>";
-            uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            uno += "<div class='col-sm'>Costo</div>";
-            uno += "<div class='col-sm'>Proveedor</div>";
-            uno += "<div class='col-sm'>Acción</div>";
-            uno += "</div>";
-            uno += "<hr class='solid4'>";
+            DespXArt += "<hr class='solid4'>";
+            DespXArt += "<div class='row'>";
+            DespXArt += "<div class='col-sm'>NoPedido</div>";
+            DespXArt += "<div class='col-sm'>Artículo</div>";
+            DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXArt += "<div class='col-sm'>Costo</div>";
+            DespXArt += "<div class='col-sm'>Proveedor</div>";
+            DespXArt += "<div class='col-sm'>Acción</div>";
+            DespXArt += "</div>";
+            DespXArt += "<hr class='solid4'>";
 
 
 
             for (var i = 0; i < Data.length; i++) {
                 //----Cuerpo del grid-------------
-                uno += "<div class='row'>";
-                uno += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                DespXArt += "<div class='row'>";
+                DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
+                DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
+                DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                DespXArt += "<div class='col-sm'>" + Data[i].Coste + "</div>";
                 //-----------------------------Abre el modal deacuerdo con el proveedor---------------------------------------------------
-                uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
+                DespXArt += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
-                uno += "<div class='col-sm'>"
-                uno += "<label>"
-                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoPedido + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoPedido + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoPedido + ")'><i class='fas fa-angle-down'></i></button>";
-                uno += "</label>"
-                uno += "</div>";
+                DespXArt += "<div class='col-sm'>"
+                DespXArt += "<label>"
+                DespXArt += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoPedido + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoPedido + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoPedido + ")'><i class='fas fa-angle-down'></i></button>";
+                DespXArt += "</label>"
+                DespXArt += "</div>";
                 //-------------------Termina-------------------------
-                uno += "</div>";
+                DespXArt += "</div>";
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
-                uno += "<div class='row'>";
-                uno += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
-                uno += "</div>";
+                DespXArt += "<div class='row'>";
+                DespXArt += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
+                DespXArt += "</div>";
             }
-            uno += "</div>";
-            uno += "</br>";
-            uno += "</br>";
+            DespXArt += "</div>";
+            DespXArt += "</br>";
+            DespXArt += "</br>";
 
             let compraArticulo = "desplegable" + id;
-            document.getElementById(compraArticulo).innerHTML = uno;
+            document.getElementById(compraArticulo).innerHTML = DespXArt;
         });
     }
 }
@@ -252,35 +252,35 @@ function Desplegar2(no) {
     else {
 
         $.get("/Supervision/ConsultaNumPedido/?No=" + no, function (Data) {
-            var dos = "";
+            var DespXPedido = "";
             //---Encabezado del grid---------
-            dos += "<hr class='solid3'>";
-            dos += "<div class='row'>";
-            dos += "<div class='col-sm'>NoPedido</div>";
-            dos += "<div class='col-sm'>Artículo</div>";
-            dos += "<div class='col-sm'>Fecha de Ingreso</div>";
-            dos += "<div class='col-sm'>Unidad de medida</div>";
-            dos += "<div class='col-sm'>Costo</div>";
-            dos += "</div>";
-            dos += "<hr class='solid3'>";
+            DespXPedido += "<hr class='solid3'>";
+            DespXPedido += "<div class='row'>";
+            DespXPedido += "<div class='col-sm'>NoPedido</div>";
+            DespXPedido += "<div class='col-sm'>Artículo</div>";
+            DespXPedido += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXPedido += "<div class='col-sm'>Unidad de medida</div>";
+            DespXPedido += "<div class='col-sm'>Costo</div>";
+            DespXPedido += "</div>";
+            DespXPedido += "<hr class='solid3'>";
 
             for (var i = 0; i < Data.length; i++) {
 
                 //----Cuerpo del grid-------------
-                dos += "<div class='row'>";
-                dos += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                dos += "</div>";
+                DespXPedido += "<div class='row'>";
+                DespXPedido += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
+                DespXPedido += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
+                DespXPedido += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                DespXPedido += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
+                DespXPedido += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                DespXPedido += "</div>";
             }
-            dos += "</div>";
-            dos += "</br>";
-            dos += "</br>";
+            DespXPedido += "</div>";
+            DespXPedido += "</br>";
+            DespXPedido += "</br>";
 
             let numero = "desplegable2" + no;
-            document.getElementById(numero).innerHTML = dos;
+            document.getElementById(numero).innerHTML = DespXPedido;
         });
     }
 }
