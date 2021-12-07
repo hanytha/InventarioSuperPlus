@@ -143,51 +143,50 @@ namespace Inventario.Controllers
 
         }
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
-        //public JsonResult ConsultaArtProveedores(long IdP )
-        //{
-        //    string Articulos = "";
-        //    string ID = "";
-        //    var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
-        //        .Select(p => new
-        //        {
-        //            Articulo = p.Articulo,
-        //            Id = p.IdArticulo,
-
-        //        });
-        //    foreach (var ap in compra)
-        //    {
-        //        int Afectados = 0;
-
-        //        int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            Articulos += ap.Articulo + ",";
-        //            ID += ap.Id + ",";
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-
-        //    }
-        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
-        //    return Json(compras, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-        public JsonResult ConsultaIdPro(long IdP)
+        public JsonResult ConsultaArticulosXProveedores(long IdP )
         {
-            var compra = InvBD.Compra.Where(p => p.IdProveedor.Equals(IdP) && p.Estatus.Equals(1))
+            string Articulos = "";
+            string ID = "";
+            var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
-                    p.IdArticulo,
-                    p.Articulo
-                });
+                    Articulo = p.Articulo,
+                    Id = p.IdArticulo,
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
+               });
+            foreach (var ap in compra)
+            {
+                int Afectados = 0;
+
+                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+
+                if (nveces == 0)
+                {
+                    Articulos += ap.Articulo + ",";
+                    ID += ap.Id + ",";
+               }
+               else
+               {
+                    Afectados = -1;
+                }
+
+           }
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
+
+        //************************************************************************************************
+        //public JsonResult ConsultaIdPro(long IdP)
+        //{
+        //    var compra = InvBD.Compra.Where(p => p.IdProveedor.Equals(IdP) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdArticulo,
+        //            p.Articulo
+        //        });
+
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
+        //}
 
 
         //----------------------Lenar el combobox----------------------------
