@@ -71,12 +71,12 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <form id="regiration_form" novalidate method="post">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                        <select  onchange="abrirModal(this.value)" id="cmbProveedor"  style="width: 100%" class="form-control limpiarSelect"></select>
+                                        <label class="form-control-label" for="cmbProveedor">Proveedor<<span class="required">*</span></label>
+                                        <select  onchange="abrirModal(this.value)" id="cmbProveedor"  style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +84,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar" >
+                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtRFC]" id="TxtRFC" class="form-control  limpiar" >
+                                        <input type="text" name="data[TxtRFC]" id="TxtRFC" class="form-control  limpiar obligatorio" >
                                     </div>
                                 </div>
                             </div>

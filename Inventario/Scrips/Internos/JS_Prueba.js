@@ -156,6 +156,14 @@ function LimpiarCampos() {
 //************************************************************************************************
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 function MostrarArticulos(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
 
     if (id == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
@@ -194,74 +202,96 @@ function MostrarArticulos(id) {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoExterno() {
+    if (CamposObligatorios() == true) {
 
-    if (confirm("¿Desea aplicar los cambios?") == 1) {
-        //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
-        var NumPedidos = document.getElementsByClassName("input-cantidad");
-        let llenar = "";
-        var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
-        let seleccionados = "";
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
+            var NumPedidos = document.getElementsByClassName("input-cantidad");
+            let llenar = "";
+            var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
+            let seleccionados = "";
 
-        for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
-                llenar += NumPedidos[i].value;
-                seleccionados += ChevPedidos[i].id;
-        //------------Termina---------------------------------------------
-                var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
-                var IdProveedor = document.getElementById("cmbProveedor").value;
-                var TempProvedor = document.getElementById("cmbProveedor");
-                var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+            for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
+                    llenar += NumPedidos[i].value;
+                    seleccionados += ChevPedidos[i].id;
 
-                var Correo = document.getElementById("TxtCorreo").value;
-                var RFC = document.getElementById("TxtRFC").value;
-                var Telefono = document.getElementById("TxtTelefono").value;
-                var Clabe = document.getElementById("TxtClabe").value;
-                var NumeroPedido = document.getElementById("TxtNumPedido").value;
-                var Fecha = document.getElementById("TxtFechaSistema").value;
-                //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-                var Articulo = ChevPedidos[i].id;
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = NumPedidos[i].value;
-                //------------------------------------------------------------------------------------------------------
-               var frm = new FormData();
-                frm.append("IdPedidosExternos", IdPedidosExternos);
-                frm.append("IdProveedor", IdProveedor);
-                frm.append("Proveedor", Proveedor);
-                frm.append("Correo", Correo);
-                frm.append("RFC", RFC);
-                frm.append("Telefono", Telefono);
-                frm.append("Clabe", Clabe);
-                frm.append("Articulo", Articulo);
-                frm.append("NumeroPedido", NumeroPedido);
-                frm.append("CantidadSolicitada", CantidadSolicitada);
-                frm.append("Fecha", Fecha);
-                frm.append("Estatus", 1);
-                $.ajax({
-                    type: "POST",
-                    url: "/Prueba/GuardarPedidoExterno",
-                    data: frm,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data == 0) {
-                            alert("Ocurrio un error");
+                    var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+                    var IdProveedor = document.getElementById("cmbProveedor").value;
+                    var TempProvedor = document.getElementById("cmbProveedor");
+                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+
+                    var Correo = document.getElementById("TxtCorreo").value;
+                    var RFC = document.getElementById("TxtRFC").value;
+                    var Telefono = document.getElementById("TxtTelefono").value;
+                    var Clabe = document.getElementById("TxtClabe").value;
+                    var NumeroPedido = document.getElementById("TxtNumPedido").value;
+                    var Fecha = document.getElementById("TxtFechaSistema").value;
+                    //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
+                    var Articulo = ChevPedidos[i].id;
+                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    var CantidadSolicitada = NumPedidos[i].value;
+                    //------------------------------------------------------------------------------------------------------
+                    var frm = new FormData();
+                    frm.append("IdPedidosExternos", IdPedidosExternos);
+                    frm.append("IdProveedor", IdProveedor);
+                    frm.append("Proveedor", Proveedor);
+                    frm.append("Correo", Correo);
+                    frm.append("RFC", RFC);
+                    frm.append("Telefono", Telefono);
+                    frm.append("Clabe", Clabe);
+                    frm.append("Articulo", Articulo);
+                    frm.append("NumeroPedido", NumeroPedido);
+                    frm.append("CantidadSolicitada", CantidadSolicitada);
+                    frm.append("Fecha", Fecha);
+                    frm.append("Estatus", 1);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Prueba/GuardarPedidoExterno",
+                        data: frm,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == 0) {
+                                alert("Ocurrio un error");
+                            }
+                            else if (data == -1) {
+                                alert("Ya existe el perfil");
+                            }
+                            else {
+                                alert("Se guardaron los datos correctamente.");
+
+                            }
                         }
-                        else if (data == -1) {
-                            alert("Ya existe el perfil");
-                        }
-                        else {
-                            alert("Se guardaron los datos correctamente.");
+                    });
 
-                        }
-                    }
-                });
-        
+                }
             }
-        }
 
+        }
     }
 
 }
+
+//******************************************************************************************************
+//marca los campos obligatorios
+function CamposObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
+
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
     $.get("/Prueba/BDProveedor", function (data) {
@@ -323,3 +353,4 @@ function Desplegar2(no) {
         });
     }
 }
+
