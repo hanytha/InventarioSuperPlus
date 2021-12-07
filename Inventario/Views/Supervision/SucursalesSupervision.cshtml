@@ -1,7 +1,5 @@
 ﻿@using Inventario.Models;
 
-
-
 @{
     ViewBag.Title = "Tiendas de la supervisión";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,7 +28,7 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-<!--Mostrar los registros en el accordion-->
+
 <div id="accordion"></div>
 
 <div class="accordion" id="AcordeonSucursales">
@@ -63,15 +61,14 @@
                         </h4>
                         <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
-                                <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
-                                @*<div id="contenedor1"></div>*@
+                                <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+                                <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
-                                    <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">Tabla</div>
+                                    <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                 </div>
-                                
+
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -80,7 +77,7 @@
     }
 </div>
 
-<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
+<!----------------------------------------Distribuir los títulos de los DIVS -------------------------------------------->
 <style>
     #contenedor {
         width: 300px;

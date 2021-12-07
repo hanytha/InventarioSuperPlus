@@ -470,5 +470,30 @@ namespace Inventario.Controllers
 
             }
         }
+
+        //Consulta de la tabla de articulos x tienda
+        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        public JsonResult ConsultaExistenciaAlmGJoinProveedor(long Id)
+        {
+            var ExistenciaAlmG = from ExistenciAAlmacenG in InvBD.ExistenciaAlmacenG
+                          join provedor in InvBD.Proveedores
+                      on ExistenciAAlmacenG.IdProveedor equals provedor.IdProveedores
+                          where ExistenciAAlmacenG.IdArticulo.Equals(Id)
+                          select new
+                          {
+                              FechaDeIngreso = ExistenciAAlmacenG.FechaDeIngreso,
+                              NoCompra = ExistenciAAlmacenG.NoPedido,
+                              Articulo = ExistenciAAlmacenG.NombreEmpresa,
+                              Coste = ExistenciAAlmacenG.Coste,
+                              IdArticulo = ExistenciAAlmacenG.IdArticulo,
+                              IdProveedor = provedor.IdProveedores,
+                              Proveedor = provedor.Nombre
+
+                          };
+
+
+            return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

@@ -3929,6 +3929,10 @@ namespace Inventario
 		
 		private string _NombreEmpresa;
 		
+		private System.Nullable<long> _IdUnidadDeMedida;
+		
+		private System.Nullable<long> _IdProveedor;
+		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
 		private EntityRef<Compra> _Compra;
@@ -3963,6 +3967,10 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnNombreEmpresaChanging(string value);
     partial void OnNombreEmpresaChanged();
+    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
+    partial void OnIdUnidadDeMedidaChanged();
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4232,6 +4240,46 @@ namespace Inventario
 					this._NombreEmpresa = value;
 					this.SendPropertyChanged("NombreEmpresa");
 					this.OnNombreEmpresaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
+		public System.Nullable<long> IdUnidadDeMedida
+		{
+			get
+			{
+				return this._IdUnidadDeMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadDeMedida != value))
+				{
+					this.OnIdUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._IdUnidadDeMedida = value;
+					this.SendPropertyChanged("IdUnidadDeMedida");
+					this.OnIdUnidadDeMedidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
 				}
 			}
 		}

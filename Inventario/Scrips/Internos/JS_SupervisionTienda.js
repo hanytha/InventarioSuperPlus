@@ -1,56 +1,50 @@
-﻿const f = new Date();
+﻿//const f = new Date();
 
 
-function Usuarios_X_Tienda(IDTienda) {
-    $.get("/Usuario/UsuariosXTienda/?IDTienda=" + IDTienda, function (PersonalTienda) {
-        if (PersonalTienda.lenght != 0) {
-            llenarComboPersonal(PersonalTienda, document.getElementById("cmbIDUsuario"), sessionStorage.getItem('IDUsuario'), sessionStorage.getItem('Nombre'));
-            document.getElementById("cmbIDUsuario").value = sessionStorage.getItem('IDUsuario');
-        }
-    });
-}
-//combo personal por tienda
-function llenarComboPersonal(Datos, control, IDExtra, NombreExtra) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-    for (var i = 0; i < Datos.length; i++) {
-        contenido += "<option value='" + Datos[i].ID + "'>" + Datos[i].Nombre + "</option>";
-    }
-    if (IDExtra != "") {
-        contenido += "<option value='" + IDExtra + "'>" + NombreExtra + "</option>";
-    }
-    control.innerHTML = contenido;
-}
-function Limpiar() {
-    var ControlesTXT = document.getElementsByClassName("limpiar");
-    for (var i = 0; i < ControlesTXT.length; i++) {
-        ControlesTXT[i].value = "";
-    }
-    var ControlesSLT = document.getElementsByClassName("SelectCLS");
-    for (var i = 0; i < ControlesSLT.length; i++) {
-        document.getElementById(ControlesSLT[i].id).value = 0;
-    }
-}
-//funcion general para llenar los select
-function llenarCombo(DAtos, control) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-    for (var i = 0; i < DAtos.length; i++) {
-        contenido += "<option value='" + DAtos[i].ID + "'>" + DAtos[i].Nombre + "</option>";
-    }
-    control.innerHTML = contenido;
-}
+//function Usuarios_X_Tienda(IDTienda) {
+//    $.get("/Usuario/UsuariosXTienda/?IDTienda=" + IDTienda, function (PersonalTienda) {
+//        if (PersonalTienda.lenght != 0) {
+//            llenarComboPersonal(PersonalTienda, document.getElementById("cmbIDUsuario"), sessionStorage.getItem('IDUsuario'), sessionStorage.getItem('Nombre'));
+//            document.getElementById("cmbIDUsuario").value = sessionStorage.getItem('IDUsuario');
+//        }
+//    });
+//}
+////combo personal por tienda
+//function llenarComboPersonal(Datos, control, IDExtra, NombreExtra) {
+//    var contenido = "";
+//    contenido += "<option value='0'>--Seleccione--</option>";
+//    for (var i = 0; i < Datos.length; i++) {
+//        contenido += "<option value='" + Datos[i].ID + "'>" + Datos[i].Nombre + "</option>";
+//    }
+//    if (IDExtra != "") {
+//        contenido += "<option value='" + IDExtra + "'>" + NombreExtra + "</option>";
+//    }
+//    control.innerHTML = contenido;
+//}
+//function Limpiar() {
+//    var ControlesTXT = document.getElementsByClassName("limpiar");
+//    for (var i = 0; i < ControlesTXT.length; i++) {
+//        ControlesTXT[i].value = "";
+//    }
+//    var ControlesSLT = document.getElementsByClassName("SelectCLS");
+//    for (var i = 0; i < ControlesSLT.length; i++) {
+//        document.getElementById(ControlesSLT[i].id).value = 0;
+//    }
+//}
+////funcion general para llenar los select
+//function llenarCombo(DAtos, control) {
+//    var contenido = "";
+//    contenido += "<option value='0'>--Seleccione--</option>";
+//    for (var i = 0; i < DAtos.length; i++) {
+//        contenido += "<option value='" + DAtos[i].ID + "'>" + DAtos[i].Nombre + "</option>";
+//    }
+//    control.innerHTML = contenido;
+//}
 
 
 ////----------Tabla------------////
 
-//-----------------------Crea el grid con las consultas de la tabla artículos y compra---------------------------------------------------
-
-
-
-
-
-
+//-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
 
 //////////////////////////////////
 
@@ -75,7 +69,6 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "</div>";
 
-
             let id = Data.id;
             let ArrayId = id.split(',');
             let Nombre = Data.Nombre;
@@ -86,7 +79,6 @@ function ConsultaArticuloComp(IDTienda) {
             let Arraystock = Stock.split(',');
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
-
 
             for (var i = 0; i < ArrayId.length; i++) {
 
@@ -202,7 +194,7 @@ function Desplegar(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?Id=" + id, function (Data) {
             var uno = "";
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
@@ -210,7 +202,7 @@ function Desplegar(id) {
             uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            //uno += "<div class='col-sm'>Costo</div>";
+            uno += "<div class='col-sm'>Costo</div>";
             uno += "<div class='col-sm'>Proveedor</div>";
             uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
@@ -225,7 +217,7 @@ function Desplegar(id) {
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                //--------------------------------------------------------------------------------
+                //-----------------------------Abre el modal deacuerdo con el proveedor---------------------------------------------------
                 uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
@@ -235,7 +227,7 @@ function Desplegar(id) {
                 uno += "</div>";
                 //-------------------Termina-------------------------
                 uno += "</div>";
-                //-----------------------------------------
+                //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 uno += "<div class='row'>";
                 uno += "<div class='col'><div id='desplegable2" + Data[i].NoCompra + "' class='collapse'></div></div>";
                 uno += "</div>";
@@ -249,4 +241,3 @@ function Desplegar(id) {
         });
     }
 }
-
