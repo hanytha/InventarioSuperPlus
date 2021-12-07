@@ -199,7 +199,7 @@ function Desplegar(id) {
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
             uno += "<div class='row'>";
-            uno += "<div class='col-sm'>NoCompra</div>";
+            uno += "<div class='col-sm'>NoPedido</div>";
             uno += "<div class='col-sm'>Artículo</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
             uno += "<div class='col-sm'>Costo</div>";
@@ -213,7 +213,7 @@ function Desplegar(id) {
             for (var i = 0; i < Data.length; i++) {
                 //----Cuerpo del grid-------------
                 uno += "<div class='row'>";
-                uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
@@ -222,14 +222,14 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra + ")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoPedido + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoPedido + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoPedido + ")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
                 uno += "</div>";
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 uno += "<div class='row'>";
-                uno += "<div class='col'><div id='desplegable2" + Data[i].NoCompra + "' class='collapse'></div></div>";
+                uno += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
                 uno += "</div>";
             }
             uno += "</div>";
@@ -238,6 +238,49 @@ function Desplegar(id) {
 
             let compraArticulo = "desplegable" + id;
             document.getElementById(compraArticulo).innerHTML = uno;
+        });
+    }
+}
+
+
+
+//------------- Función que crea el segundo grid para desplegar que se despliega por numero de pedido-----------------------------
+function Desplegar2(no) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaNumPedido/?No=" + no, function (Data) {
+            var dos = "";
+            //---Encabezado del grid---------
+            dos += "<hr class='solid3'>";
+            dos += "<div class='row'>";
+            dos += "<div class='col-sm'>NoPedido</div>";
+            dos += "<div class='col-sm'>Artículo</div>";
+            dos += "<div class='col-sm'>Fecha de Ingreso</div>";
+            dos += "<div class='col-sm'>Unidad de medida</div>";
+            dos += "<div class='col-sm'>Costo</div>";
+            dos += "</div>";
+            dos += "<hr class='solid3'>";
+
+            for (var i = 0; i < Data.length; i++) {
+
+                //----Cuerpo del grid-------------
+                dos += "<div class='row'>";
+                dos += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                dos += "</div>";
+            }
+            dos += "</div>";
+            dos += "</br>";
+            dos += "</br>";
+
+            let numero = "desplegable2" + no;
+            document.getElementById(numero).innerHTML = dos;
         });
     }
 }

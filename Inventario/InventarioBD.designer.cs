@@ -3933,6 +3933,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdProveedor;
 		
+		private string _Unidad;
+		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
 		private EntityRef<Compra> _Compra;
@@ -3971,6 +3973,8 @@ namespace Inventario
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnIdProveedorChanging(System.Nullable<long> value);
     partial void OnIdProveedorChanged();
+    partial void OnUnidadChanging(string value);
+    partial void OnUnidadChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4280,6 +4284,26 @@ namespace Inventario
 					this._IdProveedor = value;
 					this.SendPropertyChanged("IdProveedor");
 					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(50)")]
+		public string Unidad
+		{
+			get
+			{
+				return this._Unidad;
+			}
+			set
+			{
+				if ((this._Unidad != value))
+				{
+					this.OnUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._Unidad = value;
+					this.SendPropertyChanged("Unidad");
+					this.OnUnidadChanged();
 				}
 			}
 		}
