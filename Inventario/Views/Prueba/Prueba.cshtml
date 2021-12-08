@@ -134,8 +134,10 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success"  onclick=" GuardarPedidoExterno()">Guardar</button>
-                    <button type="button" class="btn btn-info">Ver Pedido</button>
+                    <button type="button" class="btn btn-success" onclick=" GuardarPedidoExterno()">Guardar</button>
+                    <!------------------------------------------------------------------------------------------------------>
+                    <button onclick="VerPedido(0)" data-dismiss="modal" class="btn btn-info" data-toggle="modal" data-target="#VerPedidos">Ver_Pedido</button>
+                    <!------------------------------------------------------------------------------------------------------>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -188,12 +190,57 @@
 </style>
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
-        var f = new Date();
-        fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-        document.getElementById('TxtFechaSistema').value = fecha;
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaSistema').value = fecha;
 
 </script>
 <!------------------------------------------>
+<!------------------------------------------Modal Para ver los pedidos---------------------------------------------------------------->
+<div class="container">
+    <div class="modal fade" id="VerPedidos">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="card">
+                            <img class="card-img-top" src="http://1.bp.blogspot.com/-ib8pBUm-zgo/UZQPlF2yb1I/AAAAAAAAABM/h5pf7fstMkc/s1600/logotipo+super+plus+(1).jpg">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align:center;">PEDIDO(S)</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p type="number" name="data[TxtCorreoVer]" id="TxtCorreoVer">Uno</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p type="number" name="data[TxtRFCVer]" id="TxtRFCVer">Dos</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p type="number" name="data[TxtTelefonoVer]" id="TxtTelefonoVer">Tres</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p type="number" name="data[TxtClabeVer]" id="TxtClabeVer">Cuatro</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p type="number" name="data[TxtNumPedidoVer]" id="TxtNumPedidoVer">Cinco</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!----------------------------------------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
