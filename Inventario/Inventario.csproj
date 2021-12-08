@@ -212,7 +212,6 @@
     <Content Include="Views\Bonificaciones\Bonificaciones.cshtml" />
     <Content Include="Views\Existencias\Existencias.cshtml" />
     <Content Include="Views\Impuestos\Impuestos.cshtml" />
-    <Content Include="Views\Marca\SucursalesSupervision.cshtml" />
     <Content Include="Views\Pagina\Pagina.cshtml" />
     <Content Include="Views\Pedidosext\Pedidosext.cshtml" />
     <Content Include="Views\Pedidosint\Pedidosint.cshtml" />
