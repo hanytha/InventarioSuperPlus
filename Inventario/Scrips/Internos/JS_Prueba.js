@@ -66,12 +66,10 @@ function CrearArticuloComp(Data) {
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
-
     if (id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-
         $.get("/Prueba/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
             var uno = "";
             //---Encabezado del grid---------
@@ -86,8 +84,6 @@ function Desplegar(id) {
             uno += "</div>";
             uno += "<hr class='solid4'>";
 
-
-
             for (var i = 0; i < Data.length; i++) {
                 //----Cuerpo del grid-------------
                 uno += "<div class='row'>";
@@ -100,7 +96,7 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra +")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra +")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
@@ -343,4 +339,3 @@ function Desplegar2(no) {
         });
     }
 }
-

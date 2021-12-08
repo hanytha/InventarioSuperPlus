@@ -56,18 +56,7 @@
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!----------------------Mostrar el div principal-------------------------------------------------------------------->
-<div id="contenedor1"></div>
-<!------------------------------------------------------Despliega la segunda tabla------------------------------------------------------>
-<!--<div id="seccion1" style="display:none">
-    <div id="contenedor3"></div>
-</div>-->
-<!-----------------------------------------------------Despliega la tercera tabla----------------------------------------------------------->
-<!--<div id="seccion2" style="display:none">
-    <div id="contenedor2"></div>
-</div>-->
-<!--------------------------------------------------------------------------------------------------------------->
-<!-- Encabezado del Modal -->
+<!---------------------------------------------------------------------------------------------------------->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -78,197 +67,33 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>ARTÍCULO</h4>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombre">Ingrese el nombre del artículo<span class="required">*</span></label>
-                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
+                    <div class="card-body">
+                        <div class="card">
+                            <img class="card-img-top" src="http://1.bp.blogspot.com/-ib8pBUm-zgo/UZQPlF2yb1I/AAAAAAAAABM/h5pf7fstMkc/s1600/logotipo+super+plus+(1).jpg">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align:center;">PEDIDO(S)</h5>
                             </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" name="data[TxtCorreo]" id="TxtCorreo"><label>uno</label></li>
+                                <li class="list-group-item" name="data[TxtRFC]" id="TxtRFC"><label>uno</label></li>
+                                <li class="list-group-item" name="data[TxtTelefono]" id="TxtTelefono"><label>Uno</label></li>
+                                <li class="list-group-item" name="data[TxtCorreo]" id="TxtCorreo"><label>uno</label></li>
+                                <li class="list-group-item" name="data[TxtRFC]" id="TxtRFC"><label>uno</label></li>
+                            </ul>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidad">INGRESE LA CANTIDAD<span class="required">*</span></label>
-                                    <input id="TxtCantidad" name="data[TxtCantidad]" class="form-control  limpiar obligatorio" placeholder="22" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbUnidadM">Unidad de Medida<span class="required">*</span></label>
-                                    <select id="cmbUnidadM" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombreP">INGRESE EL NOMBRE DE EL PROVEEDOR<span class="required">*</span></label>
-                                    <input id="TxtNombreP" name="data[TxtNombreP]" class="form-control  limpiar obligatorio" placeholder="Proveedor" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtMarca">INGRESE LA MARCA DEL ARTÍCULO<span class="required">*</span></label>
-                                    <input id="TxtMarca" name="data[TxtMarca]" class="form-control  limpiar obligatorio" placeholder="Nombre" size="30" maxlength="100" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbCompra">Seleccione la compra<span class="required">*</span></label>
-                                    <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success" onclick="GuardarBonificacion()">Guardar</button>
-                    </form>
-                </div>
-                <!-- pie del diálogo -->
-                <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                    <!-- pie del modal-->
+                    <div class="modal-footer">
+                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
-<style>
-    #contenedor {
-        width: 300px;
-        height: auto;
-        text-align: center;
-    }
 
-    #contenedor_follow div.icono {
-        display: inline-block;
-        width: 15%;
-        height: auto;
-        vertical-align: middle;
-        text-align: center;
-    }
-</style>
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid {
-        border-top: 3px solid #D7DBDD;
-    }
-</style>
-
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 3px solid #f1f507;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid4 {
-        border-top: 3px solid #0B94F8;
-    }
-</style>
-<!-------------------------------------Estilo para separar los Div---------------------------------------------------------------------->
-<title>Como crear una tabla con divs</title>
-<style type="text/css">
-
-    .Table {
-        display: table;
-    }
-
-    .Title {
-        display: table-caption;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-
-    .Heading {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-    }
-</style>
-
-
-<!-------------------------------DIV DESPLEGABLES------------------------------------------------------>
-
-<style>
-
-    .active, .collapsible:hover {
-        background-color: #555;
-    }
-
-    .collapsible:after {
-        content: '\002B';
-        color: white;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
-    }
-
-    .active:after {
-        content: "\2212";
-    }
-
-    .content {
-        padding: 0 18px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        background-color: #f1f1f1;
-    }
-</style>
-
-<h2>Animated Collapsibles</h2>
-<button class="collapsible btn btn-primary">Open Section 3</button>
-<div class="content">
-    <p>unonuouonouon</p>
- 
-</div>
-
-<button class="collapsible btn btn-primary">Open Section 3</button>
-<div class="content">
-    <p>ppppppppppppp</p>
-</div>
-
-<button class="collapsible  btn btn-primary">Open Section 3</button>
-<div id="dos" class="content">
-    <p>Unooooooooooo</p>
-</div>
-<button class="collapsible  btn btn-primary">Open Section 3</button>
-<div class="content">
-    <p>Dosssssss</p>
-</div>
-<button class="collapsible  btn btn-primary">Open Section 3</button>
-<div class="content">
-    <p>Tres</p>
-</div>
-
-
-<!---------------------CONTENEDOR3------------------------------>
-@*<div style="display:none" id="contenedor3"></div>*@
-
-<div id="tabla"></div>
-<!------------------------------------------------------------>
+<!------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -279,6 +104,6 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Articulo_Vista.js"></script>
+<script src="~/Scrips/Internos/JS_Prueba.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

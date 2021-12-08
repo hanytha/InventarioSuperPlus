@@ -98,21 +98,21 @@ namespace Inventario.Controllers
         //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
         public JsonResult ConsultaCompraJoinProveedor(long Id)
         {
-          var compras = from comprs in InvBD.Compra
+            var compras = from comprs in InvBD.Compra
                           join provedor in InvBD.Proveedores
                       on comprs.IdProveedor equals provedor.IdProveedores
-                       where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
-                         select new
-                         {
-                             FechaDeIngreso = comprs.FechaDeIngreso,
-                             NoCompra = comprs.NoCompra,
-                             Articulo = comprs.Articulo,
-                             Coste = comprs.Coste,
-                             IdArticulo = comprs.IdArticulo,
-                             IdProveedor = provedor.IdProveedores,
-                             Proveedor = provedor.Nombre,
-                             
-                       };
+                          where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
+                          select new
+                          {
+                              FechaDeIngreso = comprs.FechaDeIngreso,
+                              NoCompra = comprs.NoCompra,
+                              Articulo = comprs.Articulo,
+                              Coste = comprs.Coste,
+                              IdArticulo = comprs.IdArticulo,
+                              IdProveedor = provedor.IdProveedores,
+                              Proveedor = provedor.Nombre,
+
+                          };
 
 
             return Json(compras, JsonRequestBehavior.AllowGet);
@@ -122,28 +122,28 @@ namespace Inventario.Controllers
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var comps = from comprs in InvBD.Compra
-                          join provedor in InvBD.Proveedores
-                      on comprs.IdProveedor equals provedor.IdProveedores
-                          where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1) 
-                          select new
-                          {
-                              Articulo = comprs.Articulo,
-                              IdArticulo = comprs.IdArticulo,
-                              IdProveedor = provedor.IdProveedores,
-                              Proveedor = provedor.Nombre,
-                              Correo = provedor.Correo,
-                              Clabe = provedor.ClaveInterbancaria,
-                              Telefono = provedor.Telefono,
-                              RFC = provedor.RFC
+                        join provedor in InvBD.Proveedores
+                    on comprs.IdProveedor equals provedor.IdProveedores
+                        where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+                        select new
+                        {
+                            Articulo = comprs.Articulo,
+                            IdArticulo = comprs.IdArticulo,
+                            IdProveedor = provedor.IdProveedores,
+                            Proveedor = provedor.Nombre,
+                            Correo = provedor.Correo,
+                            Clabe = provedor.ClaveInterbancaria,
+                            Telefono = provedor.Telefono,
+                            RFC = provedor.RFC
 
-                          };
+                        };
 
 
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
-        public JsonResult ConsultaArticulosXProveedores(long IdP )
+        public JsonResult ConsultaArticulosXProveedores(long IdP)
         {
             string Articulos = "";
             string ID = "";
@@ -153,24 +153,24 @@ namespace Inventario.Controllers
                     Articulo = p.Articulo,
                     Id = p.IdArticulo,
 
-               });
+                });
             foreach (var ap in compra)
             {
                 int Afectados = 0;
 
-                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(Articulos)).Count();
 
                 if (nveces == 0)
                 {
                     Articulos += ap.Articulo + ",";
                     ID += ap.Id + ",";
-               }
-               else
-               {
+                }
+                else
+                {
                     Afectados = -1;
                 }
 
-           }
+            }
             var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
@@ -193,7 +193,8 @@ namespace Inventario.Controllers
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.IdProveedores,
                     Nombre = p.Nombre
                 });
@@ -203,7 +204,8 @@ namespace Inventario.Controllers
         public JsonResult BDUnidad()
         {
             var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.IdUnidadDeMedida,
                     Nombre = p.Unidad
                 });
