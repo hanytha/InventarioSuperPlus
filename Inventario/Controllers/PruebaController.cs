@@ -147,16 +147,19 @@ namespace Inventario.Controllers
         {
             string Articulos = "";
             string ID = "";
+            string Proveedor = "";
             var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
                     Articulo = p.Articulo,
                     Id = p.IdArticulo,
-
+                    Proveedor= p.IdProveedor
                 });
             foreach (var ap in compra)
             {
+                Proveedor += ap.Proveedor + ",";
                 int Afectados = 0;
+
 
                 int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(Articulos)).Count();
 
@@ -164,6 +167,7 @@ namespace Inventario.Controllers
                 {
                     Articulos += ap.Articulo + ",";
                     ID += ap.Id + ",";
+
                 }
                 else
                 {
@@ -171,7 +175,7 @@ namespace Inventario.Controllers
                 }
 
             }
-            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1), Proveedor = Proveedor.Substring(0, Proveedor.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
@@ -283,5 +287,29 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
+
+        //****************************************************
+       /* public JsonResult ConsultaVerpedido(long Num)
+        {
+            var pedidoss = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+   
+                    p.NumeroPedido,
+                    p.CantidadSolicitada,
+                    p.IdProveedor,
+                    p.Proveedor,
+                    p.Articulo,
+                    p.Fecha,
+                    p.Correo,
+                    p.Telefono,
+                    p.RFC,
+                    p.Clabe,
+
+                });
+
+            return Json(pedidoss, JsonRequestBehavior.AllowGet);
+        }*/
+
     }
 }

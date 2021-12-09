@@ -168,6 +168,8 @@ function MostrarArticulos(id) {
             let ArrayID = ID.split(',');
             let Articulos = Data.Articulos;
             let ArrayArticulos = Articulos.split(',');
+            let Proveedor = Data.Proveedor;
+            let ArrayProveedor = Proveedor.split(',');
 
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -184,12 +186,18 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>"
+            TablaArticulo += "<button onclick='VerPedido(0)" + ArrayProveedor[i] + "' data-dismiss='modal' class='btn btn-info' data-toggle='modal' data-target='#VerPedidos'>Ver_Pedido</button>";
+            TablaArticulo += "</label>"
+            TablaArticulo += "</div>";
+
+            TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
 }
-
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoExterno() {
@@ -339,3 +347,25 @@ function Desplegar2(no) {
         });
     }
 }
+
+//********************************************************************************************************
+/*
+function VerPedido(num) {
+    if (num == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+    else {
+
+        $.get("/Prueba/ConsultaVerpedido/?Num=" + num, function (Data) {
+
+            document.getElementById("TxtCorreoVer").value = Data[0].Correo;
+            document.getElementById("TxtRFCVer").value = Data[0].RFC;
+            document.getElementById("TxtTelefonoVer").value = Data[0].Telefono;
+            document.getElementById("TxtClabeVer").value = Data[0].Clabe;
+            document.getElementById("TxtNumPedidoVer").value = Data[0].NumeroPedido;
+
+        });
+    }
+}
+*/
