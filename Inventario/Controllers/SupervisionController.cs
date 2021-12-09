@@ -359,12 +359,7 @@ namespace Inventario.Controllers
             Sucursales.Longitud = new List<string>();
             Sucursales.HApertura = new List<string>();
             Sucursales.HCierre = new List<string>();
-            Sucursales.IUSACodigo = new List<string>();
-            Sucursales.IUSAUsuario = new List<string>();
-            Sucursales.IUSAContraseña = new List<string>();
-            Sucursales.PCPAYUsuario = new List<string>();
-            Sucursales.PCPAYContraseña = new List<string>();
-            Sucursales.NoServicioLuz = new List<string>();
+       
             Sucursales.Estatus = new List<int>();
 
             var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))

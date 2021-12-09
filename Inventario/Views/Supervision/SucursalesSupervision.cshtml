@@ -36,7 +36,7 @@
         if (TiendasSupervision.IDTienda != null)
         {
             int NSucursales = TiendasSupervision.IDTienda.Count();
-          
+
             string InsrtClases = "card m-b-0";
             for (int i = 0; i < NSucursales; i++)
             {
@@ -123,6 +123,124 @@
         border-top: 3px solid #0B94F8;
     }
 </style>
+
+
+<!------------------------------------------------Modal------------------------------------------------------------------>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalProveedor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE PEDIDOS INTERNOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorio" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadSolicitada">Cantidad solicitada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadSolicitada" class="form-control limpiar obligatorio" placeholder="Cantidad solicitada">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadAprobada" class="form-control limpiar obligatorio" placeholder="Cantidad aprobada">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTipo">Tipo<span class="required">*</span></label>
+                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbArticulo">Artículo<span class="required">*</span></label>
+                                    <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbUnidadDeMedida">Unidad de medida<span class="required">*</span></label>
+                                    <select id="cmbUnidadDeMedida" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbMarca">Marca<span class="required">*</span></label>
+                                    <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTipoTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTipoTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarPedidoInterno()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------Obtener la fecha-------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngreso').value = fecha;
+
+</script>
+
 
 <script src="~/Scrips/jquery.min.js"></script>
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
