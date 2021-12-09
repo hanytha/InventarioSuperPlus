@@ -186,11 +186,6 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>"
-            TablaArticulo += "<button onclick='VerPedido(0)" + ArrayProveedor[i] + "' data-dismiss='modal' class='btn btn-info' data-toggle='modal' data-target='#VerPedidos'>Ver_Pedido</button>";
-            TablaArticulo += "</label>"
-            TablaArticulo += "</div>";
 
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
@@ -204,12 +199,13 @@ function GuardarPedidoExterno() {
     if (CamposObligatorios() == true) {
 
         if (confirm("¿Desea aplicar los cambios?") == 1) {
+            //----------------------------Habílita el botón de ver_pedidos solo cuando el pedido es guardado---------------------------
+            document.getElementById('more').disabled = false;
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
             let llenar = "";
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
             let seleccionados = "";
-
             for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
                 if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
                     llenar += NumPedidos[i].value;
