@@ -78,7 +78,7 @@ namespace Inventario.Controllers
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
-        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos-----------------
+        //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
         public JsonResult ConsultaNumCompra(long No)
         {
             var compra = InvBD.Compra.Where(p => p.NoCompra.Equals(No) && p.Estatus.Equals(1))
@@ -93,9 +93,8 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
         //------------------------------------------------------------
-        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        //-----------Consulta los datos por ID del artículo pero en la tabla de compras JOIN Proveedores------------------
         public JsonResult ConsultaCompraJoinProveedor(long Id)
         {
             var compras = from comprs in InvBD.Compra
@@ -118,7 +117,7 @@ namespace Inventario.Controllers
             return Json(compras, JsonRequestBehavior.AllowGet);
 
         }
-        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        //-----------Consulta los datos por ID del proveedor pero en la tabla de compras JOIN Proveedor------------------
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var comps = from comprs in InvBD.Compra
@@ -142,7 +141,7 @@ namespace Inventario.Controllers
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
-        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
+        //---------------Consulta datos del artículo por ID de proveedor en la tabla de Compras----------------
         public JsonResult ConsultaArticulosXProveedores(long IdP)
         {
             string Articulos = "";
@@ -204,18 +203,8 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        //----------------------Lenar el combobox----------------------------
-        public JsonResult BDUnidad()
-        {
-            var datos = InvBD.UnidadDeMedida.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    ID = p.IdUnidadDeMedida,
-                    Nombre = p.Unidad
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-        //-------Guardar Combo-box de selección---------Pedidos externos------------------------------------------------
+
+        //----------------------Guarda los datos de los pedidos que son realizados-----------------------------------------
         public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
         {
             int Afectados = 0;
@@ -272,11 +261,7 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+
             return Afectados;
         }
 
