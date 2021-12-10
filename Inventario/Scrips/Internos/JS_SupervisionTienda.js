@@ -294,15 +294,15 @@ function abrirModal(id) {
     LimpiarCampos();
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
-
     }
     else {
 
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+            //document.getElementById("cmbTipoTienda").value = Data[0].IdSitio;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
             //document.getElementById("TxtRFC").value = Data[0].RFC;
-            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
             MostrarArticulos(id);
         });
@@ -441,6 +441,8 @@ function LlenarCMCProveedores() {
     });
 
 }
+
+
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {

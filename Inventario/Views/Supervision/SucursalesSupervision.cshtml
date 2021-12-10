@@ -165,55 +165,52 @@
                                     <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect"></select>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">Artículo(s) del proveedor</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
-                                    <input type="number" id="TxtCantidadAprobada" class="form-control limpiar obligatorio" placeholder="Cantidad aprobada">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTipo">Tipo<span class="required">*</span></label>
-                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
-                                </div>
-                            </div>
+                      
                         </div>
 
                         @*<div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbUnidadDeMedida">Unidad de medida<span class="required">*</span></label>
-                                    <select id="cmbUnidadDeMedida" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>*@
-                        <div class="row">
-                            @*<div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbMarca">Marca<span class="required">*</span></label>
-                                    <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>*@
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTipoTienda">Tienda<span class="required">*</span></label>
                                     <select id="cmbTipoTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
+                        </div>*@
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                            </div>
                         </div>
 
+                    </div>
+                      
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
+                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
                     </form>
                 </div>
                 <!-- pie del diálogo -->

@@ -518,6 +518,8 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+
+
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
         public JsonResult ConsultaArtProveedores(long IdP)
         {
@@ -565,10 +567,11 @@ namespace Inventario.Controllers
                             //Tienda = ExistAlm.TipoDeOperacion,
                             IdProveedor = provedor.IdProveedores,
                             Proveedor = provedor.Nombre,
-                            
+                            Correo = provedor.Correo,
                             Clabe = provedor.ClaveInterbancaria,
                             Telefono = provedor.ClaveInterbancaria,
-                            RFC = provedor.RFC
+                            RFC = provedor.RFC,
+                            Tienda = ExistAlm.IdSitio,
 
                         };
 
