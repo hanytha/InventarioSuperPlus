@@ -298,12 +298,12 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
-            document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            document.getElementById("TxtClabe").value = Data[0].Clabe;
+            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+            //document.getElementById("TxtRFC").value = Data[0].RFC;
+            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            //document.getElementById("TxtClabe").value = Data[0].Clabe;
             MostrarArticulos(id);
         });
     }
@@ -329,7 +329,7 @@ function MostrarArticulos(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaArtProveedores/?IdP=" + id, function (Data) {
+        $.get("/Supervision/ConsultaArtProveedores/?IdP=" + id, function (Data) {
 
             let ID = Data.ID;
             let ArrayID = ID.split(',');
@@ -349,6 +349,9 @@ function MostrarArticulos(id) {
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font '></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -433,7 +436,7 @@ function GuardarPedidoExterno() {
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
-    $.get("/Prueba/BDProveedor", function (data) {
+    $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 

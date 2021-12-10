@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-
     public class SupervisionController : Controller
     {
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -467,7 +466,7 @@ namespace Inventario.Controllers
         }
 
         //Consulta de la tabla de articulos x tienda
-        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        //-----------Consulta los datos por ID del artículo pero en la tabla de existencias almacen G------------------
         public JsonResult ConsultaExistenciaAlmGJoinProveedor(long Id)
         {
             var ExistenciaAlmG = from ExistenciAAlmacen in InvBD.ExistenciaAlmacenG
@@ -505,5 +504,80 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+        //----------------------Lenar el combobox----------------------------
+        public JsonResult BDProveedor()
+        {
+            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
+        public JsonResult ConsultaArtProveedores(long IdP)
+        {
+            string Articulos = "";
+            string ID = "";
+            var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdP)&& p.IdAsignacion.Equals(2))
+                .Select(p => new
+                {
+                    Articulo = p.NombreEmpresa,
+                    Id = p.IdArticulo,
+
+                });
+            foreach (var ap in compra)
+            {
+                int Afectados = 0;
+
+                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+
+                if (nveces == 0)
+                {
+                    Articulos += ap.Articulo + ",";
+                    ID += ap.Id + ",";
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+
+            }
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
+        //-----------Consulta los datos por ID del artículo pero en la tabla de compras------------------
+        public JsonResult ConsultaComJoinProveedor(long Id)
+        {
+            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                        join provedor in InvBD.Proveedores
+                    on ExistAlm.IdProveedor equals provedor.IdProveedores
+                        where ExistAlm.IdProveedor.Equals(Id)
+                        select new
+                        {
+                            Articulo = ExistAlm.NombreEmpresa,
+                            IdArticulo = ExistAlm.IdArticulo,
+                            Tipo = ExistAlm.TipoDeOperacion,
+                            //Tienda = ExistAlm.TipoDeOperacion,
+                            IdProveedor = provedor.IdProveedores,
+                            Proveedor = provedor.Nombre,
+                            
+                            Clabe = provedor.ClaveInterbancaria,
+                            Telefono = provedor.ClaveInterbancaria,
+                            RFC = provedor.RFC
+
+                        };
+
+
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
     }
 }
