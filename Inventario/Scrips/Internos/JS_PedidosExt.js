@@ -30,10 +30,7 @@ function CrearTablaPedidos(Data) {
         CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#MoPedidos(" + Data[i].NumeroPedido + ")'><i class='fas fa-edit'></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
 
-
-
-        CodigoHtmlTablaPedidos += "<div class='modal fade' id='MoPedidos(" + Data[i].NumeroPedido + ")'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title'>Registro de pedidos</h5><button type='button' class='close' data-dismiss='modal'><i class='fas fa-times-circle'></i></button></div><div class='modal-body'><div class='card-body'><div class='card'><div class='card'><img class='card-img-top' src='http://1.bp.blogspot.com/-ib8pBUm-zgo/UZQPlF2yb1I/AAAAAAAAABM/h5pf7fstMkc/s1600/logotipo+super+plus+(1).jpg'></div></div></div></div></div></div>"
-   
+        CodigoHtmlTablaPedidos += "<div class='modal fade' id='MoPedidos(" + Data[i].NumeroPedido + ")'><div class='modal-dialog'><div class='modal-content'> <div class='modal-body'></div></div></div></div>"
     }
     CodigoHtmlTablaPedidos += "</tbody>";
     CodigoHtmlTablaPedidos += "</table>";
@@ -53,6 +50,8 @@ function VerPedido(num) {
         $.get("/Pedidosext/ConsultaPedidoXnum/?Num=" + num, function (Data) {
             var Pedidos = "";
 
+            Pedidos += "<div class='card'>"
+            Pedidos += " <img class='card-img-top' src='http://1.bp.blogspot.com/-ib8pBUm-zgo/UZQPlF2yb1I/AAAAAAAAABM/h5pf7fstMkc/s1600/logotipo+super+plus+(1).jpg'>"
             Pedidos += "<div class='card-body'>"
             Pedidos += "<h5 class='card-title' style='text-align:center;'>PEDIDO(S)</h5>"
             Pedidos += "</div>"
@@ -71,13 +70,11 @@ function VerPedido(num) {
                 Pedidos += "<li class='list-group-item'>"
                 Pedidos += "<strong>Télefono:</strong>" + Data[i].Telefono + "</li>"
                 Pedidos += "</ul>"
-
+                Pedidos += "</div>"
             }
-            Pedidos += "</div>"
             Pedidos += "<div class='modal-footer'>"
             Pedidos += "<button id='btnCancelar' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>"
             Pedidos += "</div>"
-
 
             let nombre = "MoPedidos" + num;
             document.getElementById(nombre).innerHTML = Pedidos;

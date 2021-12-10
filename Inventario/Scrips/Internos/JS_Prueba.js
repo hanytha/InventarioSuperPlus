@@ -186,11 +186,7 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
-        //-----------Crea el botón de ver pedido--------------------------------------------------------------------------
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<button onclick='VerPedido(0)' id='more' disabled='true' data-dismiss='modal' class='btn btn-info' data-toggle='modal' data-target='#VerPedidos'>Ver_Pedido</button>";
-            TablaArticulo += "</div>";
-        //-----------Termina-----------------------------------------------------------------------------------------------------
+
 
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
