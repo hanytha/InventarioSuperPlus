@@ -20,7 +20,7 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaPedidosExternos()
         {
-            var pedidosExt = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1))
+            var pedidosExt = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdPedidosExternos)
                 .Select(p => new
                 {
                     p.IdPedidosExternos,

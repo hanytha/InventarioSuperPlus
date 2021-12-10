@@ -2,65 +2,45 @@
 LlenarCMBPrin();
 BloquearCTRL();
 
-CrearAcordeonPedidosExt();
-function CrearAcordeonPedidosExt() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (data) {
-        AcordeonPedidosExt(data, document.getElementById("accordion"));
-    });
-}
 
-//Crea la información basica de las insidencias
-function AcordeonPedidosExt(data, IDo) {
-    var CodHtml = "";
-    for (var i = 0; i < data.length; i++) {
-        if (i < 1) {
-            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        else {
-            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosExternos + "'>";
-        CodHtml += "<h5 class='mb-0'>";
-        CodHtml += "<a data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosExternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
-
-        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodHtml += "<span >" + data[i].NumeroPedido + "</span>";
-        CodHtml += "</a>";
-        CodHtml += "</h5>";
-        CodHtml += "<div id='collapse" + data[i].IdPedidosExternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-        CodHtml += "<div class='card-body'>";
-        CodHtml += "<div class='row'>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad de Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + data[i].Articulo + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
-        CodHtml += "</div>";
-        CodHtml += "<div class='row'>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + data[i].Proveedor + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + data[i].Fecha + "</div>";
-        CodHtml += "</div >";
-        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosExternos + "," + data[i].IdPedidosExternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoExterno(" + data[i].IdPedidosExternos + "," + data[i].IdPedidosExternos + ",this)'><i class='fas fa-eraser'></i></button>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
+ConsultaPedidos();
+function ConsultaPedidos() {
+    $.get("/Pedidosext/ConsultaPedidosExternos", function (Data) {
+        CrearTablaPedidos(Data);
     }
-    IDo.innerHTML = CodHtml;
+    );
+}
+function CrearTablaPedidos(Data) {
+    var CodigoHtmlTablaPedidos = "";
+    CodigoHtmlTablaPedidos += "<table id='tablas' class='table table table-sm'>";
+    CodigoHtmlTablaPedidos += "<thead><tr><th>ID</th><th>Número_Pedido</th><th>Proveedor</th><th>Fecha</th><th>Acción</thead>";
+    CodigoHtmlTablaPedidos += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaPedidos += "<tr>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosExternos + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>";
+        CodigoHtmlTablaPedidos += "<td>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].NumeroPedido + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPedidos += "</td>";
+        CodigoHtmlTablaPedidos += "</tr>";
+    }
+    CodigoHtmlTablaPedidos += "</tbody>";
+    CodigoHtmlTablaPedidos += "</table>";
+    document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
 }
 
 
-
-
+//*************************************************************************************************************************
+//**************************************************************************************************************************
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
-
-
 //llena los combosprincipales
 function LlenarCMBPrin() {
     $.get("/GLOBAL/BDPro", function (data) {
