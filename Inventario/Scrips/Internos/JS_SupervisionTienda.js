@@ -60,6 +60,7 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>No. Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
@@ -71,6 +72,8 @@ function ConsultaArticuloComp(IDTienda) {
 
             let id = Data.id;
             let ArrayId = id.split(',');
+            let NoPedido = Data.NoPedido;
+            let ArrayNoPedido = NoPedido.split(',');
             let Nombre = Data.Nombre;
             let Arraynombre = Nombre.split(',');
             let Fechas = Data.Fechas;
@@ -85,6 +88,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";

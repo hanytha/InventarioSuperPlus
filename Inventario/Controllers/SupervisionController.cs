@@ -253,7 +253,9 @@ namespace Inventario.Controllers
         public JsonResult ConsultaArticulos(long IDTienda)
         {
             string id = "";
+            string NoPedido = "";
             string Nombre = "";
+
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
 
@@ -264,6 +266,7 @@ namespace Inventario.Controllers
                                    select new
                                    {
                                        Id = Articulos.IdArticulos,
+                                       NoPedido = ExistenciaAlmacenG.NoPedido,
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
                                        IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
@@ -275,6 +278,7 @@ namespace Inventario.Controllers
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
+                NoPedido += art.NoPedido + ",";
 
                 var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdArticulo)
                    //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(TiendasSupervision.IDTienda)).OrderBy(p => p.IdArticulo)
@@ -318,7 +322,7 @@ namespace Inventario.Controllers
                     Stock += "0" + ",";
                 }
             }
-            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
 
