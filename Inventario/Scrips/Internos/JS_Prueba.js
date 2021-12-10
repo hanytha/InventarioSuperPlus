@@ -204,8 +204,7 @@ function GuardarPedidoExterno() {
     if (CamposObligatorios() == true) {
 
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            //----------------------------Habílita el botón de ver_pedidos solo cuando el pedido es guardado---------------------------
-            document.getElementById('more').disabled = false;
+
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
             let llenar = "";
@@ -348,25 +347,3 @@ function Desplegar2(no) {
         });
     }
 }
-
-//********************************************************************************************************
-/*
-function VerPedido(num) {
-    if (num == 0) {
-        sessionStorage.setItem('IDG', '0');
-
-    }
-    else {
-
-        $.get("/Prueba/ConsultaVerpedido/?Num=" + num, function (Data) {
-
-            document.getElementById("TxtCorreoVer").value = Data[0].Correo;
-            document.getElementById("TxtRFCVer").value = Data[0].RFC;
-            document.getElementById("TxtTelefonoVer").value = Data[0].Telefono;
-            document.getElementById("TxtClabeVer").value = Data[0].Clabe;
-            document.getElementById("TxtNumPedidoVer").value = Data[0].NumeroPedido;
-
-        });
-    }
-}
-*/

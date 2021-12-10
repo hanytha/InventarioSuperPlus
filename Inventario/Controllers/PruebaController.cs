@@ -264,29 +264,5 @@ namespace Inventario.Controllers
 
             return Afectados;
         }
-
-        //****************************************************
-       /* public JsonResult ConsultaVerpedido(long Num)
-        {
-            var pedidoss = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-   
-                    p.NumeroPedido,
-                    p.CantidadSolicitada,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.Articulo,
-                    p.Fecha,
-                    p.Correo,
-                    p.Telefono,
-                    p.RFC,
-                    p.Clabe,
-
-                });
-
-            return Json(pedidoss, JsonRequestBehavior.AllowGet);
-        }*/
-
     }
 }
