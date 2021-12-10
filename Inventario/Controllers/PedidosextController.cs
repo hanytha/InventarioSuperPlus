@@ -52,6 +52,29 @@ namespace Inventario.Controllers
                 });
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
+
+        //*****************************************************************************************************************
+        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
+        public JsonResult ConsultaPedidoXnum(long Num)
+        {
+            var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdPedidosExternos,
+                    p.NumeroPedido,
+                    p.CantidadSolicitada,
+                    p.IdProveedor,
+                    p.Proveedor,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.Fecha,
+                    p.RFC,
+                    p.Correo,
+                    p.Clabe,
+                    p.Telefono,
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
         //Guardar los datos de la compra
         public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
         {
