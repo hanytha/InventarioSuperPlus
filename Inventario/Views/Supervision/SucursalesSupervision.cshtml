@@ -8,7 +8,7 @@
 <h2>Tiendas de la supervisión</h2>
 
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+@*<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
 <!------------------------------------------------------------------------------------------------------------>
 @*<div id="contenedor1"></div>*@
 <!------------------------------------------------>
@@ -61,9 +61,14 @@
                         </h4>
                         <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
-                                <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
+                                    <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPedidoInterno">REGISTRAR</button>
+
+                                    <div>
+                                        <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+                                    </div>
                                     <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                 </div>
 
@@ -128,7 +133,7 @@
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalProveedor">
+    <div class="modal fade" id="ModalPedidoInterno">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,40 +164,51 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
                                     <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect"></select>
                                 </div>
-                            </div>
-                      
-                        </div>
 
-                        @*<div class="row">
-                            <div class="col-md-6">
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTipoTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTipoTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <label class="form-control-label" for="cmbEstadoBloqueado">Tienda<span class="required">*</span></label>
+                                    <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        <!--Aquí se está ocupando razor para mostrar los estados desde la base de datos-->
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
                                 </div>
                             </div>
-                        </div>*@
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
-                            </div>
                         </div>
 
-                    </div>
-                      
+                       
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -209,8 +225,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                        </div>
+                      
                     </form>
                 </div>
                 <!-- pie del diálogo -->

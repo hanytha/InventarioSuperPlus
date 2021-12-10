@@ -223,10 +223,10 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
-                 && p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
-                 && p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
-                 && p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
-                 && p.Marca.Equals(DatosPedidoExterno.Marca)
+                 //&& p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
+                 //&& p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
+                 //&& p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
+                 //&& p.Marca.Equals(DatosPedidoExterno.Marca)
                  && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
                  && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
                  && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
@@ -241,10 +241,10 @@ namespace Inventario.Controllers
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
-                    obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
-                    obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
-                    obj.IdMarca = DatosPedidoExterno.IdMarca;
-                    obj.Marca = DatosPedidoExterno.Marca;
+                    //obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
+                    //obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
+                    //obj.IdMarca = DatosPedidoExterno.IdMarca;
+                    //obj.Marca = DatosPedidoExterno.Marca;
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
                     obj.Articulo = DatosPedidoExterno.Articulo;

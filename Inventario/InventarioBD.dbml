@@ -222,7 +222,6 @@
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Marca_Articulos" Member="Articulos" ThisKey="IdMarca" OtherKey="IdMarca" Type="Articulos" />
-      <Association Name="Marca_PedidosExternos" Member="PedidosExternos" ThisKey="IdMarca" OtherKey="IdMarca" Type="PedidosExternos" />
       <Association Name="Marca_PedidosInternos" Member="PedidosInternos" ThisKey="IdMarca" OtherKey="IdMarca" Type="PedidosInternos" />
     </Type>
   </Table>
@@ -257,10 +256,6 @@
       <Column Name="IdPedidosExternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CantidadSolicitada" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
-      <Column Name="IdUnidadDeMedida" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="UnidadDeMedida" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Marca" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -270,11 +265,10 @@
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Clabe" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NombreArchivo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Marca_PedidosExternos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
       <Association Name="Proveedores_PedidosExternos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
-      <Association Name="UnidadDeMedida_PedidosExternos" Member="UnidadDeMedida1" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="UnidadDeMedida" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PedidosInternos" Member="PedidosInternos">
@@ -319,7 +313,7 @@
       <Column Name="IdProveedores" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="RazonSocial" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RazonSocial" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -450,7 +444,6 @@
       <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />
-      <Association Name="UnidadDeMedida_PedidosExternos" Member="PedidosExternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosExternos" />
       <Association Name="UnidadDeMedida_PedidosInternos" Member="PedidosInternos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="PedidosInternos" />
     </Type>
   </Table>
