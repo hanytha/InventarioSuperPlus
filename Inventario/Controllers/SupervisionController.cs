@@ -471,14 +471,14 @@ namespace Inventario.Controllers
 
         //Consulta de la tabla de articulos x tienda
         //-----------Consulta los datos por ID del artículo pero en la tabla de existencias almacen G------------------
-        public JsonResult ConsultaExistenciaAlmGJoinProveedor(long Id)
+        public JsonResult ConsultaExistenciaAlmGJoinProveedor(long No)
         {
             var ExistenciaAlmG = from ExistenciAAlmacen in InvBD.ExistenciaAlmacenG
                                  join provedor in InvBD.Proveedores
                              on ExistenciAAlmacen.IdProveedor equals provedor.IdProveedores
                                  join Tienda in InvBD.Tienda
                                    on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.IdArticulo.Equals(Id) 
+                                 where ExistenciAAlmacen.NoPedido.Equals(No) 
                                  select new
                                  {
                                      FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
