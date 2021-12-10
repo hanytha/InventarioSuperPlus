@@ -494,20 +494,20 @@ namespace Inventario.Controllers
             return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
 
         }
-        public JsonResult ConsultaNumPedido(long No)
-        {
-            var compra = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(No))
-                .Select(p => new
-                {
-                    p.NoPedido,
-                    p.NombreEmpresa,
-                    p.FechaDeIngreso,
-                    p.Unidad,
-                    p.Coste
-                });
+        //public JsonResult ConsultaNumPedido(long No)
+        //{
+        //    var compra = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(No))
+        //        .Select(p => new
+        //        {
+        //            p.NoPedido,
+        //            p.NombreEmpresa,
+        //            p.FechaDeIngreso,
+        //            p.Unidad,
+        //            p.Coste
+        //        });
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
+        //}
 
 
 

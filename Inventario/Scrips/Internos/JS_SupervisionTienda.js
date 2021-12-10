@@ -206,9 +206,9 @@ function Desplegar(no) {
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
             DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
-            DespXArt += "<div class='col-sm'>Costo</div>";
-            DespXArt += "<div class='col-sm'>Proveedor</div>";
-            DespXArt += "<div class='col-sm'>Acción</div>";
+            //DespXArt += "<div class='col-sm'>Costo</div>";
+            //DespXArt += "<div class='col-sm'>Proveedor</div>";
+            //DespXArt += "<div class='col-sm'>Acción</div>";
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
@@ -220,17 +220,7 @@ function Desplegar(no) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                //-----------------------------Abre el modal deacuerdo con el proveedor---------------------------------------------------
-                DespXArt += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
-                //-----------------Botón para desplegar la segunda tabla--------------------------------------------
-                DespXArt += "<div class='col-sm'>"
-                DespXArt += "<label>"
-                DespXArt += "<button title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoPedido + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoPedido + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoPedido + ")'><i class='fas fa-angle-down'></i></button>";
-                DespXArt += "</label>"
-                DespXArt += "</div>";
-                //-------------------Termina-------------------------
-                DespXArt += "</div>";
+             
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 DespXArt += "<div class='row'>";
                 DespXArt += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
@@ -248,47 +238,47 @@ function Desplegar(no) {
 
 
 
-//------------- Función que crea el segundo grid para desplegar que se despliega por numero de pedido-----------------------------
-function Desplegar2(no) {
-    if (no == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
+////------------- Función que crea el segundo grid para desplegar que se despliega por numero de pedido-----------------------------
+//function Desplegar2(no) {
+//    if (no == 0) {
+//        sessionStorage.setItem('IDArt', '0');
+//    }
+//    else {
 
-        $.get("/Supervision/ConsultaNumPedido/?No=" + no, function (Data) {
-            var DespXPedido = "";
-            //---Encabezado del grid---------
-            DespXPedido += "<hr class='solid3'>";
-            DespXPedido += "<div class='row'>";
-            DespXPedido += "<div class='col-sm'>NoPedido</div>";
-            DespXPedido += "<div class='col-sm'>Artículo</div>";
-            DespXPedido += "<div class='col-sm'>Fecha de Ingreso</div>";
-            DespXPedido += "<div class='col-sm'>Unidad de medida</div>";
-            DespXPedido += "<div class='col-sm'>Costo</div>";
-            DespXPedido += "</div>";
-            DespXPedido += "<hr class='solid3'>";
+//        $.get("/Supervision/ConsultaNumPedido/?No=" + no, function (Data) {
+//            var DespXPedido = "";
+//            //---Encabezado del grid---------
+//            DespXPedido += "<hr class='solid3'>";
+//            DespXPedido += "<div class='row'>";
+//            DespXPedido += "<div class='col-sm'>NoPedido</div>";
+//            DespXPedido += "<div class='col-sm'>Artículo</div>";
+//            DespXPedido += "<div class='col-sm'>Fecha de Ingreso</div>";
+//            DespXPedido += "<div class='col-sm'>Unidad de medida</div>";
+//            DespXPedido += "<div class='col-sm'>Costo</div>";
+//            DespXPedido += "</div>";
+//            DespXPedido += "<hr class='solid3'>";
 
-            for (var i = 0; i < Data.length; i++) {
+//            for (var i = 0; i < Data.length; i++) {
 
-                //----Cuerpo del grid-------------
-                DespXPedido += "<div class='row'>";
-                DespXPedido += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-                DespXPedido += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
-                DespXPedido += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                DespXPedido += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
-                DespXPedido += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-                DespXPedido += "</div>";
-            }
-            DespXPedido += "</div>";
-            DespXPedido += "</br>";
-            DespXPedido += "</br>";
+//                //----Cuerpo del grid-------------
+//                DespXPedido += "<div class='row'>";
+//                DespXPedido += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
+//                DespXPedido += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
+//                DespXPedido += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+//                DespXPedido += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
+//                DespXPedido += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+//                DespXPedido += "</div>";
+//            }
+//            DespXPedido += "</div>";
+//            DespXPedido += "</br>";
+//            DespXPedido += "</br>";
 
-            let numero = "desplegable2" + no;
-            document.getElementById(numero).innerHTML = DespXPedido;
-        });
+//            let numero = "desplegable2" + no;
+//            document.getElementById(numero).innerHTML = DespXPedido;
+//        });
 
-    }
-}
+//    }
+//}
 
 
 
