@@ -126,6 +126,7 @@
                                     <div align="right"><strong>Comercializadora Picaros de la Mixteca S.A. de C.V</strong></div>
                                     <!--------------------------------------Encabezado de el dodumento--------------------------------------->
                                     <br />
+
                                     <label class="form-control-label" for="TxtProveedor">Proveedor:</label>
                                     <span id="TxtProveedor"></span>
                                     <br />
@@ -141,15 +142,17 @@
                                     <label class="form-control-label" for="TxtCorreo">Correo:</label>
                                     <label id="TxtCorreo"></label>
                                     <br />
+                                    <br />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="TblArticulos">Artículo(s)</label>
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArticulos">Artículo(s) a solicitar</label>
+                                                </div>
                                                 <div id="TblArticulos">Artículo(s) de el pedido</div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -176,6 +179,7 @@
         ventimp.document.close();
         ventimp.print();
         ventimp.close();
+
     }
 </script>
 <!------------------------------------------------------------------------------------------------------------------------->

@@ -72,25 +72,23 @@ function MostrarArticulos(num) {
         $.get("/Pedidosext/ConsultaArícuiloXnum/?Pedi=" + num, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<ol class='list-group list-group-numbered'>";
 
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los Artículos-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<li class='list-group-item'>";
                 TablaArticulo += "<span>Artículo:</span>";
                 TablaArticulo += " <label id='TxtArticulo'>" + Data[i].Articulo + "</label>"
-                TablaArticulo += "</div>";
-                //-------Crea la cantidad solicitada-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<br/>"
                 TablaArticulo += "<label>"
                 TablaArticulo += "<span>Cantidad:</span>";
                 TablaArticulo += " <label id='TxtArticulo'>" + Data[i].CantidadSolicitada + "</label>"
                 TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
+                TablaArticulo += "</li>";
+
             }
 
-            TablaArticulo += "</div>";
-            TablaArticulo += "</div>";
+            TablaArticulo += "</ol>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
