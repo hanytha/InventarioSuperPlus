@@ -55,8 +55,6 @@ function VerPedido(num) {
             document.getElementById("TxtClabe").textContent = Data[0].Clabe;
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
-            document.getElementById("TxtArticulo").textContent = Data[0].Articulo;
-            document.getElementById("TxtCantidad").textContent = Data[0].CantidadSolicitada;
             MostrarArticulos(num);
         });
     }
@@ -79,20 +77,22 @@ function MostrarArticulos(num) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los Artículos-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<span>Artículo:</span>";
                 TablaArticulo += " <label id='TxtArticulo'>" + Data[i].Articulo + "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la cantidad solicitada-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
+                TablaArticulo += "<span>Cantidad:</span>";
                 TablaArticulo += " <label id='TxtArticulo'>" + Data[i].CantidadSolicitada + "</label>"
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
-
 
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
-}
+} 
+
