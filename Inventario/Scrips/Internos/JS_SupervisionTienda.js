@@ -159,7 +159,7 @@ function ConsultaArticuloComp(IDTienda) {
 //    //let Costos = Data.Costos;
 //    //let Arraycostos = Costos.split(',');
 
-   
+
 //        for (var i = 0; i < ArrayId.length; i++) {
 
 //            CodigoHtmlArticuloComp += "<div>";
@@ -185,9 +185,9 @@ function ConsultaArticuloComp(IDTienda) {
 //            CodigoHtmlArticuloComp += "</div>";
 //            //---------------------------------------Termina----------------------------------------------------------------------------
 //        }
-  
+
 //    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
-    
+
 //}
 
 //----------------------------Crea el grid a desplegar con el botón con la funciíon de desplegar------------------------------------
@@ -220,7 +220,7 @@ function Desplegar(no) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-             
+
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 DespXArt += "<div class='row'>";
                 DespXArt += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
@@ -285,13 +285,16 @@ function Desplegar(no) {
 //----------------Abrir modal Proveedor--------------------------------------------------------
 function abrirModal(id) {
     LlenarCMCProveedores();
+
     LimpiarCampos();
     if (id == 0) {
-        sessionStorage.setItem('IDG', '0');
+        sessionStorage.setItem('IdPedidosExternos', '0');
     }
     else {
 
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+            //for (var i = 0; i < Data.length; i++) {
+            sessionStorage.setItem('IdPedidosExternos', Data[0].IdPedidosExternos);
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             //document.getElementById("cmbTipoTienda").value = Data[0].IdSitio;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
@@ -299,6 +302,8 @@ function abrirModal(id) {
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
             MostrarArticulos(id);
+            //}
+
         });
     }
 }

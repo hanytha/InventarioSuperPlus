@@ -64,10 +64,12 @@
 
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
-                                    <button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPedidoInterno">REGISTRAR</button>
+
+                                    <button onclick="abrirModal(@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
 
                                     <div>
                                         <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+
                                     </div>
                                     <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                 </div>
@@ -177,21 +179,21 @@
                                     <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         <!--Aquí se está ocupando razor para mostrar los estados desde la base de datos-->
-                                        @{
-                                            if (@TiendasSupervision.IDTienda != null)
-                                            {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                        @*@{
+                                                if (@TiendasSupervision.IDTienda != null)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                    {
+                                                        <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    }
                                                 }
-                                            }
-                                        }
+                                            }*@
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                       
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -225,7 +227,7 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                     </form>
                 </div>
                 <!-- pie del diálogo -->

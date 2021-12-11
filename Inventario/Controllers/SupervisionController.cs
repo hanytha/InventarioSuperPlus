@@ -362,7 +362,7 @@ namespace Inventario.Controllers
             Sucursales.Longitud = new List<string>();
             Sucursales.HApertura = new List<string>();
             Sucursales.HCierre = new List<string>();
-       
+
             Sucursales.Estatus = new List<int>();
 
             var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
@@ -478,7 +478,7 @@ namespace Inventario.Controllers
                              on ExistenciAAlmacen.IdProveedor equals provedor.IdProveedores
                                  join Tienda in InvBD.Tienda
                                    on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.NoPedido.Equals(No) 
+                                 where ExistenciAAlmacen.NoPedido.Equals(No)
                                  select new
                                  {
                                      FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
@@ -529,7 +529,7 @@ namespace Inventario.Controllers
         {
             string Articulos = "";
             string ID = "";
-            var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdP)&& p.IdAsignacion.Equals(2))
+            var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdP) && p.IdAsignacion.Equals(2))
                 .Select(p => new
                 {
                     Articulo = p.NombreEmpresa,
@@ -560,24 +560,24 @@ namespace Inventario.Controllers
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
-                        join provedor in InvBD.Proveedores
-                    on ExistAlm.IdProveedor equals provedor.IdProveedores
-                        where ExistAlm.IdProveedor.Equals(Id)
-                        select new
-                        {
-                            Articulo = ExistAlm.NombreEmpresa,
-                            IdArticulo = ExistAlm.IdArticulo,
-                            Tipo = ExistAlm.TipoDeOperacion,
-                            //Tienda = ExistAlm.TipoDeOperacion,
-                            IdProveedor = provedor.IdProveedores,
-                            Proveedor = provedor.Nombre,
-                            Correo = provedor.Correo,
-                            Clabe = provedor.ClaveInterbancaria,
-                            Telefono = provedor.ClaveInterbancaria,
-                            RFC = provedor.RFC,
-                            Tienda = ExistAlm.IdSitio,
+                            join provedor in InvBD.Proveedores
+                        on ExistAlm.IdProveedor equals provedor.IdProveedores
+                            where ExistAlm.IdSitio.Equals(Id)
+                            select new
+                            {
+                                Articulo = ExistAlm.NombreEmpresa,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                //Tienda = ExistAlm.TipoDeOperacion,
+                                IdProveedor = provedor.IdProveedores,
+                                Proveedor = provedor.Nombre,
+                                Correo = provedor.Correo,
+                                Clabe = provedor.ClaveInterbancaria,
+                                Telefono = provedor.ClaveInterbancaria,
+                                RFC = provedor.RFC,
+                                Tienda = ExistAlm.IdSitio,
 
-                        };
+                            };
 
 
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
