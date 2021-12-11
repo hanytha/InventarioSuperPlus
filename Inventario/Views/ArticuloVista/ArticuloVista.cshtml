@@ -109,14 +109,22 @@
         </div>
     </div>
 </div>
-
-<div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1"><img src="~/Assets/Imagenes/search.png" width="30" height="30"></span>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-</div>
+<!-----------------------------------------Texto a imprimir-------------------------------------------------------->
+<div id="seleccion">Texto a imprimir</div>
+<a  type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir texto</a>
 
 
-<!------------------------------------------------------------->
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
+    }
+</script>
+<!----------------------------------------------------------------------------------------------------------------------------->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -163,13 +171,10 @@
 </script>
 
 
-
-
-
 <div class="input-group mb-3">
-    <span  class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-    <input  class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search..">
-</div> 
+    <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+    <input class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search..">
+</div>
 <table class="table table-bordered order-table ">
     <thead>
         <tr>
@@ -224,7 +229,8 @@
         <td>Japan</td>
     </tr>
 </table>
-<!--------------------------------------------------------------------------------------->
+
+<!------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {

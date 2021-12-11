@@ -31,12 +31,10 @@ function CrearTablaPedidos(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
-        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#MoPedidos(" + Data[i].NumeroPedido + ")'><i class='far fa-eye'></i></i></button></td>";
+        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
-
-        CodigoHtmlTablaPedidos += "<div class='modal fade' id='MoPedidos(" + Data[i].NumeroPedido + ")'><div class='modal-dialog'><div class='modal-content'> <div class='modal-body'></div></div></div></div>"
     }
-    CodigoHtmlTablaPedidos += "</tbody>";
+    CodigoHtmlTablaPedidos += "</tbody>"; 
     CodigoHtmlTablaPedidos += "</table>";
     CodigoHtmlTablaPedidos += "</div>";
     document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
@@ -52,36 +50,11 @@ function VerPedido(num) {
     else {
 
         $.get("/Pedidosext/ConsultaPedidoXnum/?Num=" + num, function (Data) {
-            var Pedidos = "";
-
-            Pedidos += "<div class='card'>"
-            Pedidos += " <img class='card-img-top' src='http://1.bp.blogspot.com/-ib8pBUm-zgo/UZQPlF2yb1I/AAAAAAAAABM/h5pf7fstMkc/s1600/logotipo+super+plus+(1).jpg'>"
-            Pedidos += "<div class='card-body'>"
-            Pedidos += "<h5 class='card-title' style='text-align:center;'>PEDIDO(S)</h5>"
-            Pedidos += "</div>"
-
-            for (var i = 0; i < Data.length; i++) {
-
-                Pedidos += "<ul class='list-group list-group-flush'>"
-                Pedidos += "<li class='list-group-item'>"
-                Pedidos += "<strong>Proveedor:</strong>" + Data[i].Proveedor + "</li>"
-                Pedidos += "<li class='list-group-item'>"
-                Pedidos += "<strong>RFC:</strong>" + Data[i].RFC + "</li>"
-                Pedidos += "<li class='list-group-item'>"
-                Pedidos += "<strong>Correo:</strong>" + Data[i].Correo + "</li>"
-                Pedidos += "<li class='list-group-item'>"
-                Pedidos += "<strong>Clabe Interbancaria:</strong>" + Data[i].Clabe + "</li>"
-                Pedidos += "<li class='list-group-item'>"
-                Pedidos += "<strong>Télefono:</strong>" + Data[i].Telefono + "</li>"
-                Pedidos += "</ul>"
-                Pedidos += "</div>"
-            }
-            Pedidos += "<div class='modal-footer'>"
-            Pedidos += "<button id='btnCancelar' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>"
-            Pedidos += "</div>"
-
-            let nombre = "MoPedidos" + num;
-            document.getElementById(nombre).innerHTML = Pedidos;
+            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+            document.getElementById("TxtRFC").textContent = Data[0].RFC;
+            document.getElementById("TxtClabe").textContent = Data[0].Clabe;
+            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
         });
     }
 }

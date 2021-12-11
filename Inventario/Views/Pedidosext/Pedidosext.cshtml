@@ -104,83 +104,43 @@
 <!-------------------------------------------Id de la tabla para crearse desde la funcón script---------------------------------->
 <div id="TablaPedidos"></div>
 <!-----------------------------------------------------------Termina----------------------------------------------------->
-
-
-
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="ModalPedidos">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Registro de pedidos</h5>
+                    <h4 class="modal-title">PEDIDOS</h4>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
-                                    <select onchange="abrirModal(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <label class="form-control-label" for="TxtProveedor">Proveedor:</label>
+                                    <span  id="TxtProveedor"></span>
+                                    <br />
+                                    <label class="form-control-label" for="TxtRFC">RFC:</label>
+                                    <label id="TxtRFC"></label>
+                                    <br />
+                                    <label class="form-control-label" for="TxtClabe">Clabe:</label>
+                                    <label id="TxtClabe"></label>
+                                    <br />
+                                    <label class="form-control-label" for="TxtTelefono">Télefono:</label>
+                                    <label id="TxtTelefono"></label>
+                                    <br />
+                                    <label class="form-control-label" for="TxtCorreo">Correo:</label>
+                                    <label id="TxtCorreo"></label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtRFC]" id="TxtRFC" class="form-control  limpiar obligatorio">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtClabe">Clabe Interbancaria<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtClabe]" id="TxtClabe" class="form-control  limpiar obligatorio">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaSistema">Fecha de ingreso<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtFechaSistema]" id="TxtFechaSistema" class="form-control obligatorio">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">Artículo(s) del proveedor</div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir texto</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -189,6 +149,19 @@
 </div>
 
 
+
+<!-------------------------------------------------------------------->
+
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
+    }
+</script>
 <!------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------Estilo a tittle de el botón de ver pedido------------------------------------------------------>
 
