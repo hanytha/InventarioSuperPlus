@@ -27,7 +27,7 @@ function CrearTablaPedidos(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
-        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#MoPedidos(" + Data[i].NumeroPedido + ")'><i class='fas fa-edit'></i></button></td>";
+        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#MoPedidos(" + Data[i].NumeroPedido + ")'><i class='far fa-eye'></i></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
 
         CodigoHtmlTablaPedidos += "<div class='modal fade' id='MoPedidos(" + Data[i].NumeroPedido + ")'><div class='modal-dialog'><div class='modal-content'> <div class='modal-body'></div></div></div></div>"
