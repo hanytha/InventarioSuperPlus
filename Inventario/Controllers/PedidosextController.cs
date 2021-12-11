@@ -53,7 +53,7 @@ namespace Inventario.Controllers
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
 
-        //******************************************Abrir modal por número de pedido**************************************************
+        //******************************************Cosulta los pedidos por número de compra**************************************************
         public JsonResult ConsultaPedidoXnum(long Num)
         {
             var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
@@ -76,7 +76,7 @@ namespace Inventario.Controllers
         }
         //*****************************************************************************************************************
         //*****************************************************************************************************************
-        //******************************************Abrir modal por número de pedido**************************************************
+        //*****************************Consulta los artículos por número de pedido**************************************************
         public JsonResult ConsultaArícuiloXnum(long Pedi)
         {
             var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
