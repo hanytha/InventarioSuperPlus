@@ -93,6 +93,7 @@
     <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Assets\Imagenes\logotipo.png" />
+    <Content Include="Assets\Imagenes\search.png" />
     <Content Include="Assets\Login\logotipo.svg" />
     <Content Include="Content\EstiloLogin.css" />
     <Content Include="Content\tarjeta.css" />
