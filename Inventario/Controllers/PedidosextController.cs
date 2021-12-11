@@ -74,8 +74,24 @@ namespace Inventario.Controllers
                 });
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
-    //*****************************************************************************************************************
-   //*****************************************************************************************************************
+        //*****************************************************************************************************************
+        //*****************************************************************************************************************
+        //******************************************Abrir modal por número de pedido**************************************************
+        public JsonResult ConsultaArícuiloXnum(long Pedi)
+        {
+            var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdPedidosExternos,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.CantidadSolicitada,
+
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
+        //*****************************************************************************************************************
+        //*****************************************************************************************************************
         //Guardar los datos de la compra
         public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
         {

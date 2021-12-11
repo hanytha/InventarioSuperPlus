@@ -41,7 +41,7 @@ function CrearTablaPedidos(Data) {
 }
 
 //******************************************************************************************************************************
-//******************************************************************************************************************************
+//*************************Ver el pedido deacuerdo con el número de pedido************************************************
 
 function VerPedido(num) {
     if (num == 0) {
@@ -55,6 +55,44 @@ function VerPedido(num) {
             document.getElementById("TxtClabe").textContent = Data[0].Clabe;
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+            document.getElementById("TxtArticulo").textContent = Data[0].Articulo;
+            document.getElementById("TxtCantidad").textContent = Data[0].CantidadSolicitada;
+            MostrarArticulos(num);
+        });
+    }
+}
+
+//******************************************************************************************************************************
+//************Genera los artículo y la cantidad solicitada deacuerdo con el número de pedido*****************************
+
+function MostrarArticulos(num) {
+    if (num == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Pedidosext/ConsultaArícuiloXnum/?Pedi=" + num, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los Artículos-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += " <label id='TxtArticulo'>" + Data[i].Articulo + "</label>"
+                TablaArticulo += "</div>";
+                //-------Crea la cantidad solicitada-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += " <label id='TxtArticulo'>" + Data[i].CantidadSolicitada + "</label>"
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+            }
+
+
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
 }
