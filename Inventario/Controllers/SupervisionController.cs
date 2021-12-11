@@ -525,15 +525,15 @@ namespace Inventario.Controllers
 
 
         //---------------Consulta datos del artículo por ID de artíulo en la tabla de artículos----------------
-        public JsonResult ConsultaArtProveedores(long IdP)
+        public JsonResult ConsultaArtProveedores()
         {
             string Articulos = "";
             string ID = "";
-            var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdP) && p.IdAsignacion.Equals(2))
+            var compra = InvBD.Articulos.Where(p => p.IdProveedor.Equals(1) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     Articulo = p.NombreEmpresa,
-                    Id = p.IdArticulo,
+                    Id = p.IdArticulos,
 
                 });
             foreach (var ap in compra)

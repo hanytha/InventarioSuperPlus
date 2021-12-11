@@ -284,29 +284,29 @@ function Desplegar(no) {
 
 //----------------Abrir modal Proveedor--------------------------------------------------------
 function abrirModal(id) {
-    LlenarCMCProveedores();
+    LlenarCMBTienda();
 
     LimpiarCampos();
     if (id == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
+        sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
 
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             //for (var i = 0; i < Data.length; i++) {
-            sessionStorage.setItem('IdPedidosExternos', Data[0].IdPedidosExternos);
+            sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-            
+
             //document.getElementById("cmbTipoTienda").value = Data[0].IdSitio;
             //document.getElementById("TxtCorreo").value = Data[0].Correo;
             ////document.getElementById("TxtRFC").value = Data[0].RFC;
             //document.getElementById("TxtTelefono").value = Data[0].Telefono;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
-            MostrarArticulos(id);
+            //MostrarArticulos(id);
             //}
-
         });
+        MostrarArticulos();
     }
 }
 //-------limpiar campos del Modal-formulario------------
@@ -323,43 +323,41 @@ function LimpiarCampos() {
 
 //************************************************************************************************
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
-function MostrarArticulos(id) {
+function MostrarArticulos() {
 
-    if (id == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
-    }
-    else {
+    //if (id == 0) {
+    //    sessionStorage.setItem('IdPedidosInternos', '0');
+    //}
+    //else {
 
-        $.get("/Supervision/ConsultaArtProveedores/?IdP=" + id, function (Data) {
+    $.get("/Supervision/ConsultaArtProveedores", function (Data) {
 
-            let ID = Data.ID;
-            let ArrayID = ID.split(',');
-            let Articulos = Data.Articulos;
-            let ArrayArticulos = Articulos.split(',');
+        let ID = Data.ID;
+        let ArrayID = ID.split(',');
+        let Articulos = Data.Articulos;
+        let ArrayArticulos = Articulos.split(',');
 
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
+        var TablaArticulo = "";
+        TablaArticulo += "<div class='row row-cols-auto'>";
 
-            for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-                //-------Crea los chex-box-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
-                TablaArticulo += "</div>";
-
-                //-------Crea los input-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font '></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
-            }
+        for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
+            //-------Crea los chex-box-------------------------------------------------------------------------
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
             TablaArticulo += "</div>";
-            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-        });
-    }
+
+            //-------Crea los input-------------------------------------------------------------------------
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>"
+            TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+            TablaArticulo += "</label>"
+           
+            TablaArticulo += "</div>";
+        }
+        TablaArticulo += "</div>";
+        document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+    });
+    //}
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -367,7 +365,7 @@ function MostrarArticulos(id) {
 function GuardarPedidoExterno() {
 
     if (confirm("¿Desea aplicar los cambios?") == 1) {
-        var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+        var IdPedidosInternos = sessionStorage.getItem('IdPedidosInternos');
 
         var IdProveedor = document.getElementById("cmbProveedor").value;
         var TempProvedor = document.getElementById("cmbProveedor");
@@ -401,7 +399,7 @@ function GuardarPedidoExterno() {
         var CantidadSolicitada = llenar.substring(0, llenar.length - 1);
         //------------------------------------------------------------------------------------------------------
         var frm = new FormData();
-        frm.append("IdPedidosExternos", IdPedidosExternos);
+        frm.append("IdPedidosInternos", IdPedidosInternos);
         frm.append("IdProveedor", IdProveedor);
         frm.append("Proveedor", Proveedor);
         frm.append("Correo", Correo);
@@ -436,7 +434,7 @@ function GuardarPedidoExterno() {
     }
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-function LlenarCMCProveedores() {
+function LlenarCMBTienda() {
     //$.get("/Supervision/BDProveedor", function (data) {
     //    llenarCombo(data, document.getElementById("cmbProveedor"));
     //});
