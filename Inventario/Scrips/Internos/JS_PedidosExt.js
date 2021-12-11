@@ -8,8 +8,9 @@ function ConsultaPedidos() {
 }
 function CrearTablaPedidos(Data) {
     var CodigoHtmlTablaPedidos = "";
+    CodigoHtmlTablaPedidos += "<input class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>"
     CodigoHtmlTablaPedidos +="<div class='table-responsive'>"
-    CodigoHtmlTablaPedidos += "<table class='table-primary'>";
+    CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>ID</th>";
