@@ -239,7 +239,7 @@ function Desplegar(no) {
 
 
 ////------------- Función que crea el segundo grid para desplegar que se despliega por numero de pedido-----------------------------
-//function Desplegar2(no) {
+//function Desplegar2(no) { 
 //    if (no == 0) {
 //        sessionStorage.setItem('IDArt', '0');
 //    }
@@ -295,11 +295,13 @@ function abrirModal(id) {
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             //for (var i = 0; i < Data.length; i++) {
             sessionStorage.setItem('IdPedidosExternos', Data[0].IdPedidosExternos);
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTienda").value = Data[0].Tienda;
+            
             //document.getElementById("cmbTipoTienda").value = Data[0].IdSitio;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
-            //document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+            ////document.getElementById("TxtRFC").value = Data[0].RFC;
+            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
             MostrarArticulos(id);
             //}
@@ -435,10 +437,12 @@ function GuardarPedidoExterno() {
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
-    $.get("/Supervision/BDProveedor", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"));
+    //$.get("/Supervision/BDProveedor", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbProveedor"));
+    //});
+    $.get("/Supervision/BDTienda", function (data) {
+        llenarCombo(data, document.getElementById("cmbTienda"));
     });
-
 }
 
 

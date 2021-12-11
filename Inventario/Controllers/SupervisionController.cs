@@ -513,11 +513,11 @@ namespace Inventario.Controllers
 
 
         //----------------------Lenar el combobox----------------------------
-        public JsonResult BDProveedor()
+        public JsonResult BDTienda()
         {
-            var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
                 .Select(p => new {
-                    ID = p.IdProveedores,
+                    ID = p.IdTienda,
                     Nombre = p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);

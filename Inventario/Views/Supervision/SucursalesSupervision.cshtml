@@ -169,15 +169,18 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect"></select>
+                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
+                                        <option value="0">Almacén General</option>
+                                    </select>
+                                    
                                 </div>
 
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbEstadoBloqueado">Tienda<span class="required">*</span></label>
-                                    <select id="cmbEstadoBloqueado" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                        <option value="0">--Seleccione--</option>
+                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTienda" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        @*<option value="0">--Seleccione--</option>*@
                                         <!--Aquí se está ocupando razor para mostrar los estados desde la base de datos-->
                                         @*@{
                                                 if (@TiendasSupervision.IDTienda != null)
@@ -195,7 +198,7 @@
 
 
 
-                        <div class="row">
+                        @*<div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
@@ -208,8 +211,7 @@
                                     <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
                                 </div>
                             </div>
-
-                        </div>
+                        </div>*@
 
                         <div class="row">
                             <div class="col-md-12">
