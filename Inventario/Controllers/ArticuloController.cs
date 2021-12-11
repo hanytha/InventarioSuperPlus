@@ -7,11 +7,11 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
-    //Llamar al método de seguridad
+    //Lamar al método de seguridad
     [Seguridad]
     public class ArticuloController : Controller
     {
-      
+
         //conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
 
@@ -49,7 +49,7 @@ namespace Inventario.Controllers
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
-       
+
         public JsonResult ConsultaArticulo(long Id)
         {
             var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))

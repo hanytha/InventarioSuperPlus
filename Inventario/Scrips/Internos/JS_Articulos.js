@@ -33,7 +33,7 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
 
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos  + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
 
@@ -151,16 +151,16 @@ function GuardarArticulo() {
 
             var IdProveedor = document.getElementById("cmbProveedor").value;
             var TempProvedor = document.getElementById("cmbProveedor");
-            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;  
+            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
 
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var IdCategorias = document.getElementById("cmbCategoria").value;
             var TempCategoria = document.getElementById("cmbCategoria");
-            var Categoria = TempCategoria.options[TempCategoria.selectedIndex].text;  
+            var Categoria = TempCategoria.options[TempCategoria.selectedIndex].text;
             var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
             var TempMedida = document.getElementById("cmbUnidad");
-            var Unidad = TempMedida.options[TempMedida.selectedIndex].text; 
+            var Unidad = TempMedida.options[TempMedida.selectedIndex].text;
 
             var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
@@ -173,7 +173,7 @@ function GuardarArticulo() {
             var Area = TempArea.options[TempArea.selectedIndex].text;
             var IdMarca = document.getElementById("cmbMarca").value;
             var TempMarca = document.getElementById("cmbMarca");
-            var Marca = TempMarca.options[TempMarca.selectedIndex].text; 
+            var Marca = TempMarca.options[TempMarca.selectedIndex].text;
 
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
             if (Logo.endsWith('png')) {
