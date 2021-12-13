@@ -101,7 +101,7 @@ function ConsultaArticuloComp(IDTienda) {
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i]+","+ ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -109,7 +109,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "</div>";
                 //------------------------Despliega primer grid-----------------------------------------------------------------------
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + ArrayIdSitio[i] + "' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + ","+ ArrayIdSitio[i] +"' class='collapse'></div></div>";
                 CodigoHtmlArticuloComp += "</div>";
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
@@ -168,7 +168,7 @@ function Desplegar(no, id) {
             DespXArt += "</br>";
             DespXArt += "</br>";
 
-            let compraArticulo = "desplegable" + no + id;
+            let compraArticulo = "desplegable" + no;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
         });
     }
