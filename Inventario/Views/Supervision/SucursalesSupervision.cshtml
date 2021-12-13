@@ -167,7 +167,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
+                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">Almacén General</option>
                                     </select>
                                     
@@ -179,7 +179,7 @@
                                     <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
                                     <select id="cmbTienda" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar los estados desde la base de datos*@
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
                                                 if (@TiendasSupervision.IDTienda != null)
                                                 {

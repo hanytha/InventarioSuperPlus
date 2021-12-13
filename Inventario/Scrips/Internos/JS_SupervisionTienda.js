@@ -1,4 +1,4 @@
-﻿
+﻿BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
 function ConsultaArticuloComp(IDTienda) {
@@ -270,7 +270,6 @@ function MostrarArticulos() {
             TablaArticulo += "<label>"
             TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
             TablaArticulo += "</label>"
-
             TablaArticulo += "</div>";
         }
         TablaArticulo += "</div>";
@@ -279,6 +278,10 @@ function MostrarArticulos() {
     //}
 }
 
-
-
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
