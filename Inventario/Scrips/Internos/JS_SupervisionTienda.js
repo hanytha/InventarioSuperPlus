@@ -1,54 +1,6 @@
-﻿//juntado
-//const f = new Date();
-
-
-//function Usuarios_X_Tienda(IDTienda) {
-//    $.get("/Usuario/UsuariosXTienda/?IDTienda=" + IDTienda, function (PersonalTienda) {
-//        if (PersonalTienda.lenght != 0) {
-//            llenarComboPersonal(PersonalTienda, document.getElementById("cmbIDUsuario"), sessionStorage.getItem('IDUsuario'), sessionStorage.getItem('Nombre'));
-//            document.getElementById("cmbIDUsuario").value = sessionStorage.getItem('IDUsuario');
-//        }
-//    });
-//}
-////combo personal por tienda
-//function llenarComboPersonal(Datos, control, IDExtra, NombreExtra) {
-//    var contenido = "";
-//    contenido += "<option value='0'>--Seleccione--</option>";
-//    for (var i = 0; i < Datos.length; i++) {
-//        contenido += "<option value='" + Datos[i].ID + "'>" + Datos[i].Nombre + "</option>";
-//    }
-//    if (IDExtra != "") {
-//        contenido += "<option value='" + IDExtra + "'>" + NombreExtra + "</option>";
-//    }
-//    control.innerHTML = contenido;
-//}
-//function Limpiar() {
-//    var ControlesTXT = document.getElementsByClassName("limpiar");
-//    for (var i = 0; i < ControlesTXT.length; i++) {
-//        ControlesTXT[i].value = "";
-//    }
-//    var ControlesSLT = document.getElementsByClassName("SelectCLS");
-//    for (var i = 0; i < ControlesSLT.length; i++) {
-//        document.getElementById(ControlesSLT[i].id).value = 0;
-//    }
-//}
-////funcion general para llenar los select
-//function llenarCombo(DAtos, control) {
-//    var contenido = "";
-//    contenido += "<option value='0'>--Seleccione--</option>";
-//    for (var i = 0; i < DAtos.length; i++) {
-//        contenido += "<option value='" + DAtos[i].ID + "'>" + DAtos[i].Nombre + "</option>";
-//    }
-//    control.innerHTML = contenido;
-//}
-
-
+﻿
 ////----------Tabla------------////
-
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
-
-//////////////////////////////////
-
 function ConsultaArticuloComp(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
@@ -65,7 +17,6 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-            //CodigoHtmlArticuloComp += "<div class='col-sm'>Costo</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -81,6 +32,7 @@ function ConsultaArticuloComp(IDTienda) {
             let Arrayfechas = Fechas.split(',');
             let Stock = Data.Stock;
             let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
 
@@ -97,10 +49,10 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
-                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
+                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", "+ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
                 CodigoHtmlArticuloComp += "</div>";
@@ -116,26 +68,22 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "</br>";
             CodigoHtmlArticuloComp += "</br>";
-
             let contenedor1 = "contenedor1" + IDTienda;
             document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
 
         });
 
-
     }
-
 }
 /////////////////////////////////////////////
-
-//----------------------------Crea el grid a desplegar con el botón con la funciíon de desplegar------------------------------------
+//----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
+//función que muestra la tabla del artículo
+//Pasar los parametros(No.Pedido, Id del sitio para desplegar solo los pedidos que tiene esa tienda)
 function Desplegar(no, id) {
-
     if (no == 0 && id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-
         $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no + "&Id= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
@@ -144,9 +92,6 @@ function Desplegar(no, id) {
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
             DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
-            //DespXArt += "<div class='col-sm'>Costo</div>";
-            //DespXArt += "<div class='col-sm'>Proveedor</div>";
-            //DespXArt += "<div class='col-sm'>Acción</div>";
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
@@ -157,92 +102,31 @@ function Desplegar(no, id) {
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
                 DespXArt += "</div>";
-                //--------------------Se inserta la segunda tabla atravez de su id---------------------
-                DespXArt += "<div class='row'>";
-                DespXArt += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
-                DespXArt += "</div>";
             }
             DespXArt += "</div>";
             DespXArt += "</br>";
             DespXArt += "</br>";
-
+            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
             let compraArticulo = "desplegable" + no +","+ id;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
-          
         });
     }
 }
 
-
-
-////------------- Función que crea el segundo grid para desplegar que se despliega por numero de pedido-----------------------------
-//function Desplegar2(no) { 
-//    if (no == 0) {
-//        sessionStorage.setItem('IDArt', '0');
-//    }
-//    else {
-
-//        $.get("/Supervision/ConsultaNumPedido/?No=" + no, function (Data) {
-//            var DespXPedido = "";
-//            //---Encabezado del grid---------
-//            DespXPedido += "<hr class='solid3'>";
-//            DespXPedido += "<div class='row'>";
-//            DespXPedido += "<div class='col-sm'>NoPedido</div>";
-//            DespXPedido += "<div class='col-sm'>Artículo</div>";
-//            DespXPedido += "<div class='col-sm'>Fecha de Ingreso</div>";
-//            DespXPedido += "<div class='col-sm'>Unidad de medida</div>";
-//            DespXPedido += "<div class='col-sm'>Costo</div>";
-//            DespXPedido += "</div>";
-//            DespXPedido += "<hr class='solid3'>";
-
-//            for (var i = 0; i < Data.length; i++) {
-
-//                //----Cuerpo del grid-------------
-//                DespXPedido += "<div class='row'>";
-//                DespXPedido += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-//                DespXPedido += "<div class='col-sm'>" + Data[i].NombreEmpresa + "</div>";
-//                DespXPedido += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-//                DespXPedido += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
-//                DespXPedido += "<div class='col-sm'>" + Data[i].Coste + "</div>";
-//                DespXPedido += "</div>";
-//            }
-//            DespXPedido += "</div>";
-//            DespXPedido += "</br>";
-//            DespXPedido += "</br>";
-
-//            let numero = "desplegable2" + no;
-//            document.getElementById(numero).innerHTML = DespXPedido;
-//        });
-
-//    }
-//}
-
-
-
-//----------------Abrir modal Proveedor--------------------------------------------------------
+//----------------Abrir modal de Pedidos Internos--------------------------------------------------------
 function abrirModal(id) {
     LlenarCMBTienda();
-
     LimpiarCampos();
     if (id == 0) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
-
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
-            //for (var i = 0; i < Data.length; i++) {
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
 
-            //document.getElementById("cmbTipoTienda").value = Data[0].IdSitio;
-            //document.getElementById("TxtCorreo").value = Data[0].Correo;
-            ////document.getElementById("TxtRFC").value = Data[0].RFC;
-            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            //document.getElementById("TxtClabe").value = Data[0].Clabe;
-            //MostrarArticulos(id);
-            //}
         });
         MostrarArticulos();
     }
@@ -259,46 +143,6 @@ function LimpiarCampos() {
     }
 }
 
-//************************************************************************************************
-//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
-function MostrarArticulos() {
-
-    //if (id == 0) {
-    //    sessionStorage.setItem('IdPedidosInternos', '0');
-    //}
-    //else {
-
-    $.get("/Supervision/ConsultaArtProveedores", function (Data) {
-
-        let ID = Data.ID;
-        let ArrayID = ID.split(',');
-        let Articulos = Data.Articulos;
-        let ArrayArticulos = Articulos.split(',');
-
-        var TablaArticulo = "";
-        TablaArticulo += "<div class='row row-cols-auto'>";
-
-        for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-            //-------Crea los chex-box-------------------------------------------------------------------------
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
-            TablaArticulo += "</div>";
-
-            //-------Crea los input-------------------------------------------------------------------------
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>"
-            TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
-            TablaArticulo += "</label>"
-
-            TablaArticulo += "</div>";
-        }
-        TablaArticulo += "</div>";
-        document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-    });
-    //}
-}
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoInterno() {
 
@@ -320,11 +164,6 @@ function GuardarPedidoInterno() {
                     var IdProveedor = document.getElementById("cmbProveedor").value;
                     var TempProvedor = document.getElementById("cmbProveedor");
                     var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
-
-                    //var Correo = document.getElementById("TxtCorreo").value;
-                    //var RFC = document.getElementById("TxtRFC").value;
-                    //var Telefono = document.getElementById("TxtTelefono").value;
-                    //var Clabe = document.getElementById("TxtClabe").value;
                     var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
@@ -336,10 +175,6 @@ function GuardarPedidoInterno() {
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
                     frm.append("Proveedor", Proveedor);
-                    //frm.append("Correo", Correo);
-                    //frm.append("RFC", RFC);
-                    //frm.append("Telefono", Telefono);
-                    //frm.append("Clabe", Clabe);
                     frm.append("IdArticulo", IdArticulo);
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
@@ -353,7 +188,7 @@ function GuardarPedidoInterno() {
                         processData: false,
                         success: function (data) {
                             if (data == 0) {
-                                alert("Ocurrio un error");
+                                alert("Ocurrió un error");
                             }
                             else if (data == -1) {
                                 alert("Ya existe");
@@ -361,7 +196,6 @@ function GuardarPedidoInterno() {
 
                         }
                     });
-
                 }
             }
             //-----Mensaje de confirmación-----------------------
@@ -395,8 +229,6 @@ function LlenarCMBTienda() {
         llenarCombo(data, document.getElementById("cmbTienda"));
     });
 }
-
-
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {
