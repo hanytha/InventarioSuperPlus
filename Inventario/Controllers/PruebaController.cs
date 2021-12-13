@@ -191,7 +191,27 @@ namespace Inventario.Controllers
         //    return Json(compra, JsonRequestBehavior.AllowGet);
         //}
 
+        //*************************************************************************************************************
+        //****************************Consulta el último número de pedido*************************************************
 
+        public JsonResult ConsultaPedidosDecendiente()
+        {
+            string NumeroPedido = "";
+            var pedidosNum = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.NumeroPedido)
+                .Select(p => new
+                {
+                    p.IdPedidosExternos,
+                    Pedido = p.NumeroPedido,
+                });
+            foreach (var ped in pedidosNum)
+            {
+                int SumaNum = (int)(ped.Pedido + 1);
+                NumeroPedido += SumaNum + ",";
+            }
+            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
         {

@@ -168,8 +168,7 @@ function MostrarArticulos(id) {
             let ArrayID = ID.split(',');
             let Articulos = Data.Articulos;
             let ArrayArticulos = Articulos.split(',');
-            let Proveedor = Data.Proveedor;
-            let ArrayProveedor = Proveedor.split(',');
+
 
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -342,4 +341,34 @@ function Desplegar2(no) {
             document.getElementById(numero).innerHTML = dos;
         });
     }
+}
+
+//************************************************************************************************************
+//***************************************************************************************************************
+ConsultaMarcas();
+function ConsultaMarcas() {
+    $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
+        CrearTablaMarcas(Data);
+
+    }
+    );
+}
+function CrearTablaMarcas(Data) {
+    var CodigoHtmlTablaMarcas = "";
+    CodigoHtmlTablaMarcas += "<table id='tablas' class='table table table-sm'>";
+    CodigoHtmlTablaMarcas += "<thead><tr><th>Nombre</th></thead>";
+    CodigoHtmlTablaMarcas += "<tbody>";
+
+    let NumeroPedido = Data.NumeroPedido;
+    let ArrayNumeroPedido = NumeroPedido.split(',');
+
+    for (var i = 0; i < ArrayNumeroPedido.length; i++) {
+        CodigoHtmlTablaMarcas += "<tr>";
+        CodigoHtmlTablaMarcas += "<td>" + ArrayNumeroPedido[i] + "</td>";
+        CodigoHtmlTablaMarcas += "</td>";
+        CodigoHtmlTablaMarcas += "</tr>";
+    }
+    CodigoHtmlTablaMarcas += "</tbody>";
+    CodigoHtmlTablaMarcas += "</table>";
+    document.getElementById("tablaNum").innerHTML = CodigoHtmlTablaMarcas;
 }
