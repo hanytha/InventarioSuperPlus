@@ -242,6 +242,43 @@ function llenarCombo(data, control) {
 }
 
 
+function MostrarArticulos() {
+
+    //if (id == 0) {
+    //    sessionStorage.setItem('IdPedidosInternos', '0');
+    //}
+    //else {
+
+    $.get("/Supervision/ConsultaArtProveedores", function (Data) {
+
+        let ID = Data.ID;
+        let ArrayID = ID.split(',');
+        let Articulos = Data.Articulos;
+        let ArrayArticulos = Articulos.split(',');
+
+        var TablaArticulo = "";
+        TablaArticulo += "<div class='row row-cols-auto'>";
+
+        for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
+            //-------Crea los chex-box-------------------------------------------------------------------------
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+            TablaArticulo += "</div>";
+
+            //-------Crea los input-------------------------------------------------------------------------
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>"
+            TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+            TablaArticulo += "</label>"
+
+            TablaArticulo += "</div>";
+        }
+        TablaArticulo += "</div>";
+        document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+    });
+    //}
+}
+
 
 
 

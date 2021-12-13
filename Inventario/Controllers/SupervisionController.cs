@@ -576,5 +576,37 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+
+        public JsonResult ConsultaArtProveedores()
+        {
+            string Articulos = "";
+            string ID = "";
+            var compra = InvBD.Articulos.Where(p => p.IdProveedor.Equals(1) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Articulo = p.NombreEmpresa,
+                    Id = p.IdArticulos,
+
+                });
+            foreach (var ap in compra)
+            {
+                int Afectados = 0;
+
+                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+
+                if (nveces == 0)
+                {
+                    Articulos += ap.Articulo + ",";
+                    ID += ap.Id + ",";
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+
+            }
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
     }
 }
