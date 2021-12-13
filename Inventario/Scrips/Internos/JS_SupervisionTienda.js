@@ -116,7 +116,7 @@ function Desplegar(no, id) {
 
 //----------------Abrir modal de Pedidos Internos--------------------------------------------------------
 function abrirModal(id) {
-    LlenarCMBTienda();
+    //LlenarCMBTienda();
     LimpiarCampos();
     if (id == 0) {
         sessionStorage.setItem('IdPedidosInternos', '0');
@@ -221,14 +221,14 @@ function CamposObligatorios() {
     return exito;
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-function LlenarCMBTienda() {
-    //$.get("/Supervision/BDProveedor", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbProveedor"));
-    //});
-    $.get("/Supervision/BDTienda", function (data) {
-        llenarCombo(data, document.getElementById("cmbTienda"));
-    });
-}
+//function LlenarCMBTienda() {
+//    //$.get("/Supervision/BDProveedor", function (data) {
+//    //    llenarCombo(data, document.getElementById("cmbProveedor"));
+//    //});
+//    $.get("/Supervision/BDTienda", function (data) {
+//        llenarCombo(data, document.getElementById("cmbTienda"));
+//    });
+//}
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {

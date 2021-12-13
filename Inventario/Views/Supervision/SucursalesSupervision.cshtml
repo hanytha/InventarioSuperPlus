@@ -178,9 +178,9 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
                                     <select id="cmbTienda" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                        @*<option value="0">--Seleccione--</option>*@
-                                        <!--Aquí se está ocupando razor para mostrar los estados desde la base de datos-->
-                                        @*@{
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar los estados desde la base de datos*@
+                                        @{
                                                 if (@TiendasSupervision.IDTienda != null)
                                                 {
                                                     for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
@@ -188,7 +188,7 @@
                                                         <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
                                                     }
                                                 }
-                                            }*@
+                                            }
                                     </select>
                                 </div>
                             </div>
