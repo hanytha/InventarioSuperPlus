@@ -132,8 +132,10 @@ function abrirModal(id) {
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
-
+            //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
+            //----Muestra el número de pedido que le corresponde-------
+            ConsultaSiguientePedido();
         });
     }
 }
@@ -345,7 +347,6 @@ function Desplegar2(no) {
 
 //************************************************************************************************************
 //*******************************Función que determina el siguiente número de pedido*****************************************************
-ConsultaSiguientePedido();
 function ConsultaSiguientePedido() {
     $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
         SiguientePedido(Data);
@@ -358,11 +359,6 @@ function SiguientePedido(Data) {
     let ArrayNumeroPedido = NumeroPedido.split(',');
 
     const ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
-    alert(ultimoElemento);
-
-
+    alert("El número de este pedido es:" + ultimoElemento);
 }
 
-
-//******************************************************************************************
-//*******************************************************************************************
