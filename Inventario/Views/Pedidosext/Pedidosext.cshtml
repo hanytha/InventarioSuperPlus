@@ -120,12 +120,13 @@
                             <div class="form-group">
                                 <div id="seleccion">
 
-                                    <div align="right"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 12em;"></div>
+                                    <div align="right"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
                                     <br />
                                     <br />
-                                    <div align="right"><strong>Comercializadora Picaros de la Mixteca S.A. de C.V</strong></div>
+                                    <div align="right"><strong>Comercializadora Picaros de la Mixteca S.A. de C.V.</strong></div>
                                     <!--------------------------------------Encabezado de el dodumento--------------------------------------->
                                     <br />
+                                     <br />
 
                                     <label class="form-control-label" for="TxtProveedor">Proveedor:</label>
                                     <span id="TxtProveedor"></span>
@@ -160,7 +161,8 @@
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir texto</a>
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
+                    <a type="button" class="btn btn-warning" target="_blank" href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin">Enviar_Correo</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -183,7 +185,7 @@
     }
 </script>
 <!------------------------------------------------------------------------------------------------------------------------->
-<!-----------------------------------Estilo a tittle de el botón de ver pedido------------------------------------------------------>
+<!-----------------------------------Estilo para el title del botón de ver pedido------------------------------------------------------>
 
 <style>
 
@@ -218,18 +220,9 @@
 </style>
 
 <!------------------------------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-
-
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_PedidosExt.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+ <!--Hacer que el modal muestre los pasos por parte-->
+    <!--Script-->
+    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+    <script src="~/Scrips/Internos/JS_PedidosExt.js"></script>
+    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+    <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

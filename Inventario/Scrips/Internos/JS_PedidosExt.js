@@ -9,8 +9,8 @@ function ConsultaPedidos() {
 function CrearTablaPedidos(Data) {
     var CodigoHtmlTablaPedidos = "";
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
-    CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
     CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
     CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
