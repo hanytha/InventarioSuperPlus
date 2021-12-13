@@ -344,31 +344,25 @@ function Desplegar2(no) {
 }
 
 //************************************************************************************************************
-//***************************************************************************************************************
-ConsultaMarcas();
-function ConsultaMarcas() {
+//*******************************Función que determina el siguiente número de pedido*****************************************************
+ConsultaSiguientePedido();
+function ConsultaSiguientePedido() {
     $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
-        CrearTablaMarcas(Data);
-
+        SiguientePedido(Data);
     }
     );
 }
-function CrearTablaMarcas(Data) {
-    var CodigoHtmlTablaMarcas = "";
-    CodigoHtmlTablaMarcas += "<table id='tablas' class='table table table-sm'>";
-    CodigoHtmlTablaMarcas += "<thead><tr><th>Nombre</th></thead>";
-    CodigoHtmlTablaMarcas += "<tbody>";
+function SiguientePedido(Data) {
 
     let NumeroPedido = Data.NumeroPedido;
     let ArrayNumeroPedido = NumeroPedido.split(',');
 
-    for (var i = 0; i < ArrayNumeroPedido.length; i++) {
-        CodigoHtmlTablaMarcas += "<tr>";
-        CodigoHtmlTablaMarcas += "<td>" + ArrayNumeroPedido[i] + "</td>";
-        CodigoHtmlTablaMarcas += "</td>";
-        CodigoHtmlTablaMarcas += "</tr>";
-    }
-    CodigoHtmlTablaMarcas += "</tbody>";
-    CodigoHtmlTablaMarcas += "</table>";
-    document.getElementById("tablaNum").innerHTML = CodigoHtmlTablaMarcas;
+    const ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
+    alert(ultimoElemento);
+
+
 }
+
+
+//******************************************************************************************
+//*******************************************************************************************

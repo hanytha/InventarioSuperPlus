@@ -146,17 +146,14 @@ namespace Inventario.Controllers
         {
             string Articulos = "";
             string ID = "";
-            string Proveedor = "";
             var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
                 .Select(p => new
                 {
                     Articulo = p.Articulo,
                     Id = p.IdArticulo,
-                    Proveedor= p.IdProveedor
                 });
             foreach (var ap in compra)
             {
-                Proveedor += ap.Proveedor + ",";
                 int Afectados = 0;
 
 
@@ -174,7 +171,7 @@ namespace Inventario.Controllers
                 }
 
             }
-            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1), Proveedor = Proveedor.Substring(0, Proveedor.Length - 1) };
+            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
@@ -197,7 +194,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
-            var pedidosNum = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.NumeroPedido)
+            var pedidosNum = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
                 .Select(p => new
                 {
                     p.IdPedidosExternos,
