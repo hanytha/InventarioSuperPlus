@@ -1,4 +1,5 @@
-﻿//const f = new Date();
+﻿//juntado
+//const f = new Date();
 
 
 //function Usuarios_X_Tienda(IDTienda) {
@@ -80,6 +81,9 @@ function ConsultaArticuloComp(IDTienda) {
             let Arrayfechas = Fechas.split(',');
             let Stock = Data.Stock;
             let Arraystock = Stock.split(',');
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
 
@@ -92,12 +96,12 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ")'><i class='fas fa-angle-down'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -105,7 +109,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "</div>";
                 //------------------------Despliega primer grid-----------------------------------------------------------------------
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + ArrayIdSitio[i] + "' class='collapse'></div></div>";
                 CodigoHtmlArticuloComp += "</div>";
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
@@ -124,81 +128,15 @@ function ConsultaArticuloComp(IDTienda) {
 }
 /////////////////////////////////////////////
 
-//function ConsultaArticuloComp(IDTienda) {
-//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
-//        CrearArticuloComp(Data);
-//    });
-
-//}
-//function CrearArticuloComp(Data) {
-
-//    var CodigoHtmlArticuloComp = "";
-
-//    CodigoHtmlArticuloComp += "<div id='contenedor1'>";
-//    CodigoHtmlArticuloComp += "<hr class='solid'>";
-//    CodigoHtmlArticuloComp += "<div class='row'>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-//    //CodigoHtmlArticuloComp += "<div class='col-sm'>Costo</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-//    CodigoHtmlArticuloComp += "</div>";
-//    CodigoHtmlArticuloComp += "<hr class='solid'>";
-//    CodigoHtmlArticuloComp += "</div>";
-
-
-//    let id = Data.id;
-//    let ArrayId = id.split(',');
-//    let Nombre = Data.Nombre;
-//    let Arraynombre = Nombre.split(',');
-//    let Fechas = Data.Fechas;
-//    let Arrayfechas = Fechas.split(',');
-//    let Stock = Data.Stock;
-//    let Arraystock = Stock.split(',');
-//    //let Costos = Data.Costos;
-//    //let Arraycostos = Costos.split(',');
-
-
-//        for (var i = 0; i < ArrayId.length; i++) {
-
-//            CodigoHtmlArticuloComp += "<div>";
-//            CodigoHtmlArticuloComp += "<div class='row'>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-
-//            //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
-//            //-----------------Botón para desplegar la primera tabla--------------
-//            CodigoHtmlArticuloComp += "<div class='col'>"
-//            CodigoHtmlArticuloComp += "<label>"
-//            CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>";
-//            CodigoHtmlArticuloComp += "</label>";
-//            CodigoHtmlArticuloComp += "</div>";
-//            //-------------Termina----------------------------------------
-//            CodigoHtmlArticuloComp += "</div>";
-//            CodigoHtmlArticuloComp += "</div>";
-//            //------------------------Despliega primer grid-----------------------------------------------------------------------
-//            CodigoHtmlArticuloComp += "<div class='row'>";
-//            CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
-//            CodigoHtmlArticuloComp += "</div>";
-//            //---------------------------------------Termina----------------------------------------------------------------------------
-//        }
-
-//    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
-
-//}
-
 //----------------------------Crea el grid a desplegar con el botón con la funciíon de desplegar------------------------------------
-function Desplegar(no) {
+function Desplegar(no, id) {
 
-    if (no == 0) {
+    if (no == 0 && id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
 
-        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no, function (Data) {
+        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no + "&Id= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -220,7 +158,7 @@ function Desplegar(no) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-
+                DespXArt += "</div>";
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 DespXArt += "<div class='row'>";
                 DespXArt += "<div class='col'><div id='desplegable2" + Data[i].NoPedido + "' class='collapse'></div></div>";
@@ -230,7 +168,7 @@ function Desplegar(no) {
             DespXArt += "</br>";
             DespXArt += "</br>";
 
-            let compraArticulo = "desplegable" + no;
+            let compraArticulo = "desplegable" + no + id;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
         });
     }
@@ -351,7 +289,7 @@ function MostrarArticulos() {
             TablaArticulo += "<label>"
             TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
             TablaArticulo += "</label>"
-           
+
             TablaArticulo += "</div>";
         }
         TablaArticulo += "</div>";
@@ -381,7 +319,7 @@ function GuardarPedidoInterno() {
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                     var IdProveedor = document.getElementById("cmbProveedor").value;
                     var TempProvedor = document.getElementById("cmbProveedor");
-                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text; 
+                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
 
                     //var Correo = document.getElementById("TxtCorreo").value;
                     //var RFC = document.getElementById("TxtRFC").value;
@@ -470,3 +408,8 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
+
+
+
+
+
