@@ -172,6 +172,11 @@ function GuardarPedidoInterno() {
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
+
+                    var IdTienda = document.getElementById("cmbTienda").value;
+                    var TempTienda = document.getElementById("cmbTienda");
+                    var Tienda = TempTienda.options[TempTienda.selectedIndex].text;
+                     
                     var frm = new FormData();
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
@@ -179,6 +184,8 @@ function GuardarPedidoInterno() {
                     frm.append("IdArticulo", IdArticulo);
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
+                    frm.append("IdTienda", IdTienda);
+                    frm.append("Tienda", Tienda);
                     frm.append("Fecha", Fecha);
                     frm.append("Estatus", 1);
                     $.ajax({
@@ -191,6 +198,7 @@ function GuardarPedidoInterno() {
                             if (data == 0) {
                                 alert("Ocurrió un error");
                             }
+
                             else if (data == -1) {
                                 alert("Ya existe");
                             }
