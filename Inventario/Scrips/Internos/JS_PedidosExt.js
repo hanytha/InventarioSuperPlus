@@ -36,7 +36,6 @@ function CrearTablaPedidos(Data) {
     }
     CodigoHtmlTablaPedidos += "</tbody>"; 
     CodigoHtmlTablaPedidos += "</table>";
-    CodigoHtmlTablaPedidos += "</div>";
     document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
 }
 
