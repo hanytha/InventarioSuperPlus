@@ -1,4 +1,5 @@
-﻿BloquearCTRL();
+﻿LlenarCMCProveedores();
+BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
 function ConsultaArticuloComp(IDTienda) {
@@ -127,7 +128,7 @@ function abrirModal(id) {
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         });
         MostrarArticulos();
     }
@@ -294,3 +295,8 @@ function BloquearCTRL() {
     }
 }
 
+function LlenarCMCProveedores() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+}
