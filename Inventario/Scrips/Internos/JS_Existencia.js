@@ -2,66 +2,49 @@
 LlenarCMBArticulo();
 LlenarCMBProveedores();
 LlenarCMBUnidades();
-CrearAcordeonExistencia();
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonExistencia() {
-    $.get("/Compra/ConsultasCompras", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonExistencia(Data, document.getElementById("accordion"));
-    });
-}
-function AcordeonExistencia(Data, CtrlExt) {
-    var CodigoHTMLAreas = "";
-    for (var i = 0; i < Data.length; i++) {
-        if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        else {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdCompra + "'>";
-        CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdCompra + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdCompra + "' class='collapsed'>";
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>"; 
-        CodigoHTMLAreas += "<span >" + Data[i].Articulo + "</span>";
-        CodigoHTMLAreas += "</a>";
-        CodigoHTMLAreas += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdCompra + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion'' style=''>";
-        CodigoHTMLAreas += "<div class='card-body'>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Número de Compra: </strong>" + Data[i].NoCompra + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Método De Pago: </strong>" + Data[i].MetodoDePago + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Ingreso: </strong>" + Data[i].FechaDeIngreso +
-            "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Exitencia Inicial: </strong>" + Data[i].ExitenciaInicial +
-            "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha Final: </strong>" + Data[i].FechaFinal + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Exitencia Actual: </strong>" + Data[i].ExitenciaActual + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidad + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Coste : </strong>" + Data[i].Coste + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Impuesto: </strong>" + Data[i].Impuesto + "</div>";
-      
-    
-        CodigoHTMLAreas += "</div>";
-        //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-    }
-    CtrlExt.innerHTML = CodigoHTMLAreas;
-}
 
+ConsultaCompras();
+function ConsultaCompras() {
+    $.get("/Compra/ConsultasCompras", function (Data) {
+        CrearTablaCompras(Data);
+    }
+    );
+}
+function CrearTablaCompras(Data) {
+    var CodigoHtmlTablaCompras = "";
+    CodigoHtmlTablaCompras += "<div class='input-group mb-3'>";
+    CodigoHtmlTablaCompras += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    CodigoHtmlTablaCompras += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaCompras += "</div>";
+    CodigoHtmlTablaCompras += "<div class='table-responsive'>";
+    CodigoHtmlTablaCompras += "<table class='table-info table table-bordered order-table'>";
+    CodigoHtmlTablaCompras += "<thead>";
+    CodigoHtmlTablaCompras += "<tr>";
+    CodigoHtmlTablaCompras += "<th>Número_Compra</th>";
+    CodigoHtmlTablaCompras += "<th>Fecha De Ingreso</th>";
+    CodigoHtmlTablaCompras += "<th>Coste</th>";
+    CodigoHtmlTablaCompras += "<th>Unidad</th>";
+    CodigoHtmlTablaCompras += "<th>Artículo</th>";
+    CodigoHtmlTablaCompras += "<th>Detalle Compra</th>";
+    CodigoHtmlTablaCompras += "</tr>";
+    CodigoHtmlTablaCompras += "</thead>";
+    CodigoHtmlTablaCompras += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+
+        CodigoHtmlTablaCompras += "<tr>"
+        CodigoHtmlTablaCompras += "<td>" + Data[i].NoCompra + "</td>"
+        CodigoHtmlTablaCompras += "<td>" + Data[i].FechaDeIngreso + "</td>"
+        CodigoHtmlTablaCompras += "<td>" + Data[i].Coste + "</td>"
+        CodigoHtmlTablaCompras += "<td>" + Data[i].Unidad + "</td>"
+        CodigoHtmlTablaCompras += "<td>" + Data[i].Articulo + "</td>"
+        CodigoHtmlTablaCompras += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+        CodigoHtmlTablaCompras += "</tr>";
+    }
+    CodigoHtmlTablaCompras += "</tbody>";
+    CodigoHtmlTablaCompras += "</table>";
+    CodigoHtmlTablaCompras += "</div>";
+    document.getElementById("TablaCompras").innerHTML = CodigoHtmlTablaCompras;
+}
 
 
 //Limpia la información y carga la informacion del proveedor

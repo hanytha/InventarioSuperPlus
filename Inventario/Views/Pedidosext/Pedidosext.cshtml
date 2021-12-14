@@ -161,7 +161,7 @@
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
-                    <a type="button" class="btn btn-warning" target="_blank" href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin">Enviar_Correo</a>
+                    @*<a type="button" class="btn btn-warning" target="_blank" href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin">Enviar_Correo</a>*@
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -184,6 +184,43 @@
     }
 </script>
 <!------------------------------------------------------------------------------------------------------------------------->
+@*<script>
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>
+
+
+
+<button onclick="exportTableToExcel('TablaPedidos')">Export Table Data To Excel File</button>
+<button onclick="exportTableToExcel('TablaPedidos', 'members-data')">Export Table Data To Excel File</button>*@
 <!-----------------------------------Estilo para el title del botón de ver pedido------------------------------------------------------>
 
 <style>

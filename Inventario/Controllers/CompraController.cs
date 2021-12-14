@@ -19,7 +19,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultasCompras()
         {
-            var compras = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+            var compras = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.NoCompra)
                 .Select(p => new
                 {
                     p.IdCompra,
