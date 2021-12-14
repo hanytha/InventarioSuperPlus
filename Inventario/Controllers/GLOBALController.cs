@@ -302,10 +302,19 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        //Consulta 
+        //Consulta (combo de proveedores en SucursalesSupervisión)
         public JsonResult BDPro()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDProv()
+        {
+            var datos = InvBD.Proveedores.Where(p => p.Nombre.Equals("Almacén General") && p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdProveedores,
                     Nombre = p.Nombre
