@@ -37,7 +37,7 @@
         {
             int NSucursales = TiendasSupervision.IDTienda.Count();
 
-            string InsrtClases = "card m-b-0";
+            string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
             for (int i = 0; i < NSucursales; i++)
             {
                 if (i == 0)
@@ -46,16 +46,16 @@
                 }
                 else
                 {
-                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1  border-top";
+                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 }
                 string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
                 string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
                 string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
                     <div class="card-header" id="@titulo">
-                        <h4 class="mb-0">
+                        <h4 class="m-b-0 list-group list-group-flush  mb-1">
                             <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
-                                <i class="m-r-5 mdi mdi-store" aria-hidden="true"></i>
+                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                 <span>@TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
@@ -91,7 +91,7 @@
     }
     /* Color y grosor del borde */
     hr.solid {
-        border-top: 4px solid #D7DBDD;
+        border-top: 4px solid #808080;
     }
 
     .D1 {
