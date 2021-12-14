@@ -12,16 +12,16 @@ function AcordeonPedidosInt(data, IDo) {
     var CodHtml = "";
     for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodHtml += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodHtml += "<div class='card m-b-0 border-top'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosInternos + "'>";
         CodHtml += "<h5 class='mb-0'>";
         CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosInternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
         CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodHtml += "<span >" + data[i].NumeroPedido + "</span>";
+        CodHtml += "<span> Número de pedido:" + data[i].NumeroPedido + "</span>";
         CodHtml += "</a>";
         CodHtml += "</h5>";
         CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
@@ -35,9 +35,9 @@ function AcordeonPedidosInt(data, IDo) {
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
 
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
+        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
+        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
         CodHtml += "</div >";
         CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";

@@ -118,6 +118,7 @@
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
+    <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />

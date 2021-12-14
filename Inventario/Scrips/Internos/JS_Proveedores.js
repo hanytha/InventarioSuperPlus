@@ -15,10 +15,10 @@ function AcordeonProveedores(data, IDo) {
     var CodHtml = "";
     for (var i = 0; i < data.length; i++) {
         if (i < 1) {
-            CodHtml += "<div class='card m-b-0'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
-            CodHtml += "<div class='card m-b-0 border-top'>";
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         CodHtml += "<div class='card-header' id='heading" + data[i].IdProveedores + "'>";
         CodHtml += "<h5 class='mb-0'>";
