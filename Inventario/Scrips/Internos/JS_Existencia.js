@@ -13,7 +13,7 @@ function ConsultaCompras() {
 }
 function CrearTablaCompras(Data) {
     var CodigoHtmlTablaPedidos = "";
-    CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
+    CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
     CodigoHtmlTablaPedidos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
@@ -35,8 +35,8 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Articulo + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-primary' style='width: 30px; height: 30px;' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' style='width: 30px; height: 30px;' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-info' style='width: 28px; height: 28px;' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' style='width: 28px; height: 28px;' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
