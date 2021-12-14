@@ -1,9 +1,10 @@
-﻿LlenarCMBImpuesto();
+﻿
+ConsultaCompras();
+LlenarCMBImpuesto();
 LlenarCMBArticulo();
 LlenarCMBProveedores();
 LlenarCMBUnidades();
 
-ConsultaCompras();
 function ConsultaCompras() {
     $.get("/Compra/ConsultasCompras", function (Data) {
         CrearTablaCompras(Data);
@@ -21,8 +22,8 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>Núm_Compra</th>";
-    CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
     CodigoHtmlTablaPedidos += "<th>Artículo</th>";
+    CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
     CodigoHtmlTablaPedidos += "<th>Opciones</th>";
     CodigoHtmlTablaPedidos += "</tr>";
     CodigoHtmlTablaPedidos += "</thead>";
@@ -31,11 +32,11 @@ function CrearTablaCompras(Data) {
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaPedidos += "<tr>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NoCompra + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Articulo + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-primary' style='width: 30px; height: 30px;' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' style='width: 30px; height: 30px;' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
