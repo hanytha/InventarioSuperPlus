@@ -197,11 +197,12 @@ function MostrarArticulos(id) {
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
+
 function GuardarPedidoExterno() {
+
     if (CamposObligatorios() == true) {
-
+     
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
             let llenar = "";
@@ -350,6 +351,7 @@ function Desplegar2(no) {
 function ConsultaSiguientePedido() {
     $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
         SiguientePedido(Data);
+
     }
     );
 }
@@ -359,6 +361,7 @@ function SiguientePedido(Data) {
     let ArrayNumeroPedido = NumeroPedido.split(',');
 
     const ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
-    alert("El número de este pedido es:" + ultimoElemento);
+    swal("El número de este pedido es: " + ultimoElemento, ".", "warning")
+
 }
 
