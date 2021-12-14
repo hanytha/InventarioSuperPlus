@@ -209,7 +209,9 @@ function GuardarPedidoInterno() {
                 }
             }
             //-----Mensaje de confirmación-----------------------
-            alert("Se guardaron los datos correctamente");
+            alert("Los datos se guardaron correctamente");
+            ConsultaArticuloComp();
+            document.getElementById("btnCancelar").click();
         }
     }
 }
