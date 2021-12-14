@@ -84,52 +84,62 @@
     }
 </div>
 
-<!----------------------------------------Distribuir los títulos de los DIVS -------------------------------------------->
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
-    #contenedor {
-        width: 300px;
-        height: auto;
-        text-align: center;
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Color y grosor del borde */
+    hr.solid {
+        border-top: 4px solid #D7DBDD;
     }
 
-    #contenedor_follow div.icono {
-        display: inline-block;
-        width: 15%;
-        height: auto;
-        vertical-align: middle;
-        text-align: center;
+    .D1 {
+        background-color: #EBEBEB;
     }
 </style>
-@*-----------------------------Estilo para la linea en el encabezado del los divs---------------------------------------*@
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid {
-        border-top: 3px solid #D7DBDD;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 3px solid #f1f507;
-    }
-</style>
+@*<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Solid border */
+        hr.solid3 {
+            border-top: 1px solid #f1f507;
+        }
+    </style>*@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
     /* Solid border */
     hr.solid4 {
-        border-top: 3px solid #0B94F8;
+        border-top: 4px solid #0B94F8;
     }
 </style>
+<!------------------------------------Estilos para los inputs de los pedidos en el modal--------------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        /*grosor del alto de la casilla*/
+        height: 44px;
+        border: 1.5px solid #808080;
+        /*Ancho de la casilla*/
+        width: 220px
+    }
 
+    input:focus {
+        background-color: white;
+        border-color: dodgerblue;
+    }
+</style>
+<!------------Obtener la fecha-------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaSistema').value = fecha;
 
+</script>
+<!------------------------------------------>
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -170,7 +180,7 @@
                                     <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">Almacén General</option>
                                     </select>
-                                    
+
                                 </div>
 
                             </div>
@@ -181,14 +191,14 @@
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
-                                                if (@TiendasSupervision.IDTienda != null)
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
                                                 {
-                                                    for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
-                                                    {
-                                                        <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
-                                                    }
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -197,19 +207,19 @@
 
 
                         @*<div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
 
                         <div class="row">
                             <div class="col-md-12">
@@ -220,13 +230,13 @@
                             </div>
                         </div>
                         @*<div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
-                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
+                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
 
                     </form>
                 </div>

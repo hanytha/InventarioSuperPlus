@@ -48,7 +48,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
+                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
@@ -66,9 +66,10 @@ function ConsultaArticuloComp(IDTienda) {
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
             CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "</br>";
-            CodigoHtmlArticuloComp += "</br>";
+            //CodigoHtmlArticuloComp += "</br>";
+            //CodigoHtmlArticuloComp += "</br>";
             let contenedor1 = "contenedor1" + IDTienda;
+           
             document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
 
         });
