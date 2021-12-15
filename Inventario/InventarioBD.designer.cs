@@ -5732,6 +5732,10 @@ namespace Inventario
 		
 		private string _NombreArchivo;
 		
+		private string _UsoCFDI;
+		
+		private string _Direccion;
+		
 		private int _Estatus;
 		
 		private EntityRef<Articulos> _Articulos;
@@ -5768,6 +5772,10 @@ namespace Inventario
     partial void OnClabeChanged();
     partial void OnNombreArchivoChanging(string value);
     partial void OnNombreArchivoChanged();
+    partial void OnUsoCFDIChanging(string value);
+    partial void OnUsoCFDIChanged();
+    partial void OnDireccionChanging(string value);
+    partial void OnDireccionChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -6043,6 +6051,46 @@ namespace Inventario
 					this._NombreArchivo = value;
 					this.SendPropertyChanged("NombreArchivo");
 					this.OnNombreArchivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsoCFDI", DbType="VarChar(50)")]
+		public string UsoCFDI
+		{
+			get
+			{
+				return this._UsoCFDI;
+			}
+			set
+			{
+				if ((this._UsoCFDI != value))
+				{
+					this.OnUsoCFDIChanging(value);
+					this.SendPropertyChanging();
+					this._UsoCFDI = value;
+					this.SendPropertyChanged("UsoCFDI");
+					this.OnUsoCFDIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(150)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this.OnDireccionChanging(value);
+					this.SendPropertyChanging();
+					this._Direccion = value;
+					this.SendPropertyChanged("Direccion");
+					this.OnDireccionChanged();
 				}
 			}
 		}

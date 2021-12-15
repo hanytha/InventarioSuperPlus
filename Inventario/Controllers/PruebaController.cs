@@ -259,6 +259,9 @@ namespace Inventario.Controllers
                  && p.Correo.Equals(DatosPedidoExterno.Correo)
                  && p.Telefono.Equals(DatosPedidoExterno.Telefono)
                  && p.Clabe.Equals(DatosPedidoExterno.Clabe)
+                 && p.UsoCFDI.Equals(DatosPedidoExterno.UsoCFDI)
+                 && p.Direccion.Equals(DatosPedidoExterno.Direccion)
+       
                  && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)
                 {
@@ -273,6 +276,8 @@ namespace Inventario.Controllers
                     obj.Telefono = DatosPedidoExterno.Telefono;
                     obj.Clabe = DatosPedidoExterno.Clabe;
                     obj.Fecha = DatosPedidoExterno.Fecha;
+                    obj.UsoCFDI = DatosPedidoExterno.UsoCFDI;
+                    obj.Direccion = DatosPedidoExterno.Direccion;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

@@ -226,6 +226,9 @@ function GuardarPedidoExterno() {
                     var Clabe = document.getElementById("TxtClabe").value;
                     var NumeroPedido = document.getElementById("TxtNumPedido").value;
                     var Fecha = document.getElementById("TxtFechaSistema").value;
+
+                    var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
+                    var Direccion = document.getElementById("TxtDireccion").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
                     var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
@@ -243,6 +246,8 @@ function GuardarPedidoExterno() {
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
                     frm.append("Fecha", Fecha);
+                    frm.append("UsoCFDI", UsoCFDI);
+                    frm.append("Direccion", Direccion);
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
