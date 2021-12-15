@@ -128,10 +128,12 @@ function abrirModal(id) {
 
         $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
+            document.getElementById("TxtCorreo").value = Data[0].Correo;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
             //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
             //----Muestra el número de pedido que le corresponde-------

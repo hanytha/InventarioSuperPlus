@@ -133,7 +133,10 @@ namespace Inventario.Controllers
                             Correo = provedor.Correo,
                             Clabe = provedor.ClaveInterbancaria,
                             Telefono = provedor.Telefono,
-                            RFC = provedor.RFC
+                            RFC = provedor.RFC,
+                            UsoCFDI = provedor.UsoCFDI,
+                            Direccion = provedor.Direccion,
+
 
                         };
 
