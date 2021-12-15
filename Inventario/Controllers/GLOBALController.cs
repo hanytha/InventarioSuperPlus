@@ -398,7 +398,15 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult BDArtProvAlm()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Proveedor.Equals("Almacén General") && p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 

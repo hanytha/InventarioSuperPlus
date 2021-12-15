@@ -91,6 +91,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDGeneral', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             //document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
@@ -300,5 +301,8 @@ function llenarCombo(data, control) {
 function LlenarCMCProveedores() {
     $.get("/GLOBAL/BDProv", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+    $.get("/GLOBAL/BDArtProvAlm", function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
     });
 }
