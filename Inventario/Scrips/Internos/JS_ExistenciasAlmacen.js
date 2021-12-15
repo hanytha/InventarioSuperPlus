@@ -1,4 +1,5 @@
-﻿LlenarCMCProveedores();
+﻿//LlenarCMCProveedores();
+LlenarCMBPrin();
 BloquearCTRL();
 LlenarCMBCompra();
 CrearAcordeonExistenciasAlmacen();
@@ -91,7 +92,11 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDGeneral', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+
+            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+            });
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             //document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
@@ -285,6 +290,26 @@ function Sitio(IDAsignacion, IDSitio) {
 
 }
 
+function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDPro", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"), true);
+    });
+    //$.get("/GLOBAL/BDAreas", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbArea"));
+    //});
+    //$.get("/Usuario/ConsultaPerfiles", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbPerfil"));
+    //});
+}
+
+
+
+var IDP = document.getElementById("cmbProveedor");
+IDP.addEventListener("change", function () {
+    $.get("/GLOBAL/BDArt/?IDP=" + IDP.value, function (data) {
+        llenarCombo(data, document.getElementById("cmbArticulo"));
+    });
+});
 //funcion general para llenar los select
 function llenarCombo(data, control) {
     var contenido = "";
@@ -298,11 +323,11 @@ function llenarCombo(data, control) {
 }
 
 
-function LlenarCMCProveedores() {
-    $.get("/GLOBAL/BDProv", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"));
-    });
-    $.get("/GLOBAL/BDArtProvAlm", function (data) {
-        llenarCombo(data, document.getElementById("cmbArticulo"));
-    });
-}
+//function LlenarCMCProveedores() {
+//    $.get("/GLOBAL/BDProv", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
+//    $.get("/GLOBAL/BDArtProvAlm", function (data) {
+//        llenarCombo(data, document.getElementById("cmbArticulo"));
+//    });
+//}
