@@ -50,6 +50,8 @@ function VerPedido(num) {
 
         $.get("/Pedidosext/ConsultaPedidoXnum/?Num=" + num, function (Data) {
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+            document.getElementById("TxtUsoCFDI").textContent = Data[0].UsoCFDI;
+            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
             document.getElementById("TxtRFC").textContent = Data[0].RFC;
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;

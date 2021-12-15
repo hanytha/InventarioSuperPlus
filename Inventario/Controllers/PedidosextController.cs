@@ -71,6 +71,8 @@ namespace Inventario.Controllers
                     p.Correo,
                     p.Clabe,
                     p.Telefono,
+                    p.UsoCFDI,
+                    p.Direccion,
                 });
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
