@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace Inventario.Controllers
 {
+    //Llamar al método de seguridad
+    [Seguridad]
     public class SupervisionController : Controller
     {
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
