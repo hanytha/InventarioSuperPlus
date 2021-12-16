@@ -53,12 +53,11 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
-                    //p.Compra,
                     p.IdAsignacion,
-                    //p.NombreAsignacion,
                     p.IdSitio,
-                    //p.NombreSitio,
-                    //p.FechaSistema,
+                    p.IdArticulo,
+                    p.NombreEmpresa,
+                    p.IdProveedor
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
@@ -81,7 +80,7 @@ namespace Inventario.Controllers
                     p.IdSitio,
                     p.IdArticulo,
                     p.NombreEmpresa,
-                    p.IdProveedor,
+                    p.IdProveedor
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
@@ -112,34 +111,57 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
                 && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
+                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 && p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
+                 && p.Coste.Equals(DatosAlmacen.Coste)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
+             
 
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                 //&& p.NombreAsignacion.Equals(DatosAlmacen.NombreAsignacion)
                 && p.IdSitio.Equals(DatosAlmacen.IdSitio)
+                  && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                 //&& p.NombreSitio.Equals(DatosAlmacen.NombreSitio)
-
+                && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
+                && p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
                 && p.Coste.Equals(DatosAlmacen.Coste)).Count();
+
+              //  int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
+              //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
+              //&& p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
+              //&& p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+              //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
+              //&& p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
+              //&& p.IdCompra.Equals(DatosAlmacen.IdCompra)
+
+              //&& p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
+              ////&& p.NombreAsignacion.Equals(DatosAlmacen.NombreAsignacion)
+              //&& p.IdSitio.Equals(DatosAlmacen.IdSitio)
+              ////&& p.NombreSitio.Equals(DatosAlmacen.NombreSitio)
+
+              //&& p.Coste.Equals(DatosAlmacen.Coste)).Count();
                 if (nveces == 0)
                 {
                     ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+                    obj.IdCompra = DatosAlmacen.IdCompra;
                     obj.NoPedido = DatosAlmacen.NoPedido;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.FechaFinal = DatosAlmacen.FechaFinal;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.IdCompra = DatosAlmacen.IdCompra;
-                    obj.Compra = DatosAlmacen.Compra;
+                    //obj.IdCompra = DatosAlmacen.IdCompra;
+                    //obj.Compra = DatosAlmacen.Compra;
                     obj.Coste = DatosAlmacen.Coste;
 
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
                     //obj.NombreAsignacion = DatosAlmacen.NombreAsignacion;
                     obj.IdSitio = DatosAlmacen.IdSitio;
+                    obj.IdArticulo = DatosAlmacen.IdArticulo;
+                    obj.NombreEmpresa = DatosAlmacen.NombreEmpresa;
+                    obj.IdProveedor = DatosAlmacen.IdProveedor;
                     //obj.NombreSitio = DatosAlmacen.NombreSitio;
                     InvBD.SubmitChanges();
                     Afectados = 1;

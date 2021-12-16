@@ -139,6 +139,7 @@ function abrirModal(id) {//la clase  Obligatorio
                 llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
                 document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             });
+
             document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             //document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
@@ -147,8 +148,10 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("cmbCompra").value = Data[0].IdCompra;
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtCosto").value = Data[0].Coste;
+            //document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+            //document.getElementById("cmbSitio").value = Data[0].IdSitio;
             document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
-            document.getElementById("cmbSitio").value = Data[0].IdSitio;
+            Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
         });
     }
 }
@@ -190,8 +193,8 @@ function GuardarAlmacen() {
             var FechaFinal = document.getElementById("TxtFechaFinal").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
             var IdCompra = document.getElementById("cmbCompra").value;
-            var TempEdo = document.getElementById("cmbCompra");
-            var Compra = TempEdo.options[TempEdo.selectedIndex].text;
+            //var TempEdo = document.getElementById("cmbCompra");
+            //var Compra = TempEdo.options[TempEdo.selectedIndex].text;
             var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
             var Coste = document.getElementById("TxtCosto").value;
             var IdAsignacion = document.getElementById("cmbAsignacion").value;
