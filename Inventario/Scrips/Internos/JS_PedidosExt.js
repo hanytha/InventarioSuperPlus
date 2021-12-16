@@ -62,6 +62,7 @@ function VerPedido(num) {
 //******************************************************************************************************************************
 //************Genera los artículo y la cantidad solicitada deacuerdo con el número de pedido*****************************
 
+/*
 function MostrarArticulos(num) {
     if (num == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
@@ -93,3 +94,43 @@ function MostrarArticulos(num) {
     }
 } 
 
+*/
+//-----------------------------------------------------------------------------------------------------------------------
+function MostrarArticulos(num) {
+    if (num == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Pedidosext/ConsultaArícuiloXnum/?Pedi=" + num, function (Data) {
+            var dos = "";
+
+            dos += "<div style='width: 100%'>"
+            dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+            dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+            dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+            dos += "<thead>"
+            dos += "<tr>"
+            dos += "<th >Artículo</th>"
+            dos += "<th >Cantidad Solicitada</th>"
+            dos += "</tr>"
+            dos += "</thead>"
+            dos += "<tbody>"
+
+            for (var i = 0; i < Data.length; i++) {
+
+                //----Cuerpo del grid-------------
+                dos += "<tr>"
+                dos += "<td id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+                dos += "<td id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                dos += "</tr>"
+            }
+            dos += "</tbody>"
+            dos += "</table>"
+            dos += "</div>";
+            dos += "</div>";
+
+            document.getElementById("TblArticulos").innerHTML = dos;
+        });
+    }
+}

@@ -160,7 +160,7 @@ namespace Inventario.Controllers
                 int Afectados = 0;
 
 
-                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(Articulos)).Count();
+                int nveces = InvBD.Compra.Where(p => Articulos.Equals(ap)&& ID.Equals(ap)).Count();
 
                 if (nveces == 0)
                 {

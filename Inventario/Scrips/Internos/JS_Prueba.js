@@ -182,6 +182,8 @@ function MostrarArticulos(id) {
             let ArrayArticulos = Articulos.split(',');
 
 
+            var array = [ArrayID.length];
+
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
 
@@ -205,6 +207,9 @@ function MostrarArticulos(id) {
         });
     }
 }
+
+
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 
@@ -379,3 +384,4 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNumPedido").value = ultimoElemento;
 
 }
+
