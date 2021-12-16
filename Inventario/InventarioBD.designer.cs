@@ -105,7 +105,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString3"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -2550,8 +2550,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
-		private string _FechaFinal;
-		
 		private System.Nullable<long> _ExitenciaActual;
 		
 		private long _Coste;
@@ -2567,6 +2565,8 @@ namespace Inventario
 		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
+		
+		private System.Nullable<long> _PrecioUnitario;
 		
 		private int _Estatus;
 		
@@ -2590,8 +2590,6 @@ namespace Inventario
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(string value);
-    partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -2608,6 +2606,8 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnPrecioUnitarioChanging(System.Nullable<long> value);
+    partial void OnPrecioUnitarioChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -2754,26 +2754,6 @@ namespace Inventario
 					this._ExitenciaInicial = value;
 					this.SendPropertyChanged("ExitenciaInicial");
 					this.OnExitenciaInicialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50)")]
-		public string FechaFinal
-		{
-			get
-			{
-				return this._FechaFinal;
-			}
-			set
-			{
-				if ((this._FechaFinal != value))
-				{
-					this.OnFechaFinalChanging(value);
-					this.SendPropertyChanging();
-					this._FechaFinal = value;
-					this.SendPropertyChanged("FechaFinal");
-					this.OnFechaFinalChanged();
 				}
 			}
 		}
@@ -2934,6 +2914,26 @@ namespace Inventario
 					this._Articulo = value;
 					this.SendPropertyChanged("Articulo");
 					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="BigInt")]
+		public System.Nullable<long> PrecioUnitario
+		{
+			get
+			{
+				return this._PrecioUnitario;
+			}
+			set
+			{
+				if ((this._PrecioUnitario != value))
+				{
+					this.OnPrecioUnitarioChanging(value);
+					this.SendPropertyChanging();
+					this._PrecioUnitario = value;
+					this.SendPropertyChanged("PrecioUnitario");
+					this.OnPrecioUnitarioChanged();
 				}
 			}
 		}

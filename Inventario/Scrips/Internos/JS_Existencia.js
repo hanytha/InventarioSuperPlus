@@ -71,7 +71,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
-            document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
+            document.getElementById("TxtPrecioUnitario").value = Data[0].PrecioUnitario;
             document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCoste").value = Data[0].Coste;
@@ -114,7 +114,7 @@ function GuardarCompra() {
 
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
-            var FechaFinal = document.getElementById("TxtFechaFinal").value;
+            var PrecioUnitario = document.getElementById("TxtPrecioUnitario").value;
             var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
             var Coste = document.getElementById("TxtCoste").value;
@@ -136,7 +136,7 @@ function GuardarCompra() {
             frm.append("Proveedor", Proveedor);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("FechaDeIngreso", FechaDeIngreso);
-            frm.append("FechaFinal", FechaFinal);
+            frm.append("PrecioUnitario", PrecioUnitario);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);

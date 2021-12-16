@@ -116,7 +116,6 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div id="seleccion">
-
                                     <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
                                     <br />
                                     <br />
@@ -129,12 +128,12 @@
                                     <br />
                                     <br />
                                     <br />
-                                    <br />
                                     <!------------------------------------------------Cuerpo del documento------------------------------------>
                                     <strong>Datos Proveedor</strong>
+                                    <hr class="solid3" />
                                     <br />
                                     <label class="form-control-label" for="TxtProveedor">Compañía:</label>
-                                    <span id="TxtProveedor"></span>
+                                    <label id="TxtProveedor"></label>
                                     <br />
                                     <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI:</label>
                                     <label id="TxtUsoCFDI"></label>
@@ -177,7 +176,7 @@
     </div>
 </div>
 
-
+<!-------------------------------------------------------------------------------------------------------------->
 <!--------------------------Función para imprimir el contenido del div------------------------------------------>
 <script language="Javascript">
     function imprSelec(nombre) {
@@ -191,7 +190,27 @@
     }
 </script>
 <!------------------------------------------------------------------------------------------------------------------------->
-<!-----------------------------------Estilo para el title del botón de ver pedido------------------------------------------------------>
+
+
+
+<style>
+    .aParents div {
+        float: right;
+        clear: none;
+    }
+</style>
+<!--------------------------------------------------------------------------------------------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 1px solid #030303;
+        width: 50%;
+    }
+</style>
+<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
 
 <style>
 
@@ -225,7 +244,7 @@
     }
 </style>
 <!------------------------------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
+<!--Hacer que el modal muestre los pasos por parte-- >
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <script src="~/Scrips/Internos/JS_PedidosExt.js"></script>

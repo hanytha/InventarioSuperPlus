@@ -28,7 +28,7 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
-                    p.FechaFinal,
+                    p.PrecioUnitario,
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
@@ -53,7 +53,7 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
-                    p.FechaFinal,
+                    p.PrecioUnitario,
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
@@ -97,7 +97,7 @@ namespace Inventario.Controllers
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor) 
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
-                && p.FechaFinal.Equals(DatosCompra.FechaFinal)
+                && p.PrecioUnitario.Equals(DatosCompra.PrecioUnitario)
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.Coste.Equals(DatosCompra.Coste)
                 && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
@@ -113,7 +113,7 @@ namespace Inventario.Controllers
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
                     obj.ExitenciaInicial = DatosCompra.ExitenciaInicial;
-                    obj.FechaFinal = DatosCompra.FechaFinal;
+                    obj.PrecioUnitario = DatosCompra.PrecioUnitario;
                     obj.ExitenciaActual = DatosCompra.ExitenciaActual;
                     obj.Coste = DatosCompra.Coste;
                     obj.IdImpuesto = DatosCompra.IdImpuesto;
