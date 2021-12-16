@@ -70,7 +70,49 @@ function AcordeonExistenciasAlmacen(Data, CtrlAlmacen) {
 
 
 
-//Limpia la información y carga la informacion del proveedor
+////Limpia la información y carga la informacion del proveedor
+//function abrirModal(id) {//la clase  Obligatorio
+//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        //Cambia los bordes lo las casillas a color rojo
+//        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+//    }
+//    if (id == 0) {
+//        LimpiarCampos();
+//        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
+
+//    }
+//    else {
+
+//        $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacen/?Id=" + id, function (Data) {
+//            //Obtener los datos de los proveedores para permitir editar
+//            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+//            document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
+//            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+//            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+//                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+//                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
+//            });
+//            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
+//            document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
+//            //document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
+//            document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
+//            document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
+//            document.getElementById("cmbCompra").value = Data[0].IdCompra;
+//            document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
+//            document.getElementById("TxtCosto").value = Data[0].Coste;
+//            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+//            document.getElementById("cmbSitio").value = Data[0].IDSitio;
+//            //document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+//            //Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
+//        });
+//    }
+//}
+
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -82,14 +124,14 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDGeneral', '0');
+        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
 
     }
     else {
 
         $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacen/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
-            sessionStorage.setItem('IDGeneral', Data[0].IdExistenciaAlmacenG);
+            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
@@ -106,12 +148,12 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
-            document.getElementById("cmbSitio").value = Data[0].IDSitio;
-            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
-            Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
+            document.getElementById("cmbSitio").value = Data[0].IdSitio;
         });
     }
 }
+
+
 
 
 //limpiar campos
@@ -138,7 +180,7 @@ function BloquearCTRL() {
 function GuardarAlmacen() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdExistenciaAlmacenG = sessionStorage.getItem('IDGeneral');
+            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var IdArticulo = document.getElementById("cmbArticulo").value;
             var TempArticulo = document.getElementById("cmbArticulo");

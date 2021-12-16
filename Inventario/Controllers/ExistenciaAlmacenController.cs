@@ -62,9 +62,10 @@ namespace Inventario.Controllers
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
+    
         public JsonResult ConsultaExistenciaAlmacen(long Id)
         {
-            var almacen = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+            var proveedores = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
@@ -76,16 +77,13 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
-                    p.Compra,
-                    //p.Compra,
                     p.IdAsignacion,
-                    //p.NombreAsignacion,
                     p.IdSitio,
-                    //p.NombreSitio,
-                    //p.FechaSistema,
-
+                    p.IdArticulo,
+                    p.NombreEmpresa,
+                    p.IdProveedor,
                 });
-            return Json(almacen, JsonRequestBehavior.AllowGet);
+            return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos de la compra
         public int GuardarAlmacen(ExistenciaAlmacenG DatosAlmacen)
