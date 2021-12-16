@@ -108,7 +108,6 @@
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaFinal" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -117,6 +116,7 @@
       <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="PrecioUnitario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Compra_ExistenciaAlmacenG" Member="ExistenciaAlmacenG" ThisKey="IdCompra" OtherKey="IdCompra" Type="ExistenciaAlmacenG" />
     </Type>
@@ -253,16 +253,18 @@
       <Column Name="IdPedidosExternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CantidadSolicitada" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
-      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Proveedor" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
+      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Clabe" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="NombreArchivo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="UsoCFDI" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Proveedores_PedidosExternos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
@@ -317,10 +319,10 @@
       <Column Name="Localidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="RFC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Banco" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NumeroDeCuenta" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="UsoCFDI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Banco" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NumeroDeCuenta" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UsoCFDI" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

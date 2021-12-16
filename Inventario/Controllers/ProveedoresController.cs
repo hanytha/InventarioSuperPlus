@@ -19,9 +19,38 @@ namespace Inventario.Controllers
         }
         //consulta general de los proveedores
         //consulta general de los proveedores
-        public JsonResult ConsultaProveedores()
+        //public JsonResult ConsultaProveedores()
+        //{
+        //    var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdProveedores,
+        //            p.Nombre,
+        //            p.Correo,
+        //            p.RazonSocial,
+        //            p.ClaveInterbancaria,
+        //            p.CodigoPostal,
+        //            p.IdEstado,
+        //            p.Estado,
+        //            p.IdMunicipio,
+        //            p.Municipio,
+        //            p.IdLocalidad,
+        //            p.Localidad,
+        //            p.RFC,
+        //            p.Direccion,
+        //            p.Telefono,
+        //            p.Banco,
+        //            p.NumeroDeCuenta,
+        //            p.UsoCFDI,
+        //            p.Descripcion,
+        //            p.Logo
+        //        });
+        //    return Json(proveedores, JsonRequestBehavior.AllowGet);
+        //}
+
+        public JsonResult ConsultaSupervisores()
         {
-            var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+            var supervisores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdProveedores,
@@ -42,10 +71,13 @@ namespace Inventario.Controllers
                     p.Banco,
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
+                    //p.UsoCFDI,
                     p.Descripcion,
-                    p.Logo
+                    p.Logo,
+                    //p.Estatus,
+                    
                 });
-            return Json(proveedores, JsonRequestBehavior.AllowGet);
+            return Json(supervisores, JsonRequestBehavior.AllowGet);
         }
 
 

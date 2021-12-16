@@ -2550,8 +2550,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
-		private string _FechaFinal;
-		
 		private System.Nullable<long> _ExitenciaActual;
 		
 		private long _Coste;
@@ -2567,6 +2565,8 @@ namespace Inventario
 		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
+		
+		private System.Nullable<long> _PrecioUnitario;
 		
 		private int _Estatus;
 		
@@ -2590,8 +2590,6 @@ namespace Inventario
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(string value);
-    partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -2608,6 +2606,8 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnPrecioUnitarioChanging(System.Nullable<long> value);
+    partial void OnPrecioUnitarioChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -2754,26 +2754,6 @@ namespace Inventario
 					this._ExitenciaInicial = value;
 					this.SendPropertyChanged("ExitenciaInicial");
 					this.OnExitenciaInicialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50)")]
-		public string FechaFinal
-		{
-			get
-			{
-				return this._FechaFinal;
-			}
-			set
-			{
-				if ((this._FechaFinal != value))
-				{
-					this.OnFechaFinalChanging(value);
-					this.SendPropertyChanging();
-					this._FechaFinal = value;
-					this.SendPropertyChanged("FechaFinal");
-					this.OnFechaFinalChanged();
 				}
 			}
 		}
@@ -2934,6 +2914,26 @@ namespace Inventario
 					this._Articulo = value;
 					this.SendPropertyChanged("Articulo");
 					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="BigInt")]
+		public System.Nullable<long> PrecioUnitario
+		{
+			get
+			{
+				return this._PrecioUnitario;
+			}
+			set
+			{
+				if ((this._PrecioUnitario != value))
+				{
+					this.OnPrecioUnitarioChanging(value);
+					this.SendPropertyChanging();
+					this._PrecioUnitario = value;
+					this.SendPropertyChanged("PrecioUnitario");
+					this.OnPrecioUnitarioChanged();
 				}
 			}
 		}
@@ -5712,13 +5712,13 @@ namespace Inventario
 		
 		private string _CantidadSolicitada;
 		
-		private System.Nullable<long> _IdProveedor;
-		
-		private string _Proveedor;
-		
 		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
+		
+		private System.Nullable<long> _IdProveedor;
+		
+		private string _Proveedor;
 		
 		private string _Fecha;
 		
@@ -5731,6 +5731,10 @@ namespace Inventario
 		private string _Clabe;
 		
 		private string _NombreArchivo;
+		
+		private string _UsoCFDI;
+		
+		private string _Direccion;
 		
 		private int _Estatus;
 		
@@ -5748,14 +5752,14 @@ namespace Inventario
     partial void OnNumeroPedidoChanged();
     partial void OnCantidadSolicitadaChanging(string value);
     partial void OnCantidadSolicitadaChanged();
-    partial void OnIdProveedorChanging(System.Nullable<long> value);
-    partial void OnIdProveedorChanged();
-    partial void OnProveedorChanging(string value);
-    partial void OnProveedorChanged();
     partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanged();
+    partial void OnProveedorChanging(string value);
+    partial void OnProveedorChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
     partial void OnRFCChanging(string value);
@@ -5768,6 +5772,10 @@ namespace Inventario
     partial void OnClabeChanged();
     partial void OnNombreArchivoChanging(string value);
     partial void OnNombreArchivoChanged();
+    partial void OnUsoCFDIChanging(string value);
+    partial void OnUsoCFDIChanged();
+    partial void OnDireccionChanging(string value);
+    partial void OnDireccionChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -5839,50 +5847,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
-		public System.Nullable<long> IdProveedor
-		{
-			get
-			{
-				return this._IdProveedor;
-			}
-			set
-			{
-				if ((this._IdProveedor != value))
-				{
-					if (this._Proveedores.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._IdProveedor = value;
-					this.SendPropertyChanged("IdProveedor");
-					this.OnIdProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(250)")]
-		public string Proveedor
-		{
-			get
-			{
-				return this._Proveedor;
-			}
-			set
-			{
-				if ((this._Proveedor != value))
-				{
-					this.OnProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._Proveedor = value;
-					this.SendPropertyChanged("Proveedor");
-					this.OnProveedorChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
 		public System.Nullable<long> IdArticulo
 		{
@@ -5923,6 +5887,50 @@ namespace Inventario
 					this._Articulo = value;
 					this.SendPropertyChanged("Articulo");
 					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
+		{
+			get
+			{
+				return this._IdProveedor;
+			}
+			set
+			{
+				if ((this._IdProveedor != value))
+				{
+					if (this._Proveedores.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._IdProveedor = value;
+					this.SendPropertyChanged("IdProveedor");
+					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(250)")]
+		public string Proveedor
+		{
+			get
+			{
+				return this._Proveedor;
+			}
+			set
+			{
+				if ((this._Proveedor != value))
+				{
+					this.OnProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._Proveedor = value;
+					this.SendPropertyChanged("Proveedor");
+					this.OnProveedorChanged();
 				}
 			}
 		}
@@ -6043,6 +6051,46 @@ namespace Inventario
 					this._NombreArchivo = value;
 					this.SendPropertyChanged("NombreArchivo");
 					this.OnNombreArchivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsoCFDI", DbType="VarChar(50)")]
+		public string UsoCFDI
+		{
+			get
+			{
+				return this._UsoCFDI;
+			}
+			set
+			{
+				if ((this._UsoCFDI != value))
+				{
+					this.OnUsoCFDIChanging(value);
+					this.SendPropertyChanging();
+					this._UsoCFDI = value;
+					this.SendPropertyChanged("UsoCFDI");
+					this.OnUsoCFDIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(150)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this.OnDireccionChanging(value);
+					this.SendPropertyChanging();
+					this._Direccion = value;
+					this.SendPropertyChanged("Direccion");
+					this.OnDireccionChanged();
 				}
 			}
 		}
@@ -6934,13 +6982,13 @@ namespace Inventario
 		
 		private string _Direccion;
 		
-		private long _Telefono;
+		private System.Nullable<long> _Telefono;
 		
 		private string _Banco;
 		
-		private long _NumeroDeCuenta;
+		private System.Nullable<long> _NumeroDeCuenta;
 		
-		private int _UsoCFDI;
+		private string _UsoCFDI;
 		
 		private string _Descripcion;
 		
@@ -6988,13 +7036,13 @@ namespace Inventario
     partial void OnRFCChanged();
     partial void OnDireccionChanging(string value);
     partial void OnDireccionChanged();
-    partial void OnTelefonoChanging(long value);
+    partial void OnTelefonoChanging(System.Nullable<long> value);
     partial void OnTelefonoChanged();
     partial void OnBancoChanging(string value);
     partial void OnBancoChanged();
-    partial void OnNumeroDeCuentaChanging(long value);
+    partial void OnNumeroDeCuentaChanging(System.Nullable<long> value);
     partial void OnNumeroDeCuentaChanged();
-    partial void OnUsoCFDIChanging(int value);
+    partial void OnUsoCFDIChanging(string value);
     partial void OnUsoCFDIChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
@@ -7305,8 +7353,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="BigInt NOT NULL")]
-		public long Telefono
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="BigInt")]
+		public System.Nullable<long> Telefono
 		{
 			get
 			{
@@ -7325,7 +7373,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Banco", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Banco", DbType="VarChar(50)")]
 		public string Banco
 		{
 			get
@@ -7345,8 +7393,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroDeCuenta", DbType="BigInt NOT NULL")]
-		public long NumeroDeCuenta
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroDeCuenta", DbType="BigInt")]
+		public System.Nullable<long> NumeroDeCuenta
 		{
 			get
 			{
@@ -7365,8 +7413,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsoCFDI", DbType="Int NOT NULL")]
-		public int UsoCFDI
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsoCFDI", DbType="VarChar(50)")]
+		public string UsoCFDI
 		{
 			get
 			{
