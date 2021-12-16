@@ -1,54 +1,171 @@
 ﻿LlenarCMBPrincipal();
 BloquearCTRL();
-CrearAcordeonPedidosInt();
-function CrearAcordeonPedidosInt() {
-    $.get("/Pedidosint/ConsultaPedidosInternos", function (IncidenciasArea) {
-        AcordeonPedidosInt(IncidenciasArea, document.getElementById("accordion"));
-    });
-}
+//CrearAcordeonPedidosInt();
+//function CrearAcordeonPedidosInt() {
+//    $.get("/Pedidosint/ConsultaPedidosInternos", function (data) {
+//        AcordeonPedidosInt(data, document.getElementById("accordion"));
+//    });
+//}
 
-//Crea la información basica de las insidencias
-function AcordeonPedidosInt(data, IDo) {
-    var CodHtml = "";
-    for (var i = 0; i < data.length; i++) {
-        if (i < 1) {
-            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        else {
-            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosInternos + "'>";
-        CodHtml += "<h5 class='mb-0'>";
-        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosInternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
-        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodHtml += "<span> Número de pedido:" + data[i].NumeroPedido + "</span>";
-        CodHtml += "</a>";
-        CodHtml += "</h5>";
-        CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-        CodHtml += "<div class='card-body'>";
-        CodHtml += "<div class='row'>";
+////Crea la información basica de las insidencias
+//function AcordeonPedidosInt(data, IDo) {
+//    var CodHtml = "";
+//    for (var i = 0; i < data.length; i++) {
+//        if (i < 1) {
+//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+//        }
+//        else {
+//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+//        }
+//        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosInternos + "'>";
+//        CodHtml += "<h5 class='mb-0'>";
+//        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosInternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
+//        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+//        CodHtml += "<span> Número de pedido:" + data[i].NumeroPedido + "</span>";
+//        CodHtml += "</a>";
+//        CodHtml += "</h5>";
+//        CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+//        CodHtml += "<div class='card-body'>";
+//        CodHtml += "<div class='row'>";
 
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad aprobada: </strong>" + data[i].CantidadAprobada + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
-        CodHtml += "</div>";
-        CodHtml += "<div class='row'>";
+//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
+//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad aprobada: </strong>" + data[i].CantidadAprobada + "</div>";
+//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
+//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
+//        CodHtml += "</div>";
+//        CodHtml += "<div class='row'>";
 
-        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
-        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
-        CodHtml += "</div >";
-        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
-        CodHtml += "</div>";
+//        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
+//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
+//        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
+//        CodHtml += "</div >";
+//        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";
+//        CodHtml += "</div>";
+//        CodHtml += "</div>";
+//        CodHtml += "</div>";
+//        CodHtml += "</div>";
+//        CodHtml += "</div>";
+//    }CodigoHtmlTablaCompra
+//    IDo.innerHTML = CodHtml;
+//}
+
+
+
+//Tabla
+
+//ConsultaUnidadDeMedida();
+//function ConsultaUnidadDeMedida() {
+//    $.get("/Pedidosint/ConsultaPedidosInternos", function (Data) {
+//        CrearTablaUnidadDeMedida(Data);
+//    }
+//    );
+//}
+//function CrearTablaUnidadDeMedida(Data) {
+//    var CodigoHtmlTablaCompra = "";
+//    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm'>";
+//    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Número de pedido</th><th>Artículo</th><th>Cantidad solicitada</th><th>Tipo</th><th>Proveedor</th><th>Acción</thead>";
+//    CodigoHtmlTablaCompra += "<tbody>";
+//    for (var i = 0; i < Data.length; i++) {
+//        CodigoHtmlTablaCompra += "<tr>";
+//        CodigoHtmlTablaCompra += "<td>" + Data[i].NumeroPedido + "</td>";
+//        CodigoHtmlTablaCompra += "<td>" + Data[i].Articulo + "</td>";
+//        CodigoHtmlTablaCompra += "<td>" + Data[i].CantidadSolicitada + "</td>";
+//        CodigoHtmlTablaCompra += "<td>" + Data[i].Tienda + "</td>";
+//        CodigoHtmlTablaCompra += "<td>" + Data[i].Proveedor + "</td>";
+//        CodigoHtmlTablaCompra += "<td>";
+//        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+//        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUnidadDeMedida(" + Data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";
+
+//        CodigoHtmlTablaCompra += "</td>";
+//        CodigoHtmlTablaCompra += "</tr>";
+//    }
+//    CodigoHtmlTablaCompra += "</tbody>";
+//    CodigoHtmlTablaCompra += "</table>";
+//    document.getElementById("tabla").innerHTML = CodigoHtmlTablaCompra;
+//}
+
+
+ConsultaPedidos();
+function ConsultaPedidos() {
+    $.get("/Pedidosint/ConsultaPedidosInternos", function (Data) {
+        CrearTablaPedidos(Data);
     }
-    IDo.innerHTML = CodHtml;
+    );
 }
+function CrearTablaPedidos(Data) {
+    var CodigoHtmlTablaPedidos = "";
+    CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
+    CodigoHtmlTablaPedidos += "<input  class='form-control col-md-5 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaPedidos += "</div>";
+    CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
+    CodigoHtmlTablaPedidos += "<table class='table-sm table table-bordered order-table'>";
+    CodigoHtmlTablaPedidos += "<thead>";
+    CodigoHtmlTablaPedidos += "<tr>";
+    CodigoHtmlTablaPedidos += "<th>ID</th>";
+    CodigoHtmlTablaPedidos += "<th>Número_Pedido</th>";
+    CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+    CodigoHtmlTablaPedidos += "<th>Fecha</th>";
+    CodigoHtmlTablaPedidos += "<th>Acción</th>";
+    CodigoHtmlTablaPedidos += "</tr>";
+    CodigoHtmlTablaPedidos += "</thead>";
+    CodigoHtmlTablaPedidos += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+
+        CodigoHtmlTablaPedidos += "<tr>"
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosInternos + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
+        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-window-restore list__img'></i></i></button></td>";
+        CodigoHtmlTablaPedidos += "</tr>";
+    }
+    CodigoHtmlTablaPedidos += "</tbody>";
+    CodigoHtmlTablaPedidos += "</table>";
+    document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
+}
+
+
+//ConsultaPedidos();
+//function ConsultaPedidos() {
+//    $.get("/Pedidosint/ConsultaPedidosInternos", function (Data) {
+//        CrearTablaPedidos(Data);
+//    }
+//    );
+//}
+//function CrearTablaPedidos(Data) {
+//    var CodigoHtmlTablaPedidos = "";
+//    CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
+//    CodigoHtmlTablaPedidos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+//    CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+//    CodigoHtmlTablaPedidos += "</div>";
+//    CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
+//    CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
+//    CodigoHtmlTablaPedidos += "<thead>";
+//    CodigoHtmlTablaPedidos += "<tr>";
+//    CodigoHtmlTablaPedidos += "<th>ID</th>";
+//    CodigoHtmlTablaPedidos += "<th>Número_Pedido</th>";
+//    CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+//    CodigoHtmlTablaPedidos += "<th>Fecha</th>";
+//    CodigoHtmlTablaPedidos += "<th>Acción</th>";
+//    CodigoHtmlTablaPedidos += "</tr>";
+//    CodigoHtmlTablaPedidos += "</thead>";
+//    CodigoHtmlTablaPedidos += "<tbody>";
+//    for (var i = 0; i < Data.length; i++) {
+
+//        CodigoHtmlTablaPedidos += "<tr>"
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosInternos + "</td>"
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
+//        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-window-restore list__img'></i></i></button></td>";
+//        CodigoHtmlTablaPedidos += "</tr>";
+//    }
+//    CodigoHtmlTablaPedidos += "</tbody>";
+//    CodigoHtmlTablaPedidos += "</table>";
+//    document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
+//}
 
 
 function BloquearCTRL() {
