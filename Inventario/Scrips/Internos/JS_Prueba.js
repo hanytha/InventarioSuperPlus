@@ -367,8 +367,7 @@ function SiguientePedido(Data) {
     let NumeroPedido = Data.NumeroPedido;
     let ArrayNumeroPedido = NumeroPedido.split(',');
 
-    const ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
-    swal("El número de este pedido es: " + ultimoElemento, ".", "warning")
+    var ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
+    document.getElementById("TxtNumPedido").value = ultimoElemento;
 
 }
-
