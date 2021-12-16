@@ -140,6 +140,9 @@ function GuardarAlmacen() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IDGeneral');
             var NoPedido = document.getElementById("TxtNumCompra").value;
+            var IdArticulo = document.getElementById("cmbArticulo").value;
+            var TempArticulo = document.getElementById("cmbArticulo");
+            var NombreEmpresa = TempArticulo.options[TempArticulo.selectedIndex].text;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
             var FechaFinal = document.getElementById("TxtFechaFinal").value;
@@ -150,6 +153,9 @@ function GuardarAlmacen() {
             var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
             var Coste = document.getElementById("TxtCosto").value;
             var IdAsignacion = document.getElementById("cmbAsignacion").value;
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempProveedor = document.getElementById("cmbProveedor");
+            var Proveedor = TempProveedor.options[TempProveedor.selectedIndex].text;
             //var TempAsignacion = document.getElementById("cmbAsignacion");
             //var NombreAsignacion = TempAsignacion.options[TempAsignacion.selectedIndex].text;
 
@@ -160,7 +166,7 @@ function GuardarAlmacen() {
 
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("NoPedido", NoPedido); 
+            frm.append("NoPedido", NoPedido);
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("FechaDeIngreso", FechaDeIngreso);
@@ -171,9 +177,11 @@ function GuardarAlmacen() {
             //frm.append("FechaSistema", FechaSistema);
             frm.append("Coste", Coste);
             frm.append("IdAsignacion", IdAsignacion);
-            //frm.append("NombreAsignacion", NombreAsignacion);
+            frm.append("IdProveedor", IdProveedor);
+            frm.append("Proveedor", Proveedor);
             frm.append("IdSitio", IdSitio);
-            //frm.append("NombreSitio", NombreSitio);
+            frm.append("IdArticulo", IdArticulo);
+            frm.append("NombreEmpresa", NombreEmpresa);
             //frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -291,15 +299,12 @@ function Sitio(IDAsignacion, IDSitio) {
 }
 
 function LlenarCMBPrin() {
+    $.get("/GLOBAL/BDCompras", function (data) {
+        llenarCombo(data, document.getElementById("cmbCompra"));
+    });
     $.get("/GLOBAL/BDPro", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"), true);
     });
-    //$.get("/GLOBAL/BDAreas", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbArea"));
-    //});
-    //$.get("/Usuario/ConsultaPerfiles", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbPerfil"));
-    //});
 }
 
 
