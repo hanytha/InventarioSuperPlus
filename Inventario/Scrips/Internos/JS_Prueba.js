@@ -1,4 +1,5 @@
-﻿//-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
+﻿BloquearCTRL();
+//-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/Prueba/ConsultaArticulos", function (Data) {
@@ -150,6 +151,13 @@ function LimpiarCampos() {
     var controlesSLT = document.getElementsByClassName("limpiarSelect");
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
+    }
+}
+
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
 
