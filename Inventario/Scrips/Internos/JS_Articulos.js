@@ -86,6 +86,7 @@ btnFoto.onchange = function (e) {
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    MostrarProveedores();
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
@@ -93,7 +94,6 @@ function abrirModal(id) {//la clase  Obligatorio
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
-        MostrarProveedores();
         LimpiarCampos();
         sessionStorage.setItem('IDArt', '0');
     }
@@ -105,16 +105,18 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
 
+            //---------------------------------------------------------------------------
             var activar = Data[0].Proveedor.split('#');
-            var ChevPermisos = document.getElementsByClassName("checkbox-proveedor");
+            var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             for (let j = 0; j < activar.length; j++) {
-                for (let i = 0; i < ChevPermisos.length; i++) {
-                    if (ChevPermisos[i].id == activar[j]) {
-                        ChevPermisos[i].checked = true;
+                for (let i = 0; i < ChevProveedor.length; i++) {
+                    if (ChevProveedor[i].id == activar[j]) {
+                        ChevProveedor[i].checked = true;
                         break;
                     }
                 }
             }
+            //-------------------------------------------------------------------------
 
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
@@ -141,7 +143,7 @@ function MostrarProveedores() {
         CodigoHtmlProveedor += "<div class='row'>";
         for (var i = 0; i < InfoProveedor.length; i++) {
             CodigoHtmlProveedor += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            CodigoHtmlProveedor += "<input type='checkbox' class='checkbox-proveedor' id='" + InfoProveedor[i].IdProveedores + "' ><span class='help-block text-muted small-font'>" + InfoProveedor[i].Nombre + "</span>";
+            CodigoHtmlProveedor += "<input type='checkbox' class='checkbox-proveedor' id='" + InfoProveedor[i].Nombre + "' ><span class='help-block text-muted small-font'>" + InfoProveedor[i].Nombre + "</span>";
             CodigoHtmlProveedor += "</div>";
         }
         CodigoHtmlProveedor += "</div>";
@@ -182,6 +184,15 @@ function GuardarArticulo() {
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
 
+            var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
+            let seleccionados = "";
+            for (let i = 0; i < ChevProveedor.length; i++) {
+                if (ChevProveedor[i].checked == true) {
+                    seleccionados += ChevProveedor[i].id;
+                    seleccionados += "#";
+                }
+            }
+            var Proveedor = seleccionados.substring(0, seleccionados.length - 1);
 
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
@@ -212,7 +223,7 @@ function GuardarArticulo() {
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
-            frm.append("IdProveedor", IdProveedor);
+      
             frm.append("Proveedor", Proveedor);
             frm.append("NombreProveedor", NombreProveedor);
             frm.append("Descripcion", Descripcion);
