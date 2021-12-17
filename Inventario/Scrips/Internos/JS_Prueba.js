@@ -174,28 +174,20 @@ function MostrarArticulos(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaArticulosXProveedores/?IdP=" + id, function (Data) {
+        $.get("/Prueba/ConsultaIdPro/?IdPro=" + id, function (Data) {
        //-----------------------------------------------------------------------------------
-            let ID = Data.ID;
-            let ArrayID = ID.split(',');
-            let Articulos = Data.Articulos;
-            let ArrayArticulos = Articulos.split(',');
-
-
-            var array = [ArrayID.length];
-
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
 
-            for (var i = 0; i < (ArrayID, ArrayArticulos).length; i++) {
+            for (var i = 0; i < Data.length; i++) {
     //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayArticulos[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'>" + Data[i].Articulo + "</span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulo  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }

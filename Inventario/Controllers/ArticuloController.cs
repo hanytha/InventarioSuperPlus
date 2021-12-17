@@ -89,7 +89,7 @@ namespace Inventario.Controllers
             {
                 //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
-                if (nveces == 0)
+                if (nveces >= 0)
                 {
                     DatosArticulo.Logo = Convert.FromBase64String(cadF);
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
