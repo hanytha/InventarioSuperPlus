@@ -327,7 +327,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     ID = p.IdArticulos,
-                    Nombre = p.NombreProveedor
+                    Nombre = p.NombreEmpresa
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
 

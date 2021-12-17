@@ -171,6 +171,7 @@ function GuardarPedidoInterno() {
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
                     var IdArticulo = ChevPedidos[i].id;
+                     //var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
@@ -216,6 +217,11 @@ function GuardarPedidoInterno() {
         }
     }
 }
+
+
+
+
+
 
 function CamposObligatorios() {
     var exito = true;

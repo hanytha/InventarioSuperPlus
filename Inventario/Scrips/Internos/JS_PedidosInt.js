@@ -56,7 +56,7 @@ function CrearTablaPedidos(Data) {
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>ID</th>";
     CodigoHtmlTablaPedidos += "<th>Número_Pedido</th>";
-    CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+    CodigoHtmlTablaPedidos += "<th>Artículo</th>";
     CodigoHtmlTablaPedidos += "<th>Fecha</th>";
     CodigoHtmlTablaPedidos += "<th>Acción</th>";
     CodigoHtmlTablaPedidos += "</tr>";
@@ -67,7 +67,7 @@ function CrearTablaPedidos(Data) {
         CodigoHtmlTablaPedidos += "<tr>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosInternos + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Articulo + "</td>"
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
         CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-window-restore list__img'></i></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
