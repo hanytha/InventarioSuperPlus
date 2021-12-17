@@ -173,6 +173,20 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+        //---------------------------Consulta para obetener los proveedores y generar el checkbox-------------------------------------
+        public JsonResult ConsultaProveedores()
+        {
+            var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                   ID = p.IdProveedores,
+                   Nombre =  p.Nombre,
+
+                });
+            return Json(proveedores, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 
 }

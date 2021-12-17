@@ -2,7 +2,6 @@
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
-LlenarCMCProveedores();
 LlenarCMCArea();
 LlenarCMCMarca();
 CrearAcordeonArticulos();
@@ -94,6 +93,7 @@ function abrirModal(id) {//la clase  Obligatorio
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
+        MostrarProveedores();
         LimpiarCampos();
         sessionStorage.setItem('IDArt', '0');
     }
@@ -104,7 +104,18 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDArt', Data[0].IdArticulos);
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+            var activar = Data[0].Proveedor.split('#');
+            var ChevPermisos = document.getElementsByClassName("checkbox-proveedor");
+            for (let j = 0; j < activar.length; j++) {
+                for (let i = 0; i < ChevPermisos.length; i++) {
+                    if (ChevPermisos[i].id == activar[j]) {
+                        ChevPermisos[i].checked = true;
+                        break;
+                    }
+                }
+            }
+
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
@@ -120,6 +131,27 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
+
+//-------------------------Generar la tabla de los checkbox de proveedores-------------------------
+
+
+function MostrarProveedores() {
+    $.get("/Articulo/ConsultaProveedores", function (InfoProveedor) {
+        var CodigoHtmlProveedor = "";
+        CodigoHtmlProveedor += "<div class='row'>";
+        for (var i = 0; i < InfoProveedor.length; i++) {
+            CodigoHtmlProveedor += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            CodigoHtmlProveedor += "<input type='checkbox' class='checkbox-proveedor' id='" + InfoProveedor[i].IdProveedores + "' ><span class='help-block text-muted small-font'>" + InfoProveedor[i].Nombre + "</span>";
+            CodigoHtmlProveedor += "</div>";
+        }
+        CodigoHtmlProveedor += "</div>";
+        document.getElementById("TblProveedores").innerHTML = CodigoHtmlProveedor;
+    });
+}
+
+
+
+//---------------------------------------Termina-------------------------------------------------
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -149,9 +181,7 @@ function GuardarArticulo() {
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
-            var IdProveedor = document.getElementById("cmbProveedor").value;
-            var TempProvedor = document.getElementById("cmbProveedor");
-            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+
 
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
@@ -280,11 +310,7 @@ function LlenarCMCUnidad() {
     });
 }
 
-function LlenarCMCProveedores() {
-    $.get("/GLOBAL/BDPro", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"));
-    });
-}
+
 
 function LlenarCMCArea() {
     $.get("/GLOBAL/BDAreas", function (data) {
