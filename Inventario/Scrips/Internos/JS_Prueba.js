@@ -191,17 +191,12 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
-
-
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
-}
-
-
-
+} 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 
