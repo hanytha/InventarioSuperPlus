@@ -1,55 +1,5 @@
 ﻿LlenarCMBPrincipal();
 BloquearCTRL();
-//CrearAcordeonPedidosInt();
-//function CrearAcordeonPedidosInt() {
-//    $.get("/Pedidosint/ConsultaPedidosInternos", function (data) {
-//        AcordeonPedidosInt(data, document.getElementById("accordion"));
-//    });
-//}
-
-////Crea la información basica de las insidencias
-//function AcordeonPedidosInt(data, IDo) {
-//    var CodHtml = "";
-//    for (var i = 0; i < data.length; i++) {
-//        if (i < 1) {
-//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        else {
-//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        CodHtml += "<div class='card-header' id='heading" + data[i].IdPedidosInternos + "'>";
-//        CodHtml += "<h5 class='mb-0'>";
-//        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdPedidosInternos + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdPedidosInternos + "' aria-expanded='false' aria-controls='collapse" + data[i].IdPedidosExternos + "' class='collapsed'>";
-//        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-//        CodHtml += "<span> Número de pedido:" + data[i].NumeroPedido + "</span>";
-//        CodHtml += "</a>";
-//        CodHtml += "</h5>";
-//        CodHtml += "<div id='collapse" + data[i].IdPedidosInternos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-//        CodHtml += "<div class='card-body'>";
-//        CodHtml += "<div class='row'>";
-
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Articulo: </strong>" + data[i].Articulo + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad aprobada: </strong>" + data[i].CantidadAprobada + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tipo: </strong>" + data[i].Tipo + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Cantidad solicitada: </strong>" + data[i].CantidadSolicitada + "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "<div class='row'>";
-
-//        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Unidad De Medida: </strong>" + data[i].UnidadDeMedida + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Tienda: </strong>" + data[i].Tienda + "</div>";
-//        //CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Marca: </strong>" + data[i].Marca + "</div>";
-//        CodHtml += "</div >";
-//        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-//        CodHtml += "<button class='btn btn-danger' onclick='EliminarPedidoInterno(" + data[i].IdPedidosInternos + "," + data[i].IdPedidosInternos + ",this)'><i class='fas fa-eraser'></i></button>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//    }CodigoHtmlTablaCompra
-//    IDo.innerHTML = CodHtml;
-//}
-
 
 
 //Tabla
@@ -94,9 +44,10 @@ function ConsultaPedidos() {
     );
 }
 function CrearTablaPedidos(Data) {
-    var CodigoHtmlTablaPedidos = "";
+    var CodigoHtmlTablaPedidos = ""; 
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
-    CodigoHtmlTablaPedidos += "<input  class='form-control col-md-5 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    
+    CodigoHtmlTablaPedidos += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>";
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
     CodigoHtmlTablaPedidos += "<div class='table-responsive'>";

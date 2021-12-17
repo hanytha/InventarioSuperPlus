@@ -14,15 +14,15 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>No. Pedido</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "</div>";
-
+            
             let id = Data.id;
             let ArrayId = id.split(',');
             let NoPedido = Data.NoPedido;
