@@ -265,6 +265,7 @@ namespace Inventario.Controllers
                                    select new
                                    {
                                        Id = Articulos.IdArticulos,
+                                       IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedido,
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
@@ -275,7 +276,7 @@ namespace Inventario.Controllers
 
             foreach (var art in ConsultaArticulo)
             {
-                id += art.Id + ",";
+                id += art.IdExistencia + ",";
                 Nombre += art.nombres + ",";
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
