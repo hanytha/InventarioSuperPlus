@@ -184,8 +184,8 @@ namespace Inventario.Controllers
             var compra = InvBD.Compra.Where(p => p.IdProveedor.Equals(IdPro) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdArticulo,
-                   p.Articulo
+                    p.Articulo,
+                   p.IdArticulo
                });
 
             return Json(compra, JsonRequestBehavior.AllowGet);

@@ -110,7 +110,7 @@ function MostrarArticulos(num) {
             dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
             dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
             dos += "<thead>"
-            dos += "<tr>"
+            dos += "<tr align='left'>"
             dos += "<th >Artículo</th>"
             dos += "<th >Cantidad Solicitada</th>"
             dos += "</tr>"
@@ -121,8 +121,8 @@ function MostrarArticulos(num) {
 
                 //----Cuerpo del grid-------------
                 dos += "<tr>"
-                dos += "<td id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
-                dos += "<td id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+                dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
                 dos += "</tr>"
             }
             dos += "</tbody>"

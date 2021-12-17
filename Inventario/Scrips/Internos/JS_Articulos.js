@@ -136,7 +136,6 @@ function abrirModal(id) {//la clase  Obligatorio
 
 //-------------------------Generar la tabla de los checkbox de proveedores-------------------------
 
-
 function MostrarProveedores() {
     $.get("/Articulo/ConsultaProveedores", function (InfoProveedor) {
         var CodigoHtmlProveedor = "";
@@ -150,8 +149,6 @@ function MostrarProveedores() {
         document.getElementById("TblProveedores").innerHTML = CodigoHtmlProveedor;
     });
 }
-
-
 
 //---------------------------------------Termina-------------------------------------------------
 //limpiar campos
