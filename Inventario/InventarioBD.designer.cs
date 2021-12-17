@@ -1504,7 +1504,7 @@ namespace Inventario
 		
 		private string _NombreProveedor;
 		
-		private System.Nullable<long> _IdProveedor;
+		private string _IdProveedor;
 		
 		private string _Proveedor;
 		
@@ -1564,7 +1564,7 @@ namespace Inventario
     partial void OnNombreEmpresaChanged();
     partial void OnNombreProveedorChanging(string value);
     partial void OnNombreProveedorChanged();
-    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnIdProveedorChanging(string value);
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
@@ -1674,8 +1674,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
-		public System.Nullable<long> IdProveedor
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="VarChar(150)")]
+		public string IdProveedor
 		{
 			get
 			{
