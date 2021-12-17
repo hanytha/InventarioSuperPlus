@@ -610,5 +610,25 @@ namespace Inventario.Controllers
             var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Calculo del siguiente pedido
+        public JsonResult ConsultaPedidosDecendiente()
+        {
+            string NumeroPedido = "";
+            var pedidosNum = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
+                .Select(p => new
+                {
+                    p.IdPedidosInternos,
+                    Pedido = p.NumeroPedido,
+                });
+            foreach (var ped in pedidosNum)
+            {
+                int SumaNum = (int)(ped.Pedido + 1);
+                NumeroPedido += SumaNum + ",";
+            }
+            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
     }
 }
