@@ -179,13 +179,13 @@ namespace Inventario.Controllers
         //}
 
         //************************************************************************************************
-       public JsonResult ConsultaIdPro(long IdPro)
+       public JsonResult ConsultaIdPro(string IdPro)
         {
-            var compra = InvBD.Compra.Where(p => p.IdProveedor.Equals(IdPro) && p.Estatus.Equals(1))
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.Articulo,
-                   p.IdArticulo
+                    p.NombreEmpresa,
+                    p.IdArticulos
                });
 
             return Json(compra, JsonRequestBehavior.AllowGet);

@@ -142,7 +142,7 @@ function MostrarProveedores() {
         CodigoHtmlProveedor += "<div class='row'>";
         for (var i = 0; i < InfoProveedor.length; i++) {
             CodigoHtmlProveedor += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            CodigoHtmlProveedor += "<input type='checkbox' class='checkbox-proveedor' id='" + InfoProveedor[i].Nombre + "' ><span class='help-block text-muted small-font'>" + InfoProveedor[i].Nombre + "</span>";
+            CodigoHtmlProveedor += "<input type='checkbox' class='checkbox-proveedor' id='" + InfoProveedor[i].IdProveedores + "' ><span class='help-block text-muted small-font'>" + InfoProveedor[i].Nombre + "</span>";
             CodigoHtmlProveedor += "</div>";
         }
         CodigoHtmlProveedor += "</div>";
