@@ -280,7 +280,7 @@ namespace Inventario.Controllers
                 Nombre += art.nombres + ",";
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2)&&p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
                    .Select(p => new
                    {
                        fechaIngreso = p.FechaDeIngreso,

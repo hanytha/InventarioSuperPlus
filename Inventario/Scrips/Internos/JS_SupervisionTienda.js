@@ -22,7 +22,7 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "</div>";
-            
+
             let id = Data.id;
             let ArrayId = id.split(',');
             let NoPedido = Data.NoPedido;
@@ -54,7 +54,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", "+ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -62,7 +62,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "</div>";
                 //------------------------Despliega primer grid-----------------------------------------------------------------------
                 //CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] +"' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
                 CodigoHtmlArticuloComp += "</div>";
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
@@ -70,7 +70,7 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "</br>";
             CodigoHtmlArticuloComp += "</br>";
             let contenedor1 = "contenedor1" + IDTienda;
-           
+
             document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
 
         });
@@ -109,7 +109,7 @@ function Desplegar(no, id) {
             DespXArt += "</br>";
             DespXArt += "</br>";
             //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
-            let compraArticulo = "desplegable" + no +","+ id;
+            let compraArticulo = "desplegable" + no + "," + id;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
         });
@@ -126,18 +126,18 @@ function abrirModal(id) {
     else {
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            MostrarArticulos();
-            ConsultaSiguientePedido();
+
         });
         //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
 
         //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
         //});
-    
-     
+
+        MostrarArticulos();
+        ConsultaSiguientePedido();
     }
 }
 //-------limpiar campos del Modal-formulario------------
@@ -177,7 +177,7 @@ function GuardarPedidoInterno() {
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
                     var IdArticulo = ChevPedidos[i].id;
-                     //var Articulo = ChevPedidos[i].id;
+                    //var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ function GuardarPedidoInterno() {
                     var IdTienda = document.getElementById("cmbTienda").value;
                     var TempTienda = document.getElementById("cmbTienda");
                     var Tienda = TempTienda.options[TempTienda.selectedIndex].text;
-                     
+
                     var frm = new FormData();
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
