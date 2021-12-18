@@ -44,7 +44,6 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
-                    p.Logo,
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -74,25 +73,26 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
-                    p.Estatus,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
+                    p.Estatus
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
-//--------------------------------------------------------------------------------------------------------
-        //Guardar los datos del proveedor
-        public int GuardarArticulo(Articulos DatosArticulo, string cadF)
+        //--------------------------------------------------------------------------------------------------------
+        //Guardar los datos de la compra
+        public int GuardarArticulo(Articulos DatosArticulo)
         {
             int Afectados = 0;
+            //try
+            //{
             long id = DatosArticulo.IdArticulos;
             if (id.Equals(0))
             {
-                //Guardar el proveedor cuando no exista uno con el mismo nombre en la base de datos
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
+
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
-                    DatosArticulo.Logo = Convert.FromBase64String(cadF);
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -106,41 +106,47 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)
                 && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
-                && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
                 && p.IdProveedor.Equals(DatosArticulo.IdProveedor)
                 && p.Proveedor.Equals(DatosArticulo.Proveedor)
-                && p.Descripcion.Equals(DatosArticulo.Descripcion)
+                && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
+                && p.Unidad.Equals(DatosArticulo.Unidad)
+                && p.IdMarca.Equals(DatosArticulo.IdMarca)
+                && p.Marca.Equals(DatosArticulo.Marca)
+                && p.IdAreas.Equals(DatosArticulo.IdAreas)
+                && p.Area.Equals(DatosArticulo.Area)
+                && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
+                && p.Categoria.Equals(DatosArticulo.Categoria)
                 && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
+                && p.Descripcion.Equals(DatosArticulo.Descripcion)
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                 && p.Fecha.Equals(DatosArticulo.Fecha)
-                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
-                && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
-                && p.IdAreas.Equals(DatosArticulo.IdAreas)
-                && p.IdMarca.Equals(DatosArticulo.IdMarca)
-                && p.Logo.Equals(DatosArticulo.Logo)).Count();
+                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
+
+
                 if (nveces == 0)
                 {
                     Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
+
                     obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
-                    obj.IdCategorias = DatosArticulo.IdCategorias;
+                    obj.NombreProveedor = DatosArticulo.NombreProveedor;
                     obj.IdProveedor = DatosArticulo.IdProveedor;
                     obj.Proveedor = DatosArticulo.Proveedor;
+                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
+                    obj.Unidad = DatosArticulo.Unidad;
+                    obj.IdMarca = DatosArticulo.IdMarca;
+                    obj.Marca = DatosArticulo.Marca;
+                    obj.IdAreas = DatosArticulo.IdAreas;
+                    obj.Area = DatosArticulo.Area;
+                    obj.IdCategorias = DatosArticulo.IdCategorias;
                     obj.Categoria = DatosArticulo.Categoria;
-                    obj.NombreProveedor = DatosArticulo.NombreProveedor;
-                    obj.Descripcion = DatosArticulo.Descripcion;
                     obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
+                    obj.Descripcion = DatosArticulo.Descripcion;
                     obj.UnidadSAT = DatosArticulo.UnidadSAT;
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;
                     obj.Fecha = DatosArticulo.Fecha;
                     obj.FechaSistema = DatosArticulo.FechaSistema;
-                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
-                    obj.Unidad = DatosArticulo.Unidad;
-                    obj.IdAreas = DatosArticulo.IdAreas;
-                    obj.Area = DatosArticulo.Area;
-                    obj.IdMarca = DatosArticulo.IdMarca;
-                    obj.Marca = DatosArticulo.Marca;
-                    obj.Logo = Convert.FromBase64String(cadF);
+      
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -156,6 +162,9 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
+
+
+        //----------------------------------------------------------------------------------------------
         //Eliminar Compra
         public int EliminarArticulo(long Id)
         {

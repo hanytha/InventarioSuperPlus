@@ -1508,7 +1508,7 @@ namespace Inventario
 		
 		private string _Proveedor;
 		
-		private System.Nullable<int> _IdUnidadDeMedida;
+		private System.Nullable<long> _IdUnidadDeMedida;
 		
 		private string _Unidad;
 		
@@ -1524,15 +1524,13 @@ namespace Inventario
 		
 		private string _Categoria;
 		
-		private decimal _PrecioUnitarioPromedio;
+		private string _PrecioUnitarioPromedio;
 		
 		private string _Descripcion;
 		
 		private string _UnidadSAT;
 		
 		private string _ClaveSAT;
-		
-		private System.Data.Linq.Binary _Logo;
 		
 		private string _Fecha;
 		
@@ -1568,7 +1566,7 @@ namespace Inventario
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
-    partial void OnIdUnidadDeMedidaChanging(System.Nullable<int> value);
+    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
     partial void OnUnidadChanged();
@@ -1584,7 +1582,7 @@ namespace Inventario
     partial void OnIdCategoriasChanged();
     partial void OnCategoriaChanging(string value);
     partial void OnCategoriaChanged();
-    partial void OnPrecioUnitarioPromedioChanging(decimal value);
+    partial void OnPrecioUnitarioPromedioChanging(string value);
     partial void OnPrecioUnitarioPromedioChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
@@ -1592,8 +1590,6 @@ namespace Inventario
     partial void OnUnidadSATChanged();
     partial void OnClaveSATChanging(string value);
     partial void OnClaveSATChanged();
-    partial void OnLogoChanging(System.Data.Linq.Binary value);
-    partial void OnLogoChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
     partial void OnFechaSistemaChanging(string value);
@@ -1714,8 +1710,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="Int")]
-		public System.Nullable<int> IdUnidadDeMedida
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
+		public System.Nullable<long> IdUnidadDeMedida
 		{
 			get
 			{
@@ -1890,8 +1886,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitarioPromedio", DbType="Decimal(18,0) NOT NULL")]
-		public decimal PrecioUnitarioPromedio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitarioPromedio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string PrecioUnitarioPromedio
 		{
 			get
 			{
@@ -1966,26 +1962,6 @@ namespace Inventario
 					this._ClaveSAT = value;
 					this.SendPropertyChanged("ClaveSAT");
 					this.OnClaveSATChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Logo", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Logo
-		{
-			get
-			{
-				return this._Logo;
-			}
-			set
-			{
-				if ((this._Logo != value))
-				{
-					this.OnLogoChanging(value);
-					this.SendPropertyChanging();
-					this._Logo = value;
-					this.SendPropertyChanged("Logo");
-					this.OnLogoChanged();
 				}
 			}
 		}
@@ -2218,7 +2194,7 @@ namespace Inventario
 					}
 					else
 					{
-						this._IdUnidadDeMedida = default(Nullable<int>);
+						this._IdUnidadDeMedida = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("UnidadDeMedida");
 				}
@@ -7101,7 +7077,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
 		public string Correo
 		{
 			get
@@ -9933,7 +9909,7 @@ namespace Inventario
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _IdUnidadDeMedida;
+		private long _IdUnidadDeMedida;
 		
 		private string _Unidad;
 		
@@ -9945,7 +9921,7 @@ namespace Inventario
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdUnidadDeMedidaChanging(int value);
+    partial void OnIdUnidadDeMedidaChanging(long value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
     partial void OnUnidadChanged();
@@ -9959,8 +9935,8 @@ namespace Inventario
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdUnidadDeMedida
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdUnidadDeMedida
 		{
 			get
 			{

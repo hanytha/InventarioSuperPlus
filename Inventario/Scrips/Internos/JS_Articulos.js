@@ -1,4 +1,4 @@
-﻿var imagen64;
+﻿
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
@@ -11,7 +11,7 @@ function CrearAcordeonArticulos() {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonArticulos(Data, document.getElementById("accordion"));
     });
-    imagen64 = getBase64Image(document.getElementById("PBFoto"));
+
 }
 function AcordeonArticulos(Data, CtrlArti) {
     var CodigoHTMLAreas = "";
@@ -46,7 +46,6 @@ function AcordeonArticulos(Data, CtrlArti) {
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + Data[i].ClaveSAT + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Imagen: </strong>" + Data[i].Logo + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidad + "</div>";
         CodigoHTMLAreas += "</div>";
@@ -69,19 +68,7 @@ function AcordeonArticulos(Data, CtrlArti) {
 }
 
 
-//Logo
-var btnFoto = document.getElementById("BtnFoto");
-btnFoto.onchange = function (e) {
-    var file = document.getElementById("BtnFoto").files[0];
-    var reader = new FileReader();
-    if (reader != null) {
-        reader.onloadend = function () {
-            var img = document.getElementById("PBFoto");
-            img.src = reader.result;
-        }
-    }
-    reader.readAsDataURL(file);
-}
+
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
@@ -128,7 +115,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaIngreso").value = Data[0].FechaSistema;
             document.getElementById("cmbArea").value = Data[0].IdAreas;
             document.getElementById("cmbMarca").value = Data[0].IdMarca;
-            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+
 
         });
     }
@@ -213,10 +200,6 @@ function GuardarArticulo() {
             var TempMarca = document.getElementById("cmbMarca");
             var Marca = TempMarca.options[TempMarca.selectedIndex].text;
 
-            var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");  ///////////-------->
-            if (Logo.endsWith('png')) {
-                Logo = imagen64.replace("data:image/png;base64,", "");
-            }
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
@@ -237,7 +220,6 @@ function GuardarArticulo() {
             frm.append("Area", Area);
             frm.append("IdMarca", IdMarca);
             frm.append("Marca", Marca);
-            frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -264,15 +246,7 @@ function GuardarArticulo() {
     }
 }
 
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
+
 
 //marca los campos obligatorios
 function CamposObligatorios() {

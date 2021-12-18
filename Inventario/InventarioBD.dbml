@@ -59,7 +59,7 @@
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdUnidadDeMedida" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Marca" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
@@ -67,11 +67,10 @@
       <Column Name="Area" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="PrecioUnitarioPromedio" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PrecioUnitarioPromedio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -307,7 +306,7 @@
     <Type Name="Proveedores">
       <Column Name="IdProveedores" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="RazonSocial" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveInterbancaria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPostal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -435,7 +434,7 @@
   </Table>
   <Table Name="dbo.UnidadDeMedida" Member="UnidadDeMedida">
     <Type Name="UnidadDeMedida">
-      <Column Name="IdUnidadDeMedida" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="UnidadDeMedida_Articulos" Member="Articulos" ThisKey="IdUnidadDeMedida" OtherKey="IdUnidadDeMedida" Type="Articulos" />

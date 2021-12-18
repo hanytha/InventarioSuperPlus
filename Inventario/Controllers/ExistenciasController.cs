@@ -40,7 +40,6 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
-                    p.Logo,
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -69,7 +68,6 @@ namespace Inventario.Controllers
                     p.Area,
                     p.Marca,
                     p.Estatus,
-                    FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
@@ -87,7 +85,7 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
                 if (nveces == 0)
                 {
-                    DatosArticulo.Logo = Convert.FromBase64String(cadF);
+
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -110,8 +108,7 @@ namespace Inventario.Controllers
                 && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
                 && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
                 && p.IdAreas.Equals(DatosArticulo.IdAreas)
-                && p.IdMarca.Equals(DatosArticulo.IdMarca)
-                && p.Logo.Equals(DatosArticulo.Logo)).Count();
+                && p.IdMarca.Equals(DatosArticulo.IdMarca)).Count();
                 if (nveces == 0)
                 {
                     Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
@@ -131,7 +128,7 @@ namespace Inventario.Controllers
                     obj.Area = DatosArticulo.Area;
                     obj.IdMarca = DatosArticulo.IdMarca;
                     obj.Marca = DatosArticulo.Marca;
-                    obj.Logo = Convert.FromBase64String(cadF);
+
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -141,11 +138,6 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
             return Afectados;
         }
         //Eliminar Compra
