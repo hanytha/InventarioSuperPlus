@@ -7,7 +7,7 @@ LlenarCMCMarca();
 CrearAcordeonArticulos();
 //Crea el acordeón e inserta (los registros de la base de datos)
 function CrearAcordeonArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaArticuloXProveedor", function (Data) {
         //Accordeon(DatosProveedor, document.getElementById("accordion"));
         AcordeonArticulos(Data, document.getElementById("accordion"));
     });
@@ -15,48 +15,79 @@ function CrearAcordeonArticulos() {
 }
 function AcordeonArticulos(Data, CtrlArti) {
     var CodigoHTMLAreas = "";
-    for (var i = 0; i < Data.length; i++) {
+
+    let IdArticulos = Data.IdArticulos;
+    let ArrayIdArticulos = IdArticulos.split(',');
+    let NombreEmpresa = Data.NombreEmpresa;
+    let ArrayNombreEmpresa = NombreEmpresa.split(',');
+    let Proveedor = Data.Proveedor;
+    let ArrayProveedor = Proveedor.split(',');
+    let Categoria = Data.Categoria;
+    let ArrayCategoria = Categoria.split(',');
+    let NombreProveedor = Data.NombreProveedor;
+    let ArrayNombreProveedor = NombreProveedor.split(',');
+    let PrecioUnitarioPromedio = Data.PrecioUnitarioPromedio;
+    let ArrayPrecioUnitarioPromedio = PrecioUnitarioPromedio.split(',');
+    let Descripcion = Data.Descripcion;
+    let ArrayDescripcion = Descripcion.split(',');
+    let UnidadSAT = Data.UnidadSAT;
+    let ArrayUnidadSAT = UnidadSAT.split(',');
+    let ClaveSAT = Data.ClaveSAT;
+    let ArrayClaveSAT = ClaveSAT.split(',');
+    let Fecha = Data.Fecha;
+    let ArrayFecha = Fecha.split(',');
+    let FechaSistema = Data.FechaSistema;
+    let ArrayFechaSistema = FechaSistema.split(',');
+    let Unidad = Data.Unidad;
+    let ArrayUnidad = Unidad.split(',');
+    let Area = Data.Area;
+    let ArrayArea = Area.split(',');
+    let Marca = Data.Marca;
+    let ArrayMarca = Marca.split(',');
+
+
+    for (var i = 0; i < ArrayIdArticulos.length; i++) {
         if (i < 1) {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdArticulos + "'>";
+        CodigoHTMLAreas += "<div class='card-header' id='heading" + ArrayIdArticulos[i] + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdArticulos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdArticulos + "' class='collapsed'>";
+        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + ArrayIdArticulos[i] + "' aria-expanded='false' aria-controls='collapse" + ArrayIdArticulos[i] + "' class='collapsed'>";
 
         //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
         CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
-        CodigoHTMLAreas += "<span >" + Data[i].NombreEmpresa + "</span>";
+        CodigoHTMLAreas += "<span >" + ArrayNombreEmpresa[i] + "</span>";
         CodigoHTMLAreas += "</a>";
         CodigoHTMLAreas += "</h5>";
 
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdArticulos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodigoHTMLAreas += "<div id='collapse" + ArrayIdArticulos[i] + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
         CodigoHTMLAreas += "<div class='row'>";
 
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + Data[i].FechaSistema + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + Data[i].NombreProveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + Data[i].Proveedor + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + Data[i].PrecioUnitarioPromedio + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Categoria: </strong>" + Data[i].Categoria + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + Data[i].UnidadSAT + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + Data[i].ClaveSAT + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + ArrayFechaSistema[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + ArrayNombreProveedor[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + ArrayProveedor[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + ArrayPrecioUnitarioPromedio[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + ArrayDescripcion[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Categoria: </strong>" + ArrayCategoria[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + ArrayUnidadSAT[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + ArrayClaveSAT[i] + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + Data[i].Fecha + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidad + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + ArrayFecha[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + ArrayUnidad[i] + "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Área: </strong>" + Data[i].Area + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + Data[i].Marca + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Área: </strong>" + ArrayArea[i] + "</div>";
+        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + ArrayMarca[i]+ "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + ArrayIdArticulos[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarArticulo(" + ArrayIdArticulos[i] + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";

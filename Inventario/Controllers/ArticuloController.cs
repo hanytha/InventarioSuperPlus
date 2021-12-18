@@ -78,6 +78,109 @@ namespace Inventario.Controllers
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
+        //------------------------------------------------------------------------------------------------------------------------
+        public JsonResult ConsultaArticuloXProveedor()
+        {
+            string IdArticulos = "";
+            string NombreEmpresa = "";
+            string IdUnidadDeMedida = "";
+            string IdAreas = "";
+            string IdMarca = "";
+            string IdCategorias = "";
+            string IdProveedor = "";
+            string Proveedor = "";
+            string Categoria = "";
+            string NombreProveedor = "";
+            string PrecioUnitarioPromedio = "";
+            string Descripcion = "";
+            string UnidadSAT = "";
+            string ClaveSAT = "";
+            string Fecha = "";
+            string FechaSistema = "";
+            string Unidad = "";
+            string Area = "";
+            string Marca = "";
+
+
+            var articuloss = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    IdArticulos = p.IdArticulos,
+                    NombreEmpresa = p.NombreEmpresa,
+                    IdUnidadDeMedida = p.IdUnidadDeMedida,
+                    IdAreas = p.IdAreas,
+                    IdMarca = p.IdMarca,
+                    IdCategorias = p.IdCategorias,
+                    IdProveedor = p.IdProveedor,
+                    Proveedor = p.Proveedor,
+                    Categoria = p.Categoria,
+                    NombreProveedor = p.NombreProveedor,
+                    PrecioUnitarioPromedio = p.PrecioUnitarioPromedio,
+                    Descripcion = p.Descripcion,
+                    UnidadSAT = p.UnidadSAT,
+                    ClaveSAT = p.ClaveSAT,
+                    Fecha = p.Fecha,
+                    FechaSistema = p.FechaSistema,
+                    Unidad = p.Unidad,
+                    Area = p.Area,
+                    Marca = p.Marca,
+
+                });
+            foreach (var pro in articuloss)
+            {
+                IdArticulos += pro.IdArticulos + ",";
+                NombreEmpresa += pro.NombreEmpresa + ",";
+                IdUnidadDeMedida += pro.IdUnidadDeMedida + ",";
+                IdAreas += pro.IdAreas + ",";
+                IdMarca += pro.IdMarca + ",";
+                IdCategorias += pro.IdCategorias + ",";
+                IdProveedor += pro.IdProveedor + ",";
+
+                //string[] nombre = pro.Proveedor.Split('#');
+
+                //foreach (var uno in articuloss)
+                //{
+      
+                //}
+
+                Proveedor += pro.Proveedor + ",";
+                Categoria += pro.Categoria + ",";
+                NombreProveedor += pro.NombreProveedor + ",";
+                PrecioUnitarioPromedio += pro.PrecioUnitarioPromedio + ",";
+                Descripcion += pro.Descripcion + ",";
+                UnidadSAT += pro.UnidadSAT + ",";
+                ClaveSAT += pro.ClaveSAT + ",";
+                Fecha += pro.Fecha + ",";
+                FechaSistema += pro.FechaSistema + ",";
+                Unidad += pro.Unidad + ",";
+                Area += pro.Area + ",";
+                Marca += pro.Marca + ",";
+
+            }
+            var Resultado = new {
+                IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
+                NombreEmpresa = NombreEmpresa.Substring(0, NombreEmpresa.Length - 1),
+                IdUnidadDeMedida = IdUnidadDeMedida.Substring(0, IdUnidadDeMedida.Length - 1),
+                IdAreas = IdAreas.Substring(0, IdAreas.Length - 1),
+                IdMarca = IdMarca.Substring(0, IdMarca.Length - 1),
+                IdCategorias = IdCategorias.Substring(0, IdCategorias.Length - 1),
+                IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+                Categoria = Categoria.Substring(0, Categoria.Length - 1),
+                NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1),
+                PrecioUnitarioPromedio = PrecioUnitarioPromedio.Substring(0, PrecioUnitarioPromedio.Length - 1),
+                Descripcion = Descripcion.Substring(0, Descripcion.Length - 1),
+                UnidadSAT = UnidadSAT.Substring(0, UnidadSAT.Length - 1),
+                ClaveSAT = ClaveSAT.Substring(0, ClaveSAT.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                FechaSistema = FechaSistema.Substring(0, FechaSistema.Length - 1),
+                Unidad = Unidad.Substring(0, Unidad.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+                Marca = Marca.Substring(0, Marca.Length - 1) };
+
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------
         //Guardar los datos de la compra
         public int GuardarArticulo(Articulos DatosArticulo)
