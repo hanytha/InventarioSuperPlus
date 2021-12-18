@@ -375,7 +375,7 @@ namespace Inventario.Controllers
             return Json(DatosSupervisiones, JsonRequestBehavior.AllowGet);
         }
 
-
+        //Consulta para el combo de proveedores en pedidosInternos-sucursalesSupervision
         public JsonResult Areas()
         {
             var DatosDepartamento = InvBD.Areas.Where(p => p.Estatus.Equals(1))

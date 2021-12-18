@@ -128,10 +128,16 @@ function abrirModal(id) {
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            MostrarArticulos();
+            ConsultaSiguientePedido();
         });
-        MostrarArticulos();
-        ConsultaSiguientePedido();
+        //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
+
+        //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
+        //});
+    
+     
     }
 }
 //-------limpiar campos del Modal-formulario------------
@@ -305,7 +311,7 @@ function BloquearCTRL() {
 }
 
 function LlenarCMCProveedores() {
-    $.get("/GLOBAL/BDPro", function (data) {
+    $.get("/GLOBAL/Areas", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 }
