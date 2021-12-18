@@ -72,8 +72,8 @@ function AcordeonArticulos(Data, CtrlArti) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
     MostrarProveedores();
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
