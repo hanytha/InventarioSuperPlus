@@ -49,7 +49,7 @@ namespace Inventario.Controllers
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
-
+//--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaArticulo(long Id)
         {
             var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
@@ -80,6 +80,7 @@ namespace Inventario.Controllers
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
+//--------------------------------------------------------------------------------------------------------
         //Guardar los datos del proveedor
         public int GuardarArticulo(Articulos DatosArticulo, string cadF)
         {

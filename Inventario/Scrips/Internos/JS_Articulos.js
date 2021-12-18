@@ -105,7 +105,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
 
-            //---------------------------------------------------------------------------
+            //-------------------muestra los checkbox guardados ----------------------
             var activar = Data[0].Proveedor.split('#');
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             for (let j = 0; j < activar.length; j++) {
@@ -180,7 +180,7 @@ function GuardarArticulo() {
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
-
+//--------------------Guarda los checkebox seleccionados---------------------
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             let seleccionados = "";
             for (let i = 0; i < ChevProveedor.length; i++) {
@@ -190,7 +190,7 @@ function GuardarArticulo() {
                 }
             }
             var Proveedor = seleccionados.substring(0, seleccionados.length - 1);
-
+//----------------------------------------------------------------------------------------
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var IdCategorias = document.getElementById("cmbCategoria").value;

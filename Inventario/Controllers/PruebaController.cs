@@ -144,41 +144,8 @@ namespace Inventario.Controllers
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
-        //---------------Consulta datos del artículo por ID de proveedor en la tabla de Compras----------------
-        //public JsonResult ConsultaArticulosXProveedores(long IdP)
-        //{
-        //    string Articulos = "";
-        //    string ID = "";
-        //    var compra = InvBD.Compra.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IdP))
-        //        .Select(p => new
-        //        {
-        //            Articulo = p.Articulo,
-        //            Id = p.IdArticulo,
-        //        });
-        //    foreach (var ap in compra)
-        //    {
-        //        int Afectados = 0;
 
-
-        //        int nveces = InvBD.Compra.Where(p => Articulos.Equals(ap)&& ID.Equals(ap)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            Articulos += ap.Articulo + ",";
-        //            ID += ap.Id + ",";
-
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-
-        //    }
-        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
-        //    return Json(compras, JsonRequestBehavior.AllowGet);
-        //}
-
-        //************************************************************************************************
+        //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
        public JsonResult ConsultaIdPro(string IdPro)
         {
             var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
