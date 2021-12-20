@@ -508,9 +508,9 @@ namespace Inventario.Controllers
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 //Tienda = ExistAlm.TipoDeOperacion,
-                                
-                                //IdProveedor = areas.IdAreas,
-                                //Proveedor = areas.Nombre,
+
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
 
                                 //Correo = provedor.Correo,
                                 //Clabe = provedor.ClaveInterbancaria,
@@ -582,11 +582,40 @@ namespace Inventario.Controllers
         }
 
 
-        public JsonResult ConsultaArtProveedores()
+        //public JsonResult ConsultaArtProveedores()
+        //{
+        //    string Articulos = "";
+        //    string ID = "";
+        //    var compra = InvBD.Articulos.Where(p => p.IdProveedor.Equals(1) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            Articulo = p.NombreEmpresa,
+        //            Id = p.IdArticulos,
+
+        //        });
+        //    foreach (var ap in compra)
+        //    {
+        //        int Afectados = 0;
+        //        int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+
+        //        if (nveces == 0)
+        //        {
+        //            Articulos += ap.Articulo + ",";
+        //            ID += ap.Id + ",";
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+        //    return Json(compras, JsonRequestBehavior.AllowGet);
+        //}
+        public JsonResult ConsultaArtProveedores(long IdP)
         {
             string Articulos = "";
             string ID = "";
-            var compra = InvBD.Articulos.Where(p => p.IdProveedor.Equals(1) && p.Estatus.Equals(1))
+            var compra = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IdP))
                 .Select(p => new
                 {
                     Articulo = p.NombreEmpresa,
@@ -597,7 +626,7 @@ namespace Inventario.Controllers
             {
                 int Afectados = 0;
 
-                int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
+                int nveces = InvBD.Articulos.Where(p => ap.Articulo.Equals(ap)).Count();
 
                 if (nveces == 0)
                 {
