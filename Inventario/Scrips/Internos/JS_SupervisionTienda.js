@@ -246,14 +246,14 @@ function CamposObligatorios() {
     return exito;
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-//function LlenarCMBTienda() {
-//    //$.get("/Supervision/BDProveedor", function (data) {
-//    //    llenarCombo(data, document.getElementById("cmbProveedor"));
-//    //});
-//    $.get("/Supervision/BDTienda", function (data) {
-//        llenarCombo(data, document.getElementById("cmbTienda"));
-//    });
-//}
+function LlenarCMBTienda(Id) {
+    //$.get("/Supervision/BDProveedor", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbProveedor"));
+    //});
+    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
+        llenarCombo(data, document.getElementById("cmbTienda"));
+    });
+}
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {

@@ -485,9 +485,9 @@ namespace Inventario.Controllers
         }
 
         //----------------------Lenar el combobox----------------------------
-        public JsonResult BDTienda()
+        public JsonResult BDTienda(long Id)
         {
-            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+            var datos = InvBD.Tienda.Where(p => p.Estatus.Equals(1) && p.IdTienda.Equals(Id))
                 .Select(p => new
                 {
                     ID = p.IdTienda,
@@ -499,8 +499,8 @@ namespace Inventario.Controllers
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
-                            join provedor in InvBD.Proveedores
-                        on ExistAlm.IdProveedor equals provedor.IdProveedores
+                            join areas in InvBD.Areas
+                        on ExistAlm.IdProveedor equals areas.IdAreas
                             where ExistAlm.IdSitio.Equals(Id)
                             select new
                             {
@@ -508,12 +508,12 @@ namespace Inventario.Controllers
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 //Tienda = ExistAlm.TipoDeOperacion,
-                                IdProveedor = provedor.IdProveedores,
-                                Proveedor = provedor.Nombre,
-                                Correo = provedor.Correo,
-                                Clabe = provedor.ClaveInterbancaria,
-                                Telefono = provedor.ClaveInterbancaria,
-                                RFC = provedor.RFC,
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
+                                //Correo = provedor.Correo,
+                                //Clabe = provedor.ClaveInterbancaria,
+                                //Telefono = provedor.ClaveInterbancaria,
+                                //RFC = provedor.RFC,
                                 Tienda = ExistAlm.IdSitio,
 
                             };
