@@ -1,114 +1,63 @@
-﻿
+﻿ConsultaArticulos();
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
 LlenarCMCArea();
 LlenarCMCMarca();
-CrearAcordeonArticulos();
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonArticulos() {
-    $.get("/Articulo/ConsultaArticuloXProveedor", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonArticulos(Data, document.getElementById("accordion"));
-    });
-
-}
-function AcordeonArticulos(Data, CtrlArti) {
-    var CodigoHTMLAreas = "";
-
-    let IdArticulos = Data.IdArticulos;
-    let ArrayIdArticulos = IdArticulos.split(',');
-    let NombreEmpresa = Data.NombreEmpresa;
-    let ArrayNombreEmpresa = NombreEmpresa.split(',');
-    let Proveedor = Data.Proveedor;
-    let ArrayProveedor = Proveedor.split(',');
-    let Categoria = Data.Categoria;
-    let ArrayCategoria = Categoria.split(',');
-    let NombreProveedor = Data.NombreProveedor;
-    let ArrayNombreProveedor = NombreProveedor.split(',');
-    let PrecioUnitarioPromedio = Data.PrecioUnitarioPromedio;
-    let ArrayPrecioUnitarioPromedio = PrecioUnitarioPromedio.split(',');
-    let Descripcion = Data.Descripcion;
-    let ArrayDescripcion = Descripcion.split(',');
-    let UnidadSAT = Data.UnidadSAT;
-    let ArrayUnidadSAT = UnidadSAT.split(',');
-    let ClaveSAT = Data.ClaveSAT;
-    let ArrayClaveSAT = ClaveSAT.split(',');
-    let Fecha = Data.Fecha;
-    let ArrayFecha = Fecha.split(',');
-    let FechaSistema = Data.FechaSistema;
-    let ArrayFechaSistema = FechaSistema.split(',');
-    let Unidad = Data.Unidad;
-    let ArrayUnidad = Unidad.split(',');
-    let Area = Data.Area;
-    let ArrayArea = Area.split(',');
-    let Marca = Data.Marca;
-    let ArrayMarca = Marca.split(',');
 
 
-    for (var i = 0; i < ArrayIdArticulos.length; i++) {
-        if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        else {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + ArrayIdArticulos[i] + "'>";
-        CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + ArrayIdArticulos[i] + "' aria-expanded='false' aria-controls='collapse" + ArrayIdArticulos[i] + "' class='collapsed'>";
-
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'><label></label></i>";
-        CodigoHTMLAreas += "<span >" + ArrayNombreEmpresa[i] + "</span>";
-        CodigoHTMLAreas += "</a>";
-        CodigoHTMLAreas += "</h5>";
-
-        CodigoHTMLAreas += "<div id='collapse" + ArrayIdArticulos[i] + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-        CodigoHTMLAreas += "<div class='card-body'>";
-        CodigoHTMLAreas += "<div class='row'>";
-
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha de Ingreso: </strong>" + ArrayFechaSistema[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre asignado por el proveedor: </strong>" + ArrayNombreProveedor[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Proveedor: </strong>" + ArrayProveedor[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Precio Unitario de el artículo: </strong>" + ArrayPrecioUnitarioPromedio[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Decripción: </strong>" + ArrayDescripcion[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Categoria: </strong>" + ArrayCategoria[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad SAT: </strong>" + ArrayUnidadSAT[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Clave SAT: </strong>" + ArrayClaveSAT[i] + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Fecha: </strong>" + ArrayFecha[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + ArrayUnidad[i] + "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Área: </strong>" + ArrayArea[i] + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Marca: </strong>" + ArrayMarca[i]+ "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + ArrayIdArticulos[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarArticulo(" + ArrayIdArticulos[i] + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
+function ConsultaArticulos() {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
+        CrearTablaArticulos(Data);
     }
-    CtrlArti.innerHTML = CodigoHTMLAreas;
+    );
 }
+function CrearTablaArticulos(Data) {
+    var CodigoHtmlTablaArticulos = "";
+    CodigoHtmlTablaArticulos += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaArticulos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    CodigoHtmlTablaArticulos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaArticulos += "</div>";
+    CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
+    CodigoHtmlTablaArticulos += "<table class='table-info table table-bordered order-table'>";
+    CodigoHtmlTablaArticulos += "<thead>";
+    CodigoHtmlTablaArticulos += "<tr>";
+    CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
+    CodigoHtmlTablaArticulos += "<th>Artículo</th>";
+    CodigoHtmlTablaArticulos += "<th>Área</th>";
+    CodigoHtmlTablaArticulos += "<th>Clasificación</th>";
+    CodigoHtmlTablaArticulos += "<th>Opciones</th>";
+    CodigoHtmlTablaArticulos += "</tr>";
+    CodigoHtmlTablaArticulos += "</thead>";
+    CodigoHtmlTablaArticulos += "<tbody>";
 
 
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaArticulos += "<tr>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].NombreEmpresa + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].Area + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
+        CodigoHtmlTablaArticulos += "<td>";
+        CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
+
+        CodigoHtmlTablaArticulos += "</td>";
+        CodigoHtmlTablaArticulos += "</tr>";
+    }
+    CodigoHtmlTablaArticulos += "</tbody>";
+    CodigoHtmlTablaArticulos += "</table>";
+    document.getElementById("tablaArticulos").innerHTML = CodigoHtmlTablaArticulos;
+}
 
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-    MostrarProveedores();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    MostrarProveedores();
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
@@ -171,7 +120,6 @@ function MostrarProveedores() {
 //---------------------------------------Termina-------------------------------------------------
 //limpiar campos
 function LimpiarCampos() {
-    //Limpiar la casilla de texto
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
@@ -268,7 +216,7 @@ function GuardarArticulo() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonArticulos();
+                        ConsultaArticulos();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -302,7 +250,7 @@ function EliminarArticulo(id) {
         $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArt) {
             if (DatoArt == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonArticulos();
+                ConsultaArticulos();
             } else {
                 alert("Ocurrio un error");
             }
