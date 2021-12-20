@@ -5,7 +5,7 @@ LlenarCMCUnidad();
 LlenarCMCArea();
 LlenarCMCMarca();
 
-
+//---------------Crea una tabla de todos los artículos de la BD---------------
 function ConsultaArticulos() {
     $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearTablaArticulos(Data);
@@ -19,7 +19,7 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaArticulos += "</div>";
     CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
-    CodigoHtmlTablaArticulos += "<table class='table-info table table-bordered order-table'>";
+    CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaArticulos += "<thead>";
     CodigoHtmlTablaArticulos += "<tr>";
     CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
@@ -51,7 +51,7 @@ function CrearTablaArticulos(Data) {
 }
 
 
-//Limpia la información y carga la informacion del proveedor
+//--------------------Limpia la información y carga la informacion de Artículos---------------------
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     MostrarProveedores();
@@ -67,7 +67,6 @@ function abrirModal(id) {//la clase  Obligatorio
     else {
 
         $.get("/Articulo/ConsultaArticulo/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDArt', Data[0].IdArticulos);
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
@@ -138,7 +137,7 @@ function BloquearCTRL() {
 }
 
 
-//Guarda los cambios y altas de los proveedores
+//-------------Guarda los cambios y altas de los proveedores---------------------------------------
 function GuardarArticulo() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -146,7 +145,7 @@ function GuardarArticulo() {
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
-//--------------------Guarda los checkebox seleccionados---------------------
+//--------------------Guarda los checkebox seleccionados-----------------------------------------
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             let seleccionados = "";
             for (let i = 0; i < ChevProveedor.length; i++) {
@@ -227,7 +226,7 @@ function GuardarArticulo() {
 
 
 
-//marca los campos obligatorios
+//---------------marca los campos obligatorios------------------------
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -244,7 +243,7 @@ function CamposObligatorios() {
     }
     return exito;
 }
-//"Elimina" el área cambia el Estatus
+//-----------cambia el Estatus de 1 a 0------------------
 function EliminarArticulo(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArt) {
@@ -258,7 +257,7 @@ function EliminarArticulo(id) {
     }
 }
 
-
+//----------Consultas para obtener los datos de los combobox----------------
 function LlenarCMCategoria() {
     $.get("/GLOBAL/BDCategorias", function (data) {
         llenarCombo(data, document.getElementById("cmbCategoria"));
@@ -287,7 +286,7 @@ function LlenarCMCMarca() {
 }
 
 
-//funcion general para llenar los select
+//----------funcion general para llenar los select---------------------------
 function llenarCombo(data, control) {
 
     var contenido = "";

@@ -47,13 +47,11 @@ function CrearTablaCompras(Data) {
 }
 
 
-//Limpia la información y carga la informacion del proveedor
+//------------Limpia la información y carga la informacion de la compra------------------------
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
@@ -84,7 +82,7 @@ function abrirModal(id) {//la clase  Obligatorio
 
 
 
-//limpiar campos
+//------------------limpiar campos-------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -97,7 +95,7 @@ function LimpiarCampos() {
 }
 
 
-//Guarda los cambios y altas de las áreas
+//---------Guarda los cambios y altas de las compras------------------------------------
 function GuardarCompra() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -172,7 +170,7 @@ function GuardarCompra() {
     }
 }
 
-//marca los campos obligatorios
+//----------marca los campos obligatorios--------------------
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -191,7 +189,7 @@ function CamposObligatorios() {
 
 
 
-//"Elimina" el área cambia el Estatus
+//-------------------"Elimina" la compra cambia el Estatus de 1 a 0-------------
 function EliminarCompra(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
@@ -206,6 +204,7 @@ function EliminarCompra(id) {
     }
 }
 
+//------obtiene los datos de las consultas para llenar los combobox-----------
 
 function LlenarCMBImpuesto() {
     $.get("/GLOBAL/BDImpuesto", function (data) {
@@ -232,7 +231,7 @@ function LlenarCMBUnidades() {
     });
 }
 
-//funcion general para llenar los select
+//----------------funcion general para llenar los select------------
 function llenarCombo(data, control) {
     var contenido = "";
     contenido += "<option value='0'>--Seleccione--</option>";
