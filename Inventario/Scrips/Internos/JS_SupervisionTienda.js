@@ -126,7 +126,7 @@ function abrirModal(id) {
     else {
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
@@ -135,7 +135,7 @@ function abrirModal(id) {
 
         //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
         //});
-
+        //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         MostrarArticulos();
         ConsultaSiguientePedido();
     }

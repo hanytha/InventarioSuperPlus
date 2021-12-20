@@ -508,8 +508,10 @@ namespace Inventario.Controllers
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 //Tienda = ExistAlm.TipoDeOperacion,
-                                IdProveedor = areas.IdAreas,
-                                Proveedor = areas.Nombre,
+                                
+                                //IdProveedor = areas.IdAreas,
+                                //Proveedor = areas.Nombre,
+
                                 //Correo = provedor.Correo,
                                 //Clabe = provedor.ClaveInterbancaria,
                                 //Telefono = provedor.ClaveInterbancaria,
