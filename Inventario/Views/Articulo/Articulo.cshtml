@@ -103,7 +103,8 @@
 
     })(document);
 </script>
-<!------------------------------------------------Termina------------------------------------------------------------->
+
+
 <!----------------------Crea Tabla de artículos----------------------------------->
 <div id="tablaArticulos"></div>
 <!-------------------------------------------------------------------------->
@@ -129,8 +130,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
-                                        <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtFechaIngreso]" id="TxtFechaIngreso" class="form-control obligatorio bloquear">
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +250,7 @@
     document.getElementById('TxtFechaIngreso').value = fecha;
 
 </script>
-<!------------------------------------------>
+
 <!------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
