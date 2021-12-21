@@ -125,7 +125,7 @@ function abrirModal(id) {
     }
     else {
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
@@ -138,6 +138,7 @@ function abrirModal(id) {
         //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         MostrarArticulos(id);
         ConsultaSiguientePedido();
+        document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
     }
 }
 //-------limpiar campos del Modal-formulario------------
