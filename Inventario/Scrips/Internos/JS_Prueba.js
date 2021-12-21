@@ -262,7 +262,10 @@ function GuardarPedidoExterno() {
                             else if (data == -1) {
                                 alert("Ya existe el perfil");
                             }
-
+                            else {
+                                ConsultaArticuloComp();
+                                document.getElementById("btnCancelar").click();
+                            }
                         }
                     });
 

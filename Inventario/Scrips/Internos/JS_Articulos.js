@@ -15,7 +15,7 @@ function ConsultaArticulos() {
 function CrearTablaArticulos(Data) {
     var CodigoHtmlTablaArticulos = "";
     CodigoHtmlTablaArticulos += "<div class='input-group mb-3 float-right '>";
-    CodigoHtmlTablaArticulos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text' placeholder='Search..'>";
+    CodigoHtmlTablaArticulos += "<input  class='form-control col-md-3 light-table-filter' data-table='order-table' type='text'  placeholder='Search....'>";
     CodigoHtmlTablaArticulos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaArticulos += "</div>";
     CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
