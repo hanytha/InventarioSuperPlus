@@ -463,8 +463,8 @@ namespace Inventario.Controllers
         public JsonResult ConsultaExistenciaAlmGJoinProveedor(long No, long Id)
         {
             var ExistenciaAlmG = from ExistenciAAlmacen in InvBD.ExistenciaAlmacenG
-                                 join provedor in InvBD.Proveedores
-                             on ExistenciAAlmacen.IdProveedor equals provedor.IdProveedores
+                                 join provedor in InvBD.Areas
+                             on ExistenciAAlmacen.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
                                    on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
                                  where ExistenciAAlmacen.NoPedido.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id)
@@ -475,7 +475,7 @@ namespace Inventario.Controllers
                                      Articulo = ExistenciAAlmacen.NombreEmpresa,
                                      Coste = ExistenciAAlmacen.Coste,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
-                                     IdProveedor = provedor.IdProveedores,
+                                     IdProveedor = provedor.IdAreas,
                                      Proveedor = provedor.Nombre
 
                                  };
