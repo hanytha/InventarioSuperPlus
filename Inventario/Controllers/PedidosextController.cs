@@ -108,7 +108,7 @@ namespace Inventario.Controllers
                             CantidadSolicitada = pedidos.CantidadSolicitada,
                             PrecioUnitarioPromedio = artis.PrecioUnitarioPromedio,
                             Unidad = artis.Unidad,
-
+                            
                         };
 
 
@@ -169,11 +169,7 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+
             return Afectados;
         }
 

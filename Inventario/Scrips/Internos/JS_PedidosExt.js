@@ -60,41 +60,6 @@ function VerPedido(num) {
 }
 
 //******************************************************************************************************************************
-//************Genera los artículo y la cantidad solicitada deacuerdo con el número de pedido*****************************
-
-/*
-function MostrarArticulos(num) {
-    if (num == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
-    }
-    else {
-
-        $.get("/Pedidosext/ConsultaArícuiloXnum/?Pedi=" + num, function (Data) {
-            //-----------------------------------------------------------------------------------
-            var TablaArticulo = "";
-            TablaArticulo += "<ol class='list-group list-group-numbered'>";
-
-            for (var i = 0; i < Data.length; i++) {
-                //-------Crea los Artículos-------------------------------------------------------------------------
-                TablaArticulo += "<li class='list-group-item'>";
-                TablaArticulo += "<span>Artículo:</span>";
-                TablaArticulo += " <label id='TxtArticulo'>" + Data[i].Articulo + "</label>"
-                TablaArticulo += "<br/>"
-                TablaArticulo += "<label>"
-                TablaArticulo += "<span>Cantidad:</span>";
-                TablaArticulo += " <label id='TxtArticulo'>" + Data[i].CantidadSolicitada + "</label>"
-                TablaArticulo += "</label>"
-                TablaArticulo += "</li>";
-
-            }
-
-            TablaArticulo += "</ol>";
-            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-        });
-    }
-} 
-
-*/
 //-----------------------------------------------------------------------------------------------------------------------
 function MostrarArticulos(num) {
     if (num == 0) {
@@ -115,18 +80,23 @@ function MostrarArticulos(num) {
             dos += "<th >Unidad_Medida</th>"
             dos += "<th >Cantidad Solicitada</th>"
             dos += "<th >Precio_Unitario</th>"
+            dos += "<th >Total</th>"
             dos += "</tr>"
             dos += "</thead>"
             dos += "<tbody>"
 
-            for (var i = 0; i < Data.length; i++) {
+            for (var i = 0; i < Data.length; i++) { 
+
+                //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
+                let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitarioPromedio);
 
                 //----Cuerpo del grid-------------
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
                 dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
-                dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
-                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitarioPromedio + "</label></td>"
+                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitarioPromedio + "</label></td>"
+                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label></label>"+ tres +"</td>"
                 dos += "</tr>"
             }
             dos += "</tbody>"
@@ -138,3 +108,4 @@ function MostrarArticulos(num) {
         });
     }
 }
+

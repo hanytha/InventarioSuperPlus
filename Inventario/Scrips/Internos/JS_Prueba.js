@@ -185,10 +185,10 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Precio_Unitario</label>";
+            TablaArticulo += "<label>Unidad_Medida</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Unidad_Medida</label>";
+            TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
     //-------Crea los chex-box-------------------------------------------------------------------------
@@ -202,16 +202,16 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
+                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
+                TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
                 TablaArticulo += "</div>";
 
-                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
-                TablaArticulo += "</div>";
-
+            
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
