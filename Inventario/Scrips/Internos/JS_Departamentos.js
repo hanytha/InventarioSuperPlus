@@ -330,7 +330,7 @@ function GuardarSubarea() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonSubAreas();
+                        CrearAcordeonSubAreas(IdArea);
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -375,7 +375,7 @@ function EliminarSubarea(id) {
         $.get("/Subarea/EliminarSubarea/?Id=" + id, function (DatoSub) {
             if (DatoSub == 1) {
                 alert("Se elimino correctamente");
-                CrearAcordeonSubAreas();
+                CrearAcordeonSubAreas(IdArea);
             } else {
                 alert("Ocurrio un error");
             }

@@ -16,6 +16,8 @@ namespace Inventario.Controllers
         // GET: Departamentos
         public ActionResult Departamentos()
         {
+            DepartamentosController departamento = new DepartamentosController();
+            departamento.ConsultaDepartamentos();
             return View();
         }
         public void ConsultaDepartamentos()
