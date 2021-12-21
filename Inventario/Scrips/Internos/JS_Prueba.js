@@ -202,12 +202,12 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
-                //-------Crea los chex-box-------------------------------------------------------------------------
+                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+                TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
                 TablaArticulo += "</div>";
 
-                //-------Crea los chex-box-------------------------------------------------------------------------
+                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
                 TablaArticulo += "</div>";
@@ -236,6 +236,7 @@ function GuardarPedidoExterno() {
                 if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
                     llenar += NumPedidos[i].value;
                     seleccionados += ChevPedidos[i].id;
+
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                     var IdProveedor = document.getElementById("cmbProveedor").value;

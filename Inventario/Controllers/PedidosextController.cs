@@ -79,19 +79,44 @@ namespace Inventario.Controllers
         //*****************************************************************************************************************
         //*****************************************************************************************************************
         //*****************************Consulta los artículos por número de pedido**************************************************
-        public JsonResult ConsultaArícuiloXnum(long Pedi)
-        {
-            var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdPedidosExternos,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.CantidadSolicitada,
+        //public JsonResult ConsultaArícuiloXnum(long Pedi)
+        //{
+        //    var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdPedidosExternos,
+        //            p.IdArticulo,
+        //            p.Articulo,
+        //            p.CantidadSolicitada,
+                    
 
-                });
-            return Json(numero, JsonRequestBehavior.AllowGet);
+        //        });
+        //    return Json(numero, JsonRequestBehavior.AllowGet);
+        //}
+
+//***********Join con la tabla de artículos para obtener los precios unitarios y las unidades de media de cada artículo del pedido*********
+
+        public JsonResult ConsultaPedidoJoinArticulo(long Pedi)
+        {
+            var comps = from pedidos in InvBD.PedidosExternos
+                        join artis in InvBD.Articulos
+                    on pedidos.Articulo equals artis.NombreEmpresa
+                        where pedidos.NumeroPedido.Equals(Pedi) && pedidos.Estatus.Equals(1)
+                        select new
+                        {
+                            Articulo = pedidos.Articulo,
+                            CantidadSolicitada = pedidos.CantidadSolicitada,
+                            PrecioUnitarioPromedio = artis.PrecioUnitarioPromedio,
+                            Unidad = artis.Unidad,
+
+                        };
+
+
+            return Json(comps, JsonRequestBehavior.AllowGet);
+
         }
+
+
         //*****************************************************************************************************************
         //*****************************************************************************************************************
         //Guardar los datos de la compra

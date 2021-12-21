@@ -102,7 +102,7 @@ function MostrarArticulos(num) {
     }
     else {
 
-        $.get("/Pedidosext/ConsultaArícuiloXnum/?Pedi=" + num, function (Data) {
+        $.get("/Pedidosext/ConsultaPedidoJoinArticulo/?Pedi=" + num, function (Data) {
             var dos = "";
 
             dos += "<div style='width: 100%'>"
@@ -112,7 +112,9 @@ function MostrarArticulos(num) {
             dos += "<thead>"
             dos += "<tr align='left'>"
             dos += "<th >Artículo</th>"
+            dos += "<th >Unidad_Medida</th>"
             dos += "<th >Cantidad Solicitada</th>"
+            dos += "<th >Precio_Unitario</th>"
             dos += "</tr>"
             dos += "</thead>"
             dos += "<tbody>"
@@ -122,7 +124,9 @@ function MostrarArticulos(num) {
                 //----Cuerpo del grid-------------
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+                dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
                 dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitarioPromedio + "</label></td>"
                 dos += "</tr>"
             }
             dos += "</tbody>"

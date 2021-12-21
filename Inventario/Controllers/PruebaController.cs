@@ -159,6 +159,7 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+
         //*************************************************************************************************************
         //****************************Consulta el último número de pedido*************************************************
 
