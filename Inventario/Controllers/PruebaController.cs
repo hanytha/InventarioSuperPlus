@@ -152,7 +152,9 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     p.NombreEmpresa,
-                    p.IdArticulos
+                    p.IdArticulos,
+                    p.PrecioUnitarioPromedio,
+                    p.Unidad
                });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
@@ -227,7 +229,6 @@ namespace Inventario.Controllers
                  && p.Clabe.Equals(DatosPedidoExterno.Clabe)
                  && p.UsoCFDI.Equals(DatosPedidoExterno.UsoCFDI)
                  && p.Direccion.Equals(DatosPedidoExterno.Direccion)
-       
                  && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)
                 {
