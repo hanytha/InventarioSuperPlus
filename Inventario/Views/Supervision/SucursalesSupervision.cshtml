@@ -196,14 +196,11 @@
                                     </select>
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                    <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
-                                        <option value="0">--Seleccione--</option>
-                                    </select>
-
+                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
+                                    <select onchange="abrirModal(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
                         </div>

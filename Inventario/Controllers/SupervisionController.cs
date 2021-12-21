@@ -611,6 +611,8 @@ namespace Inventario.Controllers
         //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
         //    return Json(compras, JsonRequestBehavior.AllowGet);
         //}
+
+        //*¨
         public JsonResult ConsultaArtProveedores(long IdP)
         {
             string Articulos = "";
@@ -643,6 +645,22 @@ namespace Inventario.Controllers
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
+        //]*
+
+
+        public JsonResult ConsultaIdPro(string IdPro)
+        {
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.PrecioUnitarioPromedio,
+                    p.Unidad
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
 
         //Calculo del siguiente pedido
         public JsonResult ConsultaPedidosDecendiente()

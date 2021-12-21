@@ -1,4 +1,4 @@
-﻿LlenarCMCProveedores();
+﻿
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
@@ -118,6 +118,7 @@ function Desplegar(no, id) {
 
 //----------------Abrir modal de Pedidos Internos--------------------------------------------------------
 function abrirModal(id) {
+    LlenarCMCProveedores();
     //LlenarCMBTienda();
     LimpiarCampos();
     if (id == 0) {
@@ -129,16 +130,18 @@ function abrirModal(id) {
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+           
         });
         //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
 
         //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
         //});
         //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
         MostrarArticulos(id);
         ConsultaSiguientePedido();
-        document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+       
     }
 }
 //-------limpiar campos del Modal-formulario------------
@@ -305,7 +308,11 @@ function llenarCombo(data, control) {
 //}
 
 function MostrarArticulos(id) {
-
+       var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
     if (id == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
     }
