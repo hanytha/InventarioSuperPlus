@@ -30,30 +30,13 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.IdArticulo,
                     p.Articulo,
-                    p.Fecha
+                    p.Fecha,
+                    p.NumPedidoProveedor,
                 });
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
 
-        //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
-        public JsonResult ConsultaPedidoExterno(long Id)
-        {
-            var pedidosExt = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(Id) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdPedidosExternos,
-                    p.NumeroPedido,
-                    p.CantidadSolicitada,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.Fecha
-                });
-            return Json(pedidosExt, JsonRequestBehavior.AllowGet);
-        }
-
-        //******************************************Cosulta los pedidos por número de compra**************************************************
+ //******************************************Cosulta los pedidos por número de compra**************************************************
         public JsonResult ConsultaPedidoXnum(long Num)
         {
             var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
@@ -73,27 +56,12 @@ namespace Inventario.Controllers
                     p.Telefono,
                     p.UsoCFDI,
                     p.Direccion,
+                    p.NumPedidoProveedor,
                 });
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
-        //*****************************************************************************************************************
-        //*****************************************************************************************************************
-        //*****************************Consulta los artículos por número de pedido**************************************************
-        //public JsonResult ConsultaArícuiloXnum(long Pedi)
-        //{
-        //    var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.IdPedidosExternos,
-        //            p.IdArticulo,
-        //            p.Articulo,
-        //            p.CantidadSolicitada,
-                    
 
-        //        });
-        //    return Json(numero, JsonRequestBehavior.AllowGet);
-        //}
-
+ //****************************************************************************************************************************************
 //***********Join con la tabla de artículos para obtener los precios unitarios y las unidades de media de cada artículo del pedido*********
 
         public JsonResult ConsultaPedidoJoinArticulo(long Pedi)
