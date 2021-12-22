@@ -184,10 +184,10 @@ namespace Inventario.Controllers
         public JsonResult ConsultaNumPedidoProveedor(long ID)
         {
             string numPedidoProve = "";
-            var numero = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(ID) && p.Estatus.Equals(1))
+            var numero = InvBD.PedidosExternos.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                   Id = p.IdProveedores,
+                   Id = p.IdProveedor,
                    NumeroPProveedor= p.NumPedidoProveedor,
 
                 });
