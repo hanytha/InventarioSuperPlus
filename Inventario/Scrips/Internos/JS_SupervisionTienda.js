@@ -473,8 +473,15 @@ function BloquearCTRL() {
 //        llenarCombo(data, document.getElementById("cmbProveedor"));
 //    });
 //}
+//function LlenarCMCProveedores() {
+//    $.get("/Prueba/BDProveedor", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
+
+//}
+
 function LlenarCMCProveedores() {
-    $.get("/Prueba/BDProveedor", function (data) {
+    $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 

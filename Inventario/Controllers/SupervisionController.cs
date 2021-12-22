@@ -525,33 +525,78 @@ namespace Inventario.Controllers
 
         //}
 
+        //public JsonResult ConsultaComJoinProveedor(long Id)
+        //{
+        //    var comps = from comprs in InvBD.Compra
+        //                join provedor in InvBD.Proveedores
+        //            on comprs.IdProveedor equals provedor.IdProveedores
+        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+        //                select new
+        //                {
+        //                    Articulo = comprs.Articulo,
+        //                    IdArticulo = comprs.IdArticulo,
+        //                    IdProveedor = provedor.IdProveedores,
+        //                    Proveedor = provedor.Nombre,
+        //                    Correo = provedor.Correo,
+        //                    Clabe = provedor.ClaveInterbancaria,
+        //                    Telefono = provedor.Telefono,
+        //                    RFC = provedor.RFC,
+        //                    UsoCFDI = provedor.UsoCFDI,
+        //                    Direccion = provedor.Direccion,
+
+
+        //                };
+
+
+        //    return Json(comps, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
+
+
+
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
-            var comps = from comprs in InvBD.Compra
-                        join provedor in InvBD.Proveedores
-                    on comprs.IdProveedor equals provedor.IdProveedores
-                        where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-                        select new
-                        {
-                            Articulo = comprs.Articulo,
-                            IdArticulo = comprs.IdArticulo,
-                            IdProveedor = provedor.IdProveedores,
-                            Proveedor = provedor.Nombre,
-                            Correo = provedor.Correo,
-                            Clabe = provedor.ClaveInterbancaria,
-                            Telefono = provedor.Telefono,
-                            RFC = provedor.RFC,
-                            UsoCFDI = provedor.UsoCFDI,
-                            Direccion = provedor.Direccion,
+            var ExistAlmG = from Art in InvBD.Articulos
+                            join areas in InvBD.Areas
+                        on Art.IdAreas equals areas.IdAreas
+                            where Art.IdAreas.Equals(Id)
+                            select new
+                            {
+                                Articulo = Art.NombreEmpresa,
+                                IdArticulo = Art.IdArticulos,
+                                //Tipo = Art.TipoDeOperacion,
+                                //Tienda = ExistAlm.TipoDeOperacion,
+
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
+                                //IdAreas = Art.IdAreas,
+                                //Correo = provedor.Correo,
+                                //Clabe = provedor.ClaveInterbancaria,
+                                //Telefono = provedor.ClaveInterbancaria,
+                                //RFC = provedor.RFC,
+                                //Tienda = Art.IdSitio,
+
+                            };
 
 
-                        };
-
-
-            return Json(comps, JsonRequestBehavior.AllowGet);
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
 
         }
 
+
+
+
+        public JsonResult BDProveedor()
+        {
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
 
         //public JsonResult ConsultaComJoinProveedorModal(long Id)
         //{
@@ -580,19 +625,11 @@ namespace Inventario.Controllers
 
         //}
 
-        public JsonResult BDProveedor()
-        {
-            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdAreas,
-                    Nombre = p.Nombre
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
+     
 
         public JsonResult ConsultaIdPro(string IdPro)
         {
-            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+            var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.NombreEmpresa,
