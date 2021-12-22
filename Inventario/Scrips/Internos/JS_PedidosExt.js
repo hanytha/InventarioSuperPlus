@@ -54,6 +54,7 @@ function VerPedido(num) {
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+            document.getElementById("NumeroPedido").textContent = Data[0].NumeroPedido;
             MostrarArticulos(num);
         });
     }
