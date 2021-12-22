@@ -1,4 +1,5 @@
 ﻿
+//*****************Crea la tabla de todos los pedidos quee se realizan a los proveedores*****************************
 ConsultaPedidos();
 function ConsultaPedidos() {
     $.get("/Pedidosext/ConsultaPedidosExternos", function (Data) {
@@ -40,7 +41,7 @@ function CrearTablaPedidos(Data) {
 }
 
 //******************************************************************************************************************************
-//*************************Ver el pedido deacuerdo con el número de pedido************************************************
+//*******************Despliega el modal deacuerdo con el número de pedido************************************************
 
 function VerPedido(num) {
     if (num == 0) {
@@ -61,7 +62,7 @@ function VerPedido(num) {
 }
 
 //******************************************************************************************************************************
-//-----------------------------------------------------------------------------------------------------------------------
+//--------------Crea la tabla de los artículos y sus caracteristicas para mostrarse en el modal de ver pedido-----------------
 function MostrarArticulos(num) {
     if (num == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
