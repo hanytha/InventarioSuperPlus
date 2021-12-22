@@ -137,8 +137,6 @@ namespace Inventario.Controllers
                             RFC = provedor.RFC,
                             UsoCFDI = provedor.UsoCFDI,
                             Direccion = provedor.Direccion,
-                            NumPedidoProveedor = provedor.NumPedidoProveedor,
-
                         };
 
 

@@ -50,7 +50,6 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RazonSocial: </strong>" + data[i].RazonSocial + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Direccion: </strong>" + data[i].Direccion + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Descripcion: </strong>" + data[i].Descripcion + "</div>";
-        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Número de pedidos: </strong>" + data[i].NumPedidoProveedor + "</div>";
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>CodigoPostal: </strong>" + data[i].CodigoPostal + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
@@ -184,7 +183,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("TxtNumPedidosProve").value = Data[0].NumPedidoProveedor;
             document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
         });
@@ -252,7 +250,6 @@ function GuardarProveedor() {
             var NumeroDeCuenta = document.getElementById("TxtNumeroDeCuenta").value;
 
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
-            var NumPedidoProveedor = document.getElementById("TxtNumPedidosProve").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
@@ -280,7 +277,6 @@ function GuardarProveedor() {
             frm.append("NumeroDeCuenta", NumeroDeCuenta);
             frm.append("UsoCFDI", UsoCFDI);
             frm.append("Descripcion", Descripcion);
-            frm.append("NumPedidoProveedor", NumPedidoProveedor);
             frm.append("cadF", Logo);
             frm.append("Estatus", 1);
             $.ajax({
