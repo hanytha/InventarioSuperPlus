@@ -524,6 +524,87 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
 
         }
+
+        //public JsonResult ConsultaComJoinProveedor(long Id)
+        //{
+        //    var comps = from comprs in InvBD.Compra
+        //                join provedor in InvBD.Proveedores
+        //            on comprs.IdProveedor equals provedor.IdProveedores
+        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+        //                select new
+        //                {
+        //                    Articulo = comprs.Articulo,
+        //                    IdArticulo = comprs.IdArticulo,
+        //                    IdProveedor = provedor.IdProveedores,
+        //                    Proveedor = provedor.Nombre,
+        //                    Correo = provedor.Correo,
+        //                    Clabe = provedor.ClaveInterbancaria,
+        //                    Telefono = provedor.Telefono,
+        //                    RFC = provedor.RFC,
+        //                    UsoCFDI = provedor.UsoCFDI,
+        //                    Direccion = provedor.Direccion,
+
+
+        //                };
+
+
+        //    return Json(comps, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
+        public JsonResult ConsultaComJoinProveedorModal(long Id)
+        {
+            var comps = from comprs in InvBD.Compra
+                        join provedor in InvBD.Proveedores
+                    on comprs.IdProveedor equals provedor.IdProveedores
+                        where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+                        select new
+                        {
+                            Articulo = comprs.Articulo,
+                            IdArticulo = comprs.IdArticulo,
+                            IdProveedor = provedor.IdProveedores,
+                            Proveedor = provedor.Nombre,
+                            Correo = provedor.Correo,
+                            Clabe = provedor.ClaveInterbancaria,
+                            Telefono = provedor.Telefono,
+                            RFC = provedor.RFC,
+                            UsoCFDI = provedor.UsoCFDI,
+                            Direccion = provedor.Direccion,
+                            NumPedidoProveedor = provedor.NumPedidoProveedor,
+
+                        };
+
+
+            return Json(comps, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult BDProveedor()
+        {
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ConsultaIdPro(string IdPro)
+        {
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.PrecioUnitarioPromedio,
+                    p.Unidad
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+
+
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
@@ -613,54 +694,67 @@ namespace Inventario.Controllers
         //}
 
         //*¨
-        public JsonResult ConsultaArtProveedores(long IdP)
-        {
-            string Articulos = "";
-            string ID = "";
-            var compra = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IdP))
-                .Select(p => new
-                {
-                    Articulo = p.NombreEmpresa,
-                    Id = p.IdArticulos,
+        //public JsonResult ConsultaArtProveedores(long IdP)
+        //{
+        //    string Articulos = "";
+        //    string ID = "";
+        //    var compra = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IdP))
+        //        .Select(p => new
+        //        {
+        //            Articulo = p.NombreEmpresa,
+        //            Id = p.IdArticulos,
 
-                });
-            foreach (var ap in compra)
-            {
-                int Afectados = 0;
+        //        });
+        //    foreach (var ap in compra)
+        //    {
+        //        int Afectados = 0;
 
-                int nveces = InvBD.Articulos.Where(p => ap.Articulo.Equals(ap)).Count();
+        //        int nveces = InvBD.Articulos.Where(p => ap.Articulo.Equals(ap)).Count();
 
-                if (nveces == 0)
-                {
-                    Articulos += ap.Articulo + ",";
-                    ID += ap.Id + ",";
-                }
-                else
-                {
-                    Afectados = -1;
-                }
+        //        if (nveces == 0)
+        //        {
+        //            Articulos += ap.Articulo + ",";
+        //            ID += ap.Id + ",";
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
 
-            }
-            var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
-            return Json(compras, JsonRequestBehavior.AllowGet);
-        }
+        //    }
+        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
+        //    return Json(compras, JsonRequestBehavior.AllowGet);
+        //}
 
         //]*
 
 
-        public JsonResult ConsultaIdPro(string IdPro)
-        {
-            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.NombreEmpresa,
-                    p.IdArticulos,
-                    p.PrecioUnitarioPromedio,
-                    p.Unidad
-                });
+        //public JsonResult ConsultaIdPro(string IdPro)
+        //{
+        //    var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.NombreEmpresa,
+        //            p.IdArticulos,
+        //            p.PrecioUnitarioPromedio,
+        //            p.Unidad
+        //        });
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
+        //}
+        //public JsonResult ConsultaIdPro(string IdPro)
+        //{
+        //    var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.NombreEmpresa,
+        //            //p.IdArticulos,
+        //            //p.PrecioUnitarioPromedio,
+        //            //p.Unidad
+        //        });
+
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
+        //}
 
         //Calculo del siguiente pedido
         public JsonResult ConsultaPedidosDecendiente()

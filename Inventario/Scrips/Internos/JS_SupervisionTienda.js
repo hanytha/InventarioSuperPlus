@@ -116,34 +116,148 @@ function Desplegar(no, id) {
     }
 }
 
-//----------------Abrir modal de Pedidos Internos--------------------------------------------------------
+
+
 function abrirModal(id) {
     LlenarCMCProveedores();
-    //LlenarCMBTienda();
     LimpiarCampos();
     if (id == 0) {
-        sessionStorage.setItem('IdPedidosInternos', '0');
+        sessionStorage.setItem('IDG', '0');
+
     }
     else {
-        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
-            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbTienda").value = Data[0].Tienda;
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+        $.get("/Supervision/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-           
+            //document.getElementById("TxtRFC").value = Data[0].RFC;
+            //document.getElementById("TxtClabe").value = Data[0].Clabe;
+            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            //document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
+            //---Muestra los artículos que le pertenecen a ese proveedor----
+            MostrarArticulos(id);
+            //----Muestra el número de pedido que le corresponde-------
+            ConsultaSiguientePedido();
         });
-        //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
-
-        //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
-        //});
-        //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-
-        MostrarArticulos(id);
-        ConsultaSiguientePedido();
-       
     }
 }
+
+function MostrarArticulos(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaIdPro/?IdPro=" + id, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Unidad_Medida</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Precio_Unitario</label>";
+            TablaArticulo += "</div>";
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los chex-box-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                TablaArticulo += "</div>";
+                //-------Crea los input-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
+                TablaArticulo += "</div>";
+                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+                TablaArticulo += "</div>";
+
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+        });
+    }
+} 
+
+//----------------Abrir modal de Pedidos Internos--------------------------------------------------------
+//function abrirModal(id) {
+//    LlenarCMCProveedores();
+//    //LlenarCMBTienda();
+//    LimpiarCampos();
+//    if (id == 0) {
+//        sessionStorage.setItem('IdPedidosInternos', '0');
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+//            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+//            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+//            document.getElementById("cmbTienda").value = Data[0].Tienda;
+//            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+//            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+           
+//        });
+//        //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
+
+//        //    document.getElementById("cmbProv").value = Data[0].IdProveedor;
+//        //});
+//        //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+
+//        MostrarArticulos(id);
+//        ConsultaSiguientePedido();
+       
+//    }
+//}
+
+
+
+//function abrirModal(id) {
+//    LlenarCMCProveedores();
+//    LimpiarCampos();
+//    if (id == 0) {
+//        sessionStorage.setItem('IDG', '0');
+
+//    }
+//    else {
+
+//        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+//            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+//            //document.getElementById("TxtRFC").value = Data[0].RFC;
+//            //document.getElementById("TxtClabe").value = Data[0].Clabe;
+//            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+//            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+//            //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+//            //document.getElementById("TxtDireccion").value = Data[0].Direccion;
+//            //---Muestra los artículos que le pertenecen a ese proveedor----
+//            MostrarArticulos(id);
+//            //----Muestra el número de pedido que le corresponde-------
+//            ConsultaSiguientePedido();
+//        });
+//    }
+//}
+
+
 //-------limpiar campos del Modal-formulario------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -307,45 +421,45 @@ function llenarCombo(data, control) {
 //    //}
 //}
 
-function MostrarArticulos(id) {
-       var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
-    if (id == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
-    }
-    else {
+//function MostrarArticulos(id) {
+//       var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+//    }
+//    if (id == 0) {
+//        sessionStorage.setItem('IdPedidosExternos', '0');
+//    }
+//    else {
 
-        $.get("/Supervision/ConsultaArtProveedores/?IdP=" + id, function (Data) {
+//        $.get("/Supervision/ConsultaArtProveedores/?IdP=" + id, function (Data) {
 
-            let ID = Data.ID;
-            let ArrayID = ID.split(',');
-            let Articulos = Data.Articulos;
-            let ArrayArticulos = Articulos.split(',');
+//            let ID = Data.ID;
+//            let ArrayID = ID.split(',');
+//            let Articulos = Data.Articulos;
+//            let ArrayArticulos = Articulos.split(',');
 
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
+//            var TablaArticulo = "";
+//            TablaArticulo += "<div class='row row-cols-auto'>";
 
-            for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
-                //-------Crea los chex-box-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
-                TablaArticulo += "</div>";
+//            for (var i = 0; i < (ArrayArticulos, ArrayID).length; i++) {
+//                //-------Crea los chex-box-------------------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'>" + ArrayArticulos[i] + "</span>";
+//                TablaArticulo += "</div>";
 
-                //-------Crea los input-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
-            }
-            TablaArticulo += "</div>";
-            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-        });
-    }
-}
+//                //-------Crea los input-------------------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<label>"
+//                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado' id='" + ArrayID[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                TablaArticulo += "</label>"
+//                TablaArticulo += "</div>";
+//            }
+//            TablaArticulo += "</div>";
+//            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+//        });
+//    }
+//}
 
 
 function BloquearCTRL() {
@@ -355,10 +469,16 @@ function BloquearCTRL() {
     }
 }
 
+//function LlenarCMCProveedores() {
+//    $.get("/GLOBAL/Areas", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
+//}
 function LlenarCMCProveedores() {
-    $.get("/GLOBAL/Areas", function (data) {
+    $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
+
 }
 
 function ConsultaSiguientePedido() {
