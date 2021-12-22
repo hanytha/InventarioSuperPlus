@@ -251,6 +251,7 @@ function GuardarPedidoExterno() {
                     var Telefono = document.getElementById("TxtTelefono").value;
                     var Clabe = document.getElementById("TxtClabe").value;
                     var NumeroPedido = document.getElementById("TxtNumPedido").value;
+                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProve").value;
                     var Fecha = document.getElementById("TxtFechaSistema").value;
 
                     var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
@@ -270,6 +271,7 @@ function GuardarPedidoExterno() {
                     frm.append("Clabe", Clabe);
                     frm.append("Articulo", Articulo);
                     frm.append("NumeroPedido", NumeroPedido);
+                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
                     frm.append("Fecha", Fecha);
                     frm.append("UsoCFDI", UsoCFDI);
