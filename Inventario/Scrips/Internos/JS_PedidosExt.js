@@ -101,6 +101,10 @@ function MostrarArticulos(num) {
                 dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label></label>"+ tres +"</td>"
                 dos += "</tr>"
             }
+            dos += "<tfoot>"
+            dos += "<th>Total</th>"
+            dos += "</tfoot>"
+
             dos += "</tbody>"
             dos += "</table>"
             dos += "</div>";
