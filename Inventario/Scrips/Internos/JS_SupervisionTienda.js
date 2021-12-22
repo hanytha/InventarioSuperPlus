@@ -127,7 +127,7 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/Supervision/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TxtRFC").value = Data[0].RFC;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
@@ -200,7 +200,6 @@ function MostrarArticulos(id) {
         });
     }
 } 
-
 //----------------Abrir modal de Pedidos Internos--------------------------------------------------------
 //function abrirModal(id) {
 //    LlenarCMCProveedores();
@@ -475,7 +474,7 @@ function BloquearCTRL() {
 //    });
 //}
 function LlenarCMCProveedores() {
-    $.get("/Supervision/BDProveedor", function (data) {
+    $.get("/Prueba/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 

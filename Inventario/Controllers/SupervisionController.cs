@@ -496,64 +496,36 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ConsultaComJoinProveedor(long Id)
-        {
-            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
-                            join areas in InvBD.Areas
-                        on ExistAlm.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdSitio.Equals(Id)
-                            select new
-                            {
-                                Articulo = ExistAlm.NombreEmpresa,
-                                IdArticulo = ExistAlm.IdArticulo,
-                                Tipo = ExistAlm.TipoDeOperacion,
-                                //Tienda = ExistAlm.TipoDeOperacion,
-
-                                IdProveedor = areas.IdAreas,
-                                Proveedor = areas.Nombre,
-
-                                //Correo = provedor.Correo,
-                                //Clabe = provedor.ClaveInterbancaria,
-                                //Telefono = provedor.ClaveInterbancaria,
-                                //RFC = provedor.RFC,
-                                Tienda = ExistAlm.IdSitio,
-
-                            };
-
-
-            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
-        }
-
         //public JsonResult ConsultaComJoinProveedor(long Id)
         //{
-        //    var comps = from comprs in InvBD.Compra
-        //                join provedor in InvBD.Proveedores
-        //            on comprs.IdProveedor equals provedor.IdProveedores
-        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-        //                select new
-        //                {
-        //                    Articulo = comprs.Articulo,
-        //                    IdArticulo = comprs.IdArticulo,
-        //                    IdProveedor = provedor.IdProveedores,
-        //                    Proveedor = provedor.Nombre,
-        //                    Correo = provedor.Correo,
-        //                    Clabe = provedor.ClaveInterbancaria,
-        //                    Telefono = provedor.Telefono,
-        //                    RFC = provedor.RFC,
-        //                    UsoCFDI = provedor.UsoCFDI,
-        //                    Direccion = provedor.Direccion,
+        //    var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+        //                    join areas in InvBD.Areas
+        //                on ExistAlm.IdProveedor equals areas.IdAreas
+        //                    where ExistAlm.IdSitio.Equals(Id)
+        //                    select new
+        //                    {
+        //                        Articulo = ExistAlm.NombreEmpresa,
+        //                        IdArticulo = ExistAlm.IdArticulo,
+        //                        Tipo = ExistAlm.TipoDeOperacion,
+        //                        //Tienda = ExistAlm.TipoDeOperacion,
+
+        //                        IdProveedor = areas.IdAreas,
+        //                        Proveedor = areas.Nombre,
+
+        //                        //Correo = provedor.Correo,
+        //                        //Clabe = provedor.ClaveInterbancaria,
+        //                        //Telefono = provedor.ClaveInterbancaria,
+        //                        //RFC = provedor.RFC,
+        //                        Tienda = ExistAlm.IdSitio,
+
+        //                    };
 
 
-        //                };
-
-
-        //    return Json(comps, JsonRequestBehavior.AllowGet);
+        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
 
         //}
 
-
-        public JsonResult ConsultaComJoinProveedorModal(long Id)
+        public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var comps = from comprs in InvBD.Compra
                         join provedor in InvBD.Proveedores
@@ -571,7 +543,7 @@ namespace Inventario.Controllers
                             RFC = provedor.RFC,
                             UsoCFDI = provedor.UsoCFDI,
                             Direccion = provedor.Direccion,
-                            NumPedidoProveedor = provedor.NumPedidoProveedor,
+
 
                         };
 
@@ -579,6 +551,34 @@ namespace Inventario.Controllers
             return Json(comps, JsonRequestBehavior.AllowGet);
 
         }
+
+
+        //public JsonResult ConsultaComJoinProveedorModal(long Id)
+        //{
+        //    var comps = from comprs in InvBD.Compra
+        //                join provedor in InvBD.Proveedores
+        //            on comprs.IdProveedor equals provedor.IdProveedores
+        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+        //                select new
+        //                {
+        //                    Articulo = comprs.Articulo,
+        //                    IdArticulo = comprs.IdArticulo,
+        //                    IdProveedor = provedor.IdProveedores,
+        //                    Proveedor = provedor.Nombre,
+        //                    Correo = provedor.Correo,
+        //                    Clabe = provedor.ClaveInterbancaria,
+        //                    Telefono = provedor.Telefono,
+        //                    RFC = provedor.RFC,
+        //                    UsoCFDI = provedor.UsoCFDI,
+        //                    Direccion = provedor.Direccion,
+        //                    NumPedidoProveedor = provedor.NumPedidoProveedor,
+
+        //                };
+
+
+        //    return Json(comps, JsonRequestBehavior.AllowGet);
+
+        //}
 
         public JsonResult BDProveedor()
         {
@@ -603,7 +603,6 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
 
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
