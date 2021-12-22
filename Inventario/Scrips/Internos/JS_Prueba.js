@@ -127,7 +127,7 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+        $.get("/Prueba/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtClabe").value = Data[0].Clabe;
@@ -135,6 +135,7 @@ function abrirModal(id) {
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
             //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
             //----Muestra el número de pedido que le corresponde-------

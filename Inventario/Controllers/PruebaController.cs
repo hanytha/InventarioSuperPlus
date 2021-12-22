@@ -110,6 +110,7 @@ namespace Inventario.Controllers
                               IdArticulo = comprs.IdArticulo,
                               IdProveedor = provedor.IdProveedores,
                               Proveedor = provedor.Nombre,
+                       
 
                           };
 
@@ -118,7 +119,7 @@ namespace Inventario.Controllers
 
         }
         //-----------Consulta los datos por ID del proveedor pero en la tabla de compras JOIN Proveedor------------------
-        public JsonResult ConsultaComJoinProveedor(long Id)
+        public JsonResult ConsultaComJoinProveedorModal(long Id)
         {
             var comps = from comprs in InvBD.Compra
                         join provedor in InvBD.Proveedores
@@ -136,7 +137,7 @@ namespace Inventario.Controllers
                             RFC = provedor.RFC,
                             UsoCFDI = provedor.UsoCFDI,
                             Direccion = provedor.Direccion,
-
+                            NumPedidoProveedor = provedor.NumPedidoProveedor,
 
                         };
 
