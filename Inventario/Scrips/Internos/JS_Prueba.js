@@ -135,11 +135,12 @@ function abrirModal(id) {
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
-            document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
             //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
             //----Muestra el número de pedido que le corresponde-------
             ConsultaSiguientePedido();
+        //----Muestra el número de pedido que le corresponde por proveedor-------
+            ConsultaSiguientePedidoPrveedor(id);
         });
     }
 }
@@ -220,6 +221,7 @@ function MostrarArticulos(id) {
         });
     }
 } 
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 
@@ -302,6 +304,7 @@ function GuardarPedidoExterno() {
 
 }
 
+
 //---------Función para marcar los campos como obigatorios--------------------------------------------------------
 function CamposObligatorios() {
     var exito = true;
@@ -381,7 +384,7 @@ function Desplegar2(no) {
 }
 
 //************************************************************************************************************
-//*******************************Función que determina el siguiente número de pedido*****************************************************
+//******************Función que determina el siguiente número de pedido general*****************************************
 function ConsultaSiguientePedido() {
     $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
         SiguientePedido(Data);
@@ -398,4 +401,24 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNumPedido").value = ultimoElemento;
 
 }
+//******************Función que determina el siguiente número de pedido por proveedor********************************
 
+function ConsultaSiguientePedidoPrveedor(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/Prueba/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+
+
+            let numPedidoProve = Data.numPedidoProve;
+            let ArraynumPedidoProve = numPedidoProve.split(',');
+
+
+                var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+                document.getElementById("TxtNumPedidoProve").value = ultimo;
+
+        });
+    }
+}

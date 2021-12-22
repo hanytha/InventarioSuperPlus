@@ -161,7 +161,6 @@ namespace Inventario.Controllers
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
 
-        //*************************************************************************************************************
         //****************************Consulta el último número de pedido*************************************************
 
         public JsonResult ConsultaPedidosDecendiente()
@@ -181,7 +180,27 @@ namespace Inventario.Controllers
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
-        //-----------------------------------------------------------------------------------------------------------------------------
+        //***********************Consulta el siguiente número de pedido por proveedor********************************************
+        public JsonResult ConsultaNumPedidoProveedor(long ID)
+        {
+            string numPedidoProve = "";
+            var numero = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(ID) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                   Id = p.IdProveedores,
+                   NumeroPProveedor= p.NumPedidoProveedor,
+
+                });
+            foreach (var num in numero)
+            {
+                int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                numPedidoProve = SumaNumero + ",";
+            }
+            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
+            return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
+
+        //*********************************************************************************************************************
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDProveedor()
         {
