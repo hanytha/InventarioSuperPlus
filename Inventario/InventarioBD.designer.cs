@@ -6970,6 +6970,8 @@ namespace Inventario
 		
 		private System.Data.Linq.Binary _Logo;
 		
+		private System.Nullable<long> _NumPedidoProveedor;
+		
 		private int _Estatus;
 		
 		private EntitySet<PedidosExternos> _PedidosExternos;
@@ -7024,6 +7026,8 @@ namespace Inventario
     partial void OnDescripcionChanged();
     partial void OnLogoChanging(System.Data.Linq.Binary value);
     partial void OnLogoChanged();
+    partial void OnNumPedidoProveedorChanging(System.Nullable<long> value);
+    partial void OnNumPedidoProveedorChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -7445,6 +7449,26 @@ namespace Inventario
 					this._Logo = value;
 					this.SendPropertyChanged("Logo");
 					this.OnLogoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumPedidoProveedor", DbType="BigInt")]
+		public System.Nullable<long> NumPedidoProveedor
+		{
+			get
+			{
+				return this._NumPedidoProveedor;
+			}
+			set
+			{
+				if ((this._NumPedidoProveedor != value))
+				{
+					this.OnNumPedidoProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NumPedidoProveedor = value;
+					this.SendPropertyChanged("NumPedidoProveedor");
+					this.OnNumPedidoProveedorChanged();
 				}
 			}
 		}

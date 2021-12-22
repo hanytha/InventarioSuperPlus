@@ -42,6 +42,7 @@ namespace Inventario.Controllers
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
                     p.Descripcion,
+                    p.NumPedidoProveedor,
                     p.Logo
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
@@ -70,6 +71,7 @@ namespace Inventario.Controllers
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
                     p.Descripcion,
+                    p.NumPedidoProveedor,
                     FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
@@ -111,6 +113,7 @@ namespace Inventario.Controllers
                     && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta)
                     && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI)
                     && p.Descripcion.Equals(DatosProveedor.Descripcion)
+                    && p.NumPedidoProveedor.Equals(DatosProveedor.NumPedidoProveedor)
                     && p.Logo.Equals(DatosProveedor.Logo)).Count();
                     if (nveces == 0)
                     {
@@ -132,6 +135,7 @@ namespace Inventario.Controllers
                         obj.NumeroDeCuenta = DatosProveedor.NumeroDeCuenta;
                         obj.UsoCFDI = DatosProveedor.UsoCFDI;
                         obj.Descripcion = DatosProveedor.Descripcion;
+                        obj.NumPedidoProveedor = DatosProveedor.NumPedidoProveedor;
                         obj.Logo = Convert.FromBase64String(cadF);
                         InvBD.SubmitChanges();
                         Afectados = 1;

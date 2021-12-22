@@ -324,6 +324,7 @@
       <Column Name="UsoCFDI" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Proveedores_PedidosExternos" Member="PedidosExternos" ThisKey="IdProveedores" OtherKey="IdProveedor" Type="PedidosExternos" />
       <Association Name="estados_Proveedores" Member="estados" ThisKey="IdEstado" OtherKey="id" Type="estados" IsForeignKey="true" DeleteRule="CASCADE" />
