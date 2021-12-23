@@ -31,6 +31,8 @@ namespace Inventario.Controllers
                     p.Articulo,
                     p.Fecha,
                     p.NumPedidoProveedor,
+                    p.IdArea,
+                    p.Area
                 });
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
@@ -50,11 +52,12 @@ namespace Inventario.Controllers
                     p.Fecha,
                     p.RFC,
                     p.Correo,
-                    p.Clabe,
                     p.Telefono,
                     p.UsoCFDI,
                     p.Direccion,
                     p.NumPedidoProveedor,
+                    p.Area,
+                    p.IdArea,
 
                 });
             return Json(numero, JsonRequestBehavior.AllowGet);
