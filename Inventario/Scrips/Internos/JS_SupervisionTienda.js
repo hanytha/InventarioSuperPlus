@@ -289,6 +289,7 @@ function GuardarPedidoInterno() {
 
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
+
             let llenar = "";
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
             let seleccionados = "";
@@ -304,7 +305,7 @@ function GuardarPedidoInterno() {
                     var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-                    var IdArticulo = ChevPedidos[i].id;
+                    var Articulo = ChevPedidos[i].id;
                     //var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
@@ -318,7 +319,7 @@ function GuardarPedidoInterno() {
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
                     frm.append("Proveedor", Proveedor);
-                    frm.append("IdArticulo", IdArticulo);
+                    frm.append("Articulo", Articulo);
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
                     frm.append("IdTienda", IdTienda);
