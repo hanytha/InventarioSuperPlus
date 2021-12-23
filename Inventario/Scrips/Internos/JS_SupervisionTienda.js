@@ -118,16 +118,18 @@ function Desplegar(no, id) {
 
 
 
-function abrirModal(id) {
+function abrirModal(id,idS) {
     LlenarCMCProveedores();
     LimpiarCampos();
-    if (id == 0) {
+    if (idS == 0) {
         sessionStorage.setItem('IDG', '0');
 
     }
+
     else {
 
         $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+            //document.getElementById("cmbTienda").value = Data[0].IdTienda;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TxtRFC").value = Data[0].RFC;
             //document.getElementById("TxtClabe").value = Data[0].Clabe;
@@ -140,7 +142,16 @@ function abrirModal(id) {
             MostrarArticulos(id);
             //----Muestra el número de pedido que le corresponde-------
             ConsultaSiguientePedido();
+
         });
+        $.get("/Supervision/ConsultaSitio/?IdS=" + idS, function (Data) {
+            if (idS === undefined) {
+                idS = 2;
+            }
+            document.getElementById("cmbTienda").value = Data[0].IdTienda;
+           
+        });
+
     }
 }
 

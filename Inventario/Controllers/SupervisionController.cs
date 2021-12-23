@@ -496,34 +496,34 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult ConsultaComJoinProveedor(long Id)
-        //{
-        //    var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                    join areas in InvBD.Areas
-        //                on ExistAlm.IdProveedor equals areas.IdAreas
-        //                    where ExistAlm.IdSitio.Equals(Id)
-        //                    select new
-        //                    {
-        //                        Articulo = ExistAlm.NombreEmpresa,
-        //                        IdArticulo = ExistAlm.IdArticulo,
-        //                        Tipo = ExistAlm.TipoDeOperacion,
-        //                        //Tienda = ExistAlm.TipoDeOperacion,
+        public JsonResult ConsultaSitio(long IdS)
+        {
+            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join areas in InvBD.Areas
+                        on ExistAlm.IdProveedor equals areas.IdAreas
+                            where ExistAlm.IdSitio.Equals(IdS)
+                            select new
+                            {
+                                Articulo = ExistAlm.NombreEmpresa,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                //Tienda = ExistAlm.TipoDeOperacion,
 
-        //                        IdProveedor = areas.IdAreas,
-        //                        Proveedor = areas.Nombre,
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
 
-        //                        //Correo = provedor.Correo,
-        //                        //Clabe = provedor.ClaveInterbancaria,
-        //                        //Telefono = provedor.ClaveInterbancaria,
-        //                        //RFC = provedor.RFC,
-        //                        Tienda = ExistAlm.IdSitio,
+                                //Correo = provedor.Correo,
+                                //Clabe = provedor.ClaveInterbancaria,
+                                //Telefono = provedor.ClaveInterbancaria,
+                                //RFC = provedor.RFC,
+                                Tienda = ExistAlm.IdSitio,
 
-        //                    };
+                            };
 
 
-        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
 
-        //}
+        }
 
         //public JsonResult ConsultaComJoinProveedor(long Id)
         //{
