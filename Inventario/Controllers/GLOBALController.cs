@@ -91,6 +91,28 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult BDProveedorExist()
+        {
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDArtEx(int IDP)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IDP))
+                .Select(p => new
+                {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+
+        }
+
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -332,6 +354,8 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
 
         }
+
+    
         public JsonResult BDUnidadM(int IDAR)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))

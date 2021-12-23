@@ -135,7 +135,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
-            $.get("/GLOBAL/BDArt/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+            $.get("/GLOBAL/BDArtEx/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
                 llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
                 document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             });
@@ -347,7 +347,7 @@ function LlenarCMBPrin() {
     $.get("/GLOBAL/BDCompras", function (data) {
         llenarCombo(data, document.getElementById("cmbCompra"));
     });
-    $.get("/GLOBAL/BDPro", function (data) {
+    $.get("/GLOBAL/BDProveedorExist", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"), true);
     });
 }
@@ -356,7 +356,7 @@ function LlenarCMBPrin() {
 
 var IDP = document.getElementById("cmbProveedor");
 IDP.addEventListener("change", function () {
-    $.get("/GLOBAL/BDArt/?IDP=" + IDP.value, function (data) {
+    $.get("/GLOBAL/BDArtEx/?IDP=" + IDP.value, function (data) {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
 });
