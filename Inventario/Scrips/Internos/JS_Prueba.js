@@ -210,10 +210,8 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+                TablaArticulo += "<input class='input-Precio redondeado limpiar'  id='" + Data[i].IdArticulos + "' value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
-
-            
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
@@ -237,8 +235,10 @@ function GuardarPedidoExterno() {
 
             var UnidadM = document.getElementsByClassName("input-Unidad");
 
+            var Precio = document.getElementsByClassName("input-Precio");
+
             for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true && UnidadM[i].value) {
+                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true && UnidadM[i].value && Precio[i].value ) {
 
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
@@ -260,10 +260,11 @@ function GuardarPedidoExterno() {
                     var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
-                    //------------------------------------------------------------------------------------------------------
-                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
                     var Unidad = UnidadM[i].value;
-                    //------------------------------------------------------------------------------------------------------
+                    //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                    var PrecioUnitario = Precio[i].value;
+                    //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
@@ -277,6 +278,7 @@ function GuardarPedidoExterno() {
                     frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
                     frm.append("Unidad", Unidad);
+                    frm.append("PrecioUnitario", PrecioUnitario);
                     frm.append("Fecha", Fecha);
                     frm.append("UsoCFDI", UsoCFDI);
                     frm.append("Direccion", Direccion);
