@@ -170,37 +170,37 @@ function MostrarArticulos(id) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Unidad_Medida</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Precio_Unitario</label>";
+            TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los chex-box-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input-------------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
                 //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+                TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
                 TablaArticulo += "</div>";
 
 
