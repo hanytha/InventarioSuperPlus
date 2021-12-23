@@ -16,7 +16,7 @@ function CrearTablaArticulos(Data) {
     var CodigoHtmlTablaArticulos = "";
     CodigoHtmlTablaArticulos += "<div class='input-group mb-3 float-right '>";
 
-    CodigoHtmlTablaArticulos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
+    CodigoHtmlTablaArticulos += "<input  style='border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
 
     CodigoHtmlTablaArticulos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaArticulos += "</div>";
@@ -147,7 +147,7 @@ function GuardarArticulo() {
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
-//--------------------Guarda los checkebox seleccionados-----------------------------------------
+            //--------------------Guarda los checkebox seleccionados-----------------------------------------
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             let seleccionados = "";
             for (let i = 0; i < ChevProveedor.length; i++) {
@@ -157,7 +157,7 @@ function GuardarArticulo() {
                 }
             }
             var Proveedor = seleccionados.substring(0, seleccionados.length - 1);
-//----------------------------------------------------------------------------------------
+            //----------------------------------------------------------------------------------------
             var Descripcion = document.getElementById("TxtDescripcion").value;
 
             var IdCategorias = document.getElementById("cmbCategoria").value;
@@ -183,7 +183,7 @@ function GuardarArticulo() {
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
-      
+
             frm.append("Proveedor", Proveedor);
             frm.append("NombreProveedor", NombreProveedor);
             frm.append("Descripcion", Descripcion);
