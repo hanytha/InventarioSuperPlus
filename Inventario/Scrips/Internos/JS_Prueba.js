@@ -306,7 +306,7 @@ function GuardarPedidoExterno() {
                 }
             }
             //-----Mensaje de confirmación-----------------------
-            alert("Se guardaron los datos correctamente");
+            swal("Su pedido se generó correctamente!", "", "success");
         }
     }
 
