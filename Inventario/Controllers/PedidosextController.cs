@@ -57,32 +57,25 @@ namespace Inventario.Controllers
                     p.UsoCFDI,
                     p.Direccion,
                     p.NumPedidoProveedor,
+
                 });
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
         //****************************************************************************************************************************************
-        //***********Join con la tabla de artículos para obtener los precios unitarios y las unidades de media de cada artículo del pedido*********
-
-        public JsonResult ConsultaPedidoJoinArticulo(long Pedi)
+        //***********consulta obtener los artículos y sus demas caracteristicas por número de pedido*********
+        public JsonResult ConsultaPedidosArticuos(long Pedi)
         {
-            var comps = from pedidos in InvBD.PedidosExternos
-                        join artis in InvBD.Articulos
-                    on pedidos.Articulo equals artis.NombreEmpresa
-                        where pedidos.NumeroPedido.Equals(Pedi) && pedidos.Estatus.Equals(1)
-                        select new
-                        {
-                            Articulo = pedidos.Articulo,
-                            CantidadSolicitada = pedidos.CantidadSolicitada,
-                            PrecioUnitarioPromedio = artis.PrecioUnitarioPromedio,
-                            Unidad = artis.Unidad,
-
-                        };
-
-            return Json(comps, JsonRequestBehavior.AllowGet);
-
+            var numero = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.Articulo,
+                    p.CantidadSolicitada,
+                    p.PrecioUnitario,
+                    p.Unidad
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
         }
-
         //*****************************************************************************************************************
     }
 }
