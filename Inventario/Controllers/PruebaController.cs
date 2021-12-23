@@ -137,6 +137,7 @@ namespace Inventario.Controllers
                             RFC = provedor.RFC,
                             UsoCFDI = provedor.UsoCFDI,
                             Direccion = provedor.Direccion,
+                            
                         };
 
 
@@ -240,7 +241,6 @@ namespace Inventario.Controllers
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
                  && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
                  && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
-                 && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
                  && p.Articulo.Equals(DatosPedidoExterno.Articulo)
                  && p.RFC.Equals(DatosPedidoExterno.RFC)
                  && p.Correo.Equals(DatosPedidoExterno.Correo)

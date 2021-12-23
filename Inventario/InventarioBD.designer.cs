@@ -1538,8 +1538,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<PedidosExternos> _PedidosExternos;
-		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
 		private EntitySet<TipoDeMovimientos> _TipoDeMovimientos;
@@ -1600,7 +1598,6 @@ namespace Inventario
 		
 		public Articulos()
 		{
-			this._PedidosExternos = new EntitySet<PedidosExternos>(new Action<PedidosExternos>(this.attach_PedidosExternos), new Action<PedidosExternos>(this.detach_PedidosExternos));
 			this._PedidosInternos = new EntitySet<PedidosInternos>(new Action<PedidosInternos>(this.attach_PedidosInternos), new Action<PedidosInternos>(this.detach_PedidosInternos));
 			this._TipoDeMovimientos = new EntitySet<TipoDeMovimientos>(new Action<TipoDeMovimientos>(this.attach_TipoDeMovimientos), new Action<TipoDeMovimientos>(this.detach_TipoDeMovimientos));
 			this._Areas = default(EntityRef<Areas>);
@@ -1610,7 +1607,7 @@ namespace Inventario
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulos", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulos", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
 		public long IdArticulos
 		{
 			get
@@ -2026,19 +2023,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulos_PedidosExternos", Storage="_PedidosExternos", ThisKey="IdArticulos", OtherKey="IdArticulo")]
-		public EntitySet<PedidosExternos> PedidosExternos
-		{
-			get
-			{
-				return this._PedidosExternos;
-			}
-			set
-			{
-				this._PedidosExternos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulos_PedidosInternos", Storage="_PedidosInternos", ThisKey="IdArticulos", OtherKey="IdArticulo")]
 		public EntitySet<PedidosInternos> PedidosInternos
 		{
@@ -2219,18 +2203,6 @@ namespace Inventario
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_PedidosExternos(PedidosExternos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Articulos = this;
-		}
-		
-		private void detach_PedidosExternos(PedidosExternos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Articulos = null;
 		}
 		
 		private void attach_PedidosInternos(PedidosInternos entity)
@@ -5688,8 +5660,6 @@ namespace Inventario
 		
 		private string _CantidadSolicitada;
 		
-		private System.Nullable<long> _IdArticulo;
-		
 		private string _Articulo;
 		
 		private System.Nullable<long> _IdProveedor;
@@ -5718,9 +5688,11 @@ namespace Inventario
 		
 		private System.Nullable<long> _PrecioUnitario;
 		
-		private int _Estatus;
+		private string _Area;
 		
-		private EntityRef<Articulos> _Articulos;
+		private System.Nullable<long> _IdArea;
+		
+		private int _Estatus;
 		
 		private EntityRef<Proveedores> _Proveedores;
 		
@@ -5734,8 +5706,6 @@ namespace Inventario
     partial void OnNumeroPedidoChanged();
     partial void OnCantidadSolicitadaChanging(string value);
     partial void OnCantidadSolicitadaChanged();
-    partial void OnIdArticuloChanging(System.Nullable<long> value);
-    partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
     partial void OnIdProveedorChanging(System.Nullable<long> value);
@@ -5764,13 +5734,16 @@ namespace Inventario
     partial void OnUnidadChanged();
     partial void OnPrecioUnitarioChanging(System.Nullable<long> value);
     partial void OnPrecioUnitarioChanged();
+    partial void OnAreaChanging(string value);
+    partial void OnAreaChanged();
+    partial void OnIdAreaChanging(System.Nullable<long> value);
+    partial void OnIdAreaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
 		
 		public PedidosExternos()
 		{
-			this._Articulos = default(EntityRef<Articulos>);
 			this._Proveedores = default(EntityRef<Proveedores>);
 			OnCreated();
 		}
@@ -5831,30 +5804,6 @@ namespace Inventario
 					this._CantidadSolicitada = value;
 					this.SendPropertyChanged("CantidadSolicitada");
 					this.OnCantidadSolicitadaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
-		public System.Nullable<long> IdArticulo
-		{
-			get
-			{
-				return this._IdArticulo;
-			}
-			set
-			{
-				if ((this._IdArticulo != value))
-				{
-					if (this._Articulos.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._IdArticulo = value;
-					this.SendPropertyChanged("IdArticulo");
-					this.OnIdArticuloChanged();
 				}
 			}
 		}
@@ -6143,6 +6092,46 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(100)")]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this.OnAreaChanging(value);
+					this.SendPropertyChanging();
+					this._Area = value;
+					this.SendPropertyChanged("Area");
+					this.OnAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt")]
+		public System.Nullable<long> IdArea
+		{
+			get
+			{
+				return this._IdArea;
+			}
+			set
+			{
+				if ((this._IdArea != value))
+				{
+					this.OnIdAreaChanging(value);
+					this.SendPropertyChanging();
+					this._IdArea = value;
+					this.SendPropertyChanged("IdArea");
+					this.OnIdAreaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
 		public int Estatus
 		{
@@ -6159,40 +6148,6 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulos_PedidosExternos", Storage="_Articulos", ThisKey="IdArticulo", OtherKey="IdArticulos", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Articulos Articulos
-		{
-			get
-			{
-				return this._Articulos.Entity;
-			}
-			set
-			{
-				Articulos previousValue = this._Articulos.Entity;
-				if (((previousValue != value) 
-							|| (this._Articulos.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Articulos.Entity = null;
-						previousValue.PedidosExternos.Remove(this);
-					}
-					this._Articulos.Entity = value;
-					if ((value != null))
-					{
-						value.PedidosExternos.Add(this);
-						this._IdArticulo = value.IdArticulos;
-					}
-					else
-					{
-						this._IdArticulo = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Articulos");
 				}
 			}
 		}

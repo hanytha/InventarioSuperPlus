@@ -1,4 +1,6 @@
 ﻿BloquearCTRL();
+//--------Combobox de las áreas----------------
+LlenarCMCArea();
 //-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
@@ -130,17 +132,16 @@ function abrirModal(id) {
         $.get("/Prueba/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtClabe").value = Data[0].Clabe;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
             document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
             //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
-            //----Muestra el número de pedido que le corresponde-------
-            ConsultaSiguientePedido();
         //----Muestra el número de pedido que le corresponde por proveedor-------
             ConsultaSiguientePedidoPrveedor(id);
+            //----Muestra el número de pedido que le corresponde-------
+            ConsultaSiguientePedido();
         });
     }
 }
@@ -249,13 +250,16 @@ function GuardarPedidoExterno() {
                     var Correo = document.getElementById("TxtCorreo").value;
                     var RFC = document.getElementById("TxtRFC").value;
                     var Telefono = document.getElementById("TxtTelefono").value;
-                    var Clabe = document.getElementById("TxtClabe").value;
                     var NumeroPedido = document.getElementById("TxtNumPedido").value;
                     var NumPedidoProveedor = document.getElementById("TxtNumPedidoProve").value;
                     var Fecha = document.getElementById("TxtFechaSistema").value;
 
                     var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
                     var Direccion = document.getElementById("TxtDireccion").value;
+
+                    var IdArea = document.getElementById("cmbArea").value;
+                    var TempArea = document.getElementById("cmbArea");
+                    var Area = TempArea.options[TempArea.selectedIndex].text;
                     //------------------------Guarda el nombre del artículo solicitado----------------------------------
                     var Articulo = NomArticulos[i].value;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
@@ -272,7 +276,6 @@ function GuardarPedidoExterno() {
                     frm.append("Correo", Correo);
                     frm.append("RFC", RFC);
                     frm.append("Telefono", Telefono);
-                    frm.append("Clabe", Clabe);
                     frm.append("Articulo", Articulo);
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("NumPedidoProveedor", NumPedidoProveedor);
@@ -281,6 +284,8 @@ function GuardarPedidoExterno() {
                     frm.append("PrecioUnitario", PrecioUnitario);
                     frm.append("Fecha", Fecha);
                     frm.append("UsoCFDI", UsoCFDI);
+                    frm.append("IdArea", IdArea);
+                    frm.append("Area", Area);
                     frm.append("Direccion", Direccion);
                     frm.append("Estatus", 1);
                     $.ajax({
@@ -313,6 +318,7 @@ function GuardarPedidoExterno() {
 }
 
 
+
 //---------Función para marcar los campos como obigatorios--------------------------------------------------------
 function CamposObligatorios() {
     var exito = true;
@@ -335,6 +341,13 @@ function LlenarCMCProveedores() {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 
+}
+
+//----------------Combobox de las áreas------------------------
+function LlenarCMCArea() {
+    $.get("/GLOBAL/BDAreas", function (data) {
+        llenarCombo(data, document.getElementById("cmbArea"));
+    });
 }
 
 //funcion general para llenar los select
@@ -430,3 +443,4 @@ function ConsultaSiguientePedidoPrveedor(id) {
         });
     }
 }
+
