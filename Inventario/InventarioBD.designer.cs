@@ -5714,6 +5714,10 @@ namespace Inventario
 		
 		private System.Nullable<long> _NumPedidoProveedor;
 		
+		private string _Unidad;
+		
+		private System.Nullable<long> _PrecioUnitario;
+		
 		private int _Estatus;
 		
 		private EntityRef<Articulos> _Articulos;
@@ -5756,6 +5760,10 @@ namespace Inventario
     partial void OnDireccionChanged();
     partial void OnNumPedidoProveedorChanging(System.Nullable<long> value);
     partial void OnNumPedidoProveedorChanged();
+    partial void OnUnidadChanging(string value);
+    partial void OnUnidadChanged();
+    partial void OnPrecioUnitarioChanging(System.Nullable<long> value);
+    partial void OnPrecioUnitarioChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -6091,6 +6099,46 @@ namespace Inventario
 					this._NumPedidoProveedor = value;
 					this.SendPropertyChanged("NumPedidoProveedor");
 					this.OnNumPedidoProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(150)")]
+		public string Unidad
+		{
+			get
+			{
+				return this._Unidad;
+			}
+			set
+			{
+				if ((this._Unidad != value))
+				{
+					this.OnUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._Unidad = value;
+					this.SendPropertyChanged("Unidad");
+					this.OnUnidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="BigInt")]
+		public System.Nullable<long> PrecioUnitario
+		{
+			get
+			{
+				return this._PrecioUnitario;
+			}
+			set
+			{
+				if ((this._PrecioUnitario != value))
+				{
+					this.OnPrecioUnitarioChanging(value);
+					this.SendPropertyChanging();
+					this._PrecioUnitario = value;
+					this.SendPropertyChanged("PrecioUnitario");
+					this.OnPrecioUnitarioChanged();
 				}
 			}
 		}

@@ -87,21 +87,21 @@ function MostrarArticulos(num) {
             dos += "</thead>"
             dos += "<tbody>"
 
-            for (var i = 0; i < Data.length; i++) { 
+            for (var i = 0; i < Data.length; i++) {
 
                 //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
                 let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitarioPromedio);
-
-                //----Cuerpo del grid-------------
+                //------------------------Cuerpo de la tabla------------------------------------------
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
                 dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
                 dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
                 dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitarioPromedio + "</label></td>"
-                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label></label>"+ tres +"</td>"
+                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres +"</label></td>"
                 dos += "</tr>"
             }
             dos += "<tfoot>"
+            dos += "<th>Total</th>"
             dos += "<th>Total</th>"
             dos += "</tfoot>"
 

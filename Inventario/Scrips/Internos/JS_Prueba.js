@@ -206,7 +206,7 @@ function MostrarArticulos(id) {
 
                 //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
+                TablaArticulo += "<input  class='input-Unidad redondeado limpiar'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -232,13 +232,13 @@ function GuardarPedidoExterno() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
-            let llenar = "";
+
             var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
-            let seleccionados = "";
+
+            var UnidadM = document.getElementsByClassName("input-Unidad");
+
             for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
-                    llenar += NumPedidos[i].value;
-                    seleccionados += ChevPedidos[i].id;
+                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true && UnidadM[i].value) {
 
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
@@ -261,6 +261,9 @@ function GuardarPedidoExterno() {
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
+                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    var Unidad = UnidadM[i].value;
+                    //------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
@@ -273,6 +276,7 @@ function GuardarPedidoExterno() {
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
+                    frm.append("Unidad", Unidad);
                     frm.append("Fecha", Fecha);
                     frm.append("UsoCFDI", UsoCFDI);
                     frm.append("Direccion", Direccion);

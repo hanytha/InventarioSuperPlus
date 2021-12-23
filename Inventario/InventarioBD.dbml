@@ -265,6 +265,8 @@
       <Column Name="UsoCFDI" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="PrecioUnitario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosExternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Proveedores_PedidosExternos" Member="Proveedores" ThisKey="IdProveedor" OtherKey="IdProveedores" Type="Proveedores" IsForeignKey="true" />
