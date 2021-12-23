@@ -193,24 +193,24 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
-    //-------Crea los chex-box-------------------------------------------------------------------------
+              //-------Crea los input con los nombres de los artículos por proveedor-------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
-                //-------Crea los input-------------------------------------------------------------------------
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
-                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input class='input-Precio sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "' value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input class='input-Precio sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
@@ -228,17 +228,17 @@ function GuardarPedidoExterno() {
     if (CamposObligatorios() == true) {
      
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
+            //----------Guardar los inputs de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
 
-            var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
+            var NomArticulos = document.getElementsByClassName("input-Articulo");
 
             var UnidadM = document.getElementsByClassName("input-Unidad");
 
             var Precio = document.getElementsByClassName("input-Precio");
 
-            for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true && UnidadM[i].value && Precio[i].value ) {
+            for (let i = 0; i < NumPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value ) {
 
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
@@ -256,8 +256,8 @@ function GuardarPedidoExterno() {
 
                     var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
                     var Direccion = document.getElementById("TxtDireccion").value;
-                    //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-                    var Articulo = ChevPedidos[i].id;
+                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                    var Articulo = NomArticulos[i].value;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
