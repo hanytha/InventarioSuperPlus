@@ -5674,8 +5674,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _Telefono;
 		
-		private string _Clabe;
-		
 		private string _NombreArchivo;
 		
 		private string _UsoCFDI;
@@ -5720,8 +5718,6 @@ namespace Inventario
     partial void OnCorreoChanged();
     partial void OnTelefonoChanging(System.Nullable<long> value);
     partial void OnTelefonoChanged();
-    partial void OnClabeChanging(string value);
-    partial void OnClabeChanged();
     partial void OnNombreArchivoChanging(string value);
     partial void OnNombreArchivoChanged();
     partial void OnUsoCFDIChanging(string value);
@@ -5948,26 +5944,6 @@ namespace Inventario
 					this._Telefono = value;
 					this.SendPropertyChanged("Telefono");
 					this.OnTelefonoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Clabe", DbType="VarChar(50)")]
-		public string Clabe
-		{
-			get
-			{
-				return this._Clabe;
-			}
-			set
-			{
-				if ((this._Clabe != value))
-				{
-					this.OnClabeChanging(value);
-					this.SendPropertyChanging();
-					this._Clabe = value;
-					this.SendPropertyChanged("Clabe");
-					this.OnClabeChanged();
 				}
 			}
 		}

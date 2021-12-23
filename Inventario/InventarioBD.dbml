@@ -258,7 +258,6 @@
       <Column Name="RFC" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Clabe" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="NombreArchivo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="UsoCFDI" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Direccion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />

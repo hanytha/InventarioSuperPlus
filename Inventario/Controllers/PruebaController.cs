@@ -194,6 +194,8 @@ namespace Inventario.Controllers
             {
                 int SumaNumero = (int)(num.NumeroPProveedor + 1);
                 numPedidoProve = SumaNumero + ",";
+
+              
             }
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
@@ -245,7 +247,6 @@ namespace Inventario.Controllers
                  && p.RFC.Equals(DatosPedidoExterno.RFC)
                  && p.Correo.Equals(DatosPedidoExterno.Correo)
                  && p.Telefono.Equals(DatosPedidoExterno.Telefono)
-                 && p.Clabe.Equals(DatosPedidoExterno.Clabe)
                  && p.UsoCFDI.Equals(DatosPedidoExterno.UsoCFDI)
                  && p.Direccion.Equals(DatosPedidoExterno.Direccion)
                  && p.NumPedidoProveedor.Equals(DatosPedidoExterno.NumPedidoProveedor)
@@ -263,7 +264,6 @@ namespace Inventario.Controllers
                     obj.RFC = DatosPedidoExterno.RFC;
                     obj.Correo = DatosPedidoExterno.Correo;
                     obj.Telefono = DatosPedidoExterno.Telefono;
-                    obj.Clabe = DatosPedidoExterno.Clabe;
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     obj.UsoCFDI = DatosPedidoExterno.UsoCFDI;
                     obj.Direccion = DatosPedidoExterno.Direccion;
