@@ -144,12 +144,12 @@ function abrirModal(id,idS) {
             ConsultaSiguientePedido();
 
         });
-        $.get("/Supervision/ConsultaSitio/?IdS=" + idS, function (Data) {
-            if (idS === undefined) {
-                idS = 2;
-            }
-            document.getElementById("cmbTienda").value = Data[0].IdTienda;
-           
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTienda").value = Data[0].Tienda;
+        
+
         });
 
     }
