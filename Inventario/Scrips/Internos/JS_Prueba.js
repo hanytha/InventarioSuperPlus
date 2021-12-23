@@ -291,10 +291,10 @@ function GuardarPedidoExterno() {
                         processData: false,
                         success: function (data) {
                             if (data == 0) {
-                                alert("Ocurrio un error");
+                                swal("¡Ocurrio un error!", "", "danger");
                             }
                             else if (data == -1) {
-                                alert("Ya existe el perfil");
+                                swal("¡El pedido ya exixste!", "", "warning");
                             }
                             else {
                                 ConsultaArticuloComp();

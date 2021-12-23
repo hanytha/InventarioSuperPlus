@@ -208,13 +208,14 @@ function GuardarArticulo() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        swal("¡El artículo ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        //-----Mensaje de confirmación-----------------------
+                        swal("El artículo se registró exitosamente!", "", "success");
                         ConsultaArticulos();
                         document.getElementById("btnCancelar").click();
                     }
@@ -248,10 +249,10 @@ function EliminarArticulo(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
         $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArt) {
             if (DatoArt == 1) {
-                alert("Se elimino correctamente");
+                swal("El artículo se eliminó exitosamente!", "", "success");
                 ConsultaArticulos();
             } else {
-                alert("Ocurrio un error");
+                swal("¡Ocurrio un error!", "", "danger");
             }
         });
     }

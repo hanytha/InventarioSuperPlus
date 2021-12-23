@@ -153,13 +153,14 @@ function GuardarCompra() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el número de compra");
+                        swal("¡La compra ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        //-----Mensaje de confirmación-----------------------
+                        swal("Su compra se guardó exitosamente!", "", "success");
 
                         ConsultaCompras();
                         document.getElementById("btnCancelar").click();
@@ -195,10 +196,10 @@ function EliminarCompra(id) {
 
         $.get("/Compra/EliminarCompra/?Id=" + id, function (DatoTienda) {
             if (DatoTienda == 1) {
-                alert("Se elimino correctamente");
+                swal("La compra se eliminó exitosamente!", "", "success");
                 ConsultaCompras();
             } else {
-                alert("Ocurrio un error");
+                swal("¡Ocurrio un error!", "", "danger");
             }
         });
     }
