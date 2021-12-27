@@ -32,7 +32,7 @@ namespace Inventario.Controllers
                     //p.Marca,
                     p.IdProveedor,
                     p.Proveedor,
-                    p.IdArticulo,
+                    //p.IdArticulo,
                     p.Articulo,
                     p.Fecha
                 });
@@ -54,7 +54,7 @@ namespace Inventario.Controllers
                     //p.Marca,
                     p.IdProveedor,
                     p.Proveedor,
-                    p.IdArticulo,
+                    //p.IdArticulo,
                     p.Articulo,
                     p.Fecha
                 });
@@ -94,7 +94,7 @@ namespace Inventario.Controllers
                  //   && p.Marca.Equals(DatosPedidoExterno.Marca)
                      && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
                       && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
-                       && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
+                       //&& p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
                         && p.Articulo.Equals(DatosPedidoExterno.Articulo)
                           && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)

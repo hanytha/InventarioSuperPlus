@@ -274,6 +274,8 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
                                    };
 
+
+
             foreach (var art in ConsultaArticulo)
             {
                 id += art.IdExistencia + ",";
@@ -525,32 +527,7 @@ namespace Inventario.Controllers
 
         }
 
-        //public JsonResult ConsultaComJoinProveedor(long Id)
-        //{
-        //    var comps = from comprs in InvBD.Compra
-        //                join provedor in InvBD.Proveedores
-        //            on comprs.IdProveedor equals provedor.IdProveedores
-        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-        //                select new
-        //                {
-        //                    Articulo = comprs.Articulo,
-        //                    IdArticulo = comprs.IdArticulo,
-        //                    IdProveedor = provedor.IdProveedores,
-        //                    Proveedor = provedor.Nombre,
-        //                    Correo = provedor.Correo,
-        //                    Clabe = provedor.ClaveInterbancaria,
-        //                    Telefono = provedor.Telefono,
-        //                    RFC = provedor.RFC,
-        //                    UsoCFDI = provedor.UsoCFDI,
-        //                    Direccion = provedor.Direccion,
 
-
-        //                };
-
-
-        //    return Json(comps, JsonRequestBehavior.AllowGet);
-
-        //}
 
 
         public JsonResult Consulta(long Id)
@@ -582,17 +559,17 @@ namespace Inventario.Controllers
 
         }
 
-
+        //Consulta de proveedores en la tabla existenciaAlmacenGeneral
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
-            var ExistAlmG = from Art in InvBD.Articulos
+            var ExistAlmG = from Art in InvBD.ExistenciaAlmacenG
                             join areas in InvBD.Areas
-                        on Art.IdAreas equals areas.IdAreas
-                            where Art.IdAreas.Equals(Id)
+                        on Art.IdProveedor equals areas.IdAreas
+                            where Art.IdProveedor.Equals(Id)
                             select new
                             {
                                 Articulo = Art.NombreEmpresa,
-                                IdArticulo = Art.IdArticulos,
+                                IdArticulo = Art.IdExistenciaAlmacenG,
                                 //Tipo = Art.TipoDeOperacion,
                                 //Tienda = ExistAlm.TipoDeOperacion,
 
@@ -613,59 +590,104 @@ namespace Inventario.Controllers
         }
 
 
+        //Consulta de proveedores en la tabla de articulo
+        //public JsonResult ConsultaComJoinProveedor(long Id)
+        //{
+        //    var ExistAlmG = from Art in InvBD.Articulos
+        //                    join areas in InvBD.Areas
+        //                on Art.IdAreas equals areas.IdAreas
+        //                    where Art.IdAreas.Equals(Id)
+        //                    select new
+        //                    {
+        //                        Articulo = Art.NombreEmpresa,
+        //                        IdArticulo = Art.IdArticulos,
+        //                        //Tipo = Art.TipoDeOperacion,
+        //                        //Tienda = ExistAlm.TipoDeOperacion,
+
+        //                        IdProveedor = areas.IdAreas,
+        //                        Proveedor = areas.Nombre,
+        //                        //IdAreas = Art.IdAreas,
+        //                        //Correo = provedor.Correo,
+        //                        //Clabe = provedor.ClaveInterbancaria,
+        //                        //Telefono = provedor.ClaveInterbancaria,
+        //                        //RFC = provedor.RFC,
+        //                        //Tienda = Art.IdSitio,
+
+        //                    };
+
+
+        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+
+        //}
 
 
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
+                .Select(p => new
+                {
                     ID = p.IdAreas,
                     Nombre = p.Nombre
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult ConsultaComJoinProveedorModal(long Id)
+
+
+        //Combo proveedores en la tabla articulos
+        //public JsonResult ConsultaIdPro(string IdPro)
         //{
-        //    var comps = from comprs in InvBD.Compra
-        //                join provedor in InvBD.Proveedores
-        //            on comprs.IdProveedor equals provedor.IdProveedores
-        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-        //                select new
-        //                {
-        //                    Articulo = comprs.Articulo,
-        //                    IdArticulo = comprs.IdArticulo,
-        //                    IdProveedor = provedor.IdProveedores,
-        //                    Proveedor = provedor.Nombre,
-        //                    Correo = provedor.Correo,
-        //                    Clabe = provedor.ClaveInterbancaria,
-        //                    Telefono = provedor.Telefono,
-        //                    RFC = provedor.RFC,
-        //                    UsoCFDI = provedor.UsoCFDI,
-        //                    Direccion = provedor.Direccion,
-        //                    NumPedidoProveedor = provedor.NumPedidoProveedor,
+        //    var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.NombreEmpresa,
+        //            p.IdArticulos,
+        //            p.PrecioUnitarioPromedio,
+        //            p.Unidad
+        //        });
 
-        //                };
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
+        //   }
+        //Combo proveedores en la tabla existencia almacen G
+        //public JsonResult ConsultaIdPro(string IdPro)
+        //{
+        //    var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdPro))
+        //        .Select(p => new
+        //        {
+        //            p.NombreEmpresa,
+        //            p.IdArticulo,
 
+        //        });
 
-        //    return Json(comps, JsonRequestBehavior.AllowGet);
-
+        //    return Json(compra, JsonRequestBehavior.AllowGet);
         //}
 
-     
 
-        public JsonResult ConsultaIdPro(string IdPro)
+        public JsonResult ConsultaIdPro(long IdPro)
         {
-            var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.NombreEmpresa,
-                    p.IdArticulos,
-                    p.PrecioUnitarioPromedio,
-                    p.Unidad
-                });
 
-            return Json(compra, JsonRequestBehavior.AllowGet);
+            var ExistAlmG = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                            join Articulos in InvBD.Articulos
+                            on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
+                            where ExistenciaAlmacenG.IdProveedor.Equals(IdPro)
+                            select new
+                            {
+                                //IdArticulos = ExistenciaAlmacenG.IdArticulo,
+                                //NombreEmpresa = Articulos.NombreEmpresa,
+                                NombreEmpresa = Articulos.NombreEmpresa,
+                                NoPedido = ExistenciaAlmacenG.NoPedido,
+                                //nombres = Articulos.NombreEmpresa,
+                                //IdArticulo = ExistenciaAlmacenG.IdArticulo,
+                                Unidad = Articulos.Unidad,
+                                IdSitio = ExistenciaAlmacenG.IdSitio
+
+                                
+
+            };
+           
+
+                return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+
         }
 
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
@@ -726,100 +748,7 @@ namespace Inventario.Controllers
         }
 
 
-        //public JsonResult ConsultaArtProveedores()
-        //{
-        //    string Articulos = "";
-        //    string ID = "";
-        //    var compra = InvBD.Articulos.Where(p => p.IdProveedor.Equals(1) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            Articulo = p.NombreEmpresa,
-        //            Id = p.IdArticulos,
 
-        //        });
-        //    foreach (var ap in compra)
-        //    {
-        //        int Afectados = 0;
-        //        int nveces = InvBD.Compra.Where(p => ap.Articulo.Equals(ap)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            Articulos += ap.Articulo + ",";
-        //            ID += ap.Id + ",";
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
-        //    return Json(compras, JsonRequestBehavior.AllowGet);
-        //}
-
-        //*¨
-        //public JsonResult ConsultaArtProveedores(long IdP)
-        //{
-        //    string Articulos = "";
-        //    string ID = "";
-        //    var compra = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IdP))
-        //        .Select(p => new
-        //        {
-        //            Articulo = p.NombreEmpresa,
-        //            Id = p.IdArticulos,
-
-        //        });
-        //    foreach (var ap in compra)
-        //    {
-        //        int Afectados = 0;
-
-        //        int nveces = InvBD.Articulos.Where(p => ap.Articulo.Equals(ap)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            Articulos += ap.Articulo + ",";
-        //            ID += ap.Id + ",";
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-
-        //    }
-        //    var compras = new { ID = ID.Substring(0, ID.Length - 1), Articulos = Articulos.Substring(0, Articulos.Length - 1) };
-        //    return Json(compras, JsonRequestBehavior.AllowGet);
-        //}
-
-        //]*
-
-
-        //public JsonResult ConsultaIdPro(string IdPro)
-        //{
-        //    var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.NombreEmpresa,
-        //            p.IdArticulos,
-        //            p.PrecioUnitarioPromedio,
-        //            p.Unidad
-        //        });
-
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-        //}
-        //public JsonResult ConsultaIdPro(string IdPro)
-        //{
-        //    var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.NombreEmpresa,
-        //            //p.IdArticulos,
-        //            //p.PrecioUnitarioPromedio,
-        //            //p.Unidad
-        //        });
-
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-        //}
-
-        //Calculo del siguiente pedido
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
@@ -837,5 +766,30 @@ namespace Inventario.Controllers
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Consulta el siguiente número de pedido por proveedor
+        public JsonResult ConsultaNumPedidoProveedor(long ID)
+        {
+            string numPedidoProve = "";
+            var numero = InvBD.PedidosInternos.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Id = p.IdProveedor,
+                    NumeroPProveedor = p.NumPedidoProveedor,
+
+                });
+            foreach (var num in numero)
+            {
+                int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                numPedidoProve = SumaNumero + ",";
+
+
+            }
+            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
+            return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

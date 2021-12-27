@@ -138,9 +138,11 @@ function abrirModal(id,idS) {
             //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
             //document.getElementById("TxtDireccion").value = Data[0].Direccion;
             //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
-            //---Muestra los artículos que le pertenecen a ese proveedor----
+            //Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
-            //----Muestra el número de pedido que le corresponde-------
+            //Muestra el número de pedido que le corresponde por proveedor-------
+            SiguientePedidoProveedor(id);
+            //Muestra el número de pedido que le corresponde-------
             ConsultaSiguientePedido();
 
         });
@@ -152,6 +154,29 @@ function abrirModal(id,idS) {
 
         });
 
+    }
+}
+
+
+//Función que determina el siguiente número de pedido por proveedor
+
+function SiguientePedidoProveedor(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+
+
+            let numPedidoProve = Data.numPedidoProve;
+            let ArraynumPedidoProve = numPedidoProve.split(',');
+
+
+            var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+            document.getElementById("TxtNumPedidoProveedor").value = ultimo;
+
+        });
     }
 }
 
