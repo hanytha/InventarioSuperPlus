@@ -1,4 +1,4 @@
-﻿
+﻿LlenarCMCProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
@@ -119,7 +119,7 @@ function Desplegar(no, id) {
 
 
 function abrirModal(id,idS) {
-    LlenarCMCProveedores();
+   
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IDG', '0');

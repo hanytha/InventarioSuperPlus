@@ -635,27 +635,27 @@ namespace Inventario.Controllers
 
 
         //Combo proveedores en la tabla articulos
+        public JsonResult ConsultaIdPro(string IdPro)
+        {
+            var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.Unidad
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+
+        ////Combo proveedores en la tabla existencia almacen G
         //public JsonResult ConsultaIdPro(string IdPro)
         //{
-        //    var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
+        //    var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro))
         //        .Select(p => new
         //        {
         //            p.NombreEmpresa,
         //            p.IdArticulos,
-        //            p.PrecioUnitarioPromedio,
-        //            p.Unidad
-        //        });
-
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-        //   }
-        //Combo proveedores en la tabla existencia almacen G
-        //public JsonResult ConsultaIdPro(string IdPro)
-        //{
-        //    var compra = InvBD.ExistenciaAlmacenG.Where(p => p.IdProveedor.Equals(IdPro))
-        //        .Select(p => new
-        //        {
-        //            p.NombreEmpresa,
-        //            p.IdArticulo,
 
         //        });
 
@@ -663,33 +663,27 @@ namespace Inventario.Controllers
         //}
 
 
-        public JsonResult ConsultaIdPro(long IdPro)
-        {
+        //public JsonResult ConsultaIdPro(long IdPro)
+        //{
 
-            var ExistAlmG = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-                            join Articulos in InvBD.Articulos
-                            on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
-                            where ExistenciaAlmacenG.IdProveedor.Equals(IdPro)
-                            select new
-                            {
-                                //IdArticulos = ExistenciaAlmacenG.IdArticulo,
-                                //NombreEmpresa = Articulos.NombreEmpresa,
-                                NombreEmpresa = Articulos.NombreEmpresa,
-                                NoPedido = ExistenciaAlmacenG.NoPedido,
-                                //nombres = Articulos.NombreEmpresa,
-                                //IdArticulo = ExistenciaAlmacenG.IdArticulo,
-                                Unidad = Articulos.Unidad,
-                                IdSitio = ExistenciaAlmacenG.IdSitio
+        //    var ExistAlmG = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+        //                    join Articulos in InvBD.Articulos
+        //                    on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
+        //                    where Articulos.IdAreas.Equals(IdPro)
+        //                    select new
+        //                    {
+        //                        //IdArticulos = ExistenciaAlmacenG.IdArticulo,
+        //                        //NombreEmpresa = Articulos.NombreEmpresa,
+        //                        NombreEmpresa = Articulos.NombreEmpresa,
+        //                        NoPedido = ExistenciaAlmacenG.NoPedido,
+        //                        //nombres = Articulos.NombreEmpresa,
+        //                        //IdArticulo = ExistenciaAlmacenG.IdArticulo,
+        //                        Unidad = Articulos.Unidad,
+        //                        IdSitio = ExistenciaAlmacenG.IdSitio
 
-                                
-
-            };
-           
-
-                return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
-        }
-
+        //                    };
+        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        //}
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
