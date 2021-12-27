@@ -42,6 +42,7 @@ namespace Inventario.Controllers
                 });
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
+        //***********************************************************************************
         public JsonResult ConsultaCompra(long Id)
         {
             var compra = InvBD.Compra.Where(p => p.IdCompra.Equals(Id))
@@ -67,18 +68,15 @@ namespace Inventario.Controllers
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+        //*************************************************************************************************************
         //Guardar los datos de la compra
         public int GuardarCompra(Compra DatosCompra)
         {
             int Afectados = 0;
-            //try
-            //{
             long id = DatosCompra.IdCompra;
             if (id.Equals(0))
             {
                 int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)).Count();
-
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces >= 0)
                 {
                     InvBD.Compra.InsertOnSubmit(DatosCompra);
@@ -94,7 +92,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
                 && p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
-                && p.IdProveedor.Equals(DatosCompra.IdProveedor) 
+                && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
                 && p.PrecioUnitario.Equals(DatosCompra.PrecioUnitario)
@@ -130,15 +128,10 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
             return Afectados;
         }
 
-        //Eliminar Compra
+        //**************Eliminar Compra***********************************
         public int EliminarCompra(long Id)
         {
             int nregistradosAfectados = 0;
@@ -157,5 +150,44 @@ namespace Inventario.Controllers
         }
 
 
+   //**************Consulta los provedores por ID de artículo********************************
+        public JsonResult ConsultaProveedorxArticulo(long IdPro)
+        {
+            string proveedor = "";
+            var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Id = p.Proveedor,
+                });
+                foreach (var num in proveedores)
+                {
+
+                proveedor += num.Id + ",";
+                }
+
+            var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
+            return Json(provedores, JsonRequestBehavior.AllowGet);
+        }
+        //*********************************************************************************************
+        public JsonResult ConsultaProveedorxArti(long IdPro)
+        {
+            string proveedor = "";
+            var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Id = p.Proveedor,
+                });
+            foreach (var num in proveedores)
+            {
+
+                proveedor += num.Id + ",";
+
+            }
+
+            var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
+            return Json(provedores, JsonRequestBehavior.AllowGet);
+        }
+        //*********************************************************************************************
     }
+
 }

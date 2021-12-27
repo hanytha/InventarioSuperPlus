@@ -65,7 +65,7 @@ function CrearArticuloComp(Data) {
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
 }
-//*********************************************************************************************************************************
+
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
@@ -204,7 +204,6 @@ function MostrarArticulos(id) {
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
-
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
@@ -220,6 +219,8 @@ function MostrarArticulos(id) {
         });
     }
 } 
+
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
@@ -316,8 +317,6 @@ function GuardarPedidoExterno() {
     }
 
 }
-
-
 
 //---------Función para marcar los campos como obigatorios--------------------------------------------------------
 function CamposObligatorios() {

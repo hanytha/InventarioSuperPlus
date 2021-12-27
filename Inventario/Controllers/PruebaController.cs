@@ -153,12 +153,13 @@ namespace Inventario.Controllers
                 {
                     p.NombreEmpresa,
                     p.IdArticulos,
-                    p.PrecioUnitarioPromedio,
-                    p.Unidad
+                    p.Unidad,
+                    p.PrecioUnitarioPromedio
                });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+//****************************************************************************************************
 
         //****************************Consulta el último número de pedido*************************************************
 
@@ -198,6 +199,7 @@ namespace Inventario.Controllers
                    NumeroPProveedor= p.NumPedidoProveedor,
 
                 });
+
             if (numero.Count () > 0) {
                 foreach (var num in numero)
                 {

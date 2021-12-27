@@ -2,7 +2,6 @@
 ConsultaCompras();
 LlenarCMBImpuesto();
 LlenarCMBArticulo();
-LlenarCMBProveedores();
 LlenarCMBUnidades();
 
 function ConsultaCompras() {
@@ -77,7 +76,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtCoste").value = Data[0].Coste;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-
+         
         });
     }
 }
@@ -222,11 +221,6 @@ function LlenarCMBArticulo() {
     });
 }
 
-function LlenarCMBProveedores() {
-    $.get("/GLOBAL/BDPro", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedor"));
-    });
-}
 
 function LlenarCMBUnidades() {
     $.get("/GLOBAL/BDUnidadesMedida", function (data) {
@@ -241,6 +235,28 @@ function llenarCombo(data, control) {
 
     for (var i = 0; i < data.length; i++) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+
+//------------------Crea el combobox de proveedores por id de artículo--------------------------
+function LlenarCMBProveedores(id) {
+    $.get("/Compra/ConsultaProveedorxArticulo/?IdPro=" + id, function (data) {
+        llenarComboProveedor(data, document.getElementById("cmbProveedor"));
+    });
+}
+//----------------funcion para llenar el select de proveedores deacuerdo al artículo------------
+function llenarComboProveedor(data, control) {
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    let proveedor = data.proveedor;
+    let Arrayproveedor= proveedor.split('#');
+
+
+    for (var i = 0; i < Arrayproveedor.length; i++) {
+        contenido += "<option value='" + Arrayproveedor[i] + "'>" + Arrayproveedor[i] + "</option>";
     }
     control.innerHTML = contenido;
 }
