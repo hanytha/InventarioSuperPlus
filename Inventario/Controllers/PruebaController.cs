@@ -171,10 +171,18 @@ namespace Inventario.Controllers
                     p.IdPedidosExternos,
                     Pedido = p.NumeroPedido,
                 });
-            foreach (var ped in pedidosNum)
+
+            if (pedidosNum.Count() > 0) {
+                foreach (var ped in pedidosNum)
+                {
+                    int SumaNum = (int)(ped.Pedido + 1);
+                    NumeroPedido += SumaNum + ",";
+                }
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
             {
-                int SumaNum = (int)(ped.Pedido + 1);
-                NumeroPedido += SumaNum + ",";
+                NumeroPedido += "1" + ",";
             }
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
@@ -190,12 +198,19 @@ namespace Inventario.Controllers
                    NumeroPProveedor= p.NumPedidoProveedor,
 
                 });
-            foreach (var num in numero)
-            {
-                int SumaNumero = (int)(num.NumeroPProveedor + 1);
-                numPedidoProve = SumaNumero + ",";
+            if (numero.Count () > 0) {
+                foreach (var num in numero)
+                {
+                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                    numPedidoProve += SumaNumero + ",";
 
-              
+                }
+
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
+            {
+                numPedidoProve += "1" + ",";
             }
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
@@ -256,7 +271,6 @@ namespace Inventario.Controllers
                 if (nveces == 0)
                 {
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
-                    //obj.NumeroPedido = DatosPedidoExterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
