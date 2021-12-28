@@ -20,25 +20,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        //public JsonResult ConsultaExistenciaAlmacenes()
-        //{
-        //    var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.IdExistenciaAlmacenG,
-        //            p.IdCompra,
-        //            p.NoPedido,
-        //            p.FechaDeIngreso,
-        //            p.ExitenciaInicial,
-        //            p.FechaFinal,
-        //            p.ExitenciaActual,
-        //            p.Coste,
-        //            p.TipoDeOperacion,
-        //            p.Compra,
-        //        });
-        //    return Json(Almacenes, JsonRequestBehavior.AllowGet);
-        //}
-
         public JsonResult ConsultaExistenciaAlmacenes()
         {
             var Almacenes = InvBD.ExistenciaAlmacenG
@@ -64,7 +45,7 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaExistenciaAlmacen(long Id)
         {
-            var proveedores = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+            var Almacenes = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
                 .Select(p => new
                 {
                     p.IdExistenciaAlmacenG,
@@ -82,9 +63,31 @@ namespace Inventario.Controllers
                     p.NombreEmpresa,
                     p.IdProveedor
                 });
-            return Json(proveedores, JsonRequestBehavior.AllowGet);
+            return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
-        //Guardar los datos de la compra
+        //public JsonResult ConsultaExistenciaAlmacen(long Id)
+        //{
+        //    var proveedores = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+        //        .Select(p => new
+        //        {
+        //            p.IdExistenciaAlmacenG,
+        //            p.IdCompra,
+        //            p.NoPedido,
+        //            p.FechaDeIngreso,
+        //            p.ExitenciaInicial,
+        //            p.FechaFinal,
+        //            p.ExitenciaActual,
+        //            p.Coste,
+        //            p.TipoDeOperacion,
+        //            p.IdAsignacion,
+        //            p.IdSitio,
+        //            p.IdArticulo,
+        //            p.NombreEmpresa,
+        //            p.IdProveedor
+        //        });
+        //    return Json(proveedores, JsonRequestBehavior.AllowGet);
+        //}
+        //Guardar los datos de la Existencia
         public int GuardarAlmacen(ExistenciaAlmacenG DatosAlmacen)
         {
             int Afectados = 0;
