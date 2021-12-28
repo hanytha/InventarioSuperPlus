@@ -77,11 +77,7 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+
             return Afectados;
         }
 
@@ -104,5 +100,13 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+
+     //********************Retorna la segunda vista de unidades de medida*************************
+        // GET: UnidadMedida
+        public ActionResult UnidadMedida2da()
+        {
+            return View();
+        }
+    //******************************************************
     }
 }             

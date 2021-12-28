@@ -132,6 +132,7 @@
     <Content Include="Scrips\Internos\JS_MetodosDePago.js" />
     <Content Include="Scrips\Internos\JS_Paginas.js" />
     <Content Include="Scrips\Internos\JS_Proveedores.js" />
+    <Content Include="Scrips\Internos\JS_UnidadesDeMedida2da.js" />
     <Content Include="Scrips\Internos\JS_UnidadesDeMedida.js" />
     <Content Include="Scrips\Internos\JS_Perfiles.js" />
     <Content Include="Scrips\Internos\JS_SubAreas.js" />
@@ -245,6 +246,7 @@
     <Content Include="Views\Categoria\Categoria2da.cshtml" />
     <Content Include="Views\Categoria\Categoria3ra.cshtml" />
     <Content Include="Views\Impuestos\Impuestos2do.cshtml" />
+    <Content Include="Views\UnidadMedida\UnidadMedida2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
