@@ -112,6 +112,7 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\JS_Articulo2do.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Articulo2doController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\ArticuloVistaController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
@@ -238,6 +240,7 @@
     <Content Include="Views\Supervision\Supervision.cshtml" />
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
+    <Content Include="Views\Articulo2do\Articulo2do.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
