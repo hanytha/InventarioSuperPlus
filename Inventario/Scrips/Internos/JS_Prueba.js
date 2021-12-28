@@ -4,7 +4,7 @@ LlenarCMCArea();
 //-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
-    $.get("/Prueba/ConsultaArticulos", function (Data) {
+    $.get("/ExistenciasG/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
     });
 
@@ -73,7 +73,7 @@ function Desplegar(id) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Prueba/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
+        $.get("/ExistenciasG/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
             var uno = "";
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
@@ -129,7 +129,7 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
+        $.get("/ExistenciasG/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
@@ -177,7 +177,7 @@ function MostrarArticulos(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaIdPro/?IdPro=" + id, function (Data) {
+        $.get("/ExistenciasG/ConsultaIdPro/?IdPro=" + id, function (Data) {
        //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -291,7 +291,7 @@ function GuardarPedidoExterno() {
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
-                        url: "/Prueba/GuardarPedidoExterno",
+                        url: "/ExistenciasG/GuardarPedidoExterno",
                         data: frm,
                         contentType: false,
                         processData: false,
@@ -336,7 +336,7 @@ function CamposObligatorios() {
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMCProveedores() {
-    $.get("/Prueba/BDProveedor", function (data) {
+    $.get("/ExistenciasG/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
 
@@ -369,7 +369,7 @@ function Desplegar2(no) {
     }
     else {
 
-        $.get("/Prueba/ConsultaNumCompra/?No=" + no, function (Data) {
+        $.get("/ExistenciasG/ConsultaNumCompra/?No=" + no, function (Data) {
             var dos = "";
             //---Encabezado del grid---------
             dos += "<hr class='solid3'>";
@@ -406,7 +406,7 @@ function Desplegar2(no) {
 //************************************************************************************************************
 //******************Función que determina el siguiente número de pedido general*****************************************
 function ConsultaSiguientePedido() {
-    $.get("/Prueba/ConsultaPedidosDecendiente", function (Data) {
+    $.get("/ExistenciasG/ConsultaPedidosDecendiente", function (Data) {
         SiguientePedido(Data);
 
     }
@@ -429,7 +429,7 @@ function ConsultaSiguientePedidoPrveedor(id) {
     }
     else {
 
-        $.get("/Prueba/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+        $.get("/ExistenciasG/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
 
 
             let numPedidoProve = Data.numPedidoProve;

@@ -9,12 +9,12 @@ namespace Inventario.Controllers
 {
     //Lamar al método de seguridad
     [Seguridad]
-    public class PruebaController : Controller
+    public class ExistenciasGController : Controller
     {
         //DCISPlusDataContext InvBD = new DCISPlusDataContext();
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
         // GET: Prueba
-        public ActionResult Prueba()
+        public ActionResult ExistenciasG()
         {
             return View();
         }
