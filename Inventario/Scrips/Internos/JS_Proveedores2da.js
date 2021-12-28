@@ -49,7 +49,7 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>CodigoPostal: </strong>" + data[i].CodigoPostal + "</div>";
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
-        //CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodHtml += "</div>";
         CodHtml += "</div>";
         CodHtml += "</div>";
@@ -104,50 +104,50 @@ btnFoto.onchange = function (e) {
     reader.readAsDataURL(file);
 }
 //Limpia la información y carga la informacion del usuario
-//function abrirModal(id) {//la clase  Obligatorio
-//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-//    var ncontroles = controlesObligatorio.length;
-//    for (var i = 0; i < ncontroles; i++) {//recorre
-//        //Cambia los bordes lo las casillas a color rojo
-//        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-//    }
-//    if (id == 0) {
-//        LimpiarCampos();
-//        sessionStorage.setItem('IdProveedores', '0');
+function abrirModal(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IdProveedores', '0');
 
-//    }
-//    else {
-//        $.get("/Proveedores/ConsultaProveedor/?Id=" + id, function (Data) {
-//            sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);
-//            document.getElementById("TxtNombre").value = Data[0].Nombre;
-//            document.getElementById("Txtcorreo").value = Data[0].Correo;
-//            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
-//            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
-//            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
-//            document.getElementById("cmbEstado").value = Data[0].IdEstado;
-//            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
-//            document.getElementById("cmbEstado").value = Data[0].IdEstado;
-//            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
-//                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
-//                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
-//            });
-//            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
-//                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
-//                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
-//            });
-//            document.getElementById("TxtRFC").value = Data[0].RFC;
-//            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-//            document.getElementById("TxtDireccion").value = Data[0].Direccion;
-//            document.getElementById("TxtBanco").value = Data[0].Banco;
-//            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
-//            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
-//            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-//            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
+    }
+    else {
+        $.get("/Proveedores/ConsultaProveedor/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);
+            document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("Txtcorreo").value = Data[0].Correo;
+            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
+            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
+            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
+            document.getElementById("cmbEstado").value = Data[0].IdEstado;
+            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
+            document.getElementById("cmbEstado").value = Data[0].IdEstado;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
+                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
+                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
+            });
+            document.getElementById("TxtRFC").value = Data[0].RFC;
+            document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            document.getElementById("TxtBanco").value = Data[0].Banco;
+            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
+            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
+            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
 
-//        });
-//    }
-//}
+        });
+    }
+}
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -275,3 +275,5 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
+
