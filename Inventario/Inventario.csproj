@@ -123,6 +123,7 @@
     <Content Include="Scrips\Internos\JS_Existencia.js" />
     <Content Include="Scrips\Internos\JS_Supervisores2da.js" />
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
+    <Content Include="Scrips\Internos\JS_TiposMovimientos2da.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
@@ -240,6 +241,7 @@
     <Content Include="Views\Proveedores\Proveedores3ra.cshtml" />
     <Content Include="Views\Supervisor\Supervisor2da.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
+    <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

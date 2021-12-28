@@ -1,52 +1,5 @@
 ﻿LlenarCMBUnidad();
 LlenarCMBArticulo();
-//CrearAcordeonTiposDeMovimiento();
-////Crea el acordeón e inserta (los registros de la base de datos)
-//function CrearAcordeonTiposDeMovimiento() {
-//    $.get("/TiposDeMovimiento/ConsultaTiposDeMovimientos", function (Data) {
-//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-//        AcordeonTiposDeMovimiento(Data, document.getElementById("accordion"));
-//    });
-//}
-//function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
-//    var CodigoHTMLAreas = "";
-//    for (var i = 0; i < Data.length; i++) {
-//        if (i < 1) {
-//            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        else {
-//            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdMovimientos + "'>";
-//        CodigoHTMLAreas += "<h5 class='mb-0'>";
-//        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdMovimientos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdMovimientos + "' class='collapsed'>";
-//        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-//        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-//        CodigoHTMLAreas += "<span >" + Data[i].TipoDeMovimiento + "</span>";
-//        CodigoHTMLAreas += "</a>";
-//        CodigoHTMLAreas += "</h5>";
-//        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-//        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdMovimientos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-//        CodigoHTMLAreas += "<div class='card-body'>";
-//        CodigoHTMLAreas += "<div class='row'>";
-//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidades + "</div>";
-//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
-//        CodigoHTMLAreas += "</div>";
-
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-//        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-//        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "</div>";
-//        CodigoHTMLAreas += "</div>";
-//    }
-//    CtrlAlmacen.innerHTML = CodigoHTMLAreas;
-//}
 CrearTiposDeMovimiento();
 function CrearTiposDeMovimiento() {
     $.get("/TiposDeMovimiento/ConsultaTiposDeMovimientos", function (Data) {
@@ -68,7 +21,7 @@ function CrearTablaTiposDeMovimiento(Data) {
     CodigoHtmlTiposDeMovimiento += "<th>Artículo</th>";
     CodigoHtmlTiposDeMovimiento += "<th>Ud. de medida</th>";
     CodigoHtmlTiposDeMovimiento += "<th>Descripción</th>";
-    CodigoHtmlTiposDeMovimiento += "<th>Opciones</th>";
+    CodigoHtmlTiposDeMovimiento += "<th>Opción</th>";
     CodigoHtmlTiposDeMovimiento += "</tr>";
     CodigoHtmlTiposDeMovimiento += "</thead>";
     CodigoHtmlTiposDeMovimiento += "<tbody>";
@@ -80,7 +33,6 @@ function CrearTablaTiposDeMovimiento(Data) {
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion+ "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>";
         CodigoHtmlTiposDeMovimiento += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTiposDeMovimiento += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTiposDeMovimiento += "</td>";
         CodigoHtmlTiposDeMovimiento += "</tr>";
     }
@@ -99,9 +51,10 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDTDM', '0');     
+        sessionStorage.setItem('IDTDM', '0');
     }
     else {
+
         $.get("/TiposDeMovimiento/ConsultaTipoDeMovimiento/?Id=" + id, function (Data) {
             //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDTDM', Data[0].IdMovimientos);
@@ -183,26 +136,6 @@ function CamposObligatorios() {
         }
     }
     return exito;
-}
-//"Elimina" El TipoDeMovimiento cambia el Estatus
-function EliminarTipoDeMovimiento(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-
-        $.get("/TiposDeMovimiento/EliminarTipoDeMovimiento/?Id=" + id, function (DatoMovimiento) {
-            if (DatoMovimiento == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
-                CrearTiposDeMovimiento();
-            } else {
-                alert("Ocurrio un error");
-            }
-        });
-    }
 }
 function LlenarCMBUnidad() {
     $.get("/GLOBAL/BDUnidadesMedida", function (data) {
