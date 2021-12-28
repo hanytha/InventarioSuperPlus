@@ -110,5 +110,12 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+    //*****************************************************************
+        // GET: Impuestos
+        public ActionResult Impuestos2do()
+        {
+            return View();
+        }
+ //****************************************************
     }
 }
