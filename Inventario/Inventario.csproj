@@ -232,6 +232,7 @@
     <Content Include="Views\Supervision\Supervision.cshtml" />
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
+    <Content Include="Views\Proveedores\Proveedores2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,15 +1,11 @@
-﻿
-//LlenarCMBPrin();
-var imagen64;
+﻿var imagen64;
 imagen64 = getBase64Image(document.getElementById("PBFoto"));
-
 CrearAcordeonProveedores();
 function CrearAcordeonProveedores() {
     $.get("/Proveedores/ConsultaSupervisores", function (data) {
         AcordeonProveedores(data, document.getElementById("accordion"));
     });
-} 
-
+}
 //Crea la información basica de las insidencias
 function AcordeonProveedores(data, IDo) {
     var CodHtml = "";
@@ -63,36 +59,13 @@ function AcordeonProveedores(data, IDo) {
     }
     IDo.innerHTML = CodHtml;
 }
-
 BloquearCTRL();
-
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
-
-////llena los combosprincipales
-//function LlenarCMBPrin() {
-//    //$.get("/GLOBAL/BDEstado", function (data) {
-//    //    llenarCombo(data, document.getElementById("cmbEstado"), true);
-//    //});
-//    $.get("/GLOBAL/BDAreas", function (data) {
-//        llenarCombo(data, document.getElementById("cmbArea"));
-//    });
-//    $.get("/Usuario/ConsultaPerfiles", function (data) {
-//        llenarCombo(data, document.getElementById("cmbPerfil"));
-//    });
-//}
-
-////event Change index Areas para llenar el combobox SubAreas
-//var IDA = document.getElementById("cmbArea");
-//IDA.addEventListener("change", function () {
-//    $.get("/GLOBAL/BDSubAreas/?IDA=" + IDA.value, function (data) {
-//        llenarCombo(data, document.getElementById("cmbSubArea"));
-//    });
-//});
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
 IDE.addEventListener("change", function () {
@@ -118,11 +91,6 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-
-
-
-
-
 //Foto
 var btnFoto = document.getElementById("BtnFoto");
 btnFoto.onchange = function (e) {
@@ -144,7 +112,6 @@ function abrirModal(id) {//la clase  Obligatorio
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
     }
     if (id == 0) {
         LimpiarCampos();
@@ -152,18 +119,14 @@ function abrirModal(id) {//la clase  Obligatorio
 
     }
     else {
-
         $.get("/Proveedores/ConsultaProveedor/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdProveedores', Data[0].IdProveedores);
-
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("Txtcorreo").value = Data[0].Correo;
             document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
             document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
             document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
-
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
-
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
@@ -175,9 +138,7 @@ function abrirModal(id) {//la clase  Obligatorio
                 document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
             });
             document.getElementById("TxtRFC").value = Data[0].RFC;
-
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
-
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
             document.getElementById("TxtBanco").value = Data[0].Banco;
             document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
@@ -188,9 +149,6 @@ function abrirModal(id) {//la clase  Obligatorio
         });
     }
 }
-
-
-
 //limpiar campos
 function LimpiarCampos() {
     //Limpiar la casilla de texto
@@ -202,7 +160,6 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-
 }
 //event Change index Estados para llenar el combobox Municipios
 var IDE = document.getElementById("cmbEstado");
@@ -218,12 +175,8 @@ IDM.addEventListener("change", function () {
         llenarCombo(data, document.getElementById("cmbLocalidad"));
     });
 });
-
-
-
 //Guarda los cambios y altas de los proveedores
 function GuardarProveedor() {
-
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdProveedores = sessionStorage.getItem('IdProveedores');
@@ -245,18 +198,13 @@ function GuardarProveedor() {
             var Telefono = document.getElementById("TxtTelefono").value;
             var Direccion = document.getElementById("TxtDireccion").value;
             var Banco = document.getElementById("TxtBanco").value;
-
-
             var NumeroDeCuenta = document.getElementById("TxtNumeroDeCuenta").value;
-
             var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
-
             var Logo = document.getElementById("PBFoto").src.replace("data:image/png;base64,", "");
             if (Logo.endsWith('png')) {
                 Logo = imagen64.replace("data:image/png;base64,", "");
             }
-
             var frm = new FormData();
             frm.append("IdProveedores", IdProveedores);
             frm.append("Nombre", Nombre);
@@ -302,9 +250,7 @@ function GuardarProveedor() {
             });
         }
     }
-
 }
-
 function getBase64Image(img) {
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
@@ -314,7 +260,6 @@ function getBase64Image(img) {
     var dataURL = canvas.toDataURL("image/png");
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
-
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -327,7 +272,6 @@ function CamposObligatorios() {
         }
         else {
             controlesObligatorio[i].classList.remove("border-danger");
-
         }
     }
     return exito;

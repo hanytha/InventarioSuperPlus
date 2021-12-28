@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Proveedores";
 }
-
 <h2 class="form-control-label" style="font-size: 20px;">
     PROVEEDORES
 </h2>
@@ -13,7 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
 <!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
+@*<link rel="stylesheet" href="estilos.css">*@
 <div class="contenedor">
     <div class="contenedor hero">
         <div class="contenedor-cards">
@@ -56,7 +55,6 @@
         </div>
     </div>
 </div>
-
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
@@ -78,57 +76,17 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-               
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h4>Paso 1</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombre">Nombre del proveedor<span class="required">*</span></label>
+                                        <label class="form-control-label" for="TxtNombre">Nombre<span class="required">*</span></label>
                                         <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Nombre del proveedor" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="Txtcorreo">Correo<span class="required">*</span></label>
-                                        <input id="Txtcorreo" name="data[Txtcorreo]" class="form-control  limpiar obligatorio" placeholder="name@example.com" size="15" maxlength="20" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtRazonSocial">Razón Social<span class="required">*</span></label>
-                                        <input id="TxtRazonSocial" name="data[TxtRazonSocial]" class="form-control  limpiar obligatorio" placeholder="Razón Social" size="5" maxlength="150" type="text">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClaveInterbancaria">Clave Interbancaria<span class="required">*</span></label>
-                                        <input id="TxtClaveInterbancaria" name="data[TxtClaveInterbancaria]" class="form-control  limpiar obligatorio" placeholder="Clave Interbancaria" size="30" maxlength="100" type="text">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
-                                        <input id="TxtCodigoPostal" name="data[TxtCodigoPostal]" class="form-control  limpiar obligatorio" placeholder="Código Postal" size="30" maxlength="100" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-
-                        <fieldset>
-                            <h4>Paso 2</h4>
-
-
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -162,44 +120,47 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDireccion">Dirección</label>
-                                        <input id="TxtDireccion" name="data[TxtDireccion]" class="form-control  limpiar obligatorio" placeholder="Dirección" type="text">
+                                        <input id="TxtDireccion" name="data[TxtDireccion]" class="form-control  limpiar obligatorio" placeholder="Calle y No." type="text">
                                     </div>
                                 </div>
                             </div>
-
-
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="Txtcorreo">Correo<span class="required">*</span></label>
+                                        <input id="Txtcorreo" name="data[Txtcorreo]" class="form-control  limpiar obligatorio" placeholder="name@example.com" size="15" maxlength="20" type="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
 
-
                         <fieldset>
-                            <h4>Paso 3</h4>
-
+                            <h4>Paso 2</h4>
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtRFC">RFC</label>
-                                        <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="RFC" type="text">
+                                        <label class="form-control-label" for="TxtCodigoPostal">Código Postal<span class="required">*</span></label>
+                                        <input id="TxtCodigoPostal" name="data[TxtCodigoPostal]" class="form-control  limpiar obligatorio" placeholder="88888" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtTelefono">Teléfono</label>
-                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="Teléfono" type="tel">
+                                        <input id="TxtTelefono" name="data[TxtTelefono]" class="form-control  limpiar obligatorio" placeholder="953-888-8888" type="tel">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtBanco">Banco</label>
-                                        <input id="TxtBanco" name="data[TxtBanco]" class="form-control  limpiar obligatorio" placeholder="Banco" type="text">
+                                        <label class="form-control-label" for="TxtRazonSocial">Razón Social<span class="required">*</span></label>
+                                        <input id="TxtRazonSocial" name="data[TxtRazonSocial]" class="form-control  limpiar obligatorio" placeholder="Comercializadora Picaros de la Mixteca S.A de C.v" size="5" maxlength="150" type="text">
                                     </div>
                                 </div>
 
@@ -207,35 +168,55 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumeroDeCuenta">Número de Cuenta<span class="required">*</span></label>
-                                        <input type="text" class="form-control limpiar obligatorio" id="TxtNumeroDeCuenta" name="data[TxtNumeroDeCuenta]" placeholder="Número de Cuenta">
+                                        <label class="form-control-label" for="TxtBanco">Banco</label>
+                                        <input id="TxtBanco" name="data[TxtBanco]" class="form-control  limpiar obligatorio" placeholder="Banamex" type="text">
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI<span class="required">*</span></label>
-                                        <input id="TxtUsoCFDI" name="data[TxtUsoCFDI]" class="form-control  limpiar obligatorio" placeholder="UsoCFDI" size="15" maxlength="20" type="text">
+                                        <label class="form-control-label" for="TxtClaveInterbancaria">Clave Interbancaria<span class="required">*</span></label>
+                                        <input id="TxtClaveInterbancaria" name="data[TxtClaveInterbancaria]" class="form-control  limpiar obligatorio" placeholder="888888888888888888" size="30" maxlength="100" type="text">
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumeroDeCuenta">Número de Cuenta<span class="required">*</span></label>
+                                        <input type="text" class="form-control limpiar obligatorio" id="TxtNumeroDeCuenta" name="data[TxtNumeroDeCuenta]" placeholder="88888888888888888888">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI<span class="required">*</span></label>
+                                        <input id="TxtUsoCFDI" name="data[TxtUsoCFDI]" class="form-control  limpiar obligatorio" placeholder="888" size="15" maxlength="20" type="text">
+                                    </div>
+                                </div>
 
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtRFC">RFC</label>
+                                        <input id="TxtRFC" name="data[TxtRFC]" class="form-control  limpiar obligatorio" placeholder="Registro Federal del Contribuyente" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
-
                         <fieldset>
+                            <h4>Paso 3</h4>
 
-                            <h4>Paso 4</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input id="TxtDescripcion" name="data[TxtDescripcion]" class="form-control  limpiar obligatorio" placeholder="Descripción" size="30" maxlength="100" type="text">
+
+                                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agrega una descripción del proveedor..."></textarea>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -245,12 +226,9 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarProveedor()">Guardar</button>
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <button id="btnGuardar" type="button" class="btn btn-primary " onclick=" GuardarProveedor()">Guardar</button>
                         </fieldset>
-
                     </form>
                 </div>
                 <!-- pie del modal-->
@@ -263,8 +241,6 @@
 </div>
 <table>
 </table>
-
-
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -273,8 +249,6 @@
 </style>
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-@*<script src="~/Scrips/jquery-ui.min.js"></script>*@
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Proveedores.js"></script>
 <!--Validacion del formulario-->
@@ -283,5 +257,4 @@
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
 <script src="~/Scrips/General/JS_Botones.js"></script>

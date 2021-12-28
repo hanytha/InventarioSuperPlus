@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 namespace Inventario.Controllers
 {
-  
     //Llamar al método de seguridad
     [Seguridad]
     public class ProveedoresController : Controller
@@ -17,37 +16,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        //consulta general de los proveedores
-        //consulta general de los proveedores
-        //public JsonResult ConsultaProveedores()
-        //{
-        //    var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.IdProveedores,
-        //            p.Nombre,
-        //            p.Correo,
-        //            p.RazonSocial,
-        //            p.ClaveInterbancaria,
-        //            p.CodigoPostal,
-        //            p.IdEstado,
-        //            p.Estado,
-        //            p.IdMunicipio,
-        //            p.Municipio,
-        //            p.IdLocalidad,
-        //            p.Localidad,
-        //            p.RFC,
-        //            p.Direccion,
-        //            p.Telefono,
-        //            p.Banco,
-        //            p.NumeroDeCuenta,
-        //            p.UsoCFDI,
-        //            p.Descripcion,
-        //            p.Logo
-        //        });
-        //    return Json(proveedores, JsonRequestBehavior.AllowGet);
-        //}
-
         public JsonResult ConsultaSupervisores()
         {
             var supervisores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
@@ -71,16 +39,11 @@ namespace Inventario.Controllers
                     p.Banco,
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
-                    //p.UsoCFDI,
                     p.Descripcion,
                     p.Logo,
-                    //p.Estatus,
-                    
                 });
             return Json(supervisores, JsonRequestBehavior.AllowGet);
         }
-
-
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProveedor(long Id)
         {
@@ -149,7 +112,6 @@ namespace Inventario.Controllers
                     {
                         Proveedores obj = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(id)).First();
                         obj.Nombre = DatosProveedor.Nombre;
-                        //   obj.Id = DatosProveedor.Id;
                         obj.Correo = DatosProveedor.Correo;
                         obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
                         obj.CodigoPostal = DatosProveedor.CodigoPostal;
