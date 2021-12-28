@@ -56,17 +56,12 @@
     </div>
 </div>
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <script type="text/javascript">
     (function (document) {
         'use strict';
-
         var LightTableFilter = (function (Arr) {
-
             var _input;
-
             function _onInputEvent(e) {
                 _input = e.target;
                 var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
@@ -76,12 +71,10 @@
                     });
                 });
             }
-
             function _filter(row) {
                 var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
                 row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
             }
-
             return {
                 init: function () {
                     var inputs = document.getElementsByClassName('light-table-filter');
@@ -91,20 +84,17 @@
                 }
             };
         })(Array.prototype);
-
         document.addEventListener('readystatechange', function () {
             if (document.readyState === 'complete') {
                 LightTableFilter.init();
             }
         });
-
     })(document);
 </script>
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-
 <div id="tabla" class="default "></div>
 <div id="TablaPedidos"></div>
 <!-- Encabezado del Modal -->
@@ -136,19 +126,21 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaFinal">Fecha final<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaFinal]" id="TxtFechaFinal" class="form-control  limpiar obligatorio" placeholder="Fecha final">
+                                        <label class="form-control-label" for="TxtNumCompra">Número de pedido<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtNumCompra]" id="TxtNumCompra" class="form-control  limpiar obligatorio" placeholder="1">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
                                         <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
@@ -156,53 +148,32 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!--Termina-->
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNumCompra">Número de pedido<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtNumCompra]" id="TxtNumCompra" class="form-control  limpiar obligatorio" placeholder="1">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaInicial">Existencia Inicial<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="60">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="68">
-                                    </div>
-                                </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="120">
+                                        <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="88">
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="row">-->
-                            @*<div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
+                                        <label class="form-control-label" for="TxtExistenciaInicial">Existencia Inicial<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="88">
                                     </div>
-                                </div>*@
-
-
-                            <!--</div>-->
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtTipoOperacion">Tipo de Operación<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Ejemplo S.A.">
+                                        <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Compra">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -243,8 +214,6 @@
         </div>
     </div>
 </div>
-
-
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();

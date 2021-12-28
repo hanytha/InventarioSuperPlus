@@ -1,5 +1,4 @@
-﻿
-LlenarCMBPrin();
+﻿LlenarCMBPrin();
 BloquearCTRL();
 LlenarCMBCompra();
 CrearExistenciasAlmacen();
@@ -36,7 +35,7 @@ function CrearTablaExistenciasAlmacen(Data) {
         CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].NombreEmpresa + "</td>";
         CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].Coste + "</td>";
         CodigoHtmlExistenciasAlmacen += "<td>";
-        CodigoHtmlExistenciasAlmacen += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlExistenciasAlmacen += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdExistenciaAlmacenG + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         //CodigoHtmlExistenciasAlmacen += "<button class='btn btn-danger' onclick='EliminarExistenciasG(" + Data[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlExistenciasAlmacen += "</td>";
         CodigoHtmlExistenciasAlmacen += "</tr>";
@@ -45,41 +44,6 @@ function CrearTablaExistenciasAlmacen(Data) {
     CodigoHtmlExistenciasAlmacen += "</table>";
     document.getElementById("TablaPedidos").innerHTML = CodigoHtmlExistenciasAlmacen;
 }
-//function abrirModal(id) {//la clase  Obligatorio
-//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-//    var ncontroles = controlesObligatorio.length;
-//    for (var i = 0; i < ncontroles; i++) {//recorre
-//        //Cambia los bordes lo las casillas a color rojo
-//        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-//    }
-//    if (id == 0) {
-//        LimpiarCampos();
-//        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
-//    }
-//    else {
-//        $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacen/?Id=" + id, function (Data) {
-//            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-//            document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
-//            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-//            $.get("/GLOBAL/BDArtEx/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
-//                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
-//                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
-//            });
-//            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
-//            document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
-//            document.getElementById("TxtFechaFinal").value = Data[0].FechaFinal;
-//            document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
-//            document.getElementById("cmbCompra").value = Data[0].IdCompra;
-//            document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
-//            document.getElementById("TxtCosto").value = Data[0].Coste;
-//            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
-//            //Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
-//        });
-//    }
-//}
-
-
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -91,36 +55,25 @@ function abrirModal(id) {//la clase  Obligatorio
     if (id == 0) {
         LimpiarCampos();
         sessionStorage.setItem('IdExistenciaAlmacenG', '0');
-
     }
     else {
-        $.get("/ExistenciaAlmacen/ConsultaProveedor/?Id=" + id, function (Data) {
+        $.get("/ExistenciaAlmacen/ConsultaExistenciaAlmacen/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtNumCompra").value = Data[0].NoPedido;
-            document.getElementById("Txtcorreo").value = Data[0].Correo;
-            document.getElementById("TxtRazonSocial").value = Data[0].RazonSocial;
-            document.getElementById("TxtClaveInterbancaria").value = Data[0].ClaveInterbancaria;
-            document.getElementById("TxtCodigoPostal").value = Data[0].CodigoPostal;
-            document.getElementById("cmbEstado").value = Data[0].IdEstado;
-            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
-            document.getElementById("cmbEstado").value = Data[0].IdEstado;
-            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
-                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
-                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            $.get("/GLOBAL/BDArtEx/?IDP=" + Data[0].IdProveedor, function (Proveedor) {
+                llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
+                document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             });
-            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
-                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
-                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
-            });
-            document.getElementById("TxtRFC").value = Data[0].RFC;
-            document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            document.getElementById("TxtDireccion").value = Data[0].Direccion;
-            document.getElementById("TxtBanco").value = Data[0].Banco;
-            document.getElementById("TxtNumeroDeCuenta").value = Data[0].NumeroDeCuenta;
-            document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
-            document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
-            document.getElementById("PBFoto").src = "data:image/png;base64," + Data[0].FOTOMOSTRAR;
-
+            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
+            document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
+            document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
+            document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
+            document.getElementById("cmbCompra").value = Data[0].IdCompra;
+            document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
+            document.getElementById("TxtCosto").value = Data[0].Coste;
+            document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
+            Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
         });
     }
 }
@@ -152,7 +105,6 @@ function GuardarAlmacen() {
             var NombreEmpresa = TempArticulo.options[TempArticulo.selectedIndex].text;
             var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-            var FechaFinal = document.getElementById("TxtFechaFinal").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
             var IdCompra = document.getElementById("cmbCompra").value;
             var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
@@ -168,7 +120,6 @@ function GuardarAlmacen() {
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("FechaDeIngreso", FechaDeIngreso);
-            frm.append("FechaFinal", FechaFinal);
             frm.append("TipoDeOperacion", TipoDeOperacion);
             frm.append("IdCompra", IdCompra);
             frm.append("Coste", Coste);

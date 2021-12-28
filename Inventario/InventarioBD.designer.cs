@@ -3861,8 +3861,6 @@ namespace Inventario
 		
 		private long _ExitenciaInicial;
 		
-		private string _FechaFinal;
-		
 		private long _ExitenciaActual;
 		
 		private long _Coste;
@@ -3878,8 +3876,6 @@ namespace Inventario
 		private string _NombreEmpresa;
 		
 		private System.Nullable<long> _IdProveedor;
-		
-		private System.Nullable<int> _Estatus;
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
@@ -3899,8 +3895,6 @@ namespace Inventario
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(long value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(string value);
-    partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(long value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -3917,8 +3911,6 @@ namespace Inventario
     partial void OnNombreEmpresaChanged();
     partial void OnIdProveedorChanging(System.Nullable<long> value);
     partial void OnIdProveedorChanged();
-    partial void OnEstatusChanging(System.Nullable<int> value);
-    partial void OnEstatusChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4028,26 +4020,6 @@ namespace Inventario
 					this._ExitenciaInicial = value;
 					this.SendPropertyChanged("ExitenciaInicial");
 					this.OnExitenciaInicialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string FechaFinal
-		{
-			get
-			{
-				return this._FechaFinal;
-			}
-			set
-			{
-				if ((this._FechaFinal != value))
-				{
-					this.OnFechaFinalChanging(value);
-					this.SendPropertyChanging();
-					this._FechaFinal = value;
-					this.SendPropertyChanged("FechaFinal");
-					this.OnFechaFinalChanged();
 				}
 			}
 		}
@@ -4208,26 +4180,6 @@ namespace Inventario
 					this._IdProveedor = value;
 					this.SendPropertyChanged("IdProveedor");
 					this.OnIdProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
-		public System.Nullable<int> Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this.OnEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._Estatus = value;
-					this.SendPropertyChanged("Estatus");
-					this.OnEstatusChanged();
 				}
 			}
 		}
