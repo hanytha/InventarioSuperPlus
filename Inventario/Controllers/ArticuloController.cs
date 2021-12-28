@@ -299,7 +299,19 @@ namespace Inventario.Controllers
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
 
+//----------------Retorna las otras vistas de artículos--------------------------
+        // GET: Articulo
+        public ActionResult Articulo2do()
+        {
+            return View();
+        }
 
+        // GET: Articulo
+        public ActionResult Articulo3ro()
+        {
+            return View();
+        }
+//-------------Termina------------------------------------------
     }
 
 }

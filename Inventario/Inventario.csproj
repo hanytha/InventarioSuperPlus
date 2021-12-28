@@ -117,7 +117,6 @@
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
-    <Content Include="Scrips\Internos\JS_Articulo_Vista.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
@@ -149,10 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\Articulo2doController.cs" />
-    <Compile Include="Controllers\Articulo3roController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
-    <Compile Include="Controllers\ArticuloVistaController.cs" />
     <Compile Include="Controllers\BonificacionesController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
@@ -233,7 +229,6 @@
     <Content Include="Views\Categoria\Categoria.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento.cshtml" />
-    <Content Include="Views\ArticuloVista\ArticuloVista.cshtml" />
     <Content Include="Views\Compra\Compra.cshtml" />
     <Content Include="Views\Prueba\Prueba.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
@@ -242,8 +237,8 @@
     <Content Include="Views\Supervision\Supervision.cshtml" />
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
-    <Content Include="Views\Articulo2do\Articulo2do.cshtml" />
-    <Content Include="Views\Articulo3ro\Articulo3ro.cshtml" />
+    <Content Include="Views\Articulo\Articulo2do.cshtml" />
+    <Content Include="Views\Articulo\Articulo3ro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

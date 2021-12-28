@@ -7,7 +7,7 @@ LlenarCMCMarca();
 
 //---------------Crea una tabla de todos los artículos de la BD---------------
 function ConsultaArticulos() {
-    $.get("/Articulo2do/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearTablaArticulos(Data);
     }
     );
@@ -66,7 +66,7 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     else {
 
-        $.get("/Articulo2do/ConsultaArticulo/?Id=" + id, function (Data) {
+        $.get("/Articulo/ConsultaArticulo/?Id=" + id, function (Data) {
             sessionStorage.setItem('IDArt', Data[0].IdArticulos);
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
@@ -102,7 +102,7 @@ function abrirModal(id) {//la clase  Obligatorio
 //-------------------------Generar la tabla de los checkbox de proveedores-------------------------
 
 function MostrarProveedores() {
-    $.get("/Articulo2do/ConsultaProveedores", function (InfoProveedor) {
+    $.get("/Articulo/ConsultaProveedores", function (InfoProveedor) {
         var CodigoHtmlProveedor = "";
         CodigoHtmlProveedor += "<div class='row'>";
         for (var i = 0; i < InfoProveedor.length; i++) {
@@ -200,7 +200,7 @@ function GuardarArticulo() {
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/Articulo2do/GuardarArticulo",
+                url: "/Articulo/GuardarArticulo",
                 data: frm,
                 contentType: false,
                 processData: false,

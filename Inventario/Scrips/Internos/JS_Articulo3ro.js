@@ -7,7 +7,7 @@ LlenarCMCMarca();
 
 //---------------Crea una tabla de todos los artículos de la BD---------------
 function ConsultaArticulos() {
-    $.get("/Articulo3ro/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaArticulos", function (Data) {
         CrearTablaArticulos(Data);
     }
     );
