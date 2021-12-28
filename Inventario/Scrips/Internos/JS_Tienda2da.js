@@ -62,6 +62,7 @@ function AcordeonTienda(Data, CtrlAlmacen) {
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdTienda + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTienda(" + Data[i].IdTienda + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -301,5 +302,22 @@ function CamposObligatorios() {
         }
     }
     return exito;
+}
+
+
+
+//"Elimina" el área cambia el Estatus
+function EliminarTienda(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/Tienda/EliminarTienda/?Id=" + id, function (DatoTienda) {
+            if (DatoTienda == 1) {
+                alert("Se elimino correctamente");
+                CrearAcordeonTienda();
+            } else {
+                alert("Ocurrio un error");
+            }
+        });
+    }
 }
 

@@ -172,11 +172,7 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+
             return Afectados;
         }
 
@@ -199,6 +195,13 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-     
+
+        //**************Retorna la segunada vista de tienda*************
+        // GET: Tienda
+        public ActionResult Tienda2da()
+        {
+            return View();
+        }
+
     }
 }

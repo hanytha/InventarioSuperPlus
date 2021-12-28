@@ -123,6 +123,7 @@
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
+    <Content Include="Scrips\Internos\JS_Tienda2da.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
@@ -247,6 +248,7 @@
     <Content Include="Views\Categoria\Categoria3ra.cshtml" />
     <Content Include="Views\Impuestos\Impuestos2do.cshtml" />
     <Content Include="Views\UnidadMedida\UnidadMedida2da.cshtml" />
+    <Content Include="Views\Tienda\Tienda2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
