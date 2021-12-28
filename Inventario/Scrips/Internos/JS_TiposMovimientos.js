@@ -1,59 +1,99 @@
 ﻿LlenarCMBUnidad();
 LlenarCMBArticulo();
-CrearAcordeonTiposDeMovimiento();
-//Crea el acordeón e inserta (los registros de la base de datos)
-function CrearAcordeonTiposDeMovimiento() {
+//CrearAcordeonTiposDeMovimiento();
+////Crea el acordeón e inserta (los registros de la base de datos)
+//function CrearAcordeonTiposDeMovimiento() {
+//    $.get("/TiposDeMovimiento/ConsultaTiposDeMovimientos", function (Data) {
+//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
+//        AcordeonTiposDeMovimiento(Data, document.getElementById("accordion"));
+//    });
+//}
+//function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
+//    var CodigoHTMLAreas = "";
+//    for (var i = 0; i < Data.length; i++) {
+//        if (i < 1) {
+//            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+//        }
+//        else {
+//            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+//        }
+//        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdMovimientos + "'>";
+//        CodigoHTMLAreas += "<h5 class='mb-0'>";
+//        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdMovimientos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdMovimientos + "' class='collapsed'>";
+//        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
+//        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+//        CodigoHTMLAreas += "<span >" + Data[i].TipoDeMovimiento + "</span>";
+//        CodigoHTMLAreas += "</a>";
+//        CodigoHTMLAreas += "</h5>";
+//        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
+//        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdMovimientos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+//        CodigoHTMLAreas += "<div class='card-body'>";
+//        CodigoHTMLAreas += "<div class='row'>";
+//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
+//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidades + "</div>";
+//        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
+//        CodigoHTMLAreas += "</div>";
+
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
+//        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+//        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "</div>";
+//        CodigoHTMLAreas += "</div>";
+//    }
+//    CtrlAlmacen.innerHTML = CodigoHTMLAreas;
+//}
+CrearTiposDeMovimiento();
+function CrearTiposDeMovimiento() {
     $.get("/TiposDeMovimiento/ConsultaTiposDeMovimientos", function (Data) {
-        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-        AcordeonTiposDeMovimiento(Data, document.getElementById("accordion"));
-    });
-}
-function AcordeonTiposDeMovimiento(Data, CtrlAlmacen) {
-    var CodigoHTMLAreas = "";
-    for (var i = 0; i < Data.length; i++) {
-        if (i < 1) {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        else {
-            CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-        }
-        CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdMovimientos + "'>";
-        CodigoHTMLAreas += "<h5 class='mb-0'>";
-        CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdMovimientos + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdMovimientos + "' class='collapsed'>";
-        //CodigoHTMLAreas += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-        CodigoHTMLAreas += "<span >" + Data[i].TipoDeMovimiento + "</span>";
-        CodigoHTMLAreas += "</a>";
-        CodigoHTMLAreas += "</h5>";
-        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-        CodigoHTMLAreas += "<div id='collapse" + Data[i].IdMovimientos + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-        CodigoHTMLAreas += "<div class='card-body'>";
-        CodigoHTMLAreas += "<div class='row'>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Artículo: </strong>" + Data[i].Articulo + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Unidad de medida: </strong>" + Data[i].Unidades + "</div>";
-        CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Descripción: </strong>" + Data[i].Descripcion + "</div>";
-        CodigoHTMLAreas += "</div>";
-
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-        CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
-        CodigoHTMLAreas += "</div>";
+        CrearTablaTiposDeMovimiento(Data);
     }
-    CtrlAlmacen.innerHTML = CodigoHTMLAreas;
+    );
 }
-
+function CrearTablaTiposDeMovimiento(Data) {
+    var CodigoHtmlTiposDeMovimiento = "";
+    CodigoHtmlTiposDeMovimiento += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTiposDeMovimiento += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTiposDeMovimiento += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTiposDeMovimiento += "</div>";
+    CodigoHtmlTiposDeMovimiento += "<div class='table-responsive'>";
+    CodigoHtmlTiposDeMovimiento += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTiposDeMovimiento += "<thead>";
+    CodigoHtmlTiposDeMovimiento += "<tr>";
+    CodigoHtmlTiposDeMovimiento += "<th>Tipo de Movimiento</th>";
+    CodigoHtmlTiposDeMovimiento += "<th>Artículo</th>";
+    CodigoHtmlTiposDeMovimiento += "<th>Ud. de medida</th>";
+    CodigoHtmlTiposDeMovimiento += "<th>Descripción</th>";
+    CodigoHtmlTiposDeMovimiento += "<th>Opciones</th>";
+    CodigoHtmlTiposDeMovimiento += "</tr>";
+    CodigoHtmlTiposDeMovimiento += "</thead>";
+    CodigoHtmlTiposDeMovimiento += "<tbody>";
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTiposDeMovimiento += "<tr>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].TipoDeMovimiento + "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Articulo + "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Unidades + "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion+ "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>";
+        CodigoHtmlTiposDeMovimiento += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTiposDeMovimiento += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTiposDeMovimiento += "</td>";
+        CodigoHtmlTiposDeMovimiento += "</tr>";
+    }
+    CodigoHtmlTiposDeMovimiento += "</tbody>";
+    CodigoHtmlTiposDeMovimiento += "</table>";
+    document.getElementById("TablaMovimientos").innerHTML = CodigoHtmlTiposDeMovimiento;
+}
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
+    for (var i = 0; i < ncontroles; i++) {//recorre 
         //Cambia los bordes lo las casillas a color rojo
         //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
@@ -138,7 +178,7 @@ function GuardarTipoDeMovimiento() {
                     }
                     else {
                         alert("Se ejecuto correctamente");
-                        CrearAcordeonTiposDeMovimiento();
+                        CrearTiposDeMovimiento();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -172,8 +212,14 @@ function EliminarTipoDeMovimiento(id) {
 
         $.get("/TiposDeMovimiento/EliminarTipoDeMovimiento/?Id=" + id, function (DatoMovimiento) {
             if (DatoMovimiento == 1) {
-                alert("Se elimino correctamente");
-                CrearAcordeonTiposDeMovimiento();
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se eliminó correctamente.',
+                    'success'
+                )
+                //  confirmarEliminar();
+                CrearTiposDeMovimiento();
             } else {
                 alert("Ocurrio un error");
             }

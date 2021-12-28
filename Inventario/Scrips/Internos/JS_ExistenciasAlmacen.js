@@ -42,7 +42,7 @@ function CrearTablaExistenciasAlmacen(Data) {
     }
     CodigoHtmlExistenciasAlmacen += "</tbody>";
     CodigoHtmlExistenciasAlmacen += "</table>";
-    document.getElementById("TablaPedidos").innerHTML = CodigoHtmlExistenciasAlmacen;
+    document.getElementById("TablaExistencia").innerHTML = CodigoHtmlExistenciasAlmacen;
 }
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
