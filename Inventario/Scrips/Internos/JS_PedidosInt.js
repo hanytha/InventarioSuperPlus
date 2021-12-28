@@ -51,7 +51,7 @@ function CrearTablaPedidos(Data) {
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
     CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
-    CodigoHtmlTablaPedidos += "<table class='table-sm table table-bordered order-table'>";
+    CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>ID</th>";
