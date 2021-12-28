@@ -158,5 +158,12 @@ namespace Inventario.Controllers
         //    }
         //    return nregistradosAfectados;
         //}
+
+        //----------------------------------Empieza ExistenciaAlmacen2da
+        // GET: ExistenciaAlmacen
+        public ActionResult ExistenciaAlmacen2da()
+        {
+            return View();
+        }
     }
 }
