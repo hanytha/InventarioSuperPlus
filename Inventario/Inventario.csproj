@@ -111,6 +111,8 @@
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
@@ -233,6 +235,7 @@
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <Content Include="Views\Proveedores\Proveedores2da.cshtml" />
+    <Content Include="Views\Proveedores\Proveedores3ra.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

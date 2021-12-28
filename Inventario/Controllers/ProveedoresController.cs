@@ -159,6 +159,15 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
+        //---------------------------------Empieza Proveedores2da-----------------------------------
+        public ActionResult Proveedores2da()
+        {
+            return View();
+        }
+        public ActionResult Proveedores3ra()
+        {
+            return View();
+        }
     }
 }
 
