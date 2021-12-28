@@ -1,0 +1,266 @@
+﻿
+@{
+    ViewBag.Title = "Articulo3ro";
+}
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta------------------------------------------------------------------------------->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+
+    })(document);
+</script>
+
+
+<!----------------------Crea Tabla de artículos----------------------------------->
+<div id="tablaArticulos"></div>
+<!-------------------------------------------------------------------------->
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO DE ARTÍCULOS</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <fieldset>
+                            <h4>Paso 1</h4>
+                            <!--Insertar fecha-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtFechaIngreso]" id="TxtFechaIngreso" class="form-control obligatorio bloquear">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Termina-->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por el Proveedor<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div align="center">
+                                            <label class="form-control-label" for="TblProveedores">Proveedores</label>
+                                        </div>
+                                        <div id="TblProveedores">Proveedores</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
+                                        <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
+                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
+                                        <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!------------Obtener la fecha--------------------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngreso').value = fecha;
+
+</script>
+<!---------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Articulo3ro.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
