@@ -77,11 +77,6 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
             return Afectados;
         }
 
@@ -105,5 +100,17 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+        //--------------------Retorna las demas vistas de categoría----------------------
+        // GET: Categoria
+        public ActionResult Categoria2da()
+        {
+            return View();
+        }
+        // GET: Categoria
+        public ActionResult Categoria3ra()
+        {
+            return View();
+        }
+    //----------------Termina------------------------------------------------------
     }
 }

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Categoria3ra";
+}
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
+<div id="tablaCategoria" class="default "></div>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Categoria3ra.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />

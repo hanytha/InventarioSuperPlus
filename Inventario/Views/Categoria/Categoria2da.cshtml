@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Categoria2da";
+}
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Termina tarjeta-->
+<!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
+<!-- Botón del modal-->
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
+<!--Mostrar los registros en el accordion-->
+<div id="tablaCategoria" class="default "></div>
+<div id="accordion"></div>
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalCategoria">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <h4>REGISTRO CLASIFICACIÓN</h4>
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
+                        <!--Los pasos del modal-->
+
+                        <h4>PASO 1</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
+                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Categoria2da.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
+
