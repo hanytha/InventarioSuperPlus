@@ -58,7 +58,7 @@ function CrearTablaPaginas(Data) {
         CodigoHtmlTablaPagina += "<td>" + Data[i].Nombre + "</td>";
         CodigoHtmlTablaPagina += "<td>" + Data[i].Accion + "</td>";
         CodigoHtmlTablaPagina += "<td>" + Data[i].Controlador + "</td>";
-        CodigoHtmlTablaPagina += "<td>" + Data[i].Icono + "</td>";
+        CodigoHtmlTablaPagina += "<td><i class='" + Data[i].Icono + "'style='font - size: 100px; color: dodgerblue;'></i></td> ";
         CodigoHtmlTablaPagina += "<td>";
         CodigoHtmlTablaPagina += "<button class='btn btn-primary' onclick='AModalPaginas(" + Data[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Pagina'><i class='fas fa-edit'></i></button> ";
         CodigoHtmlTablaPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + Data[i].ID + ",this)' ><i class='fas fa-eraser'></i></button>";

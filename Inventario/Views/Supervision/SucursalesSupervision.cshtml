@@ -2,12 +2,54 @@
 
 @{
     ViewBag.Title = "Tiendas de la supervisión";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
     TIENDAS DE LA SUPERVISIÓN
 </h2>
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
+</div>
 <!-- Botón del modal-->
 @*<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
 <!------------------------------------------------------------------------------------------------------------>
@@ -133,6 +175,8 @@
         border-color: dodgerblue;
     }
 </style>
+
+
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
@@ -143,6 +187,8 @@
 <!------------------------------------------>
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <!-- Encabezado del Modal -->
+
+
 <div class="container">
     <div class="modal fade" id="ModalPedidoInterno">
         <div class="modal-dialog">
@@ -275,4 +321,5 @@
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
 @*<script src="~/Scripts/meg.init.js"></script>*@
 <script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
 
