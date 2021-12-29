@@ -45,10 +45,12 @@ function AModalPaginas(ID) {
         controlesObligatorio[i].parentNode.classList.remove("border-danger");
     }
     if (ID == 0) {
+        sessionStorage.setItem('IdPag', '0');
     }
     else {
         $.get("/Configuracion/BDPagina/?ID=" + ID, function (DatosPagina) {
-            document.getElementById("TxtIDPagina").value = DatosPagina[0].ID;
+            //document.getElementById("TxtIDPagina").value = DatosPagina[0].ID;
+            sessionStorage.setItem('IdPag', DatosPagina[0].ID);
             document.getElementById("TxtMensaje").value = DatosPagina[0].Nombre;
             document.getElementById("TxtAccion").value = DatosPagina[0].Accion;
             document.getElementById("TxtControlador").value = DatosPagina[0].Controlador;
@@ -61,14 +63,15 @@ function AModalPaginas(ID) {
 function GuardarPagina() {
     if (ObligatoriosPagina() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IDPagina = document.getElementById("TxtIDPagina").value;
+            var IdPagina = sessionStorage.getItem('IdPag');
+            //var IDPagina = document.getElementById("TxtIDPagina").value;
             var Mensaje = document.getElementById("TxtMensaje").value;
             var Accion = document.getElementById("TxtAccion").value;
             var Controlador = document.getElementById("TxtControlador").value;
             var Icono = document.getElementById("TxtIcono").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var frm = new FormData();
-            frm.append("IdPagina", IDPagina);
+            frm.append("IdPagina", IdPagina);
             frm.append("Mensaje", Mensaje);
             frm.append("Accion", Accion);
             frm.append("Controlador", Controlador);

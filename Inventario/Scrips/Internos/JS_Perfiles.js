@@ -43,10 +43,12 @@ function AModalPerfil(ID) {
         CtrlObligatorio[i].classList.remove("border-danger");
     }
     if (ID == 0) {
+        sessionStorage.setItem('IdPfl', '0');
     }
     else {
         $.get("/Configuracion/BDPerfil/?IDPerfil=" + ID, function (DatosPerfil) {
-            document.getElementById("TxtIDPerfil").value = DatosPerfil[0].ID;
+            //document.getElementById("TxtIDPerfil").value = DatosPerfil[0].ID;
+            sessionStorage.setItem('IdPfl', DatosPerfil[0].ID);
             document.getElementById("TxtNivel").value = DatosPerfil[0].Nivel;
             document.getElementById("TxtPerfil").value = DatosPerfil[0].Nombre;
             //--------
@@ -69,7 +71,8 @@ function AModalPerfil(ID) {
 function GuardarPerfil() {
     if (ObligatoriosPerfil() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IDPerfil = document.getElementById("TxtIDPerfil").value;
+            //var IDPerfil = document.getElementById("TxtIDPerfil").value;
+            var IdPerfilDeUsuario = sessionStorage.getItem('IdPfl');
             var Nivel = document.getElementById("TxtNivel").value;
             var Perfil = document.getElementById("TxtPerfil").value;
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
@@ -83,7 +86,7 @@ function GuardarPerfil() {
             var Permisos = seleccionados.substring(0, seleccionados.length - 1);
             var Comentarios = document.getElementById("TxtComentarios").value;
             var frm = new FormData();
-            frm.append("IdPerfilDeUsuario", IDPerfil);
+            frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
             frm.append("Perfil", Perfil);
             frm.append("Nivel", Nivel);
             frm.append("Permisos", Permisos);
