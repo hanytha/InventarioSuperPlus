@@ -177,7 +177,7 @@ namespace Inventario.Controllers
             if (id.Equals(0))
             {
                 //Guardar el Usuario cuando no exista uno con el mismo nombre en la base de datos
-                int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)).Count();
+                int nveces = InvBD.Usuarios.Where(p => p.CURP.Equals(DatosUsuarios.CURP)|| p.Usuario.Equals(DatosUsuarios.Usuario)).Count();
                 if (nveces == 0)
                 {
                     DatosUsuarios.Foto = Convert.FromBase64String(cadF);
