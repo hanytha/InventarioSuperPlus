@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Supervision2da";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="form-control-label" style="font-size: 20px;">
+    SUPERVISIÓN
+</h2>
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+@*<link rel="stylesheet" href="estilos.css">*@
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+        var LightTableFilter = (function (Arr) {
+            var _input;
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+    })(document);
+</script>
+<!--Termina tarjeta-->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<!--Mostrar los registros en la tabla-->
+<div id="tablaSupervicion"></div><!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE SUPERVISIÓN
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNomSuper">Supervisión<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNomSuper]" id="TxtNomSuper" class="form-control  limpiar obligatorio" placeholder="Nombre de la supervisión">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbEncargado">Encargado<span class="required">*</span></label>
+                                        <select id="cmbEncargado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtComentarios">Tiendas<span class="required">*</span></label>
+                                        <div id="divPagina"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="GuardarSupervision()">Guardar</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Supervision2da.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+

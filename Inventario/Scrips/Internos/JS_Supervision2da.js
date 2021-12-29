@@ -52,7 +52,6 @@ function CrearTablaSuperviciones(Data) {
         CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaSuperviciones += "<td>";
         CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaSuperviciones += "</td>";
         CodigoHtmlTablaSuperviciones += "</tr>";
     }
@@ -204,24 +203,6 @@ function CamposObligatorios() {
         }
     }
     return exito;
-}
-function EliminarSupervicion(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
-            if (DatoSupervicion == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
-                ConsultaSuperviciones();
-            } else {
-                alert("Ocurrió un error");
-            }
-        });
-    }
 }
 //Función para visualizar las tiendas seleccionadas al presionar el botón modificar
 function MostrarTiendas() {

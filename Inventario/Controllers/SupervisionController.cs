@@ -20,7 +20,6 @@ namespace Inventario.Controllers
             var superviciones = InvBD.Supervision.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-
                     p.IdSupervision,
                     p.TipoSupervicion,
                     p.IdUsuario,
@@ -28,7 +27,6 @@ namespace Inventario.Controllers
                     p.Tienda,
                     p.nombreUsuario,
                     p.Estatus
-
                 });
             return Json(superviciones, JsonRequestBehavior.AllowGet);
         }
@@ -45,7 +43,6 @@ namespace Inventario.Controllers
                     p.Tienda,
                     p.nombreUsuario,
                     p.Estatus,
-
                 });
             return Json(supervicion, JsonRequestBehavior.AllowGet);
         }
@@ -121,7 +118,6 @@ namespace Inventario.Controllers
             int Encontrados = 0;
             string[] Sucursales = Accesos.Tiendas.Split('#');
             TiendasSupervision.IDTienda = new List<long>();
-
             TiendasSupervision.Nombre = new List<string>();
             TiendasSupervision.LNombre = new List<string>();
             TiendasSupervision.E1Nombre = new List<string>();
@@ -636,6 +632,11 @@ namespace Inventario.Controllers
             }
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
+        //------------------Supervision2da------------------------------------
+        public ActionResult Supervision2da()
+        {
+            return View();
         }
     }
 }

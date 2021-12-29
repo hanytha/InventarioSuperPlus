@@ -114,6 +114,7 @@
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
     <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
     <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
+    <Content Include="Scrips\Internos\JS_Supervision2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
@@ -242,6 +243,7 @@
     <Content Include="Views\Supervisor\Supervisor2da.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
+    <Content Include="Views\Supervision\Supervision2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
