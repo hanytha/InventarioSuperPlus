@@ -138,13 +138,13 @@ function GuardarAlmacen() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe la existencia");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        alert("Se ejecutó correctamente");
                         CrearExistenciasAlmacen();
                         document.getElementById("btnCancelar").click();
                     }

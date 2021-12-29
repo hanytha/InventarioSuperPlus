@@ -83,7 +83,7 @@ function GuardarPagina() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe la página");
@@ -120,10 +120,10 @@ function EliminarPagina(id) {
     if (confirm("¿Desea eliminar el registo?") == 1) {
         $.get("/Configuracion/EliminarPagina/?IdPagina=" + id, function (Pagina) {
             if (Pagina == 1) {
-                alert("Se elimino correctamente");
+                alert("Se eliminó correctamente");
                 MostrarPaginas();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

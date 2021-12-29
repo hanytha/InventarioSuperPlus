@@ -97,7 +97,7 @@ function GuardarPerfil() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe el perfil");
@@ -132,10 +132,10 @@ function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registo?") == 1) {
         $.get("/Configuracion/EliminarPerfil/?IdPerfil=" + id, function (Pagina) {
             if (Pagina == 1) {
-                alert("Se elimino correctamente");
+                alert("Se eliminó correctamente");
                 MostrarPerfiles();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

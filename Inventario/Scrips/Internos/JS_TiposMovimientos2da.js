@@ -106,13 +106,13 @@ function GuardarTipoDeMovimiento() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        alert("Ya existe este movimieto");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        alert("Se ejecutó correctamente");
                         CrearTiposDeMovimiento();
                         document.getElementById("btnCancelar").click();
                     }

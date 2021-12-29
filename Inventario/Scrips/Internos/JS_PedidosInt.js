@@ -1,7 +1,5 @@
 ﻿LlenarCMBPrincipal();
 BloquearCTRL();
-
-
 //Tabla
 
 //ConsultaUnidadDeMedida();
@@ -211,7 +209,7 @@ function GuardarPedidoInterno() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrioó un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe el pedido");
@@ -266,7 +264,7 @@ function EliminarPedidoInterno(id) {
                 alert("Se eliminó correctamente");
                 CrearAcordeonPedidosInt();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

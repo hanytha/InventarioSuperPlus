@@ -1,58 +1,5 @@
-﻿
-//ConsultaSuperviciones();
-//function ConsultaSuperviciones() {
-//    $.get("/Usuario/BDUsrPfl/?IDPerfil=" + 9, function (data) {
-//        if (data.length != 0) {
-//            llenarCombo(data, document.getElementById("cmbEncargado"));
-//        }
-//        else {
-//            alert("No hay datos que mostrar Supervisores");
-//        }
-//    });
-//    $.get("/Supervision/ConsultaSuperviciones", function (Data) {
-//        if (Data.length != 0) {
-//            CrearTablaSuperviciones(Data);
-//        }
-//        else {
-//            alert("No hay datos que mostrar Supervision");
-//        }
-//    });
-//    $.get("/GLOBAL/BDTiendas", function (InfSucursales) {
-//        var TablaSucursales = "";
-//        TablaSucursales += "<div class='row'>";
-//        for (var i = 0; i < InfSucursales.length; i++) {
-//            TablaSucursales += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-//            TablaSucursales += "<input type='checkbox' class='checkbox-Sucursal' id='" + InfSucursales[i].ID + "' ><span class='help-block text-muted small-font'>" + InfSucursales[i].Nombre + "</span>";
-//            TablaSucursales += "</div>";
-//        }
-//        TablaSucursales += "</div>";
-//        document.getElementById("divPagina").innerHTML = TablaSucursales;
-//    });
-//}
-//function CrearTablaSuperviciones(Data) {
-//    var CodigoHtmlTablaSuperviciones = "";
-//    CodigoHtmlTablaSuperviciones += "<table id='tablas' class='table table table-sm' >";
-//    CodigoHtmlTablaSuperviciones += " <thead class='thead-dark'><tr><th>Tipo de Supervisión</th><th>nombre del Usuario</th><th>Tienda</th><th>Acción</thead>";
-//    CodigoHtmlTablaSuperviciones += "<tbody>";
-//    for (var i = 0; i < Data.length; i++) {
-//        CodigoHtmlTablaSuperviciones += "<tr>";
-//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].TipoSupervicion + "</td>";
-//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].nombreUsuario + "</td>";
-//        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
-//        CodigoHtmlTablaSuperviciones += "<td>";
-//        CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-//        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)'><i class='fas fa-eraser'></i></button>";
-//        CodigoHtmlTablaSuperviciones += "</td>";
-//        CodigoHtmlTablaSuperviciones += "</tr>";
-//    }
-//    CodigoHtmlTablaSuperviciones += "</tbody>";
-//    CodigoHtmlTablaSuperviciones += "</table>";
-//    document.getElementById("tablaSupervicion").innerHTML = CodigoHtmlTablaSuperviciones;
-//}
-
-
-CrearExistenciasAlmacen();
-function CrearExistenciasAlmacen() {
+﻿ConsultaSuperviciones();
+function ConsultaSuperviciones() {
     $.get("/Usuario/BDUsrPfl/?IDPerfil=" + 9, function (data) {
         if (data.length != 0) {
             llenarCombo(data, document.getElementById("cmbEncargado"));
@@ -63,10 +10,10 @@ function CrearExistenciasAlmacen() {
     });
     $.get("/Supervision/ConsultaSuperviciones", function (Data) {
         if (Data.length != 0) {
-            CrearTablaExistenciasAlmacen(Data);
+            CrearTablaSuperviciones(Data);
         }
         else {
-            alert("No hay datos que mostrar Supervision");
+            alert("No hay datos que mostrar Supervisión");
         }
     });
     $.get("/GLOBAL/BDTiendas", function (InfSucursales) {
@@ -81,44 +28,42 @@ function CrearExistenciasAlmacen() {
         document.getElementById("divPagina").innerHTML = TablaSucursales;
     });
 }
-function CrearTablaExistenciasAlmacen(Data) {
-    var CodigoHtmlExistenciasAlmacen = "";
-    CodigoHtmlExistenciasAlmacen += "<div class='input-group mb-3 float-right '>";
-    CodigoHtmlExistenciasAlmacen += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
-    CodigoHtmlExistenciasAlmacen += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
-    CodigoHtmlExistenciasAlmacen += "</div>";
-    CodigoHtmlExistenciasAlmacen += "<div class='table-responsive'>";
-    CodigoHtmlExistenciasAlmacen += "<table class='table-primary table table-bordered order-table'>";
-    CodigoHtmlExistenciasAlmacen += "<thead>";
-    CodigoHtmlExistenciasAlmacen += "<tr>";
-    CodigoHtmlExistenciasAlmacen += "<th>Tipo de Supervicion</th>";
-    CodigoHtmlExistenciasAlmacen += "<th>Nombre del Usuario</th>";
-    CodigoHtmlExistenciasAlmacen += "<th>Tienda</th>";
-    //CodigoHtmlExistenciasAlmacen += "<th>Artículo</th>";
-    //CodigoHtmlExistenciasAlmacen += "<th>Coste</th>";
-    CodigoHtmlExistenciasAlmacen += "<th>Opciones</th>";
-    CodigoHtmlExistenciasAlmacen += "</tr>";
-    CodigoHtmlExistenciasAlmacen += "</thead>";
-    CodigoHtmlExistenciasAlmacen += "<tbody>";
+function CrearTablaSuperviciones(Data) {
+    var CodigoHtmlTablaSuperviciones = "";
+    CodigoHtmlTablaSuperviciones += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaSuperviciones += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTablaSuperviciones += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaSuperviciones += "</div>";
+    CodigoHtmlTablaSuperviciones += "<div class='table-responsive'>";
+    CodigoHtmlTablaSuperviciones += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaSuperviciones += "<thead>";
+    CodigoHtmlTablaSuperviciones += "<tr>";
+    CodigoHtmlTablaSuperviciones += "<th>Tipo de Supervicion</th>";
+    CodigoHtmlTablaSuperviciones += "<th>Nombre del Usuario</th>";
+    CodigoHtmlTablaSuperviciones += "<th>Tienda</th>";
+    //CodigoHtmlTablaSuperviciones += "<th>Artículo</th>";
+    //CodigoHtmlTablaSuperviciones += "<th>Coste</th>";
+    CodigoHtmlTablaSuperviciones += "<th>Opciones</th>";
+    CodigoHtmlTablaSuperviciones += "</tr>";
+    CodigoHtmlTablaSuperviciones += "</thead>";
+    CodigoHtmlTablaSuperviciones += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlExistenciasAlmacen += "<tr>";
-        CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].TipoSupervicion + "</td>";
-        CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].nombreUsuario + "</td>";
-        CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].Tienda + "</td>";
-        //CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].NombreEmpresa + "</td>";
-        //CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].Coste + "</td>";
-        CodigoHtmlExistenciasAlmacen += "<td>";
-        CodigoHtmlExistenciasAlmacen += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlExistenciasAlmacen += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
-        CodigoHtmlExistenciasAlmacen += "</td>";
-        CodigoHtmlExistenciasAlmacen += "</tr>";
+        CodigoHtmlTablaSuperviciones += "<tr>";
+        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].TipoSupervicion + "</td>";
+        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].nombreUsuario + "</td>";
+        CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
+        //CodigoHtmlTablaSuperviciones += "<td>" + Data[i].NombreEmpresa + "</td>";
+        //CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Coste + "</td>";
+        CodigoHtmlTablaSuperviciones += "<td>";
+        CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaSuperviciones += "</td>";
+        CodigoHtmlTablaSuperviciones += "</tr>";
     }
-    CodigoHtmlExistenciasAlmacen += "</tbody>";
-    CodigoHtmlExistenciasAlmacen += "</table>";
-    document.getElementById("tablaSupervicion").innerHTML = CodigoHtmlExistenciasAlmacen;
+    CodigoHtmlTablaSuperviciones += "</tbody>";
+    CodigoHtmlTablaSuperviciones += "</table>";
+    document.getElementById("tablaSupervicion").innerHTML = CodigoHtmlTablaSuperviciones;
 }
-
-
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
     MostrarTiendas();
@@ -202,13 +147,13 @@ function GuardarSupervision() {
                     processData: false,
                     success: function (data) {
                         if (data == 0) {
-                            alert("Ocurrio un error");
+                            alert("Ocurrió un error");
                         }
                         else if (data == -1) {
                             alert("Ya existe la supervición");
                         }
                         else {
-                            alert("Se ejecuto correctamente");
+                            alert("Se ejecutó correctamente");
                             ConsultaSuperviciones();
                             document.getElementById("btnCancelar").click();
                         }
@@ -275,13 +220,13 @@ function EliminarSupervicion(id) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'Se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
                 ConsultaSuperviciones();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

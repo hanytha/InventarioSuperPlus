@@ -507,10 +507,10 @@ function GuardarUsuario() {
                     success: function (data) {
 
                         if (data == 0) {
-                            alert("Ocurrio un error");
+                            alert("Ocurrió un error");
                         }
                         else if (data == -1) {
-                            alert("Ya existe el proveedor");
+                            alert("Ya existe el Usuario");
                         }
                         else {
                             alert("Se ejecutó correctamente");
@@ -562,13 +562,13 @@ function EliminarUsuario(id) {
                 // alert("Se eliminó correctamente");
                 Swal.fire(
                     'Deleted!',
-                    'Se elimino correctamente.',
+                    'Se eliminó correctamente.',
                     'success'
                 )
                 //  confirmarEliminar();
                 ConsultaUsuarios();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

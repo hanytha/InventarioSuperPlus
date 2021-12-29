@@ -1,10 +1,8 @@
-﻿
-using Inventario.Models;
+﻿using Inventario.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace Inventario.Controllers
 {
     //Llamar al método de seguridad
@@ -97,7 +95,6 @@ namespace Inventario.Controllers
             }
             return Afectados;
         }
-
         public int EliminarSupervicion(long Id)
         {
             int nregistradosAfectados = 0;
@@ -247,17 +244,14 @@ namespace Inventario.Controllers
             return Encontrados;
         }
         //---------------Tabla de las tiendas---------------
-
         public JsonResult ConsultaArticulos(long IDTienda)
         {
             string id = "";
             string NoPedido = "";
             string Nombre = "";
-
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string IdSitio = "";
-
             var ConsultaArticulo = from Articulos in InvBD.Articulos
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
@@ -273,9 +267,6 @@ namespace Inventario.Controllers
                                        IdSitio = ExistenciaAlmacenG.IdSitio,
                                        FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
                                    };
-
-
-
             foreach (var art in ConsultaArticulo)
             {
                 id += art.IdExistencia + ",";
@@ -287,7 +278,6 @@ namespace Inventario.Controllers
                    {
                        fechaIngreso = p.FechaDeIngreso,
                        stockActual = p.ExitenciaActual,
-
                    });
                 if (consultaFecha.Count() > 0)
                 {
@@ -316,7 +306,6 @@ namespace Inventario.Controllers
             var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
-
         //Obtener las tiendas de la supervisión en SucursalesSupervisión.cshtml-------
         public JsonResult BDSupervisionTiendas()
         {
@@ -353,9 +342,7 @@ namespace Inventario.Controllers
             Sucursales.Longitud = new List<string>();
             Sucursales.HApertura = new List<string>();
             Sucursales.HCierre = new List<string>();
-
             Sucursales.Estatus = new List<int>();
-
             var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
             .Select(p => new
             {
@@ -456,10 +443,8 @@ namespace Inventario.Controllers
                 {
                     Sucursales.HCierre.Add("");
                 }
-
             }
         }
-
         //Consulta de la tabla de articulos x tienda
         //-----------Consulta los datos por ID del artículo pero en la tabla de existencias almacen G------------------
         public JsonResult ConsultaExistenciaAlmGJoinProveedor(long No, long Id)
@@ -479,13 +464,9 @@ namespace Inventario.Controllers
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
                                      IdProveedor = provedor.IdAreas,
                                      Proveedor = provedor.Nombre
-
                                  };
-
             return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
-
         }
-
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDTienda(long Id)
         {
@@ -497,7 +478,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult ConsultaSitio(long IdS)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
@@ -509,27 +489,12 @@ namespace Inventario.Controllers
                                 Articulo = ExistAlm.NombreEmpresa,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
-                                //Tienda = ExistAlm.TipoDeOperacion,
-
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
-
-                                //Correo = provedor.Correo,
-                                //Clabe = provedor.ClaveInterbancaria,
-                                //Telefono = provedor.ClaveInterbancaria,
-                                //RFC = provedor.RFC,
                                 Tienda = ExistAlm.IdSitio,
-
                             };
-
-
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
         }
-
-
-
-
         public JsonResult Consulta(long Id)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
@@ -541,24 +506,12 @@ namespace Inventario.Controllers
                                 Articulo = ExistAlm.NombreEmpresa,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
-                                //Tienda = ExistAlm.TipoDeOperacion,
-
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
-
-                                //Correo = provedor.Correo,
-                                //Clabe = provedor.ClaveInterbancaria,
-                                //Telefono = provedor.ClaveInterbancaria,
-                                //RFC = provedor.RFC,
                                 Tienda = ExistAlm.IdSitio,
-
                             };
-
-
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
         }
-
         //Consulta de proveedores en la tabla existenciaAlmacenGeneral
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
@@ -570,57 +523,11 @@ namespace Inventario.Controllers
                             {
                                 Articulo = Art.NombreEmpresa,
                                 IdArticulo = Art.IdExistenciaAlmacenG,
-                                //Tipo = Art.TipoDeOperacion,
-                                //Tienda = ExistAlm.TipoDeOperacion,
-
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
-                                //IdAreas = Art.IdAreas,
-                                //Correo = provedor.Correo,
-                                //Clabe = provedor.ClaveInterbancaria,
-                                //Telefono = provedor.ClaveInterbancaria,
-                                //RFC = provedor.RFC,
-                                //Tienda = Art.IdSitio,
-
                             };
-
-
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
         }
-
-
-        //Consulta de proveedores en la tabla de articulo
-        //public JsonResult ConsultaComJoinProveedor(long Id)
-        //{
-        //    var ExistAlmG = from Art in InvBD.Articulos
-        //                    join areas in InvBD.Areas
-        //                on Art.IdAreas equals areas.IdAreas
-        //                    where Art.IdAreas.Equals(Id)
-        //                    select new
-        //                    {
-        //                        Articulo = Art.NombreEmpresa,
-        //                        IdArticulo = Art.IdArticulos,
-        //                        //Tipo = Art.TipoDeOperacion,
-        //                        //Tienda = ExistAlm.TipoDeOperacion,
-
-        //                        IdProveedor = areas.IdAreas,
-        //                        Proveedor = areas.Nombre,
-        //                        //IdAreas = Art.IdAreas,
-        //                        //Correo = provedor.Correo,
-        //                        //Clabe = provedor.ClaveInterbancaria,
-        //                        //Telefono = provedor.ClaveInterbancaria,
-        //                        //RFC = provedor.RFC,
-        //                        //Tienda = Art.IdSitio,
-
-        //                    };
-
-
-        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-
-        //}
-
-
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
@@ -631,9 +538,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
         //Combo proveedores en la tabla articulos
         public JsonResult ConsultaIdPro(string IdPro)
         {
@@ -644,46 +548,8 @@ namespace Inventario.Controllers
                     p.IdArticulos,
                     p.Unidad
                 });
-
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
-        ////Combo proveedores en la tabla existencia almacen G
-        //public JsonResult ConsultaIdPro(string IdPro)
-        //{
-        //    var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro))
-        //        .Select(p => new
-        //        {
-        //            p.NombreEmpresa,
-        //            p.IdArticulos,
-
-        //        });
-
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-        //}
-
-
-        //public JsonResult ConsultaIdPro(long IdPro)
-        //{
-
-        //    var ExistAlmG = from ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-        //                    join Articulos in InvBD.Articulos
-        //                    on ExistenciaAlmacenG.IdArticulo equals Articulos.IdArticulos
-        //                    where Articulos.IdAreas.Equals(IdPro)
-        //                    select new
-        //                    {
-        //                        //IdArticulos = ExistenciaAlmacenG.IdArticulo,
-        //                        //NombreEmpresa = Articulos.NombreEmpresa,
-        //                        NombreEmpresa = Articulos.NombreEmpresa,
-        //                        NoPedido = ExistenciaAlmacenG.NoPedido,
-        //                        //nombres = Articulos.NombreEmpresa,
-        //                        //IdArticulo = ExistenciaAlmacenG.IdArticulo,
-        //                        Unidad = Articulos.Unidad,
-        //                        IdSitio = ExistenciaAlmacenG.IdSitio
-
-        //                    };
-        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
-        //}
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
@@ -710,17 +576,13 @@ namespace Inventario.Controllers
                 {
                     int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
                     && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
-
                      && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
                      && p.Articulo.Equals(DatosPedidoInterno.Articulo)
-
                      && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
                     if (nveces == 0)
                     {
                         PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
-
                         obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-
                         obj.IdProveedor = DatosPedidoInterno.IdProveedor;
                         obj.Proveedor = DatosPedidoInterno.Proveedor;
                         obj.Articulo = DatosPedidoInterno.Articulo;
@@ -740,9 +602,6 @@ namespace Inventario.Controllers
             }
             return Afectados;
         }
-
-
-
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
@@ -760,8 +619,6 @@ namespace Inventario.Controllers
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
-
-
         //Consulta el siguiente número de pedido por proveedor
         public JsonResult ConsultaNumPedidoProveedor(long ID)
         {
@@ -771,19 +628,14 @@ namespace Inventario.Controllers
                 {
                     Id = p.IdProveedor,
                     NumeroPProveedor = p.NumPedidoProveedor,
-
                 });
             foreach (var num in numero)
             {
                 int SumaNumero = (int)(num.NumeroPProveedor + 1);
                 numPedidoProve = SumaNumero + ",";
-
-
             }
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

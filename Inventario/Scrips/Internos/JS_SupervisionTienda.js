@@ -363,7 +363,7 @@ function GuardarPedidoInterno() {
                             }
 
                             else if (data == -1) {
-                                alert("Ya existe");
+                                alert("Ya existe este registro");
                             }
 
                         }
