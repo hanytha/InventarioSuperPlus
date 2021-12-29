@@ -41,7 +41,7 @@ function CrearTablaArticulos(Data) {
         CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
         CodigoHtmlTablaArticulos += "<td>";
         CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulos + ",this)' ><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaArticulos += "</td>";
         CodigoHtmlTablaArticulos += "</tr>";

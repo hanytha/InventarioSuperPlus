@@ -18,7 +18,7 @@ function CrearTablaUnidadDeMedida(Data) {
 
         CodigoHtmlTablaCompra += "<td>";
         CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdUnidadDeMedida + ")' data-toggle='modal' data-target='#ModalUnidad'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUnidadDeMedida(" + Data[i].IdUnidadDeMedida + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUnidadDeMedida(" + Data[i].IdUnidadDeMedida + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";
         CodigoHtmlTablaCompra += "</tr>";

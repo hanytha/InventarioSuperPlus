@@ -58,7 +58,7 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "<div class='row'>";
         CodHtml += "<button class='btn btn-primary' onclick='abrirModalConf(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ")' data-toggle='modal' data-target='#Configuracion'><i class='fas fa-edit'></i></button> ";
 
-        CodHtml += "<button class='btn btn-danger' onclick='EliminarConfiguracion(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarConfiguracion(" + data[i].IdConfiguracion + "," + data[i].IdConfiguracion + ",this)'><i class='far fa-trash-alt'></i></button>";
         CodHtml += "</div>";
         CodHtml += "</div>";
         CodHtml += "</div>";

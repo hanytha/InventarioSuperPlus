@@ -1,4 +1,5 @@
-﻿LlenarCMBPrin();
+﻿
+LlenarCMBPrin();
 LlenarCMSupervicion();
 LlenarCMSupervisor();
 CrearAcordeonTienda();
@@ -18,7 +19,7 @@ function AcordeonTienda(Data, CtrlAlmacen) {
         else {
             CodigoHTMLAreas += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
         }
-     
+
         CodigoHTMLAreas += "<div class='card-header' id='heading" + Data[i].IdTienda + "'>";
         CodigoHTMLAreas += "<h5 class='mb-0'>";
         CodigoHTMLAreas += "<a data-toggle='collapse' data-target='#collapse" + Data[i].IdTienda + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdTienda + "' class='collapsed'>";
@@ -31,7 +32,7 @@ function AcordeonTienda(Data, CtrlAlmacen) {
         //En el data-parent se modifica para que se de un solo clic y se oculten los demás
         CodigoHTMLAreas += "<div id='collapse" + Data[i].IdTienda + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
         CodigoHTMLAreas += "<div class='card-body'>";
-        CodigoHTMLAreas += "<div class='row'>"; 
+        CodigoHTMLAreas += "<div class='row'>";
 
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre de el Supervisor de Tienda: </strong>" + Data[i].NombreS + "</div>";
         CodigoHTMLAreas += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre de el lider de tienda: </strong>" + Data[i].LNombre + "</div>";
@@ -62,6 +63,7 @@ function AcordeonTienda(Data, CtrlAlmacen) {
         //  CodigoHTMLAreas += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
         CodigoHTMLAreas += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
         CodigoHTMLAreas += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdTienda + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHTMLAreas += "<button class='btn btn-danger' onclick='EliminarTienda(" + Data[i].IdTienda + ",this)' ><i class='far fa-trash-alt'></i></button>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
         CodigoHTMLAreas += "</div>";
@@ -95,7 +97,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDTiend', Data[0].IdTienda);
             document.getElementById("TxtNombre").value = Data[0].Nombre;
             document.getElementById("cmbSupervisor").value = Data[0].IdSupervisor;
-       
+
             //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
             document.getElementById("cmbEstado").value = Data[0].IdEstado;
             $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
@@ -122,7 +124,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtAux1").value = Data[0].A1Nombre;
             document.getElementById("TxtAux2").value = Data[0].A2Nombre;
             document.getElementById("TxtAux3").value = Data[0].A3Nombre;
-           
+
         });
     }
 }
@@ -204,7 +206,7 @@ function GuardarTienda() {
 
             var IdSupervisor = document.getElementById("cmbSupervisor").value;
             var TempSupervisor = document.getElementById("cmbSupervisor");
-            var NombreS = TempSupervisor.options[TempSupervisor.selectedIndex].text;  
+            var NombreS = TempSupervisor.options[TempSupervisor.selectedIndex].text;
 
             var IdEstado = document.getElementById("cmbEstado").value;
             var TempEdo = document.getElementById("cmbEstado");
@@ -224,7 +226,7 @@ function GuardarTienda() {
             var HCierre = document.getElementById("TxtHoraCierre").value;
             var IdSupervision = document.getElementById("cmbSupervision").value;
             var TempSuper = document.getElementById("cmbSupervision");
-            var Unombre = TempSuper.options[TempSuper.selectedIndex].text;  
+            var Unombre = TempSuper.options[TempSuper.selectedIndex].text;
             var LNombre = document.getElementById("TxtLider").value;
             var E1Nombre = document.getElementById("TxtEncargado1").value;
             var E2Nombre = document.getElementById("TxtEncargado2").value;
@@ -301,5 +303,22 @@ function CamposObligatorios() {
         }
     }
     return exito;
+}
+
+
+
+//"Elimina" el área cambia el Estatus
+function EliminarTienda(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/Tienda/EliminarTienda/?Id=" + id, function (DatoTienda) {
+            if (DatoTienda == 1) {
+                alert("Se elimino correctamente");
+                CrearAcordeonTienda();
+            } else {
+                alert("Ocurrio un error");
+            }
+        });
+    }
 }
 

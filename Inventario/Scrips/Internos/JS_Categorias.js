@@ -16,7 +16,7 @@ function CrearTablaCategorias(Data) {
 
         CodigoHtmlTablaCategoria  += "<td>";
         CodigoHtmlTablaCategoria += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarCategoria(" + Data[i].IdCategorias + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarCategoria(" + Data[i].IdCategorias + ",this)'><i class='far fa-trash-alt'></button>";
 
         CodigoHtmlTablaCategoria  += "</td>";
         CodigoHtmlTablaCategoria  += "</tr>";
