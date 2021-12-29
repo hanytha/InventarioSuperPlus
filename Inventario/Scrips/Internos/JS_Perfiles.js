@@ -1,23 +1,38 @@
-﻿MostrarPerfiles();
+﻿BloquearCTRL();
+MostrarPerfiles();
 function MostrarPerfiles() {
-    $.get("/Configuracion/BDPerfiles", function (InfPerfiles) {
-        CrearTablaPerfiles(InfPerfiles);
-    });
+    $.get("/Configuracion/BDPerfiles", function (Data) {
+        CrearTablaPerfiles(Data);
+    }
+    );
 }
-//Inserta la tabla de las páginas
-function CrearTablaPerfiles(InfPerfiles) {
+function CrearTablaPerfiles(Data) {
     var CodigoHtmlTablaPerfiles = "";
-    CodigoHtmlTablaPerfiles += "<table id='tablas' class='table'>";
-    CodigoHtmlTablaPerfiles += "<thead><tr><th>Perfil</th><th>Nivel</th><th>Permisos</th><th>Opciones</th></tr></thead>";
+    CodigoHtmlTablaPerfiles += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaPerfiles += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTablaPerfiles += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaPerfiles += "</div>";
+    CodigoHtmlTablaPerfiles += "<div class='table-responsive'>";
+    CodigoHtmlTablaPerfiles += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaPerfiles += "<thead>";
+    CodigoHtmlTablaPerfiles += "<tr>";
+    CodigoHtmlTablaPerfiles += "<th>Perfil</th>";
+    CodigoHtmlTablaPerfiles += "<th>Nivel</th>";
+    //CodigoHtmlTablaPerfiles += "<th>Permisos</th>";
+    CodigoHtmlTablaPerfiles += "<th>Comentarios</th>";
+    CodigoHtmlTablaPerfiles += "<th>Opciones</th>";
+    CodigoHtmlTablaPerfiles += "</tr>";
+    CodigoHtmlTablaPerfiles += "</thead>";
     CodigoHtmlTablaPerfiles += "<tbody>";
-    for (var i = 0; i < InfPerfiles.length; i++) {
+    for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaPerfiles += "<tr>";
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Nombre + "</td>";
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Nivel + "</td>"
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Comentarios + "</td> ";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Nivel + "</td>";
+        //CodigoHtmlTablaPerfiles += "<td>" + Data[i].Permisos + "</td>";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Comentarios + "</td>";
         CodigoHtmlTablaPerfiles += "<td>";
-        CodigoHtmlTablaPerfiles += "<button id='BtnAbrirMPag' class='btn btn-primary' onclick='AModalPerfil(" + InfPerfiles[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Perfil' ><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPerfiles += "<button class='btn btn-danger' onclick='EliminarPerfil(" + InfPerfiles[i].ID + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPerfiles += "<button class='btn btn-primary' onclick='AModalPerfil(" + Data[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Perfil'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaPerfiles += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].ID + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaPerfiles += "</td>";
         CodigoHtmlTablaPerfiles += "</tr>";
     }
@@ -25,9 +40,6 @@ function CrearTablaPerfiles(InfPerfiles) {
     CodigoHtmlTablaPerfiles += "</table>";
     document.getElementById("Paginas_Perfiles").innerHTML = CodigoHtmlTablaPerfiles;
 }
-
-BloquearCTRL();
-
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -62,7 +74,6 @@ function AModalPerfil(ID) {
                     }
                 }
             }
-            //---
             document.getElementById("TxtComentarios").value = DatosPerfil[0].Comentarios;
         });
     }
@@ -133,9 +144,14 @@ function ObligatoriosPerfil() {
 //"Elimina" el área cambia el Estatus
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registo?") == 1) {
-        $.get("/Configuracion/EliminarPerfil/?IdPerfil=" + id, function (Pagina) {
-            if (Pagina == 1) {
-                alert("Se eliminó correctamente");
+        $.get("/Configuracion/EliminarPerfil/?IdPerfil=" + id, function (Perfil) {
+            if (Perfil == 1) {
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se eliminó correctamente.',
+                    'success'
+                )
                 MostrarPerfiles();
             } else {
                 alert("Ocurrió un error");
@@ -143,7 +159,7 @@ function EliminarPerfil(id) {
         });
     }
 }
-//****************************************************************************************************************************************************************************************************
+//---
 function Limpiar() {
     var controles = document.getElementsByClassName("limpiar");
     var ncontroles = controles.length;

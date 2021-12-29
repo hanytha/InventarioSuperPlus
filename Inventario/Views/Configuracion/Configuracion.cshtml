@@ -5,72 +5,157 @@
 <h2 class="form-control-label" style="font-size: 20px;">
     CONFIGURACIÓN
 </h2>
-
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
+@*<link rel="stylesheet" href="estilos.css">*@
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">Titulo</p>
+                            <span class="categoria">Categoría</span>
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+        var LightTableFilter = (function (Arr) {
+            var _input;
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+    })(document);
+</script>
 <div class="accordion" id="accordionConfiguracion">
     <!--Div de las páginas-->
     <div class="card m-b-0">
-       
-            <h5 class="mb-0">
-                <a data-toggle="collapse" data-target="#collapsePaginas" aria-expanded="true" aria-controls="collapseOne">
-                    <em class="m-r-5 fas fa-file-code" aria-hidden="true"></em>
-                    <span>Páginas</span>
-                </a>
-            </h5>
+
+        <h5 class="mb-0">
+            <a data-toggle="collapse" data-target="#collapsePaginas" aria-expanded="true" aria-controls="collapseOne">
+                <em class="m-r-5 fas fa-file-code" aria-hidden="true"></em>
+                <span>Páginas</span>
+            </a>
+        </h5>
         <div id="collapsePaginas" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionConfiguracion">
             <div class="card-body">
                 <!--Botón modal páginas-->
                 <button onclick="AModalPaginas(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Pagina">Agregar</button>
             </div>
-            <div id="Paginas_System" class="card-body">
+            <div id="Paginas" class="card-body">
                 <!--Inserta tabla de las Páginas-->
                 No hay ninguna pagina dada de alta en el sistema.
             </div>
         </div>
     </div>
     <div class="card m-b-0 border-top">
-       
-            <h5 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <i class="fas fa-users list__img" aria-hidden="true"></i>
-                    <span>Perfiles</span>
-                </a>
-            </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
-            <div class="card-body">
-                <!--Boton modal páginas-->
-                <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
-            </div>
-            <div id="Paginas_Perfiles" class="card-body">
-                <!--Inserta tabla de las Páginas-->
-                No hay ningun perfil registrado en la plataforma.
-            </div>
-        </div>
-  
-    <div class="card m-b-0 border-top">
-       
-            <h5 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <i class="m-r-5 fas fa-cogs" aria-hidden="true"></i>
-                    <span>Configuración</span>
-                </a>
-            </h5>
-        </div>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
-            <div class="card-body">
-                <!--Boton modal páginas-->
-                <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
-            </div>
-            <div id="Paginas_Configuracion" class="card-body">
-                <!--Inserta tabla de las Páginas-->
-                Configuración general del sistema.
-            </div>
 
+        <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fas fa-users list__img" aria-hidden="true"></i>
+                <span>Perfiles</span>
+            </a>
+        </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionConfiguracion">
+        <div class="card-body">
+            <!--Boton modal páginas-->
+            <button onclick="AModalPerfil(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Perfil">Agregar</button>
         </div>
-   
+        <div id="Paginas_Perfiles" class="card-body">
+            <!--Inserta tabla de las Páginas-->
+            No hay ningun perfil registrado en la plataforma.
+        </div>
+    </div>
+
+    <div class="card m-b-0 border-top">
+
+        <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <i class="m-r-5 fas fa-cogs" aria-hidden="true"></i>
+                <span>Configuración</span>
+            </a>
+        </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionConfiguracion">
+        <div class="card-body">
+            <!--Boton modal páginas-->
+            <button onclick="AModalConfiguracion(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSystem_Empresa">Agregar</button>
+        </div>
+        <div id="Paginas_Configuracion" class="card-body">
+            <!--Inserta tabla de las Páginas-->
+            Configuración general del sistema.
+        </div>
+
+    </div>
+
 </div>
-<!--**************************************************************************************************************************-->
-<!--Pagínas-->
+<!------------------------------------------------------------------>
+<!--Páginas-->
 <div id="ModalSystem_Pagina" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -86,13 +171,13 @@
                 <div class="panel-heading ">
 
                     @*<div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtIDPagina">ID Página<span class="required">*</span></label>
-                                <input type="text" id="TxtIDPagina" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIDPagina">ID Página<span class="required">*</span></label>
+                                    <input type="text" id="TxtIDPagina" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
 
                     <div class="row">
                         <div class="col-md-6">
@@ -143,7 +228,7 @@
         </div>
     </div>
 </div>
-<!--**************************************************************************************************************************-->
+<!------------------------------------------------------------------------------------------------------------>
 <!--Perfiles-->
 <div id="ModalSystem_Perfil" class="modal" role="dialog">
     <div class="modal-dialog">
@@ -161,13 +246,13 @@
 
 
                     @*<div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtIDPerfil">ID<span class="required">*</span></label>
-                                <input type="text" id="TxtIDPerfil" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIDPerfil">ID<span class="required">*</span></label>
+                                    <input type="text" id="TxtIDPerfil" class="form-control  limpiar bloquear" maxlength="100" placeholder="Id">
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
 
 
                     <div class="row">
@@ -184,7 +269,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row ">
                         <div class="col-md-12">
                             <div class="form-group">
