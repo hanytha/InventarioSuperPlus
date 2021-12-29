@@ -3,109 +3,58 @@ LlenarCMBPrin();
 
 var imagen64;
 imagen64 = getBase64Image(document.getElementById("PBFoto"));
-//CrearAcordeonUsuarios();
 
-////Crea el acordeón e inserta (los registros de la base de datos)
-//function CrearAcordeonUsuarios() {
+//ConsultaUsuarios();
+//function ConsultaUsuarios() {
 //    $.get("/Usuario/ConsultaUsuarios", function (Data) {
-//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-//        AcordeonUsuarios(Data, document.getElementById("accordion"));
-//    });
-//    imagen64 = getBase64Image(document.getElementById("PBFoto"));
-//}
-//function AcordeonUsuarios(Data, CtrlBonis) {
-//    var CodigoHTMLUsuarios = "";
-//    for (var i = 0; i < Data.length; i++) {
-//        if (i < 1) {
-//            CodigoHTMLUsuarios += "<div class='card m-b-0'>";
-//        }
-//        else {
-//            CodigoHTMLUsuarios += "<div class='card m-b-0 border-top'>";
-//        }
-//        CodigoHTMLUsuarios += "<div class='card-header' id='heading" + Data[i].IdUsuarios + "'>";
-//        CodigoHTMLUsuarios += "<h5 class='mb-0'>";
-//        CodigoHTMLUsuarios += "<a  data-toggle='collapse' data-target='#collapse" + Data[i].IdUsuarios + "' aria-expanded='false' aria-controls='collapse" + Data[i].IdUsuarios + "' class='collapsed'>";
-//        //CodigoHTMLUsuarios += "<i class='m-r-5 mdi mdi-store' aria-hidden='true'></i>";
-//        CodigoHTMLUsuarios += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-//        CodigoHTMLUsuarios += "<span >" + Data[i].CURP + "</span>";
-//        CodigoHTMLUsuarios += "</a>";
-//        CodigoHTMLUsuarios += "</h5>";
-//        //En el data-parent se modifica para que se de un solo clic y se oculten los demás
-//        CodigoHTMLUsuarios += "<div id='collapse" + Data[i].IdUsuarios + "' class='collapse' aria-labelledby='headingOne' data-parent='#collapse' style=''>";
-//        CodigoHTMLUsuarios += "<div class='card-body'>";
-//        CodigoHTMLUsuarios += "<div class='row'>";
-//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Nombre: </strong>" + Data[i].Nombre + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Paterno: </strong>" + Data[i].ApellidosP + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Apellidos Materno: </strong>" + Data[i].ApellidosM + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Fecha De Nacimiento: </strong>" + Data[i].FechaDeNacimiento + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>RFC: </strong>" + Data[i].RFC + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Estado: </strong>" + Data[i].Estado + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + Data[i].Municipio + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + Data[i].Localidad + "</div>";
-
-//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Area: </strong>" + Data[i].NArea + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Sub Area: </strong>" + Data[i].NSArea + "</div>";
-
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>NoSS: </strong>" + Data[i].NoSS + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Correo: </strong>" + Data[i].Correo + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-5 col-sm-6 col-xs-6'><strong>Telefono: </strong>" + Data[i].Telefono + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Perfil </strong>" + Data[i].LvlPerfil + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Usuario: </strong>" + Data[i].Usuario + "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>FechaIngreso: </strong>" + Data[i].FechaIngreso + "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-
-//        //  CodigoHTMLUsuarios += "<div class='col-md-7 col-sm-6 col-xs-6'><strong>Dirección: </strong>" + DatosProveedor[i].Direccion + "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "</div>";
-//        CodigoHTMLUsuarios += "</div>";
+//        CrearTablaUsuarios(Data);
 //    }
-//    CtrlBonis.innerHTML = CodigoHTMLUsuarios;
-//}
-
-
-//CrearAcordeonUsuarios();
-
-////Crea el acordeón e inserta (los registros de la base de datos)
-//function CrearAcordeonUsuarios() {
-//    $.get("/Usuario/ConsultaUsuarios", function (Data) {
-//        //Accordeon(DatosProveedor, document.getElementById("accordion"));
-//        AcordeonUsuarios(Data);
+//    );
+//    //Cargar las opciones de asignación en el bombo
+//    $.get("/Usuario/Asignasion", function (DatosAsignasion) {
+//        if (DatosAsignasion.length !== 0) {
+//            llenarCombo(DatosAsignasion, document.getElementById("cmbAsignacion"));
+//        } else {
+//            alert("No hay datos en la tabla Asignasión.");
+//        }
 //    });
+
+//    //Cargar el combo bloqueado
+//    $.get("/Usuario/Asignasion", function (DatosAsignasion) {
+//        if (DatosAsignasion.length !== 0) {
+//            llenarCombo(DatosAsignasion, document.getElementById("cmbAsignacionBloqueado"));
+//        } else {
+//            alert("No hay datos en la tabla Asignasión.");
+//        }
+//    });
+
 //}
 
-//function AcordeonUsuarios(Data) {
-//    var CodigoHTMLUsuarios = "";
-//    CodigoHTMLUsuarios += "<table id='tablas' class='table table table-sm' >";
-//    CodigoHTMLUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Acción</thead>";
-//    CodigoHTMLUsuarios += "<tbody>";
+
+//function CrearTablaUsuarios(Data) {
+//    var CodigoHtmlTablaUsuarios = "";
+//    CodigoHtmlTablaUsuarios += "<table id='tablas' class='table table table-sm' >";
+//    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Teléfono</th><th>Acción</thead>";
+//    CodigoHtmlTablaUsuarios += "<tbody>";
 //    for (var i = 0; i < Data.length; i++) {
-//        CodigoHTMLUsuarios += "<tr>";
-//        CodigoHTMLUsuarios += "<td>" + Data[i].CURP + "</td>";
-//        CodigoHTMLUsuarios += "<td>" + Data[i].Nombre + "</td>";
-//        CodigoHTMLUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
-//        CodigoHTMLUsuarios += "<td>";
+//        CodigoHtmlTablaUsuarios += "<tr>";
+//        CodigoHtmlTablaUsuarios += "<td>" + Data[i].CURP + "</td>";
+//        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
+//        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
+//        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
+//        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
 
-//        CodigoHTMLUsuarios += "<div class='col-md-12 col-sm-12 col-xs-12 align-self-end'>";
-//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-//        CodigoHTMLUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
-//        CodigoHTMLUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
-//        CodigoHTMLUsuarios += "</td>";
-//        CodigoHTMLUsuarios += "</tr>";
+//        CodigoHtmlTablaUsuarios += "<td>";
+//        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+//        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
+//        CodigoHtmlTablaUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+//        CodigoHtmlTablaUsuarios += "</td>";
+//        CodigoHtmlTablaUsuarios += "</tr>";
 //    }
-
-//    CodigoHTMLUsuarios += "</tbody>";
-//    CodigoHTMLUsuarios += "</table>";
-//    document.getElementById("tablaPerfiles").innerHTML = CodigoHTMLUsuarios;
+//    CodigoHtmlTablaUsuarios += "</tbody>";
+//    CodigoHtmlTablaUsuarios += "</table>";
+//    document.getElementById("tablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
 //}
-
 
 ConsultaUsuarios();
 function ConsultaUsuarios() {
@@ -130,14 +79,25 @@ function ConsultaUsuarios() {
             alert("No hay datos en la tabla Asignasión.");
         }
     });
-
 }
-
-
 function CrearTablaUsuarios(Data) {
     var CodigoHtmlTablaUsuarios = "";
-    CodigoHtmlTablaUsuarios += "<table id='tablas' class='table table table-sm' >";
-    CodigoHtmlTablaUsuarios += " <thead class='thead-dark'><tr><th>CURP</th><th>Nombre</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Teléfono</th><th>Acción</thead>";
+    CodigoHtmlTablaUsuarios += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaUsuarios += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTablaUsuarios += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaUsuarios += "</div>";
+    CodigoHtmlTablaUsuarios += "<div class='table-responsive'>";
+    CodigoHtmlTablaUsuarios += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaUsuarios += "<thead>";
+    CodigoHtmlTablaUsuarios += "<tr>";
+    CodigoHtmlTablaUsuarios += "<th>CURP</th>";
+    CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
+    CodigoHtmlTablaUsuarios += "<th>ApellidosP</th>";
+    CodigoHtmlTablaUsuarios += "<th>ApellidosM</th>";
+    CodigoHtmlTablaUsuarios += "<th>Telefono</th>";
+    CodigoHtmlTablaUsuarios += "<th>Opciones</th>";
+    CodigoHtmlTablaUsuarios += "</tr>";
+    CodigoHtmlTablaUsuarios += "</thead>";
     CodigoHtmlTablaUsuarios += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaUsuarios += "<tr>";
@@ -146,11 +106,10 @@ function CrearTablaUsuarios(Data) {
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
-
         CodigoHtmlTablaUsuarios += "<td>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)'><i class='fas fa-eraser'></i></button>";
-        CodigoHtmlTablaUsuarios += "<button class='btn btn-success' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
+        //CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModalBloqueado(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#ModalBloqueado'><i class='fas fa-window-restore list__img'></i></button> ";
         CodigoHtmlTablaUsuarios += "</td>";
         CodigoHtmlTablaUsuarios += "</tr>";
     }
@@ -158,8 +117,6 @@ function CrearTablaUsuarios(Data) {
     CodigoHtmlTablaUsuarios += "</table>";
     document.getElementById("tablaUsuarios").innerHTML = CodigoHtmlTablaUsuarios;
 }
-
-
 BloquearCTRL();
 
 function BloquearCTRL() {
@@ -214,13 +171,13 @@ Asigna.addEventListener("change", function () {
 
 //(SITIO)Opciones según la selección
 function Sitio(IDAsignacion, IDSitio) {
-       //Mostrar la opcion oficina al seleccionar la opcion 3(Oficina)
+    //Mostrar la opcion oficina al seleccionar la opcion 3(Oficina)
     if (IDAsignacion == 3) {
         let DatosOficina = [{ "ID": 1, "Nombre": "Oficina" }];
         llenarCombo(DatosOficina, document.getElementById("cmbSitio"));
         document.getElementById("cmbSitio").value = IDSitio;
     }
-       //Mostrar todas las superviciones registradas al seleccionar la opcion 2(Supervisión)
+    //Mostrar todas las superviciones registradas al seleccionar la opcion 2(Supervisión)
     else if (IDAsignacion == 2) {
         $.get("/GLOBAL/BDSupervision", function (DatosSupervisiones) {
             if (DatosSupervisiones.length !== 0) {
@@ -232,7 +189,7 @@ function Sitio(IDAsignacion, IDSitio) {
             }
         });
     }
-        //Mostrar todas las tiendas registradas al seleccionar la opcion 1(Tienda)
+    //Mostrar todas las tiendas registradas al seleccionar la opcion 1(Tienda)
     else if (IDAsignacion == 1) {
         $.get("/GLOBAL/BDTiendaSuper", function (DatosTiendas) {
             if (DatosTiendas.length !== 0) {
@@ -406,7 +363,7 @@ IDM.addEventListener("change", function () {
 
 
 
-//Guarda los cambios y altas de los proveedores
+//Guarda los cambios y altas de los usuarios
 function GuardarUsuario() {
 
     var pas1 = document.getElementById("Txtpassword").value;

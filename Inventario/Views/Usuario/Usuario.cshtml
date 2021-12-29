@@ -56,7 +56,42 @@
         </div>
     </div>
 </div>
-
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+        var LightTableFilter = (function (Arr) {
+            var _input;
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+    })(document);
+</script>
 <!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
@@ -274,7 +309,7 @@
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-primary " onclick=" GuardarUsuario()">Guardar</button>
                             <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </fieldset>
 
@@ -297,9 +332,10 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            INFORMACIÓN GENERAL DE LOS USUARIOS
+                            INFOMACIÓN GENERAL DE LOS USUARIOS
                         </label>
                     </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
@@ -474,7 +510,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
                 @*<div class="modal-footer">
@@ -505,11 +540,9 @@
 <!--<script src="~/Scrips/js.cookie.js"></script>--> <!--Recorrer los pasos del modal-->
 <!--Scripts de la tarjeta y el botón-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
-
-
-<!--sweetalert2-->
+<script src="~/Scrips/General/JS_BotonesUsuarios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-@*<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>*@
+>
 
 
 

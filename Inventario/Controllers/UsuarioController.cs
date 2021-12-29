@@ -217,6 +217,7 @@ namespace Inventario.Controllers
                     obj.Nombre = DatosUsuarios.Nombre;
                     obj.ApellidosP = DatosUsuarios.ApellidosP;
                     obj.ApellidosM = DatosUsuarios.ApellidosM;
+                    obj.FechaDeNacimiento = DatosUsuarios.FechaDeNacimiento;
                     obj.Password = DatosUsuarios.Password;
                     obj.IdArea = DatosUsuarios.IdArea;
                     obj.IdSubArea = DatosUsuarios.IdSubArea;

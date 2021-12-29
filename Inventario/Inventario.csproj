@@ -107,6 +107,7 @@
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\General\jquery.dataTables.min.js" />
+    <Content Include="Scrips\General\JS_BotonesUsuarios.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
