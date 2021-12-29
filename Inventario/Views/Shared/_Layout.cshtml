@@ -420,9 +420,10 @@
                             <img src="~/Assets/Login/bg4.jpg" alt="Fondo" class="CardPerfil_Header_Fondo"/>
                             @{<img src=@Accesos.Foto class="CardPerfil_Header_FPerfil" alt="Foto perfil" />}
                         </header>
-
                     </article>
+
                     <section class="CardBody">
+                        <div class="container">
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <strong>Nombre:</strong>
@@ -430,9 +431,14 @@
                                 <strong>Usuario:</strong>
                                 @{<p class="CardBody_Text" id="UsuarioUModal">@Accesos.Usuario<span class="CardBody_Text_Claro"><br></span></p>}
                                 <strong>Perfil:</strong>
-                                @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br></span></p>}
+                                @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br></span></p>}  
+                               
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
                                 <strong>Área:</strong>
-                                @{<p class="CardBody_Text" id="AreaUModal">@Accesos.NArea<span class="CardBody_Text_Claro"><br></span></p>} 
+                                @{<p class="CardBody_Text" id="AreaUModal">@Accesos.NArea<span class="CardBody_Text_Claro"></span></p>}     
+                                  <strong>Subárea</strong>
+                                  @{<p class="CardBody_Text" id="SubareaUModal">@Accesos.NSArea<span class="CardBody_Text_Claro"></span></p>}
                                   <strong>Asignación:</strong>
                                 @{<p class="CardBody_Text" id="AsignacionUModal">@Accesos.Asignacion<span class="CardBody_Text_Claro"><br></span></p>}
 
@@ -441,6 +447,7 @@
                                     @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
                                 </div>*@
                         </div>
+                            </div>
                     </section>
                 </div>
             </div>
