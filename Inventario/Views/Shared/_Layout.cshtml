@@ -427,8 +427,15 @@
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <strong>Nombre:</strong>
                                 @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br></span></p>}
-                                <strong>Puesto:</strong>
+                                <strong>Usuario:</strong>
+                                @{<p class="CardBody_Text" id="UsuarioUModal">@Accesos.Usuario<span class="CardBody_Text_Claro"><br></span></p>}
+                                <strong>Perfil:</strong>
                                 @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br></span></p>}
+                                <strong>Área:</strong>
+                                @{<p class="CardBody_Text" id="AreaUModal">@Accesos.NArea<span class="CardBody_Text_Claro"><br></span></p>} 
+                                  <strong>Asignación:</strong>
+                                @{<p class="CardBody_Text" id="AsignacionUModal">@Accesos.Asignacion<span class="CardBody_Text_Claro"><br></span></p>}
+
                             </div>
                             @*<div class="col-md-6 col-sm-4 col-xs-4">
                                     @{<p class="CardBody_Text" id="SitioModal">@Accesos.Sitio</p><p><span id="IDAsignacionModal" class="text-light">@Accesos.IDAsignacion</span><span id="AsignacionModal" class="CardBody_Text_Claro">@Accesos.Asignacion</span></p>}
