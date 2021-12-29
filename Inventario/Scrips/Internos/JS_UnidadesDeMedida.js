@@ -9,8 +9,14 @@ function ConsultaUnidadDeMedida() {
 }
 function CrearTablaUnidadDeMedida(Data) {
     var CodigoHtmlTablaCompra = "";
-    CodigoHtmlTablaCompra += "<table id='tablas' class='table table table-sm'>";
-    CodigoHtmlTablaCompra += "<thead class='thead-dark'><tr><th>Unidad de Medida</th><th>Acción</thead>";
+    CodigoHtmlTablaCompra += "<div class='table-responsive'>";
+    CodigoHtmlTablaCompra += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaCompra += "<thead>";
+    CodigoHtmlTablaCompra += "<tr>";
+    CodigoHtmlTablaCompra += "<th>Unidad de Medida</th>";
+    CodigoHtmlTablaCompra += "<th>Acción</th>";
+    CodigoHtmlTablaCompra += "</tr>";
+    CodigoHtmlTablaCompra += "</thead>";
     CodigoHtmlTablaCompra += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCompra += "<tr>";

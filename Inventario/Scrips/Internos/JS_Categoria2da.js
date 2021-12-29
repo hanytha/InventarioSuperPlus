@@ -7,9 +7,15 @@ function ConsultaCategorias() {
 }
 function CrearTablaCategorias(Data) {
     var CodigoHtmlTablaCategoria = "";
-    CodigoHtmlTablaCategoria  += "<table id='tablas' class='table table table-sm'>";
-    CodigoHtmlTablaCategoria += "<thead class='thead-dark'><tr><th>Clasificación</th><th>Acción</thead>";
-    CodigoHtmlTablaCategoria  += "<tbody>";
+    CodigoHtmlTablaCategoria += "<div class='table-responsive'>";
+    CodigoHtmlTablaCategoria += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaCategoria += "<thead>";
+    CodigoHtmlTablaCategoria += "<tr>";
+    CodigoHtmlTablaCategoria += "<th>Clasificación</th>";
+    CodigoHtmlTablaCategoria += "<th>Acción</th>";
+    CodigoHtmlTablaCategoria += "</tr>";
+    CodigoHtmlTablaCategoria += "</thead>";
+    CodigoHtmlTablaCategoria += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaCategoria  += "<tr>";
         CodigoHtmlTablaCategoria  += "<td>" + Data[i].Tipo + "</td>";
