@@ -3,6 +3,7 @@ ConsultaCompras();
 LlenarCMBImpuesto();
 LlenarCMBArticulo();
 LlenarCMBUnidades();
+LlenarCMBProveedor();
 
 function ConsultaCompras() {
     $.get("/Compra/ConsultasCompras", function (Data) {
@@ -222,6 +223,14 @@ function LlenarCMBArticulo() {
 }
 
 
+
+function LlenarCMBProveedor() {
+    $.get("/GLOBAL/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+}
+
+
 function LlenarCMBUnidades() {
     $.get("/GLOBAL/BDUnidadesMedida", function (data) {
         llenarCombo(data, document.getElementById("cmbUnidad"));
@@ -240,25 +249,27 @@ function llenarCombo(data, control) {
 }
 
 
-//------------------Crea el combobox de proveedores por id de artículo--------------------------
-function LlenarCMBProveedores(id) {
-    $.get("/Compra/ConsultaProveedorxArticulo/?IdPro=" + id, function (data) {
-        llenarComboProveedor(data, document.getElementById("cmbProveedor"));
-    });
-}
-//----------------funcion para llenar el select de proveedores deacuerdo al artículo------------
-function llenarComboProveedor(data, control) {
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
-
-    let proveedor = data.proveedor;
-    let Arrayproveedor= proveedor.split('#');
 
 
-    for (var i = 0; i < Arrayproveedor.length; i++) {
-        contenido += "<option value='" + Arrayproveedor[i] + "'>" + Arrayproveedor[i] + "</option>";
-    }
-    control.innerHTML = contenido;
-}
+////------------------Crea el combobox de proveedores por id de artículo--------------------------
+//function LlenarCMBProveedores(id) {
+//    $.get("/Compra/ConsultaProveedorxArticulo/?IdPro=" + id, function (data) {
+//        llenarComboProveedor(data, document.getElementById("cmbProveedor"));
+//    });
+//}
+////----------------funcion para llenar el select de proveedores deacuerdo al artículo------------
+//function llenarComboProveedor(data, control) {
+//    var contenido = "";
+//    contenido += "<option value='0'>--Seleccione--</option>";
+
+//    let proveedor = data.proveedor;
+//    let Arrayproveedor= proveedor.split('#');
+
+
+//    for (var i = 0; i < Arrayproveedor.length; i++) {
+//        contenido += "<option value='" + Arrayproveedor[i] + "'>" + Arrayproveedor[i] + "</option>";
+//    }
+//    control.innerHTML = contenido;
+//}
 
 

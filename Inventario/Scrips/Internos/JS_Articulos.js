@@ -33,7 +33,6 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "</thead>";
     CodigoHtmlTablaArticulos += "<tbody>";
 
-
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaArticulos += "<tr>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";

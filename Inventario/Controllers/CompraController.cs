@@ -151,42 +151,42 @@ namespace Inventario.Controllers
 
 
    //**************Consulta los provedores por ID de artículo********************************
-        public JsonResult ConsultaProveedorxArticulo(long IdPro)
-        {
-            string proveedor = "";
-            var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    Id = p.Proveedor,
-                });
-                foreach (var num in proveedores)
-                {
+        //public JsonResult ConsultaProveedorxArticulo(long IdPro)
+        //{
+        //    string proveedor = "";
+        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            Id = p.Proveedor,
+        //        });
+        //        foreach (var num in proveedores)
+        //        {
 
-                proveedor += num.Id + ",";
-                }
+        //        proveedor += num.Id + ",";
+        //        }
 
-            var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-            return Json(provedores, JsonRequestBehavior.AllowGet);
-        }
-        //*********************************************************************************************
-        public JsonResult ConsultaProveedorxArti(long IdPro)
-        {
-            string proveedor = "";
-            var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    Id = p.Proveedor,
-                });
-            foreach (var num in proveedores)
-            {
+        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
+        //    return Json(provedores, JsonRequestBehavior.AllowGet);
+        //}
+        ////*********************************************************************************************
+        //public JsonResult ConsultaProveedorxArti(long IdPro)
+        //{
+        //    string proveedor = "";
+        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            Id = p.Proveedor,
+        //        });
+        //    foreach (var num in proveedores)
+        //    {
 
-                proveedor += num.Id + ",";
+        //        proveedor += num.Id + ",";
 
-            }
+        //    }
 
-            var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-            return Json(provedores, JsonRequestBehavior.AllowGet);
-        }
+        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
+        //    return Json(provedores, JsonRequestBehavior.AllowGet);
+        //}
         //*********************************************************************************************
     }
 
