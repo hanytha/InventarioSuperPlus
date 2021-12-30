@@ -57,52 +57,6 @@
     </div>
 </div>
 <!--Termina tarjeta-->
-<!-- Botón del modal-->
-<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<script type="text/javascript">
-    (function (document) {
-        'use strict';
-
-        var LightTableFilter = (function (Arr) {
-
-            var _input;
-
-            function _onInputEvent(e) {
-                _input = e.target;
-                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                Arr.forEach.call(tables, function (table) {
-                    Arr.forEach.call(table.tBodies, function (tbody) {
-                        Arr.forEach.call(tbody.rows, _filter);
-                    });
-                });
-            }
-
-            function _filter(row) {
-                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-            }
-
-            return {
-                init: function () {
-                    var inputs = document.getElementsByClassName('light-table-filter');
-                    Arr.forEach.call(inputs, function (input) {
-                        input.oninput = _onInputEvent;
-                    });
-                }
-            };
-        })(Array.prototype);
-
-        document.addEventListener('readystatechange', function () {
-            if (document.readyState === 'complete') {
-                LightTableFilter.init();
-            }
-        });
-
-    })(document);
-</script>
 <!-------------------------------------------Id de la tabla para crearse desde la funcón script---------------------------------->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
@@ -233,3 +187,4 @@
 <script src="~/Scrips/Internos/JS_PedidosInt.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/General/JS_Buscar.js"></script>
