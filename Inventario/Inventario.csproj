@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imagenes\cuatro.png" />
+    <Content Include="Assets\Imagenes\edit.png" />
     <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Assets\Imagenes\logotipo.png" />
     <Content Include="Assets\Imagenes\mision.png" />
