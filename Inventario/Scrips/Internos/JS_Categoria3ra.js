@@ -1,27 +1,44 @@
-﻿ConsultaCategorias();
-function ConsultaCategorias() {
+﻿
+//**********************************Crea la liste de categorias y unidades de media*******************************************
+
+ListaCategorias();
+function ListaCategorias() {
     $.get("/Categoria/ConsultaCategorias", function (Data) {
-        CrearTablaCategorias(Data);
+        CrearListaCategorias(Data);
     }
     );
 }
-function CrearTablaCategorias(Data) {
+function CrearListaCategorias(Data) {
     var CodigoHtmlTablaCategoria = "";
-    CodigoHtmlTablaCategoria += "<div class='table-responsive'>";
-    CodigoHtmlTablaCategoria += "<table class='table-primary table table-bordered order-table'>";
-    CodigoHtmlTablaCategoria += "<thead>";
-    CodigoHtmlTablaCategoria += "<tr>";
-    CodigoHtmlTablaCategoria += "<th>Clasificación</th>";
-    CodigoHtmlTablaCategoria += "</tr>";
-    CodigoHtmlTablaCategoria += "</thead>";
-    CodigoHtmlTablaCategoria += "<tbody>";
+
+
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaCategoria  += "<tr>";
-        CodigoHtmlTablaCategoria  += "<td>" + Data[i].Tipo + "</td>";
-        CodigoHtmlTablaCategoria  += "</td>";
-        CodigoHtmlTablaCategoria  += "</tr>";
+        CodigoHtmlTablaCategoria += "<ul class='list-group list-group-flush'>";
+        CodigoHtmlTablaCategoria += "<li>" + Data[i].Tipo + "</li>";
+        CodigoHtmlTablaCategoria += "</ul>";
     }
-    CodigoHtmlTablaCategoria  += "</tbody>";
-    CodigoHtmlTablaCategoria  += "</table>";
-    document.getElementById("tablaCategoria").innerHTML = CodigoHtmlTablaCategoria ;
+  
+    document.getElementById("listaCategoria").innerHTML = CodigoHtmlTablaCategoria;
+}
+
+//******************************************************************************************
+
+ListaUnidadDeMedida();
+function ListaUnidadDeMedida() {
+    $.get("/UnidadMedida/ConsultaUnidadDeMedidas", function (Data) {
+        CrearListaUnidadDeMedida(Data);
+    }
+    );
+}
+function CrearListaUnidadDeMedida(Data) {
+    var CodigoHtmlTablaCompra = "";
+
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCompra += "<ul class='list-group list-group-flush'>";
+        CodigoHtmlTablaCompra += "<li>" + Data[i].Unidad + "</li>";
+        CodigoHtmlTablaCompra += "</ul>";
+
+    }
+
+    document.getElementById("ListaUnidadMedida").innerHTML = CodigoHtmlTablaCompra;
 }
