@@ -89,12 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imagenes\cuatro.png" />
-    <Content Include="Assets\Imagenes\imagen1.jpg" />
-    <Content Include="Assets\Imagenes\imagen2.jpg" />
-    <Content Include="Assets\Imagenes\imagen3.png" />
     <Content Include="Assets\Imagenes\logo.png" />
     <Content Include="Assets\Imagenes\logotipo.png" />
+    <Content Include="Assets\Imagenes\mision.png" />
+    <Content Include="Assets\Imagenes\pls.png" />
     <Content Include="Assets\Imagenes\Plus.jpg" />
+    <Content Include="Assets\Imagenes\vision.png" />
     <Content Include="Assets\Login\logotipo.svg" />
     <Content Include="Content\EstiloLogin.css" />
     <Content Include="Content\tarjeta.css" />
