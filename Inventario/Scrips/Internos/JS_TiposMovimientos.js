@@ -174,12 +174,12 @@ function CamposObligatorios() {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "") {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
             exito = false;
-            controlesObligatorio[i].parentNode.classList.add("error");
+            controlesObligatorio[i].classList.add("border-danger");
         }
         else {
-            controlesObligatorio[i].parentNode.classList.remove("error");
+            controlesObligatorio[i].classList.remove("border-danger");
         }
     }
     return exito;

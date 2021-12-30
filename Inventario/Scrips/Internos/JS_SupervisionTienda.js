@@ -388,7 +388,7 @@ function CamposObligatorios() {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "") {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
             exito = false;
             controlesObligatorio[i].classList.add("border-danger");
         }

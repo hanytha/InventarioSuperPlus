@@ -70,12 +70,13 @@ namespace Inventario.Controllers
                 }
                 else
                 {
-                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
+                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.IdUsuario.Equals(DatosSupervicion.IdUsuario) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
                     if (nveces == 0)
                     {
                         Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
                         obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
                         obj.Tienda = DatosSupervicion.Tienda;
+                        obj.IdUsuario = DatosSupervicion.IdUsuario;
                         obj.nombreUsuario = DatosSupervicion.nombreUsuario;
                         InvBD.SubmitChanges();
                         Afectados = 1;
