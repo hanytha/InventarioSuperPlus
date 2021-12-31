@@ -1,4 +1,5 @@
-﻿ConsultaCategorias();
+﻿/*
+ConsultaCategorias();
 function ConsultaCategorias() {
     $.get("/Categoria/ConsultaCategorias", function (Data) {
         CrearTablaCategorias(Data);
@@ -30,9 +31,42 @@ function CrearTablaCategorias(Data) {
     CodigoHtmlTablaCategoria  += "</table>";
     document.getElementById("tablaCategoria").innerHTML = CodigoHtmlTablaCategoria ;
 }
+*/
+
+//********************************************************************************************************
+
+ConsultaCategorias();
+function ConsultaCategorias() {
+    $.get("/Categoria/ConsultaCategorias", function (Data) {
+        CrearTablaCategorias(Data);
+    }
+    );
+}
+function CrearTablaCategorias(Data) {
+    var CodigoHtmlTablaCategoria = "";
 
 
-//Limpia la información y carga la informacion de la compra
+    for (var i = 0; i < Data.length; i++) {
+        CodigoHtmlTablaCategoria += "<div>"
+        CodigoHtmlTablaCategoria += "<div class='row'>"
+        CodigoHtmlTablaCategoria += "<div class='col-6'>" + Data[i].Tipo + "</div>";
+        CodigoHtmlTablaCategoria += "<div  class='col-6'>";
+        CodigoHtmlTablaCategoria += "<label>";
+        CodigoHtmlTablaCategoria += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCategoria += "</label>";
+        CodigoHtmlTablaCategoria += "</div>";
+        CodigoHtmlTablaCategoria += "</div>";
+        CodigoHtmlTablaCategoria += "</div>";
+
+    }
+
+    document.getElementById("DivCategoria").innerHTML = CodigoHtmlTablaCategoria;
+}
+
+
+
+
+//*************Limpia la información y carga la informacion de la compra*************************
 function editarModal(id) {//la clase AreaObligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -54,7 +88,7 @@ function editarModal(id) {//la clase AreaObligatorio
     }
 }
 
-//limpiar campos
+//*****************limpiar campos*********************
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -66,7 +100,7 @@ function LimpiarCampos() {
     }
 }
 
-//Guarda los cambios y altas de las compras
+//************Guarda los cambios y altas de las compras**************************
 function GuardarCategoria() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -102,7 +136,7 @@ function GuardarCategoria() {
     }
 }
 
-//marca los campos obligatorios
+//*******marca los campos obligatorios**********************************
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");

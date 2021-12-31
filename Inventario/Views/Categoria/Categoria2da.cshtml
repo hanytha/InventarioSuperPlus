@@ -8,16 +8,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Inicia tarjeta-->
-<!-- Estilos -->
+<link rel="stylesheet" href="estilos.css">
+<div class="contenedor">
+    <div class="contenedor hero">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--Termina tarjeta-->
 <!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
+<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR</button>
+<br />
+<br />
 <!--Mostrar los registros en el accordion-->
-<div id="tablaCategoria" class="default "></div>
-<div id="accordion"></div>
-<!-- Encabezado del Modal -->
+<!------------------------------------------------------------------------>
+<div align="center">
+    <div class="card" style="width: 38rem;">
+        <img src="~/Assets/Imagenes/edit.png" class="card-img-top">
+        <div class="card-body">
+            <div id="DivCategoria"></div>
+        </div>
+    </div>
+</div>
+<!--------------------------- Encabezado del Modal ----------------------->
 <div class="container">
     <div class="modal fade" id="ModalCategoria">
         <div class="modal-dialog">
@@ -52,6 +69,23 @@
         </div>
     </div>
 </div>
+
+<!----------------------------------------------------------------------------------------------------------------->
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 4px solid #D7DBDD;
+    }
+
+    .D1 {
+        background-color: #EBEBEB;
+    }
+</style>
+<!------------------------------------------------------------------------------------------------------------------>
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
