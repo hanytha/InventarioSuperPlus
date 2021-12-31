@@ -22,7 +22,6 @@ function CrearTablaExistenciasAlmacen(Data) {
     CodigoHtmlExistenciasAlmacen += "<th>Fecha</th>";
     CodigoHtmlExistenciasAlmacen += "<th>Operación</th>";
     CodigoHtmlExistenciasAlmacen += "<th>Artículo</th>";
-    CodigoHtmlExistenciasAlmacen += "<th>Coste</th>";
     CodigoHtmlExistenciasAlmacen += "<th>Opciones</th>";
     CodigoHtmlExistenciasAlmacen += "</tr>";
     CodigoHtmlExistenciasAlmacen += "</thead>";
@@ -33,7 +32,6 @@ function CrearTablaExistenciasAlmacen(Data) {
         CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].TipoDeOperacion + "</td>";
         CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].NombreEmpresa + "</td>";
-        CodigoHtmlExistenciasAlmacen += "<td>" + Data[i].Coste + "</td>";
         CodigoHtmlExistenciasAlmacen += "<td>";
         CodigoHtmlExistenciasAlmacen += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdExistenciaAlmacenG + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         //CodigoHtmlExistenciasAlmacen += "<button class='btn btn-danger' onclick='EliminarExistenciasG(" + Data[i].IdArticulos + ",this)' ><i class='fas fa-eraser'></i></button>";
@@ -65,13 +63,13 @@ function abrirModal(id) {//la clase  Obligatorio
                 llenarCombo(Proveedor, document.getElementById("cmbArticulo"));
                 document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
             });
-            document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
+            //document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
-            document.getElementById("cmbCompra").value = Data[0].IdCompra;
+            //document.getElementById("cmbCompra").value = Data[0].IdCompra;
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
-            document.getElementById("TxtCosto").value = Data[0].Coste;
+            //document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbAsignacion").value = Data[0].IdAsignacion;
             Sitio(Data[0].IdAsignacion, Data[0].IdSitio);
         });
@@ -103,12 +101,12 @@ function GuardarAlmacen() {
             var IdArticulo = document.getElementById("cmbArticulo").value;
             var TempArticulo = document.getElementById("cmbArticulo");
             var NombreEmpresa = TempArticulo.options[TempArticulo.selectedIndex].text;
-            var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
+            //var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
-            var IdCompra = document.getElementById("cmbCompra").value;
+            //var IdCompra = document.getElementById("cmbCompra").value;
             var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
-            var Coste = document.getElementById("TxtCosto").value;
+            //var Coste = document.getElementById("TxtCosto").value;
             var IdAsignacion = document.getElementById("cmbAsignacion").value;
             var IdProveedor = document.getElementById("cmbProveedor").value;
             var TempProveedor = document.getElementById("cmbProveedor");
@@ -117,12 +115,12 @@ function GuardarAlmacen() {
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
             frm.append("NoPedido", NoPedido);
-            frm.append("ExitenciaInicial", ExitenciaInicial);
+            //frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("TipoDeOperacion", TipoDeOperacion);
-            frm.append("IdCompra", IdCompra);
-            frm.append("Coste", Coste);
+            //frm.append("IdCompra", IdCompra);
+            //frm.append("Coste", Coste);
             frm.append("IdAsignacion", IdAsignacion);
             frm.append("IdProveedor", IdProveedor);
             frm.append("Proveedor", Proveedor);
@@ -184,9 +182,9 @@ function CamposObligatorios() {
 //    }
 //}
 function LlenarCMBCompra() {
-    $.get("/GLOBAL/BDCompras", function (data) {
-        llenarCombo(data, document.getElementById("cmbCompra"));
-    });
+    //$.get("/GLOBAL/BDCompras", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbCompra"));
+    //});
     //funcion general para llenar los select
     function llenarCombo(data, control) {
         var contenido = "";

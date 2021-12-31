@@ -91,10 +91,12 @@ function CrearTablaUsuarios(Data) {
     CodigoHtmlTablaUsuarios += "<thead>";
     CodigoHtmlTablaUsuarios += "<tr>";
     CodigoHtmlTablaUsuarios += "<th>CURP</th>";
-    CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
-    CodigoHtmlTablaUsuarios += "<th>ApellidosP</th>";
-    CodigoHtmlTablaUsuarios += "<th>ApellidosM</th>";
+    CodigoHtmlTablaUsuarios += "<th>Usuario</th>";
+    //CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
+    //CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
     CodigoHtmlTablaUsuarios += "<th>Telefono</th>";
+    CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
+
     CodigoHtmlTablaUsuarios += "<th>Opciones</th>";
     CodigoHtmlTablaUsuarios += "</tr>";
     CodigoHtmlTablaUsuarios += "</thead>";
@@ -102,10 +104,12 @@ function CrearTablaUsuarios(Data) {
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaUsuarios += "<tr>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].CURP + "</td>";
-        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
-        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP + "</td>";
-        CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosM + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Usuario + "</td>";
+        //CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
+        //CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP +  "</td>";   
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + ' ' + Data[i].ApellidosM + '  ' +Data[i].ApellidosP + "</td>";
+     
         CodigoHtmlTablaUsuarios += "<td>";
         CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";

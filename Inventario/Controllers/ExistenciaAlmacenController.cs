@@ -70,7 +70,7 @@ namespace Inventario.Controllers
                 {
                     //int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
                     int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
-                      && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
+                      //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                     && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                     && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                     && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
