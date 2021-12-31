@@ -10,52 +10,6 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-@*<link rel="stylesheet" href="estilos.css">*@
-<div class="contenedor">
-    <div class="contenedor hero">
-        <div class="contenedor-cards">
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
@@ -76,6 +30,9 @@
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <h4>Paso 1</h4>
@@ -132,7 +89,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="Txtcorreo">Correo<span class="required">*</span></label>
-                                        <input id="Txtcorreo" name="data[Txtcorreo]" class="form-control  limpiar obligatorio" placeholder="name@example.com" size="15" maxlength="20" type="email">
+                                        <input id="Txtcorreo" name="data[Txtcorreo]" class="form-control  limpiar obligatorio" placeholder="nombreusuario@servidor.com" size="15" maxlength="20" type="email">
                                     </div>
                                 </div>
                             </div>
@@ -250,10 +207,6 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Proveedores2da.js"></script>
-<!--Validacion del formulario-->
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/General/JS_Botones.js"></script>
