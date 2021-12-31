@@ -120,13 +120,13 @@ function GuardarCategoria() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe la clasificación");
+                        swal("¡La clasificación ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("La clasificación se registró exitosamente!", "", "success");
                         ConsultaCategorias();
                         document.getElementById("btnCancelar").click();
                     }

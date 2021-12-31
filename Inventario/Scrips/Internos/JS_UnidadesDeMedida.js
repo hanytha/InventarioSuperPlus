@@ -89,13 +89,13 @@ function GuardarUnidadDeMedida() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el MetodoDePago");
+                        swal("¡La unidad de medición ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("La unidad de medición se registró exitosamente!", "", "success");
                         ConsultaUnidadDeMedida();
                         document.getElementById("btnCancelar").click();
                     }
@@ -128,10 +128,10 @@ function EliminarUnidadDeMedida(id) {
 
         $.get("/UnidadMedida/EliminarUnidadDeMedida/?Id=" + id, function (DatoUni) {
             if (DatoUni == 1) {
-                alert("Se elimino correctamente");
+                swal("La unidad de medición se eliminó exitosamente!", "", "success");
                 ConsultaUnidadDeMedida();
             } else {
-                alert("Ocurrio un error");
+                swal("¡Ocurrio un error!", "", "danger");
             }
         });
     }

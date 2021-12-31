@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
@@ -30,7 +33,7 @@
                 <div class="@Classe">
                     <div class="card-header" id="@Heading'(@ModeloAreas.IdAreas[i])'">
                         <h5 class="mb-0">
-                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])"  data-toggle="collapse" data-target="#@Collapse'(@ModeloAreas.IdAreas[i])'" aria-expanded="false" aria-controls="Collapse'(@ModeloAreas.IdAreas[i])'" class="collapsed">
+                            <a onclick="CrearAcordeonSubAreas(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Collapse'(@ModeloAreas.IdAreas[i])'" aria-expanded="false" aria-controls="Collapse'(@ModeloAreas.IdAreas[i])'" class="collapsed">
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                 <span>@ModeloAreas.Nombre[i] </span><span id="@Badge" class="badge badge-danger"></span>
                             </a>

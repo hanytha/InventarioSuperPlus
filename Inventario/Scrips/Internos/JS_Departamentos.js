@@ -122,13 +122,13 @@ function GuardarDepartamento() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        swal("¡El área ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("El área se registró exitosamente!", "", "success");
                         CrearAcordeonDepartamentos();
                         document.getElementById("btnCancelar").click();
                     }
@@ -164,10 +164,10 @@ function EliminarDepartamento(id) {
 
         $.get("/Departamentos/EliminarDepartamento/?Id=" + id, function (DatoDepartamento) {
             if (DatoDepartamento == 1) {
-                alert("Se elimino correctamente");
+                swal("El área se eliminó exitosamente!", "", "success");
                 CrearAcordeonDepartamentos();
             } else {
-                alert("Ocurrio un error");
+                swal("¡Ocurrio un error!", "", "danger");
             }
         });
     }
@@ -323,13 +323,13 @@ function GuardarSubarea() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        swal("¡La subárea ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("La subárea se registró exitosamente!", "", "success");
                         CrearAcordeonSubAreas(IdArea);
                         document.getElementById("btnCancelar").click();
                     }
@@ -374,10 +374,10 @@ function EliminarSubarea(id) {
 
         $.get("/Subarea/EliminarSubarea/?Id=" + id, function (DatoSub) {
             if (DatoSub == 1) {
-                alert("Se elimino correctamente");
+                swal("La subárea se eliminó exitosamente!", "", "success");
                 CrearAcordeonSubAreas(IdArea);
             } else {
-                alert("Ocurrio un error");
+                swal("¡Ocurrio un error!", "", "danger");
             }
         });
     }

@@ -270,13 +270,13 @@ function GuardarTienda() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el Tienda");
+                        swal("¡La tienda ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("La tienda se registró exitosamente!", "", "success");
                         CrearAcordeonTienda();
                         document.getElementById("btnCancelar").click();
                     }

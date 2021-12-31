@@ -92,13 +92,13 @@ function GuardarImpuesto() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        alert("Ya existe el MetodoDePago");
+                        swal("¡El impuesto ya existe!", "", "warning");
                     }
                     else {
-                        alert("Se ejecuto correctamente");
+                        swal("El impuesto se registró exitosamente!", "", "success");
                         ConsultaImpuesto();
                         document.getElementById("btnCancelar").click();
                     }
@@ -131,7 +131,7 @@ function EliminarImpuesto(id) {
 
         $.get("/Impuestos/EliminarImpuesto/?Id=" + id, function (DatoImpu) {
             if (DatoImpu == 1) {
-                alert("Se elimino correctamente");
+                swal("El impuesto se eliminó exitosamente!", "", "success");
                 ConsultaImpuesto();
             } else {
                 alert("Ocurrio un error");
