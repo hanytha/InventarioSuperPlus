@@ -271,7 +271,7 @@
   </Table>
   <Table Name="dbo.PedidosInternos" Member="PedidosInternos">
     <Type Name="PedidosInternos">
-      <Column Name="IdPedidosInternos" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdPedidosInternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CantidadAprobada" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -284,7 +284,7 @@
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Association Name="Articulos_PedidosInternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="ExistenciaAlmacenG" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="ExistenciaAlmacenG" IsForeignKey="true" />

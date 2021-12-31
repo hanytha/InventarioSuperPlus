@@ -244,6 +244,7 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
+    <Content Include="Views\Pedidosint\Pedido2da.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

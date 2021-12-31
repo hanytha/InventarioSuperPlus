@@ -328,6 +328,7 @@ function GuardarPedidoInterno() {
                     var TempProvedor = document.getElementById("cmbProveedor");
                     var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
                     var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
+                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
                     var Articulo = ChevPedidos[i].id;
@@ -346,6 +347,7 @@ function GuardarPedidoInterno() {
                     frm.append("Proveedor", Proveedor);
                     frm.append("Articulo", Articulo);
                     frm.append("NumeroPedido", NumeroPedido);
+                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
                     frm.append("IdTienda", IdTienda);
                     frm.append("Tienda", Tienda);

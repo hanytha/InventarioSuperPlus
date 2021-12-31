@@ -153,7 +153,10 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
+        public ActionResult Pedido2da()
+        {
+            return View();
+        }
     }
 }
 
