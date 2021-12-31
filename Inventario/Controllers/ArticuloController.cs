@@ -22,7 +22,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaArticulos()
         {
-            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.FechaSistema)
                 .Select(p => new
                 {
                     p.IdArticulos,

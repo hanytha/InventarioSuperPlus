@@ -24,10 +24,12 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaArticulos += "<thead>";
     CodigoHtmlTablaArticulos += "<tr>";
-    CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
     CodigoHtmlTablaArticulos += "<th>Artículo</th>";
-    CodigoHtmlTablaArticulos += "<th>Área</th>";
     CodigoHtmlTablaArticulos += "<th>Clasificación</th>";
+    CodigoHtmlTablaArticulos += "<th>Área</th>";
+    CodigoHtmlTablaArticulos += "<th></th>";
+    CodigoHtmlTablaArticulos += "<th>Unidad de medición</th>";
+    CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
     CodigoHtmlTablaArticulos += "</tr>";
     CodigoHtmlTablaArticulos += "</thead>";
     CodigoHtmlTablaArticulos += "<tbody>";
@@ -35,10 +37,11 @@ function CrearTablaArticulos(Data) {
 
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaArticulos += "<tr>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].NombreEmpresa + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].Area + "</td>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
+        CodigoHtmlTablaArticulos += "<td colspan='2'>" + Data[i].Area + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].Unidad + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
         CodigoHtmlTablaArticulos += "</tr>";
     }
     CodigoHtmlTablaArticulos += "</tbody>";

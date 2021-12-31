@@ -27,6 +27,7 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
     CodigoHtmlTablaArticulos += "<th>Artículo</th>";
     CodigoHtmlTablaArticulos += "<th>Área</th>";
+    CodigoHtmlTablaArticulos += "<th></th>";
     CodigoHtmlTablaArticulos += "<th>Clasificación</th>";
     CodigoHtmlTablaArticulos += "<th>Opciones</th>";
     CodigoHtmlTablaArticulos += "</tr>";
@@ -38,7 +39,7 @@ function CrearTablaArticulos(Data) {
         CodigoHtmlTablaArticulos += "<tr>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].NombreEmpresa + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].Area + "</td>";
+        CodigoHtmlTablaArticulos += "<td colspan='2'>" + Data[i].Area + "</td>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
         CodigoHtmlTablaArticulos += "<td>";
         CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
