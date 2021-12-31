@@ -49,7 +49,6 @@ namespace Inventario.Controllers
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
-                    p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
@@ -72,7 +71,6 @@ namespace Inventario.Controllers
                     p.NoPedido,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
-                    p.FechaFinal,
                     p.ExitenciaActual,
                     p.Coste,
                     p.TipoDeOperacion,
@@ -116,7 +114,6 @@ namespace Inventario.Controllers
                 && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
-                && p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
 
@@ -133,7 +130,6 @@ namespace Inventario.Controllers
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
-                    obj.FechaFinal = DatosAlmacen.FechaFinal;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
                     obj.IdCompra = DatosAlmacen.IdCompra;
                     obj.Compra = DatosAlmacen.Compra;

@@ -1923,7 +1923,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnidadSAT", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnidadSAT", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
 		public string UnidadSAT
 		{
 			get
@@ -3861,8 +3861,6 @@ namespace Inventario
 		
 		private long _ExitenciaInicial;
 		
-		private string _FechaFinal;
-		
 		private long _ExitenciaActual;
 		
 		private long _Coste;
@@ -3897,8 +3895,6 @@ namespace Inventario
     partial void OnFechaDeIngresoChanged();
     partial void OnExitenciaInicialChanging(long value);
     partial void OnExitenciaInicialChanged();
-    partial void OnFechaFinalChanging(string value);
-    partial void OnFechaFinalChanged();
     partial void OnExitenciaActualChanging(long value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -4024,26 +4020,6 @@ namespace Inventario
 					this._ExitenciaInicial = value;
 					this.SendPropertyChanged("ExitenciaInicial");
 					this.OnExitenciaInicialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFinal", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string FechaFinal
-		{
-			get
-			{
-				return this._FechaFinal;
-			}
-			set
-			{
-				if ((this._FechaFinal != value))
-				{
-					this.OnFechaFinalChanging(value);
-					this.SendPropertyChanging();
-					this._FechaFinal = value;
-					this.SendPropertyChanged("FechaFinal");
-					this.OnFechaFinalChanged();
 				}
 			}
 		}
@@ -4296,9 +4272,9 @@ namespace Inventario
 		
 		private long _IdImpuesto;
 		
-		private long _Impuestos;
+		private string _Impuestos;
 		
-		private long _Porcentaje;
+		private System.Nullable<long> _Porcentaje;
 		
 		private int _Estatus;
 		
@@ -4308,9 +4284,9 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdImpuestoChanging(long value);
     partial void OnIdImpuestoChanged();
-    partial void OnImpuestosChanging(long value);
+    partial void OnImpuestosChanging(string value);
     partial void OnImpuestosChanged();
-    partial void OnPorcentajeChanging(long value);
+    partial void OnPorcentajeChanging(System.Nullable<long> value);
     partial void OnPorcentajeChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
@@ -4341,8 +4317,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Impuestos", DbType="BigInt NOT NULL")]
-		public long Impuestos
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Impuestos", DbType="VarChar(50)")]
+		public string Impuestos
 		{
 			get
 			{
@@ -4361,8 +4337,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Porcentaje", DbType="BigInt NOT NULL")]
-		public long Porcentaje
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Porcentaje", DbType="BigInt")]
+		public System.Nullable<long> Porcentaje
 		{
 			get
 			{
@@ -6269,7 +6245,7 @@ namespace Inventario
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidosInternos", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPedidosInternos", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long IdPedidosInternos
 		{
 			get
@@ -6541,7 +6517,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumPedidoProveedor", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumPedidoProveedor", DbType="BigInt NOT NULL")]
 		public long NumPedidoProveedor
 		{
 			get
@@ -7336,7 +7312,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(200)")]
 		public string Direccion
 		{
 			get
