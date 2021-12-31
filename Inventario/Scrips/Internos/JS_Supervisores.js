@@ -64,7 +64,7 @@ function TablaSupervisores(Data) {
     CodigoHtmlSupervisores += "<th>Nombre Completo</th>";
     CodigoHtmlSupervisores += "<th>Correo</th>";
     CodigoHtmlSupervisores += "<th>Telefono</th>";
-    CodigoHtmlSupervisores += "<th>TipoSupervision</th>";
+    CodigoHtmlSupervisores += "<th>Supervisión</th>";
     CodigoHtmlSupervisores += "<th>Opciones</th>";
     CodigoHtmlSupervisores += "</tr>";
     CodigoHtmlSupervisores += "</thead>";
