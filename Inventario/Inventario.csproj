@@ -120,6 +120,8 @@
     <Content Include="Scrips\Internos\JS_Articulo3ro.js" />
     <Content Include="Scrips\Internos\JS_Categoria2da.js" />
     <Content Include="Scrips\Internos\JS_Categoria3ra.js" />
+    <Content Include="Scrips\Internos\JS_Compra3.js" />
+    <Content Include="Scrips\Internos\JS_Compra2.js" />
     <Content Include="Scrips\Internos\JS_Impuesto2do.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
@@ -252,6 +254,8 @@
     <Content Include="Views\Impuestos\Impuestos2do.cshtml" />
     <Content Include="Views\UnidadMedida\UnidadMedida2da.cshtml" />
     <Content Include="Views\Tienda\Tienda2da.cshtml" />
+    <Content Include="Views\Compra\Compra2.cshtml" />
+    <Content Include="Views\Compra\Compra3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

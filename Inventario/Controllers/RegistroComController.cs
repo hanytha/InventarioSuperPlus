@@ -9,11 +9,13 @@ namespace Inventario.Controllers
 {
     //Lamar al método de seguridad
     [Seguridad]
-    public class CompraController : Controller
-    {//conexion con DB
+    public class RegistroComController : Controller
+    {
+        //conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
-        // GET: Compra
-        public ActionResult Compra()
+
+        // GET: RegistroCom
+        public ActionResult Compras2da()
         {
             return View();
         }
@@ -148,56 +150,5 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-        //***********Genera las otras dos vistas de compras**************
-        // GET: Compra
-        public ActionResult Compra2()
-        {
-            return View();
-        }
-        // GET: Compra
-        public ActionResult Compra3()
-        {
-            return View();
-        }
-
-        //**************Consulta los provedores por ID de artículo********************************
-        //public JsonResult ConsultaProveedorxArticulo(long IdPro)
-        //{
-        //    string proveedor = "";
-        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            Id = p.Proveedor,
-        //        });
-        //        foreach (var num in proveedores)
-        //        {
-
-        //        proveedor += num.Id + ",";
-        //        }
-
-        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-        //    return Json(provedores, JsonRequestBehavior.AllowGet);
-        //}
-        ////*********************************************************************************************
-        //public JsonResult ConsultaProveedorxArti(long IdPro)
-        //{
-        //    string proveedor = "";
-        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            Id = p.Proveedor,
-        //        });
-        //    foreach (var num in proveedores)
-        //    {
-
-        //        proveedor += num.Id + ",";
-
-        //    }
-
-        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-        //    return Json(provedores, JsonRequestBehavior.AllowGet);
-        //}
-        //*********************************************************************************************
     }
-
 }
