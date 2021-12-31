@@ -105,7 +105,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString3"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -2500,8 +2500,6 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
-		private System.Nullable<long> _ExitenciaInicial;
-		
 		private System.Nullable<long> _ExitenciaActual;
 		
 		private long _Coste;
@@ -2540,8 +2538,6 @@ namespace Inventario
     partial void OnNoCompraChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
-    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
-    partial void OnExitenciaInicialChanged();
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -2722,26 +2718,6 @@ namespace Inventario
 					this._FechaDeIngreso = value;
 					this.SendPropertyChanged("FechaDeIngreso");
 					this.OnFechaDeIngresoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
-		public System.Nullable<long> ExitenciaInicial
-		{
-			get
-			{
-				return this._ExitenciaInicial;
-			}
-			set
-			{
-				if ((this._ExitenciaInicial != value))
-				{
-					this.OnExitenciaInicialChanging(value);
-					this.SendPropertyChanging();
-					this._ExitenciaInicial = value;
-					this.SendPropertyChanged("ExitenciaInicial");
-					this.OnExitenciaInicialChanged();
 				}
 			}
 		}

@@ -27,7 +27,6 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
-                    p.ExitenciaInicial,
                     p.PrecioUnitario,
                     p.ExitenciaActual,
                     p.Coste,
@@ -53,7 +52,6 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
-                    p.ExitenciaInicial,
                     p.PrecioUnitario,
                     p.ExitenciaActual,
                     p.Coste,
@@ -76,7 +74,7 @@ namespace Inventario.Controllers
             long id = DatosCompra.IdCompra;
             if (id.Equals(0))
             {
-                int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)).Count();
+                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)).Count();
                 if (nveces >= 0)
                 {
                     InvBD.Compra.InsertOnSubmit(DatosCompra);
@@ -90,8 +88,7 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Compra.Where(p => p.ExitenciaInicial.Equals(DatosCompra.ExitenciaInicial)
-                && p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
+                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
@@ -110,7 +107,6 @@ namespace Inventario.Controllers
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
-                    obj.ExitenciaInicial = DatosCompra.ExitenciaInicial;
                     obj.PrecioUnitario = DatosCompra.PrecioUnitario;
                     obj.ExitenciaActual = DatosCompra.ExitenciaActual;
                     obj.Coste = DatosCompra.Coste;

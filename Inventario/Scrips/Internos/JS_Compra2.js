@@ -15,7 +15,7 @@ function CrearTablaCompras(Data) {
     var CodigoHtmlTablaPedidos = "";
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
 
-    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>"; 
+    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
 
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumturquoise;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
@@ -38,7 +38,7 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-info' style='width: 28px; height: 28px;' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' style='width: 28px; height: 28px;' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
@@ -72,12 +72,11 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtPrecioUnitario").value = Data[0].PrecioUnitario;
-            document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCoste").value = Data[0].Coste;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-         
+
         });
     }
 }
@@ -115,7 +114,6 @@ function GuardarCompra() {
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var PrecioUnitario = document.getElementById("TxtPrecioUnitario").value;
-            var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
             var Coste = document.getElementById("TxtCoste").value;
 
@@ -137,7 +135,6 @@ function GuardarCompra() {
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("PrecioUnitario", PrecioUnitario);
-            frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);
             frm.append("IdUnidadDeMedida", IdUnidadDeMedida);

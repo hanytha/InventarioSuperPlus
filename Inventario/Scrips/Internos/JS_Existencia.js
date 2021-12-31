@@ -72,7 +72,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtPrecioUnitario").value = Data[0].PrecioUnitario;
-            document.getElementById("TxtExitenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtCoste").value = Data[0].Coste;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
@@ -115,7 +114,6 @@ function GuardarCompra() {
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var PrecioUnitario = document.getElementById("TxtPrecioUnitario").value;
-            var ExitenciaInicial = document.getElementById("TxtExitenciaInicial").value;
             var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
             var Coste = document.getElementById("TxtCoste").value;
 
@@ -137,7 +135,6 @@ function GuardarCompra() {
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("PrecioUnitario", PrecioUnitario);
-            frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);
             frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
