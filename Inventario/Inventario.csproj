@@ -118,7 +118,6 @@
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Buscar.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
-<<<<<<< HEAD
     <Content Include="Scrips\Internos\JS_Articulo2do.js" />
     <Content Include="Scrips\Internos\JS_Articulo3ro.js" />
     <Content Include="Scrips\Internos\JS_Categoria2da.js" />
@@ -126,25 +125,20 @@
     <Content Include="Scrips\Internos\JS_Compra3.js" />
     <Content Include="Scrips\Internos\JS_Compra2.js" />
     <Content Include="Scrips\Internos\JS_Impuesto2do.js" />
-=======
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
     <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
     <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision2da.js" />
->>>>>>> alma
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
-<<<<<<< HEAD
     <Content Include="Scrips\Internos\JS_Tienda2da.js" />
-=======
     <Content Include="Scrips\Internos\JS_Supervisores2da.js" />
     <Content Include="Scrips\Internos\JS_Supervisores.js" />
     <Content Include="Scrips\Internos\JS_TiposMovimientos2da.js" />
->>>>>>> alma
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
@@ -256,7 +250,6 @@
     <Content Include="Views\Supervision\Supervision.cshtml" />
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Articulo\Articulo2do.cshtml" />
     <Content Include="Views\Articulo\Articulo3ro.cshtml" />
     <Content Include="Views\Categoria\Categoria2da.cshtml" />
@@ -266,14 +259,12 @@
     <Content Include="Views\Tienda\Tienda2da.cshtml" />
     <Content Include="Views\Compra\Compra2.cshtml" />
     <Content Include="Views\Compra\Compra3.cshtml" />
-=======
     <Content Include="Views\Proveedores\Proveedores2da.cshtml" />
     <Content Include="Views\Proveedores\Proveedores3ra.cshtml" />
     <Content Include="Views\Supervisor\Supervisor2da.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
->>>>>>> alma
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
