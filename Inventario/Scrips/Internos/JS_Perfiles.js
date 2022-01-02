@@ -111,13 +111,25 @@ function GuardarPerfil() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrìó un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe el perfil");
+                        Swal.fire(
+                            '',
+                            'Ya existe el perfil',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se guardaron los datos correctamente.");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         MostrarPerfiles();
                         document.getElementById("btnCancelarPerfil").click();
                     }

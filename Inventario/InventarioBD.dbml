@@ -107,10 +107,6 @@
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-<<<<<<< HEAD
-=======
-      <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
->>>>>>> alma
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -368,7 +364,6 @@
       <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Tienda" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Supervision_Supervisor" Member="Supervisor" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervisor" />
       <Association Name="Supervision_Tienda" Member="Tienda1" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Tienda" />
       <Association Name="Areas_Supervision" Member="Areas" ThisKey="IdAreas" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
@@ -385,7 +380,6 @@
       <Column Name="TipoSupervision" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Supervisor_Tienda" Member="Tienda" ThisKey="IdSupervisor" OtherKey="IdSupervisor" Type="Tienda" />
-      <Association Name="Supervision_Supervisor" Member="Supervision" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervision" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Tienda" Member="Tienda">

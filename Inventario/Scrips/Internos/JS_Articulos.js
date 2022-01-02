@@ -73,7 +73,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
 
-  //------------------------muestra los checkbox guardados -----------------------------------
+            //------------------------muestra los checkbox guardados -----------------------------------
             var activar = Data[0].Proveedor.split('#');
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             for (let j = 0; j < activar.length; j++) {
@@ -84,7 +84,7 @@ function abrirModal(id) {//la clase  Obligatorio
                     }
                 }
             }
-   //--------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;

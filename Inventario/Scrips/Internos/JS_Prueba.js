@@ -99,7 +99,7 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra +")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra + ")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
@@ -138,7 +138,7 @@ function abrirModal(id) {
             document.getElementById("TxtDireccion").value = Data[0].Direccion;
             //---Muestra los artículos que le pertenecen a ese proveedor----
             MostrarArticulos(id);
-        //----Muestra el número de pedido que le corresponde por proveedor-------
+            //----Muestra el número de pedido que le corresponde por proveedor-------
             ConsultaSiguientePedidoPrveedor(id);
             //----Muestra el número de pedido que le corresponde-------
             ConsultaSiguientePedido();
@@ -178,7 +178,7 @@ function MostrarArticulos(id) {
     else {
 
         $.get("/ExistenciasG/ConsultaIdPro/?IdPro=" + id, function (Data) {
-       //-----------------------------------------------------------------------------------
+            //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -194,14 +194,14 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
-              //-------Crea los input con los nombres de los artículos por proveedor-------------------------------------------------
+                //-------Crea los input con los nombres de los artículos por proveedor-------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
@@ -218,7 +218,7 @@ function MostrarArticulos(id) {
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
-} 
+}
 
 
 
@@ -228,7 +228,7 @@ function MostrarArticulos(id) {
 function GuardarPedidoExterno() {
 
     if (CamposObligatorios() == true) {
-     
+
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
@@ -240,7 +240,7 @@ function GuardarPedidoExterno() {
             var Precio = document.getElementsByClassName("input-Precio");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value ) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
@@ -436,8 +436,8 @@ function ConsultaSiguientePedidoPrveedor(id) {
             let ArraynumPedidoProve = numPedidoProve.split(',');
 
 
-                var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
-                document.getElementById("TxtNumPedidoProve").value = ultimo;
+            var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+            document.getElementById("TxtNumPedidoProve").value = ultimo;
 
         });
     }

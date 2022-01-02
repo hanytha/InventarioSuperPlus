@@ -22,7 +22,6 @@ function CrearTablaExistenciasAlmacen(Data) {
     CodigoHtmlExistenciasAlmacen += "<th>Fecha</th>";
     CodigoHtmlExistenciasAlmacen += "<th>Operación</th>";
     CodigoHtmlExistenciasAlmacen += "<th>Artículo</th>";
-    CodigoHtmlExistenciasAlmacen += "<th>Opciones</th>";
     CodigoHtmlExistenciasAlmacen += "</tr>";
     CodigoHtmlExistenciasAlmacen += "</thead>";
     CodigoHtmlExistenciasAlmacen += "<tbody>";
@@ -103,13 +102,25 @@ function GuardarAlmacen() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe la existencia");
+                        Swal.fire(
+                            '',
+                            'Ya existe el proveedor',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se ejecutó correctamente");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         CrearExistenciasAlmacen();
                         document.getElementById("btnCancelar").click();
                     }

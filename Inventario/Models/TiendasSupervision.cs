@@ -23,10 +23,10 @@ namespace Inventario.Models
         public static List<string> Calle { get; set; }
         public static List<long> CP { get; set; }
         public static List<long> Telefono { get; set; }
-       
+
         public static List<string> HApertura { get; set; }
         public static List<string> HCierre { get; set; }
-      
+
         public static List<int> Estatus { get; set; }
     }
 }

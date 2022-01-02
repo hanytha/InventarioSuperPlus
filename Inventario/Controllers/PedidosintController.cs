@@ -19,9 +19,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
-
-=======
         public JsonResult ConsultaPedidosInternos()
         {
             var pedidosInt = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
@@ -97,10 +94,10 @@ namespace Inventario.Controllers
                 && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
                    && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada)
                    && p.Tipo.Equals(DatosPedidoInterno.Tipo)
-                 //&& p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida)
-                 // && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
-                 //  && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
-                 //   && p.Marca.Equals(DatosPedidoInterno.Marca)
+                     //&& p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida)
+                     // && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
+                     //  && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
+                     //   && p.Marca.Equals(DatosPedidoInterno.Marca)
                      && p.IdTienda.Equals(DatosPedidoInterno.IdTienda)
                       && p.Tienda.Equals(DatosPedidoInterno.Tienda)
                        && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
@@ -160,7 +157,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
->>>>>>> alma
     }
 }
 

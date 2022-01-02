@@ -34,7 +34,6 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "</thead>";
     CodigoHtmlTablaArticulos += "<tbody>";
 
-
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaArticulos += "<tr>";
         CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
@@ -43,6 +42,8 @@ function CrearTablaArticulos(Data) {
         CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
         CodigoHtmlTablaArticulos += "<td>";
         CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+
+
         CodigoHtmlTablaArticulos += "</td>";
         CodigoHtmlTablaArticulos += "</tr>";
     }
@@ -72,7 +73,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtNombreEmpresa").value = Data[0].NombreEmpresa;
             document.getElementById("TxtNombreProveedor").value = Data[0].NombreProveedor;
 
-  //------------------------muestra los checkbox guardados -----------------------------------
+            //------------------------muestra los checkbox guardados -----------------------------------
             var activar = Data[0].Proveedor.split('#');
             var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
             for (let j = 0; j < activar.length; j++) {
@@ -83,7 +84,7 @@ function abrirModal(id) {//la clase  Obligatorio
                     }
                 }
             }
-   //--------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
@@ -244,6 +245,8 @@ function CamposObligatorios() {
     }
     return exito;
 }
+//-----------cambia el Estatus de 1 a 0------------------
+
 //----------Consultas para obtener los datos de los combobox----------------
 function LlenarCMCategoria() {
     $.get("/GLOBAL/BDCategorias", function (data) {

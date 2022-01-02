@@ -192,6 +192,19 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //consulta Tiendas
+        public JsonResult BDImpuesto()
+        {
+            var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+
+                    ID = p.IdImpuesto,
+                    Nombre = p.Impuestos
+
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
 
 
         //consulta Estados
@@ -245,19 +258,6 @@ namespace Inventario.Controllers
                 .Select(p => new {
                     ID = p.IdMarca,
                     Nombre = p.Nombre
-
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
-
-        //Consulta 
-        public JsonResult BDImpuesto()
-
-        {
-            var datos = InvBD.Impuesto.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdImpuesto,
-                    Nombre = p.Impuestos
 
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
@@ -355,7 +355,7 @@ namespace Inventario.Controllers
 
         }
 
-    
+
         public JsonResult BDUnidadM(int IDAR)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
@@ -376,7 +376,7 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-     
+
         public JsonResult BDArticulosEmpresa()
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))

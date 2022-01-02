@@ -22,7 +22,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaArticulos()
         {
-            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.FechaSistema)
+            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdArticulos,
@@ -44,15 +44,11 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
-<<<<<<< HEAD
-=======
-                    //p.Logo,
->>>>>>> alma
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
         }
-//--------------------------------Consulta los artículos por ID-------------------------------------------
+        //--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaArticulo(long Id)
         {
             var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
@@ -77,12 +73,7 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
-<<<<<<< HEAD
                     p.Estatus
-=======
-                    p.Estatus,
-                    //FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
->>>>>>> alma
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
@@ -149,7 +140,7 @@ namespace Inventario.Controllers
 
                 //foreach (var uno in articuloss)
                 //{
-      
+
                 //}
 
                 Proveedor += pro.Proveedor + ",";
@@ -166,7 +157,8 @@ namespace Inventario.Controllers
                 Marca += pro.Marca + ",";
 
             }
-            var Resultado = new {
+            var Resultado = new
+            {
                 IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
                 NombreEmpresa = NombreEmpresa.Substring(0, NombreEmpresa.Length - 1),
                 IdUnidadDeMedida = IdUnidadDeMedida.Substring(0, IdUnidadDeMedida.Length - 1),
@@ -185,7 +177,8 @@ namespace Inventario.Controllers
                 FechaSistema = FechaSistema.Substring(0, FechaSistema.Length - 1),
                 Unidad = Unidad.Substring(0, Unidad.Length - 1),
                 Area = Area.Substring(0, Area.Length - 1),
-                Marca = Marca.Substring(0, Marca.Length - 1) };
+                Marca = Marca.Substring(0, Marca.Length - 1)
+            };
 
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
@@ -205,10 +198,6 @@ namespace Inventario.Controllers
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
-<<<<<<< HEAD
-=======
-                    //DatosArticulo.Logo = Convert.FromBase64String(cadF);
->>>>>>> alma
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -237,16 +226,9 @@ namespace Inventario.Controllers
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                 && p.Fecha.Equals(DatosArticulo.Fecha)
-<<<<<<< HEAD
                 && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
 
 
-=======
-                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
-                && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
-                && p.IdAreas.Equals(DatosArticulo.IdAreas)
-                && p.IdMarca.Equals(DatosArticulo.IdMarca)).Count();
->>>>>>> alma
                 if (nveces == 0)
                 {
                     Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
@@ -269,17 +251,7 @@ namespace Inventario.Controllers
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;
                     obj.Fecha = DatosArticulo.Fecha;
                     obj.FechaSistema = DatosArticulo.FechaSistema;
-<<<<<<< HEAD
-      
-=======
-                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
-                    obj.Unidad = DatosArticulo.Unidad;
-                    obj.IdAreas = DatosArticulo.IdAreas;
-                    obj.Area = DatosArticulo.Area;
-                    obj.IdMarca = DatosArticulo.IdMarca;
-                    obj.Marca = DatosArticulo.Marca;
-                    //obj.Logo = Convert.FromBase64String(cadF);
->>>>>>> alma
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -322,14 +294,14 @@ namespace Inventario.Controllers
             var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                   p.IdProveedores,
-                   p.Nombre,
+                    p.IdProveedores,
+                    p.Nombre,
 
                 });
             return Json(proveedores, JsonRequestBehavior.AllowGet);
         }
 
-//----------------Retorna las otras vistas de artículos--------------------------
+        //----------------Retorna las otras vistas de artículos--------------------------
         // GET: Articulo
         public ActionResult Articulo2do()
         {
@@ -341,7 +313,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
-//-------------Termina------------------------------------------
+        //-------------Termina------------------------------------------
     }
 
 }

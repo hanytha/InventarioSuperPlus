@@ -70,7 +70,7 @@ namespace Inventario.Controllers
                 {
                     //int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
                     int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
-                      //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
+                    //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                     && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                     && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                     && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
@@ -136,46 +136,7 @@ namespace Inventario.Controllers
             }
             catch (Exception ex)
             {
-<<<<<<< HEAD
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
-                && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
-                && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
-                && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
-                && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
-
-                && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
-                //&& p.NombreAsignacion.Equals(DatosAlmacen.NombreAsignacion)
-                && p.IdSitio.Equals(DatosAlmacen.IdSitio)
-                //&& p.NombreSitio.Equals(DatosAlmacen.NombreSitio)
-
-                && p.Coste.Equals(DatosAlmacen.Coste)).Count();
-                if (nveces == 0)
-                {
-                    ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
-                    obj.NoPedido = DatosAlmacen.NoPedido;
-                    obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
-                    obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
-                    obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
-                    obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.IdCompra = DatosAlmacen.IdCompra;
-                    obj.Compra = DatosAlmacen.Compra;
-                    obj.Coste = DatosAlmacen.Coste;
-
-                    obj.IdAsignacion = DatosAlmacen.IdAsignacion;
-                    //obj.NombreAsignacion = DatosAlmacen.NombreAsignacion;
-                    obj.IdSitio = DatosAlmacen.IdSitio;
-                    //obj.NombreSitio = DatosAlmacen.NombreSitio;
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
-=======
                 Afectados = 0;
->>>>>>> alma
             }
             return Afectados;
         }

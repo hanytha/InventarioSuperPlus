@@ -110,7 +110,7 @@ namespace Inventario.Controllers
                               IdArticulo = comprs.IdArticulo,
                               IdProveedor = provedor.IdProveedores,
                               Proveedor = provedor.Nombre,
-                       
+
 
                           };
 
@@ -137,7 +137,7 @@ namespace Inventario.Controllers
                             RFC = provedor.RFC,
                             UsoCFDI = provedor.UsoCFDI,
                             Direccion = provedor.Direccion,
-                            
+
                         };
 
 
@@ -146,7 +146,7 @@ namespace Inventario.Controllers
         }
 
         //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
-       public JsonResult ConsultaIdPro(string IdPro)
+        public JsonResult ConsultaIdPro(string IdPro)
         {
             var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
                 .Select(p => new
@@ -155,11 +155,11 @@ namespace Inventario.Controllers
                     p.IdArticulos,
                     p.Unidad,
                     p.PrecioUnitarioPromedio
-               });
+                });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-//****************************************************************************************************
+        //****************************************************************************************************
 
         //****************************Consulta el último número de pedido*************************************************
 
@@ -173,7 +173,8 @@ namespace Inventario.Controllers
                     Pedido = p.NumeroPedido,
                 });
 
-            if (pedidosNum.Count() > 0) {
+            if (pedidosNum.Count() > 0)
+            {
                 foreach (var ped in pedidosNum)
                 {
                     int SumaNum = (int)(ped.Pedido + 1);
@@ -195,12 +196,13 @@ namespace Inventario.Controllers
             var numero = InvBD.PedidosExternos.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                   Id = p.IdProveedor,
-                   NumeroPProveedor= p.NumPedidoProveedor,
+                    Id = p.IdProveedor,
+                    NumeroPProveedor = p.NumPedidoProveedor,
 
                 });
 
-            if (numero.Count () > 0) {
+            if (numero.Count() > 0)
+            {
                 foreach (var num in numero)
                 {
                     int SumaNumero = (int)(num.NumeroPProveedor + 1);
@@ -258,53 +260,28 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
-<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
                  && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
                  && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
-=======
-                 //&& p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
-                 //&& p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
-                 //&& p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
-                 //&& p.Marca.Equals(DatosPedidoExterno.Marca)
-                 && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
-                 && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
-                 //&& p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
->>>>>>> alma:Inventario/Controllers/PruebaController.cs
                  && p.Articulo.Equals(DatosPedidoExterno.Articulo)
                  && p.RFC.Equals(DatosPedidoExterno.RFC)
                  && p.Correo.Equals(DatosPedidoExterno.Correo)
                  && p.Telefono.Equals(DatosPedidoExterno.Telefono)
-<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
                  && p.UsoCFDI.Equals(DatosPedidoExterno.UsoCFDI)
                  && p.Direccion.Equals(DatosPedidoExterno.Direccion)
                  && p.NumPedidoProveedor.Equals(DatosPedidoExterno.NumPedidoProveedor)
                  && p.Unidad.Equals(DatosPedidoExterno.Unidad)
                  && p.PrecioUnitario.Equals(DatosPedidoExterno.PrecioUnitario)
-=======
-                 //&& p.Clabe.Equals(DatosPedidoExterno.Clabe)
->>>>>>> alma:Inventario/Controllers/PruebaController.cs
                  && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)
                 {
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
-<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
-=======
-                    //obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
-                    //obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
-                    //obj.IdMarca = DatosPedidoExterno.IdMarca;
-                    //obj.Marca = DatosPedidoExterno.Marca;
->>>>>>> alma:Inventario/Controllers/PruebaController.cs
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
                     obj.Articulo = DatosPedidoExterno.Articulo;
                     obj.RFC = DatosPedidoExterno.RFC;
                     obj.Correo = DatosPedidoExterno.Correo;
                     obj.Telefono = DatosPedidoExterno.Telefono;
-<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
-=======
-                    //obj.Clabe = DatosPedidoExterno.Clabe;
->>>>>>> alma:Inventario/Controllers/PruebaController.cs
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     obj.UsoCFDI = DatosPedidoExterno.UsoCFDI;
                     obj.Direccion = DatosPedidoExterno.Direccion;

@@ -2500,11 +2500,6 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
-<<<<<<< HEAD
-=======
-		private System.Nullable<long> _ExitenciaInicial;
-		
->>>>>>> alma
 		private System.Nullable<long> _ExitenciaActual;
 		
 		private long _Coste;
@@ -2543,11 +2538,6 @@ namespace Inventario
     partial void OnNoCompraChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
-<<<<<<< HEAD
-=======
-    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
-    partial void OnExitenciaInicialChanged();
->>>>>>> alma
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -2732,29 +2722,6 @@ namespace Inventario
 			}
 		}
 		
-<<<<<<< HEAD
-=======
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
-		public System.Nullable<long> ExitenciaInicial
-		{
-			get
-			{
-				return this._ExitenciaInicial;
-			}
-			set
-			{
-				if ((this._ExitenciaInicial != value))
-				{
-					this.OnExitenciaInicialChanging(value);
-					this.SendPropertyChanging();
-					this._ExitenciaInicial = value;
-					this.SendPropertyChanged("ExitenciaInicial");
-					this.OnExitenciaInicialChanged();
-				}
-			}
-		}
-		
->>>>>>> alma
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
 		public System.Nullable<long> ExitenciaActual
 		{
@@ -5668,19 +5635,11 @@ namespace Inventario
 		private System.Nullable<long> _NumPedidoProveedor;
 		
 		private string _Unidad;
-<<<<<<< HEAD
 		
 		private System.Nullable<long> _PrecioUnitario;
 		
 		private string _Area;
 		
-=======
-		
-		private System.Nullable<long> _PrecioUnitario;
-		
-		private string _Area;
-		
->>>>>>> alma
 		private System.Nullable<long> _IdArea;
 		
 		private int _Estatus;
@@ -8192,8 +8151,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<Supervisor> _Supervisor;
-		
 		private EntitySet<Tienda> _Tienda1;
 		
 		private EntityRef<Areas> _Areas;
@@ -8220,7 +8177,6 @@ namespace Inventario
 		
 		public Supervision()
 		{
-			this._Supervisor = new EntitySet<Supervisor>(new Action<Supervisor>(this.attach_Supervisor), new Action<Supervisor>(this.detach_Supervisor));
 			this._Tienda1 = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda1), new Action<Tienda>(this.detach_Tienda1));
 			this._Areas = default(EntityRef<Areas>);
 			OnCreated();
@@ -8370,19 +8326,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supervision_Supervisor", Storage="_Supervisor", ThisKey="IdSupervision", OtherKey="IdSupervision")]
-		public EntitySet<Supervisor> Supervisor
-		{
-			get
-			{
-				return this._Supervisor;
-			}
-			set
-			{
-				this._Supervisor.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supervision_Tienda", Storage="_Tienda1", ThisKey="IdSupervision", OtherKey="IdSupervision")]
 		public EntitySet<Tienda> Tienda1
 		{
@@ -8450,18 +8393,6 @@ namespace Inventario
 			}
 		}
 		
-		private void attach_Supervisor(Supervisor entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supervision = this;
-		}
-		
-		private void detach_Supervisor(Supervisor entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supervision = null;
-		}
-		
 		private void attach_Tienda1(Tienda entity)
 		{
 			this.SendPropertyChanging();
@@ -8501,8 +8432,6 @@ namespace Inventario
 		
 		private EntitySet<Tienda> _Tienda;
 		
-		private EntityRef<Supervision> _Supervision;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -8530,7 +8459,6 @@ namespace Inventario
 		public Supervisor()
 		{
 			this._Tienda = new EntitySet<Tienda>(new Action<Tienda>(this.attach_Tienda), new Action<Tienda>(this.detach_Tienda));
-			this._Supervision = default(EntityRef<Supervision>);
 			OnCreated();
 		}
 		
@@ -8665,10 +8593,6 @@ namespace Inventario
 			{
 				if ((this._IdSupervision != value))
 				{
-					if (this._Supervision.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdSupervisionChanging(value);
 					this.SendPropertyChanging();
 					this._IdSupervision = value;
@@ -8728,40 +8652,6 @@ namespace Inventario
 			set
 			{
 				this._Tienda.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supervision_Supervisor", Storage="_Supervision", ThisKey="IdSupervision", OtherKey="IdSupervision", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Supervision Supervision
-		{
-			get
-			{
-				return this._Supervision.Entity;
-			}
-			set
-			{
-				Supervision previousValue = this._Supervision.Entity;
-				if (((previousValue != value) 
-							|| (this._Supervision.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supervision.Entity = null;
-						previousValue.Supervisor.Remove(this);
-					}
-					this._Supervision.Entity = value;
-					if ((value != null))
-					{
-						value.Supervisor.Add(this);
-						this._IdSupervision = value.IdSupervision;
-					}
-					else
-					{
-						this._IdSupervision = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Supervision");
-				}
 			}
 		}
 		

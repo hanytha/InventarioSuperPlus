@@ -42,9 +42,9 @@ function ConsultaPedidos() {
     );
 }
 function CrearTablaPedidos(Data) {
-    var CodigoHtmlTablaPedidos = ""; 
+    var CodigoHtmlTablaPedidos = "";
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3'>";
-    
+
     CodigoHtmlTablaPedidos += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>";
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
@@ -209,13 +209,25 @@ function GuardarPedidoInterno() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrioó un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrìó un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe el pedido");
+                        Swal.fire(
+                            '',
+                            'Ya existe el pedido',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se ejecutó correctamente");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         CrearAcordeonPedidosInt();
                         document.getElementById("btnCancelar").click();
                     }
@@ -275,7 +287,7 @@ function LlenarCMBPrincipal() {
     $.get("/GLOBAL/BDArticulosEmpresa", function (data) {
         llenarCombo(data, document.getElementById("cmbArticulo"));
     });
-    //$.get("/GLOBAL/BDUnidadesMedida", function (data) {
+    //$.get("/GLOBAL/BDUnidadesMedida",  function (data) {
     //    llenarCombo(data, document.getElementById("cmbUnidadDeMedida"));
     //});
 

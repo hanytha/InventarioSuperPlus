@@ -118,8 +118,8 @@ function Desplegar(no, id) {
 
 
 
-function abrirModal(id,idS) {
-   
+function abrirModal(id, idS) {
+
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -150,7 +150,7 @@ function abrirModal(id,idS) {
             //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-        
+
 
         });
 
@@ -235,7 +235,7 @@ function MostrarArticulos(id) {
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
-} 
+}
 //----------------Abrir modal de Pedidos Internos--------------------------------------------------------
 //function abrirModal(id) {
 //    LlenarCMCProveedores();
@@ -251,7 +251,7 @@ function MostrarArticulos(id) {
 //            document.getElementById("cmbTienda").value = Data[0].Tienda;
 //            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 //            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-           
+
 //        });
 //        //$.get("/Pedidosint/ConsultaPedidoInterno/?Id=" + id, function (Data) {
 
@@ -261,7 +261,7 @@ function MostrarArticulos(id) {
 
 //        MostrarArticulos(id);
 //        ConsultaSiguientePedido();
-       
+
 //    }
 //}
 

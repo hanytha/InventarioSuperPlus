@@ -236,13 +236,25 @@ function GuardarProveedor() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe el proveedor");
+                        Swal.fire(
+                            '',
+                            'Ya existe el proveedor',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se ejecutó correctamente");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         CrearAcordeonProveedores();
                         document.getElementById("btnCancelar").click();
                     }

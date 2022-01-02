@@ -144,13 +144,25 @@ function GuardarSupervisor() {
                 success: function (data) {
 
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrìó un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe el supervidor");
+                        Swal.fire(
+                            '',
+                            'Ya existe el supervidor',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se ejecutó correctamente");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         CrearTablaSupervisores();
                         document.getElementById("btnCancelar").click();
                     }

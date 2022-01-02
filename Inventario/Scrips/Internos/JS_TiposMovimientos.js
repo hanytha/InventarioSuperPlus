@@ -153,13 +153,25 @@ function GuardarTipoDeMovimiento() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrìó un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe este movimiento");
+                        Swal.fire(
+                            '',
+                            'Ya existe este movimiento',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se ejecutó correctamente");
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         CrearTiposDeMovimiento();
                         document.getElementById("btnCancelar").click();
                     }

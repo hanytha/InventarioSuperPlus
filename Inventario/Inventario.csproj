@@ -175,7 +175,6 @@
     <Compile Include="Controllers\ConsultaXCompraController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\ExistenciaAlmacenController.cs" />
-    <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GLOBALController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />

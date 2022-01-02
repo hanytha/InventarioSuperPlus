@@ -125,13 +125,27 @@ function GuardarPagina() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrió un error");
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
                     }
                     else if (data == -1) {
-                        alert("Ya existe la página");
+
+                        Swal.fire(
+                            '',
+                            'Ya existe la página',
+                            'warning'
+                        )
                     }
                     else {
-                        alert("Se guardaron los datos correctamente.");
+                      
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
                         MostrarPaginas();
                         document.getElementById("btnCancelar").click();
                     }

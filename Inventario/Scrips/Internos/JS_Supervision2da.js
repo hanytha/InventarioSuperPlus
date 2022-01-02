@@ -138,13 +138,25 @@ function GuardarSupervision() {
                     processData: false,
                     success: function (data) {
                         if (data == 0) {
-                            alert("Ocurrió un error");
+                            Swal.fire(
+                                '',
+                                'Ocurrìó un error',
+                                'danger'
+                            )
                         }
                         else if (data == -1) {
-                            alert("Ya existe la supervición");
+                            Swal.fire(
+                                '',
+                                'Ya existe la supervición',
+                                'warning'
+                            )
                         }
                         else {
-                            alert("Se ejecutó correctamente");
+                            Swal.fire(
+                                '¡GUARDADO!',
+                                'Se guardó correctamente.',
+                                'success'
+                            )
                             ConsultaSuperviciones();
                             document.getElementById("btnCancelar").click();
                         }
