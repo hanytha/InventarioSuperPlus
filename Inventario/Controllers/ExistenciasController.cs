@@ -40,6 +40,10 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
+<<<<<<< HEAD
+=======
+                    //p.Logo,
+>>>>>>> alma
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -68,6 +72,10 @@ namespace Inventario.Controllers
                     p.Area,
                     p.Marca,
                     p.Estatus,
+<<<<<<< HEAD
+=======
+                    //FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
+>>>>>>> alma
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
@@ -85,7 +93,11 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
                 if (nveces == 0)
                 {
+<<<<<<< HEAD
 
+=======
+                    //DatosArticulo.Logo = Convert.FromBase64String(cadF);
+>>>>>>> alma
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -128,7 +140,11 @@ namespace Inventario.Controllers
                     obj.Area = DatosArticulo.Area;
                     obj.IdMarca = DatosArticulo.IdMarca;
                     obj.Marca = DatosArticulo.Marca;
+<<<<<<< HEAD
 
+=======
+                    //obj.Logo = Convert.FromBase64String(cadF);
+>>>>>>> alma
 
                     InvBD.SubmitChanges();
                     Afectados = 1;

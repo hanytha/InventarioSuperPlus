@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Supervision";
+    ViewBag.Title = "Supervision2da";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
@@ -13,8 +13,7 @@
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en la tabla-->
-<div id="tablaSupervicion"></div
-<!-- Encabezado del Modal -->
+<div id="tablaSupervicion"></div><!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -76,8 +75,9 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-@*<script src="~/Scrips/Internos/JS_Superviciones.js"></script>*@
-<script src="~/Scrips/Internos/JS_Supervision.js"></script>
+<script src="~/Scrips/Internos/JS_Supervision2da.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/General/JS_Buscar.js"></script>

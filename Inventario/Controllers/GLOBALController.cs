@@ -91,6 +91,28 @@ namespace Inventario.Controllers
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult BDProveedorExist()
+        {
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BDArtEx(int IDP)
+        {
+            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(IDP))
+                .Select(p => new
+                {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+
+        }
+
         //consulta Municipio
         public JsonResult BDMunicipio(int IDE)
         {
@@ -302,10 +324,19 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        //Consulta 
+        //Consulta (combo de proveedores en SucursalesSupervisión)
         public JsonResult BDPro()
         {
             var datos = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdProveedores,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BDProv()
+        {
+            var datos = InvBD.Proveedores.Where(p => p.Nombre.Equals("Almacén General") && p.Estatus.Equals(1))
                 .Select(p => new {
                     ID = p.IdProveedores,
                     Nombre = p.Nombre
@@ -318,11 +349,13 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     ID = p.IdArticulos,
-                    Nombre = p.NombreProveedor
+                    Nombre = p.NombreEmpresa
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
 
         }
+
+    
         public JsonResult BDUnidadM(int IDAR)
         {
             var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdArticulos.Equals(IDAR))
@@ -366,7 +399,7 @@ namespace Inventario.Controllers
             return Json(DatosSupervisiones, JsonRequestBehavior.AllowGet);
         }
 
-
+        //Consulta para el combo de proveedores en pedidosInternos-sucursalesSupervision
         public JsonResult Areas()
         {
             var DatosDepartamento = InvBD.Areas.Where(p => p.Estatus.Equals(1))
@@ -389,7 +422,15 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult BDArtProvAlm()
+        {
+            var datos = InvBD.Articulos.Where(p => p.Proveedor.Equals("Almacén General") && p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdArticulos,
+                    Nombre = p.NombreEmpresa
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 

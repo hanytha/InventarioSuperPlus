@@ -77,7 +77,6 @@ function TablaSupervisores(Data) {
         CodigoHtmlSupervisores += "<td>" + Data[i].TipoSupervision + "</td>";
         CodigoHtmlSupervisores += "<td>";
         CodigoHtmlSupervisores += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervisor + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlSupervisores += "<button class='btn btn-danger' onclick='EliminarSupervisor(" + Data[i].IdSupervisor + ",this)' ><i class='fas fa-eraser'></i></button>"; 
         CodigoHtmlSupervisores += "</td>";
         CodigoHtmlSupervisores += "</tr>";
     }
@@ -189,34 +188,6 @@ function CamposObligatorios() {
     }
     return exito;
 }
-
-//"Elimina" el área cambia el Estatus
-function EliminarSupervisor(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-
-        $.get("/Supervisor/EliminarSupervisor/?Id=" + id, function (DatoSupervisor) {
-
-
-
-            if (DatoSupervisor == 1) {
-
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
-                CrearTablaSupervisores();
-            } else {
-                alert("Ocurrio un error");
-            }
-
-        });
-    }
-}
-
-
-
 function LlenarCMBPSupervicion() {
     $.get("/GLOBAL/BDSupervicion", function (data) {
         llenarCombo(data, document.getElementById("cmbSupervicion"));

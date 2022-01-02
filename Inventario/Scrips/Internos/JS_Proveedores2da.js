@@ -50,7 +50,6 @@ function AcordeonProveedores(data, IDo) {
         CodHtml += "</div>";
         CodHtml += "<div class='row'>";
         CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodHtml += "<button class='btn btn-danger' onclick='EliminarProveedores(" + data[i].IdProveedores + "," + data[i].IdProveedores + ",this)'><i class='fas fa-eraser'></i></button>";
         CodHtml += "</div>";
         CodHtml += "</div>";
         CodHtml += "</div>";
@@ -266,7 +265,7 @@ function CamposObligatorios() {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+        if (controlesObligatorio[i].value == "") {
             exito = false;
             controlesObligatorio[i].classList.add("border-danger");
         }
@@ -275,25 +274,6 @@ function CamposObligatorios() {
         }
     }
     return exito;
-}
-//"Elimina" el área cambia el Estatus
-function EliminarProveedores(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Proveedores/EliminarProveedores/?IdProveedores=" + id, function (DatoUsuario) {
-            if (DatoUsuario == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
-                CrearAcordeonProveedores();
-            } else {
-                alert("Ocurrió un error");
-            }
-        });
-    }
 }
 
 

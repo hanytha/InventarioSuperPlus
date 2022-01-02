@@ -105,10 +105,7 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
-
-
-
-        //Eliminar Compra
+        //Eliminar Compra TipoDeMovimiento
         public int EliminarTipoDeMovimiento(long Id)
         {
             int nregistradosAfectados = 0;
@@ -125,6 +122,10 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-
+        //-----------------Empieza 
+        public ActionResult TiposDeMovimiento2da()
+        {
+            return View();
+        }
     }
 }

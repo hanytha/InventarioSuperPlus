@@ -52,7 +52,6 @@ function CrearTablaSuperviciones(Data) {
         CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaSuperviciones += "<td>";
         CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaSuperviciones += "</td>";
         CodigoHtmlTablaSuperviciones += "</tr>";
     }
@@ -66,7 +65,7 @@ function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+        controlesObligatorio[i].parentNode.classList.remove("border-danger"); //Cambia los bordes lo las casillas a color rojo
     }
     if (id == 0) {
         LimpiarCampos();
@@ -195,33 +194,15 @@ function CamposObligatorios() {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+        if (controlesObligatorio[i].value == "") {
             exito = false;
-            controlesObligatorio[i].classList.add("border-danger");
+            controlesObligatorio[i].parentNode.classList.add("error");
         }
         else {
-            controlesObligatorio[i].classList.remove("border-danger");
+            controlesObligatorio[i].parentNode.classList.remove("error");
         }
     }
     return exito;
-}
-function EliminarSupervicion(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
-        $.get("/Supervision/EliminarSupervicion/?Id=" + id, function (DatoSupervicion) {
-            if (DatoSupervicion == 1) {
-                // alert("Se eliminó correctamente");
-                Swal.fire(
-                    'Deleted!',
-                    'Se eliminó correctamente.',
-                    'success'
-                )
-                //  confirmarEliminar();
-                ConsultaSuperviciones();
-            } else {
-                alert("Ocurrió un error");
-            }
-        });
-    }
 }
 //Función para visualizar las tiendas seleccionadas al presionar el botón modificar
 function MostrarTiendas() {

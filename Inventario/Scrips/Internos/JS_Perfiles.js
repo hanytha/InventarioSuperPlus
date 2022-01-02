@@ -1,23 +1,38 @@
-﻿MostrarPerfiles();
+﻿BloquearCTRL();
+MostrarPerfiles();
 function MostrarPerfiles() {
-    $.get("/Configuracion/BDPerfiles", function (InfPerfiles) {
-        CrearTablaPerfiles(InfPerfiles);
-    });
+    $.get("/Configuracion/BDPerfiles", function (Data) {
+        CrearTablaPerfiles(Data);
+    }
+    );
 }
-//Inserta la tabla de las páginas
-function CrearTablaPerfiles(InfPerfiles) {
+function CrearTablaPerfiles(Data) {
     var CodigoHtmlTablaPerfiles = "";
-    CodigoHtmlTablaPerfiles += "<table id='tablas' class='table'>";
-    CodigoHtmlTablaPerfiles += "<thead><tr><th>Perfil</th><th>Nivel</th><th>Permisos</th><th>Opciones</th></tr></thead>";
+    CodigoHtmlTablaPerfiles += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaPerfiles += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTablaPerfiles += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaPerfiles += "</div>";
+    CodigoHtmlTablaPerfiles += "<div class='table-responsive'>";
+    CodigoHtmlTablaPerfiles += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaPerfiles += "<thead>";
+    CodigoHtmlTablaPerfiles += "<tr>";
+    CodigoHtmlTablaPerfiles += "<th>Perfil</th>";
+    CodigoHtmlTablaPerfiles += "<th>Nivel</th>";
+    //CodigoHtmlTablaPerfiles += "<th>Permisos</th>";
+    CodigoHtmlTablaPerfiles += "<th>Comentarios</th>";
+    CodigoHtmlTablaPerfiles += "<th>Opciones</th>";
+    CodigoHtmlTablaPerfiles += "</tr>";
+    CodigoHtmlTablaPerfiles += "</thead>";
     CodigoHtmlTablaPerfiles += "<tbody>";
-    for (var i = 0; i < InfPerfiles.length; i++) {
+    for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaPerfiles += "<tr>";
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Nombre + "</td>";
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Nivel + "</td>"
-        CodigoHtmlTablaPerfiles += "<td>" + InfPerfiles[i].Comentarios + "</td> ";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Nivel + "</td>";
+        //CodigoHtmlTablaPerfiles += "<td>" + Data[i].Permisos + "</td>";
+        CodigoHtmlTablaPerfiles += "<td>" + Data[i].Comentarios + "</td>";
         CodigoHtmlTablaPerfiles += "<td>";
-        CodigoHtmlTablaPerfiles += "<button id='BtnAbrirMPag' class='btn btn-primary' onclick='AModalPerfil(" + InfPerfiles[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Perfil' ><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPerfiles += "<button class='btn btn-danger' onclick='EliminarPerfil(" + InfPerfiles[i].ID + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPerfiles += "<button class='btn btn-primary' onclick='AModalPerfil(" + Data[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Perfil'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaPerfiles += "<button class='btn btn-danger' onclick='EliminarPerfil(" + Data[i].ID + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaPerfiles += "</td>";
         CodigoHtmlTablaPerfiles += "</tr>";
     }
@@ -25,9 +40,6 @@ function CrearTablaPerfiles(InfPerfiles) {
     CodigoHtmlTablaPerfiles += "</table>";
     document.getElementById("Paginas_Perfiles").innerHTML = CodigoHtmlTablaPerfiles;
 }
-
-BloquearCTRL();
-
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -43,10 +55,12 @@ function AModalPerfil(ID) {
         CtrlObligatorio[i].classList.remove("border-danger");
     }
     if (ID == 0) {
+        sessionStorage.setItem('IdPfl', '0');
     }
     else {
         $.get("/Configuracion/BDPerfil/?IDPerfil=" + ID, function (DatosPerfil) {
-            document.getElementById("TxtIDPerfil").value = DatosPerfil[0].ID;
+            //document.getElementById("TxtIDPerfil").value = DatosPerfil[0].ID;
+            sessionStorage.setItem('IdPfl', DatosPerfil[0].ID);
             document.getElementById("TxtNivel").value = DatosPerfil[0].Nivel;
             document.getElementById("TxtPerfil").value = DatosPerfil[0].Nombre;
             //--------
@@ -60,7 +74,6 @@ function AModalPerfil(ID) {
                     }
                 }
             }
-            //---
             document.getElementById("TxtComentarios").value = DatosPerfil[0].Comentarios;
         });
     }
@@ -69,7 +82,8 @@ function AModalPerfil(ID) {
 function GuardarPerfil() {
     if (ObligatoriosPerfil() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IDPerfil = document.getElementById("TxtIDPerfil").value;
+            //var IDPerfil = document.getElementById("TxtIDPerfil").value;
+            var IdPerfilDeUsuario = sessionStorage.getItem('IdPfl');
             var Nivel = document.getElementById("TxtNivel").value;
             var Perfil = document.getElementById("TxtPerfil").value;
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
@@ -83,7 +97,7 @@ function GuardarPerfil() {
             var Permisos = seleccionados.substring(0, seleccionados.length - 1);
             var Comentarios = document.getElementById("TxtComentarios").value;
             var frm = new FormData();
-            frm.append("IdPerfilDeUsuario", IDPerfil);
+            frm.append("IdPerfilDeUsuario", IdPerfilDeUsuario);
             frm.append("Perfil", Perfil);
             frm.append("Nivel", Nivel);
             frm.append("Permisos", Permisos);
@@ -97,7 +111,7 @@ function GuardarPerfil() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe el perfil");
@@ -130,17 +144,22 @@ function ObligatoriosPerfil() {
 //"Elimina" el área cambia el Estatus
 function EliminarPerfil(id) {
     if (confirm("¿Desea eliminar el registo?") == 1) {
-        $.get("/Configuracion/EliminarPerfil/?IdPerfil=" + id, function (Pagina) {
-            if (Pagina == 1) {
-                alert("Se elimino correctamente");
+        $.get("/Configuracion/EliminarPerfil/?IdPerfil=" + id, function (Perfil) {
+            if (Perfil == 1) {
+                // alert("Se eliminó correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se eliminó correctamente.',
+                    'success'
+                )
                 MostrarPerfiles();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }
 }
-//****************************************************************************************************************************************************************************************************
+//---
 function Limpiar() {
     var controles = document.getElementsByClassName("limpiar");
     var ncontroles = controles.length;

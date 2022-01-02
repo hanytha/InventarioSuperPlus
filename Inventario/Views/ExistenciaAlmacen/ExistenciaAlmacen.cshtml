@@ -2,151 +2,120 @@
 @{
     ViewBag.Title = "ExistenciaAlmacen";
 }
-
+<h2 class="form-control-label" style="font-size: 20px;">
+    EXISTENCIA ALMACÉN GENERAL
+</h2>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
-<div class="contenedor">
-    <div class="contenedor hero">
-        <div class="contenedor-cards">
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-
 <div id="tabla" class="default "></div>
-<div id="accordion"></div>
+<div id="TablaExistencia"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE ALMACEN GENERAL
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO DE ALMACEN GENERAL</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
-                            <h4>Paso 1</h4>
+
                             <!--Insertar fecha-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaSistema">Fecha de Ingreso<span>*</span></label>
                                         <input type="text" id="TxtFechaSistema" class="form-control bloquear" name="data[TxtFechaSistema]" size="25" maxlength="100">
+<<<<<<< HEAD
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaFinal">Fecha final<span class="required">*</span></label>
                                         <input type="date" name="data[TxtFechaFinal]" id="TxtFechaFinal" class="form-control  limpiar obligatorio" placeholder="Fecha final">
+=======
+>>>>>>> alma
                                     </div>
                                 </div>
-                            </div>
-                            <!--Termina-->
-                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNumCompra">Número de pedido<span class="required">*</span></label>
                                         <input type="number" name="data[TxtNumCompra]" id="TxtNumCompra" class="form-control  limpiar obligatorio" placeholder="1">
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaInicial">Existencia Inicial<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="60">
+                                        <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                        <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="68">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="120">
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div class="row">-->
-                                @*<div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
-                                    </div>
-                                </div>*@
-
-                                
-                            <!--</div>-->
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTipoOperacion">Tipo de Operación<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Ejemplo S.A.">
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbCompra">Número de compra<span>*</span></label>
-                                        <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio "></select>
+                                        <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
+                                        <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect">
+                                        </select>
                                     </div>
                                 </div>
+                                @*<div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaInicial">Cantidad<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="88">
+                                    </div>
+                                </div>*@
+                                
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtExistenciaActual">Cantidad<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
+                                        </div>
+                                    </div>
+                             
+                                @*<div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="88">
+                                        </div>
+                                    </div>*@
+                            </div>
+                            @*<div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTipoOperacion">Tipo de Operación<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Bonificación">
+                                    </div>
+                                </div>
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="cmbCompra">Número de compra<span>*</span></label>
+                                            <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio "></select>
+                                        </div>
+                                    </div>*@
                             </div>
                             <div class="row ">
                                 <div class="col-md-6">
@@ -154,8 +123,8 @@
                                         <label class="form-control-label" for="cmbAsignacion">Asignación<span class="required">*</span></label>
                                         <select id="cmbAsignacion" style="width: 100%" class="form-control limpiarSelect obligatorio">
                                             <option value="0">--Seleccione--</option>
-                                            <option value="1">--Oficina--</option>
-                                            <option value="2">--Tienda--</option>
+                                            <option value="1">Oficina</option>
+                                            <option value="2">Tienda</option>
                                         </select>
                                     </div>
                                 </div>
@@ -167,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-success" onclick="GuardarAlmacen()">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="GuardarAlmacen()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -179,8 +148,6 @@
         </div>
     </div>
 </div>
-
-
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
@@ -200,5 +167,4 @@
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_ExistenciasAlmacen.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="~/Scrips/General/JS_Buscar.js"></script>

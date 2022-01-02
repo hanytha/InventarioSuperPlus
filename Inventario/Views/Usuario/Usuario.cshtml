@@ -11,53 +11,6 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-<link rel="stylesheet" href="estilos.css">
-<div class="contenedor">
-    <div class="contenedor hero">
-        <div class="contenedor-cards">
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen1.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen2.jpg" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-card-item">
-                <div class="contenedor-card-item-wrapper">
-                    <img src="~/Assets/Imagenes/imagen3.png" alt="">
-                    <div class="contenedor-info">
-                        <div class="info">
-                            <p class="titulo">Titulo</p>
-                            <span class="categoria">Categoría</span>
-                        </div>
-                        <div class="fondo"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
@@ -133,7 +86,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNSS">Número de Seguro Social<span class="required">*</span></label>
-                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" placeholder="NSS" size="15" maxlength="20" type="text">
+                                        <input id="TxtNSS" name="data[TxtNSS]" class="form-control  limpiar obligatorio" placeholder="07-95-75-9554-8" size="15" maxlength="20" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -143,6 +96,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
                         </fieldset>
                         <fieldset>
@@ -180,7 +134,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -203,22 +156,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
-                        </fieldset>
-
-
-                        <fieldset>
-                            <h4>Paso 3</h4>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbPerfil">Perfil<span class="required">*</span></label>
-                                        <select id="cmbPerfil" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -227,21 +164,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
+                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
+                        </fieldset>
+
+
+                        <fieldset>
+                            <h4>Paso 4</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbPerfil">Perfil<span class="required">*</span></label>
+                                        <select id="cmbPerfil" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="PBFoto">Seleccione una foto</label>
-                                        <img id="PBFoto" src="~/Assets/Imagenes/logotipo.png" width="150" height="150" alt="" />
+                                        <img id="PBFoto" src="~/Assets/Imagenes/logotipo.png" width="120" height="120" alt="" />
                                         <br />
                                         <input id="BtnFoto" type="file" class="form-control form-control-sm limpiar" value="SUBIR" />
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <input type="button" name="next" class="next btn btn-primary" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <h4>Paso 4</h4>
                             <div class="row ">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -274,7 +222,7 @@
                             </div>
 
                             <input type="button" name="previous" class="previous btn btn-primary" value="Atrás" />
-                            <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarUsuario()">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-primary " onclick=" GuardarUsuario()">Guardar</button>
                             <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </fieldset>
 
@@ -297,9 +245,10 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            INFORMACIÓN GENERAL DE LOS USUARIOS
+                            INFOMACIÓN GENERAL DE LOS USUARIOS
                         </label>
                     </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
@@ -474,7 +423,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
                 @*<div class="modal-footer">
@@ -494,22 +442,15 @@
 
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-
 <script src="~/Scrips/jquery-ui.min.js"></script>
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-
 <script src="~/Scrips/Internos/JS_Usuarios.js"></script>
-
 <!--Validacion del formulario-->
 <!--<script src="~/Scrips/js.cookie.js"></script>--> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
-
-
-<!--sweetalert2-->
+<script src="~/Scrips/General/JS_BotonesUsuarios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-@*<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>*@
+<script src="~/Scrips/General/JS_Buscar.js"></script>
 
 
 

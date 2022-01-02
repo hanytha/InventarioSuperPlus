@@ -27,7 +27,12 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
+<<<<<<< HEAD
                     p.PrecioUnitario,
+=======
+                    p.ExitenciaInicial,
+                    //p.FechaFinal,
+>>>>>>> alma
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
@@ -52,7 +57,12 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
+<<<<<<< HEAD
                     p.PrecioUnitario,
+=======
+                    p.ExitenciaInicial,
+                    //p.FechaFinal,
+>>>>>>> alma
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
@@ -92,7 +102,11 @@ namespace Inventario.Controllers
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
+<<<<<<< HEAD
                 && p.PrecioUnitario.Equals(DatosCompra.PrecioUnitario)
+=======
+                //&& p.FechaFinal.Equals(DatosCompra.FechaFinal)
+>>>>>>> alma
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.Coste.Equals(DatosCompra.Coste)
                 && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
@@ -107,7 +121,12 @@ namespace Inventario.Controllers
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
+<<<<<<< HEAD
                     obj.PrecioUnitario = DatosCompra.PrecioUnitario;
+=======
+                    obj.ExitenciaInicial = DatosCompra.ExitenciaInicial;
+                    //obj.FechaFinal = DatosCompra.FechaFinal;
+>>>>>>> alma
                     obj.ExitenciaActual = DatosCompra.ExitenciaActual;
                     obj.Coste = DatosCompra.Coste;
                     obj.IdImpuesto = DatosCompra.IdImpuesto;

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "ExistenciaAlmacen2da";
+}
+<h2 class="form-control-label" style="font-size: 20px;">
+    EXISTENCIA ALMACÉN GENERAL
+</h2>
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!--Termina tarjeta-->
+<!--Mostrar los registros en el accordion-->
+<div id="tabla" class="default "></div>
+<div id="TablaExistencia"></div>
+<!------------------------------------------>
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_ExistenciasAlmacen2da.js"></script>
+<script src="~/Scrips/General/JS_Buscar.js"></script>

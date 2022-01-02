@@ -2,38 +2,39 @@
 @{
     ViewBag.Title = "TiposDeMovimiento";
 }
-
-
+<h2 class="form-control-label" style="font-size: 20px;">
+    TIPOS DE MOVIMIENTO
+</h2>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<<<<<<< HEAD
 <!-- Inicia tarjeta-->
 <!--Termina tarjeta-->
+=======
+>>>>>>> alma
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!--Mostrar los registros en el accordion-->
-
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
+<div id="TablaMovimientos"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO TIPOS DE MOVIMIENTOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h5>REGISTRO TIPOS DE MOVIMIENTOS</h5>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h5>Paso 1</h5>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -44,25 +45,25 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="----">
+                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Agrega una descripción...">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbUnidades">Unidad de medida<span>*</span></label>
-                                        <select id="cmbUnidades" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
                                         <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbUnidades">Unidad de medida<span>*</span></label>
+                                        <select id="cmbUnidades" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-success" onclick="GuardarTipoDeMovimiento()">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="GuardarTipoDeMovimiento()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -74,9 +75,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
@@ -88,5 +86,6 @@
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_TiposMovimientos.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="~/Scrips/General/JS_Buscar.js"></script>

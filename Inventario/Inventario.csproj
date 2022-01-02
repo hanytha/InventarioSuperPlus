@@ -112,10 +112,13 @@
     <Content Include="Scrips\argon.js" />
     <Content Include="Scrips\bootstrap.min.js" />
     <Content Include="Scrips\General\jquery.dataTables.min.js" />
+    <Content Include="Scrips\General\JS_BotonesUsuarios.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
+    <Content Include="Scrips\General\JS_Buscar.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
+<<<<<<< HEAD
     <Content Include="Scrips\Internos\JS_Articulo2do.js" />
     <Content Include="Scrips\Internos\JS_Articulo3ro.js" />
     <Content Include="Scrips\Internos\JS_Categoria2da.js" />
@@ -123,13 +126,25 @@
     <Content Include="Scrips\Internos\JS_Compra3.js" />
     <Content Include="Scrips\Internos\JS_Compra2.js" />
     <Content Include="Scrips\Internos\JS_Impuesto2do.js" />
+=======
+    <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
+    <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
+    <Content Include="Scrips\Internos\JS_Supervision2da.js" />
+>>>>>>> alma
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
     <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
+<<<<<<< HEAD
     <Content Include="Scrips\Internos\JS_Tienda2da.js" />
+=======
+    <Content Include="Scrips\Internos\JS_Supervisores2da.js" />
+    <Content Include="Scrips\Internos\JS_Supervisores.js" />
+    <Content Include="Scrips\Internos\JS_TiposMovimientos2da.js" />
+>>>>>>> alma
     <Content Include="Scrips\Internos\JS_TiposMovimientos.js" />
     <Content Include="Scrips\Internos\JS_Marca.js" />
     <Content Include="Scrips\Internos\JS_Categorias.js" />
@@ -154,7 +169,6 @@
     <Content Include="Scrips\jquery-ui.min.js" />
     <Content Include="Scrips\jquery.min.js" />
     <Content Include="Scrips\jquery.scrollbar.min.js" />
-    <Content Include="Scrips\js.cookie.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -221,16 +235,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Departamentos\Departamentos.cshtml" />
-    <Content Include="Views\subArea\subArea.cshtml" />
     <Content Include="Views\Usuario\Usuario.cshtml" />
     <Content Include="Views\Articulo\Articulo.cshtml" />
     <Content Include="Views\Bonificaciones\Bonificaciones.cshtml" />
     <Content Include="Views\Impuestos\Impuestos.cshtml" />
-    <Content Include="Views\Marca\SucursalesSupervision.cshtml" />
-    <Content Include="Views\Pagina\Pagina.cshtml" />
     <Content Include="Views\Pedidosext\Pedidosext.cshtml" />
     <Content Include="Views\Pedidosint\Pedidosint.cshtml" />
-    <Content Include="Views\Perfiles\Perfiles.cshtml" />
     <Content Include="Views\Proveedores\Proveedores.cshtml" />
     <Content Include="Views\Tienda\Tienda.cshtml" />
     <Content Include="Views\UnidadMedida\UnidadMedida.cshtml" />
@@ -243,10 +253,10 @@
     <Content Include="Views\ExistenciasG\ExistenciasG.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Marca\Marca.cshtml" />
-    <Content Include="Views\subArea\subArea - Copia.cshtml" />
     <Content Include="Views\Supervision\Supervision.cshtml" />
     <Content Include="Views\Supervision\SucursalesSupervision.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Articulo\Articulo2do.cshtml" />
     <Content Include="Views\Articulo\Articulo3ro.cshtml" />
     <Content Include="Views\Categoria\Categoria2da.cshtml" />
@@ -256,6 +266,14 @@
     <Content Include="Views\Tienda\Tienda2da.cshtml" />
     <Content Include="Views\Compra\Compra2.cshtml" />
     <Content Include="Views\Compra\Compra3.cshtml" />
+=======
+    <Content Include="Views\Proveedores\Proveedores2da.cshtml" />
+    <Content Include="Views\Proveedores\Proveedores3ra.cshtml" />
+    <Content Include="Views\Supervisor\Supervisor2da.cshtml" />
+    <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
+    <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
+    <Content Include="Views\Supervision\Supervision2da.cshtml" />
+>>>>>>> alma
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

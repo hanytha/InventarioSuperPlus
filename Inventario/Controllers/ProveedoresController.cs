@@ -6,8 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 namespace Inventario.Controllers
 {
-    //Lamar al método de seguridad
-
+    //Llamar al método de seguridad
+    [Seguridad]
     public class ProveedoresController : Controller
     {//conexion con DB
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
@@ -16,11 +16,9 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        //consulta general de los proveedores
-        //consulta general de los proveedores
-        public JsonResult ConsultaProveedores()
+        public JsonResult ConsultaSupervisores()
         {
-            var proveedores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
+            var supervisores = InvBD.Proveedores.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdProveedores,
@@ -42,12 +40,10 @@ namespace Inventario.Controllers
                     p.NumeroDeCuenta,
                     p.UsoCFDI,
                     p.Descripcion,
-                    p.Logo
+                    p.Logo,
                 });
-            return Json(proveedores, JsonRequestBehavior.AllowGet);
+            return Json(supervisores, JsonRequestBehavior.AllowGet);
         }
-
-
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaProveedor(long Id)
         {
@@ -116,7 +112,6 @@ namespace Inventario.Controllers
                     {
                         Proveedores obj = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(id)).First();
                         obj.Nombre = DatosProveedor.Nombre;
-                        //   obj.Id = DatosProveedor.Id;
                         obj.Correo = DatosProveedor.Correo;
                         obj.ClaveInterbancaria = DatosProveedor.ClaveInterbancaria;
                         obj.CodigoPostal = DatosProveedor.CodigoPostal;
@@ -163,6 +158,15 @@ namespace Inventario.Controllers
                 nregistradosAfectados = 0;
             }
             return nregistradosAfectados;
+        }
+        //---------------------------------Empieza Proveedores2da-----------------------------------
+        public ActionResult Proveedores2da()
+        {
+            return View();
+        }
+        public ActionResult Proveedores3ra()
+        {
+            return View();
         }
     }
 }

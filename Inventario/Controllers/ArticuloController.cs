@@ -44,6 +44,10 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
+<<<<<<< HEAD
+=======
+                    //p.Logo,
+>>>>>>> alma
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -73,7 +77,12 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
+<<<<<<< HEAD
                     p.Estatus
+=======
+                    p.Estatus,
+                    //FOTOMOSTRAR = Convert.ToBase64String(p.Logo.ToArray()),
+>>>>>>> alma
 
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
@@ -196,6 +205,10 @@ namespace Inventario.Controllers
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
+<<<<<<< HEAD
+=======
+                    //DatosArticulo.Logo = Convert.FromBase64String(cadF);
+>>>>>>> alma
                     InvBD.Articulos.InsertOnSubmit(DatosArticulo);
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -224,9 +237,16 @@ namespace Inventario.Controllers
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                 && p.Fecha.Equals(DatosArticulo.Fecha)
+<<<<<<< HEAD
                 && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
 
 
+=======
+                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)
+                && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
+                && p.IdAreas.Equals(DatosArticulo.IdAreas)
+                && p.IdMarca.Equals(DatosArticulo.IdMarca)).Count();
+>>>>>>> alma
                 if (nveces == 0)
                 {
                     Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
@@ -249,7 +269,17 @@ namespace Inventario.Controllers
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;
                     obj.Fecha = DatosArticulo.Fecha;
                     obj.FechaSistema = DatosArticulo.FechaSistema;
+<<<<<<< HEAD
       
+=======
+                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
+                    obj.Unidad = DatosArticulo.Unidad;
+                    obj.IdAreas = DatosArticulo.IdAreas;
+                    obj.Area = DatosArticulo.Area;
+                    obj.IdMarca = DatosArticulo.IdMarca;
+                    obj.Marca = DatosArticulo.Marca;
+                    //obj.Logo = Convert.FromBase64String(cadF);
+>>>>>>> alma
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

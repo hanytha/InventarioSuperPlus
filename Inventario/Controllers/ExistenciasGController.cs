@@ -258,28 +258,53 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
+<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
                  && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
                  && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
+=======
+                 //&& p.IdUnidadDeMedida.Equals(DatosPedidoExterno.IdUnidadDeMedida)
+                 //&& p.UnidadDeMedida.Equals(DatosPedidoExterno.UnidadDeMedida)
+                 //&& p.IdMarca.Equals(DatosPedidoExterno.IdMarca)
+                 //&& p.Marca.Equals(DatosPedidoExterno.Marca)
+                 && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
+                 && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
+                 //&& p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
+>>>>>>> alma:Inventario/Controllers/PruebaController.cs
                  && p.Articulo.Equals(DatosPedidoExterno.Articulo)
                  && p.RFC.Equals(DatosPedidoExterno.RFC)
                  && p.Correo.Equals(DatosPedidoExterno.Correo)
                  && p.Telefono.Equals(DatosPedidoExterno.Telefono)
+<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
                  && p.UsoCFDI.Equals(DatosPedidoExterno.UsoCFDI)
                  && p.Direccion.Equals(DatosPedidoExterno.Direccion)
                  && p.NumPedidoProveedor.Equals(DatosPedidoExterno.NumPedidoProveedor)
                  && p.Unidad.Equals(DatosPedidoExterno.Unidad)
                  && p.PrecioUnitario.Equals(DatosPedidoExterno.PrecioUnitario)
+=======
+                 //&& p.Clabe.Equals(DatosPedidoExterno.Clabe)
+>>>>>>> alma:Inventario/Controllers/PruebaController.cs
                  && p.Fecha.Equals(DatosPedidoExterno.Fecha)).Count();
                 if (nveces == 0)
                 {
                     PedidosExternos obj = InvBD.PedidosExternos.Where(p => p.IdPedidosExternos.Equals(id)).First();
                     obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
+<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
+=======
+                    //obj.IdUnidadDeMedida = DatosPedidoExterno.IdUnidadDeMedida;
+                    //obj.UnidadDeMedida = DatosPedidoExterno.UnidadDeMedida;
+                    //obj.IdMarca = DatosPedidoExterno.IdMarca;
+                    //obj.Marca = DatosPedidoExterno.Marca;
+>>>>>>> alma:Inventario/Controllers/PruebaController.cs
                     obj.IdProveedor = DatosPedidoExterno.IdProveedor;
                     obj.Proveedor = DatosPedidoExterno.Proveedor;
                     obj.Articulo = DatosPedidoExterno.Articulo;
                     obj.RFC = DatosPedidoExterno.RFC;
                     obj.Correo = DatosPedidoExterno.Correo;
                     obj.Telefono = DatosPedidoExterno.Telefono;
+<<<<<<< HEAD:Inventario/Controllers/ExistenciasGController.cs
+=======
+                    //obj.Clabe = DatosPedidoExterno.Clabe;
+>>>>>>> alma:Inventario/Controllers/PruebaController.cs
                     obj.Fecha = DatosPedidoExterno.Fecha;
                     obj.UsoCFDI = DatosPedidoExterno.UsoCFDI;
                     obj.Direccion = DatosPedidoExterno.Direccion;

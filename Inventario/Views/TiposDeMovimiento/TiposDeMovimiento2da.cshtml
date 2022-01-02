@@ -1,19 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Supervision";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "TiposDeMovimiento2da";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
-    SUPERVISIÓN
+    TIPOS DE MOVIMIENTO
 </h2>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!--Termina tarjeta-->
 <!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en la tabla-->
-<div id="tablaSupervicion"></div
+<!--Mostrar los registros en el accordion-->
+<div id="TablaMovimientos"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -22,40 +21,44 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            REGISTRO DE SUPERVISIÓN
+                            REGISTRO TIPOS DE MOVIMIENTOS
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNomSuper">Supervisión<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNomSuper]" id="TxtNomSuper" class="form-control  limpiar obligatorio" placeholder="Nombre de la supervisión">
+                                        <label class="form-control-label" for="TxtTMovimiento">Tipo de movimiento<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtTMovimiento]" id="TxtTMovimiento" class="form-control  limpiar obligatorio" placeholder="Bonificación">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Agrega una descripción...">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbEncargado">Encargado<span class="required">*</span></label>
-                                        <select id="cmbEncargado" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
+                                        <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbUnidades">Unidad de medida<span>*</span></label>
+                                        <select id="cmbUnidades" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtComentarios">Tiendas<span class="required">*</span></label>
-                                        <div id="divPagina"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="GuardarSupervision()">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="GuardarTipoDeMovimiento()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -67,6 +70,7 @@
         </div>
     </div>
 </div>
+<!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;
@@ -76,8 +80,8 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-@*<script src="~/Scrips/Internos/JS_Superviciones.js"></script>*@
-<script src="~/Scrips/Internos/JS_Supervision.js"></script>
+<script src="~/Scrips/Internos/JS_TiposMovimientos2da.js"></script>
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/General/JS_Buscar.js"></script>
+

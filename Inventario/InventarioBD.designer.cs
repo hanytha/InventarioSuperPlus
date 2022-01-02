@@ -2500,6 +2500,11 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
+<<<<<<< HEAD
+=======
+		private System.Nullable<long> _ExitenciaInicial;
+		
+>>>>>>> alma
 		private System.Nullable<long> _ExitenciaActual;
 		
 		private long _Coste;
@@ -2538,6 +2543,11 @@ namespace Inventario
     partial void OnNoCompraChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
+<<<<<<< HEAD
+=======
+    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
+    partial void OnExitenciaInicialChanged();
+>>>>>>> alma
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
     partial void OnCosteChanging(long value);
@@ -2722,6 +2732,29 @@ namespace Inventario
 			}
 		}
 		
+<<<<<<< HEAD
+=======
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaInicial
+		{
+			get
+			{
+				return this._ExitenciaInicial;
+			}
+			set
+			{
+				if ((this._ExitenciaInicial != value))
+				{
+					this.OnExitenciaInicialChanging(value);
+					this.SendPropertyChanging();
+					this._ExitenciaInicial = value;
+					this.SendPropertyChanged("ExitenciaInicial");
+					this.OnExitenciaInicialChanged();
+				}
+			}
+		}
+		
+>>>>>>> alma
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
 		public System.Nullable<long> ExitenciaActual
 		{
@@ -5635,11 +5668,19 @@ namespace Inventario
 		private System.Nullable<long> _NumPedidoProveedor;
 		
 		private string _Unidad;
+<<<<<<< HEAD
 		
 		private System.Nullable<long> _PrecioUnitario;
 		
 		private string _Area;
 		
+=======
+		
+		private System.Nullable<long> _PrecioUnitario;
+		
+		private string _Area;
+		
+>>>>>>> alma
 		private System.Nullable<long> _IdArea;
 		
 		private int _Estatus;

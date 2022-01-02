@@ -1,35 +1,74 @@
-﻿MostrarPaginas();
+﻿BloquearCTRL();
+//MostrarPaginas();
+//function MostrarPaginas() {
+//    $.get("/Configuracion/BDPaginas", function (InfPaginas) {
+//        CrearTablaPaginas(InfPaginas);
+//    }
+//    );
+//}
+////Inserta la tabla de las páginas
+//function CrearTablaPaginas(InfPaginas) {
+//    var CodigoHtmlTablaPagina = "";
+//    CodigoHtmlTablaPagina += "<table id='tablas' class='table'>";
+//    CodigoHtmlTablaPagina += "<thead><tr><th>Mensaje</th><th>Accion</th><th>Controlador</th><th>Icono</th><th>Opciones</th></tr></thead>";
+//    CodigoHtmlTablaPagina += "<tbody>";
+//    for (var i = 0; i < InfPaginas.length; i++) {
+//        CodigoHtmlTablaPagina += "<tr>";
+//        CodigoHtmlTablaPagina += "<td>" + InfPaginas[i].Nombre + "</td>";
+//        CodigoHtmlTablaPagina += "<td>" + InfPaginas[i].Accion + "</td>"
+//        CodigoHtmlTablaPagina += "<td> " + InfPaginas[i].Controlador + "</td>"
+//        CodigoHtmlTablaPagina += "<td><i class='" + InfPaginas[i].Icono + "'></i></td> ";
+//        CodigoHtmlTablaPagina += "<td>";
+//        CodigoHtmlTablaPagina += "<button id='BtnAbrirMPag' class='btn btn-primary' onclick='AModalPaginas(" + InfPaginas[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Pagina' ><i class='fas fa-edit'></i></button>";
+//        CodigoHtmlTablaPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + InfPaginas[i].ID + ",this)'><i class='fas fa-eraser'></i></button>";
+//        CodigoHtmlTablaPagina += "</td>";
+//        CodigoHtmlTablaPagina += "</tr>";
+//    }
+//    CodigoHtmlTablaPagina += "</tbody>";
+//    CodigoHtmlTablaPagina += "</table>";
+//    document.getElementById("Paginas").innerHTML = CodigoHtmlTablaPagina;
+//}
+MostrarPaginas();
 function MostrarPaginas() {
-    $.get("/Configuracion/BDPaginas", function (InfPaginas) {
-        CrearTablaPaginas(InfPaginas);
+    $.get("/Configuracion/BDPaginas", function (Data) {
+        CrearTablaPaginas(Data);
     }
     );
 }
-//Inserta la tabla de las páginas
-function CrearTablaPaginas(InfPaginas) {
+function CrearTablaPaginas(Data) {
     var CodigoHtmlTablaPagina = "";
-    CodigoHtmlTablaPagina += "<table id='tablas' class='table'>";
-    CodigoHtmlTablaPagina += "<thead><tr><th>Mensaje</th><th>Accion</th><th>Controlador</th><th>Icono</th><th>Opciones</th></tr></thead>";
+    CodigoHtmlTablaPagina += "<div class='input-group mb-3 float-right '>";
+    CodigoHtmlTablaPagina += "<input  class='form-control col-md-4 light-table-filter' data-table='order-table' type='text' placeholder='Buscar..'>"
+    CodigoHtmlTablaPagina += "<span  class='input-group-text' id='basic-addon1'><i class='fas fa-search'></i></span>";
+    CodigoHtmlTablaPagina += "</div>";
+    CodigoHtmlTablaPagina += "<div class='table-responsive'>";
+    CodigoHtmlTablaPagina += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaPagina += "<thead>";
+    CodigoHtmlTablaPagina += "<tr>";
+    CodigoHtmlTablaPagina += "<th>Mensaje</th>";
+    CodigoHtmlTablaPagina += "<th>Accion</th>";
+    CodigoHtmlTablaPagina += "<th>Controlador</th>";
+    CodigoHtmlTablaPagina += "<th>Ícono</th>";
+    CodigoHtmlTablaPagina += "<th>Opciones</th>";
+    CodigoHtmlTablaPagina += "</tr>";
+    CodigoHtmlTablaPagina += "</thead>";
     CodigoHtmlTablaPagina += "<tbody>";
-    for (var i = 0; i < InfPaginas.length; i++) {
+    for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaPagina += "<tr>";
-        CodigoHtmlTablaPagina += "<td>" + InfPaginas[i].Nombre + "</td>";
-        CodigoHtmlTablaPagina += "<td>" + InfPaginas[i].Accion + "</td>"
-        CodigoHtmlTablaPagina += "<td> " + InfPaginas[i].Controlador + "</td>"
-        CodigoHtmlTablaPagina += "<td><i class='" + InfPaginas[i].Icono + "'></i></td> ";
+        CodigoHtmlTablaPagina += "<td>" + Data[i].Nombre + "</td>";
+        CodigoHtmlTablaPagina += "<td>" + Data[i].Accion + "</td>";
+        CodigoHtmlTablaPagina += "<td>" + Data[i].Controlador + "</td>";
+        CodigoHtmlTablaPagina += "<td><i class='" + Data[i].Icono + "'style='font - size: 100px; color: dodgerblue;'></i></td> ";
         CodigoHtmlTablaPagina += "<td>";
-        CodigoHtmlTablaPagina += "<button id='BtnAbrirMPag' class='btn btn-primary' onclick='AModalPaginas(" + InfPaginas[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Pagina' ><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + InfPaginas[i].ID + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaPagina += "<button class='btn btn-primary' onclick='AModalPaginas(" + Data[i].ID + ")' data-toggle='modal' data-target='#ModalSystem_Pagina'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaPagina += "<button class='btn btn-danger' onclick='EliminarPagina(" + Data[i].ID + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaPagina += "</td>";
         CodigoHtmlTablaPagina += "</tr>";
     }
     CodigoHtmlTablaPagina += "</tbody>";
     CodigoHtmlTablaPagina += "</table>";
-    document.getElementById("Paginas_System").innerHTML = CodigoHtmlTablaPagina;
+    document.getElementById("Paginas").innerHTML = CodigoHtmlTablaPagina;
 }
-
-BloquearCTRL();
-
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -45,10 +84,12 @@ function AModalPaginas(ID) {
         controlesObligatorio[i].parentNode.classList.remove("border-danger");
     }
     if (ID == 0) {
+        sessionStorage.setItem('IdPag', '0');
     }
     else {
         $.get("/Configuracion/BDPagina/?ID=" + ID, function (DatosPagina) {
-            document.getElementById("TxtIDPagina").value = DatosPagina[0].ID;
+            //document.getElementById("TxtIDPagina").value = DatosPagina[0].ID;
+            sessionStorage.setItem('IdPag', DatosPagina[0].ID);
             document.getElementById("TxtMensaje").value = DatosPagina[0].Nombre;
             document.getElementById("TxtAccion").value = DatosPagina[0].Accion;
             document.getElementById("TxtControlador").value = DatosPagina[0].Controlador;
@@ -61,14 +102,15 @@ function AModalPaginas(ID) {
 function GuardarPagina() {
     if (ObligatoriosPagina() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IDPagina = document.getElementById("TxtIDPagina").value;
+            var IdPagina = sessionStorage.getItem('IdPag');
+            //var IDPagina = document.getElementById("TxtIDPagina").value;
             var Mensaje = document.getElementById("TxtMensaje").value;
             var Accion = document.getElementById("TxtAccion").value;
             var Controlador = document.getElementById("TxtControlador").value;
             var Icono = document.getElementById("TxtIcono").value;
             var Descripcion = document.getElementById("TxtDescripcion").value;
             var frm = new FormData();
-            frm.append("IdPagina", IDPagina);
+            frm.append("IdPagina", IdPagina);
             frm.append("Mensaje", Mensaje);
             frm.append("Accion", Accion);
             frm.append("Controlador", Controlador);
@@ -83,7 +125,7 @@ function GuardarPagina() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        alert("Ocurrio un error");
+                        alert("Ocurrió un error");
                     }
                     else if (data == -1) {
                         alert("Ya existe la página");
@@ -120,10 +162,14 @@ function EliminarPagina(id) {
     if (confirm("¿Desea eliminar el registo?") == 1) {
         $.get("/Configuracion/EliminarPagina/?IdPagina=" + id, function (Pagina) {
             if (Pagina == 1) {
-                alert("Se elimino correctamente");
+                Swal.fire(
+                    'Deleted!',
+                    'Se eliminó correctamente.',
+                    'success'
+                )
                 MostrarPaginas();
             } else {
-                alert("Ocurrio un error");
+                alert("Ocurrió un error");
             }
         });
     }

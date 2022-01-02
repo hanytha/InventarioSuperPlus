@@ -1,16 +1,15 @@
 ﻿@using Inventario.Models;
 
-
-
 @{
     ViewBag.Title = "Tiendas de la supervisión";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<link href="~/Content/magnific-popup.css" rel="stylesheet" />*@
-<h2>Tiendas de la supervisión</h2>
+<h2 class="form-control-label" style="font-size: 20px;">
+    TIENDAS DE LA SUPERVISIÓN
+</h2>
 
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+@*<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
 <!------------------------------------------------------------------------------------------------------------>
 @*<div id="contenedor1"></div>*@
 <!------------------------------------------------>
@@ -30,7 +29,7 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-<!--Mostrar los registros en el accordion-->
+
 <div id="accordion"></div>
 
 <div class="accordion" id="AcordeonSucursales">
@@ -38,39 +37,47 @@
         if (TiendasSupervision.IDTienda != null)
         {
             int NSucursales = TiendasSupervision.IDTienda.Count();
-          
-            string InsrtClases = "card m-b-0";
+
+            string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
             for (int i = 0; i < NSucursales; i++)
             {
                 if (i == 0)
                 {
-                    InsrtClases = "card m-b-0";
+                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 }
                 else
                 {
-                    InsrtClases = "card m-b-0  border-top";
+                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 }
-                string Colapse = "Collapse_Sucursa_" + @TiendasSupervision.IDTienda[i];
-                string Header = "Heading_Sucursa_" + @TiendasSupervision.IDTienda[i];
-                string IDAcordeon = "Acordeon_Sucursal_" + @TiendasSupervision.IDTienda[i] + "_Deptos";
-                string BadgeDepto = "Badge_Sucursal_" + @TiendasSupervision.IDTienda[i];
+                string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
+                string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
-                    <div class="card-header" id="@Header">
-                        <h4 class="mb-0">
+                    <div class="card-header" id="@titulo">
+                        <h4 class="m-b-0 list-group list-group-flush  mb-1">
                             <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
-                                <i class="m-r-5 mdi mdi-store" aria-hidden="true"></i>
-                                <span>@TiendasSupervision.Nombre[i]</span><span id="@BadgeDepto" class="badge badge-danger"></span>
+                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                <span>@TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
                         <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
 
-                                <h5>Subtitulo @TiendasSupervision.Nombre[i]</h5>
-                                <div id="contenedor1"></div>
-                             
+                                <!--Mostrar la tabla de los articulos por tienda en el accordion-->
+                                <div class="row">
+
+                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
+
+                                    <div>
+                                        <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+
+                                    </div>
+                                    <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                </div>
 
                             </div>
                         </div>
+
                     </div>
                 </div>
             }
@@ -78,55 +85,196 @@
     }
 </div>
 
-<!----------------------------------------DISTRIBUIR LOS TITULOS DE LOS DIVS -------------------------------------------->
-<style>
-    #contenedor {
-        width: 300px;
-        height: auto;
-        text-align: center;
-    }
-
-    #contenedor_follow div.icono {
-        display: inline-block;
-        width: 15%;
-        height: auto;
-        vertical-align: middle;
-        text-align: center;
-    }
-</style>
-@*-----------------------------Estilo para la linea en el encabezado del los divs---------------------------------------*@
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
-    /* Solid border */
+    /* Color y grosor del borde */
     hr.solid {
-        border-top: 3px solid #D7DBDD;
+        border-top: 4px solid #808080;
+    }
+
+    .D1 {
+        background-color: #EBEBEB;
     }
 </style>
-
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 3px solid #f1f507;
-    }
-</style>
+@*<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Solid border */
+        hr.solid3 {
+            border-top: 1px solid #f1f507;
+        }
+    </style>*@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
     /* Solid border */
     hr.solid4 {
-        border-top: 3px solid #0B94F8;
+        border-top: 4px solid #0B94F8;
     }
 </style>
+<!------------------------------------Estilos para los inputs de los pedidos en el modal--------------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        /*grosor del alto de la casilla*/
+        height: 30px;
+        border: 1.5px solid #808080;
+        /*Ancho de la casilla*/
+        width: 100px
+    }
+
+    input:focus {
+        background-color: white;
+        border-color: dodgerblue;
+    }
+</style>
+
+
+<!------------Obtener la fecha-------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaSistema').value = fecha;
+
+</script>
+<!------------------------------------------>
+<!------------------------------------------------Modal------------------------------------------------------------------>
+<!-- Encabezado del Modal -->
+
+
+<div class="container">
+    <div class="modal fade" id="ModalPedidoInterno">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE PEDIDOS INTERNOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorio bloquear" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumPedidoProveedor" class="form-control limpiar obligatorio bloquear" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorio limpiarSelect">
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="row">
+                          
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
+                                    <select onchange="abrirModal(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                </div>
+            </div>
+        </div>*@
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
+                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                </div>
+            </div>
+        </div>*@
+
+                    </form>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarPedidoInterno()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------Obtener la fecha-------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngreso').value = fecha;
+
+</script>
+
 
 <script src="~/Scrips/jquery.min.js"></script>
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
 @*<script src="~/Scripts/meg.init.js"></script>*@
 <script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
 
