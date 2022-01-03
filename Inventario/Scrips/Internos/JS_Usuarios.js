@@ -92,10 +92,10 @@ function CrearTablaUsuarios(Data) {
     CodigoHtmlTablaUsuarios += "<tr>";
     CodigoHtmlTablaUsuarios += "<th>CURP</th>";
     CodigoHtmlTablaUsuarios += "<th>Usuario</th>";
+    CodigoHtmlTablaUsuarios += "<th>Teléfono</th>";
     //CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
-    //CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
-    CodigoHtmlTablaUsuarios += "<th>Telefono</th>";
     CodigoHtmlTablaUsuarios += "<th>Nombre</th>";
+    CodigoHtmlTablaUsuarios += "<th>Asignación</th>";
 
     CodigoHtmlTablaUsuarios += "<th>Opciones</th>";
     CodigoHtmlTablaUsuarios += "</tr>";
@@ -106,10 +106,9 @@ function CrearTablaUsuarios(Data) {
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].CURP + "</td>";
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].Usuario + "</td>";
         //CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + "</td>";
-        //CodigoHtmlTablaUsuarios += "<td>" + Data[i].ApellidosP +  "</td>";   
         CodigoHtmlTablaUsuarios += "<td>" + Data[i].Telefono + "</td>";
-        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + ' ' + Data[i].ApellidosM + '  ' +Data[i].ApellidosP + "</td>";
-     
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].Nombre + ' ' + Data[i].ApellidosP + '  ' + Data[i].ApellidosM + "</td>";
+        CodigoHtmlTablaUsuarios += "<td>" + Data[i].NombreSitio + "</td>";   
         CodigoHtmlTablaUsuarios += "<td>";
         CodigoHtmlTablaUsuarios += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdUsuarios + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHtmlTablaUsuarios += "<button class='btn btn-danger' onclick='EliminarUsuario(" + Data[i].IdUsuarios + ",this)' ><i class='fas fa-eraser'></i></button>";
