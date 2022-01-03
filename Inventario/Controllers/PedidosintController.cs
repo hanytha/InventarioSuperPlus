@@ -70,25 +70,52 @@ namespace Inventario.Controllers
         }
 
         //Cosulta los pedidos por número de compra
+        //public JsonResult ConsultaPedidoXnum(long Num)
+        //{
+        //    var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdPedidosInternos,
+        //            p.NumeroPedido,
+        //            p.CantidadSolicitada,
+        //            p.Tipo,
+        //            p.IdProveedor,
+        //            p.Proveedor,
+        //            p.NumPedidoProveedor,
+        //            p.IdTienda,
+        //            p.Tienda,
+        //            p.IdArticulo,
+        //            p.Articulo,
+        //            p.Fecha
+
+        //        });
+        //    return Json(numero, JsonRequestBehavior.AllowGet);
+        //}
+
         public JsonResult ConsultaPedidoXnum(long Num)
         {
-            var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdPedidosInternos,
-                    p.NumeroPedido,
-                    p.CantidadSolicitada,
-                    p.Tipo,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.NumPedidoProveedor,
-                    p.IdTienda,
-                    p.Tienda,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.Fecha
+            var numero = from proveedor in InvBD.Areas
+                                 join pedido in InvBD.PedidosInternos
+                             on proveedor.IdAreas equals pedido.IdProveedor
+                                 
+                                 where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
+                                 select new
+                                 {
+                                     IdPedidosInternos = pedido.IdPedidosInternos,
+                                     NumeroPedido = pedido.NumeroPedido,
+                                     CantidadSolicitada = pedido.CantidadSolicitada,
+                                     
+                                     IdProveedor = proveedor.IdAreas,
+                                     Proveedor = proveedor.Nombre,
 
-                });
+                                     NumPedidoProveedor = pedido.NumeroPedido,
+                                     IdTienda = pedido.IdTienda,
+                                     Tienda = pedido.Tienda,
+                                     IdArticulo = pedido.IdArticulo,
+                                     Fecha = pedido.Fecha,
+                                     Correo = proveedor.Correo,
+                                     Telefono = proveedor.Telefono,
+                                 };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
         //***********consulta obtener los artículos y sus demas caracteristicas por número de pedido*********
