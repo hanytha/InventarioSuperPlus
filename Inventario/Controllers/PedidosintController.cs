@@ -29,6 +29,7 @@ namespace Inventario.Controllers
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
+                    p.Proveedor,
                     //p.IdUnidadDeMedida,
                     //p.UnidadDeMedida,
                     //p.IdMarca,
@@ -42,6 +43,7 @@ namespace Inventario.Controllers
             return Json(pedidosInt, JsonRequestBehavior.AllowGet);
         }
 
+
         //Esta consulta se ocupa en abrirModal para cargar los registros según el id del registro encontrado para cargar los datos en el modal
         public JsonResult ConsultaPedidoInterno(long Id)
         {
@@ -53,6 +55,7 @@ namespace Inventario.Controllers
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
+                    p.Proveedor,
                     //p.IdUnidadDeMedida,
                     //p.UnidadDeMedida,
                     //p.IdMarca,
@@ -65,12 +68,48 @@ namespace Inventario.Controllers
                 });
             return Json(pedidosInt, JsonRequestBehavior.AllowGet);
         }
+
+        //Cosulta los pedidos por número de compra
+        public JsonResult ConsultaPedidoXnum(long Num)
+        {
+            var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdPedidosInternos,
+                    p.NumeroPedido,
+                    p.CantidadSolicitada,
+                    p.Tipo,
+                    p.IdProveedor,
+                    p.Proveedor,
+                    p.NumPedidoProveedor,
+                    p.IdTienda,
+                    p.Tienda,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.Fecha
+
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
+        //***********consulta obtener los artículos y sus demas caracteristicas por número de pedido*********
+        public JsonResult ConsultaPedidosArticuos(long Pedi)
+        {
+            var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.Articulo,
+                    p.CantidadSolicitada,
+                    //p.PrecioUnitario,
+                    //p.Unidad
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
         //Guardar los datos de la compra
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
-            //try
-            //{
+            try
+            {
             long id = DatosPedidoInterno.IdPedidosInternos;
             if (id.Equals(0))
             {
@@ -126,11 +165,11 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Afectados = 0;
-            //}
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
             return Afectados;
         }
 

@@ -1,143 +1,226 @@
-﻿
-@{
-    ViewBag.Title = "Pedidosint";
+﻿@{
+    ViewBag.Title = "Pedidosext";
 }
-<h2 class="form-control-label" style="font-size: 20px;">
-    PEDIDOS INTERNOS
-</h2>
-
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-------------------------------------------Id de la tabla para crearse desde la funcón script---------------------------------->
-<!-- Botón del modal-->
-@*<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
-<div id="TablaPedidos"></div>
+<!-- Inicia tarjeta-->
+<!-- Estilos -->
 <!--Termina tarjeta-->
-<!--Mostrar los registros en el accordion-->
+<!-- Botón del modal-->
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
 
-<div id="tabla" class="default "></div>
-<div id="accordion"></div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+
+    })(document);
+</script>
+
+<!-------------------------------------------Id de la tabla para crearse desde la funcón script---------------------------------->
+<div id="TablaPedidos"></div>
+<!-----------------------------------------------------------Termina----------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="ModalPedidos">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">
-                        <label class="form-control-label" style="font-size: 18px;">
-                            REGISTRO DE PEDIDOS INTERNOS
-                        </label>
-                    </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
+                    <h4 class="modal-title">PEDIDOS</h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    @*<h1>Registro de pedidos Internos</h1>*@
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
-                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                    <br />
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de orden:</label><label id="TxtNumeroPedido"></label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <thead>
+                                                    <tr align="center">
+                                                        <th scope="col">Proveedor</th>
+                                                        <th scope="col">Enviar a</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedor"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto :</label><label id="TxtTelefono"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Departamento: </label><label></label><label id="TxtDepartamento"></label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtDireccion"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArticulos">Artículo(s) a solicitar</label>
+                                                </div>
+                                                <div id="TblArticulos">Artículo(s) de el pedido</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorio" placeholder="Número de Pedido">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadSolicitada">Cantidad solicitada<span class="required">*</span></label>
-                                    <input type="number" id="TxtCantidadSolicitada" class="form-control limpiar obligatorio" placeholder="Cantidad solicitada">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadAprobada">Cantidad aprobada<span class="required">*</span></label>
-                                    <input type="number" id="TxtCantidadAprobada" class="form-control limpiar obligatorio" placeholder="Cantidad aprobada">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTipo">Tipo<span class="required">*</span></label>
-                                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbArticulo">Artículo<span class="required">*</span></label>
-                                    <select id="cmbArticulo" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbUnidadDeMedida">Unidad de medida<span class="required">*</span></label>
-                                    <select id="cmbUnidadDeMedida" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbMarca">Marca<span class="required">*</span></label>
-                                    <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbTipoTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTipoTienda" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="GuardarPedidoInterno()">Guardar</button>
-                    </form>
+                    </div>
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-------------------------------------------------------------------------------------------------------------->
+<!--------------------------Función para imprimir el contenido del div------------------------------------------>
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
 
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
     }
-</style>
-
-
-<!------------Obtener la fecha-------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaIngreso').value = fecha;
-
 </script>
 
+<!--------------------------------------------------------------------------------------------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 1px solid #030303;
+        width: 50%;
+    }
+</style>
+<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
+
+<style>
+
+    [data-title]:hover:after {
+        opacity: 1;
+        transition: all 0.1s ease 0.5s;
+        visibility: visible;
+    }
+
+    [data-title]:after {
+        content: attr(data-title);
+        background-color: #FFC300;
+        color: #fff;
+        font-size: 14px;
+        font-family: Raleway;
+        position: absolute;
+        padding: 3px 20px;
+        bottom: -1.6em;
+        left: 100%;
+        white-space: nowrap;
+        box-shadow: 1px 1px 3px #222222;
+        opacity: 0;
+        border: 1px solid #111111;
+        z-index: 99999;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+    [data-title] {
+        position: relative;
+    }
+</style>
+<!------------------------------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-- >
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<!--sweetalert2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/Internos/JS_PedidosInt.js"></script>
-<script src="~/Scrips/General/JS_Buscar.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
