@@ -53,11 +53,12 @@ function VerPedido(num) {
 
         $.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
-            //document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
+           
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
+            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
             document.getElementById("TxtNumeroPedido").textContent = Data[0].NumPedidoProveedor;
             MostrarArticulos(num);
         });

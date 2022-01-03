@@ -97,8 +97,9 @@ namespace Inventario.Controllers
             var numero = from proveedor in InvBD.Areas
                                  join pedido in InvBD.PedidosInternos
                              on proveedor.IdAreas equals pedido.IdProveedor
-                                 
-                                 where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
+                         join tienda in InvBD.Tienda
+                           on pedido.IdTienda equals tienda.IdTienda
+                         where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
                                  select new
                                  {
                                      IdPedidosInternos = pedido.IdPedidosInternos,
@@ -107,7 +108,7 @@ namespace Inventario.Controllers
                                      
                                      IdProveedor = proveedor.IdAreas,
                                      Proveedor = proveedor.Nombre,
-
+                                     Direccion= tienda.Direccion,
                                      NumPedidoProveedor = pedido.NumeroPedido,
                                      IdTienda = pedido.IdTienda,
                                      Tienda = pedido.Tienda,
