@@ -50,7 +50,7 @@ function AcordeonDepartamentos(Data, CtrlAlmacen) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("obligatorios");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
@@ -97,7 +97,7 @@ function LimpiarCampos() {
 
 //Guarda los cambios y altas de las áreas
 function GuardarDepartamento() {
-    if (CamposObligatorios("Area") == true) {
+    if (InputsObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdAreas = sessionStorage.getItem('IDDepartamento');
             var Nombre = document.getElementById("TxtNombre").value;
@@ -156,7 +156,25 @@ function CamposObligatorios(clase) {
     return exito;
 }
 
-
+//*******************************************************************
+//**************************************************************
+//marca los campos obligatorios
+function InputsObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorios");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+//****************************************************************
 
 //"Elimina" el área cambia el Estatus
 function EliminarDepartamento(id) {

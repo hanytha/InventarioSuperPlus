@@ -25,6 +25,8 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>Núm_Compra</th>";
     CodigoHtmlTablaPedidos += "<th>Artículo</th>";
+    CodigoHtmlTablaPedidos += "<th>Existencia</th>";
+    CodigoHtmlTablaPedidos += "<th>Coste</th>";
     CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
     CodigoHtmlTablaPedidos += "</tr>";
     CodigoHtmlTablaPedidos += "</thead>";
@@ -34,6 +36,8 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<tr>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NoCompra + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Articulo + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].ExitenciaActual + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Coste + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
 
         CodigoHtmlTablaPedidos += "</tr>";
