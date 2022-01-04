@@ -65,7 +65,7 @@
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">REGISTRO DE COMPRA</h4>
@@ -113,7 +113,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                        <select id="cmbProveedor" onchange="MostrarArticulos(this.value)"  style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <select id="cmbProveedor" onchange="MostrarArticulos(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +142,27 @@
 <style>
     .input-group {
         float: right;
+    }
+</style>
+
+<!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        border: 1px solid #696969;
+        width: 100px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+</style>
+
+<!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+<style>
+    .sinborde {
+        border: 0;
     }
 </style>
 <!-------------------------------------------------------------------->

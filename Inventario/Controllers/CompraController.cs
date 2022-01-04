@@ -31,12 +31,9 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
-                    p.Articulo,
                     p.IdImpuesto,
                     p.IdProveedor,
-                    p.IdArticulo,
-                    p.IdUnidadDeMedida,
-                    p.Unidad,
+
 
                 });
             return Json(compras, JsonRequestBehavior.AllowGet);
@@ -56,12 +53,8 @@ namespace Inventario.Controllers
                     p.ExitenciaActual,
                     p.Coste,
                     p.Impuesto,
-                    p.Articulo,
                     p.IdImpuesto,
                     p.IdProveedor,
-                    p.IdArticulo,
-                    p.IdUnidadDeMedida,
-                    p.Unidad
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
@@ -164,20 +157,12 @@ namespace Inventario.Controllers
                     p.NombreEmpresa,
                     p.IdArticulos,
                     p.Unidad,
-                    p.PrecioUnitarioPromedio
+                    p.PrecioUnitarioPromedio,
+                    
                 });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
-
 
         //**************Consulta los provedores por ID de artículo********************************
         //public JsonResult ConsultaProveedorxArticulo(long IdPro)
@@ -217,6 +202,77 @@ namespace Inventario.Controllers
         //    return Json(provedores, JsonRequestBehavior.AllowGet);
         //}
         //*********************************************************************************************
+
+
+        //Guardar los datos de la compra y los almacena en ComprasArticulos
+        public int GuardarTienda(ComprasArticulos DatosTienda)
+        {
+            int Afectados = 0;
+          
+             var id = DatosTienda.IdExistenciaCompra;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)).Count();
+
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.ComprasArticulos.InsertOnSubmit(DatosTienda);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)
+                && p.IdCompra.Equals(DatosTienda.IdCompra)
+                && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
+                && p.StockActual.Equals(DatosTienda.StockActual)
+                && p.Costo.Equals(DatosTienda.Costo)
+                && p.TipoOperacion.Equals(DatosTienda.TipoOperacion)
+                && p.IdArticulo.Equals(DatosTienda.IdArticulo)
+                && p.Articulo.Equals(DatosTienda.Articulo)
+                && p.IdUnidad.Equals(DatosTienda.IdUnidad)
+                && p.Unidad.Equals(DatosTienda.Unidad)
+                && p.IdImpuesto.Equals(DatosTienda.IdImpuesto)
+                && p.Impuesto.Equals(DatosTienda.Impuesto)
+                && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
+                ).Count();
+
+
+                if (nveces == 0)
+                {
+                    ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(id)).First();
+
+                    obj.IdCompra = DatosTienda.IdCompra;
+                    obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
+                    obj.StockActual = DatosTienda.StockActual;
+                    obj.Costo = DatosTienda.Costo;
+                    obj.TipoOperacion = DatosTienda.TipoOperacion;
+                    obj.IdArticulo = DatosTienda.IdArticulo;
+                    obj.Articulo = DatosTienda.Articulo;
+                    obj.IdUnidad = DatosTienda.IdUnidad;
+                    obj.Unidad = DatosTienda.Unidad;
+                    obj.IdImpuesto = DatosTienda.IdImpuesto;
+                    obj.PrecioUnitario = DatosTienda.PrecioUnitario;
+
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+
+            return Afectados;
+        }
+
+
     }
 
 }

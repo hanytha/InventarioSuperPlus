@@ -182,6 +182,14 @@ namespace Inventario
 			}
 		}
 		
+		public System.Data.Linq.Table<ComprasArticulos> ComprasArticulos
+		{
+			get
+			{
+				return this.GetTable<ComprasArticulos>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Configuracion> Configuracion
 		{
 			get
@@ -2897,6 +2905,249 @@ namespace Inventario
 		{
 			this.SendPropertyChanging();
 			entity.Compra = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ComprasArticulos")]
+	public partial class ComprasArticulos
+	{
+		
+		private System.Nullable<long> _IdExistenciaCompra;
+		
+		private System.Nullable<long> _IdCompra;
+		
+		private System.Nullable<long> _ExistenciaInicial;
+		
+		private System.Nullable<long> _StockActual;
+		
+		private string _Costo;
+		
+		private string _TipoOperacion;
+		
+		private System.Nullable<long> _IdArticulo;
+		
+		private string _Articulo;
+		
+		private System.Nullable<long> _IdUnidad;
+		
+		private string _Unidad;
+		
+		private System.Nullable<long> _IdImpuesto;
+		
+		private string _Impuesto;
+		
+		private string _PrecioUnitario;
+		
+		public ComprasArticulos()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdExistenciaCompra", DbType="BigInt")]
+		public System.Nullable<long> IdExistenciaCompra
+		{
+			get
+			{
+				return this._IdExistenciaCompra;
+			}
+			set
+			{
+				if ((this._IdExistenciaCompra != value))
+				{
+					this._IdExistenciaCompra = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCompra", DbType="BigInt")]
+		public System.Nullable<long> IdCompra
+		{
+			get
+			{
+				return this._IdCompra;
+			}
+			set
+			{
+				if ((this._IdCompra != value))
+				{
+					this._IdCompra = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaInicial", DbType="BigInt")]
+		public System.Nullable<long> ExistenciaInicial
+		{
+			get
+			{
+				return this._ExistenciaInicial;
+			}
+			set
+			{
+				if ((this._ExistenciaInicial != value))
+				{
+					this._ExistenciaInicial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockActual", DbType="BigInt")]
+		public System.Nullable<long> StockActual
+		{
+			get
+			{
+				return this._StockActual;
+			}
+			set
+			{
+				if ((this._StockActual != value))
+				{
+					this._StockActual = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Costo", DbType="VarChar(150)")]
+		public string Costo
+		{
+			get
+			{
+				return this._Costo;
+			}
+			set
+			{
+				if ((this._Costo != value))
+				{
+					this._Costo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoOperacion", DbType="VarChar(150)")]
+		public string TipoOperacion
+		{
+			get
+			{
+				return this._TipoOperacion;
+			}
+			set
+			{
+				if ((this._TipoOperacion != value))
+				{
+					this._TipoOperacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this._IdArticulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this._Articulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidad", DbType="BigInt")]
+		public System.Nullable<long> IdUnidad
+		{
+			get
+			{
+				return this._IdUnidad;
+			}
+			set
+			{
+				if ((this._IdUnidad != value))
+				{
+					this._IdUnidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(150)")]
+		public string Unidad
+		{
+			get
+			{
+				return this._Unidad;
+			}
+			set
+			{
+				if ((this._Unidad != value))
+				{
+					this._Unidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdImpuesto", DbType="BigInt")]
+		public System.Nullable<long> IdImpuesto
+		{
+			get
+			{
+				return this._IdImpuesto;
+			}
+			set
+			{
+				if ((this._IdImpuesto != value))
+				{
+					this._IdImpuesto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Impuesto", DbType="VarChar(50)")]
+		public string Impuesto
+		{
+			get
+			{
+				return this._Impuesto;
+			}
+			set
+			{
+				if ((this._Impuesto != value))
+				{
+					this._Impuesto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="VarChar(10)")]
+		public string PrecioUnitario
+		{
+			get
+			{
+				return this._PrecioUnitario;
+			}
+			set
+			{
+				if ((this._PrecioUnitario != value))
+				{
+					this._PrecioUnitario = value;
+				}
+			}
 		}
 	}
 	

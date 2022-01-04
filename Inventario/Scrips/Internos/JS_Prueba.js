@@ -194,7 +194,7 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
-                //-------Crea los input con los nombres de los artículos por proveedor-------------------------------------------------
+                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
