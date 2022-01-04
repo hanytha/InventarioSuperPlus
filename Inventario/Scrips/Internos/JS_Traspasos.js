@@ -72,27 +72,34 @@ function editarModal(id) {
             document.getElementById("TxtStock").value = Data.Stock;
 
         });
+
     }
 }
 
 //*Evento onechange del selec de tipos de movimiento*****************************************
 function MovimientoModal(id) {
+  
     if (id == 0) {
         
     }
     else {
 
         $.get("/Traspasos/ConsultaArticulo/?Id=" + id, function (Data) {
-            document.getElementById("TxtStock").value = Data.Stock;
-            document.getElementById("cmbMovimiento").value;
-            document.getElementById("TxtCantidad").value;
 
             let x = document.getElementById("TxtStock").value = Data.Stock;
+            document.getElementById("cmbMovimiento").value;
             let y = document.getElementById("TxtCantidad").value;
 
-            if (document.getElementById("cmbMovimiento").value = 1) {
+
+            if (document.getElementById("cmbMovimiento").value == 1) {
 
                 let bonificacion = parseFloat(x) + parseFloat(y);
+
+                document.getElementById("TxtStockTotal").value = bonificacion;
+            }
+            else {
+
+                let bonificacion = parseFloat(x) - parseFloat(y);
 
                 document.getElementById("TxtStockTotal").value = bonificacion;
             }
