@@ -249,6 +249,7 @@ namespace Inventario.Controllers
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string IdSitio = "";
+            string IdArticulos = "";
             var ConsultaArticulo = from Articulos in InvBD.Articulos
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
@@ -260,6 +261,7 @@ namespace Inventario.Controllers
                                        NoPedido = ExistenciaAlmacenG.NoPedido,
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
+                                       Articulo = Articulos.NombreEmpresa,
                                        IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
                                        IdSitio = ExistenciaAlmacenG.IdSitio,
                                        FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
@@ -270,6 +272,7 @@ namespace Inventario.Controllers
                 Nombre += art.nombres + ",";
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
+                IdArticulos += art.IdArticulos + ",";
                 var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
                    .Select(p => new
                    {

@@ -37,6 +37,9 @@ function ConsultaArticuloComp(IDTienda) {
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
 
+
+
+
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
 
@@ -46,9 +49,11 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='row'>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModalMovimiento(" + ArrayId[i] + ")' data-toggle='modal' data-target='#Movimientos'>" + Arraynombre[i] + "</button></div>";
+                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+               
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
@@ -56,6 +61,9 @@ function ConsultaArticuloComp(IDTienda) {
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
+             
+                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+               
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
                 CodigoHtmlArticuloComp += "</div>";
@@ -157,6 +165,47 @@ function abrirModal(id, idS) {
     }
 }
 
+
+
+function abrirModalMovimiento(IDTienda) {
+
+    LimpiarCampos();
+    if (IDTienda == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+
+    else {
+
+        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+            //document.getElementById("cmbTienda").value = Data[0].IdTienda;
+            document.getElementById("TxtArticuloM").value = Data[0].Articulo;
+          
+            //document.getElementById("TxtRFC").value = Data[0].RFC;
+            //document.getElementById("TxtClabe").value = Data[0].Clabe;
+            //document.getElementById("TxtCorreo").value = Data[0].Correo;
+            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+            //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+            //document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
+            //Muestra los artículos que le pertenecen a ese proveedor----
+            //MostrarArticulos(id);
+            ////Muestra el número de pedido que le corresponde por proveedor-------
+            //SiguientePedidoProveedor(id);
+            ////Muestra el número de pedido que le corresponde-------
+            //ConsultaSiguientePedido();
+
+        });
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTienda").value = Data[0].Tienda;
+
+
+        });
+
+    }
+}
 
 //Función que determina el siguiente número de pedido por proveedor
 
@@ -378,7 +427,7 @@ function GuardarPedidoInterno() {
             document.getElementById("btnCancelar").click();
         }
     }
-}
+} 
 
 
 
