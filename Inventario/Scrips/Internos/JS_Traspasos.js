@@ -61,8 +61,8 @@ function CrearArticuloComp(Data) {
 //******Despliega el modal con el nombre y el stock por atículo para realizar el movimiento************
 
 function editarModal(id) {
+    LimpiarCampos();
     if (id == 0) {
-        LimpiarCampos();
 
     }
     else {
@@ -78,7 +78,7 @@ function editarModal(id) {
 //*Evento onechange del selec de tipos de movimiento*****************************************
 function MovimientoModal(id) {
     if (id == 0) {
-
+        
     }
     else {
 
@@ -101,6 +101,21 @@ function MovimientoModal(id) {
     }
 }
 //****************************************************************************************************************
+
+//limpiar campos
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
+//---------------------------------------Termina-------------------------------------------------
+
 
 function LlenarCMTMovimientos() {
     $.get("/Traspasos/BDTiposMovimiento", function (data) {
