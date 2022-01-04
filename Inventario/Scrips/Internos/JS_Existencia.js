@@ -1,7 +1,6 @@
 ﻿
 ConsultaCompras();
 LlenarCMBImpuesto();
-LlenarCMBArticulo();
 LlenarCMBUnidades();
 LlenarCMBProveedor();
 
@@ -66,21 +65,46 @@ function abrirModal(id) {//la clase  Obligatorio
 
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
-            document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
-            document.getElementById("cmbArticulo").value = Data[0].IdArticulo;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
-            document.getElementById("TxtPrecioUnitario").value = Data[0].PrecioUnitario;
-            document.getElementById("TxtExitenciaActual").value = Data[0].ExitenciaActual;
-            document.getElementById("TxtCoste").value = Data[0].Coste;
-            document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
+            document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
+            document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-         
+            document.getElementById("TxtCoste").value = Data[0].Coste;
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+           
         });
     }
 }
 
+//*********************************************************************************************
+//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
+function MostrarArticulos(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Compra/ConsultaArticuloxIdProveedor/?IdPro=" + id, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row'>";
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor-------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>"
+                TablaArticulo += "<input type='checkbox' class='checkbox-area' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                TablaArticulo += "</div>";
+
+            }
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+        });
+    }
+}
 
 
 //------------------limpiar campos-------------------------------
@@ -209,13 +233,6 @@ function EliminarCompra(id) {
 function LlenarCMBImpuesto() {
     $.get("/GLOBAL/BDImpuesto", function (data) {
         llenarCombo(data, document.getElementById("cmbImpuesto"));
-    });
-}
-
-
-function LlenarCMBArticulo() {
-    $.get("/GLOBAL/BDArticulos", function (data) {
-        llenarCombo(data, document.getElementById("cmbArticulo"));
     });
 }
 

@@ -3825,6 +3825,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdProveedor;
 		
+		private System.Nullable<int> _IdMovimientos;
+		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
 		private EntityRef<Compra> _Compra;
@@ -3859,6 +3861,8 @@ namespace Inventario
     partial void OnNombreEmpresaChanged();
     partial void OnIdProveedorChanging(System.Nullable<long> value);
     partial void OnIdProveedorChanged();
+    partial void OnIdMovimientosChanging(System.Nullable<int> value);
+    partial void OnIdMovimientosChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4128,6 +4132,26 @@ namespace Inventario
 					this._IdProveedor = value;
 					this.SendPropertyChanged("IdProveedor");
 					this.OnIdProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMovimientos", DbType="Int")]
+		public System.Nullable<int> IdMovimientos
+		{
+			get
+			{
+				return this._IdMovimientos;
+			}
+			set
+			{
+				if ((this._IdMovimientos != value))
+				{
+					this.OnIdMovimientosChanging(value);
+					this.SendPropertyChanging();
+					this._IdMovimientos = value;
+					this.SendPropertyChanged("IdMovimientos");
+					this.OnIdMovimientosChanged();
 				}
 			}
 		}

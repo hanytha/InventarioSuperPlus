@@ -78,14 +78,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio" placeholder="1">
+                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha De Ingreso<span class="required">*</span></label>
+                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
-                                        <select id="cmbArticulo" onchange="LlenarCMBProveedores(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio" placeholder="1">
                                     </div>
                                 </div>
                             </div>
@@ -98,50 +98,30 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                        <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha De Ingreso<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtPrecioUnitario">Precio Unitario<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPrecioUnitario]" id="TxtPrecioUnitario" class="form-control  limpiar obligatorio" placeholder="$23">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label class="form-control-label" for="cmbImpuesto">Impuesto<span>*</span></label>
                                         <select id="cmbImpuesto" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExitenciaActual">Exitencia Actual<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExitenciaActual]" id="TxtExitenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtCoste">Costo<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCoste]" id="TxtCoste" class="form-control  limpiar obligatorio" placeholder="150.00">
+                                        <label class="form-control-label" for="TxtCosto">Total<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="Tarjeta">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="cmbUnidad">Unidad de medida<span>*</span></label>
-                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                        <select id="cmbProveedor" onchange="MostrarArticulos(this.value)"  style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                        <div id="TblArticulos">Artículo(s) del proveedor</div>
                                     </div>
                                 </div>
                             </div>

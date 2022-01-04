@@ -82,24 +82,19 @@ function MovimientoModal(id) {
         $.get("/Traspasos/ConsultaArticulo/?Id=" + id, function (Data) {
 
             let x = document.getElementById("TxtStock").value;
-
             let y = document.getElementById("TxtCantidad").value;
-
 
                 if (document.getElementById("cmbMovimiento").value == 1) {
 
                     let bonificacion = parseFloat(x) + parseFloat(y);
-
                     document.getElementById("TxtStockTotal").value = bonificacion;
                 }
                 else {
 
                     let bonificacion = parseFloat(x) - parseFloat(y);
-
                     document.getElementById("TxtStockTotal").value = bonificacion;
                 }
             
-
         });
  }
 

@@ -155,6 +155,29 @@ namespace Inventario.Controllers
         {
             return View();
         }
+        //******************************************************************************************
+        public JsonResult ConsultaArticuloxIdProveedor(string IdPro)
+        {
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.Unidad,
+                    p.PrecioUnitarioPromedio
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
 
         //**************Consulta los provedores por ID de artículo********************************
         //public JsonResult ConsultaProveedorxArticulo(long IdPro)
