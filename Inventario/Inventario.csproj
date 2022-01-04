@@ -128,6 +128,7 @@
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
     <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
     <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
+    <Content Include="Scrips\Internos\JS_Traspasos.js" />
     <Content Include="Scrips\Internos\JS_Supervision2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
@@ -191,6 +192,7 @@
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\TiposDeMovimientoController.cs" />
+    <Compile Include="Controllers\TraspasosController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,6 +266,7 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
+    <Content Include="Views\Traspasos\Traspasos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

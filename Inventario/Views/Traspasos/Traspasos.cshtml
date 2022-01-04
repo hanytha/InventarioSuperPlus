@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Traspasos";
+}
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Botón del modal------------------------------------------------------------------------------------------------->
+<!----- <button onclick="abrirModal(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>-->
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script type="text/javascript">
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+
+    })(document);
+</script>
+
+
+<!----------------------Crea Tabla de artículos----------------------------------->
+<div id="contenedor1"></div>
+<!-------------------------------------------------------------------------->
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">MOVIMIENTO DE ARTÍCULOS</h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  limpiar bloquear" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtStock">Stock<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
+                                        <select id="cmbMovimiento" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar obligatorio" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtStockTotal">Stock total<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtStockTotal]" id="TxtStockTotal" class="form-control  limpiar bloquear" placeholder="Total del stock">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------------->
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 4px solid #F5CA4F;
+    }
+
+    .D1 {
+        background-color: #EBEBEB;
+    }
+</style>
+<!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        border: 1px solid #696969;
+        width: 100px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+</style>
+
+<!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+<style>
+    .sinborde {
+        border: 0;
+    }
+</style>
+
+<!------------Obtener la fecha-------------------------------------------------------------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+
+
+</script>
+<!----------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Traspasos.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

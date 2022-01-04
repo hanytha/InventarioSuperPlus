@@ -105,7 +105,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString3"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -9552,13 +9552,15 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdArticulos;
 		
+		private string _Articulo;
+		
 		private System.Nullable<long> _IdUnidadDeMedida;
+		
+		private string _Unidades;
 		
 		private string _TipoDeMovimiento;
 		
-		private string _Articulo;
-		
-		private string _Unidades;
+		private System.Nullable<long> _TotalStock;
 		
 		private string _Descripcion;
 		
@@ -9574,14 +9576,16 @@ namespace Inventario
     partial void OnIdMovimientosChanged();
     partial void OnIdArticulosChanging(System.Nullable<long> value);
     partial void OnIdArticulosChanged();
-    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
-    partial void OnIdUnidadDeMedidaChanged();
-    partial void OnTipoDeMovimientoChanging(string value);
-    partial void OnTipoDeMovimientoChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
+    partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadesChanging(string value);
     partial void OnUnidadesChanged();
+    partial void OnTipoDeMovimientoChanging(string value);
+    partial void OnTipoDeMovimientoChanged();
+    partial void OnTotalStockChanging(System.Nullable<long> value);
+    partial void OnTotalStockChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
     partial void OnEstatusChanging(int value);
@@ -9638,46 +9642,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
-		public System.Nullable<long> IdUnidadDeMedida
-		{
-			get
-			{
-				return this._IdUnidadDeMedida;
-			}
-			set
-			{
-				if ((this._IdUnidadDeMedida != value))
-				{
-					this.OnIdUnidadDeMedidaChanging(value);
-					this.SendPropertyChanging();
-					this._IdUnidadDeMedida = value;
-					this.SendPropertyChanged("IdUnidadDeMedida");
-					this.OnIdUnidadDeMedidaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeMovimiento", DbType="VarChar(150)")]
-		public string TipoDeMovimiento
-		{
-			get
-			{
-				return this._TipoDeMovimiento;
-			}
-			set
-			{
-				if ((this._TipoDeMovimiento != value))
-				{
-					this.OnTipoDeMovimientoChanging(value);
-					this.SendPropertyChanging();
-					this._TipoDeMovimiento = value;
-					this.SendPropertyChanged("TipoDeMovimiento");
-					this.OnTipoDeMovimientoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
 		public string Articulo
 		{
@@ -9694,6 +9658,26 @@ namespace Inventario
 					this._Articulo = value;
 					this.SendPropertyChanged("Articulo");
 					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
+		public System.Nullable<long> IdUnidadDeMedida
+		{
+			get
+			{
+				return this._IdUnidadDeMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadDeMedida != value))
+				{
+					this.OnIdUnidadDeMedidaChanging(value);
+					this.SendPropertyChanging();
+					this._IdUnidadDeMedida = value;
+					this.SendPropertyChanged("IdUnidadDeMedida");
+					this.OnIdUnidadDeMedidaChanged();
 				}
 			}
 		}
@@ -9718,7 +9702,47 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeMovimiento", DbType="VarChar(150)")]
+		public string TipoDeMovimiento
+		{
+			get
+			{
+				return this._TipoDeMovimiento;
+			}
+			set
+			{
+				if ((this._TipoDeMovimiento != value))
+				{
+					this.OnTipoDeMovimientoChanging(value);
+					this.SendPropertyChanging();
+					this._TipoDeMovimiento = value;
+					this.SendPropertyChanged("TipoDeMovimiento");
+					this.OnTipoDeMovimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalStock", DbType="BigInt")]
+		public System.Nullable<long> TotalStock
+		{
+			get
+			{
+				return this._TotalStock;
+			}
+			set
+			{
+				if ((this._TotalStock != value))
+				{
+					this.OnTotalStockChanging(value);
+					this.SendPropertyChanging();
+					this._TotalStock = value;
+					this.SendPropertyChanged("TotalStock");
+					this.OnTotalStockChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50)")]
 		public string Descripcion
 		{
 			get
