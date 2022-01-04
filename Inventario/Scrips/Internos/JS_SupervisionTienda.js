@@ -1,4 +1,5 @@
-﻿LlenarCMCProveedores();
+﻿LlenarCMTMovimientos();
+LlenarCMCProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
@@ -86,6 +87,33 @@ function ConsultaArticuloComp(IDTienda) {
     }
 }
 
+//function editarModal(id) {
+//    LimpiarCampos();
+//    if (id == 0) {
+
+//    }
+//    else {
+
+//        $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+//            document.getElementById("TxtStock").value = Data.Stock;
+//            document.getElementById("cmbMovimiento").value;
+//            document.getElementById("TxtCantidad").value;
+
+//            let x = document.getElementById("TxtStock").value = Data.Stock;
+//            let y = document.getElementById("TxtCantidad").value;
+
+//            if (document.getElementById("cmbMovimiento").value = 1) {
+
+//                let bonificacion = parseFloat(x) + parseFloat(y);
+
+//                document.getElementById("TxtStockTotal").value = bonificacion;
+//            }
+
+//        });
+
+//    }
+//}
+
 function editarModal(id) {
     LimpiarCampos();
     if (id == 0) {
@@ -94,24 +122,15 @@ function editarModal(id) {
     else {
 
         $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+            document.getElementById("TxtArticulo").value = Data.Nombre;
             document.getElementById("TxtStock").value = Data.Stock;
-            document.getElementById("cmbMovimiento").value;
-            document.getElementById("TxtCantidad").value;
-
-            let x = document.getElementById("TxtStock").value = Data.Stock;
-            let y = document.getElementById("TxtCantidad").value;
-
-            if (document.getElementById("cmbMovimiento").value = 1) {
-
-                let bonificacion = parseFloat(x) + parseFloat(y);
-
-                document.getElementById("TxtStockTotal").value = bonificacion;
-            }
-
+            MovimientoModal(id);
         });
 
     }
 }
+
+
 function MovimientoModal(id) {
 
     $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
@@ -137,6 +156,7 @@ function MovimientoModal(id) {
 
     });
 }
+
 
 
 

@@ -704,6 +704,17 @@ namespace Inventario.Controllers
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult BDTiposMovimiento()
+        {
+            var datos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new {
+                    ID = p.IdMovimientos,
+                    Nombre = p.TipoDeMovimiento
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+
         //------------------Supervision2da------------------------------------
         public ActionResult Supervision2da()
         {
