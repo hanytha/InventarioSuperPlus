@@ -49,8 +49,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='row'>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModalMovimiento(" + ArrayId[i] + ")' data-toggle='modal' data-target='#Movimientos'>" + Arraynombre[i] + "</button></div>";
-                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
                
@@ -60,6 +59,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+                CodigoHtmlArticuloComp += "<button class='btn btn-primary' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
              
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -85,6 +85,93 @@ function ConsultaArticuloComp(IDTienda) {
 
     }
 }
+
+function editarModal(id) {
+    LimpiarCampos();
+    if (id == 0) {
+
+    }
+    else {
+
+        $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+            document.getElementById("TxtArticulo").value = Data.Nombre;
+            document.getElementById("TxtStock").value = Data.Stock;
+            MovimientoModal(id);
+        });
+
+    }
+}
+function MovimientoModal(id) {
+
+    $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+
+        let x = document.getElementById("TxtStock").value;
+
+        let y = document.getElementById("TxtCantidad").value;
+
+
+        if (document.getElementById("cmbMovimiento").value == 1) {
+
+            let bonificacion = parseFloat(x) + parseFloat(y);
+
+            document.getElementById("TxtStockTotal").value = bonificacion;
+        }
+        else {
+
+            let bonificacion = parseFloat(x) - parseFloat(y);
+
+            document.getElementById("TxtStockTotal").value = bonificacion;
+        }
+
+
+    });
+}
+
+
+
+//****************************************************************************************************************
+
+//limpiar campos
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+}
+
+//---------------------------------------Termina-------------------------------------------------
+
+
+function LlenarCMTMovimientos() {
+    $.get("/Supervision/BDTiposMovimiento", function (data) {
+        llenarCombo(data, document.getElementById("cmbMovimiento"));
+    });
+}
+
+//funcion general para llenar los select
+function llenarCombo(data, control) {
+
+    var contenido = "";
+    contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+
+//Bloquea los input con la clase
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
+
 /////////////////////////////////////////////
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 //función que muestra la tabla del artículo

@@ -268,7 +268,7 @@ namespace Inventario.Controllers
                                    };
             foreach (var art in ConsultaArticulo)
             {
-                id += art.IdExistencia + ",";
+                id += art.Id + ",";
                 Nombre += art.nombres + ",";
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
