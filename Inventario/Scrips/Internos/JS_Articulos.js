@@ -4,7 +4,7 @@ LlenarCMCategoria();
 LlenarCMCUnidad();
 LlenarCMCArea();
 LlenarCMCMarca();
-
+LlenarCMCImpuesto();
 //---------------Crea una tabla de todos los artículos de la BD---------------
 function ConsultaArticulos() {
     $.get("/Articulo/ConsultaArticulos", function (Data) {
@@ -95,6 +95,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaIngreso").value = Data[0].FechaSistema;
             document.getElementById("cmbArea").value = Data[0].IdAreas;
             document.getElementById("cmbMarca").value = Data[0].IdMarca;
+            document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
 
 
         });
@@ -179,6 +180,10 @@ function GuardarArticulo() {
             var TempMarca = document.getElementById("cmbMarca");
             var Marca = TempMarca.options[TempMarca.selectedIndex].text;
 
+            var IdImpuesto = document.getElementById("cmbImpuesto").value;
+            var TempImpues = document.getElementById("cmbImpuesto");
+            var Impuesto = TempImpues.options[TempImpues.selectedIndex].text;
+
             var frm = new FormData();
             frm.append("IdArticulos", IdArticulos);
             frm.append("NombreEmpresa", NombreEmpresa);
@@ -199,6 +204,8 @@ function GuardarArticulo() {
             frm.append("Area", Area);
             frm.append("IdMarca", IdMarca);
             frm.append("Marca", Marca);
+            frm.append("IdImpuesto", IdImpuesto);
+            frm.append("Impuesto", Impuesto);
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -272,10 +279,16 @@ function LlenarCMCUnidad() {
     });
 }
 
+function LlenarCMCImpuesto() {
+    $.get("/GLOBAL/BDImpuesto", function (data) {
+        llenarCombo(data, document.getElementById("cmbImpuesto"));
+    });
+}
+
 
 
 function LlenarCMCArea() {
-    $.get("/GLOBAL/BDAreas", function (data) {
+    $.get("/GLOBAL/Areas", function (data) {
         llenarCombo(data, document.getElementById("cmbArea"));
     });
 }

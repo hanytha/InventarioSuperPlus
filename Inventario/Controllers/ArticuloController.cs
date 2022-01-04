@@ -44,6 +44,8 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
+                    p.IdImpuesto,
+                    p.Impuesto,
                     p.Estatus,
                 });
             return Json(articulos, JsonRequestBehavior.AllowGet);
@@ -73,6 +75,8 @@ namespace Inventario.Controllers
                     p.Unidad,
                     p.Area,
                     p.Marca,
+                    p.IdImpuesto,
+                    p.Impuesto,
                     p.Estatus
 
                 });
@@ -100,7 +104,8 @@ namespace Inventario.Controllers
             string Unidad = "";
             string Area = "";
             string Marca = "";
-
+            string IdImpuesto = "";
+            string Impuesto = "";
 
             var articuloss = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
@@ -124,6 +129,8 @@ namespace Inventario.Controllers
                     Unidad = p.Unidad,
                     Area = p.Area,
                     Marca = p.Marca,
+                    IdImpuesto = p.IdImpuesto,
+                    Impuesto = p.Impuesto,
 
                 });
             foreach (var pro in articuloss)
@@ -155,6 +162,8 @@ namespace Inventario.Controllers
                 Unidad += pro.Unidad + ",";
                 Area += pro.Area + ",";
                 Marca += pro.Marca + ",";
+                IdImpuesto += pro.IdImpuesto + ",";
+                Impuesto += pro.Impuesto + ",";
 
             }
             var Resultado = new
@@ -177,7 +186,9 @@ namespace Inventario.Controllers
                 FechaSistema = FechaSistema.Substring(0, FechaSistema.Length - 1),
                 Unidad = Unidad.Substring(0, Unidad.Length - 1),
                 Area = Area.Substring(0, Area.Length - 1),
-                Marca = Marca.Substring(0, Marca.Length - 1)
+                Marca = Marca.Substring(0, Marca.Length - 1),
+               IdImpuesto = IdImpuesto.Substring(0, IdImpuesto.Length - 1),
+                Impuesto = Impuesto.Substring(0, Impuesto.Length - 1),
             };
 
             return Json(Resultado, JsonRequestBehavior.AllowGet);
@@ -226,6 +237,8 @@ namespace Inventario.Controllers
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                 && p.Fecha.Equals(DatosArticulo.Fecha)
+                && p.IdImpuesto.Equals(DatosArticulo.IdImpuesto)
+                && p.Impuesto.Equals(DatosArticulo.Impuesto)
                 && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
 
 
@@ -250,6 +263,8 @@ namespace Inventario.Controllers
                     obj.UnidadSAT = DatosArticulo.UnidadSAT;
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;
                     obj.Fecha = DatosArticulo.Fecha;
+                    obj.IdImpuesto = DatosArticulo.IdImpuesto;
+                    obj.Impuesto = DatosArticulo.Impuesto;
                     obj.FechaSistema = DatosArticulo.FechaSistema;
 
                     InvBD.SubmitChanges();

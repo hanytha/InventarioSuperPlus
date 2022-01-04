@@ -1544,6 +1544,10 @@ namespace Inventario
 		
 		private string _FechaSistema;
 		
+		private System.Nullable<long> _IdImpuesto;
+		
+		private string _Impuesto;
+		
 		private int _Estatus;
 		
 		private EntitySet<PedidosInternos> _PedidosInternos;
@@ -1598,6 +1602,10 @@ namespace Inventario
     partial void OnFechaChanged();
     partial void OnFechaSistemaChanging(string value);
     partial void OnFechaSistemaChanged();
+    partial void OnIdImpuestoChanging(System.Nullable<long> value);
+    partial void OnIdImpuestoChanged();
+    partial void OnImpuestoChanging(string value);
+    partial void OnImpuestoChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -2004,6 +2012,46 @@ namespace Inventario
 					this._FechaSistema = value;
 					this.SendPropertyChanged("FechaSistema");
 					this.OnFechaSistemaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdImpuesto", DbType="BigInt")]
+		public System.Nullable<long> IdImpuesto
+		{
+			get
+			{
+				return this._IdImpuesto;
+			}
+			set
+			{
+				if ((this._IdImpuesto != value))
+				{
+					this.OnIdImpuestoChanging(value);
+					this.SendPropertyChanging();
+					this._IdImpuesto = value;
+					this.SendPropertyChanged("IdImpuesto");
+					this.OnIdImpuestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Impuesto", DbType="VarChar(50)")]
+		public string Impuesto
+		{
+			get
+			{
+				return this._Impuesto;
+			}
+			set
+			{
+				if ((this._Impuesto != value))
+				{
+					this.OnImpuestoChanging(value);
+					this.SendPropertyChanging();
+					this._Impuesto = value;
+					this.SendPropertyChanged("Impuesto");
+					this.OnImpuestoChanged();
 				}
 			}
 		}
