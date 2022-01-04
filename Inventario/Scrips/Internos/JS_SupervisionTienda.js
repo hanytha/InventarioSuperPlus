@@ -94,9 +94,20 @@ function editarModal(id) {
     else {
 
         $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-            document.getElementById("TxtArticulo").value = Data.Nombre;
             document.getElementById("TxtStock").value = Data.Stock;
-            MovimientoModal(id);
+            document.getElementById("cmbMovimiento").value;
+            document.getElementById("TxtCantidad").value;
+
+            let x = document.getElementById("TxtStock").value = Data.Stock;
+            let y = document.getElementById("TxtCantidad").value;
+
+            if (document.getElementById("cmbMovimiento").value = 1) {
+
+                let bonificacion = parseFloat(x) + parseFloat(y);
+
+                document.getElementById("TxtStockTotal").value = bonificacion;
+            }
+
         });
 
     }
