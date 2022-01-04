@@ -52,7 +52,7 @@ function CrearTablaSuperviciones(Data) {
         CodigoHtmlTablaSuperviciones += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaSuperviciones += "<td>";
         CodigoHtmlTablaSuperviciones += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdSupervision + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='EliminarSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
+        CodigoHtmlTablaSuperviciones += "<button class='btn btn-danger' onclick='CodigoHtmlSupervisoresrSupervicion(" + Data[i].IdSupervision + ",this)' ><i class='fas fa-eraser'></i></button>";
         CodigoHtmlTablaSuperviciones += "</td>";
         CodigoHtmlTablaSuperviciones += "</tr>";
     }
@@ -231,7 +231,12 @@ function EliminarSupervicion(id) {
                 //  confirmarEliminar();
                 ConsultaSuperviciones();
             } else {
-                alert("Ocurrió un error");
+                //alert("Ocurrió un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
         });
     }

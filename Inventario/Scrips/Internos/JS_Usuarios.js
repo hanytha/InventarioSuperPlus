@@ -495,7 +495,12 @@ function GuardarUsuario() {
         }
     }
     else {
-        alert("Su contraseña no coincide")
+        //alert("Su contraseña no coincide")
+        Swal.fire(
+            '',
+            'Su contraseña no coincide',
+            'warning'
+        )
     }
 }
 
@@ -540,7 +545,11 @@ function EliminarUsuario(id) {
                 //  confirmarEliminar();
                 ConsultaUsuarios();
             } else {
-                alert("Ocurrió un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
         });
     }

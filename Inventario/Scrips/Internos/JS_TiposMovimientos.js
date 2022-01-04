@@ -211,7 +211,12 @@ function EliminarTipoDeMovimiento(id) {
                 //  confirmarEliminar();
                 CrearTiposDeMovimiento();
             } else {
-                alert("Ocurrió un error");
+                //alert("Ocurrió un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
         });
     }

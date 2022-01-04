@@ -302,7 +302,11 @@ function EliminarProveedores(id) {
                 //  confirmarEliminar();
                 CrearAcordeonProveedores();
             } else {
-                alert("Ocurrió un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
         });
     }

@@ -220,7 +220,12 @@ function EliminarSupervisor(id) {
                 //  confirmarEliminar();
                 CrearTablaSupervisores();
             } else {
-                alert("Ocurrio un error");
+                //alert("Ocurrio un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
 
         });

@@ -166,7 +166,11 @@ function EliminarPerfil(id) {
                 )
                 MostrarPerfiles();
             } else {
-                alert("Ocurrió un error");
+                Swal.fire(
+                    '',
+                    'Ocurrìó un error',
+                    'danger'
+                )
             }
         });
     }
