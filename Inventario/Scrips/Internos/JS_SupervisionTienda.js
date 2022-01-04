@@ -1,4 +1,4 @@
-﻿LlenarCMTMovimientos();
+﻿//LlenarCMTMovimientos();
 LlenarCMCProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
@@ -139,19 +139,18 @@ function MovimientoModal(id) {
 
         let y = document.getElementById("TxtCantidad").value;
 
+        //if (document.getElementById("cmbMovimiento").value == 1) {
 
-        if (document.getElementById("cmbMovimiento").value == 1) {
+        //    let bonificacion = parseFloat(x) + parseFloat(y);
 
-            let bonificacion = parseFloat(x) + parseFloat(y);
-
-            document.getElementById("TxtStockTotal").value = bonificacion;
-        }
-        else {
+        //    document.getElementById("TxtStockTotal").value = bonificacion;
+        //}
+        //else {
 
             let bonificacion = parseFloat(x) - parseFloat(y);
 
             document.getElementById("TxtStockTotal").value = bonificacion;
-        }
+        //}
 
 
     });
@@ -177,23 +176,23 @@ function LimpiarCampos() {
 //---------------------------------------Termina-------------------------------------------------
 
 
-function LlenarCMTMovimientos() {
-    $.get("/Supervision/BDTiposMovimiento", function (data) {
-        llenarCombo(data, document.getElementById("cmbMovimiento"));
-    });
-}
+//function LlenarCMTMovimientos() {
+//    $.get("/Supervision/BDTiposMovimiento", function (data) {
+//        llenarCombo(data, document.getElementById("cmbMovimiento"));
+//    });
+//}
 
-//funcion general para llenar los select
-function llenarCombo(data, control) {
+////funcion general para llenar los select
+//function llenarCombo(data, control) {
 
-    var contenido = "";
-    contenido += "<option value='0'>--Seleccione--</option>";
+//    var contenido = "";
+//    contenido += "<option value='0'>--Seleccione--</option>";
 
-    for (var i = 0; i < data.length; i++) {
-        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
-    }
-    control.innerHTML = contenido;
-}
+//    for (var i = 0; i < data.length; i++) {
+//        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+//    }
+//    control.innerHTML = contenido;
+//}
 
 //Bloquea los input con la clase
 function BloquearCTRL() {

@@ -29,7 +29,7 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-<button onclick="abrirModalMovimiento(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Movimientos">REGISTRAR</button>
+
 <div id="accordion"></div>
 
 <div class="accordion" id="AcordeonSucursales">
@@ -299,7 +299,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
-                                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                                            <option value="0">--Seleccione--</option>
+                                            <option value="1">Uso</option>
+                                            <option value="2">Devolución</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

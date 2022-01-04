@@ -705,15 +705,15 @@ namespace Inventario.Controllers
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult BDTiposMovimiento()
-        {
-            var datos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new {
-                    ID = p.IdMovimientos,
-                    Nombre = p.TipoDeMovimiento
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult BDTiposMovimiento()
+        //{
+        //    var datos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
+        //        .Select(p => new {
+        //            ID = p.IdMovimientos,
+        //            Nombre = p.TipoDeMovimiento
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
 
         //------------------Supervision2da------------------------------------
         public ActionResult Supervision2da()
