@@ -42,7 +42,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
         CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-        //-----------------Botón para desplegar la primera tabla--------------
+        //-----------------Botón para desplegar el modal de movimientos--------------
         CodigoHtmlArticuloComp += "<div class='col'>"
         CodigoHtmlArticuloComp += "<label>"
         CodigoHtmlArticuloComp += "<button class='btn btn-warning' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
@@ -70,43 +70,41 @@ function editarModal(id) {
         $.get("/Traspasos/ConsultaArticulo/?Id=" + id, function (Data) {
             document.getElementById("TxtArticulo").value = Data.Nombre;
             document.getElementById("TxtStock").value = Data.Stock;
-
+            MovimientoModal(id);
         });
 
     }
 }
 
-//*Evento onechange del selec de tipos de movimiento*****************************************
+//********************************Evento onechange del selec de tipos de movimiento*****************************************
 function MovimientoModal(id) {
-  
-    if (id == 0) {
-        
-    }
-    else {
 
         $.get("/Traspasos/ConsultaArticulo/?Id=" + id, function (Data) {
 
-            let x = document.getElementById("TxtStock").value = Data.Stock;
-            document.getElementById("cmbMovimiento").value;
+            let x = document.getElementById("TxtStock").value;
+
             let y = document.getElementById("TxtCantidad").value;
 
 
-            if (document.getElementById("cmbMovimiento").value == 1) {
+                if (document.getElementById("cmbMovimiento").value == 1) {
 
-                let bonificacion = parseFloat(x) + parseFloat(y);
+                    let bonificacion = parseFloat(x) + parseFloat(y);
 
-                document.getElementById("TxtStockTotal").value = bonificacion;
-            }
-            else {
+                    document.getElementById("TxtStockTotal").value = bonificacion;
+                }
+                else {
 
-                let bonificacion = parseFloat(x) - parseFloat(y);
+                    let bonificacion = parseFloat(x) - parseFloat(y);
 
-                document.getElementById("TxtStockTotal").value = bonificacion;
-            }
+                    document.getElementById("TxtStockTotal").value = bonificacion;
+                }
+            
 
         });
-    }
-}
+ }
+
+
+
 //****************************************************************************************************************
 
 //limpiar campos
