@@ -9,55 +9,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal------------------------------------------------------------------------------------------------->
 <!----- <button onclick="abrirModal(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>-->
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<script type="text/javascript">
-    (function (document) {
-        'use strict';
-
-        var LightTableFilter = (function (Arr) {
-
-            var _input;
-
-            function _onInputEvent(e) {
-                _input = e.target;
-                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                Arr.forEach.call(tables, function (table) {
-                    Arr.forEach.call(table.tBodies, function (tbody) {
-                        Arr.forEach.call(tbody.rows, _filter);
-                    });
-                });
-            }
-
-            function _filter(row) {
-                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-            }
-
-            return {
-                init: function () {
-                    var inputs = document.getElementsByClassName('light-table-filter');
-                    Arr.forEach.call(inputs, function (input) {
-                        input.oninput = _onInputEvent;
-                    });
-                }
-            };
-        })(Array.prototype);
-
-        document.addEventListener('readystatechange', function () {
-            if (document.readyState === 'complete') {
-                LightTableFilter.init();
-            }
-        });
-
-    })(document);
-</script>
-
-
 <!----------------------Crea Tabla de artículos----------------------------------->
 <div id="contenedor1"></div>
 <!-------------------------------------------------------------------------->
@@ -92,7 +46,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
-                                        <select id="cmbMovimiento" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -123,6 +77,29 @@
     </div>
 </div>
 <!------------------------------------------------------------------------------------------------->
+
+<h1>Sumar dos números</h1>
+<p>Por favor, introduce dos números:</p>
+<input id="num1">
+<br>
+<input id="num2">
+<button type="button" onclick="myFunction()">Sumar</button>
+<p id="sumando"></p>
+<script>
+    function myFunction() {
+        var x, y, suma, text;
+        x = document.getElementById("num1").value;
+        y = document.getElementById("num2").value;
+        if (isNaN(x) || isNaN(y)) {
+            text = "Es necesarios introducir dos números válidos";
+        } else {
+            //si no ponemos parseFloat concatenaría x con y
+            suma = parseFloat(x) + parseFloat(y);
+            text = suma;
+        }
+        document.getElementById("sumando").innerHTML = text;
+    }
+</script>
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {

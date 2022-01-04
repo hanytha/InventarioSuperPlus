@@ -154,5 +154,6 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+//************************************************************************************************
     }
 }

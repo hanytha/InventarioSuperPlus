@@ -75,7 +75,6 @@
       <Column Name="FechaSistema" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosInternos" Member="PedidosInternos" ThisKey="IdArticulos" OtherKey="IdArticulo" Type="PedidosInternos" />
-      <Association Name="Articulos_TipoDeMovimientos" Member="TipoDeMovimientos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="TipoDeMovimientos" />
       <Association Name="Areas_Articulos" Member="Areas" ThisKey="IdAreas" OtherKey="IdAreas" Type="Areas" IsForeignKey="true" />
       <Association Name="Categorias_Articulos" Member="Categorias" ThisKey="IdCategorias" OtherKey="IdCategorias" Type="Categorias" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Marca_Articulos" Member="Marca1" ThisKey="IdMarca" OtherKey="IdMarca" Type="Marca" IsForeignKey="true" />
@@ -420,15 +419,8 @@
   <Table Name="dbo.TipoDeMovimientos" Member="TipoDeMovimientos">
     <Type Name="TipoDeMovimientos">
       <Column Name="IdMovimientos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Unidades" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="TipoDeMovimiento" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="TotalStock" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Articulos_TipoDeMovimientos" Member="Articulos" ThisKey="IdArticulos" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UnidadDeMedida" Member="UnidadDeMedida">
