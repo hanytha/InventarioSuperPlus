@@ -274,26 +274,42 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">MOVIMIENTO DE ARTÍCULOS</h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            REGISTRO DE PEDIDOS INTERNOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Descripcón">
+                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtStock">Stock actual<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Stock">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtStock">Stock<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Descripcón">
+                                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Cantidad">
                                     </div>
                                 </div>
+
+
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -306,17 +322,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Descripcón">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtStockTotal">Nuevo Stock<span class="required">*</span></label>
+                                        <label class="form-control-label" for="TxtStockTotal">Stock actualizado<span class="required">*</span></label>
                                         <input type="text" name="data[TxtStockTotal]" id="TxtStockTotal" class="form-control  limpiar bloquear" placeholder="Total del stock">
                                     </div>
                                 </div>
@@ -353,6 +361,8 @@
 <script src="~/Scrips/jquery.min.js"></script>
 @*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
 @*<script src="~/Scripts/meg.init.js"></script>*@
+<!--sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 

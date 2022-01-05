@@ -135,9 +135,6 @@ function MovimientoModal(id) {
 
     $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
 
-        let x = document.getElementById("TxtStock").value;
-
-        let y = document.getElementById("TxtCantidad").value;
 
         //if (document.getElementById("cmbMovimiento").value == 1) {
 
@@ -147,12 +144,29 @@ function MovimientoModal(id) {
         //}
         //else {
 
-            let bonificacion = parseFloat(x) - parseFloat(y);
-
-            document.getElementById("TxtStockTotal").value = bonificacion;
+           
         //}
 
 
+        if (document.getElementById("TxtCantidad")<= document.getElementById("TxtStock")) {
+        //if (y <= x) {
+            let x = document.getElementById("TxtStock").value;
+
+            let y = document.getElementById("TxtCantidad").value;
+            let resultado = parseFloat(x) - parseFloat(y);
+
+            document.getElementById("TxtStockTotal").value = resultado;
+
+            if (document.getElementById("TxtStockTotal").value < 0) {
+     
+                    Swal.fire(
+                        '!',
+                        'La cantidad excede al stock',
+                        'alert'
+                    )
+            }
+        }
+       
     });
 }
 
