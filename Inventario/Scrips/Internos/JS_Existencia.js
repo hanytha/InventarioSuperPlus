@@ -1,7 +1,5 @@
 ﻿
 ConsultaCompras();
-LlenarCMBImpuesto();
-LlenarCMBUnidades();
 LlenarCMBProveedor();
 BloquearCTRL();
 function ConsultaCompras() {
@@ -70,8 +68,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
-            document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-            document.getElementById("TxtCoste").value = Data[0].Coste;
+            document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
             
@@ -102,31 +99,39 @@ function MostrarArticulos(id) {
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Unidad_Medida</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Impuesto</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Precio_Unitario</label>";
             TablaArticulo += "</div>";
+
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-Precio redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -152,16 +157,12 @@ function LimpiarCampos() {
 }
 
 
-//---------Guarda los cambios y altas de las compras------------------------------------
+//---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------
 function GuardarCompra() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNoCompra").value;
-
-            var IdArticulo = document.getElementById("cmbArticulo").value;
-            var TempArt = document.getElementById("cmbArticulo");
-            var Articulo = TempArt.options[TempArt.selectedIndex].text;
 
             var IdProveedor = document.getElementById("cmbProveedor").value;
             var TempPro = document.getElementById("cmbProveedor");
@@ -169,34 +170,17 @@ function GuardarCompra() {
 
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
-            var PrecioUnitario = document.getElementById("TxtPrecioUnitario").value;
-            var ExitenciaActual = document.getElementById("TxtExitenciaActual").value;
-            var Coste = document.getElementById("TxtCoste").value;
+            var Coste = document.getElementById("TxtCosto").value;
 
-            var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
-            var TempUni = document.getElementById("cmbUnidad");
-            var Unidad = TempUni.options[TempUni.selectedIndex].text;
-
-            var IdImpuesto = document.getElementById("cmbImpuesto").value;
-            var TempEdo = document.getElementById("cmbImpuesto");
-            var Impuesto = TempEdo.options[TempEdo.selectedIndex].text;
 
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
             frm.append("NoCompra", NoCompra);
-            frm.append("IdArticulo", IdArticulo);
-            frm.append("Articulo", Articulo);
             frm.append("IdProveedor", IdProveedor);
             frm.append("Proveedor", Proveedor);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("FechaDeIngreso", FechaDeIngreso);
-            frm.append("PrecioUnitario", PrecioUnitario);
-            frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("Coste", Coste);
-            frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
-            frm.append("Unidad", Unidad);
-            frm.append("IdImpuesto", IdImpuesto);
-            frm.append("Impuesto", Impuesto);
 
 
             frm.append("Estatus", 1);
@@ -217,7 +201,7 @@ function GuardarCompra() {
                         //-----Mensaje de confirmación-----------------------
                         swal("Su compra se guardó exitosamente!", "", "success");
 
-                        ConsultaCompras();
+                     
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -225,6 +209,84 @@ function GuardarCompra() {
         }
     }
 }
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//----------------------Guardar datos de los pedidos-----------------------------------------------
+
+function GuardarDatosArticuloCompra() {
+
+    if (CamposObligatorios() == true) {
+
+
+            //----------Guardar los inputs de manera individual en la Base de datos--------------------
+            var cantidad = document.getElementsByClassName("input-cantidad");
+
+            var NomArticulos = document.getElementsByClassName("input-Articulo");
+
+            var UnidadM = document.getElementsByClassName("input-Unidad");
+
+           var Precio = document.getElementsByClassName("input-Precio");
+
+           var impuestos = document.getElementsByClassName("input-impuesto");
+
+        for (let i = 0; i < cantidad.length; i++) {
+            if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
+
+
+                    var IdExistenciaCompra = sessionStorage.getItem('IDExt');
+                    var NoCompra = document.getElementById("TxtNoCompra").value;
+                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                    var Articulo = NomArticulos[i].value;
+                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    var StockActual = cantidad[i].value;
+                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                    var Unidad = UnidadM[i].value;
+                    //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                    var PrecioUnitario = Precio[i].value;
+                   //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+                     var Impuesto = impuestos[i].value;
+                    //-------------------------------------------------------------------------------------------------------------
+                    var frm = new FormData();
+                    frm.append("IdExistenciaCompra", IdExistenciaCompra);
+              
+                    frm.append("StockActual", StockActual);
+                    frm.append("Articulo", Articulo);
+                    frm.append("Unidad", Unidad);
+                    frm.append("NoCompra", NoCompra);
+                    frm.append("Impuesto", Impuesto);
+                    frm.append("PrecioUnitario", PrecioUnitario);
+                    frm.append("Estatus", 1);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Compra/GuardarDatosArticuloCompra",
+                        data: frm,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == 0) {
+                                swal("¡Ocurrio un error!", "", "danger");
+                            }
+                            else if (data == -1) {
+                                swal("¡El pedido ya exixste!", "", "warning");
+                            }
+                            else {
+                                ConsultaCompras();
+                                document.getElementById("btnCancelar").click();
+                            }
+                        }
+                    });
+
+                }
+            }
+            //-----Mensaje de confirmación-----------------------
+            swal("Su compra se guardo correctamente!", "", "success");
+        }
+    
+
+}
+
+
 
 //----------marca los campos obligatorios--------------------
 function CamposObligatorios() {
@@ -262,13 +324,6 @@ function EliminarCompra(id) {
 
 //------obtiene los datos de las consultas para llenar los combobox-----------
 
-function LlenarCMBImpuesto() {
-    $.get("/GLOBAL/BDImpuesto", function (data) {
-        llenarCombo(data, document.getElementById("cmbImpuesto"));
-    });
-}
-
-
 
 function LlenarCMBProveedor() {
     $.get("/GLOBAL/BDProveedor", function (data) {
@@ -276,12 +331,6 @@ function LlenarCMBProveedor() {
     });
 }
 
-
-function LlenarCMBUnidades() {
-    $.get("/GLOBAL/BDUnidadesMedida", function (data) {
-        llenarCombo(data, document.getElementById("cmbUnidad"));
-    });
-}
 
 //----------------funcion general para llenar los select------------
 function llenarCombo(data, control) {
@@ -293,6 +342,7 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
+
 
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
@@ -318,26 +368,4 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNoCompra").value = ultimoElemento;
 
 }
-
-////------------------Crea el combobox de proveedores por id de artículo--------------------------
-//function LlenarCMBProveedores(id) {
-//    $.get("/Compra/ConsultaProveedorxArticulo/?IdPro=" + id, function (data) {
-//        llenarComboProveedor(data, document.getElementById("cmbProveedor"));
-//    });
-//}
-////----------------funcion para llenar el select de proveedores deacuerdo al artículo------------
-//function llenarComboProveedor(data, control) {
-//    var contenido = "";
-//    contenido += "<option value='0'>--Seleccione--</option>";
-
-//    let proveedor = data.proveedor;
-//    let Arrayproveedor= proveedor.split('#');
-
-
-//    for (var i = 0; i < Arrayproveedor.length; i++) {
-//        contenido += "<option value='" + Arrayproveedor[i] + "'>" + Arrayproveedor[i] + "</option>";
-//    }
-//    control.innerHTML = contenido;
-//}
-
 

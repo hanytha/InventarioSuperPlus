@@ -48,6 +48,9 @@ namespace Inventario
     partial void InsertCompra(Compra instance);
     partial void UpdateCompra(Compra instance);
     partial void DeleteCompra(Compra instance);
+    partial void InsertComprasArticulos(ComprasArticulos instance);
+    partial void UpdateComprasArticulos(ComprasArticulos instance);
+    partial void DeleteComprasArticulos(ComprasArticulos instance);
     partial void InsertConfiguracion(Configuracion instance);
     partial void UpdateConfiguracion(Configuracion instance);
     partial void DeleteConfiguracion(Configuracion instance);
@@ -2516,10 +2519,6 @@ namespace Inventario
 		
 		private string _MetodoDePago;
 		
-		private System.Nullable<long> _IdArticulo;
-		
-		private string _Articulo;
-		
 		private System.Nullable<long> _IdProveedor;
 		
 		private string _Proveedor;
@@ -2528,9 +2527,13 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
-		private System.Nullable<long> _ExitenciaActual;
+		private System.Nullable<long> _Coste;
 		
-		private long _Coste;
+		private System.Nullable<long> _IdArticulo;
+		
+		private string _Articulo;
+		
+		private System.Nullable<long> _ExitenciaActual;
 		
 		private System.Nullable<long> _IdUnidadDeMedida;
 		
@@ -2554,10 +2557,6 @@ namespace Inventario
     partial void OnIdCompraChanged();
     partial void OnMetodoDePagoChanging(string value);
     partial void OnMetodoDePagoChanged();
-    partial void OnIdArticuloChanging(System.Nullable<long> value);
-    partial void OnIdArticuloChanged();
-    partial void OnArticuloChanging(string value);
-    partial void OnArticuloChanged();
     partial void OnIdProveedorChanging(System.Nullable<long> value);
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
@@ -2566,10 +2565,14 @@ namespace Inventario
     partial void OnNoCompraChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
+    partial void OnCosteChanging(System.Nullable<long> value);
+    partial void OnCosteChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
     partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
-    partial void OnCosteChanging(long value);
-    partial void OnCosteChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
@@ -2610,7 +2613,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MetodoDePago", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MetodoDePago", DbType="VarChar(50)")]
 		public string MetodoDePago
 		{
 			get
@@ -2626,46 +2629,6 @@ namespace Inventario
 					this._MetodoDePago = value;
 					this.SendPropertyChanged("MetodoDePago");
 					this.OnMetodoDePagoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
-		public System.Nullable<long> IdArticulo
-		{
-			get
-			{
-				return this._IdArticulo;
-			}
-			set
-			{
-				if ((this._IdArticulo != value))
-				{
-					this.OnIdArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._IdArticulo = value;
-					this.SendPropertyChanged("IdArticulo");
-					this.OnIdArticuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
-		public string Articulo
-		{
-			get
-			{
-				return this._Articulo;
-			}
-			set
-			{
-				if ((this._Articulo != value))
-				{
-					this.OnArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._Articulo = value;
-					this.SendPropertyChanged("Articulo");
-					this.OnArticuloChanged();
 				}
 			}
 		}
@@ -2730,7 +2693,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50)")]
 		public string FechaDeIngreso
 		{
 			get
@@ -2746,6 +2709,66 @@ namespace Inventario
 					this._FechaDeIngreso = value;
 					this.SendPropertyChanged("FechaDeIngreso");
 					this.OnFechaDeIngresoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt")]
+		public System.Nullable<long> Coste
+		{
+			get
+			{
+				return this._Coste;
+			}
+			set
+			{
+				if ((this._Coste != value))
+				{
+					this.OnCosteChanging(value);
+					this.SendPropertyChanging();
+					this._Coste = value;
+					this.SendPropertyChanged("Coste");
+					this.OnCosteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
 				}
 			}
 		}
@@ -2766,26 +2789,6 @@ namespace Inventario
 					this._ExitenciaActual = value;
 					this.SendPropertyChanged("ExitenciaActual");
 					this.OnExitenciaActualChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt NOT NULL")]
-		public long Coste
-		{
-			get
-			{
-				return this._Coste;
-			}
-			set
-			{
-				if ((this._Coste != value))
-				{
-					this.OnCosteChanging(value);
-					this.SendPropertyChanging();
-					this._Coste = value;
-					this.SendPropertyChanged("Coste");
-					this.OnCosteChanged();
 				}
 			}
 		}
@@ -2957,10 +2960,12 @@ namespace Inventario
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ComprasArticulos")]
-	public partial class ComprasArticulos
+	public partial class ComprasArticulos : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<long> _IdExistenciaCompra;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _IdExistenciaCompra;
 		
 		private System.Nullable<long> _IdCompra;
 		
@@ -2968,30 +2973,55 @@ namespace Inventario
 		
 		private System.Nullable<long> _StockActual;
 		
-		private string _Costo;
+		private System.Nullable<long> _NoCompra;
 		
 		private string _TipoOperacion;
 		
-		private System.Nullable<long> _IdArticulo;
-		
 		private string _Articulo;
 		
-		private System.Nullable<long> _IdUnidad;
-		
 		private string _Unidad;
-		
-		private System.Nullable<long> _IdImpuesto;
 		
 		private string _Impuesto;
 		
 		private string _PrecioUnitario;
 		
+		private System.Nullable<int> _Estatus;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdExistenciaCompraChanging(long value);
+    partial void OnIdExistenciaCompraChanged();
+    partial void OnIdCompraChanging(System.Nullable<long> value);
+    partial void OnIdCompraChanged();
+    partial void OnExistenciaInicialChanging(System.Nullable<long> value);
+    partial void OnExistenciaInicialChanged();
+    partial void OnStockActualChanging(System.Nullable<long> value);
+    partial void OnStockActualChanged();
+    partial void OnNoCompraChanging(System.Nullable<long> value);
+    partial void OnNoCompraChanged();
+    partial void OnTipoOperacionChanging(string value);
+    partial void OnTipoOperacionChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
+    partial void OnUnidadChanging(string value);
+    partial void OnUnidadChanged();
+    partial void OnImpuestoChanging(string value);
+    partial void OnImpuestoChanged();
+    partial void OnPrecioUnitarioChanging(string value);
+    partial void OnPrecioUnitarioChanged();
+    partial void OnEstatusChanging(System.Nullable<int> value);
+    partial void OnEstatusChanged();
+    #endregion
+		
 		public ComprasArticulos()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdExistenciaCompra", DbType="BigInt")]
-		public System.Nullable<long> IdExistenciaCompra
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdExistenciaCompra", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdExistenciaCompra
 		{
 			get
 			{
@@ -3001,7 +3031,11 @@ namespace Inventario
 			{
 				if ((this._IdExistenciaCompra != value))
 				{
+					this.OnIdExistenciaCompraChanging(value);
+					this.SendPropertyChanging();
 					this._IdExistenciaCompra = value;
+					this.SendPropertyChanged("IdExistenciaCompra");
+					this.OnIdExistenciaCompraChanged();
 				}
 			}
 		}
@@ -3017,7 +3051,11 @@ namespace Inventario
 			{
 				if ((this._IdCompra != value))
 				{
+					this.OnIdCompraChanging(value);
+					this.SendPropertyChanging();
 					this._IdCompra = value;
+					this.SendPropertyChanged("IdCompra");
+					this.OnIdCompraChanged();
 				}
 			}
 		}
@@ -3033,7 +3071,11 @@ namespace Inventario
 			{
 				if ((this._ExistenciaInicial != value))
 				{
+					this.OnExistenciaInicialChanging(value);
+					this.SendPropertyChanging();
 					this._ExistenciaInicial = value;
+					this.SendPropertyChanged("ExistenciaInicial");
+					this.OnExistenciaInicialChanged();
 				}
 			}
 		}
@@ -3049,23 +3091,31 @@ namespace Inventario
 			{
 				if ((this._StockActual != value))
 				{
+					this.OnStockActualChanging(value);
+					this.SendPropertyChanging();
 					this._StockActual = value;
+					this.SendPropertyChanged("StockActual");
+					this.OnStockActualChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Costo", DbType="VarChar(150)")]
-		public string Costo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompra", DbType="BigInt")]
+		public System.Nullable<long> NoCompra
 		{
 			get
 			{
-				return this._Costo;
+				return this._NoCompra;
 			}
 			set
 			{
-				if ((this._Costo != value))
+				if ((this._NoCompra != value))
 				{
-					this._Costo = value;
+					this.OnNoCompraChanging(value);
+					this.SendPropertyChanging();
+					this._NoCompra = value;
+					this.SendPropertyChanged("NoCompra");
+					this.OnNoCompraChanged();
 				}
 			}
 		}
@@ -3081,23 +3131,11 @@ namespace Inventario
 			{
 				if ((this._TipoOperacion != value))
 				{
+					this.OnTipoOperacionChanging(value);
+					this.SendPropertyChanging();
 					this._TipoOperacion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
-		public System.Nullable<long> IdArticulo
-		{
-			get
-			{
-				return this._IdArticulo;
-			}
-			set
-			{
-				if ((this._IdArticulo != value))
-				{
-					this._IdArticulo = value;
+					this.SendPropertyChanged("TipoOperacion");
+					this.OnTipoOperacionChanged();
 				}
 			}
 		}
@@ -3113,23 +3151,11 @@ namespace Inventario
 			{
 				if ((this._Articulo != value))
 				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
 					this._Articulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidad", DbType="BigInt")]
-		public System.Nullable<long> IdUnidad
-		{
-			get
-			{
-				return this._IdUnidad;
-			}
-			set
-			{
-				if ((this._IdUnidad != value))
-				{
-					this._IdUnidad = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
 				}
 			}
 		}
@@ -3145,23 +3171,11 @@ namespace Inventario
 			{
 				if ((this._Unidad != value))
 				{
+					this.OnUnidadChanging(value);
+					this.SendPropertyChanging();
 					this._Unidad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdImpuesto", DbType="BigInt")]
-		public System.Nullable<long> IdImpuesto
-		{
-			get
-			{
-				return this._IdImpuesto;
-			}
-			set
-			{
-				if ((this._IdImpuesto != value))
-				{
-					this._IdImpuesto = value;
+					this.SendPropertyChanged("Unidad");
+					this.OnUnidadChanged();
 				}
 			}
 		}
@@ -3177,7 +3191,11 @@ namespace Inventario
 			{
 				if ((this._Impuesto != value))
 				{
+					this.OnImpuestoChanging(value);
+					this.SendPropertyChanging();
 					this._Impuesto = value;
+					this.SendPropertyChanged("Impuesto");
+					this.OnImpuestoChanged();
 				}
 			}
 		}
@@ -3193,8 +3211,52 @@ namespace Inventario
 			{
 				if ((this._PrecioUnitario != value))
 				{
+					this.OnPrecioUnitarioChanging(value);
+					this.SendPropertyChanging();
 					this._PrecioUnitario = value;
+					this.SendPropertyChanged("PrecioUnitario");
+					this.OnPrecioUnitarioChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

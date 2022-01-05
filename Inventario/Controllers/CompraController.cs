@@ -27,11 +27,7 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
-                    p.PrecioUnitario,
-                    p.ExitenciaActual,
                     p.Coste,
-                    p.Impuesto,
-                    p.IdImpuesto,
                     p.IdProveedor,
 
 
@@ -49,11 +45,7 @@ namespace Inventario.Controllers
                     p.MetodoDePago,
                     p.Proveedor,
                     p.FechaDeIngreso,
-                    p.PrecioUnitario,
-                    p.ExitenciaActual,
                     p.Coste,
-                    p.Impuesto,
-                    p.IdImpuesto,
                     p.IdProveedor,
 
                 });
@@ -84,13 +76,8 @@ namespace Inventario.Controllers
                 int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
-                && p.ExitenciaActual.Equals(DatosCompra.ExitenciaActual)
-                && p.PrecioUnitario.Equals(DatosCompra.PrecioUnitario)
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.Coste.Equals(DatosCompra.Coste)
-                && p.IdImpuesto.Equals(DatosCompra.IdImpuesto)
-                && p.IdArticulo.Equals(DatosCompra.IdArticulo)
-                && p.IdUnidadDeMedida.Equals(DatosCompra.IdUnidadDeMedida)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -100,15 +87,7 @@ namespace Inventario.Controllers
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
-                    obj.PrecioUnitario = DatosCompra.PrecioUnitario;
-                    obj.ExitenciaActual = DatosCompra.ExitenciaActual;
                     obj.Coste = DatosCompra.Coste;
-                    obj.IdImpuesto = DatosCompra.IdImpuesto;
-                    obj.Impuesto = DatosCompra.Impuesto;
-                    obj.IdArticulo = DatosCompra.IdArticulo;
-                    obj.Articulo = DatosCompra.Articulo;
-                    obj.IdUnidadDeMedida = DatosCompra.IdUnidadDeMedida;
-                    obj.Unidad = DatosCompra.Unidad;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -233,12 +212,13 @@ namespace Inventario.Controllers
         //*********************************************************************************************
 
 
-        //Guardar los datos de la compra y los almacena en ComprasArticulos
-        public int GuardarTienda(ComprasArticulos DatosTienda)
+        //---------------Guardar los datos de los articulos de las compras en la tabla ComprasArticulos--------------
+
+        public int GuardarDatosArticuloCompra(ComprasArticulos DatosTienda)
         {
             int Afectados = 0;
           
-             var id = DatosTienda.IdExistenciaCompra;
+             long id = (long) DatosTienda.IdExistenciaCompra;
             if (id.Equals(0))
             {
                 int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)).Count();
@@ -258,16 +238,12 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)
-                && p.IdCompra.Equals(DatosTienda.IdCompra)
+      
                 && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
                 && p.StockActual.Equals(DatosTienda.StockActual)
-                && p.Costo.Equals(DatosTienda.Costo)
-                && p.TipoOperacion.Equals(DatosTienda.TipoOperacion)
-                && p.IdArticulo.Equals(DatosTienda.IdArticulo)
                 && p.Articulo.Equals(DatosTienda.Articulo)
-                && p.IdUnidad.Equals(DatosTienda.IdUnidad)
                 && p.Unidad.Equals(DatosTienda.Unidad)
-                && p.IdImpuesto.Equals(DatosTienda.IdImpuesto)
+                && p.NoCompra.Equals(DatosTienda.NoCompra)
                 && p.Impuesto.Equals(DatosTienda.Impuesto)
                 && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
                 ).Count();
@@ -277,16 +253,11 @@ namespace Inventario.Controllers
                 {
                     ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(id)).First();
 
-                    obj.IdCompra = DatosTienda.IdCompra;
-                    obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
                     obj.StockActual = DatosTienda.StockActual;
-                    obj.Costo = DatosTienda.Costo;
-                    obj.TipoOperacion = DatosTienda.TipoOperacion;
-                    obj.IdArticulo = DatosTienda.IdArticulo;
                     obj.Articulo = DatosTienda.Articulo;
-                    obj.IdUnidad = DatosTienda.IdUnidad;
                     obj.Unidad = DatosTienda.Unidad;
-                    obj.IdImpuesto = DatosTienda.IdImpuesto;
+                    obj.NoCompra = DatosTienda.NoCompra;
+                    obj.Impuesto = DatosTienda.Impuesto;
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
 
                     InvBD.SubmitChanges();
