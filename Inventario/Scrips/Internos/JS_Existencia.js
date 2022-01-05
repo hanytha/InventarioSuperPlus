@@ -70,7 +70,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-
         });
     }
 }
@@ -89,6 +88,7 @@ function MostrarArticulos(id) {
     else {
 
         $.get("/Compra/ConsultaArticuloxIdProveedor/?IdPro=" + id, function (Data) {
+            ConsultaSiguienteCompraPrveedor(id);
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
