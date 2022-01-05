@@ -257,7 +257,7 @@ function Desplegar(no, id) {
 
 
 
-function abrirModal(id, idS) {
+function abrirModal(id, idS) { 
 
     LimpiarCampos();
     if (idS == 0) {
@@ -266,37 +266,41 @@ function abrirModal(id, idS) {
     }
 
     else {
-
-        $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
-            //document.getElementById("cmbTienda").value = Data[0].IdTienda;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            //document.getElementById("TxtRFC").value = Data[0].RFC;
-            //document.getElementById("TxtClabe").value = Data[0].Clabe;
-            //document.getElementById("TxtCorreo").value = Data[0].Correo;
-            //document.getElementById("TxtTelefono").value = Data[0].Telefono;
-            //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
-            //document.getElementById("TxtDireccion").value = Data[0].Direccion;
-            //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
-            //Muestra los artículos que le pertenecen a ese proveedor----
-            MostrarArticulos(id);
-            //Muestra el número de pedido que le corresponde por proveedor-------
-            SiguientePedidoProveedor(id);
-            //Muestra el número de pedido que le corresponde-------
-            ConsultaSiguientePedido();
-
-        });
+  
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
             //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-
+      
 
         });
-
+        Prov(id)
     }
 }
 
 
+
+
+function Prov(id) {
+    $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+        //document.getElementById("cmbTienda").value = Data[0].IdTienda;
+        document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+        //document.getElementById("TxtRFC").value = Data[0].RFC;
+        //document.getElementById("TxtClabe").value = Data[0].Clabe;
+        //document.getElementById("TxtCorreo").value = Data[0].Correo;
+        //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+        //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+        //document.getElementById("TxtDireccion").value = Data[0].Direccion;
+        //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
+        //Muestra los artículos que le pertenecen a ese proveedor----
+        MostrarArticulos(id);
+        //Muestra el número de pedido que le corresponde por proveedor-------
+        SiguientePedidoProveedor(id);
+        //Muestra el número de pedido que le corresponde-------
+        ConsultaSiguientePedido();
+
+    });
+}
 
 function abrirModalMovimiento(IDTienda) {
 
