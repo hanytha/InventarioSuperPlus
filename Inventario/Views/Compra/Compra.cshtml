@@ -78,14 +78,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha De Ingreso<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
+                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control   obligatorio bloquear">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio" placeholder="1">
+                                        <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio bloquear" placeholder="1">
                                     </div>
                                 </div>
                             </div>
@@ -171,10 +171,18 @@
         display: none;
     }
 </style>
+
+<!------------Obtener la fecha--------------------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaDeIngreso').value = fecha;
+
+</script>
+
+
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
 <script src="~/Scrips/Internos/JS_Existencia.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

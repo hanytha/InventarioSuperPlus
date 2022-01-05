@@ -3,7 +3,7 @@ ConsultaCompras();
 LlenarCMBImpuesto();
 LlenarCMBUnidades();
 LlenarCMBProveedor();
-
+BloquearCTRL();
 function ConsultaCompras() {
     $.get("/Compra/ConsultasCompras", function (Data) {
         CrearTablaCompras(Data);
@@ -50,6 +50,8 @@ function CrearTablaCompras(Data) {
 
 //------------Limpia la información y carga la informacion de la compra------------------------
 function abrirModal(id) {//la clase  Obligatorio
+    ConsultaSiguientePedido(); 
+
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -71,7 +73,8 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
             document.getElementById("TxtCoste").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-           
+
+            
         });
     }
 }
@@ -108,11 +111,11 @@ function MostrarArticulos(id) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -126,7 +129,6 @@ function MostrarArticulos(id) {
                 TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
-
 
             }
             TablaArticulo += "</div>";
@@ -292,8 +294,30 @@ function llenarCombo(data, control) {
     control.innerHTML = contenido;
 }
 
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
 
+//******************Función que determina el siguiente número de compra general*****************************************
+function ConsultaSiguientePedido() {
+    $.get("/Compra/ConsultaPedidosDecendiente", function (Data) {
+        SiguientePedido(Data);
 
+    }
+    );
+}
+function SiguientePedido(Data) {
+
+    let NumeroPedido = Data.NumeroPedido;
+    let ArrayNumeroPedido = NumeroPedido.split(',');
+
+    var ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
+    document.getElementById("TxtNoCompra").value = ultimoElemento;
+
+}
 
 ////------------------Crea el combobox de proveedores por id de artículo--------------------------
 //function LlenarCMBProveedores(id) {

@@ -158,10 +158,39 @@ namespace Inventario.Controllers
                     p.IdArticulos,
                     p.Unidad,
                     p.PrecioUnitarioPromedio,
-                    
+                    p.Impuesto,
                 });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+        //*******************************************************************************************************
+
+
+        public JsonResult ConsultaPedidosDecendiente()
+        {
+            string NumeroPedido = "";
+            var pedidosNum = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NoCompra)
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    Pedido = p.NoCompra,
+                });
+
+            if (pedidosNum.Count() > 0)
+            {
+                foreach (var ped in pedidosNum)
+                {
+                    int SumaNum = (int)(ped.Pedido + 1);
+                    NumeroPedido += SumaNum + ",";
+                }
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
+            {
+                NumeroPedido += "1" + ",";
+            }
+            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
         //**************Consulta los provedores por ID de artículo********************************
