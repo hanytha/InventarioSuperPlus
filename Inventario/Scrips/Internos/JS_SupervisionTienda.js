@@ -569,9 +569,11 @@ function GuardarPedidoInterno() {
 
 
 
+
+
 function CamposObligatorios() {
     var exito = true;
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("obligatorioPedido");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
