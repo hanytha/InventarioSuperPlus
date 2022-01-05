@@ -142,9 +142,7 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-        //*******************************************************************************************************
-
-
+        //**************************Consulta los números de compra para poder generar el siguiente**************************
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
@@ -172,46 +170,50 @@ namespace Inventario.Controllers
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
-        //**************Consulta los provedores por ID de artículo********************************
-        //public JsonResult ConsultaProveedorxArticulo(long IdPro)
-        //{
-        //    string proveedor = "";
-        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            Id = p.Proveedor,
-        //        });
-        //        foreach (var num in proveedores)
-        //        {
+        //********************************************************************************************************************************
 
-        //        proveedor += num.Id + ",";
-        //        }
+        public JsonResult ConsultaId()
+        {
+            var compras = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdCompra)
+                .Select(p => new
+                {
+                    p.IdCompra
+                });
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
 
-        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-        //    return Json(provedores, JsonRequestBehavior.AllowGet);
-        //}
-        ////*********************************************************************************************
-        //public JsonResult ConsultaProveedorxArti(long IdPro)
-        //{
-        //    string proveedor = "";
-        //    var proveedores = InvBD.Articulos.Where(p => p.IdArticulos.Equals(IdPro) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            Id = p.Proveedor,
-        //        });
-        //    foreach (var num in proveedores)
-        //    {
+        //***********************Consulta el siguiente número de pedido por proveedor********************************************
+        public JsonResult ConsultaNumPedidoProveedor(long ID)
+        {
+            string numPedidoProve = "";
+            var numero = InvBD.Compra.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Id = p.IdProveedor,
+                    NumeroPProveedor = p.NoCompra,
 
-        //        proveedor += num.Id + ",";
+                });
 
-        //    }
+            if (numero.Count() > 0)
+            {
+                foreach (var num in numero)
+                {
+                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                    numPedidoProve += SumaNumero + ",";
 
-        //    var provedores = new { proveedor = proveedor.Substring(0, proveedor.Length - 1) };
-        //    return Json(provedores, JsonRequestBehavior.AllowGet);
-        //}
-        //*********************************************************************************************
+                }
 
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
+            {
+                numPedidoProve += "1" + ",";
+            }
+            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
+            return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
 
+        //****************************************************************************************************************
         //---------------Guardar los datos de los articulos de las compras en la tabla ComprasArticulos--------------
 
         public int GuardarDatosArticuloCompra(ComprasArticulos DatosTienda)

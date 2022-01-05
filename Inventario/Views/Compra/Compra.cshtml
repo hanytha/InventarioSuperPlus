@@ -76,34 +76,46 @@
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
                                         <input type="text" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control   obligatorio bloquear">
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtID">ID<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtID]" id="TxtID" class="form-control  limpiar bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNoCompraPro">No. Compra por proveedor<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtNoCompraPro]" id="TxtNoCompraPro" class="form-control  limpiar bloquear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
                                         <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio bloquear" placeholder="1">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtMetodo">Método de pago<span class="required">*</span></label>
                                         <input type="text" name="data[TxtMetodo]" id="TxtMetodo" class="form-control  limpiar obligatorio" placeholder="Tarjeta">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtCosto">Total<span class="required">*</span></label>
                                         <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="$0.0">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
@@ -111,14 +123,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                        <div id="TblArticulos">Artículo(s) del proveedor</div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                            <div id="TblArticulos">Artículo(s) del proveedor</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </fieldset>
                     </form>
                 </div>

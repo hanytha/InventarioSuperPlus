@@ -71,7 +71,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
 
-            
         });
     }
 }
@@ -280,7 +279,8 @@ function GuardarDatosArticuloCompra() {
                 }
             }
             //-----Mensaje de confirmación-----------------------
-            swal("Su compra se guardo correctamente!", "", "success");
+        //  swal("Su compra se guardo correctamente!", "", "success");
+        alert("los datos se guardaron correctamente");
         }
     
 
@@ -311,9 +311,10 @@ function CamposObligatorios() {
 function EliminarCompra(id) {
     if (confirm("¿Desea eliminar el registro?") == 1) {
 
-        $.get("/Compra/EliminarCompra/?Id=" + id, function (DatoTienda) {
-            if (DatoTienda == 1) {
-                swal("La compra se eliminó exitosamente!", "", "success");
+        $.get("/Compra/EliminarCompra/?Id=" + id, function (DatoCompra) {
+            if (DatoCompra == 1) {
+                //    swal("La compra se eliminó exitosamente!", "", "success");
+                alert("Se elimino correctamente la compra");
                 ConsultaCompras();
             } else {
                 swal("¡Ocurrio un error!", "", "danger");
@@ -368,4 +369,27 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNoCompra").value = ultimoElemento;
 
 }
+
+//******************Función que determina el siguiente número de pedido por proveedor********************************
+
+function ConsultaSiguienteCompraPrveedor(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/Compra/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+
+
+            let numPedidoProve = Data.numPedidoProve;
+            let ArraynumPedidoProve = numPedidoProve.split(',');
+
+
+            var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+            document.getElementById("TxtNoCompraPro").value = ultimo;
+
+        });
+    }
+}
+
 
