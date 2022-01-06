@@ -141,6 +141,84 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+
+
+
+
+
+
+
+        public long GuardarCompra(CompraInterno DatosCompra)
+        {
+            long Afectados = 0;
+            long id = DatosCompra.IdCompraInterno;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.CompraInterno.Where(p => p.Articulo.Equals(DatosCompra.Articulo)
+                  && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                  //&& p.NoPedido.Equals(DatosCompra.NoPedido)
+                  && p.Proveedor.Equals(DatosCompra.Proveedor)
+                  //&& p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                  //&& p.Costo.Equals(DatosCompra.Costo)
+                  ).Count();
+
+                if (nveces >= 0)
+                {
+                    InvBD.CompraInterno.InsertOnSubmit(DatosCompra);
+                    InvBD.SubmitChanges();
+
+                    var IdCompra = InvBD.CompraInterno.Where(p => p.Proveedor.Equals(DatosCompra.Proveedor)
+
+             && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+             //&& p.NoPedido.Equals(DatosCompra.NoPedido)
+             && p.Proveedor.Equals(DatosCompra.Proveedor)
+             //&& p.Costo.Equals(DatosCompra.Costo)
+              ).First();
+                    Afectados = IdCompra.IdCompraInterno;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
+                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+             && p.NoPedido.Equals(DatosCompra.NoPedido)
+             && p.Proveedor.Equals(DatosCompra.Proveedor)
+             && p.Costo.Equals(DatosCompra.Costo)
+                ).Count();
+                if (nveces == 0)
+                {
+                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
+                    obj.IdProveedor = DatosCompra.IdProveedor;
+                    obj.NoPedido = DatosCompra.NoPedido;
+                    obj.Proveedor = DatosCompra.Proveedor;
+                    obj.IdProveedor = DatosCompra.IdProveedor;
+                    obj.Proveedor = DatosCompra.Proveedor;
+                    obj.Costo = DatosCompra.Costo;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            return Afectados;
+        }
+
+
+
+
+
+
+
+
+
+
+
         //Eliminar Existencia
         //public int EliminarAlmacen(long Id)
         //{
@@ -162,19 +240,19 @@ namespace Inventario.Controllers
         ///------------------------------------GuardraCompraInt
 
 
-        public int GuardarDatosArticuloCompra(CompraInterno DatosTienda)
+        public int GuardarDatosArticuloCompra(ExistenciaAlmacenG DatosAlmacen)
         {
             int Afectados = 0;
 
-            long id = (long)DatosTienda.IdCompraInterno;
+            long id = (long)DatosAlmacen.IdExistenciaAlmacenG;
             if (id.Equals(0))
             {
-                int nveces = InvBD.CompraInterno.Where(p => p.Articulo.Equals(DatosTienda.Articulo)).Count();
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
 
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
-                    InvBD.CompraInterno.InsertOnSubmit(DatosTienda);
+                    InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosAlmacen);
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -185,28 +263,38 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.CompraInterno.Where(p => p.Articulo.Equals(DatosTienda.Articulo)
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
 
-                && p.IdProveedor.Equals(DatosTienda.IdProveedor)
-                && p.NoPedido.Equals(DatosTienda.NoPedido)
-                && p.Proveedor.Equals(DatosTienda.Proveedor)
-                && p.FechaIngreso.Equals(DatosTienda.FechaIngreso)
-                && p.Costo.Equals(DatosTienda.Costo)
-                && p.ExistenciaActual.Equals(DatosTienda.ExistenciaActual)
+               && p.IdCompra.Equals(DatosAlmacen.IdCompra)
+                    && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
+                    && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+                    //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
+                    && p.Coste.Equals(DatosAlmacen.Coste)
+                    && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
+                    && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
+                    && p.IdSitio.Equals(DatosAlmacen.IdSitio)
+                    && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
+                    && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
+                    && p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
+                    && p.Coste.Equals(DatosAlmacen.Coste)
                 ).Count();
 
 
                 if (nveces == 0)
                 {
-                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
-
-                    obj.IdProveedor = DatosTienda.IdProveedor;
-                    obj.NoPedido = DatosTienda.NoPedido;
-                    obj.Articulo = DatosTienda.Articulo;
-                    obj.Proveedor = DatosTienda.Proveedor;
-                    obj.FechaIngreso = DatosTienda.FechaIngreso;
-                    obj.Costo = DatosTienda.Costo;
-                    obj.ExistenciaActual = DatosTienda.ExistenciaActual;
+                    ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+                    obj.IdCompra = DatosAlmacen.IdCompra;
+                    obj.NoPedido = DatosAlmacen.NoPedido;
+                    obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
+                    obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
+                    obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
+                    obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
+                    obj.Coste = DatosAlmacen.Coste;
+                    obj.IdAsignacion = DatosAlmacen.IdAsignacion;
+                    obj.IdSitio = DatosAlmacen.IdSitio;
+                    obj.IdArticulo = DatosAlmacen.IdArticulo;
+                    obj.NombreEmpresa = DatosAlmacen.NombreEmpresa;
+                    obj.IdProveedor = DatosAlmacen.IdProveedor;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -220,79 +308,6 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-        public JsonResult ConsultaArticuloxIdProveedor(string IdPro)
-        {
-            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.NombreEmpresa,
-                    p.IdArticulos,
-                    p.Unidad,
-                    p.PrecioUnitarioPromedio,
-                    p.Impuesto,
-                });
-
-            return Json(compra, JsonRequestBehavior.AllowGet);
-        }
-        //**************************Consulta los números de compra para poder generar el siguiente**************************
-        public JsonResult ConsultaPedidosDecendiente()
-        {
-            string NumeroPedido = "";
-            var pedidosNum = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NoCompra)
-                .Select(p => new
-                {
-                    p.IdCompra,
-                    Pedido = p.NoCompra,
-                });
-
-            if (pedidosNum.Count() > 0)
-            {
-                foreach (var ped in pedidosNum)
-                {
-                    int SumaNum = (int)(ped.Pedido + 1);
-                    NumeroPedido += SumaNum + ",";
-                }
-            }
-            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
-            else
-            {
-                NumeroPedido += "1" + ",";
-            }
-            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
-            return Json(compras, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-        public JsonResult ConsultaNumPedidoProveedor(long ID)
-        {
-            string numPedidoProve = "";
-            var numero = InvBD.Compra.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    Id = p.IdProveedor,
-                    NumeroPProveedor = p.NoCompraProveedor,
-
-                });
-
-            if (numero.Count() > 0)
-            {
-                foreach (var num in numero)
-                {
-                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
-                    numPedidoProve += SumaNumero + ",";
-
-                }
-
-            }
-            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
-            else
-            {
-                numPedidoProve += "1" + ",";
-            }
-            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
-            return Json(numeros, JsonRequestBehavior.AllowGet);
-        }
 
 
         ///------------------------------------
