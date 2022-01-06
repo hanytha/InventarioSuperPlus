@@ -475,7 +475,7 @@ function LlenarCMBPrin() {
     //$.get("/GLOBAL/BDProveedorExist", function (data) {
     //    llenarCombo(data, document.getElementById("cmbProveedor"), true);
     //});
-    $.get("/GLOBAL/BDProveedor", function (data) {
+    $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
     $.get("/Supervision/BDProveedor", function (data) {
@@ -568,7 +568,7 @@ function SiguientePedidoProveedor(id) {
     }
     else {
 
-        $.get("/Supervision/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+        $.get("/ExistenciaAlmacen/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
 
 
             let numPedidoProve = Data.numPedidoProve;
@@ -576,7 +576,7 @@ function SiguientePedidoProveedor(id) {
 
 
             var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
-            document.getElementById("TxtNumPedidoProveedor").value = ultimo;
+            document.getElementById("TxtNumCompra").value = ultimo;
 
         });
     }
@@ -602,3 +602,5 @@ function ConsultaSiguienteCompraPrveedor(id) {
         });
     }
 }
+
+

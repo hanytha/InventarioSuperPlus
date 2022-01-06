@@ -3029,6 +3029,8 @@ namespace Inventario
 		
 		private string _Articulo;
 		
+		private System.Nullable<long> _NoCompraProveedor;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3051,6 +3053,8 @@ namespace Inventario
     partial void OnEstatusChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnNoCompraProveedorChanging(System.Nullable<long> value);
+    partial void OnNoCompraProveedorChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3238,6 +3242,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompraProveedor", DbType="BigInt")]
+		public System.Nullable<long> NoCompraProveedor
+		{
+			get
+			{
+				return this._NoCompraProveedor;
+			}
+			set
+			{
+				if ((this._NoCompraProveedor != value))
+				{
+					this.OnNoCompraProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NoCompraProveedor = value;
+					this.SendPropertyChanged("NoCompraProveedor");
+					this.OnNoCompraProveedorChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3287,6 +3311,8 @@ namespace Inventario
 		
 		private System.Nullable<int> _Estatus;
 		
+		private System.Nullable<long> _NoCompraProveedor;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3313,6 +3339,8 @@ namespace Inventario
     partial void OnPrecioUnitarioChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
+    partial void OnNoCompraProveedorChanging(System.Nullable<long> value);
+    partial void OnNoCompraProveedorChanged();
     #endregion
 		
 		public ComprasArticulos()
@@ -3536,6 +3564,26 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompraProveedor", DbType="BigInt")]
+		public System.Nullable<long> NoCompraProveedor
+		{
+			get
+			{
+				return this._NoCompraProveedor;
+			}
+			set
+			{
+				if ((this._NoCompraProveedor != value))
+				{
+					this.OnNoCompraProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NoCompraProveedor = value;
+					this.SendPropertyChanged("NoCompraProveedor");
+					this.OnNoCompraProveedorChanged();
 				}
 			}
 		}

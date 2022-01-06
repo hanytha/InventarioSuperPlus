@@ -308,6 +308,35 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+        public JsonResult ConsultaNumPedidoProveedor(long ID)
+        {
+            string numPedidoProve = "";
+            var numero = InvBD.CompraInterno.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    Id = p.IdProveedor,
+                    NumeroPProveedor = p.NoCompraProveedor,
+
+                });
+
+            if (numero.Count() > 0)
+            {
+                foreach (var num in numero)
+                {
+                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                    numPedidoProve += SumaNumero + ",";
+
+                }
+
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
+            {
+                numPedidoProve += "1" + ",";
+            }
+            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
+            return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
 
 
         ///------------------------------------
