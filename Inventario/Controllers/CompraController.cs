@@ -242,7 +242,7 @@ namespace Inventario.Controllers
              long id = (long) DatosTienda.IdExistenciaCompra;
             if (id.Equals(0))
             {
-                int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)).Count();
+                int nveces = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(DatosTienda.IdExistenciaCompra)).Count();
 
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
@@ -258,15 +258,8 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.ComprasArticulos.Where(p => p.Articulo.Equals(DatosTienda.Articulo)
-      
-                && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
-                && p.StockActual.Equals(DatosTienda.StockActual)
-                && p.Articulo.Equals(DatosTienda.Articulo)
-                && p.Unidad.Equals(DatosTienda.Unidad)
-                && p.NoCompra.Equals(DatosTienda.NoCompra)
-                && p.Impuesto.Equals(DatosTienda.Impuesto)
-                && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
+                int nveces = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(DatosTienda.IdExistenciaCompra)
+     
                 ).Count();
 
 
