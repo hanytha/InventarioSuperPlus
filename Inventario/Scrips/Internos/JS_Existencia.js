@@ -12,7 +12,7 @@ function CrearTablaCompras(Data) {
     var CodigoHtmlTablaPedidos = "";
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
 
-    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>"; 
+    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
 
     CodigoHtmlTablaPedidos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumturquoise;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaPedidos += "</div>";
@@ -48,7 +48,7 @@ function CrearTablaCompras(Data) {
 
 //------------Limpia la información y carga la informacion de la compra------------------------
 function abrirModal(id) {//la clase  Obligatorio
-    ConsultaSiguientePedido(); 
+    ConsultaSiguientePedido();
 
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -199,8 +199,8 @@ function GuardarCompra() {
                     else {
                         //-----Mensaje de confirmación-----------------------
                         swal("Su compra se guardó exitosamente!", "", "success");
+                        GuardarDatosArticuloCompra(data);
 
-                     
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -213,76 +213,77 @@ function GuardarCompra() {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 
-function GuardarDatosArticuloCompra() {
+function GuardarDatosArticuloCompra(IdCompra) {
 
     if (CamposObligatorios() == true) {
 
 
-            //----------Guardar los inputs de manera individual en la Base de datos--------------------
-            var cantidad = document.getElementsByClassName("input-cantidad");
+        //----------Guardar los inputs de manera individual en la Base de datos--------------------
+        var cantidad = document.getElementsByClassName("input-cantidad");
 
-            var NomArticulos = document.getElementsByClassName("input-Articulo");
+        var NomArticulos = document.getElementsByClassName("input-Articulo");
 
-            var UnidadM = document.getElementsByClassName("input-Unidad");
+        var UnidadM = document.getElementsByClassName("input-Unidad");
 
-           var Precio = document.getElementsByClassName("input-Precio");
+        var Precio = document.getElementsByClassName("input-Precio");
 
-           var impuestos = document.getElementsByClassName("input-impuesto");
+        var impuestos = document.getElementsByClassName("input-impuesto");
 
         for (let i = 0; i < cantidad.length; i++) {
             if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
 
 
-                    var IdExistenciaCompra = sessionStorage.getItem('IDExt');
-                    var NoCompra = document.getElementById("TxtNoCompra").value;
-                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                    var Articulo = NomArticulos[i].value;
-                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                    var StockActual = cantidad[i].value;
-                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                    var Unidad = UnidadM[i].value;
-                    //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                    var PrecioUnitario = Precio[i].value;
-                   //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
-                     var Impuesto = impuestos[i].value;
-                    //-------------------------------------------------------------------------------------------------------------
-                    var frm = new FormData();
-                    frm.append("IdExistenciaCompra", IdExistenciaCompra);
-              
-                    frm.append("StockActual", StockActual);
-                    frm.append("Articulo", Articulo);
-                    frm.append("Unidad", Unidad);
-                    frm.append("NoCompra", NoCompra);
-                    frm.append("Impuesto", Impuesto);
-                    frm.append("PrecioUnitario", PrecioUnitario);
-                    frm.append("Estatus", 1);
-                    $.ajax({
-                        type: "POST",
-                        url: "/Compra/GuardarDatosArticuloCompra",
-                        data: frm,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            if (data == 0) {
-                                swal("¡Ocurrio un error!", "", "danger");
-                            }
-                            else if (data == -1) {
-                                swal("¡El pedido ya exixste!", "", "warning");
-                            }
-                            else {
-                                ConsultaCompras();
-                                document.getElementById("btnCancelar").click();
-                            }
-                        }
-                    });
+                var IdExistenciaCompra = sessionStorage.getItem('IDExt');
+                var NoCompra = document.getElementById("TxtNoCompra").value;
 
-                }
+                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                var Articulo = NomArticulos[i].value;
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var StockActual = cantidad[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = UnidadM[i].value;
+                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                var PrecioUnitario = Precio[i].value;
+                //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+                var Impuesto = impuestos[i].value;
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                frm.append("IdExistenciaCompra", IdExistenciaCompra);
+                frm.append("IdCompra", IdCompra);
+                frm.append("StockActual", StockActual);
+                frm.append("Articulo", Articulo);
+                frm.append("Unidad", Unidad);
+                frm.append("NoCompra", NoCompra);
+                frm.append("Impuesto", Impuesto);
+                frm.append("PrecioUnitario", PrecioUnitario);
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/Compra/GuardarDatosArticuloCompra",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            swal("¡Ocurrio un error!", "", "danger");
+                        }
+                        else if (data == -1) {
+                            swal("¡El pedido ya exixste!", "", "warning");
+                        }
+                        else {
+                            ConsultaCompras();
+                            document.getElementById("btnCancelar").click();
+                        }
+                    }
+                });
+
             }
-            //-----Mensaje de confirmación-----------------------
+        }
+        //-----Mensaje de confirmación-----------------------
         //  swal("Su compra se guardo correctamente!", "", "success");
         alert("los datos se guardaron correctamente");
-        }
-    
+    }
+
 
 }
 
@@ -370,7 +371,7 @@ function SiguientePedido(Data) {
 
 }
 
-//******************Función que determina el siguiente número de pedido por proveedor********************************
+//******************Función que determina el siguiente número de compra por proveedor********************************
 
 function ConsultaSiguienteCompraPrveedor(id) {
     if (id == 0) {

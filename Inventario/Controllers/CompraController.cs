@@ -53,18 +53,30 @@ namespace Inventario.Controllers
         }
         //*************************************************************************************************************
         //Guardar los datos de la compra
-        public int GuardarCompra(Compra DatosCompra)
+        public long GuardarCompra(Compra DatosCompra)
         {
-            int Afectados = 0;
+            long Afectados = 0;
             long id = DatosCompra.IdCompra;
             if (id.Equals(0))
             {
-                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)).Count();
+                int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
+                  && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                  && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
+                  && p.NoCompra.Equals(DatosCompra.NoCompra)
+                  && p.Coste.Equals(DatosCompra.Coste)
+                  ).Count();
+
                 if (nveces >= 0)
                 {
                     InvBD.Compra.InsertOnSubmit(DatosCompra);
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
+                    InvBD.SubmitChanges(); 
+                    var IdCompra  = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
+              && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+              && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
+              && p.NoCompra.Equals(DatosCompra.NoCompra)
+              && p.Coste.Equals(DatosCompra.Coste)
+              ).First();
+                    Afectados = IdCompra.IdCompra;
                 }
                 else
                 {
@@ -260,6 +272,7 @@ namespace Inventario.Controllers
                     obj.Unidad = DatosTienda.Unidad;
                     obj.NoCompra = DatosTienda.NoCompra;
                     obj.Impuesto = DatosTienda.Impuesto;
+                    obj.IdCompra = DatosTienda.IdCompra;
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
 
                     InvBD.SubmitChanges();
