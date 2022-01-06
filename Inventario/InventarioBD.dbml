@@ -105,6 +105,7 @@
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NoCompraProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />

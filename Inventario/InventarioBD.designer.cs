@@ -2525,6 +2525,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _NoCompra;
 		
+		private System.Nullable<long> _NoCompraProveedor;
+		
 		private string _FechaDeIngreso;
 		
 		private System.Nullable<long> _Coste;
@@ -2563,6 +2565,8 @@ namespace Inventario
     partial void OnProveedorChanged();
     partial void OnNoCompraChanging(System.Nullable<long> value);
     partial void OnNoCompraChanged();
+    partial void OnNoCompraProveedorChanging(System.Nullable<long> value);
+    partial void OnNoCompraProveedorChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnCosteChanging(System.Nullable<long> value);
@@ -2689,6 +2693,26 @@ namespace Inventario
 					this._NoCompra = value;
 					this.SendPropertyChanged("NoCompra");
 					this.OnNoCompraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompraProveedor", DbType="BigInt")]
+		public System.Nullable<long> NoCompraProveedor
+		{
+			get
+			{
+				return this._NoCompraProveedor;
+			}
+			set
+			{
+				if ((this._NoCompraProveedor != value))
+				{
+					this.OnNoCompraProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NoCompraProveedor = value;
+					this.SendPropertyChanged("NoCompraProveedor");
+					this.OnNoCompraProveedorChanged();
 				}
 			}
 		}

@@ -162,6 +162,7 @@ function GuardarCompra() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNoCompra").value;
+            var NoCompraProveedor = document.getElementById("TxtNoCompraPro").value;
 
             var IdProveedor = document.getElementById("cmbProveedor").value;
             var TempPro = document.getElementById("cmbProveedor");
@@ -175,6 +176,7 @@ function GuardarCompra() {
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
             frm.append("NoCompra", NoCompra);
+            frm.append("NoCompraProveedor", NoCompraProveedor);
             frm.append("IdProveedor", IdProveedor);
             frm.append("Proveedor", Proveedor);
             frm.append("MetodoDePago", MetodoDePago);

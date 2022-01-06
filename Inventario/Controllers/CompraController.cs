@@ -28,6 +28,7 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.FechaDeIngreso,
                     p.Coste,
+                    p.NoCompraProveedor,
                     p.IdProveedor,
 
 
@@ -46,6 +47,7 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.FechaDeIngreso,
                     p.Coste,
+                    p.NoCompraProveedor,
                     p.IdProveedor,
 
                 });
@@ -63,6 +65,7 @@ namespace Inventario.Controllers
                   && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                   && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                   && p.NoCompra.Equals(DatosCompra.NoCompra)
+                  && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
                   && p.Coste.Equals(DatosCompra.Coste)
                   ).Count();
 
@@ -70,7 +73,9 @@ namespace Inventario.Controllers
                 {
                     InvBD.Compra.InsertOnSubmit(DatosCompra);
                     InvBD.SubmitChanges(); 
+
                     var IdCompra  = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
+
               && p.IdProveedor.Equals(DatosCompra.IdProveedor)
               && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
               && p.NoCompra.Equals(DatosCompra.NoCompra)
@@ -89,12 +94,14 @@ namespace Inventario.Controllers
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
+                && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
                 && p.Coste.Equals(DatosCompra.Coste)
                 ).Count();
                 if (nveces == 0)
                 {
                     Compra obj = InvBD.Compra.Where(p => p.IdCompra.Equals(id)).First();
                     obj.NoCompra = DatosCompra.NoCompra;
+                    obj.NoCompraProveedor = DatosCompra.NoCompraProveedor;
                     obj.MetodoDePago = DatosCompra.MetodoDePago;
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
@@ -202,7 +209,7 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     Id = p.IdProveedor,
-                    NumeroPProveedor = p.NoCompra,
+                    NumeroPProveedor = p.NoCompraProveedor,
 
                 });
 
