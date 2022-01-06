@@ -155,9 +155,48 @@ function LimpiarCampos() {
     }
 }
 
+//-------------------------------Función ------------------------------------------------
+function verificar() {
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var contador = 0;
+    var contadorCantidad = 0;
+    var contadorbonificacion = 0;
+    for (let i = 0; i < cantidad.length; i++) {
+
+
+        if (cantidad[i].value > 0 && Precio[i].value == 0 || cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value > 0 && Precio[i].value > 0) {
+
+            contador++;
+          
+        }
+        if (cantidad[i].value >= 1 && Precio[i].value > 0) {
+            contadorCantidad++;
+
+
+        }
+        if (cantidad[i].value > 0 && Precio[i].value == 0) {
+            contadorbonificacion++;
+
+
+        }
+    }
+    if (contador == contadorCantidad) {
+        GuardarCompra("Compra");
+        
+    }
+    else if (contador == contadorbonificacion) {
+        GuardarCompra("Bonificación");
+    }
+    else {
+        alert("Datos incorrectos");
+    }
+}
+
 
 //---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------
-function GuardarCompra() {
+function GuardarCompra(movimiento) {
+  
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDExt');
