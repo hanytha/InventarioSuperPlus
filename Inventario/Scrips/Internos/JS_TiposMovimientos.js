@@ -77,7 +77,7 @@ function CrearTablaTiposDeMovimiento(Data) {
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].TipoDeMovimiento + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Articulo + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Unidades + "</td>";
-        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion+ "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>";
         CodigoHtmlTiposDeMovimiento += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHtmlTiposDeMovimiento += "<button class='btn btn-danger' onclick='EliminarTipoDeMovimiento(" + Data[i].IdMovimientos + ",this)' ><i class='fas fa-eraser'></i></button>";
@@ -99,7 +99,7 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
-        sessionStorage.setItem('IDTDM', '0');     
+        sessionStorage.setItem('IDTDM', '0');
     }
     else {
         $.get("/TiposDeMovimiento/ConsultaTipoDeMovimiento/?Id=" + id, function (Data) {
@@ -211,12 +211,7 @@ function EliminarTipoDeMovimiento(id) {
                 //  confirmarEliminar();
                 CrearTiposDeMovimiento();
             } else {
-                //alert("Ocurrió un error");
-                Swal.fire(
-                    '',
-                    'Ocurrìó un error',
-                    'danger'
-                )
+                alert("Ocurrió un error");
             }
         });
     }

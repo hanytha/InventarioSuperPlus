@@ -30,7 +30,7 @@ function CrearTablaTiposDeMovimiento(Data) {
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].TipoDeMovimiento + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Articulo + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Unidades + "</td>";
-        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion+ "</td>";
+        CodigoHtmlTiposDeMovimiento += "<td>" + Data[i].Descripcion + "</td>";
         CodigoHtmlTiposDeMovimiento += "<td>";
         CodigoHtmlTiposDeMovimiento += "<button class='btn btn-primary' onclick='abrirModal(" + Data[i].IdMovimientos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
         CodigoHtmlTiposDeMovimiento += "</td>";
