@@ -52,7 +52,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                        <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect">
+                                        <select id="cmbProveedor" onchange="MostrarArticulos(this.value)" style="width: 100%" class="form-control limpiarSelect">
                                         </select>
                                     </div>
                                 </div>
@@ -65,13 +65,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*<div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtExistenciaInicial">Cantidad<span class="required">*</span></label>
-                                            <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="88">
-                                        </div>
-                                    </div>*@
 
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaInicial">Cantidad<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtExistenciaInicial]" id="TxtExistenciaInicial" class="form-control  limpiar obligatorio" placeholder="88">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtExistenciaActual">Cantidad<span class="required">*</span></label>
@@ -79,21 +81,21 @@
                                     </div>
                                 </div>
 
-                                @*<div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
-                                            <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="88">
-                                        </div>
-                                    </div>*@
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCosto">Costo<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiar obligatorio" placeholder="88">
+                                    </div>
+                                </div>
                             </div>
                             @*<div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
-                                            <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
-                                        </div>
-                                    </div>
-                                </div>*@
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtExistenciaActual">Existencia actual<span class="required">*</span></label>
+                    <input type="number" name="data[TxtExistenciaActual]" id="TxtExistenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
+                </div>
+            </div>
+        </div>*@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -101,12 +103,6 @@
                                         <input type="text" name="data[TxtTipoOperacion]" id="TxtTipoOperacion" class="form-control  limpiar obligatorio" placeholder="Bonificación">
                                     </div>
                                 </div>
-                                @*<div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="cmbCompra">Número de compra<span>*</span></label>
-                                            <select id="cmbCompra" style="width: 100%" class="form-control limpiarSelect obligatorio "></select>
-                                        </div>
-                                    </div>*@
                             </div>
                             <div class="row ">
                                 <div class="col-md-6">
@@ -124,6 +120,14 @@
                                         <label class="form-control-label" for="cmbSitio">Sitio<span class="required">*</span></label>
                                         <select id="cmbSitio" style="width: 100%" class="form-control limpiarSelect obligatorio">
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                        <div id="TblArticulos">Artículo(s) del proveedor</div>
                                     </div>
                                 </div>
                             </div>

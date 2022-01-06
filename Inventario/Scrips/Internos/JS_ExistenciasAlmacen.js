@@ -97,33 +97,34 @@ function GuardarAlmacen() {
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
-            var NoPedido = document.getElementById("TxtNumCompra").value;
+            //var NoPedido = document.getElementById("TxtNumCompra").value;
+
             var IdArticulo = document.getElementById("cmbArticulo").value;
             var TempArticulo = document.getElementById("cmbArticulo");
             var NombreEmpresa = TempArticulo.options[TempArticulo.selectedIndex].text;
             //var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
-            var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
+            //var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
             var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
             //var IdCompra = document.getElementById("cmbCompra").value;
-            var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
+            //var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
             //var Coste = document.getElementById("TxtCosto").value;
             var IdAsignacion = document.getElementById("cmbAsignacion").value;
-            var IdProveedor = document.getElementById("cmbProveedor").value;
-            var TempProveedor = document.getElementById("cmbProveedor");
-            var Proveedor = TempProveedor.options[TempProveedor.selectedIndex].text;
+            //var IdProveedor = document.getElementById("cmbProveedor").value;
+            //var TempProveedor = document.getElementById("cmbProveedor");
+            //var Proveedor = TempProveedor.options[TempProveedor.selectedIndex].text;
             var IdSitio = document.getElementById("cmbSitio").value;
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("NoPedido", NoPedido);
+            //frm.append("NoPedido", NoPedido);
             //frm.append("ExitenciaInicial", ExitenciaInicial);
-            frm.append("ExitenciaActual", ExitenciaActual);
-            frm.append("FechaDeIngreso", FechaDeIngreso);
+            //frm.append("ExitenciaActual", ExitenciaActual);
+            //frm.append("FechaDeIngreso", FechaDeIngreso);
             frm.append("TipoDeOperacion", TipoDeOperacion);
             //frm.append("IdCompra", IdCompra);
             //frm.append("Coste", Coste);
             frm.append("IdAsignacion", IdAsignacion);
-            frm.append("IdProveedor", IdProveedor);
-            frm.append("Proveedor", Proveedor);
+            //frm.append("IdProveedor", IdProveedor);
+            //frm.append("Proveedor", Proveedor);
             frm.append("IdSitio", IdSitio);
             frm.append("IdArticulo", IdArticulo);
             frm.append("NombreEmpresa", NombreEmpresa);
@@ -155,7 +156,7 @@ function GuardarAlmacen() {
                             'Se guardó correctamente.',
                             'success'
                         )
-                        CrearExistenciasAlmacen();
+                        GuardarDatosArticuloCompra(data);
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -163,6 +164,80 @@ function GuardarAlmacen() {
         }
     }
 }
+
+
+function GuardarDatosArticuloCompra(IdCompra) {
+
+    if (CamposObligatorios() == true) {
+
+
+        //----------Guardar los inputs de manera individual en la Base de datos--------------------
+        var cantidad = document.getElementsByClassName("input-cantidad");
+
+        var NomArticulos = document.getElementsByClassName("input-Articulo");
+
+        var UnidadM = document.getElementsByClassName("input-Unidad");
+
+        //var Precio = document.getElementsByClassName("input-Precio");
+
+        //var impuestos = document.getElementsByClassName("input-impuesto");
+
+        for (let i = 0; i < cantidad.length; i++) {
+            if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+
+
+                var IdCompraInterno = sessionStorage.getItem('IDExt');
+                //var NoCompra = document.getElementById("TxtNoCompra").value;
+
+                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                var Articulo = NomArticulos[i].value;
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var StockActual = cantidad[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = UnidadM[i].value;
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                frm.append("IdCompraInterno", IdCompraInterno);
+                //frm.append("IdCompra", IdCompra);
+                frm.append("StockActual", StockActual);
+                frm.append("Articulo", Articulo);
+                frm.append("Unidad", Unidad);
+                ////frm.append("NoCompra", NoCompra);
+                //frm.append("Impuesto", Impuesto);
+                //frm.append("PrecioUnitario", PrecioUnitario);
+                frm.append("Estatus", 1);
+                $.ajax({
+                    type: "POST",
+                    url: "/ExistenciaAlmacen/GuardarDatosArticuloCompra",
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 0) {
+                            '¡GUARDADO!',
+                                'Se guardó correctamente.',
+                                'success'
+                        }
+                        else if (data == -1) {
+                            swal("¡El pedido ya exixste!", "", "warning");
+                        }
+                        else {
+                            CrearExistenciasAlmacen();
+                            document.getElementById("btnCancelar").click();
+                        }
+                    }
+                });
+
+            }
+        }
+        //-----Mensaje de confirmación-----------------------
+        //  swal("Su compra se guardo correctamente!", "", "success");
+        alert("los datos se guardaron correctamente");
+    }
+
+
+}
+
 //marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
@@ -242,6 +317,12 @@ function LlenarCMBPrin() {
     $.get("/GLOBAL/BDCompras", function (data) {
         llenarCombo(data, document.getElementById("cmbCompra"));
     });
+    //$.get("/GLOBAL/BDProveedorExist", function (data) {
+    //    llenarCombo(data, document.getElementById("cmbProveedor"), true);
+    //});
+    $.get("/GLOBAL/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
     $.get("/GLOBAL/BDProveedorExist", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"), true);
     });
@@ -260,4 +341,109 @@ function llenarCombo(data, control) {
         contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
     }
     control.innerHTML = contenido;
+}
+
+
+
+function MostrarArticulos(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaIdPro/?IdPro=" + id, function (Data) {
+            SiguientePedidoProveedor(id);
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>UnidadMedida</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "</div>";
+
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<label>"
+                //TablaArticulo += "<input type='number' value='' class='input-Precio redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+        });
+    }
+}
+
+function SiguientePedidoProveedor(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+
+
+            let numPedidoProve = Data.numPedidoProve;
+            let ArraynumPedidoProve = numPedidoProve.split(',');
+
+
+            var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+            document.getElementById("TxtNumPedidoProveedor").value = ultimo;
+
+        });
+    }
+}
+
+
+function ConsultaSiguienteCompraPrveedor(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+
+        $.get("/ExistenciaAlmacen/ConsultaNumPedidoProveedor/?ID=" + id, function (Data) {
+
+
+            let numPedidoProve = Data.numPedidoProve;
+            let ArraynumPedidoProve = numPedidoProve.split(',');
+
+
+            var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
+            document.getElementById("TxtNoCompraPro").value = ultimo;
+
+        });
+    }
 }

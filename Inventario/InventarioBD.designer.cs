@@ -3027,6 +3027,8 @@ namespace Inventario
 		
 		private System.Nullable<int> _Estatus;
 		
+		private string _Articulo;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3047,6 +3049,8 @@ namespace Inventario
     partial void OnExistenciaActualChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3210,6 +3214,26 @@ namespace Inventario
 					this._Estatus = value;
 					this.SendPropertyChanged("Estatus");
 					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(10)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
 				}
 			}
 		}
@@ -4440,15 +4464,15 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCompra;
 		
-		private long _NoPedido;
+		private System.Nullable<long> _NoPedido;
 		
 		private string _FechaDeIngreso;
 		
-		private long _ExitenciaInicial;
+		private System.Nullable<long> _ExitenciaInicial;
 		
-		private long _ExitenciaActual;
+		private System.Nullable<long> _ExitenciaActual;
 		
-		private long _Coste;
+		private System.Nullable<long> _Coste;
 		
 		private string _TipoDeOperacion;
 		
@@ -4476,15 +4500,15 @@ namespace Inventario
     partial void OnIdExistenciaAlmacenGChanged();
     partial void OnIdCompraChanging(System.Nullable<long> value);
     partial void OnIdCompraChanged();
-    partial void OnNoPedidoChanging(long value);
+    partial void OnNoPedidoChanging(System.Nullable<long> value);
     partial void OnNoPedidoChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
-    partial void OnExitenciaInicialChanging(long value);
+    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnExitenciaActualChanging(long value);
+    partial void OnExitenciaActualChanging(System.Nullable<long> value);
     partial void OnExitenciaActualChanged();
-    partial void OnCosteChanging(long value);
+    partial void OnCosteChanging(System.Nullable<long> value);
     partial void OnCosteChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
@@ -4553,8 +4577,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedido", DbType="BigInt NOT NULL")]
-		public long NoPedido
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedido", DbType="BigInt")]
+		public System.Nullable<long> NoPedido
 		{
 			get
 			{
@@ -4573,7 +4597,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50)")]
 		public string FechaDeIngreso
 		{
 			get
@@ -4593,8 +4617,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt NOT NULL")]
-		public long ExitenciaInicial
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaInicial
 		{
 			get
 			{
@@ -4613,8 +4637,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt NOT NULL")]
-		public long ExitenciaActual
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaActual
 		{
 			get
 			{
@@ -4633,8 +4657,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt NOT NULL")]
-		public long Coste
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coste", DbType="BigInt")]
+		public System.Nullable<long> Coste
 		{
 			get
 			{
@@ -4653,7 +4677,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeOperacion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeOperacion", DbType="VarChar(50)")]
 		public string TipoDeOperacion
 		{
 			get
