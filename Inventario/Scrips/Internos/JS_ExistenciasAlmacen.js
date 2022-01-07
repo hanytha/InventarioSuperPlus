@@ -43,6 +43,7 @@ function CrearTablaExistenciasAlmacen(Data) {
     document.getElementById("TablaExistencia").innerHTML = CodigoHtmlExistenciasAlmacen;
 }
 function abrirModal(id) {//la clase  Obligatorio
+    ConsultaSiguientePedido();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -249,9 +250,11 @@ function GuardarCompra() {
             var IdProveedor = document.getElementById("cmbProveedor").value;
             var TempPro = document.getElementById("cmbProveedor");
             var Proveedor = TempPro.options[TempPro.selectedIndex].text;
-
+            var NoPedido = document.getElementById("TxtNumCompra").value;
+            var NoCompraProveedor = document.getElementById("TxtNumCompraProv").value;
+            
             //var MetodoDePago = document.getElementById("TxtMetodo").value;
-            //var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
+            var FechaIngreso = document.getElementById("TxtFechaSistema").value;
             //var Coste = document.getElementById("TxtCosto").value;
 
 
@@ -261,8 +264,10 @@ function GuardarCompra() {
             //frm.append("NoCompraProveedor", NoCompraProveedor);
             frm.append("IdProveedor", IdProveedor);
             frm.append("Proveedor", Proveedor);
+            frm.append("NoPedido", NoPedido);
+            frm.append("NoCompraProveedor", NoCompraProveedor);
             //frm.append("MetodoDePago", MetodoDePago);
-            //frm.append("FechaDeIngreso", FechaDeIngreso);
+            frm.append("FechaIngreso", FechaIngreso);
             //frm.append("Coste", Coste);
 
 
@@ -378,13 +383,27 @@ function GuardarDatosArticuloCompra(IdCompra) {
         alert("los datos se guardaron correctamente");
     }
 
-
 }
 
 
 
 
+function ConsultaSiguientePedido() {
+    $.get("/ExistenciaAlmacen/ConsultaPedidosDecendiente", function (Data) {
+        SiguientePedido(Data);
 
+    }
+    );
+}
+function SiguientePedido(Data) {
+
+    let NumeroPedido = Data.NumeroPedido;
+    let ArrayNumeroPedido = NumeroPedido.split(',');
+
+    var ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
+    document.getElementById("TxtNumCompra").value = ultimoElemento;
+
+}
 
 
 
@@ -576,7 +595,7 @@ function SiguientePedidoProveedor(id) {
 
 
             var ultimo = ArraynumPedidoProve[ArraynumPedidoProve.length - 1]
-            document.getElementById("TxtNumCompra").value = ultimo;
+            document.getElementById("TxtNumCompraProv").value = ultimo;
 
         });
     }

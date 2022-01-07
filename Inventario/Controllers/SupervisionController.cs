@@ -696,14 +696,23 @@ namespace Inventario.Controllers
                     Id = p.IdProveedor,
                     NumeroPProveedor = p.NumPedidoProveedor,
                 });
-            foreach (var num in numero)
+            if (numero.Count() > 0)
             {
-                int SumaNumero = (int)(num.NumeroPProveedor + 1);
-                numPedidoProve = SumaNumero + ",";
+                foreach (var num in numero)
+                {
+                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
+                    numPedidoProve = SumaNumero + ",";
+                }
             }
+            else
+            {
+                numPedidoProve += "1" + ",";
+            }
+
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
+
 
         //public JsonResult BDTiposMovimiento()
         //{
