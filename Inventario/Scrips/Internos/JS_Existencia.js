@@ -130,7 +130,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-Precio redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='sumar();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -188,11 +188,10 @@ function verificar() {
     if (contador == contadorCantidad && contador >= 1) {
         GuardarCompra("Compra");
 
-
     }
     else if (contador == contadorbonificacion && contador >= 1) {
         GuardarCompra("Bonificación");
-
+       
     }
     else {
         swal("¡Datos incorrectos!", "", "warning");
@@ -205,6 +204,14 @@ function GuardarCompra(movimiento) {
 
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
+
+//-------------Validacion cuando el precio esta en null y lo intercambia por cero para guardarlo en la BD---------------
+            if (Coste = document.getElementById("TxtCosto").value == "") {
+                Coste = document.getElementById("TxtCosto").value = 0;
+
+            }
+
+
             var IdCompra = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNoCompra").value;
             var NoCompraProveedor = document.getElementById("TxtNoCompraPro").value;
@@ -261,10 +268,7 @@ function GuardarCompra(movimiento) {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
-
 function GuardarDatosArticuloCompra(IdCompra) {
-
-
 
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
     var cantidad = document.getElementsByClassName("input-cantidad");
@@ -313,6 +317,7 @@ function GuardarDatosArticuloCompra(IdCompra) {
             frm.append("NoCompra", NoCompra);
             frm.append("Impuesto", Impuesto);
             frm.append("PrecioUnitario", PrecioUnitario);
+
             frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
@@ -451,4 +456,28 @@ function ConsultaSiguienteCompraPrveedor(id) {
     }
 }
 
+
+//----------Función para sumar los input de precio---------------------------------
+function sumar() {
+
+    var total = 0;
+
+    $(".monto").each(function () {
+
+        if (isNaN(parseFloat($(this).val()))) {
+
+            total += 0;
+
+        } else {
+
+            total += parseFloat($(this).val());
+
+        }
+
+    });
+
+    //alert(total);
+
+    document.getElementById("TxtCosto").value = total;
+}
 

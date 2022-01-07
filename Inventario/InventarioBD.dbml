@@ -128,7 +128,6 @@
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="NoPedido" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Costo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="ExistenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
@@ -142,7 +141,7 @@
       <Column Name="ExistenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="StockActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="TipoOperacion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Impuesto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -195,16 +194,19 @@
     <Type Name="ExistenciaAlmacenG">
       <Column Name="IdExistenciaAlmacenG" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="NoPedido" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdCompraInterno" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Coste" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="StockActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unidad" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Coste" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NoPedido" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdMovimientos" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="PedidosInternos" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="PedidosInternos" />
