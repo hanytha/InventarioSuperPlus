@@ -164,34 +164,38 @@ function verificar() {
     var contadorbonificacion = 0;
     for (let i = 0; i < cantidad.length; i++) {
 
+        //----Cuenta todos los inputs con un valor
 
         if (cantidad[i].value > 0 && Precio[i].value == 0 || cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value > 0 && Precio[i].value > 0) {
 
             contador++;
 
         }
+        //---Cuenta los input con cantidad y precio que son las compras
         if (cantidad[i].value >= 1 && Precio[i].value > 0) {
             contadorCantidad++;
 
 
         }
+        //----Cuenta los input que solo tienen cantidad para las bonificaciones
         if (cantidad[i].value > 0 && Precio[i].value == 0) {
             contadorbonificacion++;
 
 
         }
     }
-    if (contador == contadorCantidad && contador >= 1 ) {
+    //--determina si es una compra o una bonificación o un error
+    if (contador == contadorCantidad && contador >= 1) {
         GuardarCompra("Compra");
 
 
     }
-    else if (contador == contadorbonificacion && contador >= 1 ) {
+    else if (contador == contadorbonificacion && contador >= 1) {
         GuardarCompra("Bonificación");
 
     }
     else {
-        alert("Datos incorrectos");
+        swal("¡Datos incorrectos!", "", "warning");
     }
 }
 
@@ -243,6 +247,7 @@ function GuardarCompra(movimiento) {
                     else {
                         //-----Mensaje de confirmación-----------------------
                         alert("los datos se guardaron correctamente");
+
                         GuardarDatosArticuloCompra(data);
 
                         document.getElementById("btnCancelar").click();
@@ -259,6 +264,8 @@ function GuardarCompra(movimiento) {
 
 function GuardarDatosArticuloCompra(IdCompra) {
 
+
+
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
     var cantidad = document.getElementsByClassName("input-cantidad");
 
@@ -270,7 +277,16 @@ function GuardarDatosArticuloCompra(IdCompra) {
 
     var impuestos = document.getElementsByClassName("input-impuesto");
 
+
     for (let i = 0; i < cantidad.length; i++) {
+
+        //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
+
+        if (Precio[i].value == "") {
+            Precio[i].value = 0;
+
+        }
+
         if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
 
 
@@ -309,7 +325,7 @@ function GuardarDatosArticuloCompra(IdCompra) {
                         swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        swal("¡Los datos ya exixsten!", "", "warning");
+                        swal("¡El pedido ya exixste!", "", "warning");
                     }
                     else {
 
@@ -324,6 +340,8 @@ function GuardarDatosArticuloCompra(IdCompra) {
 
     //-----Mensaje de confirmación-----------------------
     swal("Su compra se guardó exitosamente!", "", "success");
+
+
 
 }
 
