@@ -107,6 +107,7 @@ namespace Inventario.Controllers
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
                     obj.Coste = DatosCompra.Coste;
+                    obj.TipoOperacion = DatosCompra.TipoOperacion;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -274,6 +275,7 @@ namespace Inventario.Controllers
                     obj.Impuesto = DatosTienda.Impuesto;
                     obj.IdCompra = DatosTienda.IdCompra;
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
+                    obj.TipoOperacion = DatosTienda.TipoOperacion;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;

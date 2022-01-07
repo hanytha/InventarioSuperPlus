@@ -168,7 +168,7 @@ function verificar() {
         if (cantidad[i].value > 0 && Precio[i].value == 0 || cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value > 0 && Precio[i].value > 0) {
 
             contador++;
-          
+
         }
         if (cantidad[i].value >= 1 && Precio[i].value > 0) {
             contadorCantidad++;
@@ -181,12 +181,14 @@ function verificar() {
 
         }
     }
-    if (contador == contadorCantidad) {
+    if (contador == contadorCantidad && contador >= 1 ) {
         GuardarCompra("Compra");
-        
+
+
     }
-    else if (contador == contadorbonificacion) {
+    else if (contador == contadorbonificacion && contador >= 1 ) {
         GuardarCompra("Bonificación");
+
     }
     else {
         alert("Datos incorrectos");
@@ -196,7 +198,7 @@ function verificar() {
 
 //---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------
 function GuardarCompra(movimiento) {
-  
+
     if (CamposObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompra = sessionStorage.getItem('IDExt');
@@ -210,7 +212,7 @@ function GuardarCompra(movimiento) {
             var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var Coste = document.getElementById("TxtCosto").value;
-
+            var TipoOperacion = movimiento;
 
             var frm = new FormData();
             frm.append("IdCompra", IdCompra);
@@ -220,6 +222,7 @@ function GuardarCompra(movimiento) {
             frm.append("Proveedor", Proveedor);
             frm.append("MetodoDePago", MetodoDePago);
             frm.append("FechaDeIngreso", FechaDeIngreso);
+            frm.append("TipoOperacion", TipoOperacion);
             frm.append("Coste", Coste);
 
 
@@ -239,7 +242,7 @@ function GuardarCompra(movimiento) {
                     }
                     else {
                         //-----Mensaje de confirmación-----------------------
-                        swal("Su compra se guardó exitosamente!", "", "success");
+                        alert("los datos se guardaron correctamente");
                         GuardarDatosArticuloCompra(data);
 
                         document.getElementById("btnCancelar").click();
@@ -256,75 +259,71 @@ function GuardarCompra(movimiento) {
 
 function GuardarDatosArticuloCompra(IdCompra) {
 
-    if (CamposObligatorios() == true) {
+    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+    var cantidad = document.getElementsByClassName("input-cantidad");
+
+    var NomArticulos = document.getElementsByClassName("input-Articulo");
+
+    var UnidadM = document.getElementsByClassName("input-Unidad");
+
+    var Precio = document.getElementsByClassName("input-Precio");
+
+    var impuestos = document.getElementsByClassName("input-impuesto");
+
+    for (let i = 0; i < cantidad.length; i++) {
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
 
 
-        //----------Guardar los inputs de manera individual en la Base de datos--------------------
-        var cantidad = document.getElementsByClassName("input-cantidad");
+            var IdExistenciaCompra = sessionStorage.getItem('IDExt');
+            var NoCompra = document.getElementById("TxtNoCompra").value;
 
-        var NomArticulos = document.getElementsByClassName("input-Articulo");
-
-        var UnidadM = document.getElementsByClassName("input-Unidad");
-
-        var Precio = document.getElementsByClassName("input-Precio");
-
-        var impuestos = document.getElementsByClassName("input-impuesto");
-
-        for (let i = 0; i < cantidad.length; i++) {
-            if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
-
-
-                var IdExistenciaCompra = sessionStorage.getItem('IDExt');
-                var NoCompra = document.getElementById("TxtNoCompra").value;
-
-                //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                var Articulo = NomArticulos[i].value;
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var StockActual = cantidad[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = UnidadM[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                var PrecioUnitario = Precio[i].value;
-                //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
-                var Impuesto = impuestos[i].value;
-                //-------------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
-                frm.append("IdExistenciaCompra", IdExistenciaCompra);
-                frm.append("IdCompra", IdCompra);
-                frm.append("StockActual", StockActual);
-                frm.append("Articulo", Articulo);
-                frm.append("Unidad", Unidad);
-                frm.append("NoCompra", NoCompra);
-                frm.append("Impuesto", Impuesto);
-                frm.append("PrecioUnitario", PrecioUnitario);
-                frm.append("Estatus", 1);
-                $.ajax({
-                    type: "POST",
-                    url: "/Compra/GuardarDatosArticuloCompra",
-                    data: frm,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data == 0) {
-                            swal("¡Ocurrio un error!", "", "danger");
-                        }
-                        else if (data == -1) {
-                            swal("¡El pedido ya exixste!", "", "warning");
-                        }
-                        else {
-                            ConsultaCompras();
-                            document.getElementById("btnCancelar").click();
-                        }
+            //------------------------Guarda el nombre del artículo solicitado----------------------------------
+            var Articulo = NomArticulos[i].value;
+            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+            var StockActual = cantidad[i].value;
+            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+            var Unidad = UnidadM[i].value;
+            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+            var PrecioUnitario = Precio[i].value;
+            //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+            var Impuesto = impuestos[i].value;
+            //-------------------------------------------------------------------------------------------------------------
+            var frm = new FormData();
+            frm.append("IdExistenciaCompra", IdExistenciaCompra);
+            frm.append("IdCompra", IdCompra);
+            frm.append("StockActual", StockActual);
+            frm.append("Articulo", Articulo);
+            frm.append("Unidad", Unidad);
+            frm.append("NoCompra", NoCompra);
+            frm.append("Impuesto", Impuesto);
+            frm.append("PrecioUnitario", PrecioUnitario);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Compra/GuardarDatosArticuloCompra",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
-                });
+                    else if (data == -1) {
+                        swal("¡Los datos ya exixsten!", "", "warning");
+                    }
+                    else {
 
-            }
+                        ConsultaCompras();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+
         }
-        //-----Mensaje de confirmación-----------------------
-        //  swal("Su compra se guardo correctamente!", "", "success");
-        alert("los datos se guardaron correctamente");
     }
 
+    //-----Mensaje de confirmación-----------------------
+    swal("Su compra se guardó exitosamente!", "", "success");
 
 }
 
