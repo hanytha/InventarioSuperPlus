@@ -34,7 +34,7 @@ namespace Inventario.Controllers
                     p.IdSitio,
                     p.IdArticulo,
                     p.NombreEmpresa,
-                    p.IdProveedor,
+                    //p.IdProveedor,
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }

@@ -760,5 +760,10 @@ namespace Inventario.Controllers
         {
             return View();
         }
+
+        public ActionResult TiendaLider()
+        {
+            return View();
+        }
     }
 }
