@@ -208,8 +208,30 @@ function verificar() {
     }
     else {
         swal("¡Datos incorrectos!", "", "warning");
+
+        //**********************Marca el borde del input que este falatante de datos*********************************
+            changeBGColor();
+            function changeBGColor() {
+                var cols = document.getElementsByClassName('input-cantidad');
+                var precio = document.getElementsByClassName('input-Precio');
+
+                for (i = 0; i < cols.length; i++) {
+
+                    if (cantidad[i].value == 0 && Precio[i].value > 0) {
+                        cols[i].style.borderColor = 'red';
+
+                    }
+                    if (cantidad[i].value > 0 && Precio[i].value == 0) {
+                        precio[i].style.borderColor = 'orange';
+                    }
+                }
+            }
+        
+
+        //**********************************************************
     }
 }
+
 
 
 //---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------

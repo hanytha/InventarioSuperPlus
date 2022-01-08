@@ -1,0 +1,7 @@
+.incorrecto {
+    position: relative;
+}
+
+    .incorrecto::after {
+        background-color: red;
+    }
