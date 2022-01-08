@@ -593,8 +593,10 @@ namespace Inventario.Controllers
         public JsonResult Consulta(long Id)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
-                        on ExistAlm.IdProveedor equals areas.IdAreas
+                        on Compra.IdProveedor equals areas.IdAreas
                             where ExistAlm.IdSitio.Equals(Id)
                             select new
                             {
@@ -610,14 +612,14 @@ namespace Inventario.Controllers
         //Consulta de proveedores en la tabla existenciaAlmacenGeneral
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
-            var ExistAlmG = from Art in InvBD.ExistenciaAlmacenG
+            var ExistAlmG = from Art in InvBD.Articulos
                             join areas in InvBD.Areas
-                        on Art.IdProveedor equals areas.IdAreas
-                            where Art.IdProveedor.Equals(Id)
+                        on Art.IdAreas equals areas.IdAreas
+                            where Art.IdAreas.Equals(Id)
                             select new
                             {
                                 Articulo = Art.NombreEmpresa,
-                                IdArticulo = Art.IdExistenciaAlmacenG,
+                                IdArticulo = Art.IdArticulos,
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
                             };
