@@ -765,5 +765,132 @@ namespace Inventario.Controllers
         {
             return View();
         }
+
+        public int CargarTiendaLider()
+        {
+            int Encontrados = 0;
+            string[] Sucursales = Accesos.Tiendas.Split('#');
+            TiendasSupervision.IDTienda = new List<long>();
+            TiendasSupervision.Nombre = new List<string>();
+            TiendasSupervision.LNombre = new List<string>();
+            TiendasSupervision.E1Nombre = new List<string>();
+            TiendasSupervision.E2Nombre = new List<string>();
+            TiendasSupervision.E3Nombre = new List<string>();
+            TiendasSupervision.A1Nombre = new List<string>();
+            TiendasSupervision.A2Nombre = new List<string>();
+            TiendasSupervision.A3Nombre = new List<string>();
+            TiendasSupervision.Estado = new List<string>();
+            TiendasSupervision.Municipio = new List<string>();
+            TiendasSupervision.Localidad = new List<string>();
+            TiendasSupervision.Calle = new List<string>();
+            TiendasSupervision.CP = new List<long>();
+            TiendasSupervision.Telefono = new List<long>();
+            TiendasSupervision.HApertura = new List<string>();
+            TiendasSupervision.HCierre = new List<string>();
+            TiendasSupervision.Estatus = new List<int>();
+            for (int i = 0; i < Sucursales.Length; i++)
+            {
+                var Tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Sucursales[i]))
+                .Select(p => new
+                {
+                    p.IdTienda,
+                    p.Nombre,
+                    p.LNombre,
+                    p.E1Nombre,
+                    p.E2Nombre,
+                    p.E3Nombre,
+                    p.A1Nombre,
+                    p.A2Nombre,
+                    p.A3Nombre,
+                    p.Estado,
+                    p.Municipio,
+                    p.Localidad,
+                    p.Calle,
+                    p.CP,
+                    p.Telefono,
+                    p.HApertura,
+                    p.HCierre,
+                    p.Estatus
+                }).First();
+                TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
+                TiendasSupervision.Nombre.Add(Tienda.Nombre);
+                TiendasSupervision.LNombre.Add(Tienda.LNombre);
+                if (Tienda.E1Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E1Nombre.Add(Tienda.E1Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E1Nombre.Add("");
+                }
+                if (Tienda.E2Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E2Nombre.Add(Tienda.E2Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E2Nombre.Add("");
+                }
+                if (Tienda.E3Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E3Nombre.Add(Tienda.E3Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E3Nombre.Add("");
+                }
+                if (Tienda.A1Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A1Nombre.Add(Tienda.A1Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A1Nombre.Add("");
+                }
+                if (Tienda.A2Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A2Nombre.Add(Tienda.A2Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A2Nombre.Add("");
+                }
+                if (Tienda.A3Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A3Nombre.Add(Tienda.A3Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A3Nombre.Add("");
+                }
+                TiendasSupervision.Estado.Add(Tienda.Estado);
+                TiendasSupervision.Municipio.Add(Tienda.Municipio);
+                TiendasSupervision.Localidad.Add(Tienda.Localidad);
+                TiendasSupervision.Calle.Add(Tienda.Calle);
+                TiendasSupervision.CP.Add(Tienda.CP);
+                TiendasSupervision.Telefono.Add(Tienda.Telefono);
+                TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
+
+                if (Tienda.HApertura != null)
+                {
+                    TiendasSupervision.HApertura.Add(Tienda.HApertura);
+                }
+                else
+                {
+                    TiendasSupervision.HApertura.Add("");
+
+                }
+                if (Tienda.HCierre != null)
+                {
+                    TiendasSupervision.HCierre.Add(Tienda.HCierre);
+                }
+                else
+                {
+                    TiendasSupervision.HCierre.Add("");
+                }
+
+            }
+            return Encontrados;
+        }
     }
 }
