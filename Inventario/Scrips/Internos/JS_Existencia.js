@@ -48,8 +48,10 @@ function CrearTablaCompras(Data) {
 
 
 //------------Limpia la información y carga la informacion de la compra------------------------
-function abrirModal(id) {//la clase  Obligatorio
+function abrirModal(id) {
+
     ConsultaSiguientePedido();
+    restablecerBordeInput();
 
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -80,13 +82,10 @@ function abrirModal(id) {//la clase  Obligatorio
 //*********************************************************************************************
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 function MostrarArticulos(id) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
+
     if (id == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
+
     }
     else {
 
@@ -225,7 +224,7 @@ function verificar() {
 
                     }
                     if (cantidad[i].value > 0 && Precio[i].value == 0) {
-                        precio[i].style.borderColor = 'orange';
+                        precio[i].style.borderColor = 'Red';
                     }
                 }
             }
@@ -235,8 +234,20 @@ function verificar() {
     }
 }
 
+//----Función que  restablece el color de borde de los input------------------------
+function restablecerBordeInput() {
 
+    var cols = document.getElementsByClassName('input-cantidad');
+    var precio = document.getElementsByClassName('input-Precio');
 
+    for (i = 0; i < cols.length; i++) {
+
+        cols[i].style.borderColor = 'DimGray';
+        precio[i].style.borderColor = 'DimGray';
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 //---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------
 function GuardarCompra(movimiento) {
 

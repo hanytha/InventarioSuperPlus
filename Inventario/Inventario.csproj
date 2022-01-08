@@ -114,6 +114,7 @@
     <Content Include="Scrips\General\jquery.dataTables.min.js" />
     <Content Include="Scrips\General\JS_BotonesUsuarios.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
+    <Content Include="Scrips\General\JS_Buscador.js" />
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Buscar.js" />
