@@ -58,6 +58,7 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
+        CalcularFecha();
         sessionStorage.setItem('IDExt', '0');
 
     }
@@ -67,6 +68,7 @@ function abrirModal(id) {//la clase  Obligatorio
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
+            document.getElementById("TxtNoCompraPro").value = Data[0].NoCompraProveedor;
             document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
@@ -154,6 +156,17 @@ function LimpiarCampos() {
         controlesSLT[i].value = "0";
     }
 }
+
+
+//--Al ejecytarse el evento onechange------------
+function LimpiarCamposIn() {
+    var controlesTXT = document.getElementsByClassName("limpiars");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+
+}
+
 
 //-------------------------------Función ------------------------------------------------
 function verificar() {
@@ -481,3 +494,10 @@ function sumar() {
     document.getElementById("TxtCosto").value = total;
 }
 
+//------------Funcion que calcula la fecha del sistema------------------------
+function CalcularFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaDeIngreso').value = fecha;
+
+}
