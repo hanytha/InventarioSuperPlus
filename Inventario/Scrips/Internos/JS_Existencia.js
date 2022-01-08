@@ -209,6 +209,8 @@ function verificar() {
     else {
         swal("¡Datos incorrectos!", "", "warning");
 
+        //***************************
+        CamposObligatorios();
         //**********************Marca el borde del input que este falatante de datos*********************************
             changeBGColor();
             function changeBGColor() {
@@ -237,7 +239,7 @@ function verificar() {
 //---------Guarda los cambios y altas de los proveedores en la tabla de compra------------------------------------
 function GuardarCompra(movimiento) {
 
-    if (CamposObligatorios() == true) {
+
         if (confirm("¿Desea aplicar los cambios?") == 1) {
 
 //-------------Validacion cuando el precio esta en null y lo intercambia por cero para guardarlo en la BD---------------
@@ -297,7 +299,6 @@ function GuardarCompra(movimiento) {
                 }
             });
         }
-    }
 }
 
 
