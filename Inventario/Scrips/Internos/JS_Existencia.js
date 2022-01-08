@@ -177,9 +177,11 @@ function verificar() {
     var contadorbonificacion = 0;
     for (let i = 0; i < cantidad.length; i++) {
 
+
+
         //----Cuenta todos los inputs con un valor
 
-        if (cantidad[i].value > 0 && Precio[i].value == 0 || cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value > 0 && Precio[i].value > 0) {
+        if (cantidad[i].value > 0 && Precio[i].value == 0 || cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value > 0 && Precio[i].value > 0 || cantidad[i].value < 0 || Precio[i].value < 0) {
 
             contador++;
 
@@ -219,11 +221,12 @@ function verificar() {
 
                 for (i = 0; i < cols.length; i++) {
 
-                    if (cantidad[i].value == 0 && Precio[i].value > 0) {
+                    if (cantidad[i].value == 0 && Precio[i].value > 0 || cantidad[i].value < 0 || Precio[i].value < 0 && cantidad[i].value < 0 || cantidad[i].value == 0 && Precio[i].value < 0) {
                         cols[i].style.borderColor = 'red';
 
                     }
-                    if (cantidad[i].value > 0 && Precio[i].value == 0) {
+                    if (cantidad[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 && cantidad[i].value == 0 || cantidad[i].value > 0 && Precio[i].value < 0 || cantidad[i].value < 0 && Precio[i].value == 0 || cantidad[i].value < 0 && Precio[i].value < 0  ) {
+
                         precio[i].style.borderColor = 'Red';
                     }
                 }
