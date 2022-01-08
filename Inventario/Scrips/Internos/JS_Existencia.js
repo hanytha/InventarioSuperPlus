@@ -347,10 +347,13 @@ function GuardarDatosArticuloCompra(IdCompra, Tmovimiento) {
             var IdExistenciaCompra = sessionStorage.getItem('IDExt');
             var NoCompra = document.getElementById("TxtNoCompra").value;
             var TipoDeOperacion = Tmovimiento;
+
             //------------------------Guarda el nombre del artículo solicitado----------------------------------
             var Articulo = NomArticulos[i].value;
             //------------------------Guarda la cantidad de artículos solicitados----------------------------------
             var StockActual = cantidad[i].value;
+
+            var ExistenciaInicial = cantidad[i].value;
             //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
             var Unidad = UnidadM[i].value;
             //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
@@ -368,6 +371,8 @@ function GuardarDatosArticuloCompra(IdCompra, Tmovimiento) {
             frm.append("Impuesto", Impuesto);
             frm.append("PrecioUnitario", PrecioUnitario);
             frm.append("TipoDeOperacion", TipoDeOperacion);
+            frm.append("ExistenciaInicial", ExistenciaInicial);
+
 
             frm.append("Estatus", 1);
             $.ajax({

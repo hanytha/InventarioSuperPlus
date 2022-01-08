@@ -276,6 +276,7 @@ namespace Inventario.Controllers
                     obj.IdCompra = DatosTienda.IdCompra;
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
                     obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
+                    obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
 
 
                     InvBD.SubmitChanges();
