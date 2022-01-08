@@ -154,7 +154,7 @@ namespace Inventario.Controllers
             long id = DatosCompra.IdCompraInterno;
             if (id.Equals(0))
             {
-                int nveces = InvBD.CompraInterno.Where(p => p.Articulo.Equals(DatosCompra.Articulo)
+                int nveces = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(DatosCompra.IdCompraInterno)
                   && p.IdProveedor.Equals(DatosCompra.IdProveedor)
 
                   //&& p.NoPedido.Equals(DatosCompra.NoPedido)
@@ -191,7 +191,7 @@ namespace Inventario.Controllers
              && p.NoPedido.Equals(DatosCompra.NoPedido)
              && p.Proveedor.Equals(DatosCompra.Proveedor)
              && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
-             && p.Costo.Equals(DatosCompra.Costo)
+                //&& p.Costo.Equals(DatosCompra.Costo)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -202,7 +202,7 @@ namespace Inventario.Controllers
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.NoCompraProveedor = DatosCompra.NoCompraProveedor;
-                    obj.Costo = DatosCompra.Costo;
+                    //obj.Costo = DatosCompra.Costo;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -313,42 +313,42 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-        public JsonResult ConsultaNumPedidoProveedor(long ID)
-        {
-            string numPedidoProve = "";
-            var numero = InvBD.CompraInterno.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    Id = p.IdProveedor,
-                    NumeroPProveedor = p.NoCompraProveedor,
+        //public JsonResult ConsultaNumPedidoProveedor(long ID)
+        //{
+        //    string numPedidoProve = "";
+        //    var numero = InvBD.CompraInterno.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            Id = p.IdProveedor,
+        //            NumeroPProveedor = p.NoCompraProveedor,
 
-                });
+        //        });
 
-            if (numero.Count() > 0)
-            {
-                foreach (var num in numero)
-                {
-                    int SumaNumero = (int)(num.NumeroPProveedor + 1);
-                    numPedidoProve += SumaNumero + ",";
+        //    if (numero.Count() > 0)
+        //    {
+        //        foreach (var num in numero)
+        //        {
+        //            int SumaNumero = (int)(num.NumeroPProveedor + 1);
+        //            numPedidoProve += SumaNumero + ",";
 
-                }
+        //        }
 
-            }
-            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
-            else
-            {
-                numPedidoProve += "1" + ",";
-            }
-            var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
-            return Json(numeros, JsonRequestBehavior.AllowGet);
-        }
+        //    }
+        //    //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+        //    else
+        //    {
+        //        numPedidoProve += "1" + ",";
+        //    }
+        //    var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
+        //    return Json(numeros, JsonRequestBehavior.AllowGet);
+        //}
 
 
 
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
-            var pedidosNum = InvBD.CompraInterno.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NoPedido)
+            var pedidosNum = InvBD.CompraInterno.OrderBy(p => p.NoPedido)
                 .Select(p => new
                 {
                     p.IdCompraInterno,

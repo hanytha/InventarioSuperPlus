@@ -53,6 +53,7 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     if (id == 0) {
         LimpiarCampos();
+        Fecha();
         sessionStorage.setItem('IdExistenciaAlmacenG', '0');
     }
     else {
@@ -67,7 +68,7 @@ function abrirModal(id) {//la clase  Obligatorio
             //document.getElementById("TxtExistenciaInicial").value = Data[0].ExitenciaInicial;
             document.getElementById("TxtExistenciaActual").value = Data[0].ExitenciaActual;
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
-            document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
+            //document.getElementById("TxtTipoOperacion").value = Data[0].TipoDeOperacion;
             //document.getElementById("cmbCompra").value = Data[0].IdCompra;
             document.getElementById("TxtFechaSistema").value = Data[0].FechaDeIngreso;
             //document.getElementById("TxtCosto").value = Data[0].Coste;
@@ -86,6 +87,12 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
+}
+
+function Fecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaSistema').value = fecha;
 }
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
@@ -193,14 +200,14 @@ function BloquearCTRL() {
 //                //------------------------Guarda el nombre del artículo solicitado----------------------------------
 //                var Articulo = NomArticulos[i].value;
 //                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-//                var StockActual = cantidad[i].value;
+//                var ExitenciaActual = cantidad[i].value;
 //                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
 //                var Unidad = UnidadM[i].value;
 //                //-------------------------------------------------------------------------------------------------------------
 //                var frm = new FormData();
 //                frm.append("IdCompraInterno", IdCompraInterno);
 //                //frm.append("IdCompra", IdCompra);
-//                frm.append("StockActual", StockActual);
+//                frm.append("ExitenciaActual", ExitenciaActual);
 //                frm.append("Articulo", Articulo);
 //                frm.append("Unidad", Unidad);
 //                ////frm.append("NoCompra", NoCompra);
@@ -252,7 +259,7 @@ function GuardarCompra() {
             var Proveedor = TempPro.options[TempPro.selectedIndex].text;
             var NoPedido = document.getElementById("TxtNumCompra").value;
             var NoCompraProveedor = document.getElementById("TxtNumCompraProv").value;
-            
+
             //var MetodoDePago = document.getElementById("TxtMetodo").value;
             var FechaIngreso = document.getElementById("TxtFechaSistema").value;
             //var Coste = document.getElementById("TxtCosto").value;
@@ -331,7 +338,7 @@ function GuardarDatosArticuloCompra(IdCompra) {
                 //var NombreEmpresa = TempArticulo.options[TempArticulo.selectedIndex].text;
                 //var ExitenciaInicial = document.getElementById("TxtExistenciaInicial").value;
                 //var ExitenciaActual = document.getElementById("TxtExistenciaActual").value;
-                var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
+                //var TipoDeOperacion = document.getElementById("TxtTipoOperacion").value;
                 //var IdCompra = document.getElementById("cmbCompra").value;
                 //var FechaDeIngreso = document.getElementById("TxtFechaSistema").value;
                 //var Coste = document.getElementById("TxtCosto").value;
@@ -346,7 +353,7 @@ function GuardarDatosArticuloCompra(IdCompra) {
                 //frm.append("ExitenciaInicial", ExitenciaInicial);
                 //frm.append("ExitenciaActual", ExitenciaActual);
                 //frm.append("FechaDeIngreso", FechaDeIngreso);
-                frm.append("TipoDeOperacion", TipoDeOperacion);
+                //frm.append("TipoDeOperacion", TipoDeOperacion);
                 //frm.append("IdCompra", IdCompra);
                 //frm.append("Coste", Coste);
                 frm.append("IdAsignacion", IdAsignacion);
@@ -401,7 +408,7 @@ function SiguientePedido(Data) {
     let ArrayNumeroPedido = NumeroPedido.split(',');
 
     var ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
-    document.getElementById("TxtNumCompra").value = ultimoElemento;
+    document.getElementById("TxtNumeroPedido").value = ultimoElemento;
 
 }
 
