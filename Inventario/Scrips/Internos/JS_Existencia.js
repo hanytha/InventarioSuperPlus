@@ -198,11 +198,11 @@ function verificar() {
         }
     }
     //--determina si es una compra o una bonificación o un error
-    if (contador == contadorCantidad && contador >= 1) {
+    if (contador == contadorCantidad && contador >= 1 && CamposObligatorios() == true) {
         GuardarCompra("Compra");
 
     }
-    else if (contador == contadorbonificacion && contador >= 1) {
+    else if (contador == contadorbonificacion && contador >= 1 && CamposObligatorios() == true) {
         GuardarCompra("Bonificación");
        
     }
