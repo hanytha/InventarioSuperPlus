@@ -10,6 +10,7 @@ function ConsultaCompras() {
 }
 function CrearTablaCompras(Data) {
     var CodigoHtmlTablaPedidos = "";
+    CodigoHtmlTablaPedidos += "<br />"
     CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
 
     CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";

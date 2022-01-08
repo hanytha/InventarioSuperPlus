@@ -2,22 +2,18 @@
 @{
     ViewBag.Title = "Compra";
 }
+<h2 class="form-control-label" style="font-size: 20px;">
+    REGISTRO DE COMPRAS Y BONIFICACIONES
+</h2>
+
 
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-<!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" style="float: right; background-color:mediumturquoise;" class="btn btn-primary " data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <script type="text/javascript">
@@ -62,8 +58,12 @@
     })(document);
 </script>
 <!------------------------------------------------Termina------------------------------------------------------------->
+<!-- Botón del modal-->
+<button onclick="abrirModal(0)" type="button" style="background-color:mediumturquoise;" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+
 <!--Mostrar los registros en el accordion-->
 <div id="tablaCompras"></div>
+
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="dialogo1">
@@ -173,14 +173,6 @@
         display: none;
     }
 </style>
-
-<!------------Obtener la fecha--------------------------->
-<script type="text/javascript">
-
-
-
-</script>
-
 
 <!--Script-->
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
