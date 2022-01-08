@@ -209,7 +209,7 @@ function verificar() {
        
     }
     else {
-        swal("¡Datos incorrectos!", "", "warning");
+        swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
 
         //***************************
         CamposObligatorios();
