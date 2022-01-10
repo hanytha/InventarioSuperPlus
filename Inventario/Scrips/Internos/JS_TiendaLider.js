@@ -60,7 +60,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button class='btn btn-primary' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Clic para relizar un movimiento' class='btn btn-primary' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -729,4 +729,58 @@ function SiguientePedido(Data) {
     var ultimoElemento = ArrayNumeroPedido[ArrayNumeroPedido.length - 1]
     document.getElementById("TxtNumeroPedido").value = ultimoElemento;
 
+}
+
+
+
+function abrirModalAceptarPedido(id) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IdPedido', '0');
+
+    }
+    else {
+
+        $.get("/Tienda/ConsultaTienda/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IdPedido', Data[0].IdTienda);
+            document.getElementById("TxtNombre").value = Data[0].Nombre;
+            document.getElementById("cmbSupervisor").value = Data[0].IdSupervisor;
+
+            //Mostrar el Estado, Municipio y localidad registrado al inicio y permitir cambiarlo
+            document.getElementById("cmbEstado").value = Data[0].IdEstado;
+            $.get("/GLOBAL/BDMunicipio/?IDE=" + Data[0].IdEstado, function (Municipios) {
+                llenarCombo(Municipios, document.getElementById("cmbMunicipio"));
+                document.getElementById("cmbMunicipio").value = Data[0].IdMunicipio;
+            });
+            $.get("/GLOBAL/BDLocalidades/?IDM=" + Data[0].IdMunicipio, function (Localidades) {
+                llenarCombo(Localidades, document.getElementById("cmbLocalidad"));
+                document.getElementById("cmbLocalidad").value = Data[0].IdLocalidad;
+            });
+
+            document.getElementById("TxtDireccion").value = Data[0].Direccion;
+            document.getElementById("TxtCalle").value = Data[0].Calle;
+            document.getElementById("TxtCodigoPostal").value = Data[0].CP;
+            document.getElementById("TxtNumeroTelefono").value = Data[0].Telefono;
+            document.getElementById("TxtHoraApertura").value = Data[0].HApertura;
+            document.getElementById("TxtHoraCierre").value = Data[0].HCierre;
+            document.getElementById("cmbSupervision").value = Data[0].IdSupervision;
+
+            document.getElementById("TxtLider").value = Data[0].LNombre;
+            document.getElementById("TxtEncargado1").value = Data[0].E1Nombre;
+            document.getElementById("TxtEncargado2").value = Data[0].E2Nombre;
+            document.getElementById("TxtEncargado3").value = Data[0].E3Nombre;
+            document.getElementById("TxtAux1").value = Data[0].A1Nombre;
+            document.getElementById("TxtAux2").value = Data[0].A2Nombre;
+            document.getElementById("TxtAux3").value = Data[0].A3Nombre;
+
+        });
+    }
 }

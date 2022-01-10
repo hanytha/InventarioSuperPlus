@@ -28,7 +28,7 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-
+<button onclick="abrirModalAceptarPedido(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAceptarPedido">Aceptar Pedido</button>
 <div id="accordion"></div>
 
 <div class="accordion" id="AcordeonSucursales">
@@ -348,6 +348,162 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="container">
+    <div class="modal fade" id="ModalAceptarPedido">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            ACEPTAR PEDIDO
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorioPedido bloquear" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
+                                    <input type="number" id="TxtNumPedidoProveedor" class="form-control limpiar obligatorioPedido bloquear" placeholder="Número de Pedido">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
+                                    <select onchange="Prov(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
+                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </form>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-primary" onclick="AceptarPedidoInterno()">AceptarPedido</button>
+        <button type="button" class="btn btn-primary" onclick="ImprimirPedidoInterno()">ImprimirPedido</button>
+        <button type="button" class="btn btn-primary" onclick="VisualizarPedidoInterno()">VisualizarPedido</button>*@
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+                    <input type="button" class="btn btn-primary" id="btn-1" value="Aceptar pedido" onclick="mostrarBoton()" />
+                    <input type="button" class="btn btn-primary" id="btn-2" value="Imprimir" style="display: none;" />
+                    <input type="button" class="btn btn-primary" id="btn-3" value="Visualizar" style="display: none;" />
+                    <script>
+                        var btn_1 = document.getElementById('btn-1');
+                        var btn_2 = document.getElementById('btn-2');
+                        var btn_3 = document.getElementById('btn-3');
+
+                        function mostrarBoton() {
+                            btn_1.style.display = 'none';
+                            btn_2.style.display = 'inline';
+                            btn_3.style.display = 'inline';
+                        }
+                    </script>
+
+                    @*<button type="button" class="btn btn-primary" id="button">Acción</button>
+                    <button type="button" class="btn btn-primary" id="show">Mostrar botón acción</button>
+                    <button type="button" class="btn btn-primary" id="hide">Ocultar botón acción</button>
+                    <script>
+                        $(function () {
+                            $('#button').click(function () {
+                                $('#button').show();
+                            });
+                            $('#hide').click(function () {
+                                $('#button').hide();
+                            });
+                        })
+                    </script>*@
+
+
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
