@@ -182,7 +182,20 @@ function verificar() {
 
     var pago = document.getElementById("cmbMPago").value;
 
+    //------------------------Función para calcular el costo de las compras----------------------------
+    var total = 0;
+    for (let i = 0; i < cantidad.length; i++) {
 
+        if (cantidad[i].value > 0 && Precio[i].value > 0) {
+
+            var sum = (cantidad[i].value) * (Precio[i].value);
+            total = total + sum ;
+        }
+
+    }
+    document.getElementById("TxtCosto").value = total;
+
+   //-----------------------------------------------------------------------
     for (let i = 0; i < cantidad.length; i++) {
 
         //----Cuenta todos los inputs con un valor
@@ -560,28 +573,29 @@ function ConsultaSiguienteCompraPrveedor(id) {
 
 
 //----------Función para sumar los input de precio---------------------------------
-function sumar() {
+//function sumar() {
 
-    var total = 0;
+//    var total = 0;
 
-    $(".monto").each(function () {
+//    $(".monto").each(function () {
 
-        if (isNaN(parseFloat($(this).val()))) {
+//        if (isNaN(parseFloat($(this).val()))) {
 
-            total += 0;
+//            total += 0;
 
-        } else {
+//        } else {
 
-            total += parseFloat($(this).val());
+//            total += parseFloat($(this).val());
 
-        }
+//        }
 
-    });
 
-    //alert(total);
+//    });
 
-    document.getElementById("TxtCosto").value = total;
-}
+//    //alert(total);
+
+//    document.getElementById("TxtCosto").value = total;
+//}
 
 //------------Funcion que calcula la fecha del sistema------------------------
 function CalcularFecha() {
