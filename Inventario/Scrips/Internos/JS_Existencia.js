@@ -206,9 +206,10 @@ function verificar() {
         swal({
             title: "Desea guardar la Compra?",
             text: "",
-            icon: "warning",
+            icon: "info",
             buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
         })
             .then((willDelete) => {
                 if (willDelete) {
@@ -224,9 +225,10 @@ function verificar() {
         swal({
             title: "Desea guardar la Bonificación?",
             text: "",
-            icon: "warning",
+            icon: "info",
             buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
         })
             .then((willDelete) => {
                 if (willDelete) {
