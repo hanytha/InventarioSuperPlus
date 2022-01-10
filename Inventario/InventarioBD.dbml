@@ -248,7 +248,7 @@
   </Table>
   <Table Name="dbo.MetodoPago" Member="MetodoPago">
     <Type Name="MetodoPago">
-      <Column Name="IdMetodoPago" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdMetodoPago" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MetodoPago" Member="MetodoPago1" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />

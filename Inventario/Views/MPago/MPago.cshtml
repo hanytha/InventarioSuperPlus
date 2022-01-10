@@ -13,7 +13,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
+<button onclick="editarModal(0)" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR MÉTODO DE PAGO</button>
+<br />
 <!--Mostrar los registros en el accordion-->
 <div id="tablaCategoria" class="default "></div>
 <div id="accordion"></div>
@@ -23,7 +24,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">REGISTRO CLASIFICACIÓN</h4>
+                    <h4 class="modal-title">REGISTRO MÉTODO DE PAGO</h4>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
@@ -33,12 +34,20 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtClasificacion">Tipo de clasificación<span class="required">*</span></label>
-                                    <input id="TxtClasificacion" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
+                                    <label class="form-control-label" for="TxtMPago">Método de pago<span class="required">*</span></label>
+                                    <input id="TxtMPago" name="data[TxtMPago]" class="form-control  limpiar obligatorio" placeholder="Papeleria" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
-                        <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarCategoria()">Guardar</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+                                    <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega una descripción..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btnGuardar" type="button" class="btn btn-success " onclick=" GuardarMPago()">Guardar</button>
                     </form>
                 </div>
                 <!-- pie del modal-->
@@ -59,6 +68,6 @@
 <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
 <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
 <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Categorias.js"></script>
+<script src="~/Scrips/Internos/JS_MPago.js"></script>
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <link href="~/Content/tarjeta.css" rel="stylesheet" />

@@ -72,6 +72,9 @@ namespace Inventario
     partial void InsertMarca(Marca instance);
     partial void UpdateMarca(Marca instance);
     partial void DeleteMarca(Marca instance);
+    partial void InsertMetodoPago(MetodoPago instance);
+    partial void UpdateMetodoPago(MetodoPago instance);
+    partial void DeleteMetodoPago(MetodoPago instance);
     partial void InsertMovimientosTienda(MovimientosTienda instance);
     partial void UpdateMovimientosTienda(MovimientosTienda instance);
     partial void DeleteMovimientosTienda(MovimientosTienda instance);
@@ -5628,10 +5631,12 @@ namespace Inventario
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MetodoPago")]
-	public partial class MetodoPago
+	public partial class MetodoPago : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<long> _IdMetodoPago;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _IdMetodoPago;
 		
 		private string _MetodoPago1;
 		
@@ -5639,12 +5644,27 @@ namespace Inventario
 		
 		private System.Nullable<int> _Estatus;
 		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdMetodoPagoChanging(long value);
+    partial void OnIdMetodoPagoChanged();
+    partial void OnMetodoPago1Changing(string value);
+    partial void OnMetodoPago1Changed();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    partial void OnEstatusChanging(System.Nullable<int> value);
+    partial void OnEstatusChanged();
+    #endregion
+		
 		public MetodoPago()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMetodoPago", DbType="BigInt")]
-		public System.Nullable<long> IdMetodoPago
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMetodoPago", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long IdMetodoPago
 		{
 			get
 			{
@@ -5654,7 +5674,11 @@ namespace Inventario
 			{
 				if ((this._IdMetodoPago != value))
 				{
+					this.OnIdMetodoPagoChanging(value);
+					this.SendPropertyChanging();
 					this._IdMetodoPago = value;
+					this.SendPropertyChanged("IdMetodoPago");
+					this.OnIdMetodoPagoChanged();
 				}
 			}
 		}
@@ -5670,7 +5694,11 @@ namespace Inventario
 			{
 				if ((this._MetodoPago1 != value))
 				{
+					this.OnMetodoPago1Changing(value);
+					this.SendPropertyChanging();
 					this._MetodoPago1 = value;
+					this.SendPropertyChanged("MetodoPago1");
+					this.OnMetodoPago1Changed();
 				}
 			}
 		}
@@ -5686,7 +5714,11 @@ namespace Inventario
 			{
 				if ((this._Descripcion != value))
 				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
 					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
 				}
 			}
 		}
@@ -5702,8 +5734,32 @@ namespace Inventario
 			{
 				if ((this._Estatus != value))
 				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
 					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
