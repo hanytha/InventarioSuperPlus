@@ -431,6 +431,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
+        //Consulta para el combo de proveedores en pedidosInternos-sucursalesSupervision
+        public JsonResult Mpago()
+        {
+            var pago = InvBD.MetodoPago.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdMetodoPago,
+                    Nombre = p.MetodoPago1
+                });
+            return Json(pago, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 

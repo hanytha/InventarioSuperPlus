@@ -1,6 +1,7 @@
 ﻿
 ConsultaCompras();
 LlenarCMBProveedor();
+LlenarCMBMPago();
 BloquearCTRL();
 function ConsultaCompras() {
     $.get("/Compra/ConsultasCompras", function (Data) {
@@ -72,9 +73,9 @@ function abrirModal(id) {
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
             document.getElementById("TxtNoCompraPro").value = Data[0].NoCompraProveedor;
-            document.getElementById("TxtMetodo").value = Data[0].MetodoDePago;
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbMPago").value = Data[0].IdMetodoPago;
         });
     }
 }
@@ -299,7 +300,13 @@ function GuardarCompra(movimiento) {
     var TempPro = document.getElementById("cmbProveedor");
     var Proveedor = TempPro.options[TempPro.selectedIndex].text;
 
-    var MetodoDePago = document.getElementById("TxtMetodo").value;
+
+    var IdMetodoPago = document.getElementById("cmbMPago").value;
+    var TempPago = document.getElementById("cmbMPago");
+    var MetodoDePago = TempPago.options[TempPago.selectedIndex].text;
+
+
+
     var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
     var Coste = document.getElementById("TxtCosto").value;
     var TipoOperacion = movimiento;
@@ -310,6 +317,7 @@ function GuardarCompra(movimiento) {
     frm.append("NoCompraProveedor", NoCompraProveedor);
     frm.append("IdProveedor", IdProveedor);
     frm.append("Proveedor", Proveedor);
+    frm.append("IdMetodoPago", IdMetodoPago);
     frm.append("MetodoDePago", MetodoDePago);
     frm.append("FechaDeIngreso", FechaDeIngreso);
     frm.append("TipoOperacion", TipoOperacion);
@@ -474,6 +482,13 @@ function LlenarCMBProveedor() {
     });
 }
 
+//------obtiene los datos de las consultas para llenar los combobox-----------
+
+function LlenarCMBMPago() {
+    $.get("/GLOBAL/Mpago", function (data) {
+        llenarCombo(data, document.getElementById("cmbMPago"));
+    });
+}
 
 //----------------funcion general para llenar los select------------
 function llenarCombo(data, control) {

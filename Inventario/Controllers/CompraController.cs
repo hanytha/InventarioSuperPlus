@@ -92,6 +92,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Compra.Where(p => p.MetodoDePago.Equals(DatosCompra.MetodoDePago)
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                && p.IdMetodoPago.Equals(DatosCompra.IdMetodoPago)
                 && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
@@ -102,12 +103,13 @@ namespace Inventario.Controllers
                     Compra obj = InvBD.Compra.Where(p => p.IdCompra.Equals(id)).First();
                     obj.NoCompra = DatosCompra.NoCompra;
                     obj.NoCompraProveedor = DatosCompra.NoCompraProveedor;
-                    obj.MetodoDePago = DatosCompra.MetodoDePago;
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaDeIngreso = DatosCompra.FechaDeIngreso;
                     obj.Coste = DatosCompra.Coste;
                     obj.TipoOperacion = DatosCompra.TipoOperacion;
+                    obj.IdMetodoPago = DatosCompra.IdMetodoPago;
+                    obj.MetodoDePago = DatosCompra.MetodoDePago;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
