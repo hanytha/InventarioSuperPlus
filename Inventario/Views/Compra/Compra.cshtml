@@ -100,6 +100,23 @@
     </div>
 </div>
 
+<!-------------------------------------------------------------------------->
+<script>
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                alert("acpetar");
+            }
+        });
+
+</script>
 <!-------------------------------------Termina----------------------------------->
 <style>
     .input-group {
@@ -140,3 +157,4 @@
 <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
 <script src="~/Scrips/General/JS_Buscador.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

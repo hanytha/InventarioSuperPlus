@@ -202,17 +202,40 @@ function verificar() {
     //--determina si es una compra o una bonificación o un error
     if (contador == contadorCantidad && contador >= 1 && CamposObligatorios() == true) {
 
-        if ((confirm("¿Desea guardar la COMPRA?") == 1)) {
-            GuardarCompra("Compra");
-        }
+        //-------------------------------------------------------------------
+        swal({
+            title: "Desea guardar la Compra?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
+                    GuardarCompra("Compra");
+                }
+            });
+        //-----------------------------------------------------------------------------
     }
     else if (contador == contadorbonificacion && contador >= 1 && CamposObligatorios() == true) {
 
-        if ((confirm("¿Desea guardar la Bonificación?") == 1)) {
-            GuardarCompra("Bonificación");
-        }
+        //-----------------------------------------------------------
+        swal({
+            title: "Desea guardar la Bonificación?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
+                    GuardarCompra("Bonificación");
+                }
+            });
+
+        //---------------------------------------------------------------
     }
     else {
         swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
