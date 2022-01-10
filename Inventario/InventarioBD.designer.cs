@@ -255,6 +255,14 @@ namespace Inventario
 			}
 		}
 		
+		public System.Data.Linq.Table<MetodoPago> MetodoPago
+		{
+			get
+			{
+				return this.GetTable<MetodoPago>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MovimientosTienda> MovimientosTienda
 		{
 			get
@@ -2539,6 +2547,8 @@ namespace Inventario
 		
 		private long _IdCompra;
 		
+		private System.Nullable<long> _IdMetodoPago;
+		
 		private string _MetodoDePago;
 		
 		private string _TipoOperacion;
@@ -2573,14 +2583,14 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<ExistenciaAlmacenG> _ExistenciaAlmacenG;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnIdCompraChanging(long value);
     partial void OnIdCompraChanged();
+    partial void OnIdMetodoPagoChanging(System.Nullable<long> value);
+    partial void OnIdMetodoPagoChanged();
     partial void OnMetodoDePagoChanging(string value);
     partial void OnMetodoDePagoChanged();
     partial void OnTipoOperacionChanging(string value);
@@ -2619,7 +2629,6 @@ namespace Inventario
 		
 		public Compra()
 		{
-			this._ExistenciaAlmacenG = new EntitySet<ExistenciaAlmacenG>(new Action<ExistenciaAlmacenG>(this.attach_ExistenciaAlmacenG), new Action<ExistenciaAlmacenG>(this.detach_ExistenciaAlmacenG));
 			OnCreated();
 		}
 		
@@ -2639,6 +2648,26 @@ namespace Inventario
 					this._IdCompra = value;
 					this.SendPropertyChanged("IdCompra");
 					this.OnIdCompraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMetodoPago", DbType="BigInt")]
+		public System.Nullable<long> IdMetodoPago
+		{
+			get
+			{
+				return this._IdMetodoPago;
+			}
+			set
+			{
+				if ((this._IdMetodoPago != value))
+				{
+					this.OnIdMetodoPagoChanging(value);
+					this.SendPropertyChanging();
+					this._IdMetodoPago = value;
+					this.SendPropertyChanged("IdMetodoPago");
+					this.OnIdMetodoPagoChanged();
 				}
 			}
 		}
@@ -2983,19 +3012,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_ExistenciaAlmacenG", Storage="_ExistenciaAlmacenG", ThisKey="IdCompra", OtherKey="IdCompra")]
-		public EntitySet<ExistenciaAlmacenG> ExistenciaAlmacenG
-		{
-			get
-			{
-				return this._ExistenciaAlmacenG;
-			}
-			set
-			{
-				this._ExistenciaAlmacenG.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3015,18 +3031,6 @@ namespace Inventario
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra = this;
-		}
-		
-		private void detach_ExistenciaAlmacenG(ExistenciaAlmacenG entity)
-		{
-			this.SendPropertyChanging();
-			entity.Compra = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CompraInterno")]
@@ -3037,21 +3041,15 @@ namespace Inventario
 		
 		private long _IdCompraInterno;
 		
-		private System.Nullable<long> _IdProveedor;
+		private long _NoPedido;
+		
+		private long _NoCompraProveedor;
+		
+		private long _IdProveedor;
 		
 		private string _Proveedor;
 		
-		private System.Nullable<long> _NoPedido;
-		
 		private string _FechaIngreso;
-		
-		private System.Nullable<long> _ExistenciaActual;
-		
-		private System.Nullable<int> _Estatus;
-		
-		private string _Articulo;
-		
-		private System.Nullable<long> _NoCompraProveedor;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -3059,22 +3057,16 @@ namespace Inventario
     partial void OnCreated();
     partial void OnIdCompraInternoChanging(long value);
     partial void OnIdCompraInternoChanged();
-    partial void OnIdProveedorChanging(System.Nullable<long> value);
+    partial void OnNoPedidoChanging(long value);
+    partial void OnNoPedidoChanged();
+    partial void OnNoCompraProveedorChanging(long value);
+    partial void OnNoCompraProveedorChanged();
+    partial void OnIdProveedorChanging(long value);
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
-    partial void OnNoPedidoChanging(System.Nullable<long> value);
-    partial void OnNoPedidoChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
-    partial void OnExistenciaActualChanging(System.Nullable<long> value);
-    partial void OnExistenciaActualChanged();
-    partial void OnEstatusChanging(System.Nullable<int> value);
-    partial void OnEstatusChanged();
-    partial void OnArticuloChanging(string value);
-    partial void OnArticuloChanged();
-    partial void OnNoCompraProveedorChanging(System.Nullable<long> value);
-    partial void OnNoCompraProveedorChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3102,8 +3094,48 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
-		public System.Nullable<long> IdProveedor
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedido", DbType="BigInt NOT NULL")]
+		public long NoPedido
+		{
+			get
+			{
+				return this._NoPedido;
+			}
+			set
+			{
+				if ((this._NoPedido != value))
+				{
+					this.OnNoPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._NoPedido = value;
+					this.SendPropertyChanged("NoPedido");
+					this.OnNoPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompraProveedor", DbType="BigInt NOT NULL")]
+		public long NoCompraProveedor
+		{
+			get
+			{
+				return this._NoCompraProveedor;
+			}
+			set
+			{
+				if ((this._NoCompraProveedor != value))
+				{
+					this.OnNoCompraProveedorChanging(value);
+					this.SendPropertyChanging();
+					this._NoCompraProveedor = value;
+					this.SendPropertyChanged("NoCompraProveedor");
+					this.OnNoCompraProveedorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt NOT NULL")]
+		public long IdProveedor
 		{
 			get
 			{
@@ -3122,7 +3154,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
 		public string Proveedor
 		{
 			get
@@ -3142,27 +3174,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedido", DbType="BigInt")]
-		public System.Nullable<long> NoPedido
-		{
-			get
-			{
-				return this._NoPedido;
-			}
-			set
-			{
-				if ((this._NoPedido != value))
-				{
-					this.OnNoPedidoChanging(value);
-					this.SendPropertyChanging();
-					this._NoPedido = value;
-					this.SendPropertyChanged("NoPedido");
-					this.OnNoPedidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string FechaIngreso
 		{
 			get
@@ -3178,86 +3190,6 @@ namespace Inventario
 					this._FechaIngreso = value;
 					this.SendPropertyChanged("FechaIngreso");
 					this.OnFechaIngresoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaActual", DbType="BigInt")]
-		public System.Nullable<long> ExistenciaActual
-		{
-			get
-			{
-				return this._ExistenciaActual;
-			}
-			set
-			{
-				if ((this._ExistenciaActual != value))
-				{
-					this.OnExistenciaActualChanging(value);
-					this.SendPropertyChanging();
-					this._ExistenciaActual = value;
-					this.SendPropertyChanged("ExistenciaActual");
-					this.OnExistenciaActualChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
-		public System.Nullable<int> Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this.OnEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._Estatus = value;
-					this.SendPropertyChanged("Estatus");
-					this.OnEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(10)")]
-		public string Articulo
-		{
-			get
-			{
-				return this._Articulo;
-			}
-			set
-			{
-				if ((this._Articulo != value))
-				{
-					this.OnArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._Articulo = value;
-					this.SendPropertyChanged("Articulo");
-					this.OnArticuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoCompraProveedor", DbType="BigInt")]
-		public System.Nullable<long> NoCompraProveedor
-		{
-			get
-			{
-				return this._NoCompraProveedor;
-			}
-			set
-			{
-				if ((this._NoCompraProveedor != value))
-				{
-					this.OnNoCompraProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._NoCompraProveedor = value;
-					this.SendPropertyChanged("NoCompraProveedor");
-					this.OnNoCompraProveedorChanged();
 				}
 			}
 		}
@@ -4492,9 +4424,11 @@ namespace Inventario
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
-		private System.Nullable<long> _StockActual;
+		private System.Nullable<long> _ExitenciaActual;
 		
 		private string _TipoDeOperacion;
+		
+		private System.Nullable<long> _IdArticulo;
 		
 		private string _NombreEmpresa;
 		
@@ -4510,17 +4444,7 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
-		private System.Nullable<long> _ExitenciaActual;
-		
-		private System.Nullable<long> _IdArticulo;
-		
-		private System.Nullable<long> _IdProveedor;
-		
-		private System.Nullable<int> _IdMovimientos;
-		
 		private EntitySet<PedidosInternos> _PedidosInternos;
-		
-		private EntityRef<Compra> _Compra;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -4534,10 +4458,12 @@ namespace Inventario
     partial void OnIdCompraInternoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnStockActualChanging(System.Nullable<long> value);
-    partial void OnStockActualChanged();
+    partial void OnExitenciaActualChanging(System.Nullable<long> value);
+    partial void OnExitenciaActualChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
     partial void OnNombreEmpresaChanging(string value);
     partial void OnNombreEmpresaChanged();
     partial void OnUnidadChanging(string value);
@@ -4552,20 +4478,11 @@ namespace Inventario
     partial void OnNoPedidoChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
-    partial void OnExitenciaActualChanging(System.Nullable<long> value);
-    partial void OnExitenciaActualChanged();
-    partial void OnIdArticuloChanging(System.Nullable<long> value);
-    partial void OnIdArticuloChanged();
-    partial void OnIdProveedorChanging(System.Nullable<long> value);
-    partial void OnIdProveedorChanged();
-    partial void OnIdMovimientosChanging(System.Nullable<int> value);
-    partial void OnIdMovimientosChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
 		{
 			this._PedidosInternos = new EntitySet<PedidosInternos>(new Action<PedidosInternos>(this.attach_PedidosInternos), new Action<PedidosInternos>(this.detach_PedidosInternos));
-			this._Compra = default(EntityRef<Compra>);
 			OnCreated();
 		}
 		
@@ -4600,10 +4517,6 @@ namespace Inventario
 			{
 				if ((this._IdCompra != value))
 				{
-					if (this._Compra.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdCompraChanging(value);
 					this.SendPropertyChanging();
 					this._IdCompra = value;
@@ -4653,22 +4566,22 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockActual", DbType="BigInt")]
-		public System.Nullable<long> StockActual
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
+		public System.Nullable<long> ExitenciaActual
 		{
 			get
 			{
-				return this._StockActual;
+				return this._ExitenciaActual;
 			}
 			set
 			{
-				if ((this._StockActual != value))
+				if ((this._ExitenciaActual != value))
 				{
-					this.OnStockActualChanging(value);
+					this.OnExitenciaActualChanging(value);
 					this.SendPropertyChanging();
-					this._StockActual = value;
-					this.SendPropertyChanged("StockActual");
-					this.OnStockActualChanged();
+					this._ExitenciaActual = value;
+					this.SendPropertyChanged("ExitenciaActual");
+					this.OnExitenciaActualChanged();
 				}
 			}
 		}
@@ -4689,6 +4602,26 @@ namespace Inventario
 					this._TipoDeOperacion = value;
 					this.SendPropertyChanged("TipoDeOperacion");
 					this.OnTipoDeOperacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
 				}
 			}
 		}
@@ -4833,86 +4766,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
-		public System.Nullable<long> ExitenciaActual
-		{
-			get
-			{
-				return this._ExitenciaActual;
-			}
-			set
-			{
-				if ((this._ExitenciaActual != value))
-				{
-					this.OnExitenciaActualChanging(value);
-					this.SendPropertyChanging();
-					this._ExitenciaActual = value;
-					this.SendPropertyChanged("ExitenciaActual");
-					this.OnExitenciaActualChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
-		public System.Nullable<long> IdArticulo
-		{
-			get
-			{
-				return this._IdArticulo;
-			}
-			set
-			{
-				if ((this._IdArticulo != value))
-				{
-					this.OnIdArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._IdArticulo = value;
-					this.SendPropertyChanged("IdArticulo");
-					this.OnIdArticuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
-		public System.Nullable<long> IdProveedor
-		{
-			get
-			{
-				return this._IdProveedor;
-			}
-			set
-			{
-				if ((this._IdProveedor != value))
-				{
-					this.OnIdProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._IdProveedor = value;
-					this.SendPropertyChanged("IdProveedor");
-					this.OnIdProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMovimientos", DbType="Int")]
-		public System.Nullable<int> IdMovimientos
-		{
-			get
-			{
-				return this._IdMovimientos;
-			}
-			set
-			{
-				if ((this._IdMovimientos != value))
-				{
-					this.OnIdMovimientosChanging(value);
-					this.SendPropertyChanging();
-					this._IdMovimientos = value;
-					this.SendPropertyChanged("IdMovimientos");
-					this.OnIdMovimientosChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExistenciaAlmacenG_PedidosInternos", Storage="_PedidosInternos", ThisKey="IdExistenciaAlmacenG", OtherKey="IdExistenciaAlmacenG")]
 		public EntitySet<PedidosInternos> PedidosInternos
 		{
@@ -4923,40 +4776,6 @@ namespace Inventario
 			set
 			{
 				this._PedidosInternos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Compra_ExistenciaAlmacenG", Storage="_Compra", ThisKey="IdCompra", OtherKey="IdCompra", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Compra Compra
-		{
-			get
-			{
-				return this._Compra.Entity;
-			}
-			set
-			{
-				Compra previousValue = this._Compra.Entity;
-				if (((previousValue != value) 
-							|| (this._Compra.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Compra.Entity = null;
-						previousValue.ExistenciaAlmacenG.Remove(this);
-					}
-					this._Compra.Entity = value;
-					if ((value != null))
-					{
-						value.ExistenciaAlmacenG.Add(this);
-						this._IdCompra = value.IdCompra;
-					}
-					else
-					{
-						this._IdCompra = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Compra");
-				}
 			}
 		}
 		
@@ -5805,6 +5624,87 @@ namespace Inventario
 		{
 			this.SendPropertyChanging();
 			entity.Marca1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MetodoPago")]
+	public partial class MetodoPago
+	{
+		
+		private System.Nullable<long> _IdMetodoPago;
+		
+		private string _MetodoPago1;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<int> _Estatus;
+		
+		public MetodoPago()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMetodoPago", DbType="BigInt")]
+		public System.Nullable<long> IdMetodoPago
+		{
+			get
+			{
+				return this._IdMetodoPago;
+			}
+			set
+			{
+				if ((this._IdMetodoPago != value))
+				{
+					this._IdMetodoPago = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="MetodoPago", Storage="_MetodoPago1", DbType="VarChar(150)")]
+		public string MetodoPago1
+		{
+			get
+			{
+				return this._MetodoPago1;
+			}
+			set
+			{
+				if ((this._MetodoPago1 != value))
+				{
+					this._MetodoPago1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(150)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
 		}
 	}
 	

@@ -20,7 +20,7 @@ namespace Inventario.Controllers
             //Obtener las consultas del controlador de Supervisión
             SupervisionController TiendaSupervision = new SupervisionController();
             //Cargar las tiendas al iniciar sesión
-            TiendaSupervision.CargarSucursales();
+        
 
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
@@ -33,7 +33,7 @@ namespace Inventario.Controllers
                 if (Accesos.Tiendas != "")
                 {
                     SupervisionController Super = new SupervisionController();
-                    Super.CargarSucursalesXSupervision();
+                    
 
                 }
             }

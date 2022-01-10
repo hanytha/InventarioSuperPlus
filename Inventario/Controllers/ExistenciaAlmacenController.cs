@@ -34,7 +34,7 @@ namespace Inventario.Controllers
                     p.IdSitio,
                     p.IdArticulo,
                     p.NombreEmpresa,
-                    p.IdProveedor
+
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
@@ -55,7 +55,7 @@ namespace Inventario.Controllers
                     p.IdSitio,
                     p.IdArticulo,
                     p.NombreEmpresa,
-                    p.IdProveedor
+       
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
@@ -81,7 +81,7 @@ namespace Inventario.Controllers
                     && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                     && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                     && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
-                    && p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
+
                     && p.Coste.Equals(DatosAlmacen.Coste)
                     ).Count();
                     if (nveces == 0)
@@ -108,7 +108,7 @@ namespace Inventario.Controllers
                     && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                       && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                     && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
-                    && p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
+
                     && p.Coste.Equals(DatosAlmacen.Coste)).Count();
                     if (nveces == 0)
                     {
@@ -124,7 +124,7 @@ namespace Inventario.Controllers
                         obj.IdSitio = DatosAlmacen.IdSitio;
                         obj.IdArticulo = DatosAlmacen.IdArticulo;
                         obj.NombreEmpresa = DatosAlmacen.NombreEmpresa;
-                        obj.IdProveedor = DatosAlmacen.IdProveedor;
+              
                         InvBD.SubmitChanges();
                         Afectados = 1;
                     }
