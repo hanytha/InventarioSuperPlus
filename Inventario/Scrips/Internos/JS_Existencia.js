@@ -127,13 +127,13 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='sumar();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -171,7 +171,24 @@ function LimpiarCamposIn() {
     }
 }
 
+//--------------------Función---------------------------------------------------
+function costo() {
 
+    //------------------------Función para calcular el costo de las compras----------------------------
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var total = 0;
+    for (let i = 0; i < cantidad.length; i++) {
+
+        if (cantidad[i].value > 0 && Precio[i].value > 0) {
+
+            var sum = (cantidad[i].value) * (Precio[i].value);
+            total = total + sum;
+        }
+
+    }
+    document.getElementById("TxtCosto").value = total;
+}
 //-------------------------------Función ------------------------------------------------
 function verificar() {
     var cantidad = document.getElementsByClassName("input-cantidad");
@@ -181,19 +198,6 @@ function verificar() {
     var contadorbonificacion = 0;
 
     var pago = document.getElementById("cmbMPago").value;
-
-    //------------------------Función para calcular el costo de las compras----------------------------
-    var total = 0;
-    for (let i = 0; i < cantidad.length; i++) {
-
-        if (cantidad[i].value > 0 && Precio[i].value > 0) {
-
-            var sum = (cantidad[i].value) * (Precio[i].value);
-            total = total + sum ;
-        }
-
-    }
-    document.getElementById("TxtCosto").value = total;
 
    //-----------------------------------------------------------------------
     for (let i = 0; i < cantidad.length; i++) {
