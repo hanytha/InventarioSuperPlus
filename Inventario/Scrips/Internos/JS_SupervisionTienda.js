@@ -87,6 +87,10 @@ function ConsultaArticuloComp(IDTienda) {
     }
 }
 
+
+
+
+
 //function editarModal(id) {
 //    LimpiarCampos();
 //    if (id == 0) {

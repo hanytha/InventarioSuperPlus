@@ -28,8 +28,8 @@
     }
 </style>
 <!--------------------------------------------------------------------------------------------------------------->
-@*<button onclick="abrirModalAceptarPedido(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAceptarPedido">Aceptar Pedido</button>
-<button class='btn btn-primary' onclick='abrirModalAceptarPedido(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>*@
+<button onclick="abrirModalAceptarPedido(0)" onchange="abrirModalAceptarPedido(this.value)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#abrirModalAceptarPedido">Aceptar Pedido</button>
+@*<button class='btn btn-primary' onclick='abrirModalAceptarPedido(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#ModalAceptarPedido'><i class='fas fa-edit'></i></button>*@
 
 
 <div id="accordion"></div>
@@ -51,18 +51,19 @@
                 {
                     InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 }
+                string ColapseAceptar = "Accordion" + @TiendasSupervision.IDTienda[i];
                 string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
                 string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
                 string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
                     <div class="card-header" id="@titulo">
                         <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                            <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                            <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span>@TiendasSupervision.Nombre[i]</span>
+                                <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
-                        <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                        <div id="@Colapse" class="collapse" class="collapse show"  aria-labelledby="headingOne"  data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
 
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
@@ -71,7 +72,7 @@
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
 
                                     <div>
-                                        <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+                                        <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
 
                                     </div>
                                     <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -82,10 +83,75 @@
 
                     </div>
                 </div>
+
             }
         }
     }
 </div>
+
+<div id="accordionAceptar"></div>
+
+<div class="accordionAceptar" id="AcordeonSucursalesAceptar">
+    @{
+        if (TiendasSupervision.IDTienda != null)
+        {
+            int NSucursales = TiendasSupervision.IDTienda.Count();
+
+            string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+            for (int i = 0; i < NSucursales; i++)
+            {
+                if (i == 0)
+                {
+                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                }
+                else
+                {
+                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                }
+                string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+     
+                string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                <div class="@InsrtClases">
+                    <div class="card-header" id="@titulo">
+                        <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                            <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
+                            </a>
+                        </h4>
+                        <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                            <div class="card-body">
+
+                                <!--Mostrar la tabla de los articulos por tienda en el accordion-->
+                                <div class="row">
+
+                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
+
+                                    <div>
+                                        <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
+
+                                    </div>
+                                    <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+        }
+    }
+</div>
+
+
+
+
+
+
+
 
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
@@ -421,7 +487,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbAceptarProveedor">Proveedor<span class="required">*</span></label>
-                                    <select  id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <select id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
                         </div>

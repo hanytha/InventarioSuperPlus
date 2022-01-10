@@ -256,7 +256,7 @@ namespace Inventario.Controllers
                                    where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
                                    select new
                                    {
-                                      
+
                                        Id = Articulos.IdArticulos,
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedido,
@@ -577,16 +577,18 @@ namespace Inventario.Controllers
         public JsonResult ConsultaSitio(long IdS)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
-                            join areas in InvBD.Areas
-                        on ExistAlm.IdProveedor equals areas.IdAreas
+                            join CompraInterno in InvBD.CompraInterno
+                            on ExistAlm.IdCompraInterno equals CompraInterno.IdCompraInterno
+                            join provedor in InvBD.Areas
+                        on CompraInterno.IdProveedor equals provedor.IdAreas
                             where ExistAlm.IdSitio.Equals(IdS)
                             select new
                             {
                                 Articulo = ExistAlm.NombreEmpresa,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
-                                IdProveedor = areas.IdAreas,
-                                Proveedor = areas.Nombre,
+                                IdProveedor = provedor.IdAreas,
+                                Proveedor = provedor.Nombre,
                                 Tienda = ExistAlm.IdSitio,
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
@@ -701,6 +703,9 @@ namespace Inventario.Controllers
             //    }
             return Afectados;
         }
+
+
+
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
@@ -743,6 +748,80 @@ namespace Inventario.Controllers
 
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult ConsultaArticulosAceptar(long IDTienda)
+        {
+            string id = "";
+            string NoPedido = "";
+            string Nombre = "";
+            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string IdSitio = "";
+            string IdArticulos = "";
+            var ConsultaArticulo = from Articulos in InvBD.Articulos
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+
+                                   //         join CompraInterno in InvBD.CompraInterno
+                                   //on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
+                                   //         join provedor in InvBD.Areas
+                                   //     on CompraInterno.IdProveedor equals provedor.IdAreas
+                                   //where ExistenciaAlmacenG.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(0)
+                                   where ExistenciaAlmacenG.IdSitio.Equals(IDTienda) 
+                                   select new
+                                   {
+
+                                       Id = Articulos.IdArticulos,
+                                       IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                       NoPedido = ExistenciaAlmacenG.NoPedido,
+                                       nombres = Articulos.NombreEmpresa,
+                                       IdArticulos = Articulos.IdArticulos,
+                                       Articulo = Articulos.NombreEmpresa,
+                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                                       IdSitio = ExistenciaAlmacenG.IdSitio,
+                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                   };
+            foreach (var art in ConsultaArticulo)
+            {
+                id += art.Id + ",";
+                Nombre += art.nombres + ",";
+                NoPedido += art.NoPedido + ",";
+                IdSitio += art.IdSitio + ",";
+                IdArticulos += art.IdArticulos + ",";
+                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+                   .Select(p => new
+                   {
+                       fechaIngreso = p.FechaDeIngreso,
+                       stockActual = p.ExitenciaActual,
+                   });
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int cont = 0;
+                    int SumaStock = 0;
+                    foreach (var comp in consultaFecha)
+                    {
+                        SumaStock = (int)(SumaStock + comp.stockActual);
+
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                        }
+                        cont++;
+                    }
+                    Stock += SumaStock + ",";
+
+                }
+                else
+                {
+                    Fechas += "2010-08-10" + ",";
+                    Stock += "0" + ",";
+                }
+            }
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
 
 
