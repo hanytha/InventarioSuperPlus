@@ -253,9 +253,12 @@ namespace Inventario.Controllers
             var ConsultaArticulo = from Articulos in InvBD.Articulos
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+                                   join Pedido in InvBD.PedidosInternos
+                                   on Articulos.IdArticulos equals Pedido.IdArticulo
                                    where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
                                    select new
                                    {
+                                       IdPedido=Pedido.IdPedidosInternos,
                                        Id = Articulos.IdArticulos,
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedido,

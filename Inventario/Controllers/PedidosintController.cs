@@ -52,9 +52,11 @@ namespace Inventario.Controllers
                 {
                     p.IdPedidosInternos,
                     p.NumeroPedido,
+                    p.NumPedidoProveedor,
                     p.CantidadSolicitada,
                     p.CantidadAprobada,
                     p.Tipo,
+                    p.IdProveedor,
                     p.Proveedor,
                     //p.IdUnidadDeMedida,
                     //p.UnidadDeMedida,
