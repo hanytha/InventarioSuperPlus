@@ -54,14 +54,11 @@
                 <div class="@InsrtClases">
                     <div class="card-header" id="@titulo">
                         <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                            <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                            <a id="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" >
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                 <span>@TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
-                        <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
-                            <div class="card-body">
-
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
 
@@ -73,16 +70,14 @@
                                     </div>
                                     <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                 </div>
-
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             }
         }
     }
 </div>
+
+
 
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>

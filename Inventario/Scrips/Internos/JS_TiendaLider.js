@@ -3,6 +3,10 @@ LlenarCMCProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
+
+ConsultaArticuloComp(2);
+
+
 function ConsultaArticuloComp(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
