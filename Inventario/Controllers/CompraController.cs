@@ -49,6 +49,7 @@ namespace Inventario.Controllers
                     p.Coste,
                     p.NoCompraProveedor,
                     p.IdProveedor,
+                    p.IdMetodoPago,
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);

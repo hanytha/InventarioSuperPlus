@@ -165,7 +165,10 @@ function LimpiarCamposIn() {
     for (var i = 0; i < controlesTXT.length; i++) {
         controlesTXT[i].value = "";
     }
-
+    var controlesSLT = document.getElementsByClassName("limpiarSelects");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
 }
 
 
@@ -176,9 +179,11 @@ function verificar() {
     var contador = 0;
     var contadorCantidad = 0;
     var contadorbonificacion = 0;
+
+    var pago = document.getElementById("cmbMPago").value;
+
+
     for (let i = 0; i < cantidad.length; i++) {
-
-
 
         //----Cuenta todos los inputs con un valor
 
@@ -201,7 +206,7 @@ function verificar() {
         }
     }
     //--determina si es una compra o una bonificación o un error
-    if (contador == contadorCantidad && contador >= 1 && CamposObligatorios() == true) {
+    if (contador == contadorCantidad && contador >= 1 && pago > 0) {
 
         //-------------------------------------------------------------------
         swal({
@@ -220,7 +225,7 @@ function verificar() {
             });
         //-----------------------------------------------------------------------------
     }
-    else if (contador == contadorbonificacion && contador >= 1 && CamposObligatorios() == true) {
+    else if (contador == contadorbonificacion && contador >= 1 && pago > 0) {
 
         //-----------------------------------------------------------
         swal({
@@ -243,8 +248,6 @@ function verificar() {
     else {
         swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
 
-        //***************************
-        CamposObligatorios();
         //**********************Marca el borde del input que este falatante de datos*********************************
         changeBGColor();
         function changeBGColor() {
@@ -261,6 +264,12 @@ function verificar() {
 
                     precio[i].style.borderColor = 'Red';
                 }
+
+            }
+
+            if (pago == 0) {
+
+                swal("¡Seleccione un método de pago!", "", "warning");
             }
         }
 
