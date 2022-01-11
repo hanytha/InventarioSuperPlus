@@ -117,7 +117,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -4471,6 +4471,10 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
+		private System.Nullable<long> _CantidadSolicitada;
+		
+		private System.Nullable<long> _CantidadAprobada;
+		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
     #region Definiciones de métodos de extensibilidad
@@ -4505,6 +4509,10 @@ namespace Inventario
     partial void OnNoPedidoChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
+    partial void OnCantidadSolicitadaChanging(System.Nullable<long> value);
+    partial void OnCantidadSolicitadaChanged();
+    partial void OnCantidadAprobadaChanging(System.Nullable<long> value);
+    partial void OnCantidadAprobadaChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4789,6 +4797,46 @@ namespace Inventario
 					this._FechaDeIngreso = value;
 					this.SendPropertyChanged("FechaDeIngreso");
 					this.OnFechaDeIngresoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadSolicitada", DbType="BigInt")]
+		public System.Nullable<long> CantidadSolicitada
+		{
+			get
+			{
+				return this._CantidadSolicitada;
+			}
+			set
+			{
+				if ((this._CantidadSolicitada != value))
+				{
+					this.OnCantidadSolicitadaChanging(value);
+					this.SendPropertyChanging();
+					this._CantidadSolicitada = value;
+					this.SendPropertyChanged("CantidadSolicitada");
+					this.OnCantidadSolicitadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadAprobada", DbType="BigInt")]
+		public System.Nullable<long> CantidadAprobada
+		{
+			get
+			{
+				return this._CantidadAprobada;
+			}
+			set
+			{
+				if ((this._CantidadAprobada != value))
+				{
+					this.OnCantidadAprobadaChanging(value);
+					this.SendPropertyChanging();
+					this._CantidadAprobada = value;
+					this.SendPropertyChanged("CantidadAprobada");
+					this.OnCantidadAprobadaChanged();
 				}
 			}
 		}

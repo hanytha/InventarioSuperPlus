@@ -971,17 +971,103 @@ namespace Inventario.Controllers
 
 
 
-        public JsonResult ConsultaPedidosArticuos(long Pedi)
+        //public JsonResult ConsultaPedidosArticulos(long Pedi)
+        //{
+        //    var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.Articulo,
+        //            p.CantidadSolicitada,
+        //            //p.PrecioUnitario,
+        //            //p.Unidad
+        //        });
+        //    return Json(numero, JsonRequestBehavior.AllowGet);
+        //}
+
+
+        public JsonResult ConsultaPedidosArticulos(long Pedi)
+        //{(long Id)
         {
-            var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.Articulo,
-                    p.CantidadSolicitada,
-                    //p.PrecioUnitario,
-                    //p.Unidad
-                });
+            var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join areas in InvBD.Areas
+                        on Compra.IdProveedor equals areas.IdAreas
+                            where ExistAlm.IdArticulo.Equals(Pedi)
+                            select new
+                            {
+                                IdPedidosInternos = ExistAlm.IdCompraInterno,
+                                NumeroPedido = ExistAlm.NombreEmpresa,
+                                NumPedidoProveedor = Compra.NoCompraProveedor,
+                                Articulo=ExistAlm.NombreEmpresa,
+                                CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                                CantidadAprobada = ExistAlm.CantidadAprobada,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                IdProveedor = Compra.IdProveedor,
+                                Proveedor = Compra.Proveedor,
+                                IdTienda = ExistAlm.IdSitio,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                //Articulo = ExistAlm.NombreEmpresa,
+                                Fecha = ExistAlm.FechaDeIngreso,
+                            };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        //public JsonResult ConsultaAceptarPedido(long Id)
+        //{
+        //    var pedidosInt = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id) && p.Estatus.Equals(1))
+        //        .Select(p => new
+        //        {
+        //            p.IdPedidosInternos,
+        //            p.NumeroPedido,
+        //            p.NumPedidoProveedor,
+        //            p.CantidadSolicitada,
+        //            p.CantidadAprobada,
+        //            p.Tipo,
+        //            p.IdProveedor,
+        //            p.Proveedor,
+        //            //p.IdUnidadDeMedida,
+        //            //p.UnidadDeMedida,
+        //            //p.IdMarca,
+        //            //p.Marca,
+        //            p.IdTienda,
+        //            p.Tienda,
+        //            p.IdArticulo,
+        //            p.Articulo,
+        //            p.Fecha
+        //        });
+        //    return Json(pedidosInt, JsonRequestBehavior.AllowGet);
+        //}
+
+        public JsonResult ConsultaAceptarPedido(long Id)
+        {
+            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join areas in InvBD.Areas
+                        on Compra.IdProveedor equals areas.IdAreas
+                            where ExistAlm.IdArticulo.Equals(Id)
+                            select new
+                            {
+                                IdPedidosInternos = ExistAlm.IdCompraInterno,
+                                NumeroPedido = ExistAlm.NombreEmpresa,
+                                NumPedidoProveedor = Compra.NoCompraProveedor,
+                                CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                                CantidadAprobada = ExistAlm.CantidadAprobada,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                IdProveedor = Compra.IdProveedor,
+                                Proveedor = Compra.Proveedor,
+                                IdTienda = ExistAlm.IdSitio,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                Articulo = ExistAlm.NombreEmpresa,
+                                Fecha = ExistAlm.FechaDeIngreso,
+                            };
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }
