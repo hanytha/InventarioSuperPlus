@@ -968,5 +968,20 @@ namespace Inventario.Controllers
             }
             return Encontrados;
         }
+
+
+
+        public JsonResult ConsultaPedidosArticuos(long Pedi)
+        {
+            var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.Articulo,
+                    p.CantidadSolicitada,
+                    //p.PrecioUnitario,
+                    //p.Unidad
+                });
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
     }
 }

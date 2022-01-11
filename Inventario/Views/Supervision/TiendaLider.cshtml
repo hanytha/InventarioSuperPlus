@@ -63,7 +63,7 @@
                                 <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
-                        <div id="@Colapse" class="collapse" class="collapse show"  aria-labelledby="headingOne"  data-parent="#AcordeonSucursales" style="">
+                        <div id="@Colapse" class="collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                             <div class="card-body">
 
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
@@ -109,7 +109,7 @@
                     InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 }
                 string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
-     
+
                 string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
                 string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
@@ -145,8 +145,6 @@
         }
     }
 </div>
-
-
 
 
 
@@ -510,8 +508,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                    <label class="form-control-label" for="TblAceptarArticulos">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblAceptarArticulos">No hay Ningún artículo de este proveedor</div>
                                 </div>
                             </div>
                         </div>
@@ -571,7 +569,173 @@
     </div>
 </div>
 
+@*<div id="TablaPedidos"></div>*@
 
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalPedidos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            PEDIDOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                    <br />
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de orden:</label><label id="TxtNumeroPedido"></label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <thead>
+                                                    <tr align="center">
+                                                        <th scope="col">Proveedor</th>
+                                                        <th scope="col">Enviar a</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedor"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccion"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                </div>
+                                                <div id="TblArt">Artículo(s) de el pedido</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------------------------------------------------------------------------------------------->
+<!--------------------------Función para imprimir el contenido del div------------------------------------------>
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
+
+    }
+</script>
+
+<!--------------------------------------------------------------------------------------------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 1px solid #030303;
+        width: 50%;
+    }
+</style>
+<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
+
+<style>
+
+    [data-title]:hover:after {
+        opacity: 1;
+        transition: all 0.1s ease 0.5s;
+        visibility: visible;
+    }
+
+    [data-title]:after {
+        content: attr(data-title);
+        background-color: #FFC300;
+        color: #fff;
+        font-size: 14px;
+        font-family: Raleway;
+        position: absolute;
+        padding: 3px 20px;
+        bottom: -1.6em;
+        left: 100%;
+        white-space: nowrap;
+        box-shadow: 1px 1px 3px #222222;
+        opacity: 0;
+        border: 1px solid #111111;
+        z-index: 99999;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+    [data-title] {
+        position: relative;
+    }
+</style>
 
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
