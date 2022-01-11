@@ -985,7 +985,7 @@ namespace Inventario.Controllers
         //}
 
 
-        public JsonResult ConsultaPedidosArticulos(long Pedi)
+        public JsonResult ConsultaPedidosArticulos(long id, long no)
         //{(long Id)
         {
             var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
@@ -993,8 +993,8 @@ namespace Inventario.Controllers
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdArticulo.Equals(Pedi)
-                            select new
+                            where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedido.Equals(no)
+                         select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
                                 NumeroPedido = ExistAlm.NombreEmpresa,
@@ -1041,14 +1041,14 @@ namespace Inventario.Controllers
         //    return Json(pedidosInt, JsonRequestBehavior.AllowGet);
         //}
 
-        public JsonResult ConsultaAceptarPedido(long Id)
+        public JsonResult ConsultaAceptarPedido(long Id, long No)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdArticulo.Equals(Id)
+                            where ExistAlm.IdArticulo.Equals(Id)&& ExistAlm.NoPedido.Equals(No)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,

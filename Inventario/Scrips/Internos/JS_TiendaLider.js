@@ -156,7 +156,10 @@ function ConsultaArticuloCompra(IDTienda) {
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 //CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 // CodigoHtmlArticuloComp += "<button title='Clic para aceptar el pedido' class='btn btn-primary' onclick='AceptarPedido(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Clic para Aceptar el pedido' class='btn btn-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + ")' data-toggle='modal' data-target='#abrirModalAceptarPedido'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Clic para Aceptar el pedido' class='btn btn-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'  data-toggle='modal' data-target='#abrirModalAceptarPedido'><i class='fas fa-archive'></i></button>";
+
+                //CodigoHtmlArticuloComp += "<button title='Clic para Aceptar pedido' class='btn btn-outline-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")' type='button' data-toggle='collapse' data-target='#abrirModalAceptarPedido" + ArrayId[i] + "," + ArrayNoPedido[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ", " + ArrayNoPedido[i] + ")'><i class='fas fa-angle-down'></i></button>";
+
                 CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
 
                 //CodigoHtmlArticuloComp += "</label>";
@@ -831,7 +834,7 @@ function SiguientePedido(Data) {
 
 
 
-function abrirModalAceptarPedido(id) {//la clase  Obligatorio
+function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -846,8 +849,9 @@ function abrirModalAceptarPedido(id) {//la clase  Obligatorio
 
     }
     else {
+        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
 
-        $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
+     //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
             document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
@@ -855,7 +859,7 @@ function abrirModalAceptarPedido(id) {//la clase  Obligatorio
             document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
-            MostrarArt(id);
+            MostrarArt(id, no);
         });
     }
 }
@@ -936,7 +940,7 @@ function MostrarArticulos(num) {
     }
     else {
 
-        $.get("/Supervision/ConsultaPedidosArticuos/?Pedi=" + num, function (Data) {
+        $.get("/Supervision/ConsultaPedidosArticulos/?Pedi=" + num, function (Data) {
             var dos = "";
 
             dos += "<div style='width: 100%'>"
@@ -983,13 +987,13 @@ function MostrarArticulos(num) {
 
 
 
-function MostrarArt(id) {
+function MostrarArt(id,no) {
     if (id == 0) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
-
-        $.get("/Supervision/ConsultaPedidosArticulos/?Pedi=" + id, function (Data) {
+        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
+            //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
             var dos = "";
 
             dos += "<div style='width: 100%'>"
