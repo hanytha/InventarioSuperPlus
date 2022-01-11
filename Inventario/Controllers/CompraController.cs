@@ -263,7 +263,15 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(DatosTienda.IdExistenciaCompra)
-     
+                && p.StockActual.Equals(DatosTienda.StockActual)
+                && p.Articulo.Equals(DatosTienda.Articulo)
+                && p.Unidad.Equals(DatosTienda.Unidad)
+                && p.NoCompra.Equals(DatosTienda.NoCompra)
+                && p.Impuesto.Equals(DatosTienda.Impuesto)
+                && p.IdCompra.Equals(DatosTienda.IdCompra)
+                && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
+                && p.TipoDeOperacion.Equals(DatosTienda.TipoDeOperacion)
+                && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
                 ).Count();
 
 
@@ -280,7 +288,6 @@ namespace Inventario.Controllers
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
                     obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
                     obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
-
 
                     InvBD.SubmitChanges();
                     Afectados = 1;

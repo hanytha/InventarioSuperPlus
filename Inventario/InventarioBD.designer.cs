@@ -3054,6 +3054,8 @@ namespace Inventario
 		
 		private string _FechaIngreso;
 		
+		private System.Nullable<int> _EstatusPedido;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3070,6 +3072,8 @@ namespace Inventario
     partial void OnProveedorChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
+    partial void OnEstatusPedidoChanging(System.Nullable<int> value);
+    partial void OnEstatusPedidoChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3193,6 +3197,26 @@ namespace Inventario
 					this._FechaIngreso = value;
 					this.SendPropertyChanged("FechaIngreso");
 					this.OnFechaIngresoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstatusPedido", DbType="Int")]
+		public System.Nullable<int> EstatusPedido
+		{
+			get
+			{
+				return this._EstatusPedido;
+			}
+			set
+			{
+				if ((this._EstatusPedido != value))
+				{
+					this.OnEstatusPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._EstatusPedido = value;
+					this.SendPropertyChanged("EstatusPedido");
+					this.OnEstatusPedidoChanged();
 				}
 			}
 		}

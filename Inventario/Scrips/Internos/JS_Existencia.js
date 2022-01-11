@@ -51,7 +51,6 @@ function CrearTablaCompras(Data) {
 //------------Limpia la información y carga la informacion de la compra------------------------
 function abrirModal(id) {
 
-    ConsultaSiguientePedido();
     restablecerBordeInput();
 
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -63,6 +62,7 @@ function abrirModal(id) {
     if (id == 0) {
         LimpiarCampos();
         CalcularFecha();
+        ConsultaSiguientePedido();
         sessionStorage.setItem('IDExt', '0');
 
     }
