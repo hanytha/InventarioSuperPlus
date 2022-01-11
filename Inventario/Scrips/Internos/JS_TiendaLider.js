@@ -157,7 +157,7 @@ function ConsultaArticuloCompra(IDTienda) {
                 //CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 // CodigoHtmlArticuloComp += "<button title='Clic para aceptar el pedido' class='btn btn-primary' onclick='AceptarPedido(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "<button title='Clic para Aceptar el pedido' class='btn btn-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + ")' data-toggle='modal' data-target='#abrirModalAceptarPedido'><i class='fas fa-archive'></i></button>";
-                CodigoHtmlArticuloComp += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+                CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
 
                 //CodigoHtmlArticuloComp += "</label>";
 
@@ -184,36 +184,31 @@ function ConsultaArticuloCompra(IDTienda) {
 
     }
 }
+function mostrarBoton() {
+    //btn_1.disabled = 'true';
+    //btn_2.disabled = 'true';
+    ////btn_3.style.display = 'inline';
+    //document.getElementById('btn-2').disabled)==false
+    //$('#btn-1').prop('disabled', true);
+    $('#btn-2').prop('disabled', false);
+    CodigoHtmlArticuloComp += "<td><button class='btn btn-primary disabled'  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+}
 
+jQuery.fn.extend({
+    disable: function (state) {
+        return this.each(function () {
+            this.disabled = state;
+        });
+    }
+   
+});
 
+// Disabled with:
+$('input[type="submit"], input[type="button"], button').disable(true);
 
+// Enabled with:
+$('input[type="submit"], input[type="button"], button').disable(false);
 
-//function editarModal(id) {
-//    LimpiarCampos();
-//    if (id == 0) {
-
-//    }
-//    else {
-
-//        $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-//            document.getElementById("TxtStock").value = Data.Stock;
-//            document.getElementById("cmbMovimiento").value;
-//            document.getElementById("TxtCantidad").value;
-
-//            let x = document.getElementById("TxtStock").value = Data.Stock;
-//            let y = document.getElementById("TxtCantidad").value;
-
-//            if (document.getElementById("cmbMovimiento").value = 1) {
-
-//                let bonificacion = parseFloat(x) + parseFloat(y);
-
-//                document.getElementById("TxtStockTotal").value = bonificacion;
-//            }
-
-//        });
-
-//    }
-//}
 
 function editarModal(id) {
     LimpiarCampos();
@@ -810,7 +805,9 @@ function LlenarCMCProveedores() {
     $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
-
+    $.get("/Supervision/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbAceptarProveedor"));
+    });
 }
 
 function ConsultaSiguientePedido() {
@@ -858,7 +855,7 @@ function abrirModalAceptarPedido(id) {//la clase  Obligatorio
             document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
-
+            MostrarArt(id);
         });
     }
 }
@@ -984,3 +981,55 @@ function MostrarArticulos(num) {
     }
 }
 
+
+
+function MostrarArt(id) {
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosInternos', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaPedidosArticuos/?Pedi=" + id, function (Data) {
+            var dos = "";
+
+            dos += "<div style='width: 100%'>"
+            dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+            dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+            dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+            dos += "<thead>"
+            dos += "<tr align='left'>"
+            dos += "<th >Artículo</th>"
+            //dos += "<th >Unidad_Medida</th>"
+            dos += "<th >Cantidad Solicitada</th>"
+            ////dos += "<th >Precio_Unitario</th>"
+            //dos += "<th >Total</th>"
+            dos += "</tr>"
+            dos += "</thead>"
+            dos += "<tbody>"
+
+            for (var i = 0; i < Data.length; i++) {
+
+                //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
+                //let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
+                //------------------------Cuerpo de la tabla------------------------------------------
+                dos += "<tr>"
+                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+                //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
+                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
+                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
+                dos += "</tr>"
+            }
+            dos += "<tfoot>"
+            //dos += "<th>Total</th>"
+            dos += "</tfoot>"
+
+            dos += "</tbody>"
+            dos += "</table>"
+            dos += "</div>";
+            dos += "</div>";
+
+            document.getElementById("TblAceptarArticulos").innerHTML = dos;
+        });
+    }
+}
