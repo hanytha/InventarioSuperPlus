@@ -313,6 +313,7 @@ namespace Inventario.Controllers
                     p.Impuesto,
                     p.StockActual,
                     p.PrecioUnitario,
+                    p.IdExistenciaCompra,
 
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
