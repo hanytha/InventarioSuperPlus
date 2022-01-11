@@ -294,6 +294,23 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+        //------------------------------------Consultar los artículos por id de compra----------------------------
+        public JsonResult ConsultaIdCompraenCompraArts(long Id)
+        {
+            var compra = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    p.Articulo,
+                    p.Unidad,
+                    p.Impuesto,
+                    p.StockActual,
+                    p.PrecioUnitario,
+
+                });
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+        //-------------------Termina------------------------------------------------------------------------------------------
 
     }
 
