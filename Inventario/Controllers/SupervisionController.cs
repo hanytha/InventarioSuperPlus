@@ -989,27 +989,27 @@ namespace Inventario.Controllers
         //{(long Id)
         {
             var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
-                            join Compra in InvBD.CompraInterno
-                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                            join areas in InvBD.Areas
-                        on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedido.Equals(no)
+                         join Compra in InvBD.CompraInterno
+                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                         join areas in InvBD.Areas
+                     on Compra.IdProveedor equals areas.IdAreas
+                         where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedido.Equals(no)
                          select new
-                            {
-                                IdPedidosInternos = ExistAlm.IdCompraInterno,
-                                NumeroPedido = ExistAlm.NombreEmpresa,
-                                NumPedidoProveedor = Compra.NoCompraProveedor,
-                                Articulo=ExistAlm.NombreEmpresa,
-                                CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                CantidadAprobada = ExistAlm.CantidadAprobada,
-                                Tipo = ExistAlm.TipoDeOperacion,
-                                IdProveedor = Compra.IdProveedor,
-                                Proveedor = Compra.Proveedor,
-                                IdTienda = ExistAlm.IdSitio,
-                                IdArticulo = ExistAlm.IdArticulo,
-                                //Articulo = ExistAlm.NombreEmpresa,
-                                Fecha = ExistAlm.FechaDeIngreso,
-                            };
+                         {
+                             IdPedidosInternos = ExistAlm.IdCompraInterno,
+                             NumeroPedido = ExistAlm.NombreEmpresa,
+                             NumPedidoProveedor = Compra.NoCompraProveedor,
+                             Articulo = ExistAlm.NombreEmpresa,
+                             CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                             CantidadAprobada = ExistAlm.CantidadAprobada,
+                             Tipo = ExistAlm.TipoDeOperacion,
+                             IdProveedor = Compra.IdProveedor,
+                             Proveedor = Compra.Proveedor,
+                             IdTienda = ExistAlm.IdSitio,
+                             IdArticulo = ExistAlm.IdArticulo,
+                             //Articulo = ExistAlm.NombreEmpresa,
+                             Fecha = ExistAlm.FechaDeIngreso,
+                         };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
@@ -1050,7 +1050,7 @@ namespace Inventario.Controllers
                            on ExistAlm.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdArticulo.Equals(Id)&& ExistAlm.NoPedido.Equals(No)
+                            where ExistAlm.IdArticulo.Equals(Id) && ExistAlm.NoPedido.Equals(No)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
@@ -1115,7 +1115,7 @@ namespace Inventario.Controllers
                 //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
 
                 int nveces = InvBD.CompraInterno.Count();
-                //               int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
@@ -1130,21 +1130,21 @@ namespace Inventario.Controllers
             }
             else
             {
-                //int nveces = InvBD.CompraInterno.Count();
-                // int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(AceptarPedido.NoPedido)).Count();
-                  int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido) && p.NoCompraProveedor.Equals(AceptarPedido.NoCompraProveedor)).Count();
-                if (nveces == 0)
-                {
+
+                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
+                //if (nveces == 0)
+                //{
                     CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
                     obj.NoPedido = AceptarPedido.NoPedido;
                     //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
                     InvBD.SubmitChanges();
                     Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
+                //}
+                //else
+                //{
+                //    Afectados = -1;
+                //}
             }
 
             return Afectados;

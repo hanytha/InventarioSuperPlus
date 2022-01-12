@@ -1158,7 +1158,7 @@ function Guardar() {
                             'Se guardó correctamente.',
                             'success'
                         )
-                        ConsultaArticuloComp();
+                        ConsultaArticuloComp(IDTienda);
                         document.getElementById("btnCancelar").click();
                     }
                 }
