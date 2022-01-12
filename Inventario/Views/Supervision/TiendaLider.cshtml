@@ -434,22 +434,27 @@
                 <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <div class="form-control-label">
-                            <strong>Usuario quien recibe el pedido:</strong>
-                            @{<p class="CardBody_Text" type="text" id="NombreUsuario">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br></span></p>}
-                        </div>
                         <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNombreUsr">No<span class="required">*</span></label>
+                                    <input type="text" id="TxtNombreUsr" class="form-control limpiar obligatorioAceptar bloquear" value="@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtAceptarNumeroPedidoAceptar">No. Pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtAceptarNumeroPedidoAceptar" class="form-control limpiar obligatorioAceptar" placeholder="Número de Pedido">
+                                    <input type="number" id="TxtAceptarNumeroPedidoAceptar" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtAceptarNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
-                                    <input type="number" id="TxtAceptarNumPedidoProveedor" class="form-control limpiar obligatorioAceptar " placeholder="Número de Pedido">
+                                    <input type="number" id="TxtAceptarNumPedidoProveedor" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
                                 </div>
                             </div>
                         </div>
@@ -457,13 +462,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtAceptarFechaIngreso">Fecha de Ingreso<span></span></label>
-                                    <input type="text" id="TxtAceptarFechaIngreso" class="form-control " name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                    <input type="text" id="TxtAceptarFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbAceptarTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
+                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -485,7 +490,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbAceptarProveedor">Proveedor<span class="required">*</span></label>
-                                    <select id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorioAceptar"></select>
+                                    <select id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorioAceptar bloquear"></select>
                                 </div>
                             </div>
                         </div>

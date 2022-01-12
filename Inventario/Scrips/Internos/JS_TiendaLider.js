@@ -1122,7 +1122,7 @@ function Guardar() {
             //var IdProveedor = document.getElementById("TxtRazonSocial").value;
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
             var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
-            var Usuario = document.getElementById("NombreUsuario").value;
+            var Usuario = document.getElementById("TxtNombreUsr").value;
             var frm = new FormData();
             frm.append("IdCompraInterno", IdCompraInterno);
             frm.append("NoPedido", NoPedido);
