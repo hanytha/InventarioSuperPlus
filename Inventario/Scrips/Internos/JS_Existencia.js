@@ -128,13 +128,13 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -244,7 +244,7 @@ function verificar() {
         //-----------------------------------------------------------------------------
     }
     else if (contador == contadorbonificacion && contador >= 1 && pago > 0) {
-
+        BordeInputPrecio();
         //-----------------------------------------------------------
         swal({
             title: "Desea guardar la Bonificación?",
@@ -295,6 +295,43 @@ function verificar() {
         //**********************************************************
     }
 }
+
+
+//----Función que  restablece el color de borde de los input------------------------
+function BordeInput() {
+
+    var cols = document.getElementsByClassName('input-cantidad');
+    var precio = document.getElementsByClassName('input-Precio');
+
+    for (i = 0; i < cols.length; i++) {
+
+
+        if (cols[i].value > 0) {
+            cols[i].style.borderColor = 'DimGray';
+        }
+        if (precio[i].value  > 0) {
+            precio[i].style.borderColor = 'DimGray';
+        }
+        if (precio[i].value == 0 && cols[i].value == 0) {
+
+            cols[i].style.borderColor = 'DimGray';
+            precio[i].style.borderColor = 'DimGray';
+        }
+
+    }
+}
+
+//----Función que  restablece el color de borde de los input------------------------
+function BordeInputPrecio() {
+
+    var precio = document.getElementsByClassName('input-Precio');
+
+    for (i = 0; i < precio.length; i++) {
+
+        precio[i].style.borderColor = 'DimGray';
+    }
+}
+
 
 //----Función que  restablece el color de borde de los input------------------------
 function restablecerBordeInput() {
@@ -629,7 +666,7 @@ function MostrarArticulosPorIdCompra(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='" + Data[i].StockActual + "' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' id='" + Data[i].IdExistenciaCompra + "'  ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='" + Data[i].StockActual + "' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' name='" + Data[i].IdExistenciaCompra + "'  ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
