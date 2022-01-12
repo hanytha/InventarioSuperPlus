@@ -503,7 +503,14 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
                         swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        swal("¡El pedido ya exixste!", "", "warning");
+                        swal({
+                            title: "Verifique la actualización de sus datos",
+                            text: "",
+                            icon: "info",
+                            buttons: true,
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                        })
                     }
                     else {
 
