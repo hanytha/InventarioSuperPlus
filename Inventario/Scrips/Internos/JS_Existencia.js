@@ -410,7 +410,18 @@ function GuardarCompra(movimiento) {
                 //-----Mensaje de confirmación-----------------------
                 alert("los datos se guardaron correctamente");
 
-                GuardarDatosArticuloCompra(data, movimiento);
+                //-------GuardarDatosArticuloCompra deacuerdo con la función que le corresponda----------
+
+
+                if (IdCompra == 0) {
+
+                    GuardarDatosArticuloCompra(data, movimiento);
+                    //---guarda el nuevo registro
+                }
+                else {
+                    GuardarDatosArticuloCompra(IdCompra, movimiento);
+                    //---guarda las modificaciones de las compras
+                }
 
                 document.getElementById("btnCancelar").click();
             }
@@ -422,7 +433,7 @@ function GuardarCompra(movimiento) {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
-function GuardarDatosArticuloCompra(IdCompra, Tmovimiento) {
+function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
     var cantidad = document.getElementsByClassName("input-cantidad");
@@ -444,10 +455,13 @@ function GuardarDatosArticuloCompra(IdCompra, Tmovimiento) {
             Precio[i].value = 0;
 
         }
+        if (Precio[i].name == "") {
+            Precio[i].name = 0;
+        }
 
-        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value) {
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name) {
 
-            var IdExistenciaCompra = sessionStorage.getItem('IDExt');
+            var IdExistenciaCompra = Precio[i].name;
             var NoCompra = document.getElementById("TxtNoCompra").value;
             var TipoDeOperacion = Tmovimiento;
 
@@ -466,7 +480,7 @@ function GuardarDatosArticuloCompra(IdCompra, Tmovimiento) {
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaCompra", IdExistenciaCompra);
-            frm.append("IdCompra", IdCompra);
+            frm.append("IdCompra", IdCompras);
             frm.append("StockActual", StockActual);
             frm.append("Articulo", Articulo);
             frm.append("Unidad", Unidad);
