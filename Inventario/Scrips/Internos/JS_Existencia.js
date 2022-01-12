@@ -404,15 +404,16 @@ function GuardarCompra(movimiento) {
                 swal("¡Ocurrio un error!", "", "danger");
             }
             else if (data == -1) {
-                swal("¡La compra ya existe!", "", "warning");
+
+                swal("¡Verifique la actualización de sus datos!", "", "warning");
+
+                GuardarDatosArticuloCompra(IdCompra, movimiento);
             }
             else {
                 //-----Mensaje de confirmación-----------------------
                 alert("los datos se guardaron correctamente");
 
                 //-------GuardarDatosArticuloCompra deacuerdo con la función que le corresponda----------
-
-
                 if (IdCompra == 0) {
 
                     GuardarDatosArticuloCompra(data, movimiento);
