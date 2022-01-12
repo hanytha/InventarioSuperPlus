@@ -36,8 +36,8 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' style='width: 28px; height: 28px;' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' style='width: 28px; height: 28px;' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
@@ -297,7 +297,7 @@ function verificar() {
 }
 
 
-//----Función que  restablece el color de borde de los input------------------------
+//----Función que  restablece el color del borde de los input cuando los valores ingresados sean validos------------------------
 function BordeInput() {
 
     var cols = document.getElementsByClassName('input-cantidad');
@@ -321,7 +321,7 @@ function BordeInput() {
     }
 }
 
-//----Función que  restablece el color de borde de los input------------------------
+//----Función que  restablece el color de borde de los input cuando sean bonificacioones------------------------
 function BordeInputPrecio() {
 
     var precio = document.getElementsByClassName('input-Precio');
