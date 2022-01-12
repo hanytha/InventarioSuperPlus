@@ -63,12 +63,16 @@ function abrirModal(id) {
         LimpiarCampos();
         CalcularFecha();
         ConsultaSiguientePedido();
+        habilitar();
         sessionStorage.setItem('IDExt', '0');
 
     }
     else {
 
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
+ 
+            habilitar();
+ 
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
@@ -666,13 +670,13 @@ function MostrarArticulosPorIdCompra(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='" + Data[i].StockActual + "' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' name='" + Data[i].IdExistenciaCompra + "'  ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='" + Data[i].StockActual + "' onkeyup='costo();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' name='" + Data[i].ExistenciaInicial + "'><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='" + Data[i].PrecioUnitario + "' onkeyup='costo();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='" + Data[i].PrecioUnitario + "' onkeyup='costo();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' name='" + Data[i].IdExistenciaCompra + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -680,9 +684,45 @@ function MostrarArticulosPorIdCompra(id) {
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
+
+            deshabilitar();
         });
     }
 }
 
+//-------Función para deshabilitar los inputs en el modal de editar compras-------------------------------
 
+function deshabilitar() {
 
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var provee = document.getElementById("cmbProveedor");
+    var metodo = document.getElementById("cmbMPago");
+
+    for (let i = 0; i < cantidad.length; i++) {
+
+        if (cantidad[i].value != cantidad[i].name) {
+
+            for (let i = 0; i < cantidad.length; i++) {
+
+                cantidad[i].disabled = true;
+                Precio[i].disabled = true;
+                provee.disabled = true;
+                metodo.disabled = true;
+            }
+        }
+    }
+}
+
+//-------Función para habilitar los inputs en el modal de compras-------------------------------
+function habilitar() {
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var provee = document.getElementById("cmbProveedor");
+    var metodo = document.getElementById("cmbMPago");
+
+    cantidad.disabled = false;
+    Precio.disabled = false;
+    provee.disabled = false;
+    metodo.disabled = false;
+}

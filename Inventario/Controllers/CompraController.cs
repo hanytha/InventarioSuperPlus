@@ -314,7 +314,7 @@ namespace Inventario.Controllers
                     p.StockActual,
                     p.PrecioUnitario,
                     p.IdExistenciaCompra,
-
+                    p.ExistenciaInicial,
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
