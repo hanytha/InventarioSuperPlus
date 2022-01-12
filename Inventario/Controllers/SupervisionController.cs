@@ -1104,5 +1104,53 @@ namespace Inventario.Controllers
         //}
 
 
+        public int Guardar(CompraInterno AceptarPedido)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = AceptarPedido.IdCompraInterno;
+            if (id.Equals(0))
+            {
+                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
+
+                int nveces = InvBD.CompraInterno.Count();
+                //               int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.CompraInterno.InsertOnSubmit(AceptarPedido);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                //int nveces = InvBD.CompraInterno.Count();
+                // int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(AceptarPedido.NoPedido)).Count();
+                  int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido) && p.NoCompraProveedor.Equals(AceptarPedido.NoCompraProveedor)).Count();
+                if (nveces == 0)
+                {
+                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
+                    obj.NoPedido = AceptarPedido.NoPedido;
+                    //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+
+            return Afectados;
+        }
+
+
+
     }
 }

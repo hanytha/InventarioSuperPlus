@@ -194,6 +194,8 @@ function mostrarBoton() {
     //document.getElementById('btn-2').disabled)==false
     //$('#btn-1').prop('disabled', true);
     $('#btn-2').prop('disabled', false);
+
+    Guardar();
     CodigoHtmlArticuloComp += "<td><button class='btn btn-primary disabled'  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
 }
 
@@ -686,6 +688,7 @@ function CamposObligatorios() {
     }
     return exito;
 }
+
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
 function LlenarCMBTienda(Id) {
     //$.get("/Supervision/BDProveedor", function (data) {
@@ -1087,5 +1090,79 @@ function MostrarArt(id, no) {
 
             document.getElementById("TblAceptarArticulos").innerHTML = dos;
         });
+    }
+}
+
+
+function CamposObligatoriosAceptar() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorioAceptar");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+            exito = false;
+            controlesObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            controlesObligatorio[i].classList.remove("border-danger");
+
+        }
+    }
+    return exito;
+}
+
+
+function Guardar() {
+    if (CamposObligatoriosAceptar() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdCompraInterno = sessionStorage.getItem('IdPedido');
+            var NoPedido = document.getElementById("TxtAceptarNumeroPedidoAceptar").value;
+            var NoCompraProveedor = document.getElementById("TxtAceptarNumPedidoProveedor").value;
+            //var IdProveedor = document.getElementById("TxtRazonSocial").value;
+            //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
+            var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+            var frm = new FormData();
+            frm.append("IdCompraInterno", IdCompraInterno);
+            frm.append("NoPedido", NoPedido);
+            frm.append("NoCompraProveedor", NoCompraProveedor);
+            //frm.append("IdProveedor", IdProveedor);
+            //frm.append("Proveedor", Proveedor);
+            frm.append("FechaIngreso", FechaIngreso);
+            
+            frm.append("EstatusPedido", 0);
+            $.ajax({
+                type: "POST",
+                url: "/Supervision/Guardar",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    if (data == 0) {
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
+                    }
+                    else if (data == -1) {
+                        Swal.fire(
+                            '',
+                            'Ya existe',
+                            'warning'
+                        )
+                    }
+                    else {
+                        Swal.fire(
+                            '¡GUARDADO!',
+                            'Se guardó correctamente.',
+                            'success'
+                        )
+                        ConsultaArticuloComp();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
     }
 }
