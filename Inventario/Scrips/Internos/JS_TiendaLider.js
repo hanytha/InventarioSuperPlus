@@ -160,7 +160,7 @@ function ConsultaArticuloCompra(IDTienda) {
 
                 //CodigoHtmlArticuloComp += "<button title='Clic para Aceptar pedido' class='btn btn-outline-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")' type='button' data-toggle='collapse' data-target='#abrirModalAceptarPedido" + ArrayId[i] + "," + ArrayNoPedido[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ", " + ArrayNoPedido[i] + ")'><i class='fas fa-angle-down'></i></button>";
 
-                CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+                CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
 
                 //CodigoHtmlArticuloComp += "</label>";
 
@@ -912,13 +912,13 @@ function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
 //******************************************************************************************************************************
 //*******************Despliega el modal deacuerdo con el número de pedido************************************************
 
-function VerPedido(num) {
-    if (num == 0) {
+function VerPedido(id, no) {
+    if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-
-        $.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+        //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
 
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
@@ -926,21 +926,73 @@ function VerPedido(num) {
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
-            document.getElementById("TxtNumeroPedido").textContent = Data[0].NumPedidoProveedor;
-            MostrarArticulos(num);
+            document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
+            MostrarArticulos(id, no);
         });
     }
 }
 
 //******************************************************************************************************************************
 //--------------Crea la tabla de los artículos y sus caracteristicas para mostrarse en el modal de ver pedido-----------------
-function MostrarArticulos(num) {
-    if (num == 0) {
+//function MostrarArticulos(num) {
+//    if (num == 0) {
+//        sessionStorage.setItem('IdPedidosInternos', '0');
+//    }
+//    else {
+
+//        $.get("/Supervision/ConsultaPedidosArticulos/?Pedi=" + num, function (Data) {
+//            var dos = "";
+
+//            dos += "<div style='width: 100%'>"
+//            dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+//            dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+//            dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+//            dos += "<thead>"
+//            dos += "<tr align='left'>"
+//            dos += "<th >Artículo</th>"
+//            //dos += "<th >Unidad_Medida</th>"
+//            dos += "<th >Cantidad Solicitada</th>"
+//            ////dos += "<th >Precio_Unitario</th>"
+//            //dos += "<th >Total</th>"
+//            dos += "</tr>"
+//            dos += "</thead>"
+//            dos += "<tbody>"
+
+//            for (var i = 0; i < Data.length; i++) {
+
+//                //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
+//                //let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
+//                //------------------------Cuerpo de la tabla------------------------------------------
+//                dos += "<tr>"
+//                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+//                //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
+//                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+//                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
+//                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
+//                dos += "</tr>"
+//            }
+//            dos += "<tfoot>"
+//            //dos += "<th>Total</th>"
+//            dos += "</tfoot>"
+
+//            dos += "</tbody>"
+//            dos += "</table>"
+//            dos += "</div>";
+//            dos += "</div>";
+
+//            document.getElementById("TblArt").innerHTML = dos;
+//        });
+//    }
+//}
+
+
+function MostrarArticulos(id, no) {
+    if (id == 0) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
-
-        $.get("/Supervision/ConsultaPedidosArticulos/?Pedi=" + num, function (Data) {
+        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
+            //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
             var dos = "";
 
             dos += "<div style='width: 100%'>"
@@ -987,7 +1039,7 @@ function MostrarArticulos(num) {
 
 
 
-function MostrarArt(id,no) {
+function MostrarArt(id, no) {
     if (id == 0) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }

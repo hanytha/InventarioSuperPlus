@@ -1046,14 +1046,17 @@ namespace Inventario.Controllers
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join Tienda in InvBD.Tienda
+                           on ExistAlm.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
                             where ExistAlm.IdArticulo.Equals(Id)&& ExistAlm.NoPedido.Equals(No)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
-                                NumeroPedido = ExistAlm.NombreEmpresa,
+                                NumeroPedido = ExistAlm.NoPedido,
                                 NumPedidoProveedor = Compra.NoCompraProveedor,
+                                NoCompraProveedor = Compra.NoCompraProveedor,
                                 CantidadSolicitada = ExistAlm.CantidadSolicitada,
                                 CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
@@ -1063,10 +1066,42 @@ namespace Inventario.Controllers
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Articulo = ExistAlm.NombreEmpresa,
                                 Fecha = ExistAlm.FechaDeIngreso,
+                                Telefono = areas.Telefono,
+                                Correo = areas.Correo,
+                                Tienda = Tienda.Nombre,
+                                Direccion = Tienda.Direccion
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
+
+        //public JsonResult ConsultaPedidoXnum(long Id, long No)
+        //{
+        //    var numero = from proveedor in InvBD.Areas
+        //                 join pedido in InvBD.PedidosInternos
+        //             on proveedor.IdAreas equals pedido.IdProveedor
+        //                 join tienda in InvBD.Tienda
+        //                   on pedido.IdTienda equals tienda.IdTienda
+        //                 where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
+        //                 select new
+        //                 {
+        //                     IdPedidosInternos = pedido.IdPedidosInternos,
+        //                     NumeroPedido = pedido.NumeroPedido,
+        //                     CantidadSolicitada = pedido.CantidadSolicitada,
+
+        //                     IdProveedor = proveedor.IdAreas,
+        //                     Proveedor = proveedor.Nombre,
+        //                     Direccion = tienda.Direccion,
+        //                     NumPedidoProveedor = pedido.NumeroPedido,
+        //                     IdTienda = pedido.IdTienda,
+        //                     Tienda = pedido.Tienda,
+        //                     IdArticulo = pedido.IdArticulo,
+        //                     Fecha = pedido.Fecha,
+        //                     Correo = proveedor.Correo,
+        //                     Telefono = proveedor.Telefono,
+        //                 };
+        //    return Json(numero, JsonRequestBehavior.AllowGet);
+        //}
 
 
     }
