@@ -1118,6 +1118,7 @@ function Guardar() {
             var IdCompraInterno = sessionStorage.getItem('IdPedido');
             var NoPedido = document.getElementById("TxtAceptarNumeroPedidoAceptar").value;
             var NoCompraProveedor = document.getElementById("TxtAceptarNumPedidoProveedor").value;
+            //var EstatusPedido = value"1";
             //var IdProveedor = document.getElementById("TxtRazonSocial").value;
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
             var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
@@ -1129,7 +1130,7 @@ function Guardar() {
             //frm.append("Proveedor", Proveedor);
             frm.append("FechaIngreso", FechaIngreso);
             
-            frm.append("EstatusPedido", 0);
+            frm.append("EstatusPedido", 1);
             $.ajax({
                 type: "POST",
                 url: "/Supervision/Guardar",
@@ -1158,7 +1159,7 @@ function Guardar() {
                             'Se guardó correctamente.',
                             'success'
                         )
-                        ConsultaArticuloComp(IDTienda);
+                        ConsultaArticuloComp();
                         document.getElementById("btnCancelar").click();
                     }
                 }

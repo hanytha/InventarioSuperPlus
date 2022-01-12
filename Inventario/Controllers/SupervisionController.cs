@@ -1135,11 +1135,12 @@ namespace Inventario.Controllers
                 //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
                 //if (nveces == 0)
                 //{
-                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
-                    obj.NoPedido = AceptarPedido.NoPedido;
-                    //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
+                CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
+                obj.NoPedido = AceptarPedido.NoPedido;
+                obj.EstatusPedido = AceptarPedido.EstatusPedido;
+                //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
+                InvBD.SubmitChanges();
+                Afectados = 1;
                 //}
                 //else
                 //{

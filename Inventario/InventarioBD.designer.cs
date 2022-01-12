@@ -3056,6 +3056,10 @@ namespace Inventario
 		
 		private System.Nullable<int> _EstatusPedido;
 		
+		private System.Nullable<long> _IdUsuario;
+		
+		private string _Usuario;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3074,6 +3078,10 @@ namespace Inventario
     partial void OnFechaIngresoChanged();
     partial void OnEstatusPedidoChanging(System.Nullable<int> value);
     partial void OnEstatusPedidoChanged();
+    partial void OnIdUsuarioChanging(System.Nullable<long> value);
+    partial void OnIdUsuarioChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3217,6 +3225,46 @@ namespace Inventario
 					this._EstatusPedido = value;
 					this.SendPropertyChanged("EstatusPedido");
 					this.OnEstatusPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="BigInt")]
+		public System.Nullable<long> IdUsuario
+		{
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					this.OnIdUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._IdUsuario = value;
+					this.SendPropertyChanged("IdUsuario");
+					this.OnIdUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
 				}
 			}
 		}

@@ -130,6 +130,8 @@
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="FechaIngreso" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="EstatusPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ComprasArticulos" Member="ComprasArticulos">
