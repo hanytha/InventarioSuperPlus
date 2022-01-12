@@ -1122,6 +1122,7 @@ function Guardar() {
             //var IdProveedor = document.getElementById("TxtRazonSocial").value;
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
             var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+            var Usuario = document.getElementById("NombreUsuario").value;
             var frm = new FormData();
             frm.append("IdCompraInterno", IdCompraInterno);
             frm.append("NoPedido", NoPedido);
@@ -1129,7 +1130,7 @@ function Guardar() {
             //frm.append("IdProveedor", IdProveedor);
             //frm.append("Proveedor", Proveedor);
             frm.append("FechaIngreso", FechaIngreso);
-            
+            frm.append("Usuario", Usuario);
             frm.append("EstatusPedido", 1);
             $.ajax({
                 type: "POST",

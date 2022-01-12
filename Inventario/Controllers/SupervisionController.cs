@@ -1138,6 +1138,7 @@ namespace Inventario.Controllers
                 CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
                 obj.NoPedido = AceptarPedido.NoPedido;
                 obj.EstatusPedido = AceptarPedido.EstatusPedido;
+                obj.Usuario = AceptarPedido.Usuario;
                 //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
                 InvBD.SubmitChanges();
                 Afectados = 1;
