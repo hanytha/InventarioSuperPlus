@@ -119,7 +119,7 @@ function MostrarArticulos(id) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' "+ Data[i].IdArticulos +"'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -460,14 +460,16 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
             Precio[i].name = 0;
         }
 
-        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name) {
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name && NomArticulos[i].name) {
 
             var IdExistenciaCompra = Precio[i].name;
             var NoCompra = document.getElementById("TxtNoCompra").value;
+            var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
             var TipoDeOperacion = Tmovimiento;
 
             //------------------------Guarda el nombre del artículo solicitado----------------------------------
             var Articulo = NomArticulos[i].value;
+            var IdArticulo = NomArticulos[i].name;
             //------------------------Guarda la cantidad de artículos solicitados----------------------------------
             var StockActual = cantidad[i].value;
 
@@ -490,6 +492,8 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
             frm.append("PrecioUnitario", PrecioUnitario);
             frm.append("TipoDeOperacion", TipoDeOperacion);
             frm.append("ExistenciaInicial", ExistenciaInicial);
+            frm.append("FechaIngreso", FechaIngreso);
+            frm.append("IdArticulo", IdArticulo);
 
 
             frm.append("Estatus", 1);
@@ -679,7 +683,7 @@ function MostrarArticulosPorIdCompra(id) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo +"'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";

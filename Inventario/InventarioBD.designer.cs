@@ -3056,6 +3056,10 @@ namespace Inventario
 		
 		private System.Nullable<int> _EstatusPedido;
 		
+		private System.Nullable<long> _IdUsuario;
+		
+		private string _Usuario;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3074,6 +3078,10 @@ namespace Inventario
     partial void OnFechaIngresoChanged();
     partial void OnEstatusPedidoChanging(System.Nullable<int> value);
     partial void OnEstatusPedidoChanged();
+    partial void OnIdUsuarioChanging(System.Nullable<long> value);
+    partial void OnIdUsuarioChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3221,6 +3229,46 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="BigInt")]
+		public System.Nullable<long> IdUsuario
+		{
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					this.OnIdUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._IdUsuario = value;
+					this.SendPropertyChanged("IdUsuario");
+					this.OnIdUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3260,6 +3308,8 @@ namespace Inventario
 		
 		private string _TipoDeOperacion;
 		
+		private System.Nullable<long> _IdArticulo;
+		
 		private string _Articulo;
 		
 		private string _Unidad;
@@ -3267,6 +3317,8 @@ namespace Inventario
 		private string _Impuesto;
 		
 		private string _PrecioUnitario;
+		
+		private string _FechaIngreso;
 		
 		private System.Nullable<int> _Estatus;
 		
@@ -3286,6 +3338,8 @@ namespace Inventario
     partial void OnNoCompraChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
     partial void OnUnidadChanging(string value);
@@ -3294,6 +3348,8 @@ namespace Inventario
     partial void OnImpuestoChanged();
     partial void OnPrecioUnitarioChanging(string value);
     partial void OnPrecioUnitarioChanged();
+    partial void OnFechaIngresoChanging(string value);
+    partial void OnFechaIngresoChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
     #endregion
@@ -3423,6 +3479,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
 		public string Articulo
 		{
@@ -3499,6 +3575,26 @@ namespace Inventario
 					this._PrecioUnitario = value;
 					this.SendPropertyChanged("PrecioUnitario");
 					this.OnPrecioUnitarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50)")]
+		public string FechaIngreso
+		{
+			get
+			{
+				return this._FechaIngreso;
+			}
+			set
+			{
+				if ((this._FechaIngreso != value))
+				{
+					this.OnFechaIngresoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaIngreso = value;
+					this.SendPropertyChanged("FechaIngreso");
+					this.OnFechaIngresoChanged();
 				}
 			}
 		}
@@ -4471,6 +4567,10 @@ namespace Inventario
 		
 		private string _FechaDeIngreso;
 		
+		private System.Nullable<long> _CantidadSolicitada;
+		
+		private System.Nullable<long> _CantidadAprobada;
+		
 		private EntitySet<PedidosInternos> _PedidosInternos;
 		
     #region Definiciones de métodos de extensibilidad
@@ -4505,6 +4605,10 @@ namespace Inventario
     partial void OnNoPedidoChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
+    partial void OnCantidadSolicitadaChanging(System.Nullable<long> value);
+    partial void OnCantidadSolicitadaChanged();
+    partial void OnCantidadAprobadaChanging(System.Nullable<long> value);
+    partial void OnCantidadAprobadaChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4789,6 +4893,46 @@ namespace Inventario
 					this._FechaDeIngreso = value;
 					this.SendPropertyChanged("FechaDeIngreso");
 					this.OnFechaDeIngresoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadSolicitada", DbType="BigInt")]
+		public System.Nullable<long> CantidadSolicitada
+		{
+			get
+			{
+				return this._CantidadSolicitada;
+			}
+			set
+			{
+				if ((this._CantidadSolicitada != value))
+				{
+					this.OnCantidadSolicitadaChanging(value);
+					this.SendPropertyChanging();
+					this._CantidadSolicitada = value;
+					this.SendPropertyChanged("CantidadSolicitada");
+					this.OnCantidadSolicitadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadAprobada", DbType="BigInt")]
+		public System.Nullable<long> CantidadAprobada
+		{
+			get
+			{
+				return this._CantidadAprobada;
+			}
+			set
+			{
+				if ((this._CantidadAprobada != value))
+				{
+					this.OnCantidadAprobadaChanging(value);
+					this.SendPropertyChanging();
+					this._CantidadAprobada = value;
+					this.SendPropertyChanged("CantidadAprobada");
+					this.OnCantidadAprobadaChanged();
 				}
 			}
 		}

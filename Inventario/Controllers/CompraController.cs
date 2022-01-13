@@ -272,6 +272,8 @@ namespace Inventario.Controllers
                 && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosTienda.TipoDeOperacion)
                 && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
+                && p.IdArticulo.Equals(DatosTienda.IdArticulo)
+                && p.FechaIngreso.Equals(DatosTienda.FechaIngreso)
                 ).Count();
 
 
@@ -288,6 +290,8 @@ namespace Inventario.Controllers
                     obj.PrecioUnitario = DatosTienda.PrecioUnitario;
                     obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
                     obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
+                    obj.IdArticulo = DatosTienda.IdArticulo;
+                    obj.FechaIngreso = DatosTienda.FechaIngreso;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -315,6 +319,7 @@ namespace Inventario.Controllers
                     p.PrecioUnitario,
                     p.IdExistenciaCompra,
                     p.ExistenciaInicial,
+                    p.IdArticulo,
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
