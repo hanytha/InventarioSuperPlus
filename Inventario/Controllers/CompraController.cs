@@ -30,6 +30,7 @@ namespace Inventario.Controllers
                     p.Coste,
                     p.NoCompraProveedor,
                     p.IdProveedor,
+                    p.TipoOperacion,
 
 
                 });

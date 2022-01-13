@@ -35,12 +35,12 @@ namespace Inventario.Controllers
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
-                var consultaFecha = InvBD.Compra.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdCompra)
+                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.Id) && p.StockActual > 0).OrderBy(p => p.IdCompra)
                     .Select(p => new
                     {
-                        fechaIngreso = p.FechaDeIngreso,
-                        stockActual = p.ExitenciaActual,
-                        costo = p.Coste,
+                        fechaIngreso = p.FechaIngreso,
+                        stockActual = p.StockActual,
+                        costo = p.PrecioUnitario,
                     });
 
                 if (consultaFecha.Count() > 0)

@@ -24,6 +24,8 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>Núm_Compra</th>";
     CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+    CodigoHtmlTablaPedidos += "<th></th>";
+    CodigoHtmlTablaPedidos += "<th>Operación</th>";
     CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
     CodigoHtmlTablaPedidos += "<th>Opciones</th>";
     CodigoHtmlTablaPedidos += "</tr>";
@@ -33,7 +35,8 @@ function CrearTablaCompras(Data) {
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaPedidos += "<tr>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NoCompra + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>";
+        CodigoHtmlTablaPedidos += "<td colspan='2'>" + Data[i].Proveedor + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].TipoOperacion + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
