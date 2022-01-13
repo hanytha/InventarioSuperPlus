@@ -69,20 +69,22 @@ function CrearArticuloComp(Data) {
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
+    
     if (id == 0) {
         sessionStorage.setItem('IDArt', '0');
+       
     }
     else {
-        $.get("/ExistenciasG/ConsultaCompraJoinProveedor/?Id=" + id, function (Data) {
+        $.get("/ExistenciasG/ConsultaIdArticulo/?Id=" + id, function (Data) {
             var uno = "";
             //---Encabezado del grid---------
             uno += "<hr class='solid4'>";
             uno += "<div class='row'>";
             uno += "<div class='col-sm'>NoCompra</div>";
             uno += "<div class='col-sm'>Artículo</div>";
+            uno += "<div class='col-sm'>Operación</div>";
             uno += "<div class='col-sm'>Fecha de Ingreso</div>";
-            uno += "<div class='col-sm'>Costo</div>";
-            uno += "<div class='col-sm'>Proveedor</div>";
+            uno += "<div class='col-sm'>Precio_Unitario</div>";
             uno += "<div class='col-sm'>Acción</div>";
             uno += "</div>";
             uno += "<hr class='solid4'>";
@@ -92,10 +94,11 @@ function Desplegar(id) {
                 uno += "<div class='row'>";
                 uno += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 uno += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                uno += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].TipoDeOperacion + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].FechaIngreso + "</div>";
+                uno += "<div class='col-sm'>" + Data[i].PrecioUnitario + "</div>";
                 //-----------------------------Abre el modal deacuerdo con el proveedor---------------------------------------------------
-                uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
+                //uno += "<div class='col-sm'><button style='background-color:white; border:none;' onclick='abrirModal(" + Data[i].IdProveedor + ")' data-toggle='modal' data-target='#ModalProveedor'>" + Data[i].Proveedor + "</button></div>";
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
@@ -366,6 +369,7 @@ function llenarCombo(data, control) {
 function Desplegar2(no) {
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
+        
     }
     else {
 
@@ -388,9 +392,9 @@ function Desplegar2(no) {
                 dos += "<div class='row'>";
                 dos += "<div class='col-sm'>" + Data[i].NoCompra + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].FechaIngreso + "</div>";
                 dos += "<div class='col-sm'>" + Data[i].Unidad + "</div>";
-                dos += "<div class='col-sm'>" + Data[i].Coste + "</div>";
+                dos += "<div class='col-sm'>" + Data[i].PrecioUnitario + "</div>";
                 dos += "</div>";
             }
             dos += "</div>";

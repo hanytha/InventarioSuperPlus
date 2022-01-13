@@ -81,14 +81,31 @@ namespace Inventario.Controllers
         //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
         public JsonResult ConsultaNumCompra(long No)
         {
-            var compra = InvBD.Compra.Where(p => p.NoCompra.Equals(No) && p.Estatus.Equals(1))
+            var compra = InvBD.ComprasArticulos.Where(p => p.NoCompra.Equals(No) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.NoCompra,
                     p.Articulo,
-                    p.FechaDeIngreso,
+                    p.FechaIngreso,
                     p.Unidad,
-                    p.Coste,
+                    p.PrecioUnitario,
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------
+        //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
+        public JsonResult ConsultaIdArticulo(long Id)
+        {
+            var compra = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Id) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NoCompra,
+                    p.Articulo,
+                    p.FechaIngreso,
+                    p.Unidad,
+                    p.TipoDeOperacion,
+                    p.PrecioUnitario
                 });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
