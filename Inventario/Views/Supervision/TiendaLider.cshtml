@@ -117,7 +117,7 @@
                         <h4 class="m-b-0 list-group list-group-flush  mb-1">
                             <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                 <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
                             </a>
                         </h4>
                         <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -129,7 +129,7 @@
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
 
                                     <div>
-                                        <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
+                                        <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
 
                                     </div>
                                     <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
