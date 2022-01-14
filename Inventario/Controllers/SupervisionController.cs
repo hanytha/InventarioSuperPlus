@@ -262,7 +262,7 @@ namespace Inventario.Controllers
 
                                        Id = Articulos.IdArticulos,
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       NoPedido = ExistenciaAlmacenG.NoPedido,
+                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
                                        Articulo = Articulos.NombreEmpresa,
@@ -337,7 +337,7 @@ namespace Inventario.Controllers
                     {
                         fechaIngreso = p.FechaDeIngreso,
                         stockActual = p.ExitenciaActual,
-                        costo = p.Coste,
+                        costo = p.PrecioUnitario,
                     });
 
                 if (consultaFecha.Count() > 0)
@@ -526,13 +526,13 @@ namespace Inventario.Controllers
                              on CompraInterno.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
                                    on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.NoPedido.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id)
+                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id)
                                  select new
                                  {
                                      FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
-                                     NoPedido = ExistenciAAlmacen.NoPedido,
-                                     Articulo = ExistenciAAlmacen.NombreEmpresa,
-                                     Coste = ExistenciAAlmacen.Coste,
+                                     NoPedido = ExistenciAAlmacen.NoPedidoG,
+                                     Articulo = ExistenciAAlmacen.Articulo,
+                                     Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
                                      //    IdProveedor = provedor.IdAreas,
                                      //    Proveedor = provedor.Nombre
@@ -587,7 +587,7 @@ namespace Inventario.Controllers
                             where ExistAlm.IdSitio.Equals(IdS)
                             select new
                             {
-                                Articulo = ExistAlm.NombreEmpresa,
+                                Articulo = ExistAlm.Articulo,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = provedor.IdAreas,
@@ -606,7 +606,7 @@ namespace Inventario.Controllers
                             where ExistAlm.IdSitio.Equals(Id)
                             select new
                             {
-                                Articulo = ExistAlm.NombreEmpresa,
+                                Articulo = ExistAlm.Articulo,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = areas.IdAreas,
@@ -774,7 +774,7 @@ namespace Inventario.Controllers
 
                                        Id = Articulos.IdArticulos,
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       NoPedido = ExistenciaAlmacenG.NoPedido,
+                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
                                        Articulo = Articulos.NombreEmpresa,
@@ -996,15 +996,15 @@ namespace Inventario.Controllers
                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                          join areas in InvBD.Areas
                      on Compra.IdProveedor equals areas.IdAreas
-                         where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedido.Equals(no)
+                         where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                          select new
                          {
                              IdPedidosInternos = ExistAlm.IdCompraInterno,
-                             NumeroPedido = ExistAlm.NombreEmpresa,
-                             NumPedidoProveedor = Compra.NoCompraProveedor,
-                             Articulo = ExistAlm.NombreEmpresa,
-                             CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                             CantidadAprobada = ExistAlm.CantidadAprobada,
+                             NumeroPedido = ExistAlm.Articulo,
+                             NumPedidoProveedor = Compra.NoPedidoProveedor,
+                             Articulo = ExistAlm.Articulo,
+                       //      CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                         //    CantidadAprobada = ExistAlm.CantidadAprobada,
                              Tipo = ExistAlm.TipoDeOperacion,
                              IdProveedor = Compra.IdProveedor,
                              Proveedor = Compra.Proveedor,
@@ -1053,21 +1053,21 @@ namespace Inventario.Controllers
                            on ExistAlm.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdArticulo.Equals(Id) && ExistAlm.NoPedido.Equals(No)
+                            where ExistAlm.IdArticulo.Equals(Id) && ExistAlm.NoPedidoG.Equals(No)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
-                                NumeroPedido = ExistAlm.NoPedido,
-                                NumPedidoProveedor = Compra.NoCompraProveedor,
-                                NoCompraProveedor = Compra.NoCompraProveedor,
-                                CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                CantidadAprobada = ExistAlm.CantidadAprobada,
+                                NumeroPedido = ExistAlm.NoPedidoG,
+                                NumPedidoProveedor = Compra.NoPedidoProveedor,
+                                NoCompraProveedor = Compra.NoPedidoProveedor,
+                               // CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                               // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
                                 IdTienda = ExistAlm.IdSitio,
                                 IdArticulo = ExistAlm.IdArticulo,
-                                Articulo = ExistAlm.NombreEmpresa,
+                                Articulo = ExistAlm.Articulo,
                                 Fecha = ExistAlm.FechaDeIngreso,
                                 Telefono = areas.Telefono,
                                 Correo = areas.Correo,

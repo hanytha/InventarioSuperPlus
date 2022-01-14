@@ -24,16 +24,16 @@ namespace Inventario.Controllers
                 {
                     p.IdExistenciaAlmacenG,
                     p.IdCompra,
-                    p.NoPedido,
+                    p.NoPedidoG,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
-                    p.Coste,
+                    p.PrecioUnitario,
                     p.TipoDeOperacion,
                     p.IdAsignacion,
                     p.IdSitio,
                     p.IdArticulo,
-                    p.NombreEmpresa,
+                    p.Articulo,
                     //p.IdProveedor,
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
@@ -45,16 +45,16 @@ namespace Inventario.Controllers
                 {
                     p.IdExistenciaAlmacenG,
                     p.IdCompra,
-                    p.NoPedido,
+                    p.NoPedidoG,
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
-                    p.Coste,
+                    p.PrecioUnitario,
                     p.TipoDeOperacion,
                     p.IdAsignacion,
                     p.IdSitio,
                     p.IdArticulo,
-                    p.NombreEmpresa,
+                    p.Articulo,
                     //p.IdProveedor
                 });
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
@@ -69,20 +69,20 @@ namespace Inventario.Controllers
             if (id.Equals(0))
             {
                 //int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)
                 //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
-                && p.Coste.Equals(DatosAlmacen.Coste)
+                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                 && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                 && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
-                && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
+                && p.Articulo.Equals(DatosAlmacen.Articulo)
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                && p.Coste.Equals(DatosAlmacen.Coste)
+                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -97,33 +97,33 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)
                 && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
-                 && p.Coste.Equals(DatosAlmacen.Coste)
+                 && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                 && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                   && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
-                && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
+                && p.Articulo.Equals(DatosAlmacen.Articulo)
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                && p.Coste.Equals(DatosAlmacen.Coste)).Count();
+                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)).Count();
                 if (nveces == 0)
                 {
                     ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                     obj.IdCompra = DatosAlmacen.IdCompra;
-                    obj.NoPedido = DatosAlmacen.NoPedido;
+                    obj.NoPedidoG = DatosAlmacen.NoPedidoG;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.Coste = DatosAlmacen.Coste;
+                    obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
                     obj.IdSitio = DatosAlmacen.IdSitio;
                     obj.IdArticulo = DatosAlmacen.IdArticulo;
-                    obj.NombreEmpresa = DatosAlmacen.NombreEmpresa;
+                    obj.Articulo = DatosAlmacen.Articulo;
                     //obj.IdProveedor = DatosAlmacen.IdProveedor;
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -159,7 +159,7 @@ namespace Inventario.Controllers
 
                   //&& p.NoPedido.Equals(DatosCompra.NoPedido)
                   && p.Proveedor.Equals(DatosCompra.Proveedor)
-                  && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
+                  && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
                   && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
                   //&& p.Costo.Equals(DatosCompra.Costo)
                   ).Count();
@@ -174,7 +174,7 @@ namespace Inventario.Controllers
              && p.IdProveedor.Equals(DatosCompra.IdProveedor)
              //&& p.NoPedido.Equals(DatosCompra.NoPedido)
              && p.Proveedor.Equals(DatosCompra.Proveedor)
-             && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
+             && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
               //&& p.Costo.Equals(DatosCompra.Costo)
               ).First();
                     Afectados = IdCompra.IdCompraInterno;
@@ -190,7 +190,7 @@ namespace Inventario.Controllers
                  && p.IdProveedor.Equals(DatosCompra.IdProveedor)
              && p.NoPedido.Equals(DatosCompra.NoPedido)
              && p.Proveedor.Equals(DatosCompra.Proveedor)
-             && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
+             && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
                 //&& p.Costo.Equals(DatosCompra.Costo)
                 ).Count();
                 if (nveces == 0)
@@ -201,7 +201,7 @@ namespace Inventario.Controllers
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
-                    obj.NoCompraProveedor = DatosCompra.NoCompraProveedor;
+                    obj.NoPedidoProveedor = DatosCompra.NoPedidoProveedor;
                     //obj.Costo = DatosCompra.Costo;
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -252,7 +252,7 @@ namespace Inventario.Controllers
             long id = (long)DatosAlmacen.IdExistenciaAlmacenG;
             if (id.Equals(0))
             {
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)).Count();
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)).Count();
 
                 // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
@@ -268,20 +268,21 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedido.Equals(DatosAlmacen.NoPedido)
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)
 
                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                     && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                     && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                     //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
-                    && p.Coste.Equals(DatosAlmacen.Coste)
+                    && p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)
                     && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                     && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                     && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                     && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
-                    && p.NombreEmpresa.Equals(DatosAlmacen.NombreEmpresa)
+                    && p.Articulo.Equals(DatosAlmacen.Articulo
+                    )
                     //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                    && p.Coste.Equals(DatosAlmacen.Coste)
+                    && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 ).Count();
 
 
@@ -289,16 +290,16 @@ namespace Inventario.Controllers
                 {
                     ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                     obj.IdCompra = DatosAlmacen.IdCompra;
-                    obj.NoPedido = DatosAlmacen.NoPedido;
+                    obj.NoPedidoG = DatosAlmacen.NoPedidoG;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.Coste = DatosAlmacen.Coste;
+                    obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
                     obj.IdSitio = DatosAlmacen.IdSitio;
                     obj.IdArticulo = DatosAlmacen.IdArticulo;
-                    obj.NombreEmpresa = DatosAlmacen.NombreEmpresa;
+                    obj.Articulo = DatosAlmacen.Articulo;
                     //obj.IdProveedor = DatosAlmacen.IdProveedor;
 
                     InvBD.SubmitChanges();
