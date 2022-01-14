@@ -857,6 +857,7 @@ function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
 
      //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
+            document.getElementById("TxtNombreUsr");
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
             document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;

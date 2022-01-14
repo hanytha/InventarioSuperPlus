@@ -337,7 +337,7 @@ namespace Inventario.Controllers
                     {
                         fechaIngreso = p.FechaDeIngreso,
                         stockActual = p.ExitenciaActual,
-                        costo = p.PrecioUnitario,
+                      //  costo = p.PrecioUnitario,
                     });
 
                 if (consultaFecha.Count() > 0)
@@ -353,7 +353,7 @@ namespace Inventario.Controllers
                         SumaStock = (int)(SumaStock + comp.stockActual);
                         if (cont == 0)
                         {
-                            Costos += comp.costo + ",";
+                           // Costos += comp.costo + ",";
                         }
                         if (cont == UltimoReg)
                         {
@@ -526,13 +526,13 @@ namespace Inventario.Controllers
                              on CompraInterno.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
                                    on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id)
+                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
                                  select new
                                  {
                                      FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
                                      NoPedido = ExistenciAAlmacen.NoPedidoG,
                                      Articulo = ExistenciAAlmacen.Articulo,
-                                     Coste = ExistenciAAlmacen.PrecioUnitario,
+                                    // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
                                      //    IdProveedor = provedor.IdAreas,
                                      //    Proveedor = provedor.Nombre

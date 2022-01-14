@@ -130,7 +130,6 @@
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="FechaIngreso" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="EstatusPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
@@ -201,14 +200,12 @@
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Unidad" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="PrecioUnitario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NoPedidoG" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="PedidosInternos" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="PedidosInternos" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">
@@ -326,22 +323,19 @@
     <Type Name="PedidosInternos">
       <Column Name="IdPedidosInternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CantidadAprobada" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tipo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdAsignacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdTienda" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Tienda" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IdExistenciaAlmacenG" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="UnidadMedida" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Association Name="Articulos_PedidosInternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="ExistenciaAlmacenG_PedidosInternos" Member="ExistenciaAlmacenG" ThisKey="IdExistenciaAlmacenG" OtherKey="IdExistenciaAlmacenG" Type="ExistenciaAlmacenG" IsForeignKey="true" />
       <Association Name="Tienda_PedidosInternos" Member="Tienda1" ThisKey="IdTienda" OtherKey="IdTienda" Type="Tienda" IsForeignKey="true" />
     </Type>
   </Table>

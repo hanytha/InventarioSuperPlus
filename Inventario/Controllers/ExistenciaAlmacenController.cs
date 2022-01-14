@@ -28,7 +28,7 @@ namespace Inventario.Controllers
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
-                    p.PrecioUnitario,
+                   // p.PrecioUnitario,
                     p.TipoDeOperacion,
                     p.IdAsignacion,
                     p.IdSitio,
@@ -49,7 +49,7 @@ namespace Inventario.Controllers
                     p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
-                    p.PrecioUnitario,
+                   // p.PrecioUnitario,
                     p.TipoDeOperacion,
                     p.IdAsignacion,
                     p.IdSitio,
@@ -60,6 +60,9 @@ namespace Inventario.Controllers
             return Json(Almacenes, JsonRequestBehavior.AllowGet);
         }
         //Guardar los datos de la Existencia
+
+
+
         public int GuardarAlmacen(ExistenciaAlmacenG DatosAlmacen)
         {
             int Afectados = 0;
@@ -75,14 +78,14 @@ namespace Inventario.Controllers
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
-                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
+              //  && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                 && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                 && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                 && p.Articulo.Equals(DatosAlmacen.Articulo)
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
+             //  && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -102,14 +105,14 @@ namespace Inventario.Controllers
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
                 && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
-                 && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
+                 //&& p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
                 && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
                 && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                   && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
-                && p.Articulo.Equals(DatosAlmacen.Articulo)
+                && p.Articulo.Equals(DatosAlmacen.Articulo)).Count();
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)).Count();
+                //&& p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)).Count();
                 if (nveces == 0)
                 {
                     ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
@@ -119,7 +122,7 @@ namespace Inventario.Controllers
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
+                   // obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
                     obj.IdSitio = DatosAlmacen.IdSitio;
                     obj.IdArticulo = DatosAlmacen.IdArticulo;
@@ -140,9 +143,6 @@ namespace Inventario.Controllers
             //}
             return Afectados;
         }
-
-
-
 
 
 
@@ -282,7 +282,7 @@ namespace Inventario.Controllers
                     && p.Articulo.Equals(DatosAlmacen.Articulo
                     )
                     //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
-                    && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
+                    //&& p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 ).Count();
 
 
@@ -295,7 +295,7 @@ namespace Inventario.Controllers
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
                     obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
-                    obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
+                   // obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
                     obj.IdAsignacion = DatosAlmacen.IdAsignacion;
                     obj.IdSitio = DatosAlmacen.IdSitio;
                     obj.IdArticulo = DatosAlmacen.IdArticulo;

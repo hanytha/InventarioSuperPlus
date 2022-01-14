@@ -27,8 +27,8 @@ namespace Inventario.Controllers
                     p.IdPedidosInternos,
                     p.NumeroPedido,
                     p.CantidadSolicitada,
-                    p.CantidadAprobada,
-                    p.Tipo,
+                   // p.CantidadAprobada,
+                  //  p.Tipo,
                     p.Proveedor,
                     //p.IdUnidadDeMedida,
                     //p.UnidadDeMedida,
@@ -54,8 +54,8 @@ namespace Inventario.Controllers
                     p.NumeroPedido,
                     p.NumPedidoProveedor,
                     p.CantidadSolicitada,
-                    p.CantidadAprobada,
-                    p.Tipo,
+                   // p.CantidadAprobada,
+                   // p.Tipo,
                     p.IdProveedor,
                     p.Proveedor,
                     //p.IdUnidadDeMedida,
@@ -161,8 +161,8 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
                 && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
-                   && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada)
-                   && p.Tipo.Equals(DatosPedidoInterno.Tipo)
+                 //  && p.CantidadAprobada.Equals(DatosPedidoInterno.CantidadAprobada)
+                //   && p.Tipo.Equals(DatosPedidoInterno.Tipo)
                      //&& p.IdUnidadDeMedida.Equals(DatosPedidoInterno.IdUnidadDeMedida)
                      // && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
                      //  && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
@@ -177,8 +177,8 @@ namespace Inventario.Controllers
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
                     //obj.NumeroPedido = DatosPedidoInterno.NumeroPedido;
                     obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-                    obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
-                    obj.Tipo = DatosPedidoInterno.Tipo;
+                 //   obj.CantidadAprobada = DatosPedidoInterno.CantidadAprobada;
+                  //  obj.Tipo = DatosPedidoInterno.Tipo;
                     //obj.IdUnidadDeMedida = DatosPedidoInterno.IdUnidadDeMedida;
                     //obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     //obj.IdMarca = DatosPedidoInterno.IdMarca;
