@@ -41,6 +41,34 @@ namespace Inventario.Controllers
                 });
             return Json(pedidos, JsonRequestBehavior.AllowGet);
         }
+
+        //****************************Consulta el último número de pedido*************************************************
+
+        public JsonResult ConsultaPedidosDecendiente(PedidosExternos DatosPedidoExterno)
+        {
+
+            int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+
+            string NumeroPedido = "";
+            string Tienda = "";
+
+            var pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
+                   .Select(p => new
+                {
+                   pedido=  p.NumeroPedido,
+                    plus = p.Tienda,
+                });
+            foreach (var com in pedidos) {
+
+                if (nveces == 0)
+                {
+                    NumeroPedido += com.pedido + ",";
+                    Tienda += com.plus + ",";
+                }
+            }
+            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1), Tienda = Tienda.Substring(0, Tienda.Length - 1) };
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
         //*******************************************************************************************************
         //--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaPedidoXNumero(long Num)
@@ -66,7 +94,7 @@ namespace Inventario.Controllers
  
    //*****************Consulta los articulos por pedidos y su stock en la tabala de comprasArticulos*************************
 
-        public JsonResult ConsultaPedidosDecendiente(long Num)
+        public JsonResult ConsultaPedidosNumero(long Num)
         {
             string solicitada = "";
             string IdArticulo = "";

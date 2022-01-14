@@ -2,7 +2,7 @@
 ConsultaCompras();
 BloquearCTRL();
 function ConsultaCompras() {
-    $.get("/PedidosPendientes/ConsultaPedidos", function (Data) {
+    $.get("/PedidosPendientes/ConsultaPedidosDecendiente", function (Data) {
         CrearTablaCompras(Data);
     }
     );
@@ -21,14 +21,21 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "</thead>";
     CodigoHtmlTablaPedidos += "<tbody>";
 
-    for (var i = 0; i < Data.length; i++) {
+
+    let NumeroPedido = Data.NumeroPedido;
+    let ArrayNumeroPedido = NumeroPedido.split(',');
+    let Tienda = Data.Tienda;
+    let ArrayTienda = Tienda.split(',');
+
+
+    for (var i = 0; i < ArrayNumeroPedido.length; i++) {
 
         CodigoHtmlTablaPedidos += "<tr>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Tienda + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayNumeroPedido[i] + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayTienda[i] + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].NumeroPedido + ",this)'><i class='far fa-trash-alt'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + ArrayNumeroPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + ArrayNumeroPedido[i] + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
@@ -74,7 +81,7 @@ function MostrarArticulosPorId(id) {
     }
     else {
 
-        $.get("/PedidosPendientes/ConsultaPedidosDecendiente/?Num=" + id, function (Data) {
+        $.get("/PedidosPendientes/ConsultaPedidosNumero/?Num=" + id, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -104,15 +111,15 @@ function MostrarArticulosPorId(id) {
             for (var i = 0; i < ArrayIdArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''   id=''  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-solicitada sinborde limpiar ' disabled name=''   id=''  value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-stock sinborde limpiar ' disabled name=''  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-stock sinborde limpiar ' disabled  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -120,7 +127,6 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "<input  class='input-aprobada  limpiar redondeado' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
-
      
             }
             TablaArticulo += "</div>";
