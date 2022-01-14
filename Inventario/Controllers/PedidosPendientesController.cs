@@ -94,11 +94,14 @@ namespace Inventario.Controllers
                         stock = p.StockActual,
                         
                     });
+
+                int SumaStock = 0;
+
                 foreach (var com in consultaStock)
                 {
-                    stock += com.stock + ",";
+                    SumaStock = (int)(SumaStock + com.stock);
                 }
-
+                stock += SumaStock + ",";
             }
 
             var compras = new { solicitada = solicitada.Substring(0, solicitada.Length - 1),
