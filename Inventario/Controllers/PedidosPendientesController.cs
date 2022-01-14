@@ -41,5 +41,28 @@ namespace Inventario.Controllers
                 });
             return Json(pedidos, JsonRequestBehavior.AllowGet);
         }
+        //*******************************************************************************************************
+        //--------------------------------Consulta los artículos por ID-------------------------------------------
+        public JsonResult ConsultaPedidoXNumero(long Num)
+        {
+            var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
+                .Select(p => new
+                {
+                    p.IdPedidosInternos,
+                    p.NumeroPedido,
+                    p.CantidadSolicitada,
+                    p.IdAsignacion,
+                    p.IdTienda,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.IdProveedor,
+                    p.Proveedor,
+                    p.Fecha,
+                    p.Tienda,
+
+                });
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+        //*********************************************************************************************************
     }
 }

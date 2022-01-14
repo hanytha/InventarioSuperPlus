@@ -14,12 +14,11 @@
 <!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <div id="tablaPedidos"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
-    <div class="modal fade" id="ModalProveedor">
+    <div class="modal fade" id="ModalPedidos">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -30,19 +29,25 @@
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
                                     <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFecha">Fecha del pedido<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio bloquear">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtAsignacion">ID_Asignación<span class="required">*</span></label>
                                     <input type="number" name="data[TxtAsignacion]" id="TxtAsignacion" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTienda">ID_Tienda<span class="required">*</span></label>
                                     <input type="number" name="data[TxtTienda]" id="TxtTienda" class="form-control  limpiar obligatorio bloquear">
@@ -53,7 +58,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtProveedor]" id="TxtProveedor" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtProveedor]" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                         </div>
@@ -131,14 +136,7 @@
         border: 0;
     }
 </style>
-<!------------Obtener la fecha-------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaSistema').value = fecha;
 
-</script>
-<!------------------------------------------>
 <!----------------------------------------------------------------------------------------------------->
 <!--Hacer que el modal muestre los pasos por parte-->
 <style type="text/css">

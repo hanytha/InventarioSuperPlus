@@ -32,7 +32,7 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].NumeroPedido + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
@@ -54,18 +54,15 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
+        $.get("/PedidosPendientes/ConsultaPedidoXNumero/?Num=" + id, function (Data) {
  
-            habilitar();
- 
-            sessionStorage.setItem('IDExt', Data[0].IdCompra);
-            document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
-            document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
-            document.getElementById("TxtNoCompraPro").value = Data[0].NoCompraProveedor;
-            document.getElementById("TxtCosto").value = Data[0].Coste;
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbMPago").value = Data[0].IdMetodoPago;
-            MostrarArticulosPorIdCompra(id);
+            sessionStorage.setItem('IDExt', Data[0].IdPedidosInternos);
+            document.getElementById("TxtAsignacion").value = Data[0].IdAsignacion;
+            document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
+            document.getElementById("TxtTienda").value = Data[0].IdTienda;
+            document.getElementById("TxtProveedor").value = Data[0].Proveedor;
+            document.getElementById("TxtFecha").value = Data[0].Fecha;
+
         });
     }
 }
@@ -152,4 +149,9 @@ function LimpiarCampos() {
     }
 }
 
-
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
