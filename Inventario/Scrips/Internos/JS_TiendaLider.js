@@ -111,9 +111,9 @@ function ConsultaArticuloCompra(IDTienda) {
             CodigoHtmlArticuloComp += "<div class='row'>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
+            //CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -125,12 +125,12 @@ function ConsultaArticuloCompra(IDTienda) {
             let ArrayId = id.split(',');
             let NoPedido = Data.NoPedido;
             let ArrayNoPedido = NoPedido.split(',');
-            let Nombre = Data.Nombre;
-            let Arraynombre = Nombre.split(',');
+            let Proveedor = Data.Proveedor;
+            let ArrayProveedor = Proveedor.split(',');
             let Fechas = Data.Fechas;
             let Arrayfechas = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
+            //let Stock = Data.Stock;
+            //let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
@@ -147,9 +147,9 @@ function ConsultaArticuloCompra(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='row'>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
 
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------

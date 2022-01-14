@@ -759,6 +759,7 @@ namespace Inventario.Controllers
             string id = "";
             string NoPedido = "";
             string Nombre = "";
+            string Proveedor = "";
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string IdSitio = "";
@@ -776,6 +777,7 @@ namespace Inventario.Controllers
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        nombres = Articulos.NombreEmpresa,
+                                       Proveedor=CompraInterno.Proveedor,
                                        IdArticulos = Articulos.IdArticulos,
                                        Articulo = Articulos.NombreEmpresa,
                                        IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
@@ -786,6 +788,7 @@ namespace Inventario.Controllers
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
+                Proveedor += art.Proveedor + ",";
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
                 IdArticulos += art.IdArticulos + ",";
@@ -819,7 +822,7 @@ namespace Inventario.Controllers
                     Stock += "0" + ",";
                 }
             }
-            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Proveedor = Proveedor.Substring(0, Proveedor.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
 
