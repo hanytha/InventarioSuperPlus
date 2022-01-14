@@ -64,5 +64,38 @@ namespace Inventario.Controllers
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
         //*********************************************************************************************************
+        //--------------------------------Consulta los artículos por ID-------------------------------------------
+        public JsonResult ConsultaArticulosNum(long Num)
+        {
+            var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
+                .Select(p => new
+                {
+                   p.IdArticulo,
+                   p.Articulo,
+                   p.CantidadSolicitada,
+
+                });
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+        //*********************************************************************************************************
+        public JsonResult ConsultaComJoinProveedorModal(long Num)
+        {
+            var comps = from pedidos in InvBD.PedidosInternos
+                        join comprs in InvBD.ComprasArticulos  
+                    on pedidos.IdArticulo equals comprs.IdArticulo
+                        where pedidos.NumeroPedido.Equals(Num)
+                        select new
+                        {
+                            Articulo = pedidos.Articulo,
+                            IdArticulo = pedidos.IdArticulo,
+                            CantidadSolicitada = pedidos.CantidadSolicitada,
+                            StockActual = comprs.StockActual,
+
+                        };
+
+
+            return Json(comps, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }
