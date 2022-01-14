@@ -91,10 +91,6 @@ function MostrarArticulosPorId(id) {
             TablaArticulo += "<label>Cantidad_Aprobada</label>";
             TablaArticulo += "</div>";
 
-
-
-
-
             let IdArticulo = Data.IdArticulo;
             let ArrayIdArticulo = IdArticulo.split(',');
             let Articulo = Data.Articulo;
@@ -105,8 +101,6 @@ function MostrarArticulosPorId(id) {
             let Arraystock = stock.split(',');
 
 
-
-
             for (var i = 0; i < ArrayIdArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -114,16 +108,16 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''   id=''  value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-solicitada sinborde limpiar ' disabled name=''   id=''  value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-stock sinborde limpiar ' disabled name=''  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-Articulo  limpiar redondeado' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-aprobada  limpiar redondeado' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
