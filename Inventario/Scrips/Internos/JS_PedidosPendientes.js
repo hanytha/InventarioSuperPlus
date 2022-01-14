@@ -74,7 +74,7 @@ function MostrarArticulosPorId(id) {
     }
     else {
 
-        $.get("/PedidosPendientes/ConsultaArticulosNum/?Num=" + id, function (Data) {
+        $.get("/PedidosPendientes/ConsultaPedidosDecendiente/?Num=" + id, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -91,23 +91,39 @@ function MostrarArticulosPorId(id) {
             TablaArticulo += "<label>Cantidad_Aprobada</label>";
             TablaArticulo += "</div>";
 
-            for (var i = 0; i < Data.length; i++) {
+
+
+
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulo = IdArticulo.split(',');
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let solicitada = Data.solicitada;
+            let Arraysolicitada = solicitada.split(',');
+            let stock = Data.stock;
+            let Arraystock = stock.split(',');
+
+
+
+
+            for (var i = 0; i < ArrayIdArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'   id='" + Data[i].IdArticulo + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''   id=''  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'   id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''   id=''  value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'   id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=''  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-Articulo  limpiar redondeado' name=' " + Data[i].IdArticulo + "'   id='" + Data[i].IdArticulo + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo  limpiar redondeado' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -116,8 +132,6 @@ function MostrarArticulosPorId(id) {
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-
-            deshabilitar();
         });
     }
 }

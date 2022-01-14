@@ -63,39 +63,52 @@ namespace Inventario.Controllers
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
-        //*********************************************************************************************************
-        //--------------------------------Consulta los artículos por ID-------------------------------------------
-        public JsonResult ConsultaArticulosNum(long Num)
+ 
+   //*****************Consulta los articulos por pedidos y su stock en la tabala de comprasArticulos*************************
+
+        public JsonResult ConsultaPedidosDecendiente(long Num)
         {
-            var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
+            string solicitada = "";
+            string IdArticulo = "";
+            string Articulo = "";
+            string stock = "";
+            var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
                 .Select(p => new
                 {
-                   p.IdArticulo,
-                   p.Articulo,
-                   p.CantidadSolicitada,
+                    solicitada = p.CantidadSolicitada,
+                    articulo = p.Articulo,
+                    IdArticulo = p.IdArticulo,
 
                 });
-            return Json(articulo, JsonRequestBehavior.AllowGet);
+
+
+            foreach (var ped in pedidosNum)
+            {
+                IdArticulo += ped.IdArticulo + ",";
+                Articulo += ped.articulo + ",";
+                solicitada += ped.solicitada + ",";
+
+                var consultaStock = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ped.IdArticulo))
+                    .Select(p => new
+                    {
+                        stock = p.StockActual,
+                        
+                    });
+                foreach (var com in consultaStock)
+                {
+                    stock += com.stock + ",";
+                }
+
+            }
+
+            var compras = new { solicitada = solicitada.Substring(0, solicitada.Length - 1),
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
+                stock = stock.Substring(0, stock.Length - 1)
+            };
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
-        //*********************************************************************************************************
-        public JsonResult ConsultaComJoinProveedorModal(long Num)
-        {
-            var comps = from pedidos in InvBD.PedidosInternos
-                        join comprs in InvBD.ComprasArticulos  
-                    on pedidos.IdArticulo equals comprs.IdArticulo
-                        where pedidos.NumeroPedido.Equals(Num)
-                        select new
-                        {
-                            Articulo = pedidos.Articulo,
-                            IdArticulo = pedidos.IdArticulo,
-                            CantidadSolicitada = pedidos.CantidadSolicitada,
-                            StockActual = comprs.StockActual,
+//**************************************************************************
 
-                        };
-
-
-            return Json(comps, JsonRequestBehavior.AllowGet);
-
-        }
     }
 }
