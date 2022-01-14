@@ -540,6 +540,7 @@ function GuardarPedidoInterno() {
                     frm.append("IdTienda", IdTienda);
                     frm.append("Tienda", Tienda);
                     frm.append("Fecha", Fecha);
+                    frm.append("IdAsignacion", 2);
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
