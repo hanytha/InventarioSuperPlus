@@ -27,7 +27,24 @@
         margin: 16px;
         padding: 16px;
     }
+
+
+    .redondeado {
+        border-radius: 10px;
+        border: 1px solid #696969;
+        width: 100px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+
+    .sinborde {
+        border: 0;
+    }
 </style>
+
 <!--------------------------------------------------------------------------------------------------------------->
 
 <div id="accordion"></div>
@@ -379,13 +396,13 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoPedidoProv">No.Pedido Prov<span class="required">*</span></label>
+                                    <label class="form-control-label" for="TxtNoPedidoProvDev">No.Pedido Prov<span class="required">*</span></label>
                                     <input type="number" id="TxtNoPedidoProv" class="form-control limpiar obligatorioPedido">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoPedido">No.Pedido<span class="required">*</span></label>
+                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
                                     <input type="number" id="TxtNoPedido" class="form-control limpiar obligatorioPedido">
                                 </div>
                             </div>
@@ -394,7 +411,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedorDevolucion">Proveedor<span class="required">*</span></label>
-                                    <select onchange="Prov(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
                         </div>
@@ -424,8 +441,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                    <label class="form-control-label" for="TblArticulosDevolucion">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulosDevolucion">No hay Ningún artículo de este proveedor</div>
                                 </div>
                             </div>
                         </div>
@@ -451,7 +468,7 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            REGISTRO DE PEDIDOS INTERNOS
+                            REGISTRO DE MOVIMIENTOS
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
@@ -464,7 +481,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                                        <label class="form-control-label" for="TxtArticuloM">Artículo<span class="required">*</span></label>
                                         <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
                                     </div>
                                 </div>
