@@ -136,7 +136,7 @@ function MostrarArticulosPorId(id) {
     }
 }
 
-
+//-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
 function comparar() {
     var total = document.getElementsByClassName("input-stock");
     var aprobar = document.getElementsByClassName("input-aprobada");
