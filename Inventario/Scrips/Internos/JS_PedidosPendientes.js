@@ -160,7 +160,7 @@ function BordeInput() {
     for (i = 0; i < aprobar.length; i++) {
 
 
-        if (aprobar[i].value > 0 && aprobar[i].value <= stock[i].value) {
+        if (aprobar[i].value > 0 && aprobar[i].value <= stock[i].value || aprobar[i].value == 0) {
 
             aprobar[i].style.borderColor = 'DimGray';
         }
