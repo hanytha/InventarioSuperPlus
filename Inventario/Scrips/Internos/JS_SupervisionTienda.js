@@ -60,7 +60,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -330,7 +330,7 @@ function abrirModalMovimiento(IDTienda) {
             //Muestra los artículos que le pertenecen a ese proveedor----
             //MostrarArticulos(id);
             ////Muestra el número de pedido que le corresponde por proveedor-------
-            //SiguientePedidoProveedor(id);
+            //SiguientePedidoProveedor(id);devolucion
             ////Muestra el número de pedido que le corresponde-------
             //ConsultaSiguientePedido();
 
@@ -368,34 +368,33 @@ function abrirModalDevoluciones(id, idS) {
             document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        ProvDev(id)
+        ConsultaArt(id);
+        ProvDev(id);
+        
     }
+}
+function ConsultaArt(id) {
+    $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+       //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+          //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+       
+        document.getElementById("TxtArtDev").value = Data.Nombre;
+      
+        //Muestra el número de pedido que le corresponde por proveedor-------
+        //SiguientePedidoProveedor(id);
+        ////Muestra el número de pedido que le corresponde-------
+        //ConsultaSiguientePedido();
+
+    });
 }
 
 
-
-
 function ProvDev(id) {
-    $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-        //    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-        //document.getElementById("cmbTienda").value = Data[0].IdTienda;
-      //  document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
-       
-        document.getElementById("TxtArtDev").value = Data.Nombre;
-        //document.getElementById("TxtRFC").value = Data[0].RFC;
-        //document.getElementById("TxtClabe").value = Data[0].Clabe;
-        //document.getElementById("TxtCorreo").value = Data[0].Correo;
-        //document.getElementById("TxtTelefono").value = Data[0].Telefono;
-        //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
-        //document.getElementById("TxtDireccion").value = Data[0].Direccion;
-        //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
-        //Muestra los artículos que le pertenecen a ese proveedor----
-        MostrarArticulosDevolucion(id);
-        //Muestra el número de pedido que le corresponde por proveedor-------
-        SiguientePedidoProveedor(id);
-        //Muestra el número de pedido que le corresponde-------
-        ConsultaSiguientePedido();
 
+         $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+          document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+
+     
     });
 }
 

@@ -318,6 +318,7 @@ namespace Inventario.Controllers
         {
             string id = "";
             string Nombre = "";
+            string NombreProveedor = "";
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
@@ -325,13 +326,15 @@ namespace Inventario.Controllers
                 .Select(p => new
                 {
                     Id = p.IdArticulos,
-                    nombres = p.NombreEmpresa
+                    nombres = p.NombreEmpresa,
+                    NombreProveedor = p.IdAreas
 
                 });
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
+                NombreProveedor += art.nombres + ",";
                 var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdExistenciaAlmacenG)
                     .Select(p => new
                     {
@@ -372,7 +375,7 @@ namespace Inventario.Controllers
                     Stock += "0" + ",";
                 }
             }
-            var ResultadoId = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+            var ResultadoId = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1) };
             return Json(ResultadoId, JsonRequestBehavior.AllowGet);
         }
 
@@ -637,10 +640,10 @@ namespace Inventario.Controllers
             var ExistAlmG = from Art in InvBD.Articulos
                             join areas in InvBD.Areas
                         on Art.IdAreas equals areas.IdAreas
-                            where Art.IdAreas.Equals(Id)
+                            where Art.IdArticulos.Equals(Id)
                             select new
                             {
-                                Articulo = Art.NombreEmpresa,
+                                Nombre = Art.NombreEmpresa,
                                 IdArticulo = Art.IdArticulos,
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
