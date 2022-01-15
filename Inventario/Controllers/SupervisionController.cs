@@ -110,199 +110,206 @@ namespace Inventario.Controllers
         //    return nregistradosAfectados;
         //}
         ////--------------------Controlador SucursalesSupervision--------------------
-        //public ActionResult SucursalesSupervision()
-        //{
-        //    return View();
-        //}
-        //public int CargarSucursalesXSupervision()
-        //{
-        //    int Encontrados = 0;
-        //    string[] Sucursales = Accesos.Tiendas.Split('#');
-        //    TiendasSupervision.IDTienda = new List<long>();
-        //    TiendasSupervision.Nombre = new List<string>();
-        //    TiendasSupervision.LNombre = new List<string>();
-        //    TiendasSupervision.E1Nombre = new List<string>();
-        //    TiendasSupervision.E2Nombre = new List<string>();
-        //    TiendasSupervision.E3Nombre = new List<string>();
-        //    TiendasSupervision.A1Nombre = new List<string>();
-        //    TiendasSupervision.A2Nombre = new List<string>();
-        //    TiendasSupervision.A3Nombre = new List<string>();
-        //    TiendasSupervision.Estado = new List<string>();
-        //    TiendasSupervision.Municipio = new List<string>();
-        //    TiendasSupervision.Localidad = new List<string>();
-        //    TiendasSupervision.Calle = new List<string>();
-        //    TiendasSupervision.CP = new List<long>();
-        //    TiendasSupervision.Telefono = new List<long>();
-        //    TiendasSupervision.HApertura = new List<string>();
-        //    TiendasSupervision.HCierre = new List<string>();
-        //    TiendasSupervision.Estatus = new List<int>();
-        //    for (int i = 0; i < Sucursales.Length; i++)
-        //    {
-        //        var Tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Sucursales[i]))
-        //        .Select(p => new
-        //        {
-        //            p.IdTienda,
-        //            p.Nombre,
-        //            p.LNombre,
-        //            p.E1Nombre,
-        //            p.E2Nombre,
-        //            p.E3Nombre,
-        //            p.A1Nombre,
-        //            p.A2Nombre,
-        //            p.A3Nombre,
-        //            p.Estado,
-        //            p.Municipio,
-        //            p.Localidad,
-        //            p.Calle,
-        //            p.CP,
-        //            p.Telefono,
-        //            p.HApertura,
-        //            p.HCierre,
-        //            p.Estatus
-        //        }).First();
-        //        TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
-        //        TiendasSupervision.Nombre.Add(Tienda.Nombre);
-        //        TiendasSupervision.LNombre.Add(Tienda.LNombre);
-        //        if (Tienda.E1Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.E1Nombre.Add(Tienda.E1Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.E1Nombre.Add("");
-        //        }
-        //        if (Tienda.E2Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.E2Nombre.Add(Tienda.E2Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.E2Nombre.Add("");
-        //        }
-        //        if (Tienda.E3Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.E3Nombre.Add(Tienda.E3Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.E3Nombre.Add("");
-        //        }
-        //        if (Tienda.A1Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.A1Nombre.Add(Tienda.A1Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.A1Nombre.Add("");
-        //        }
-        //        if (Tienda.A2Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.A2Nombre.Add(Tienda.A2Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.A2Nombre.Add("");
-        //        }
-        //        if (Tienda.A3Nombre != "--Seleccione--")
-        //        {
-        //            TiendasSupervision.A3Nombre.Add(Tienda.A3Nombre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.A3Nombre.Add("");
-        //        }
-        //        TiendasSupervision.Estado.Add(Tienda.Estado);
-        //        TiendasSupervision.Municipio.Add(Tienda.Municipio);
-        //        TiendasSupervision.Localidad.Add(Tienda.Localidad);
-        //        TiendasSupervision.Calle.Add(Tienda.Calle);
-        //        TiendasSupervision.CP.Add(Tienda.CP);
-        //        TiendasSupervision.Telefono.Add(Tienda.Telefono);
-        //        TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
 
-        //        if (Tienda.HApertura != null)
-        //        {
-        //            TiendasSupervision.HApertura.Add(Tienda.HApertura);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.HApertura.Add("");
 
-        //        }
-        //        if (Tienda.HCierre != null)
-        //        {
-        //            TiendasSupervision.HCierre.Add(Tienda.HCierre);
-        //        }
-        //        else
-        //        {
-        //            TiendasSupervision.HCierre.Add("");
-        //        }
+        public ActionResult SucursalesSupervision()
+        {
+            return View();
+        }
+        public int CargarSucursalesXSupervision()
+        {
+            int Encontrados = 0;
+            string[] Sucursales = Accesos.Tiendas.Split('#');
+            TiendasSupervision.IDTienda = new List<long>();
+            TiendasSupervision.Nombre = new List<string>();
+            TiendasSupervision.LNombre = new List<string>();
+            TiendasSupervision.E1Nombre = new List<string>();
+            TiendasSupervision.E2Nombre = new List<string>();
+            TiendasSupervision.E3Nombre = new List<string>();
+            TiendasSupervision.A1Nombre = new List<string>();
+            TiendasSupervision.A2Nombre = new List<string>();
+            TiendasSupervision.A3Nombre = new List<string>();
+            TiendasSupervision.Estado = new List<string>();
+            TiendasSupervision.Municipio = new List<string>();
+            TiendasSupervision.Localidad = new List<string>();
+            TiendasSupervision.Calle = new List<string>();
+            TiendasSupervision.CP = new List<long>();
+            TiendasSupervision.Telefono = new List<long>();
+            TiendasSupervision.HApertura = new List<string>();
+            TiendasSupervision.HCierre = new List<string>();
+            TiendasSupervision.Estatus = new List<int>();
+            for (int i = 0; i < Sucursales.Length; i++)
+            {
+                var Tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Sucursales[i]))
+                .Select(p => new
+                {
+                    p.IdTienda,
+                    p.Nombre,
+                    p.LNombre,
+                    p.E1Nombre,
+                    p.E2Nombre,
+                    p.E3Nombre,
+                    p.A1Nombre,
+                    p.A2Nombre,
+                    p.A3Nombre,
+                    p.Estado,
+                    p.Municipio,
+                    p.Localidad,
+                    p.Calle,
+                    p.CP,
+                    p.Telefono,
+                    p.HApertura,
+                    p.HCierre,
+                    p.Estatus
+                }).First();
+                TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
+                TiendasSupervision.Nombre.Add(Tienda.Nombre);
+                TiendasSupervision.LNombre.Add(Tienda.LNombre);
+                if (Tienda.E1Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E1Nombre.Add(Tienda.E1Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E1Nombre.Add("");
+                }
+                if (Tienda.E2Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E2Nombre.Add(Tienda.E2Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E2Nombre.Add("");
+                }
+                if (Tienda.E3Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.E3Nombre.Add(Tienda.E3Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.E3Nombre.Add("");
+                }
+                if (Tienda.A1Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A1Nombre.Add(Tienda.A1Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A1Nombre.Add("");
+                }
+                if (Tienda.A2Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A2Nombre.Add(Tienda.A2Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A2Nombre.Add("");
+                }
+                if (Tienda.A3Nombre != "--Seleccione--")
+                {
+                    TiendasSupervision.A3Nombre.Add(Tienda.A3Nombre);
+                }
+                else
+                {
+                    TiendasSupervision.A3Nombre.Add("");
+                }
+                TiendasSupervision.Estado.Add(Tienda.Estado);
+                TiendasSupervision.Municipio.Add(Tienda.Municipio);
+                TiendasSupervision.Localidad.Add(Tienda.Localidad);
+                TiendasSupervision.Calle.Add(Tienda.Calle);
+                TiendasSupervision.CP.Add(Tienda.CP);
+                TiendasSupervision.Telefono.Add(Tienda.Telefono);
+                TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
 
-        //    }
-        //    return Encontrados;
-        //}
+                if (Tienda.HApertura != null)
+                {
+                    TiendasSupervision.HApertura.Add(Tienda.HApertura);
+                }
+                else
+                {
+                    TiendasSupervision.HApertura.Add("");
+
+                }
+                if (Tienda.HCierre != null)
+                {
+                    TiendasSupervision.HCierre.Add(Tienda.HCierre);
+                }
+                else
+                {
+                    TiendasSupervision.HCierre.Add("");
+                }
+
+            }
+            return Encontrados;
+        }
+
         ////---------------Tabla de las tiendas---------------
-        //public JsonResult ConsultaArticulos(long IDTienda)
-        //{
-        //    string id = "";
-        //    string NoPedido = "";
-        //    string Nombre = "";
-        //    string Fechas = "";//Es la fecha de la ultima compra reaizada
-        //    string Stock = "";//Es la suma del stock atcual de todas las compras
-        //    string IdSitio = "";
-        //    var ConsultaArticulo = from Articulos in InvBD.Articulos
-        //                           join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-        //                           on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-        //                           where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
-        //                           select new
-        //                           {
-        //                               Id = Articulos.IdArticulos,
-        //                               IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-        //                               NoPedido = ExistenciaAlmacenG.NoPedido,
-        //                               nombres = Articulos.NombreEmpresa,
-        //                               IdArticulos = Articulos.IdArticulos,
-        //                               IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-        //                               IdSitio = ExistenciaAlmacenG.IdSitio,
-        //                               FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
-        //                           };
-        //    foreach (var art in ConsultaArticulo)
-        //    {
-        //        id += art.IdExistencia + ",";
-        //        Nombre += art.nombres + ",";
-        //        NoPedido += art.NoPedido + ",";
-        //        IdSitio += art.IdSitio + ",";
-        //        var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
-        //           .Select(p => new
-        //           {
-        //               fechaIngreso = p.FechaDeIngreso,
-        //               stockActual = p.ExitenciaActual,
-        //           });
-        //        if (consultaFecha.Count() > 0)
-        //        {
-        //            int UltimoReg = consultaFecha.Count() - 1;
-        //            int cont = 0;
-        //            int SumaStock = 0;
-        //            foreach (var comp in consultaFecha)
-        //            {
-        //                SumaStock = (int)(SumaStock + comp.stockActual);
+        public JsonResult ConsultaArticulos(long IDTienda)
+        {
+            string id = "";
+            string NoPedido = "";
+            string Nombre = "";
+            string Fechas = ""; 
+            string Stock = "";
+            string IdSitio = "";
+            var ConsultaArticulo = from Articulos in InvBD.Articulos
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+                                   where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
+                                   select new
+                                   {
+                                       Id = Articulos.IdArticulos,
+                                       IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       nombres = Articulos.NombreEmpresa,
+                                       IdArticulos = Articulos.IdArticulos,
+                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+                                       IdSitio = ExistenciaAlmacenG.IdSitio,
+                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                   };
+            foreach (var art in ConsultaArticulo)
+            {
+                id += art.IdExistencia + ",";
+                Nombre += art.nombres + ",";
+                NoPedido += art.NoPedido + ",";
+                IdSitio += art.IdSitio + ",";
+                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+                   .Select(p => new
+                   {
+                       fechaIngreso = p.FechaDeIngreso,
+                       stockActual = p.ExitenciaActual,
+                   });
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int cont = 0;
+                    int SumaStock = 0;
+                    foreach (var comp in consultaFecha)
+                    {
+                        SumaStock = (int)(SumaStock + comp.stockActual);
 
-        //                if (cont == UltimoReg)
-        //                {
-        //                    Fechas += comp.fechaIngreso + ",";
-        //                }
-        //                cont++;
-        //            }
-        //            Stock += SumaStock + ",";
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                        }
+                        cont++;
+                    }
+                    Stock += SumaStock + ",";
 
-        //        }
-        //        else
-        //        {
-        //            Fechas += "2010-08-10" + ",";
-        //            Stock += "0" + ",";
-        //        }
-        //    }
-        //    var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
-        //    return Json(Resultado, JsonRequestBehavior.AllowGet);
-        //}
+                }
+                else
+                {
+                    Fechas += "2010-08-10" + ",";
+                    Stock += "0" + ",";
+                }
+            }
+            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
         ////Obtener las tiendas de la supervisión en SucursalesSupervisión.cshtml-------
         //public JsonResult BDSupervisionTiendas()
         //{

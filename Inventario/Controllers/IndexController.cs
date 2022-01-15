@@ -33,7 +33,7 @@ namespace Inventario.Controllers
                 if (Accesos.Tiendas != "")
                 {
                     SupervisionController Super = new SupervisionController();
-                    
+                    Super.CargarSucursalesXSupervision();
 
                 }
             }

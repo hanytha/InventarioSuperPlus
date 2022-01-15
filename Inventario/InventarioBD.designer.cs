@@ -4529,21 +4529,17 @@ namespace Inventario
 		
 		private string _Articulo;
 		
-		private string _Unidad;
-		
 		private System.Nullable<long> _IdAsignacion;
 		
 		private System.Nullable<long> _IdSitio;
-		
-		private System.Nullable<int> _PrecioUnitario;
-		
-		private System.Nullable<long> _NoPedidoG;
 		
 		private string _FechaDeIngreso;
 		
 		private string _TipoDeOperacion;
 		
 		private string _Observaciones;
+		
+		private System.Nullable<int> _NoPedidoG;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -4563,22 +4559,18 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
-    partial void OnUnidadChanging(string value);
-    partial void OnUnidadChanged();
     partial void OnIdAsignacionChanging(System.Nullable<long> value);
     partial void OnIdAsignacionChanged();
     partial void OnIdSitioChanging(System.Nullable<long> value);
     partial void OnIdSitioChanged();
-    partial void OnPrecioUnitarioChanging(System.Nullable<int> value);
-    partial void OnPrecioUnitarioChanged();
-    partial void OnNoPedidoGChanging(System.Nullable<long> value);
-    partial void OnNoPedidoGChanged();
     partial void OnFechaDeIngresoChanging(string value);
     partial void OnFechaDeIngresoChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
     partial void OnObservacionesChanging(string value);
     partial void OnObservacionesChanged();
+    partial void OnNoPedidoGChanging(System.Nullable<int> value);
+    partial void OnNoPedidoGChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4726,26 +4718,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(50)")]
-		public string Unidad
-		{
-			get
-			{
-				return this._Unidad;
-			}
-			set
-			{
-				if ((this._Unidad != value))
-				{
-					this.OnUnidadChanging(value);
-					this.SendPropertyChanging();
-					this._Unidad = value;
-					this.SendPropertyChanged("Unidad");
-					this.OnUnidadChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAsignacion", DbType="BigInt")]
 		public System.Nullable<long> IdAsignacion
 		{
@@ -4782,46 +4754,6 @@ namespace Inventario
 					this._IdSitio = value;
 					this.SendPropertyChanged("IdSitio");
 					this.OnIdSitioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="Int")]
-		public System.Nullable<int> PrecioUnitario
-		{
-			get
-			{
-				return this._PrecioUnitario;
-			}
-			set
-			{
-				if ((this._PrecioUnitario != value))
-				{
-					this.OnPrecioUnitarioChanging(value);
-					this.SendPropertyChanging();
-					this._PrecioUnitario = value;
-					this.SendPropertyChanged("PrecioUnitario");
-					this.OnPrecioUnitarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoG", DbType="BigInt")]
-		public System.Nullable<long> NoPedidoG
-		{
-			get
-			{
-				return this._NoPedidoG;
-			}
-			set
-			{
-				if ((this._NoPedidoG != value))
-				{
-					this.OnNoPedidoGChanging(value);
-					this.SendPropertyChanging();
-					this._NoPedidoG = value;
-					this.SendPropertyChanged("NoPedidoG");
-					this.OnNoPedidoGChanged();
 				}
 			}
 		}
@@ -4882,6 +4814,26 @@ namespace Inventario
 					this._Observaciones = value;
 					this.SendPropertyChanged("Observaciones");
 					this.OnObservacionesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoG", DbType="Int")]
+		public System.Nullable<int> NoPedidoG
+		{
+			get
+			{
+				return this._NoPedidoG;
+			}
+			set
+			{
+				if ((this._NoPedidoG != value))
+				{
+					this.OnNoPedidoGChanging(value);
+					this.SendPropertyChanging();
+					this._NoPedidoG = value;
+					this.SendPropertyChanged("NoPedidoG");
+					this.OnNoPedidoGChanged();
 				}
 			}
 		}

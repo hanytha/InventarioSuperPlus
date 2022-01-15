@@ -65,6 +65,11 @@ namespace Inventario.Controllers
                     NumeroPedido += com.pedido + ",";
                     Tienda += com.plus + ",";
                 }
+                else
+                {
+                    NumeroPedido += "1" + ",";
+                    Tienda += "1" + ",";
+                }
             }
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1), Tienda = Tienda.Substring(0, Tienda.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);

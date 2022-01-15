@@ -2,7 +2,7 @@
 ConsultaCompras();
 BloquearCTRL();
 function ConsultaCompras() {
-    $.get("/PedidosPendientes/ConsultaPedidosDecendiente", function (Data) {
+    $.get("/PedidosPendientes/ConsultaPedidos", function (Data) {
         CrearTablaCompras(Data);
     }
     );
@@ -22,20 +22,20 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "<tbody>";
 
 
-    let NumeroPedido = Data.NumeroPedido;
-    let ArrayNumeroPedido = NumeroPedido.split(',');
-    let Tienda = Data.Tienda;
-    let ArrayTienda = Tienda.split(',');
+    //let NumeroPedido = Data.NumeroPedido;
+    //let ArrayNumeroPedido = NumeroPedido.split(',');
+    //let Tienda = Data.Tienda;
+    //let ArrayTienda = Tienda.split(',');
 
 
-    for (var i = 0; i < ArrayNumeroPedido.length; i++) {
+    for (var i = 0; i < Data.length; i++) {
 
         CodigoHtmlTablaPedidos += "<tr>";
-        CodigoHtmlTablaPedidos += "<td>" + ArrayNumeroPedido[i] + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + ArrayTienda[i] + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + ArrayNumeroPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + ArrayNumeroPedido[i] + ",this)'><i class='far fa-trash-alt'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].NumeroPedido + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
@@ -137,7 +137,23 @@ function MostrarArticulosPorId(id) {
 }
 
 
+function comparar() {
+    var total = document.getElementsByClassName("input-stock");
+    var aprobar = document.getElementsByClassName("input-aprobada");
 
+    for (let i = 0; i < aprobar.length; i++) {
+
+        if (aprobar[i].value > total[i].value) {
+
+            aprobar[i].style.borderColor = 'Red';
+        }
+
+        if (total[i].value > aprobar[i].value) {
+
+            aprobar[i].style.borderColor = 'DimGray';
+        }
+    }
+}
 //------------------limpiar campos-------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
