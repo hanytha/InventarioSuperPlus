@@ -67,8 +67,8 @@
                                 <div class="row">
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
-                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalDevoluciones">Movimiento: Devoluciones</button>
+                                    <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                    <button onclick="abrirModalDevoluciones(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalDevoluciones">Movimiento: Devoluciones</button>
 
                                     <div>
                                         <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
@@ -290,13 +290,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
-                                    <input type="text" id="TxtMovUsados" class="form-control limpiar obligatorioPedido" value="Usados">
+                                    <input type="text" id="TxtMovUsados" class="form-control obligatorioPedido bloquear" value="Usados">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
-                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                    <label class="form-control-label" for="TxtFechaIngresoUsados">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
                                 </div>
                             </div>
                         </div>
@@ -304,8 +304,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
+                                    <label class="form-control-label" for="cmbTiendaUsados">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -326,8 +326,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">No hay Ningún artículo de este proveedor</div>
+                                    <label class="form-control-label" for="TblArticulosUsados">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulosUsados">No hay Ningún artículo de este proveedor</div>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            MOVIMIENTO: Usados
+                            MOVIMIENTO: Devoluciones
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
@@ -364,14 +364,14 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
-                                    <input type="text" id="TxtMovUsados" class="form-control limpiar obligatorioPedido" value="Usados">
+                                    <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
+                                    <input type="text" id="TxtMovDev" class="form-control obligatorioPedido bloquear" value="Devolución">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
-                                    <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                    <label class="form-control-label" for="TxtFechaIngresoDev">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngresoDev" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
                                 </div>
                             </div>
                         </div>
@@ -393,8 +393,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
-                                    <select onchange="Prov(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <label class="form-control-label" for="cmbProveedorDevolucion">Proveedor<span class="required">*</span></label>
+                                    <select onchange="Prov(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
                                 </div>
                             </div>
                         </div>
@@ -402,8 +402,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
+                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -529,7 +529,8 @@
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaIngreso').value = fecha;
-
+    document.getElementById('TxtFechaIngresoDev').value = fecha;
+    document.getElementById('TxtFechaIngresoUsados').value = fecha;
 </script>
 
 

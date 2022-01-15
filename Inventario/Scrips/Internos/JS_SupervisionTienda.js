@@ -346,6 +346,80 @@ function abrirModalMovimiento(IDTienda) {
     }
 }
 
+
+
+
+
+
+function abrirModalDevoluciones(id, idS) {
+
+    LimpiarCampos();
+    if (idS == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+
+    else {
+
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+
+
+        });
+        Prov(id)
+    }
+}
+
+
+function abrirModalUsados(id, idS) {
+
+    LimpiarCampos();
+    if (idS == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+
+    else {
+
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTiendaUsados").value = Data[0].Tienda;
+
+
+        });
+        //Prov(id)
+        MostrarArticulosUsados(idS);
+    }
+}
+
+
+
+//function Prov(id) {
+//    $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+//        //document.getElementById("cmbTienda").value = Data[0].IdTienda;
+//        document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+//        //document.getElementById("TxtRFC").value = Data[0].RFC;
+//        //document.getElementById("TxtClabe").value = Data[0].Clabe;
+//        //document.getElementById("TxtCorreo").value = Data[0].Correo;
+//        //document.getElementById("TxtTelefono").value = Data[0].Telefono;
+//        //document.getElementById("TxtUsoCFDI").value = Data[0].UsoCFDI;
+//        //document.getElementById("TxtDireccion").value = Data[0].Direccion;
+//        //document.getElementById("TxtNumPedidoProve").value = Data[0].NumPedidoProveedor;
+//        //Muestra los artículos que le pertenecen a ese proveedor----
+//        MostrarArticulos(id);
+//        //Muestra el número de pedido que le corresponde por proveedor-------
+//        SiguientePedidoProveedor(id);
+//        //Muestra el número de pedido que le corresponde-------
+//        ConsultaSiguientePedido();
+
+//    });
+//}
+
+
+
 //Función que determina el siguiente número de pedido por proveedor
 
 function SiguientePedidoProveedor(id) {
@@ -367,6 +441,68 @@ function SiguientePedidoProveedor(id) {
         });
     }
 }
+
+
+
+
+function MostrarArticulosUsados(idS) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (idS == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Supervision/ConsultaArticulosXtienda/?IdPro=" + idS, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Unidad_Medida</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Precio_Unitario</label>";
+            TablaArticulo += "</div>";
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los chex-box-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                TablaArticulo += "</div>";
+                //-------Crea los input-------------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
+                TablaArticulo += "</div>";
+                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+                TablaArticulo += "</div>";
+
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArticulosUsados").innerHTML = TablaArticulo;
+        });
+    }
+}
+
+
 
 function MostrarArticulos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -714,7 +850,9 @@ function LlenarCMCProveedores() {
     $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
-
+    $.get("/Supervision/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedorDevolucion"));
+    });
 }
 
 function ConsultaSiguientePedido() {

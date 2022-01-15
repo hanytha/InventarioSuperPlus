@@ -653,6 +653,39 @@ namespace Inventario.Controllers
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+
+
+        public JsonResult ConsultaArticulosXtienda(string IdPro)
+        {
+            //var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
+            //    .Select(p => new
+            //    {
+            //        p.NombreEmpresa,
+            //        p.IdArticulos,
+            //        p.Unidad
+            //    });
+            //return Json(compra, JsonRequestBehavior.AllowGet);
+
+            var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join areas in InvBD.Areas
+                        on Compra.IdProveedor equals areas.IdAreas
+                            where ExistAlm.IdSitio.Equals(IdPro)
+                            select new
+                            {
+                                NombreEmpresa = ExistAlm.Articulo,
+                                IdArticulos = ExistAlm.IdArticulo,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
+                                Tienda = ExistAlm.IdSitio,
+                            };
+            return Json(compra, JsonRequestBehavior.AllowGet);
+
+
+        }
+
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
