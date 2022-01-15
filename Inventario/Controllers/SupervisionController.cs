@@ -618,12 +618,30 @@ namespace Inventario.Controllers
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
+        //public JsonResult BDNoPedido(long Id)
+        //{
+        //    var datos = from Art in InvBD.Articulos
+        //                    join existenciaAlm in InvBD.ExistenciaAlmacenG
+        //              on Art.IdArticulos equals existenciaAlm.IdArticulo
+        //                where Art.IdArticulos.Equals(Id)
+        //                    select new
+        //                    {
+        //                        NoPedido = existenciaAlm.NoPedidoG
+                               
+        //                    };
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
+
         //Consulta de proveedores en la tabla existenciaAlmacenGeneral
         public JsonResult ConsultaComJoinProveedor(long Id)
         {
             var ExistAlmG = from Art in InvBD.Articulos
                             join areas in InvBD.Areas
                         on Art.IdAreas equals areas.IdAreas
+
+                            //join ExistenciaAlmacen in InvBD.ExistenciaAlmacenG
+                            //   on Art.IdArticulos equals ExistenciaAlmacen.IdArticulo
+
                             where Art.IdAreas.Equals(Id)
                             select new
                             {
@@ -631,6 +649,7 @@ namespace Inventario.Controllers
                                 IdArticulo = Art.IdArticulos,
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
+                                //NoPedido = ExistenciaAlmacen.NoPedidoG
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
@@ -640,6 +659,10 @@ namespace Inventario.Controllers
             var ExistAlmG = from Art in InvBD.Articulos
                             join areas in InvBD.Areas
                         on Art.IdAreas equals areas.IdAreas
+
+                            join ExistenciaAlmacen in InvBD.ExistenciaAlmacenG
+                               on Art.IdArticulos equals ExistenciaAlmacen.IdArticulo
+
                             where Art.IdArticulos.Equals(Id)
                             select new
                             {
@@ -647,9 +670,13 @@ namespace Inventario.Controllers
                                 IdArticulo = Art.IdArticulos,
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
+                                NoPedido = ExistenciaAlmacen.NoPedidoG
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
+
+     
+
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))

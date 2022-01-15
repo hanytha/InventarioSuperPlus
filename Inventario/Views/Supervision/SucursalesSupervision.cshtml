@@ -393,24 +393,32 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
+                                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtArtDev">Articulo<span class="required">*</span></label>
-                                    <input type="text" id="TxtArtDev" class="form-control limpiar ">
+                                    <input type="text" id="TxtArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+
+                            <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtNoPedido" class="form-control limpiar ">
+                                    <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
+                                    <input type="number" id="TxtCantidadDev" class="form-control limpiar ">
                                 </div>
                             </div>
                         </div>
+                     
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedorDevolucion">Proveedor<span class="required">*</span></label>
-                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
                                 </div>
                             </div>
                         </div>
@@ -419,7 +427,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect">
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -432,16 +440,6 @@
                                             }
                                         }
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulosDevolucion">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulosDevolucion">No hay Ningún artículo de este proveedor</div>
                                 </div>
                             </div>
                         </div>

@@ -370,6 +370,7 @@ function abrirModalDevoluciones(id, idS) {
         });
         ConsultaArt(id);
         ProvDev(id);
+   //     BDNoPedido(id);
         
     }
 }
@@ -393,10 +394,19 @@ function ProvDev(id) {
 
          $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
           document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
-
+             document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
      
     });
 }
+
+//function BDNoPedido(id) {
+
+//    $.get("/Supervision/BDNoPedido/?Id=" + id, function (Data) {
+//      ///  document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+//        document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
+
+//    });
+//}
 
 function abrirModalMovimiento(IDTienda) {
 
