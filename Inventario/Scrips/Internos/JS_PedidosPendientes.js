@@ -11,7 +11,7 @@ function CrearTablaCompras(Data) {
     var CodigoHtmlTablaPedidos = "";
     CodigoHtmlTablaPedidos = "<br / >";
     CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
-    CodigoHtmlTablaPedidos += "<table class='table-info table table-bordered order-table'>";
+    CodigoHtmlTablaPedidos += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
     CodigoHtmlTablaPedidos += "<th>Núm_Pedido</th>";
@@ -34,7 +34,7 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
         CodigoHtmlTablaPedidos += "<td>" + Data[i].Tienda + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].NumeroPedido + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
@@ -143,15 +143,17 @@ function comparar() {
 
     for (let i = 0; i < aprobar.length; i++) {
 
+        total[i].value;
+
         if (aprobar[i].value > total[i].value) {
 
             aprobar[i].style.borderColor = 'Red';
         }
 
-        if (total[i].value > aprobar[i].value) {
+        //if (total[i].value > aprobar[i].value) {
 
-            aprobar[i].style.borderColor = 'DimGray';
-        }
+        //    aprobar[i].style.borderColor = 'DimGray';
+        //}
     }
 }
 //------------------limpiar campos-------------------------------
