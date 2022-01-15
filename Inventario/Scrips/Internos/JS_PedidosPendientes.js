@@ -124,7 +124,7 @@ function MostrarArticulosPorId(id) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-aprobada  limpiar redondeado' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-aprobada  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
      
@@ -138,25 +138,37 @@ function MostrarArticulosPorId(id) {
 
 //-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
 function comparar() {
-    var total = document.getElementsByClassName("input-stock");
+    var stock = document.getElementsByClassName("input-stock");
     var aprobar = document.getElementsByClassName("input-aprobada");
 
     for (let i = 0; i < aprobar.length; i++) {
 
-        total[i].value;
+        stock[i].value;
 
-        if (aprobar[i].value > total[i].value) {
+        if (aprobar[i].value > stock[i].value || aprobar[i].value < 0) {
 
             aprobar[i].style.borderColor = 'Red';
         }
-
-        //if (total[i].value > aprobar[i].value) {
-
-        //    aprobar[i].style.borderColor = 'DimGray';
-        //}
     }
 }
-//------------------limpiar campos-------------------------------
+//-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
+function BordeInput() {
+
+    var stock = document.getElementsByClassName("input-stock");
+    var aprobar = document.getElementsByClassName("input-aprobada");
+
+    for (i = 0; i < aprobar.length; i++) {
+
+
+        if (aprobar[i].value > 0 && aprobar[i].value <= stock[i].value) {
+
+            aprobar[i].style.borderColor = 'DimGray';
+        }
+    }
+}
+
+
+//------------------------------------------------------limpiar campos-------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
