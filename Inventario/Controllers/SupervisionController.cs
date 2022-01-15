@@ -631,6 +631,22 @@ namespace Inventario.Controllers
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ConsultaArtDev(long Id)
+        {
+            var ExistAlmG = from Art in InvBD.Articulos
+                            join areas in InvBD.Areas
+                        on Art.IdAreas equals areas.IdAreas
+                            where Art.IdAreas.Equals(Id)
+                            select new
+                            {
+                                Articulo = Art.NombreEmpresa,
+                                IdArticulo = Art.IdArticulos,
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
+                            };
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))

@@ -60,7 +60,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -351,7 +351,7 @@ function abrirModalMovimiento(IDTienda) {
 
 
 
-function abrirModalDevoluciones(id, idS) {
+function abrirModalDevoluciones(id, idS) { 
 
     LimpiarCampos();
     if (idS == 0) {
@@ -376,9 +376,12 @@ function abrirModalDevoluciones(id, idS) {
 
 
 function ProvDev(id) {
-    $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
+    $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+        //    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
         //document.getElementById("cmbTienda").value = Data[0].IdTienda;
-        document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+      //  document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+       
+        document.getElementById("TxtArtDev").value = Data.Nombre;
         //document.getElementById("TxtRFC").value = Data[0].RFC;
         //document.getElementById("TxtClabe").value = Data[0].Clabe;
         //document.getElementById("TxtCorreo").value = Data[0].Correo;
