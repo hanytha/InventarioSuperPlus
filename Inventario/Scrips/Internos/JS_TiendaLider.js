@@ -65,7 +65,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+             //   CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
                 CodigoHtmlArticuloComp += "<button title='Clic para realizar un movimiento' class='btn btn-primary' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
                 CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
 

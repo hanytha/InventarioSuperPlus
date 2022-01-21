@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SuperPlus" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -201,11 +201,14 @@
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Asignacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExistenciaInicDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ExistenciaActDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">

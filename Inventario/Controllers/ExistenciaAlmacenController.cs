@@ -377,12 +377,40 @@ namespace Inventario.Controllers
 
         ///------------------------------------
 
+        public JsonResult ConsultaExistenciaTienda()
+        {
+            var ExistenciaAlmG = from ExistenciAAlmacen in InvBD.ExistenciaAlmacenG
+                                 join CompraInterno in InvBD.CompraInterno
+                            on ExistenciAAlmacen.IdCompraInterno equals CompraInterno.IdCompraInterno
+                                 join provedor in InvBD.Areas
+                             on CompraInterno.IdProveedor equals provedor.IdAreas
+                                 join Tienda in InvBD.Tienda
+                                   on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
+                                 where ExistenciAAlmacen.IdAsignacion.Equals(2)
+                                 select new
+                                 {
+                                     FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
+                                     NoPedido = CompraInterno.NoPedido,
+                                     tienda= ExistenciAAlmacen.Asignacion,
+                                     Articulo = ExistenciAAlmacen.Articulo,
+                                     // Coste = ExistenciAAlmacen.PrecioUnitario,
+                                     IdArticulo = ExistenciAAlmacen.IdArticulo,
+                                     //    IdProveedor = provedor.IdAreas,
+                                     //    Proveedor = provedor.Nombre
+                                 };
+            return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
+        }
 
 
 
         //----------------------------------Empieza ExistenciaAlmacen2da
         // GET: ExistenciaAlmacen
         public ActionResult ExistenciaAlmacen2da()
+        {
+            return View();
+        }
+
+        public ActionResult ExistenciasTiendas()
         {
             return View();
         }

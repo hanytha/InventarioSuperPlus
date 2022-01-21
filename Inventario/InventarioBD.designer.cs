@@ -117,7 +117,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -4531,6 +4531,8 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdAsignacion;
 		
+		private string _Asignacion;
+		
 		private System.Nullable<long> _IdSitio;
 		
 		private string _FechaDeIngreso;
@@ -4540,6 +4542,10 @@ namespace Inventario
 		private string _Observaciones;
 		
 		private System.Nullable<int> _NoPedidoG;
+		
+		private System.Nullable<long> _ExistenciaInicDevolucion;
+		
+		private System.Nullable<long> _ExistenciaActDevolucion;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -4561,6 +4567,8 @@ namespace Inventario
     partial void OnArticuloChanged();
     partial void OnIdAsignacionChanging(System.Nullable<long> value);
     partial void OnIdAsignacionChanged();
+    partial void OnAsignacionChanging(string value);
+    partial void OnAsignacionChanged();
     partial void OnIdSitioChanging(System.Nullable<long> value);
     partial void OnIdSitioChanged();
     partial void OnFechaDeIngresoChanging(string value);
@@ -4571,6 +4579,10 @@ namespace Inventario
     partial void OnObservacionesChanged();
     partial void OnNoPedidoGChanging(System.Nullable<int> value);
     partial void OnNoPedidoGChanged();
+    partial void OnExistenciaInicDevolucionChanging(System.Nullable<long> value);
+    partial void OnExistenciaInicDevolucionChanged();
+    partial void OnExistenciaActDevolucionChanging(System.Nullable<long> value);
+    partial void OnExistenciaActDevolucionChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4738,6 +4750,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Asignacion", DbType="VarChar(50)")]
+		public string Asignacion
+		{
+			get
+			{
+				return this._Asignacion;
+			}
+			set
+			{
+				if ((this._Asignacion != value))
+				{
+					this.OnAsignacionChanging(value);
+					this.SendPropertyChanging();
+					this._Asignacion = value;
+					this.SendPropertyChanged("Asignacion");
+					this.OnAsignacionChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSitio", DbType="BigInt")]
 		public System.Nullable<long> IdSitio
 		{
@@ -4834,6 +4866,46 @@ namespace Inventario
 					this._NoPedidoG = value;
 					this.SendPropertyChanged("NoPedidoG");
 					this.OnNoPedidoGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaInicDevolucion", DbType="BigInt")]
+		public System.Nullable<long> ExistenciaInicDevolucion
+		{
+			get
+			{
+				return this._ExistenciaInicDevolucion;
+			}
+			set
+			{
+				if ((this._ExistenciaInicDevolucion != value))
+				{
+					this.OnExistenciaInicDevolucionChanging(value);
+					this.SendPropertyChanging();
+					this._ExistenciaInicDevolucion = value;
+					this.SendPropertyChanged("ExistenciaInicDevolucion");
+					this.OnExistenciaInicDevolucionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaActDevolucion", DbType="BigInt")]
+		public System.Nullable<long> ExistenciaActDevolucion
+		{
+			get
+			{
+				return this._ExistenciaActDevolucion;
+			}
+			set
+			{
+				if ((this._ExistenciaActDevolucion != value))
+				{
+					this.OnExistenciaActDevolucionChanging(value);
+					this.SendPropertyChanging();
+					this._ExistenciaActDevolucion = value;
+					this.SendPropertyChanged("ExistenciaActDevolucion");
+					this.OnExistenciaActDevolucionChanged();
 				}
 			}
 		}

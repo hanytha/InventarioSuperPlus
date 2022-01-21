@@ -6,7 +6,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
-
 namespace Inventario.Controllers
 {
     public class LoginController : Controller
@@ -89,8 +88,6 @@ namespace Inventario.Controllers
                         Accesos.IdSubArea = DatosUsuario.IdSubArea;
                         Accesos.NArea = DatosUsuario.NArea;
                         Accesos.NSArea = DatosUsuario.NSArea;
-
-
                         Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                         Accesos.IDAsignacion = (long)DatosUsuario.IdAsignacion;
                         Session["IDSitio"] = (long)DatosUsuario.IdSitio;
@@ -131,37 +128,15 @@ namespace Inventario.Controllers
                         {
                             Accesos.NSArea = "";
                         }
-
-                        //if (DatosUsuario.CManejador != null)
-                        //{
-                        //    Accesos.CManejador = DatosUsuario.CManejador;
-                        //}
-                        //else
-                        //{
-                        //    Accesos.CManejador = "Aun no se le ha asignado una contraseña de la plataforma FRONT.";
-                        //}
-
-                        //if (DatosUsuario.CPlataforma != null)
-                        //{
-                        //    Accesos.CPlataforma = DatosUsuario.CPlataforma;
-                        //}
-                        //else
-                        //{
-                        //    Accesos.CPlataforma = "Aun no se le ha asignado una contraseña de la plataforma MTCenter.";
-                        //}
                         var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
-
-
                         string[] IdPaginas = Permisos.Permisos.Split('#');
                         int Filas = IdPaginas.GetLength(0);
-
                         string[,] IdPagina = new string[Filas, 3];
                         Accesos.Perfil = Permisos.Perfil;
                         Accesos.Accion = new List<string>();
                         Accesos.Controlador = new List<string>();
                         Accesos.Mensaje = new List<string>();
                         Accesos.Icono = new List<string>();
-
                         for (int i = 0; i < Filas; i++)
                         {
                             var Pagina = InvBD.Pagina.Where(p => p.IdPagina.Equals(IdPaginas[i]))
@@ -183,7 +158,6 @@ namespace Inventario.Controllers
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 solicitud = 0;
@@ -192,7 +166,6 @@ namespace Inventario.Controllers
         }
         //La llave de la contraseña encriptada
         static readonly string password = "P455W0rd";
-
         public int Filas { get; private set; }
         //Metodo de seguridad: cifrar y descifrar contraseñas en la base de datos con el método de encriptación (Advanced Encryption Standard (AES)),también conocido como Rijndael Encryption
         public static string Encrypt(string plainText)

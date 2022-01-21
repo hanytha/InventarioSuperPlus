@@ -68,7 +68,8 @@
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
 
-                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
+                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                    <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
 
                                     <div>
                                         <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
@@ -126,8 +127,7 @@
                                 <div class="row">
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
-
-                                    <div>
+                                     <div>
                                         <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
 
                                     </div>
