@@ -52,7 +52,7 @@ namespace Inventario.Controllers
             string IdTienda = "";
             string NomTienda = "";
 
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
                .Select(p => new
                {
                    pedido = p.NumeroPedido,

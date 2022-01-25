@@ -2,7 +2,7 @@
 //*****************Crea la tabla de todos los pedidos quee se realizan a los proveedores*****************************
 ConsultaPedidos();
 function ConsultaPedidos() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (Data) {
+    $.get("/Pedidosext/ConsultaPedidosNumeroPedido", function (Data) {
         CrearTablaPedidos(Data);
     }
     );
@@ -19,22 +19,37 @@ function CrearTablaPedidos(Data) {
     CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
-    CodigoHtmlTablaPedidos += "<th>ID</th>";
     CodigoHtmlTablaPedidos += "<th>Número_Pedido</th>";
     CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+    CodigoHtmlTablaPedidos += "<th></th>";
     CodigoHtmlTablaPedidos += "<th>Fecha</th>";
     CodigoHtmlTablaPedidos += "<th>Acción</th>";
     CodigoHtmlTablaPedidos += "</tr>";
     CodigoHtmlTablaPedidos += "</thead>";
     CodigoHtmlTablaPedidos += "<tbody>";
-    for (var i = 0; i < Data.length; i++) {
+
+
+
+
+    let NoPedido = Data.NoPedido;
+    let ArrayNoPedido = NoPedido.split(',');
+    let NoProvedor = Data.NoProvedor;
+    let ArrayNoProvedor = NoProvedor.split(',');
+    let Proveedor = Data.Proveedor;
+    let ArrayProveedor = Proveedor.split(',');
+    let fecha = Data.fecha;
+    let Arrayfecha = fecha.split(',');
+    let IdPedido = Data.IdPedido;
+    let ArrayIdPedido = IdPedido.split(',');
+
+
+    for (var i = 0; i < ArrayIdPedido.length; i++) {
 
         CodigoHtmlTablaPedidos += "<tr>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosExternos + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
-        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayNoPedido[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td colspan='2'>" + ArrayProveedor[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Arrayfecha[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
     }
     CodigoHtmlTablaPedidos += "</tbody>"; 

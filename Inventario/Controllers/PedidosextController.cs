@@ -36,6 +36,88 @@ namespace Inventario.Controllers
                 });
             return Json(pedidosExt, JsonRequestBehavior.AllowGet);
         }
+        //****************************************************************************************************************************
+        //****************************Consulta de pedidos internos***********************************************************
+
+        public JsonResult ConsultaPedidosNumeroPedido()
+        {
+            string NoPedido = "";
+            string NoProvedor = "";
+            string Proveedor = "";
+            string fecha = "";
+            string IdPedido = "";
+            
+
+            var Pedidos = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdPedidosExternos)
+               .Select(p => new
+               {
+                   pedido = p.NumeroPedido,
+                   proveedors = p.Proveedor,
+                   fecha = p.Fecha,
+                   id = p.IdPedidosExternos,
+                   noProve = p.NumPedidoProveedor
+               });
+            if (Pedidos.Count() > 0)
+            {
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+
+                long pedi = Pedidos.Count();
+
+                foreach (var numero in Pedidos)
+                {
+                    if (contador == 0)
+                    {
+                        tem1 = (int)numero.pedido;
+                        tem2 = (int)numero.noProve;
+                      
+
+                        NoPedido += numero.pedido + ",";
+                        NoProvedor += numero.noProve + ",";
+                        Proveedor += numero.proveedors + ",";
+                        fecha += numero.fecha + ",";
+                        IdPedido += numero.id + ",";
+
+                    }
+                    if (numero.pedido != tem1 || numero.noProve != tem2)
+                    {
+                        NoPedido += numero.pedido + ",";
+                        NoProvedor += numero.noProve + ",";
+                        Proveedor += numero.proveedors + ",";
+                        fecha += numero.fecha + ",";
+                        IdPedido += numero.id + ",";
+
+                        tem1 = (int)numero.pedido;
+                        tem2 = (int)numero.noProve;
+
+                        contador++;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+                NoPedido += "0" + ",";
+                NoProvedor += "0" + ",";
+                Proveedor += "0" + ",";
+                fecha += "0" + ",";
+                IdPedido += "0" + ",";
+            }
+            var consulta = new
+            {
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                NoProvedor = NoProvedor.Substring(0, NoProvedor.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+                fecha = fecha.Substring(0, fecha.Length - 1),
+                IdPedido = IdPedido.Substring(0, IdPedido.Length - 1)
+            };
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+        }
+
 
         //******************************************Cosulta los pedidos por número de compra**************************************************
         public JsonResult ConsultaPedidoXnum(long Num)
