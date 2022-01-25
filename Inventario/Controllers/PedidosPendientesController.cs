@@ -114,27 +114,36 @@ namespace Inventario.Controllers
 
                 });
 
-
-            foreach (var ped in pedidosNum)
+            if (pedidosNum.Count() > 0)
             {
-                IdArticulo += ped.IdArticulo + ",";
-                Articulo += ped.articulo + ",";
-                solicitada += ped.solicitada + ",";
-
-                var consultaStock = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ped.IdArticulo))
-                    .Select(p => new
-                    {
-                        stock = p.StockActual,
-                        
-                    });
-
-                int SumaStock = 0;
-
-                foreach (var com in consultaStock)
+                foreach (var ped in pedidosNum)
                 {
-                    SumaStock = (int)(SumaStock + com.stock);
+                    IdArticulo += ped.IdArticulo + ",";
+                    Articulo += ped.articulo + ",";
+                    solicitada += ped.solicitada + ",";
+
+                    var consultaStock = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ped.IdArticulo))
+                        .Select(p => new
+                        {
+                            stock = p.StockActual,
+
+                        });
+
+                    int SumaStock = 0;
+
+                    foreach (var com in consultaStock)
+                    {
+                        SumaStock = (int)(SumaStock + com.stock);
+                    }
+                    stock += SumaStock + ",";
                 }
-                stock += SumaStock + ",";
+            }
+            else
+            {
+                IdArticulo += "0" + ",";
+                Articulo += "0" + ",";
+                solicitada += "0" + ",";
+                stock += "0" + ",";
             }
 
             var compras = new { solicitada = solicitada.Substring(0, solicitada.Length - 1),
