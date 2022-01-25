@@ -61,44 +61,53 @@ namespace Inventario.Controllers
                    tiendas = p.Tienda,
 
                });
-
-            long contador = 0;
-            long tem1= 0;
-            long tem2 = 0;
-            long tem3 = 0;
-            long pedi = Pedidos.Count();
-
-            foreach (var numero in Pedidos)
+            if (Pedidos.Count() > 0)
             {
-                if (contador == 0)
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+                long tem3 = 0;
+                long pedi = Pedidos.Count();
+
+                foreach (var numero in Pedidos)
                 {
-                    tem1 = numero.pedido;
-                    tem2 = (int)numero.asignacion;
-                    tem3 = (int)numero.Idtienda;
+                    if (contador == 0)
+                    {
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                        tem3 = (int)numero.Idtienda;
 
-                    NoPedido += numero.pedido + ",";
-                    IdAsignacion += numero.asignacion + ",";
-                    IdTienda += numero.Idtienda + ",";
-                    NomTienda += numero.tiendas + ",";
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                        IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
 
+                    }
+                    if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
+                    {
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                        IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
+
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                        tem3 = (int)numero.Idtienda;
+
+                        contador++;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
                 }
-                if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
-                {
-                    NoPedido += numero.pedido + ",";
-                    IdAsignacion += numero.asignacion + ",";
-                    IdTienda += numero.Idtienda + ",";
-                    NomTienda += numero.tiendas + ",";
-
-                    tem1 = numero.pedido;
-                    tem2 = (int)numero.asignacion;
-                    tem3 = (int)numero.Idtienda;
-
-                    contador++;
-                }
-                else
-                {
-                    contador++;
-                }
+            }
+            else
+            {
+                NoPedido += "0" + ",";
+                IdAsignacion += "0" + ",";
+                IdTienda += "0" + ",";
+                NomTienda += "0" + ",";
             }
             var consulta = new
             {
