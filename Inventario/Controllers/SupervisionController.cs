@@ -1237,6 +1237,68 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+        //----------------Guardar movimiento de  SupervisionTienda------------
+
+        public int GuardarUsados(MovimientosTienda DatosUsados)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = DatosUsados.IdMovimiento;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)).Count();
+
+                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces >= 0)
+                {
+                    InvBD.MovimientosTienda.InsertOnSubmit(DatosUsados);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)
+                && p.IdExistencia.Equals(DatosUsados.IdExistencia)
+                && p.IdCompra.Equals(DatosUsados.IdCompra)
+                 && p.IdArticulo.Equals(DatosUsados.IdArticulo)
+                 && p.Movimiento.Equals(DatosUsados.Movimiento)
+                 && p.Fecha.Equals(DatosUsados.Fecha)
+                  && p.Cantidad.Equals(DatosUsados.Cantidad)
+                 && p.Costo.Equals(DatosUsados.Costo)
+                 && p.Fecha.Equals(DatosUsados.Fecha)
+                 ).Count();
+                if (nveces == 0)
+                {
+                    MovimientosTienda obj = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(id)).First();
+                    obj.IdExistencia = DatosUsados.IdExistencia;
+                    obj.IdCompra = DatosUsados.IdCompra;
+                    obj.IdArticulo = DatosUsados.IdArticulo;
+                    obj.Movimiento = DatosUsados.Movimiento;
+                    obj.Movimiento = DatosUsados.Movimiento;
+                    obj.Cantidad = DatosUsados.Cantidad;
+                    obj.Costo = DatosUsados.Costo;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            //}
+            //    catch (Exception ex)
+            //    {
+            //        Afectados = 0;
+            //    }
+            return Afectados;
+        }
+
 
 
     }

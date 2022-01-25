@@ -612,13 +612,13 @@ function MostrarArticulosUsados(idS) {
                 //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                // TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</div>";
                 //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -849,6 +849,74 @@ function GuardarPedidoInterno() {
 
 
 
+function GuardarUsados() {
+
+    if (CamposObligatoriosUsados() == true) {
+
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            //----------Guardar los inputs de manera individual en la Base de datos--------------------
+            var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+
+            var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+            //var UnidadM = document.getElementsByClassName("input-Unidad");
+
+            //var Precio = document.getElementsByClassName("input-Precio");
+
+            for (let i = 0; i < NumPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value) {
+
+
+                    var IdMovimiento = sessionStorage.getItem('IdMovimiento');
+                  
+                    var Movimiento = document.getElementById("TxtMovUsados").value;
+                    var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                    var IdArticulo = NomArticulos[i].value;
+                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    var Cantidad = NumPedidos[i].value;
+                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                    
+                    //-------------------------------------------------------------------------------------------------------------
+                    var frm = new FormData();
+                    frm.append("IdMovimiento", IdMovimiento);
+                    frm.append("Movimiento", Movimiento);
+                    frm.append("Fecha", Fecha);
+                   
+
+                    frm.append("IdArticulo", IdArticulo);
+                   
+                    frm.append("Cantidad", Cantidad);
+                   
+                    frm.append("Estatus", 1);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Supervision/GuardarUsados",
+                        data: frm,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == 0) {
+                                alert("Ocurrió un error");
+                            }
+                            else if (data == -1) {
+                                alert("Ya existe este registro");
+                            }
+                            
+                        }
+                    });
+
+                }
+            }
+            //-----Mensaje de confirmación-----------------------
+            alert("Guardado correctamente");
+            ConsultaArticuloComp();
+            document.getElementById("btnCancelar").click();
+        }
+    }
+
+}
+
 
 
 
@@ -857,6 +925,24 @@ function GuardarPedidoInterno() {
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorioPedido");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+            exito = false;
+            controlesObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            controlesObligatorio[i].classList.remove("border-danger");
+
+        }
+    }
+    return exito;
+}
+
+
+function CamposObligatoriosUsados() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorioUsados");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
