@@ -2,7 +2,7 @@
 ConsultaCompras();
 BloquearCTRL();
 function ConsultaCompras() {
-    $.get("/PedidosPendientes/ConsultaPedidos", function (Data) {
+    $.get("/PedidosPendientes/ConsultaPedidosNumeroPedido", function (Data) {
         CrearTablaCompras(Data);
     }
     );
@@ -22,20 +22,25 @@ function CrearTablaCompras(Data) {
     CodigoHtmlTablaPedidos += "<tbody>";
 
 
-    //let NumeroPedido = Data.NumeroPedido;
-    //let ArrayNumeroPedido = NumeroPedido.split(',');
-    //let Tienda = Data.Tienda;
-    //let ArrayTienda = Tienda.split(',');
+    let NoPedido = Data.NoPedido;
+    let ArrayNoPedido = NoPedido.split(',');
+    let NomTienda = Data.NomTienda;
+    let ArrayNomTienda = NomTienda.split(',');
+
+    let IdAsignacion = Data.IdAsignacion;
+    let ArrayIdAsignacion = IdAsignacion.split(',');
+    let IdTienda = Data.IdTienda;
+    let ArrayIdTienda = IdTienda.split(',');
 
 
-    for (var i = 0; i < Data.length; i++) {
+    for (var i = 0; i < ArrayNoPedido.length; i++) {
 
         CodigoHtmlTablaPedidos += "<tr>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Tienda + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayNoPedido[i] + "</td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayNomTienda[i] + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].NumeroPedido + ",this)'><i class='far fa-trash-alt'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-success' onclick='abrirModal(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + ArrayNoPedido[i] + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";

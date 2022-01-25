@@ -42,41 +42,77 @@ namespace Inventario.Controllers
             return Json(pedidos, JsonRequestBehavior.AllowGet);
         }
 
-        //****************************Consulta el último número de pedido*************************************************
+ //****************************************************************************************************************************
+        //****************************Consulta de pedidos internos***********************************************************
 
-        public JsonResult ConsultaPedidosDecendiente(PedidosExternos DatosPedidoExterno)
+        public JsonResult ConsultaPedidosNumeroPedido()
         {
+            string NoPedido = "";
+            string IdAsignacion = "";
+            string IdTienda = "";
+            string NomTienda = "";
 
-            int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
+               .Select(p => new
+               {
+                   pedido = p.NumeroPedido,
+                   asignacion = p.IdAsignacion,
+                   Idtienda = p.IdTienda,
+                   tiendas = p.Tienda,
 
-            string NumeroPedido = "";
-            string Tienda = "";
+               });
 
-            var pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
-                   .Select(p => new
+            long contador = 0;
+            long tem1= 0;
+            long tem2 = 0;
+            long tem3 = 0;
+            long pedi = Pedidos.Count();
+
+            foreach (var numero in Pedidos)
+            {
+                if (contador == 0)
                 {
-                   pedido=  p.NumeroPedido,
-                    plus = p.Tienda,
-                });
-            foreach (var com in pedidos) {
+                    tem1 = numero.pedido;
+                    tem2 = (int)numero.asignacion;
+                    tem3 = (int)numero.Idtienda;
 
-                if (nveces == 0)
+                    NoPedido += numero.pedido + ",";
+                    IdAsignacion += numero.asignacion + ",";
+                    IdTienda += numero.Idtienda + ",";
+                    NomTienda += numero.tiendas + ",";
+
+                }
+                if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
                 {
-                    NumeroPedido += com.pedido + ",";
-                    Tienda += com.plus + ",";
+                    NoPedido += numero.pedido + ",";
+                    IdAsignacion += numero.asignacion + ",";
+                    IdTienda += numero.Idtienda + ",";
+                    NomTienda += numero.tiendas + ",";
+
+                    tem1 = numero.pedido;
+                    tem2 = (int)numero.asignacion;
+                    tem3 = (int)numero.Idtienda;
+
+                    contador++;
                 }
                 else
                 {
-                    NumeroPedido += "1" + ",";
-                    Tienda += "1" + ",";
+                    contador++;
                 }
             }
-            var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1), Tienda = Tienda.Substring(0, Tienda.Length - 1) };
-            return Json(compras, JsonRequestBehavior.AllowGet);
+            var consulta = new
+            {
+                NoPedido = NoPedido.Substring(0, NoPedido.Length -1),
+                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length -1),
+                IdTienda = IdTienda.Substring(0, IdTienda.Length -1),
+                NomTienda = NomTienda.Substring(0, NomTienda.Length -1)
+            };
+            return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-        //*******************************************************************************************************
-        //--------------------------------Consulta los artículos por ID-------------------------------------------
-        public JsonResult ConsultaPedidoXNumero(long Num)
+
+        //*************************************************************************************************************
+            //--------------------------------Consulta los artículos por ID-------------------------------------------
+            public JsonResult ConsultaPedidoXNumero(long Num)
         {
             var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
                 .Select(p => new
