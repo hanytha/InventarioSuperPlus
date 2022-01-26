@@ -29,36 +29,30 @@
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
+                                    <label class="form-control-label" for="TxtTiendas">Enviar a:<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtTiendas]" id="TxtTiendas" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtFecha">Fecha del pedido<span class="required">*</span></label>
+                                    <label class="form-control-label" for="TxtFecha">Fecha de pedido<span class="required">*</span></label>
                                     <input type="text" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtAsignacion">ID_Asignación<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtAsignacion]" id="TxtAsignacion" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTienda">ID_Tienda<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtTienda]" id="TxtTienda" class="form-control  limpiar obligatorio bloquear">
+                                    <label class="form-control-label" for="TxtFechaAprobada">Fecha de aprobación<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtFechaAprobada]" id="TxtFechaAprobada" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
-                                    <input type="text" name="" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
+                                    <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
+                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -69,8 +63,22 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaAprobada">Fecha de aprobación<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtFechaAprobada]" id="TxtFechaAprobada" class="form-control  limpiar obligatorio bloquear">
+                                    <label class="form-control-label" for="TxtAsignacion">ID_Asignación<span class="required">*</span></label>
+                                    <input type="number" name="data[TxtAsignacion]" id="TxtAsignacion" class="form-control  limpiar obligatorio bloquear">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIDTienda">ID_Tienda<span class="required">*</span></label>
+                                    <input type="number" name="data[TxtIDTienda]" id="TxtIDTienda" class="form-control  limpiar obligatorio bloquear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
+                                    <input type="text" name="" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
                                 </div>
                             </div>
                         </div>

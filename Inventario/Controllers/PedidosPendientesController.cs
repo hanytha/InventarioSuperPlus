@@ -128,12 +128,17 @@ namespace Inventario.Controllers
             string IdArticulo = "";
             string Articulo = "";
             string stock = "";
+            string IdAsignacion = "";
+            string IdSitio = "";
+
             var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
                 .Select(p => new
                 {
                     solicitada = p.CantidadSolicitada,
                     articulo = p.Articulo,
                     IdArticulo = p.IdArticulo,
+                    IDasig = p.IdAsignacion,
+                    sitio = p.IdTienda,
 
                 });
 
@@ -144,6 +149,8 @@ namespace Inventario.Controllers
                     IdArticulo += ped.IdArticulo + ",";
                     Articulo += ped.articulo + ",";
                     solicitada += ped.solicitada + ",";
+                    IdAsignacion += ped.IDasig + ",";
+                    IdSitio += ped.sitio + ",";
 
                     var consultaStock = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ped.IdArticulo))
                         .Select(p => new
@@ -167,12 +174,16 @@ namespace Inventario.Controllers
                 Articulo += "0" + ",";
                 solicitada += "0" + ",";
                 stock += "0" + ",";
+                IdAsignacion += "0" + ",";
+                IdSitio += "0" + ",";
             }
 
             var compras = new { solicitada = solicitada.Substring(0, solicitada.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
-                stock = stock.Substring(0, stock.Length - 1)
+                stock = stock.Substring(0, stock.Length - 1),
+                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                IdSitio = IdSitio.Substring(0, IdSitio.Length - 1)
             };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
@@ -272,7 +283,7 @@ namespace Inventario.Controllers
                 && p.Articulo.Equals(DatosTienda.Articulo)
                 && p.IdAsignacion.Equals(DatosTienda.IdAsignacion)
                 && p.Asignacion.Equals(DatosTienda.Asignacion)
-                && p.FechaDeIngreso.Equals(DatosTienda.FechaDeIngreso)
+
                 ).Count();
 
 
@@ -289,7 +300,7 @@ namespace Inventario.Controllers
                     obj.IdAsignacion = DatosTienda.IdAsignacion;
                     obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
                     obj.Asignacion = DatosTienda.Asignacion;
-                    obj.FechaDeIngreso = DatosTienda.FechaDeIngreso;
+     
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

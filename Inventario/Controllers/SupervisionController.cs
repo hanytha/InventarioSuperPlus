@@ -265,7 +265,7 @@ namespace Inventario.Controllers
                                        IdArticulos = Articulos.IdArticulos,
                                        IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
                                        IdSitio = ExistenciaAlmacenG.IdSitio,
-                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                       
                                    };
             foreach (var art in ConsultaArticulo)
             {
@@ -276,7 +276,7 @@ namespace Inventario.Controllers
                 var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
                    .Select(p => new
                    {
-                       fechaIngreso = p.FechaDeIngreso,
+                       
                        stockActual = p.ExitenciaActual,
                    });
                 if (consultaFecha.Count() > 0)
@@ -288,11 +288,7 @@ namespace Inventario.Controllers
                     {
                         SumaStock = (int)(SumaStock + comp.stockActual);
 
-                        if (cont == UltimoReg)
-                        {
-                            Fechas += comp.fechaIngreso + ",";
-                        }
-                        cont++;
+                     
                     }
                     Stock += SumaStock + ",";
 

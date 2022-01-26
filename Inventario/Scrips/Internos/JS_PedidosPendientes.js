@@ -66,11 +66,12 @@ function abrirModal(id) {
 
             document.getElementById("TxtAsignacion").value = Data[0].IdAsignacion;
             document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
-            document.getElementById("TxtTienda").value = Data[0].IdTienda;
+            document.getElementById("TxtIDTienda").value = Data[0].IdTienda;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtProveedor").name = Data[0].IdProveedor;
+            document.getElementById("TxtTiendas").value = Data[0].Tienda;
 
             MostrarArticulosPorId(id);
             CalcularFecha();
@@ -115,6 +116,12 @@ function MostrarArticulosPorId(id) {
             let Arraysolicitada = solicitada.split(',');
             let stock = Data.stock;
             let Arraystock = stock.split(',');
+
+            let IdAsignacion = Data.IdAsignacion;
+            let ArrayIdAsignacion = IdAsignacion.split(',');
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
 
 
             for (var i = 0; i < ArrayIdArticulo.length; i++) {
@@ -257,8 +264,10 @@ function GuardarCompraInterna() {
                     swal("¡La compra ya existe!", "", "warning");
                 }
                 else {
-                    swal("La compra se registró exitosamente!", "", "success");
-                    ConsultaCompras();
+                    alert("Los datos se guardaron de manera exitosa");
+
+                    GuardarDatosArticuloCompra(data);
+
                     document.getElementById("btnCancelar").click();
                 }
             }
@@ -268,3 +277,103 @@ function GuardarCompraInterna() {
 }
 
 //----------------------------------------------Termina------------------------------------------------------------------------
+
+//--------------------------------Función para guardar los datos en la segunda tabla de existencias almacen--------------------
+
+function GuardarDatosArticuloCompra(IdCompras) {
+
+    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+    var cantidad = document.getElementsByClassName("input-cantidad");
+
+    var NomArticulos = document.getElementsByClassName("input-Articulo");
+
+    var UnidadM = document.getElementsByClassName("input-Unidad");
+
+    var Precio = document.getElementsByClassName("input-Precio");
+
+    var impuestos = document.getElementsByClassName("input-impuesto");
+
+
+    for (let i = 0; i < cantidad.length; i++) {
+
+        //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
+
+        if (Precio[i].value == "") {
+            Precio[i].value = 0;
+
+        }
+        if (Precio[i].name == "") {
+            Precio[i].name = 0;
+        }
+
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name && NomArticulos[i].name) {
+
+            var IdExistenciaCompra = Precio[i].name;
+            var NoCompra = document.getElementById("TxtNoCompra").value;
+            var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
+            var TipoDeOperacion = Tmovimiento;
+
+            //------------------------Guarda el nombre del artículo solicitado----------------------------------
+            var Articulo = NomArticulos[i].value;
+            var IdArticulo = NomArticulos[i].name;
+            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+            var StockActual = cantidad[i].value;
+
+            var ExistenciaInicial = cantidad[i].value;
+            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+            var Unidad = UnidadM[i].value;
+            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+            var PrecioUnitario = Precio[i].value;
+            //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+            var Impuesto = impuestos[i].value;
+            //-------------------------------------------------------------------------------------------------------------
+            var frm = new FormData();
+            frm.append("IdExistenciaCompra", IdExistenciaCompra);
+            frm.append("IdCompra", IdCompras);
+            frm.append("StockActual", StockActual);
+            frm.append("Articulo", Articulo);
+            frm.append("Unidad", Unidad);
+            frm.append("NoCompra", NoCompra);
+            frm.append("Impuesto", Impuesto);
+            frm.append("PrecioUnitario", PrecioUnitario);
+            frm.append("TipoDeOperacion", TipoDeOperacion);
+            frm.append("ExistenciaInicial", ExistenciaInicial);
+            frm.append("FechaIngreso", FechaIngreso);
+            frm.append("IdArticulo", IdArticulo);
+
+
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Compra/GuardarDatosArticuloCompra",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        swal("¡Ocurrio un error!", "", "danger");
+                    }
+                    else if (data == -1) {
+                        swal({
+                            title: "Verifique la actualización de sus datos",
+                            text: "",
+                            icon: "info",
+                            buttons: true,
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                        })
+                    }
+                    else {
+
+                        ConsultaCompras();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+
+        }
+    }
+
+    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+    swal("Se guardó exitosamente!", "", "success");
+}

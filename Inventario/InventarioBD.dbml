@@ -128,7 +128,8 @@
       <Column Name="NoPedidoProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="FechaIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Destino" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="FechaIngreso" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="EstatusPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
@@ -203,7 +204,6 @@
       <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Asignacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />

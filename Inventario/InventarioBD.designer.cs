@@ -3052,6 +3052,8 @@ namespace Inventario
 		
 		private string _Proveedor;
 		
+		private string _Destino;
+		
 		private string _FechaIngreso;
 		
 		private System.Nullable<int> _EstatusPedido;
@@ -3072,6 +3074,8 @@ namespace Inventario
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
+    partial void OnDestinoChanging(string value);
+    partial void OnDestinoChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
     partial void OnEstatusPedidoChanging(System.Nullable<int> value);
@@ -3185,7 +3189,27 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destino", DbType="VarChar(150)")]
+		public string Destino
+		{
+			get
+			{
+				return this._Destino;
+			}
+			set
+			{
+				if ((this._Destino != value))
+				{
+					this.OnDestinoChanging(value);
+					this.SendPropertyChanging();
+					this._Destino = value;
+					this.SendPropertyChanged("Destino");
+					this.OnDestinoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="NChar(50)")]
 		public string FechaIngreso
 		{
 			get
@@ -4535,8 +4559,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdSitio;
 		
-		private string _FechaDeIngreso;
-		
 		private string _TipoDeOperacion;
 		
 		private string _Observaciones;
@@ -4571,8 +4593,6 @@ namespace Inventario
     partial void OnAsignacionChanged();
     partial void OnIdSitioChanging(System.Nullable<long> value);
     partial void OnIdSitioChanged();
-    partial void OnFechaDeIngresoChanging(string value);
-    partial void OnFechaDeIngresoChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
     partial void OnObservacionesChanging(string value);
@@ -4786,26 +4806,6 @@ namespace Inventario
 					this._IdSitio = value;
 					this.SendPropertyChanged("IdSitio");
 					this.OnIdSitioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaDeIngreso", DbType="VarChar(50)")]
-		public string FechaDeIngreso
-		{
-			get
-			{
-				return this._FechaDeIngreso;
-			}
-			set
-			{
-				if ((this._FechaDeIngreso != value))
-				{
-					this.OnFechaDeIngresoChanging(value);
-					this.SendPropertyChanging();
-					this._FechaDeIngreso = value;
-					this.SendPropertyChanged("FechaDeIngreso");
-					this.OnFechaDeIngresoChanged();
 				}
 			}
 		}
