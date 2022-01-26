@@ -4601,11 +4601,11 @@ namespace Inventario
 		
 		private string _Articulo;
 		
+		private System.Nullable<int> _NoPedidoG;
+		
 		private string _TipoDeOperacion;
 		
 		private string _Observaciones;
-		
-		private System.Nullable<int> _NoPedidoG;
 		
 		private System.Nullable<long> _ExistenciaInicDevolucion;
 		
@@ -4629,12 +4629,12 @@ namespace Inventario
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnNoPedidoGChanging(System.Nullable<int> value);
+    partial void OnNoPedidoGChanged();
     partial void OnTipoDeOperacionChanging(string value);
     partial void OnTipoDeOperacionChanged();
     partial void OnObservacionesChanging(string value);
     partial void OnObservacionesChanged();
-    partial void OnNoPedidoGChanging(System.Nullable<int> value);
-    partial void OnNoPedidoGChanged();
     partial void OnExistenciaInicDevolucionChanging(System.Nullable<long> value);
     partial void OnExistenciaInicDevolucionChanged();
     partial void OnExistenciaActDevolucionChanging(System.Nullable<long> value);
@@ -4786,6 +4786,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoG", DbType="Int")]
+		public System.Nullable<int> NoPedidoG
+		{
+			get
+			{
+				return this._NoPedidoG;
+			}
+			set
+			{
+				if ((this._NoPedidoG != value))
+				{
+					this.OnNoPedidoGChanging(value);
+					this.SendPropertyChanging();
+					this._NoPedidoG = value;
+					this.SendPropertyChanged("NoPedidoG");
+					this.OnNoPedidoGChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDeOperacion", DbType="VarChar(50)")]
 		public string TipoDeOperacion
 		{
@@ -4822,26 +4842,6 @@ namespace Inventario
 					this._Observaciones = value;
 					this.SendPropertyChanged("Observaciones");
 					this.OnObservacionesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoG", DbType="Int")]
-		public System.Nullable<int> NoPedidoG
-		{
-			get
-			{
-				return this._NoPedidoG;
-			}
-			set
-			{
-				if ((this._NoPedidoG != value))
-				{
-					this.OnNoPedidoGChanging(value);
-					this.SendPropertyChanging();
-					this._NoPedidoG = value;
-					this.SendPropertyChanged("NoPedidoG");
-					this.OnNoPedidoGChanged();
 				}
 			}
 		}

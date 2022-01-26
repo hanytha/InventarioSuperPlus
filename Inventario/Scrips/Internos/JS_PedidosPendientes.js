@@ -116,18 +116,16 @@ function MostrarArticulosPorId(id) {
             let Arraysolicitada = solicitada.split(',');
             let stock = Data.stock;
             let Arraystock = stock.split(',');
+            let NoPedidoG = Data.NoPedidoG;
+            let ArrayNoPedidoG = NoPedidoG.split(',');
 
-            let IdAsignacion = Data.IdAsignacion;
-            let ArrayIdAsignacion = IdAsignacion.split(',');
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
 
 
 
             for (var i = 0; i < ArrayIdArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  name='" + ArrayIdArticulo +"' class='input-Articulo sinborde limpiar ' disabled  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -274,7 +272,7 @@ function GuardarCompraInterna() {
                 else {
                     alert("Los datos se guardaron de manera exitosa");
 
-                    GuardarDatosArticuloCompra(data);
+                    GuardarDatosArticuloCompra(data, NoPedido );
 
                     document.getElementById("btnCancelar").click();
                 }
@@ -288,72 +286,40 @@ function GuardarCompraInterna() {
 
 //--------------------------------Función para guardar los datos en la segunda tabla de existencias almacen--------------------
 
-function GuardarDatosArticuloCompra(IdCompras) {
+function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
-    var cantidad = document.getElementsByClassName("input-cantidad");
+    var cantidad = document.getElementsByClassName("input-aprobar");
 
     var NomArticulos = document.getElementsByClassName("input-Articulo");
-
-    var UnidadM = document.getElementsByClassName("input-Unidad");
-
-    var Precio = document.getElementsByClassName("input-Precio");
-
-    var impuestos = document.getElementsByClassName("input-impuesto");
 
 
     for (let i = 0; i < cantidad.length; i++) {
 
-        //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
 
-        if (Precio[i].value == "") {
-            Precio[i].value = 0;
-
-        }
-        if (Precio[i].name == "") {
-            Precio[i].name = 0;
-        }
-
-        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name && NomArticulos[i].name) {
-
-            var IdExistenciaCompra = Precio[i].name;
-            var NoCompra = document.getElementById("TxtNoCompra").value;
-            var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
-            var TipoDeOperacion = Tmovimiento;
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && NomArticulos[i].name) {
 
             //------------------------Guarda el nombre del artículo solicitado----------------------------------
+            var IdExistenciaAlmacenG = sessionStorage.getItem('IDExt');
             var Articulo = NomArticulos[i].value;
             var IdArticulo = NomArticulos[i].name;
-            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-            var StockActual = cantidad[i].value;
+            var ExitenciaInicial = cantidad[i].value;
+            var ExitenciaActual = cantidad[i].value;
+        
 
-            var ExistenciaInicial = cantidad[i].value;
-            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-            var Unidad = UnidadM[i].value;
-            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-            var PrecioUnitario = Precio[i].value;
-            //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
-            var Impuesto = impuestos[i].value;
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
-            frm.append("IdExistenciaCompra", IdExistenciaCompra);
-            frm.append("IdCompra", IdCompras);
-            frm.append("StockActual", StockActual);
+            frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+            frm.append("IdCompraInterno", IdCompras);
             frm.append("Articulo", Articulo);
-            frm.append("Unidad", Unidad);
-            frm.append("NoCompra", NoCompra);
-            frm.append("Impuesto", Impuesto);
-            frm.append("PrecioUnitario", PrecioUnitario);
-            frm.append("TipoDeOperacion", TipoDeOperacion);
-            frm.append("ExistenciaInicial", ExistenciaInicial);
-            frm.append("FechaIngreso", FechaIngreso);
             frm.append("IdArticulo", IdArticulo);
+            frm.append("ExitenciaInicial", ExitenciaInicial);
+            frm.append("ExitenciaActual", ExitenciaActual);
+            frm.append("NoPedidoG", NumeroPedido);
 
-
-            frm.append("Estatus", 1);
             $.ajax({
                 type: "POST",
-                url: "/Compra/GuardarDatosArticuloCompra",
+                url: "/PedidosPendientes/GuardarArticulosAlmacen",
                 data: frm,
                 contentType: false,
                 processData: false,
