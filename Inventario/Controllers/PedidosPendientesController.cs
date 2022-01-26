@@ -196,13 +196,13 @@ namespace Inventario.Controllers
             if (id.Equals(0))
             {
                 int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
-                  && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
-                  && p.IdProveedor.Equals(DatosCompra.IdProveedor)
-                  && p.Proveedor.Equals(DatosCompra.Proveedor)
-                  && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
-                  && p.IdSitio.Equals(DatosCompra.IdSitio)
-                  && p.Sitio.Equals(DatosCompra.Sitio)
-                  && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+                  //&& p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
+                  //&& p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                  //&& p.Proveedor.Equals(DatosCompra.Proveedor)
+                  //&& p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                  //&& p.IdSitio.Equals(DatosCompra.IdSitio)
+                  //&& p.Sitio.Equals(DatosCompra.Sitio)
+                  //&& p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
                  
                   ).Count();
 
