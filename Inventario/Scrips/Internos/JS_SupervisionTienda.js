@@ -351,7 +351,7 @@ function abrirModalMovimiento(IDTienda) {
 
 
 
-function abrirModalDevoluciones(id, idS) { 
+function abrirModalDevoluciones(id, idS) {
 
     LimpiarCampos();
     if (idS == 0) {
@@ -370,17 +370,17 @@ function abrirModalDevoluciones(id, idS) {
         });
         ConsultaArt(id);
         ProvDev(id);
-   //     BDNoPedido(id);
-        
+        //     BDNoPedido(id);
+
     }
 }
 function ConsultaArt(id) {
     $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-       //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-          //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
-       
+        //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+        //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+
         document.getElementById("TxtArtDev").value = Data.Nombre;
-      
+
         //Muestra el número de pedido que le corresponde por proveedor-------
         //SiguientePedidoProveedor(id);
         ////Muestra el número de pedido que le corresponde-------
@@ -392,10 +392,10 @@ function ConsultaArt(id) {
 
 function ProvDev(id) {
 
-         $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-          document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
-             document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
-     
+    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+        document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+        document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
+
     });
 }
 
@@ -494,7 +494,7 @@ function MostrarArticulosDevolucion(idS) {
                 //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='text' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-               TablaArticulo += "</div>";
+                TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
                 //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
@@ -611,7 +611,7 @@ function MostrarArticulosUsados(idS) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-               // TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                // TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
                 TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</div>";
@@ -676,12 +676,15 @@ function MostrarArticulos(id) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los chex-box-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                //TablaArticulo += "<input  class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+                TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+              
                 TablaArticulo += "</div>";
                 //-------Crea los input-------------------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidadPedidos redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -779,15 +782,16 @@ function GuardarPedidoInterno() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
 
             //----------Guardar los inputs y checkbox de manera individual en la Base de datos--------------------
-            var NumPedidos = document.getElementsByClassName("input-cantidad");
+            var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
 
-            let llenar = "";
-            var ChevPedidos = document.getElementsByClassName("checkbox-articulos");
-            let seleccionados = "";
-            for (let i = 0; i < NumPedidos.length && ChevPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && ChevPedidos[i].checked == true) {
-                    llenar += NumPedidos[i].value;
-                    seleccionados += ChevPedidos[i].id;
+            //let llenar = "";
+            var ChevPedidos = document.getElementsByClassName("input-ArticulosPedidos");
+            //let seleccionados = "";
+
+            for (let i = 0; i < NumPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
+                    //llenar += NumPedidos[i].value;
+                    //seleccionados += ChevPedidos[i].id;
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                     var IdProveedor = document.getElementById("cmbProveedor").value;
@@ -797,7 +801,9 @@ function GuardarPedidoInterno() {
                     var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
                     var Fecha = document.getElementById("TxtFechaIngreso").value;
                     //------------------------Guarda checkbox de los artículos seleccionados----------------------------------
-                    var Articulo = ChevPedidos[i].id;
+                    var IdArticulo = ChevPedidos[i].name;
+                    var Articulo = ChevPedidos[i].value;
+                
                     //var Articulo = ChevPedidos[i].id;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
@@ -811,6 +817,7 @@ function GuardarPedidoInterno() {
                     frm.append("IdPedidosExternos", IdPedidosExternos);
                     frm.append("IdProveedor", IdProveedor);
                     frm.append("Proveedor", Proveedor);
+                    frm.append("IdArticulo", IdArticulo);
                     frm.append("Articulo", Articulo);
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("NumPedidoProveedor", NumPedidoProveedor);
@@ -868,7 +875,7 @@ function GuardarUsados() {
 
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
-                  
+
                     var Movimiento = document.getElementById("TxtMovUsados").value;
                     var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
                     //------------------------Guarda el nombre del artículo solicitado----------------------------------
@@ -876,18 +883,18 @@ function GuardarUsados() {
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var Cantidad = NumPedidos[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                    
+
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdMovimiento", IdMovimiento);
                     frm.append("Movimiento", Movimiento);
                     frm.append("Fecha", Fecha);
-                   
+
 
                     frm.append("IdArticulo", IdArticulo);
-                   
+
                     frm.append("Cantidad", Cantidad);
-                   
+
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
@@ -902,7 +909,7 @@ function GuardarUsados() {
                             else if (data == -1) {
                                 alert("Ya existe este registro");
                             }
-                            
+
                         }
                     });
 
