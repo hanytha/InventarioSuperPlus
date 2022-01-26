@@ -35,7 +35,7 @@ namespace Inventario.Controllers
                {
                    pedido = p.NumeroPedido,
                    asignacion = p.IdAsignacion,
-                   Idtienda = p.IdTienda,
+                   Idtienda = p.IdSitio,
                    tiendas = p.Tienda,
 
                });
@@ -104,18 +104,18 @@ namespace Inventario.Controllers
             var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
                 .Select(p => new
                 {
-                    p.IdPedidosInternos,
                     p.NumeroPedido,
+                    p.NumPedidoProveedor,
                     p.CantidadSolicitada,
                     p.IdAsignacion,
-                    p.IdTienda,
+                    p.IdSitio,
+                    p.Sitio,
                     p.IdArticulo,
                     p.Articulo,
                     p.IdProveedor,
                     p.Proveedor,
                     p.Fecha,
-                    p.Tienda,
-                    p.NumPedidoProveedor,
+
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
@@ -138,7 +138,7 @@ namespace Inventario.Controllers
                     articulo = p.Articulo,
                     IdArticulo = p.IdArticulo,
                     IDasig = p.IdAsignacion,
-                    sitio = p.IdTienda,
+                    sitio = p.IdSitio,
 
                 });
 
@@ -281,8 +281,7 @@ namespace Inventario.Controllers
                 && p.ExitenciaActual.Equals(DatosTienda.ExitenciaActual)
                 && p.IdArticulo.Equals(DatosTienda.IdArticulo)
                 && p.Articulo.Equals(DatosTienda.Articulo)
-                && p.IdAsignacion.Equals(DatosTienda.IdAsignacion)
-                && p.Asignacion.Equals(DatosTienda.Asignacion)
+
 
                 ).Count();
 
@@ -297,10 +296,7 @@ namespace Inventario.Controllers
                     obj.ExitenciaActual = DatosTienda.ExitenciaActual;
                     obj.IdArticulo = DatosTienda.IdArticulo;
                     obj.Articulo = DatosTienda.Articulo;
-                    obj.IdAsignacion = DatosTienda.IdAsignacion;
-                    obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
-                    obj.Asignacion = DatosTienda.Asignacion;
-     
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

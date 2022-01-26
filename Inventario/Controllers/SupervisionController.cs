@@ -244,64 +244,64 @@ namespace Inventario.Controllers
         }
 
         ////---------------Tabla de las tiendas---------------
-        public JsonResult ConsultaArticulos(long IDTienda)
-        {
-            string id = "";
-            string NoPedido = "";
-            string Nombre = "";
-            string Fechas = ""; 
-            string Stock = "";
-            string IdSitio = "";
-            var ConsultaArticulo = from Articulos in InvBD.Articulos
-                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-                                   where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
-                                   select new
-                                   {
-                                       Id = Articulos.IdArticulos,
-                                       IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
-                                       nombres = Articulos.NombreEmpresa,
-                                       IdArticulos = Articulos.IdArticulos,
-                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                                       IdSitio = ExistenciaAlmacenG.IdSitio,
+        //public JsonResult ConsultaArticulos(long IDTienda)
+        //{
+        //    string id = "";
+        //    string NoPedido = "";
+        //    string Nombre = "";
+        //    string Fechas = ""; 
+        //    string Stock = "";
+        //    string IdSitio = "";
+        //    var ConsultaArticulo = from Articulos in InvBD.Articulos
+        //                           join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+        //                           on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+        //                           where ExistenciaAlmacenG.IdSitio.Equals(IDTienda)
+        //                           select new
+        //                           {
+        //                               Id = Articulos.IdArticulos,
+        //                               IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+        //                               NoPedido = ExistenciaAlmacenG.NoPedidoG,
+        //                               nombres = Articulos.NombreEmpresa,
+        //                               IdArticulos = Articulos.IdArticulos,
+        //                               IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
+        //                               IdSitio = ExistenciaAlmacenG.IdSitio,
                                        
-                                   };
-            foreach (var art in ConsultaArticulo)
-            {
-                id += art.IdExistencia + ",";
-                Nombre += art.nombres + ",";
-                NoPedido += art.NoPedido + ",";
-                IdSitio += art.IdSitio + ",";
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
-                   .Select(p => new
-                   {
+        //                           };
+        //    foreach (var art in ConsultaArticulo)
+        //    {
+        //        id += art.IdExistencia + ",";
+        //        Nombre += art.nombres + ",";
+        //        NoPedido += art.NoPedido + ",";
+        //        IdSitio += art.IdSitio + ",";
+        //        var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+        //           .Select(p => new
+        //           {
                        
-                       stockActual = p.ExitenciaActual,
-                   });
-                if (consultaFecha.Count() > 0)
-                {
-                    int UltimoReg = consultaFecha.Count() - 1;
-                    int cont = 0;
-                    int SumaStock = 0;
-                    foreach (var comp in consultaFecha)
-                    {
-                        SumaStock = (int)(SumaStock + comp.stockActual);
+        //               stockActual = p.ExitenciaActual,
+        //           });
+        //        if (consultaFecha.Count() > 0)
+        //        {
+        //            int UltimoReg = consultaFecha.Count() - 1;
+        //            int cont = 0;
+        //            int SumaStock = 0;
+        //            foreach (var comp in consultaFecha)
+        //            {
+        //                SumaStock = (int)(SumaStock + comp.stockActual);
 
                      
-                    }
-                    Stock += SumaStock + ",";
+        //            }
+        //            Stock += SumaStock + ",";
 
-                }
-                else
-                {
-                    Fechas += "2010-08-10" + ",";
-                    Stock += "0" + ",";
-                }
-            }
-            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
-            return Json(Resultado, JsonRequestBehavior.AllowGet);
-        }
+        //        }
+        //        else
+        //        {
+        //            Fechas += "2010-08-10" + ",";
+        //            Stock += "0" + ",";
+        //        }
+        //    }
+        //    var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
+        //    return Json(Resultado, JsonRequestBehavior.AllowGet);
+        //}
 
 
 

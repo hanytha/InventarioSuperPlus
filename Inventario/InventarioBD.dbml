@@ -127,11 +127,14 @@
       <Column Name="NoPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="NoPedidoProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Destino" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="FechaIngreso" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="EstatusPedido" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdAsignacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Sitio" Type="System.Data.Linq.Binary" DbType="VarBinary(100)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.ComprasArticulos" Member="ComprasArticulos">
@@ -199,11 +202,8 @@
       <Column Name="IdCompraInterno" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="ExitenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IdAsignacion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Asignacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -330,8 +330,8 @@
       <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdAsignacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdTienda" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Tienda" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Sitio" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -340,7 +340,7 @@
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Articulos_PedidosInternos" Member="Articulos" ThisKey="IdArticulo" OtherKey="IdArticulos" Type="Articulos" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Tienda_PedidosInternos" Member="Tienda1" ThisKey="IdTienda" OtherKey="IdTienda" Type="Tienda" IsForeignKey="true" />
+      <Association Name="Tienda_PedidosInternos" Member="Tienda" ThisKey="IdSitio" OtherKey="IdTienda" Type="Tienda" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PerfilDeUsuario" Member="PerfilDeUsuario">
@@ -463,7 +463,7 @@
       <Column Name="HApertura" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="HCierre" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Tienda_PedidosInternos" Member="PedidosInternos" ThisKey="IdTienda" OtherKey="IdTienda" Type="PedidosInternos" />
+      <Association Name="Tienda_PedidosInternos" Member="PedidosInternos" ThisKey="IdTienda" OtherKey="IdSitio" Type="PedidosInternos" />
       <Association Name="localidades_Tienda" Member="localidades" ThisKey="IdLocalidad" OtherKey="id" Type="localidades" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="municipios_Tienda" Member="municipios" ThisKey="IdMunicipio" OtherKey="id" Type="municipios" IsForeignKey="true" />
       <Association Name="Supervision_Tienda" Member="Supervision" ThisKey="IdSupervision" OtherKey="IdSupervision" Type="Supervision" IsForeignKey="true" />

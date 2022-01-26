@@ -66,12 +66,12 @@ function abrirModal(id) {
 
             document.getElementById("TxtAsignacion").value = Data[0].IdAsignacion;
             document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
-            document.getElementById("TxtIDTienda").value = Data[0].IdTienda;
+            document.getElementById("TxtIDTienda").value = Data[0].IdSitio;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtProveedor").name = Data[0].IdProveedor;
-            document.getElementById("TxtTiendas").value = Data[0].Tienda;
+            document.getElementById("TxtTiendas").value = Data[0].Sitio;
 
             MostrarArticulosPorId(id);
             CalcularFecha();
