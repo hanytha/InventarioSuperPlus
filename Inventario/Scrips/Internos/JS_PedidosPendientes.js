@@ -62,8 +62,8 @@ function abrirModal(id) {
     else {
 
         $.get("/PedidosPendientes/ConsultaPedidoXNumero/?Num=" + id, function (Data) {
- 
-    
+
+
             document.getElementById("TxtAsignacion").value = Data[0].IdAsignacion;
             document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtTienda").value = Data[0].IdTienda;
@@ -128,7 +128,7 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -136,7 +136,7 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "<input  class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
-     
+
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
@@ -146,21 +146,36 @@ function MostrarArticulosPorId(id) {
 }
 
 //-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
-function comparar() {
+function Verificar() {
     var total = document.getElementsByClassName("input-total");
     var aprobar = document.getElementsByClassName("input-aprobar");
+    var contador = 0;
+    var contadorAprobada = 0;
 
     for (let i = 0; i < aprobar.length; i++) {
 
-        if (aprobar[i].value > total[i].value || aprobar[i].value < 0) {
+        if (aprobar[i].value > 0 || aprobar[i].value < 0) {
 
-            aprobar[i].style.borderColor = 'Red';
+            contador++;
         }
-        else {
-            alert("Correcto");
+        if (aprobar[i].value < total[i].value) {
+
+            contadorAprobada++;
         }
+
+    }
+
+    if (contador == contadorAprobada && contador >= 1) {
+
+        GuardarCompraInterna();
+    }
+    else {
+        swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
     }
 }
+
+
+
 //-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
 function BordeInput() {
 
@@ -203,13 +218,11 @@ function CalcularFecha() {
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaAprobada').value = fecha;
 
-} 
+}
 //---------------------------------------------------------------------------
-
 
 //----Función para guardar los datos en la tabla de compras internos-------------------
 
-//Guarda los cambios y altas de las áreas
 function GuardarCompraInterna() {
 
     if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -229,27 +242,29 @@ function GuardarCompraInterna() {
         frm.append("IdProveedor", IdProveedor);
         frm.append("Proveedor", Proveedor);
         frm.append("FechaIngreso", FechaIngreso);
- 
-            $.ajax({
-                type: "POST",
-                url: "/PedidosPendientes/GuardarProveedorInterno",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        swal("¡Ocurrio un error!", "", "danger");
-                    }
-                    else if (data == -1) {
-                        swal("¡La compra ya existe!", "", "warning");
-                    }
-                    else {
-                        swal("La compra se registró exitosamente!", "", "success");
-                        ConsultaCompras();
-                        document.getElementById("btnCancelar").click();
-                    }
+
+        $.ajax({
+            type: "POST",
+            url: "/PedidosPendientes/GuardarProveedorInterno",
+            data: frm,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data == 0) {
+                    swal("¡Ocurrio un error!", "", "danger");
                 }
-            });
-        }
-    
+                else if (data == -1) {
+                    swal("¡La compra ya existe!", "", "warning");
+                }
+                else {
+                    swal("La compra se registró exitosamente!", "", "success");
+                    ConsultaCompras();
+                    document.getElementById("btnCancelar").click();
+                }
+            }
+        });
+    }
+
 }
+
+//----------------------------------------------Termina------------------------------------------------------------------------
