@@ -250,22 +250,34 @@ namespace Inventario.Controllers
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string IdSitio = "";
             string IdArticulos = "";
-            var ConsultaArticulo = from Articulos in InvBD.Articulos
+            //var ConsultaArticulo = from Articulos in InvBD.Articulos
+            //                       join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+            //                       on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+            //                       join CompraInterno in InvBD.CompraInterno
+            //                        on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
+            //                       where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
+            //                       select new
+
+
+
+
+           var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-                                   join CompraInterno in InvBD.CompraInterno
-                                    on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
+                                   on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
+                                  
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
                                    select new
 
+
+
                                    {
 
-                                       Id = Articulos.IdArticulos,
+                                       Id = ExistenciaAlmacenG.IdArticulo,
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
-                                       nombres = Articulos.NombreEmpresa,
-                                       IdArticulos = Articulos.IdArticulos,
-                                       Articulo = Articulos.NombreEmpresa,
+                                       nombres = ExistenciaAlmacenG.Articulo,
+                                       IdArticulos = ExistenciaAlmacenG.IdArticulo,
+                                       Articulo = ExistenciaAlmacenG.Articulo,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        ExitenciaActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdSitio = CompraInterno.IdSitio,

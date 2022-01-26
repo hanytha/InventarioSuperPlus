@@ -809,9 +809,9 @@ function GuardarPedidoInterno() {
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
 
-                    var IdTienda = document.getElementById("cmbTienda").value;
-                    var TempTienda = document.getElementById("cmbTienda");
-                    var Tienda = TempTienda.options[TempTienda.selectedIndex].text;
+                    var IdSitio = document.getElementById("cmbTienda").value;
+                    var TempSitio = document.getElementById("cmbTienda");
+                    var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
 
                     var frm = new FormData();
                     frm.append("IdPedidosExternos", IdPedidosExternos);
@@ -822,8 +822,8 @@ function GuardarPedidoInterno() {
                     frm.append("NumeroPedido", NumeroPedido);
                     frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("CantidadSolicitada", CantidadSolicitada);
-                    frm.append("IdTienda", IdTienda);
-                    frm.append("Tienda", Tienda);
+                    frm.append("Sitio", Sitio);
+                    frm.append("IdSitio", IdSitio);
                     frm.append("Fecha", Fecha);
                     frm.append("IdAsignacion", 2);
                     frm.append("Estatus", 1);
@@ -879,7 +879,8 @@ function GuardarUsados() {
                     var Movimiento = document.getElementById("TxtMovUsados").value;
                     var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
                     //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                    var IdArticulo = NomArticulos[i].value;
+                    var IdArticulo = NomArticulos[i].name;
+                    var Articulo = NomArticulos[i].value;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var Cantidad = NumPedidos[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
@@ -892,7 +893,7 @@ function GuardarUsados() {
 
 
                     frm.append("IdArticulo", IdArticulo);
-
+                    frm.append("Articulo", Articulo);
                     frm.append("Cantidad", Cantidad);
 
                     frm.append("Estatus", 1);
