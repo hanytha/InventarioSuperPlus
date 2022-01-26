@@ -137,7 +137,7 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.Fecha,
                     p.Tienda,
-
+                    p.NumPedidoProveedor,
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }

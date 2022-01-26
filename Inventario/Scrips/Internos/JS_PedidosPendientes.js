@@ -69,6 +69,7 @@ function abrirModal(id) {
             document.getElementById("TxtTienda").value = Data[0].IdTienda;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
+            document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
             MostrarArticulosPorId(id);
         });
     }
@@ -192,3 +193,5 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
+
+//************************Funcion paraguardar en 
