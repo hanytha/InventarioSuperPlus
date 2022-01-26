@@ -124,12 +124,12 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-stock sinborde limpiar ' disabled  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i]  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-aprobada  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
      
@@ -143,24 +143,25 @@ function MostrarArticulosPorId(id) {
 
 //-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
 function comparar() {
-    var stock = document.getElementsByClassName("input-stock");
-    var aprobar = document.getElementsByClassName("input-aprobada");
+    var total = document.getElementsByClassName("input-total");
+    var aprobar = document.getElementsByClassName("input-aprobar");
 
     for (let i = 0; i < aprobar.length; i++) {
 
-        stock[i].value;
-
-        if (aprobar[i].value > stock[i].value || aprobar[i].value < 0) {
+        if (aprobar[i].value > total[i].value || aprobar[i].value < 0) {
 
             aprobar[i].style.borderColor = 'Red';
+        }
+        else {
+            alert("Correcto");
         }
     }
 }
 //-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
 function BordeInput() {
 
-    var stock = document.getElementsByClassName("input-stock");
-    var aprobar = document.getElementsByClassName("input-aprobada");
+    var stock = document.getElementsByClassName("input-total");
+    var aprobar = document.getElementsByClassName("input-aprobar");
 
     for (i = 0; i < aprobar.length; i++) {
 
