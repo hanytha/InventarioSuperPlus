@@ -200,6 +200,10 @@ namespace Inventario.Controllers
                   && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                   && p.Proveedor.Equals(DatosCompra.Proveedor)
                   && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                  && p.IdSitio.Equals(DatosCompra.IdSitio)
+                  && p.Sitio.Equals(DatosCompra.Sitio)
+                  && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+                 
                   ).Count();
 
                 if (nveces == 0)
@@ -213,6 +217,10 @@ namespace Inventario.Controllers
              && p.IdProveedor.Equals(DatosCompra.IdProveedor)
              && p.Proveedor.Equals(DatosCompra.Proveedor)
              && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+             && p.IdSitio.Equals(DatosCompra.IdSitio)
+             && p.Sitio.Equals(DatosCompra.Sitio)
+             && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+            
               ).First();
                     Afectados = IdCompra.IdCompraInterno;
                 }
@@ -228,6 +236,10 @@ namespace Inventario.Controllers
                 && p.IdProveedor.Equals(DatosCompra.IdProveedor)
                 && p.Proveedor.Equals(DatosCompra.Proveedor)
                 && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                && p.IdSitio.Equals(DatosCompra.IdSitio)
+                && p.Sitio.Equals(DatosCompra.Sitio)
+                && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+               
                 ).Count();
                 if (nveces == 0)
                 {
@@ -237,6 +249,10 @@ namespace Inventario.Controllers
                     obj.IdProveedor = DatosCompra.IdProveedor;
                     obj.Proveedor = DatosCompra.Proveedor;
                     obj.FechaIngreso = DatosCompra.FechaIngreso;
+                    obj.IdSitio = DatosCompra.IdSitio;
+                    obj.Sitio = DatosCompra.Sitio;
+                    obj.IdAsignacion = DatosCompra.IdAsignacion;
+                   
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -249,7 +265,7 @@ namespace Inventario.Controllers
         }
 
         //**************Termina*********************************************************
-
+        //*******************************Guarda los datos en la segunda tabla*************************************************
 
         public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
         {
@@ -260,7 +276,6 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosTienda.IdExistenciaAlmacenG)).Count();
 
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
                     InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosTienda);

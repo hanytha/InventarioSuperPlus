@@ -3052,19 +3052,17 @@ namespace Inventario
 		
 		private string _Proveedor;
 		
-		private string _Destino;
-		
-		private string _FechaIngreso;
-		
-		private System.Nullable<int> _EstatusPedido;
-		
-		private string _Usuario;
+		private System.Nullable<long> _IdSitio;
 		
 		private System.Nullable<int> _IdAsignacion;
 		
-		private System.Nullable<long> _IdSitio;
+		private string _Sitio;
 		
-		private System.Data.Linq.Binary _Sitio;
+		private string _FechaIngreso;
+		
+		private string _Usuario;
+		
+		private System.Nullable<int> _EstatusPedido;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -3080,20 +3078,18 @@ namespace Inventario
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
-    partial void OnDestinoChanging(string value);
-    partial void OnDestinoChanged();
-    partial void OnFechaIngresoChanging(string value);
-    partial void OnFechaIngresoChanged();
-    partial void OnEstatusPedidoChanging(System.Nullable<int> value);
-    partial void OnEstatusPedidoChanged();
-    partial void OnUsuarioChanging(string value);
-    partial void OnUsuarioChanged();
-    partial void OnIdAsignacionChanging(System.Nullable<int> value);
-    partial void OnIdAsignacionChanged();
     partial void OnIdSitioChanging(System.Nullable<long> value);
     partial void OnIdSitioChanged();
-    partial void OnSitioChanging(System.Data.Linq.Binary value);
+    partial void OnIdAsignacionChanging(System.Nullable<int> value);
+    partial void OnIdAsignacionChanged();
+    partial void OnSitioChanging(string value);
     partial void OnSitioChanged();
+    partial void OnFechaIngresoChanging(string value);
+    partial void OnFechaIngresoChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
+    partial void OnEstatusPedidoChanging(System.Nullable<int> value);
+    partial void OnEstatusPedidoChanged();
     #endregion
 		
 		public CompraInterno()
@@ -3201,82 +3197,22 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destino", DbType="VarChar(150)")]
-		public string Destino
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSitio", DbType="BigInt")]
+		public System.Nullable<long> IdSitio
 		{
 			get
 			{
-				return this._Destino;
+				return this._IdSitio;
 			}
 			set
 			{
-				if ((this._Destino != value))
+				if ((this._IdSitio != value))
 				{
-					this.OnDestinoChanging(value);
+					this.OnIdSitioChanging(value);
 					this.SendPropertyChanging();
-					this._Destino = value;
-					this.SendPropertyChanged("Destino");
-					this.OnDestinoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="NChar(50)")]
-		public string FechaIngreso
-		{
-			get
-			{
-				return this._FechaIngreso;
-			}
-			set
-			{
-				if ((this._FechaIngreso != value))
-				{
-					this.OnFechaIngresoChanging(value);
-					this.SendPropertyChanging();
-					this._FechaIngreso = value;
-					this.SendPropertyChanged("FechaIngreso");
-					this.OnFechaIngresoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstatusPedido", DbType="Int")]
-		public System.Nullable<int> EstatusPedido
-		{
-			get
-			{
-				return this._EstatusPedido;
-			}
-			set
-			{
-				if ((this._EstatusPedido != value))
-				{
-					this.OnEstatusPedidoChanging(value);
-					this.SendPropertyChanging();
-					this._EstatusPedido = value;
-					this.SendPropertyChanged("EstatusPedido");
-					this.OnEstatusPedidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
-		public string Usuario
-		{
-			get
-			{
-				return this._Usuario;
-			}
-			set
-			{
-				if ((this._Usuario != value))
-				{
-					this.OnUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._Usuario = value;
-					this.SendPropertyChanged("Usuario");
-					this.OnUsuarioChanged();
+					this._IdSitio = value;
+					this.SendPropertyChanged("IdSitio");
+					this.OnIdSitioChanged();
 				}
 			}
 		}
@@ -3301,28 +3237,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSitio", DbType="BigInt")]
-		public System.Nullable<long> IdSitio
-		{
-			get
-			{
-				return this._IdSitio;
-			}
-			set
-			{
-				if ((this._IdSitio != value))
-				{
-					this.OnIdSitioChanging(value);
-					this.SendPropertyChanging();
-					this._IdSitio = value;
-					this.SendPropertyChanged("IdSitio");
-					this.OnIdSitioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sitio", DbType="VarBinary(100)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Sitio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sitio", DbType="VarChar(100)")]
+		public string Sitio
 		{
 			get
 			{
@@ -3337,6 +3253,66 @@ namespace Inventario
 					this._Sitio = value;
 					this.SendPropertyChanged("Sitio");
 					this.OnSitioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="NChar(50)")]
+		public string FechaIngreso
+		{
+			get
+			{
+				return this._FechaIngreso;
+			}
+			set
+			{
+				if ((this._FechaIngreso != value))
+				{
+					this.OnFechaIngresoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaIngreso = value;
+					this.SendPropertyChanged("FechaIngreso");
+					this.OnFechaIngresoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstatusPedido", DbType="Int")]
+		public System.Nullable<int> EstatusPedido
+		{
+			get
+			{
+				return this._EstatusPedido;
+			}
+			set
+			{
+				if ((this._EstatusPedido != value))
+				{
+					this.OnEstatusPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._EstatusPedido = value;
+					this.SendPropertyChanged("EstatusPedido");
+					this.OnEstatusPedidoChanged();
 				}
 			}
 		}

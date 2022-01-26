@@ -68,9 +68,9 @@ function abrirModal(id) {
             document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtIDTienda").value = Data[0].IdSitio;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
+            document.getElementById("TxtProveedor").name = Data[0].IdProveedor;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
-            document.getElementById("TxtProveedor").name = Data[0].IdProveedor;
             document.getElementById("TxtTiendas").value = Data[0].Sitio;
 
             MostrarArticulosPorId(id);
@@ -241,6 +241,11 @@ function GuardarCompraInterna() {
         var Proveedor = document.getElementById("TxtProveedor").value;
         var FechaIngreso = document.getElementById("TxtFechaAprobada").value;
 
+        var IdSitio = document.getElementById("TxtIDTienda").value;
+        var Sitio = document.getElementById("TxtTiendas").value;
+        var IdAsignacion = document.getElementById("TxtAsignacion").value;
+     
+
         var frm = new FormData();
 
         frm.append("IdCompraInterno", IdCompraInterno);
@@ -249,6 +254,9 @@ function GuardarCompraInterna() {
         frm.append("IdProveedor", IdProveedor);
         frm.append("Proveedor", Proveedor);
         frm.append("FechaIngreso", FechaIngreso);
+        frm.append("IdSitio", IdSitio);
+        frm.append("Sitio", Sitio);
+        frm.append("IdAsignacion", IdAsignacion);
 
         $.ajax({
             type: "POST",
