@@ -20,28 +20,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
-        public JsonResult ConsultaPedidos()
-        {
-            var pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.IdPedidosInternos,
-                    p.NumeroPedido,
-                    p.CantidadSolicitada,
-                    p.IdAsignacion,
-                    p.IdTienda,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.Fecha,
-                    p.Tienda,
-
-                });
-            return Json(pedidos, JsonRequestBehavior.AllowGet);
-        }
-
  //****************************************************************************************************************************
         //****************************Consulta de pedidos internos***********************************************************
 
@@ -198,7 +176,130 @@ namespace Inventario.Controllers
             };
             return Json(compras, JsonRequestBehavior.AllowGet);
         }
-//**************************************************************************
+        //**************************************************************************
+        //***********************Función para guardar los datos del proveedor en compra interno*****************************
+        public long GuardarProveedorInterno(CompraInterno DatosCompra)
+        {
+            long Afectados = 0;
+            long id = DatosCompra.IdCompraInterno;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
+                  && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
+                  && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                  && p.Proveedor.Equals(DatosCompra.Proveedor)
+                  && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                  ).Count();
 
+                if (nveces >= 0)
+                {
+                    InvBD.CompraInterno.InsertOnSubmit(DatosCompra);
+                    InvBD.SubmitChanges();
+
+                    var IdCompra = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
+
+             && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
+             && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+             && p.Proveedor.Equals(DatosCompra.Proveedor)
+             && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+              ).First();
+                    Afectados = IdCompra.IdCompraInterno;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
+                && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
+                && p.IdProveedor.Equals(DatosCompra.IdProveedor)
+                && p.Proveedor.Equals(DatosCompra.Proveedor)
+                && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
+                ).Count();
+                if (nveces == 0)
+                {
+                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
+                    obj.NoPedido = DatosCompra.NoPedido;
+                    obj.NoPedidoProveedor = DatosCompra.NoPedidoProveedor;
+                    obj.IdProveedor = DatosCompra.IdProveedor;
+                    obj.Proveedor = DatosCompra.Proveedor;
+                    obj.FechaIngreso = DatosCompra.FechaIngreso;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            return Afectados;
+        }
+
+        //**************Termina*********************************************************
+
+
+        public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
+        {
+            int Afectados = 0;
+
+            long id = (long)DatosTienda.IdExistenciaAlmacenG;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosTienda.IdExistenciaAlmacenG)).Count();
+
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosTienda);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosTienda.IdExistenciaAlmacenG)
+                && p.IdCompra.Equals(DatosTienda.IdCompra)
+                && p.IdCompraInterno.Equals(DatosTienda.IdCompraInterno)
+                && p.ExitenciaInicial.Equals(DatosTienda.ExitenciaInicial)
+                && p.ExitenciaActual.Equals(DatosTienda.ExitenciaActual)
+                && p.IdArticulo.Equals(DatosTienda.IdArticulo)
+                && p.Articulo.Equals(DatosTienda.Articulo)
+                && p.IdAsignacion.Equals(DatosTienda.IdAsignacion)
+                && p.Asignacion.Equals(DatosTienda.Asignacion)
+                && p.FechaDeIngreso.Equals(DatosTienda.FechaDeIngreso)
+                ).Count();
+
+
+                if (nveces == 0)
+                {
+                    ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+
+                    obj.IdCompra = DatosTienda.IdCompra;
+                    obj.IdCompraInterno = DatosTienda.IdCompraInterno;
+                    obj.ExitenciaInicial = DatosTienda.ExitenciaInicial;
+                    obj.ExitenciaActual = DatosTienda.ExitenciaActual;
+                    obj.IdArticulo = DatosTienda.IdArticulo;
+                    obj.Articulo = DatosTienda.Articulo;
+                    obj.IdAsignacion = DatosTienda.IdAsignacion;
+                    obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
+                    obj.Asignacion = DatosTienda.Asignacion;
+                    obj.FechaDeIngreso = DatosTienda.FechaDeIngreso;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+
+            return Afectados;
+        }
     }
 }
