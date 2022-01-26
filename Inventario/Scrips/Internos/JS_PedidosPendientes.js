@@ -71,6 +71,7 @@ function abrirModal(id) {
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
             MostrarArticulosPorId(id);
+            CalcularFecha();
         });
     }
 }
@@ -194,4 +195,11 @@ function BloquearCTRL() {
     }
 }
 
-//************************Funcion paraguardar en 
+//------------Funcion que calcula la fecha del sistema------------------------
+function CalcularFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaAprobada').value = fecha;
+
+} 
+//---------------------------------------------------------------------------
