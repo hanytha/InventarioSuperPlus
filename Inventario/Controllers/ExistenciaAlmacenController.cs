@@ -25,13 +25,13 @@ namespace Inventario.Controllers
                     p.IdExistenciaAlmacenG,
                     p.IdCompra,
                     p.NoPedidoG,
-                    p.FechaDeIngreso,
+                    //p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
                    // p.PrecioUnitario,
                     p.TipoDeOperacion,
-                    p.IdAsignacion,
-                    p.IdSitio,
+                    //p.IdAsignacion,
+                    //p.IdSitio,
                     p.IdArticulo,
                     p.Articulo,
                     //p.IdProveedor,
@@ -46,13 +46,13 @@ namespace Inventario.Controllers
                     p.IdExistenciaAlmacenG,
                     p.IdCompra,
                     p.NoPedidoG,
-                    p.FechaDeIngreso,
+                    //p.FechaDeIngreso,
                     p.ExitenciaInicial,
                     p.ExitenciaActual,
                    // p.PrecioUnitario,
                     p.TipoDeOperacion,
-                    p.IdAsignacion,
-                    p.IdSitio,
+                    //p.IdAsignacion,
+                    //p.IdSitio,
                     p.IdArticulo,
                     p.Articulo,
                     //p.IdProveedor
@@ -76,12 +76,12 @@ namespace Inventario.Controllers
                 //&& p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
-                && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+               // && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                 //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
               //  && p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
-                && p.IdSitio.Equals(DatosAlmacen.IdSitio)
+                //&& p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
+                //&& p.IdSitio.Equals(DatosAlmacen.IdSitio)
                 && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                 && p.Articulo.Equals(DatosAlmacen.Articulo)
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
@@ -104,11 +104,11 @@ namespace Inventario.Controllers
                 && p.ExitenciaInicial.Equals(DatosAlmacen.ExitenciaInicial)
                 && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                 && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
-                && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+              //  && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                  //&& p.PrecioUnitario.Equals(DatosAlmacen.PrecioUnitario)
                 && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
-                && p.IdSitio.Equals(DatosAlmacen.IdSitio)
+               // && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
+             //   && p.IdSitio.Equals(DatosAlmacen.IdSitio)
                   && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                 && p.Articulo.Equals(DatosAlmacen.Articulo)).Count();
                 //&& p.IdProveedor.Equals(DatosAlmacen.IdProveedor)
@@ -120,12 +120,12 @@ namespace Inventario.Controllers
                     obj.NoPedidoG = DatosAlmacen.NoPedidoG;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
-                    obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
+                  //  obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
                    // obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
-                    obj.IdAsignacion = DatosAlmacen.IdAsignacion;
-                    obj.IdSitio = DatosAlmacen.IdSitio;
-                    obj.IdArticulo = DatosAlmacen.IdArticulo;
+                  ///  obj.IdAsignacion = DatosAlmacen.IdAsignacion;
+                  //  obj.IdSitio = DatosAlmacen.IdSitio;
+                   // obj.IdArticulo = DatosAlmacen.IdArticulo;
                     obj.Articulo = DatosAlmacen.Articulo;
                     //obj.IdProveedor = DatosAlmacen.IdProveedor;
                     InvBD.SubmitChanges();
@@ -272,12 +272,12 @@ namespace Inventario.Controllers
 
                && p.IdCompra.Equals(DatosAlmacen.IdCompra)
                     && p.ExitenciaActual.Equals(DatosAlmacen.ExitenciaActual)
-                    && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
+                  //  && p.FechaDeIngreso.Equals(DatosAlmacen.FechaDeIngreso)
                     //&& p.FechaFinal.Equals(DatosAlmacen.FechaFinal)
                     && p.NoPedidoG.Equals(DatosAlmacen.NoPedidoG)
                     && p.TipoDeOperacion.Equals(DatosAlmacen.TipoDeOperacion)
-                    && p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
-                    && p.IdSitio.Equals(DatosAlmacen.IdSitio)
+                    //&& p.IdAsignacion.Equals(DatosAlmacen.IdAsignacion)
+                    //&& p.IdSitio.Equals(DatosAlmacen.IdSitio)
                     && p.IdArticulo.Equals(DatosAlmacen.IdArticulo)
                     && p.Articulo.Equals(DatosAlmacen.Articulo
                     )
@@ -293,11 +293,11 @@ namespace Inventario.Controllers
                     obj.NoPedidoG = DatosAlmacen.NoPedidoG;
                     obj.ExitenciaInicial = DatosAlmacen.ExitenciaInicial;
                     obj.ExitenciaActual = DatosAlmacen.ExitenciaActual;
-                    obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
+                   // obj.FechaDeIngreso = DatosAlmacen.FechaDeIngreso;
                     obj.TipoDeOperacion = DatosAlmacen.TipoDeOperacion;
                    // obj.PrecioUnitario = DatosAlmacen.PrecioUnitario;
-                    obj.IdAsignacion = DatosAlmacen.IdAsignacion;
-                    obj.IdSitio = DatosAlmacen.IdSitio;
+                   // obj.IdAsignacion = DatosAlmacen.IdAsignacion;
+                   // obj.IdSitio = DatosAlmacen.IdSitio;
                     obj.IdArticulo = DatosAlmacen.IdArticulo;
                     obj.Articulo = DatosAlmacen.Articulo;
                     //obj.IdProveedor = DatosAlmacen.IdProveedor;
@@ -385,13 +385,13 @@ namespace Inventario.Controllers
                                  join provedor in InvBD.Areas
                              on CompraInterno.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
-                                   on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.IdAsignacion.Equals(2)
+                                   on CompraInterno.IdSitio equals Tienda.IdTienda
+                                 where CompraInterno.IdAsignacion.Equals(2)
                                  select new
                                  {
-                                     FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
+                                     FechaDeIngreso = CompraInterno.FechaIngreso,
                                      NoPedido = CompraInterno.NoPedido,
-                                     tienda= ExistenciAAlmacen.Asignacion,
+                                     tienda= CompraInterno.Sitio,
                                      Articulo = ExistenciAAlmacen.Articulo,
                                      // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,

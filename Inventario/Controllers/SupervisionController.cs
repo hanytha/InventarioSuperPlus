@@ -255,7 +255,7 @@ namespace Inventario.Controllers
                                    on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
                                    join CompraInterno in InvBD.CompraInterno
                                     on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
-                                   where ExistenciaAlmacenG.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
                                    select new
 
                                    {
@@ -266,9 +266,10 @@ namespace Inventario.Controllers
                                        nombres = Articulos.NombreEmpresa,
                                        IdArticulos = Articulos.IdArticulos,
                                        Articulo = Articulos.NombreEmpresa,
-                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                                       IdSitio = ExistenciaAlmacenG.IdSitio,
-                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                       IdAsignacion = CompraInterno.IdAsignacion,
+                                       ExitenciaActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       FechaDeIngreso = CompraInterno.FechaIngreso
                                    };
             foreach (var art in ConsultaArticulo)
             {
@@ -277,7 +278,7 @@ namespace Inventario.Controllers
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
                 IdArticulos += art.IdArticulos + ",";
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+                var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulos)
                    .Select(p => new
                    {
                        fechaIngreso = p.FechaDeIngreso,
@@ -322,25 +323,41 @@ namespace Inventario.Controllers
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
-            var ConsultaArticulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
-                .Select(p => new
-                {
-                    Id = p.IdArticulos,
-                    nombres = p.NombreEmpresa,
-                    NombreProveedor = p.IdAreas
 
-                });
+
+            var ConsultaArticulo = from Articulos in InvBD.Articulos
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
+                                   join CompraInterno in InvBD.CompraInterno
+                                    on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
+                                   where Articulos.IdArticulos.Equals(Id)
+                                   select new
+
+                                   {
+
+                                       Id = Articulos.IdArticulos,
+                                       IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       nombres = Articulos.NombreEmpresa,
+                                       IdArticulos = Articulos.IdArticulos,
+                                       Articulo = Articulos.NombreEmpresa,
+                                       IdAsignacion = CompraInterno.IdAsignacion,
+                                       ExitenciaActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       NombreProveedor = Articulos.IdAreas,
+                                       FechaDeIngreso = CompraInterno.FechaIngreso
+                                   };
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
                 NombreProveedor += art.nombres + ",";
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdExistenciaAlmacenG)
+                var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdAsignacion)
                     .Select(p => new
                     {
                         fechaIngreso = p.FechaDeIngreso,
                         stockActual = p.ExitenciaActual,
-                      //  costo = p.PrecioUnitario,
+                        //  costo = p.PrecioUnitario,
                     });
 
                 if (consultaFecha.Count() > 0)
@@ -356,7 +373,7 @@ namespace Inventario.Controllers
                         SumaStock = (int)(SumaStock + comp.stockActual);
                         if (cont == 0)
                         {
-                           // Costos += comp.costo + ",";
+                            // Costos += comp.costo + ",";
                         }
                         if (cont == UltimoReg)
                         {
@@ -528,14 +545,14 @@ namespace Inventario.Controllers
                                  join provedor in InvBD.Areas
                              on CompraInterno.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
-                                   on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
+                                   on CompraInterno.IdSitio equals Tienda.IdTienda
+                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && CompraInterno.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
                                  select new
                                  {
-                                     FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
+                                     FechaDeIngreso = CompraInterno.FechaIngreso,
                                      NoPedido = ExistenciAAlmacen.NoPedidoG,
                                      Articulo = ExistenciAAlmacen.Articulo,
-                                    // Coste = ExistenciAAlmacen.PrecioUnitario,
+                                     // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
                                      //    IdProveedor = provedor.IdAreas,
                                      //    Proveedor = provedor.Nombre
@@ -587,7 +604,7 @@ namespace Inventario.Controllers
                             on ExistAlm.IdCompraInterno equals CompraInterno.IdCompraInterno
                             join provedor in InvBD.Areas
                         on CompraInterno.IdProveedor equals provedor.IdAreas
-                            where ExistAlm.IdSitio.Equals(IdS)
+                            where CompraInterno.IdSitio.Equals(IdS)
                             select new
                             {
                                 Articulo = ExistAlm.Articulo,
@@ -595,7 +612,7 @@ namespace Inventario.Controllers
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = provedor.IdAreas,
                                 Proveedor = provedor.Nombre,
-                                Tienda = ExistAlm.IdSitio,
+                                Tienda = CompraInterno.IdSitio,
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
@@ -606,7 +623,7 @@ namespace Inventario.Controllers
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdSitio.Equals(Id)
+                            where Compra.IdSitio.Equals(Id)
                             select new
                             {
                                 Articulo = ExistAlm.Articulo,
@@ -614,7 +631,7 @@ namespace Inventario.Controllers
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
-                                Tienda = ExistAlm.IdSitio,
+                                Tienda = Compra.IdSitio,
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
@@ -627,7 +644,7 @@ namespace Inventario.Controllers
         //                    select new
         //                    {
         //                        NoPedido = existenciaAlm.NoPedidoG
-                               
+
         //                    };
         //    return Json(datos, JsonRequestBehavior.AllowGet);
         //}
@@ -675,7 +692,7 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
-     
+
 
         public JsonResult BDProveedor()
         {
@@ -713,20 +730,20 @@ namespace Inventario.Controllers
             //return Json(compra, JsonRequestBehavior.AllowGet);
 
             var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
-                            join Compra in InvBD.CompraInterno
-                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                            join areas in InvBD.Areas
-                        on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdSitio.Equals(IdPro)
-                            select new
-                            {
-                                NombreEmpresa = ExistAlm.Articulo,
-                                IdArticulos = ExistAlm.IdArticulo,
-                                Tipo = ExistAlm.TipoDeOperacion,
-                                IdProveedor = areas.IdAreas,
-                                Proveedor = areas.Nombre,
-                                Tienda = ExistAlm.IdSitio,
-                            };
+                         join Compra in InvBD.CompraInterno
+                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                         join areas in InvBD.Areas
+                     on Compra.IdProveedor equals areas.IdAreas
+                         where Compra.IdSitio.Equals(IdPro)
+                         select new
+                         {
+                             NombreEmpresa = ExistAlm.Articulo,
+                             IdArticulos = ExistAlm.IdArticulo,
+                             Tipo = ExistAlm.TipoDeOperacion,
+                             IdProveedor = areas.IdAreas,
+                             Proveedor = areas.Nombre,
+                             Tienda = Compra.IdSitio,
+                         };
             return Json(compra, JsonRequestBehavior.AllowGet);
 
 
@@ -848,7 +865,7 @@ namespace Inventario.Controllers
                                    on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
                                    join CompraInterno in InvBD.CompraInterno
                                     on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
-                                   where ExistenciaAlmacenG.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(0)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(0)
                                    select new
                                    {
 
@@ -856,12 +873,13 @@ namespace Inventario.Controllers
                                        IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        nombres = Articulos.NombreEmpresa,
-                                       Proveedor=CompraInterno.Proveedor,
+                                       Proveedor = CompraInterno.Proveedor,
                                        IdArticulos = Articulos.IdArticulos,
                                        Articulo = Articulos.NombreEmpresa,
-                                       IdAsignacion = ExistenciaAlmacenG.IdAsignacion,
-                                       IdSitio = ExistenciaAlmacenG.IdSitio,
-                                       FechaDeIngreso = ExistenciaAlmacenG.FechaDeIngreso
+                                       ExitenciaActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdAsignacion = CompraInterno.IdAsignacion,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       FechaDeIngreso = CompraInterno.FechaIngreso
                                    };
             foreach (var art in ConsultaArticulo)
             {
@@ -871,7 +889,7 @@ namespace Inventario.Controllers
                 NoPedido += art.NoPedido + ",";
                 IdSitio += art.IdSitio + ",";
                 IdArticulos += art.IdArticulos + ",";
-                var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulo)
+                var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulos)
                    .Select(p => new
                    {
                        fechaIngreso = p.FechaDeIngreso,
@@ -1090,10 +1108,10 @@ namespace Inventario.Controllers
                              Tipo = ExistAlm.TipoDeOperacion,
                              IdProveedor = Compra.IdProveedor,
                              Proveedor = Compra.Proveedor,
-                             IdTienda = ExistAlm.IdSitio,
+                             IdTienda = Compra.IdSitio,
                              IdArticulo = ExistAlm.IdArticulo,
                              //Articulo = ExistAlm.NombreEmpresa,
-                             Fecha = ExistAlm.FechaDeIngreso,
+                             Fecha = Compra.FechaIngreso,
                          };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
@@ -1132,7 +1150,7 @@ namespace Inventario.Controllers
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join Tienda in InvBD.Tienda
-                           on ExistAlm.IdSitio equals Tienda.IdTienda
+                           on Compra.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
                             where ExistAlm.IdArticulo.Equals(Id) && ExistAlm.NoPedidoG.Equals(No)
@@ -1142,15 +1160,15 @@ namespace Inventario.Controllers
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
                                 NoCompraProveedor = Compra.NoPedidoProveedor,
-                               // CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                               // CantidadAprobada = ExistAlm.CantidadAprobada,
+                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                                // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
-                                IdTienda = ExistAlm.IdSitio,
+                                IdTienda = Compra.IdSitio,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Articulo = ExistAlm.Articulo,
-                                Fecha = ExistAlm.FechaDeIngreso,
+                                Fecha = Compra.FechaIngreso,
                                 Telefono = areas.Telefono,
                                 Correo = areas.Correo,
                                 Tienda = Tienda.Nombre,

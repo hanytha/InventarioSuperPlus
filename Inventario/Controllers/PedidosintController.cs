@@ -34,8 +34,8 @@ namespace Inventario.Controllers
                     //p.UnidadDeMedida,
                     //p.IdMarca,
                     //p.Marca,
-                    p.IdTienda,
-                    p.Tienda,
+                    p.IdSitio,
+                    p.Sitio,
                     p.IdArticulo,
                     p.Articulo,
                     p.Fecha
@@ -62,8 +62,8 @@ namespace Inventario.Controllers
                     //p.UnidadDeMedida,
                     //p.IdMarca,
                     //p.Marca,
-                    p.IdTienda,
-                    p.Tienda,
+                    p.IdSitio,
+                    p.Sitio,
                     p.IdArticulo,
                     p.Articulo,
                     p.Fecha
@@ -100,7 +100,7 @@ namespace Inventario.Controllers
                                  join pedido in InvBD.PedidosInternos
                              on proveedor.IdAreas equals pedido.IdProveedor
                          join tienda in InvBD.Tienda
-                           on pedido.IdTienda equals tienda.IdTienda
+                           on pedido.IdSitio equals tienda.IdTienda
                          where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
                                  select new
                                  {
@@ -112,8 +112,8 @@ namespace Inventario.Controllers
                                      Proveedor = proveedor.Nombre,
                                      Direccion= tienda.Direccion,
                                      NumPedidoProveedor = pedido.NumeroPedido,
-                                     IdTienda = pedido.IdTienda,
-                                     Tienda = pedido.Tienda,
+                                     IdTienda = pedido.IdSitio,
+                                     Tienda = pedido.Sitio,
                                      IdArticulo = pedido.IdArticulo,
                                      Fecha = pedido.Fecha,
                                      Correo = proveedor.Correo,
@@ -167,8 +167,8 @@ namespace Inventario.Controllers
                      // && p.UnidadDeMedida.Equals(DatosPedidoInterno.UnidadDeMedida)
                      //  && p.IdMarca.Equals(DatosPedidoInterno.IdMarca)
                      //   && p.Marca.Equals(DatosPedidoInterno.Marca)
-                     && p.IdTienda.Equals(DatosPedidoInterno.IdTienda)
-                      && p.Tienda.Equals(DatosPedidoInterno.Tienda)
+                     && p.IdSitio.Equals(DatosPedidoInterno.IdSitio)
+                      && p.Sitio.Equals(DatosPedidoInterno.Sitio)
                        && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
                         && p.Articulo.Equals(DatosPedidoInterno.Articulo)
                           && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
@@ -183,7 +183,7 @@ namespace Inventario.Controllers
                     //obj.UnidadDeMedida = DatosPedidoInterno.UnidadDeMedida;
                     //obj.IdMarca = DatosPedidoInterno.IdMarca;
                     //obj.Marca = DatosPedidoInterno.Marca;
-                    obj.IdTienda = DatosPedidoInterno.IdTienda;
+                    obj.IdSitio = DatosPedidoInterno.IdSitio;
                     obj.IdArticulo = DatosPedidoInterno.IdArticulo;
                     obj.Articulo = DatosPedidoInterno.Articulo;
                     obj.Fecha = DatosPedidoInterno.Fecha;
