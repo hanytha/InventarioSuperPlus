@@ -3046,9 +3046,9 @@ namespace Inventario
 		
 		private long _NoPedido;
 		
-		private long _NoPedidoProveedor;
+		private System.Nullable<long> _NoPedidoProveedor;
 		
-		private long _IdProveedor;
+		private System.Nullable<long> _IdProveedor;
 		
 		private string _Proveedor;
 		
@@ -3066,9 +3066,9 @@ namespace Inventario
     partial void OnIdCompraInternoChanged();
     partial void OnNoPedidoChanging(long value);
     partial void OnNoPedidoChanged();
-    partial void OnNoPedidoProveedorChanging(long value);
+    partial void OnNoPedidoProveedorChanging(System.Nullable<long> value);
     partial void OnNoPedidoProveedorChanged();
-    partial void OnIdProveedorChanging(long value);
+    partial void OnIdProveedorChanging(System.Nullable<long> value);
     partial void OnIdProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
@@ -3125,8 +3125,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoProveedor", DbType="BigInt NOT NULL")]
-		public long NoPedidoProveedor
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoProveedor", DbType="BigInt")]
+		public System.Nullable<long> NoPedidoProveedor
 		{
 			get
 			{
@@ -3145,8 +3145,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt NOT NULL")]
-		public long IdProveedor
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProveedor", DbType="BigInt")]
+		public System.Nullable<long> IdProveedor
 		{
 			get
 			{
@@ -3165,7 +3165,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(150)")]
 		public string Proveedor
 		{
 			get
@@ -3185,7 +3185,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaIngreso", DbType="VarChar(50)")]
 		public string FechaIngreso
 		{
 			get

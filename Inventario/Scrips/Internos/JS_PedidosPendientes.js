@@ -63,13 +63,15 @@ function abrirModal(id) {
 
         $.get("/PedidosPendientes/ConsultaPedidoXNumero/?Num=" + id, function (Data) {
  
-            sessionStorage.setItem('IDExt', Data[0].IdPedidosInternos);
+    
             document.getElementById("TxtAsignacion").value = Data[0].IdAsignacion;
             document.getElementById("TxtNumPedido").value = Data[0].NumeroPedido;
             document.getElementById("TxtTienda").value = Data[0].IdTienda;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
             document.getElementById("TxtNoProveedor").value = Data[0].NumPedidoProveedor;
+            document.getElementById("TxtProveedor").name = Data[0].IdProveedor;
+
             MostrarArticulosPorId(id);
             CalcularFecha();
         });
@@ -203,3 +205,51 @@ function CalcularFecha() {
 
 } 
 //---------------------------------------------------------------------------
+
+
+//----Función para guardar los datos en la tabla de compras internos-------------------
+
+//Guarda los cambios y altas de las áreas
+function GuardarCompraInterna() {
+
+    if (confirm("¿Desea aplicar los cambios?") == 1) {
+
+        var IdCompraInterno = sessionStorage.getItem('IDExt');
+        var NoPedido = document.getElementById("TxtNumPedido").value;
+        var NoPedidoProveedor = document.getElementById("TxtNoProveedor").value;
+        var IdProveedor = document.getElementById("TxtProveedor").name;
+        var Proveedor = document.getElementById("TxtProveedor").value;
+        var FechaIngreso = document.getElementById("TxtFechaAprobada").value;
+
+        var frm = new FormData();
+
+        frm.append("IdCompraInterno", IdCompraInterno);
+        frm.append("NoPedido", NoPedido);
+        frm.append("NoPedidoProveedor", NoPedidoProveedor);
+        frm.append("IdProveedor", IdProveedor);
+        frm.append("Proveedor", Proveedor);
+        frm.append("FechaIngreso", FechaIngreso);
+ 
+            $.ajax({
+                type: "POST",
+                url: "/PedidosPendientes/GuardarProveedorInterno",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        swal("¡Ocurrio un error!", "", "danger");
+                    }
+                    else if (data == -1) {
+                        swal("¡La compra ya existe!", "", "warning");
+                    }
+                    else {
+                        swal("La compra se registró exitosamente!", "", "success");
+                        ConsultaCompras();
+                        document.getElementById("btnCancelar").click();
+                    }
+                }
+            });
+        }
+    
+}

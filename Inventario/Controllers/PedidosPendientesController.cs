@@ -191,7 +191,7 @@ namespace Inventario.Controllers
                   && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
                   ).Count();
 
-                if (nveces >= 0)
+                if (nveces == 0)
                 {
                     InvBD.CompraInterno.InsertOnSubmit(DatosCompra);
                     InvBD.SubmitChanges();
