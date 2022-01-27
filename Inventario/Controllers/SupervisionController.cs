@@ -342,6 +342,7 @@ namespace Inventario.Controllers
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaIngreso =  CompraInterno.FechaIngreso,
+                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -352,8 +353,11 @@ namespace Inventario.Controllers
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
 
+                int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
+                    SumaStock = (int)(SumaStock + numero.stockActual);
+                    Stock += SumaStock + ",";
                     if (contador == 0)
                     {
                         tem1 = (int)numero.NoPedido;
@@ -400,7 +404,8 @@ namespace Inventario.Controllers
                 IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
-                Fecha = Fecha.Substring(0, Fecha.Length - 1)
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                 Stock = Stock.Substring(0, Stock.Length - 1),
 
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);

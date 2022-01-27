@@ -27,8 +27,8 @@ function ConsultaArticuloComp(IDTienda) {
             let ArrayNoPedido = NoPedido.split(',');
             let Fecha = Data.Fecha;
             let Arrayfecha = Fecha.split(',');
-            //let Stock = Data.Stock;
-            //let Arraystock = Stock.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
@@ -46,7 +46,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
