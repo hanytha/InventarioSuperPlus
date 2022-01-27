@@ -316,16 +316,16 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaArticulos(long IDTienda)
         {
-            string id = "";
+      
             string NoPedido = "";
-            string Nombre = "";
-            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Fecha = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string IdSitio = "";
             string IdArticulos = "";
-            string NomTienda = "";
+            string Articulo = "";
             string IdCmpraInt = "";
             string IdTienda = "";
+            string Sitio = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
@@ -334,11 +334,14 @@ namespace Inventario.Controllers
                                    select new
 
                                    {
-
+                                       id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-                                      
-                                       IdSitio = CompraInterno.IdSitio
+                                  //    Proveedor=CompraInterno.Proveedor,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       Tiendas = CompraInterno.Sitio,
+                                       Articulo = ExistenciaAlmacenG.Articulo,
+                                       FechaIngreso =  CompraInterno.FechaIngreso,
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -346,6 +349,7 @@ namespace Inventario.Controllers
                 long tem1 = 0;
                 long tem2 = 0;
                 long tem3 = 0;
+                long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
 
                 foreach (var numero in ConsultaArticulo)
@@ -353,25 +357,27 @@ namespace Inventario.Controllers
                     if (contador == 0)
                     {
                         tem1 = (int)numero.NoPedido;
-                       // tem2 = (int)numero.IdCmpraInt;
+                        tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
 
                         NoPedido += numero.NoPedido + ",";
-                        //IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
-                     
-                      
+                        Articulo += numero.Articulo + ",";
+                        Fecha += numero.FechaIngreso + ",";
+
                     }
-                    if (numero.NoPedido != tem1 ||  numero.IdSitio != tem3)
+                    if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
                     {
                         tem1 = (int)numero.NoPedido;
-                   //     tem2 = (int)numero.IdCmpraInt;
+                       tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
 
                         NoPedido += numero.NoPedido + ",";
-                     //   IdAsignacion += numero.IdCmpraInt + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
-
+                        Fecha += numero.FechaIngreso + ",";
+                        Articulo += numero.Articulo + ",";
                         contador++;
                     }
                     else
@@ -382,17 +388,20 @@ namespace Inventario.Controllers
             }
             else
             {
-                NoPedido += "0" + ",";
-                //IdAsignacion += "0" + ",";
-                IdSitio += "0" + ",";
-                
+                NoPedido += "No hay ningún articulo" + ",";
+                IdCmpraInt += " " + ",";
+                IdSitio += " " + ",";
+                Articulo += " " + ",";
+                Fecha += " " + ",";
             }
             var consulta = new
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-           //     IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
-              
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1)
+
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
