@@ -352,3 +352,20 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Se guardó exitosamente!", "", "success");
 }
+
+//------Funcion para ocultar los pedidos una vez solventados--------------
+
+function OcultarPedido(id) {
+    if (confirm("¿Desea eliminar el registro?") == 1) {
+
+        $.get("/PedidosPendientes/OcultarPeidos/?No=" + id, function (DatoCategoria) {
+            if (DatoCategoria == 1) {
+                swal("El método de pago se eliminó exitosamente!", "", "success");
+                ConsultaCategorias();
+            } else {
+                swal("¡Ocurrio un error!", "", "danger");
+            }
+        });
+    }
+}
+

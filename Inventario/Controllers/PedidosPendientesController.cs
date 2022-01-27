@@ -130,7 +130,7 @@ namespace Inventario.Controllers
             string stock = "";
             string NoPedidoG = "";
 
-            var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num)p.Estatus.Equals(1))
+            var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     solicitada = p.CantidadSolicitada,
@@ -319,5 +319,23 @@ namespace Inventario.Controllers
 
             return Afectados;
         }
+        //----------------------Cambia el estatus de los pedidos solventados--------------------
+        public int OcultarPeidos(long No)
+        {
+            int nregistradosAfectados = 0;
+            try
+            {
+                PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No)).First();
+                mpag.Estatus = 0;//Cambia el estatus en 0
+                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+                nregistradosAfectados = 1;//Se pudo realizar
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
+            return nregistradosAfectados;
+        }
+//--------------Termina------------------------------------------------
     }
 }
