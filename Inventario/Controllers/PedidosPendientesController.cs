@@ -130,7 +130,7 @@ namespace Inventario.Controllers
             string stock = "";
             string NoPedidoG = "";
 
-            var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
+            var pedidosNum = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num)p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     solicitada = p.CantidadSolicitada,
