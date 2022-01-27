@@ -125,20 +125,20 @@ function MostrarArticulosPorId(id) {
             for (var i = 0; i < ArrayIdArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  name='" + ArrayIdArticulo +"' class='input-Articulo sinborde limpiar ' disabled  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  id='" + ArrayIdArticulo[i] + "' name='" + ArrayIdArticulo[i] + "' class='input-Articulo sinborde limpiar ' disabled  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -292,6 +292,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
     var cantidad = document.getElementsByClassName("input-aprobar");
 
     var NomArticulos = document.getElementsByClassName("input-Articulo");
+
 
 
     for (let i = 0; i < cantidad.length; i++) {
