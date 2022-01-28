@@ -316,7 +316,8 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaArticulos(long IDTienda)
         {
-      
+
+            string id = "";
             string NoPedido = "";
             string Fecha = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
@@ -341,7 +342,7 @@ namespace Inventario.Controllers
                                        IdSitio = CompraInterno.IdSitio,
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
-                                       FechaIngreso =  CompraInterno.FechaIngreso,
+                                       FechaDeIngreso =  CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                    };
@@ -357,17 +358,45 @@ namespace Inventario.Controllers
                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
-                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.id)
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
                      .Select(p => new
                      {
-                         fechaIngreso = p.FechaIngreso,
+                         fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
                     //SumaStock = (int)(SumaStock + numero.stockActual);
                     //Stock += SumaStock + ",";
 
-                    if (consultaFecha.Count() > 0)
+                    //if (consultaFecha.Count() > 0)
+                    //{
+                    //    int UltimoReg = consultaFecha.Count() - 1;
+                    //    int cont = 0;
+                    //    int SumaStock = 0;
+                    //    foreach (var comp in consultaFecha)
+                    //    {
+                    //        SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                    //        if (cont == UltimoReg)
+                    //        {
+                    //            Fecha+= comp.fechaIngreso + ",";
+                    //        }
+                    //        cont++;
+                    //    }
+                    //    Stock += SumaStock + ",";
+
+                    //}
+
+                    if (contador == 0)
                     {
+                        tem1 = (int)numero.NoPedido;
+                        tem2 = (int)numero.IdCmpraInt;
+                        tem3 = (int)numero.IdSitio;
+                        id += numero.id + ",";
+                        NoPedido += numero.NoPedido + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdSitio += numero.IdSitio + ",";
+                        Articulo += numero.Articulo + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -377,26 +406,11 @@ namespace Inventario.Controllers
 
                             if (cont == UltimoReg)
                             {
-                                Fecha+= comp.fechaIngreso + ",";
+                                Fecha += comp.fechaIngreso + ",";
                             }
                             cont++;
                         }
                         Stock += SumaStock + ",";
-
-                    }
-
-                    if (contador == 0)
-                    {
-                        tem1 = (int)numero.NoPedido;
-                        tem2 = (int)numero.IdCmpraInt;
-                        tem3 = (int)numero.IdSitio;
-
-                        NoPedido += numero.NoPedido + ",";
-                        IdCmpraInt += numero.IdCmpraInt + ",";
-                        IdSitio += numero.IdSitio + ",";
-                        Articulo += numero.Articulo + ",";
-                        Fecha += numero.FechaIngreso + ",";
-
                     }
                     if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
                     {
@@ -404,12 +418,28 @@ namespace Inventario.Controllers
                        tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
 
+                        id += numero.id + ",";
                         NoPedido += numero.NoPedido + ",";
                         IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
-                        Fecha += numero.FechaIngreso + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
                         Articulo += numero.Articulo + ",";
                         contador++;
+
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha += comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
                     }
                     else
                     {
@@ -419,6 +449,7 @@ namespace Inventario.Controllers
             }
             else
             {
+                id += " " + ",";
                 NoPedido += "No hay ningún articulo" + ",";
                 IdCmpraInt += " " + ",";
                 IdSitio += " " + ",";
@@ -428,6 +459,7 @@ namespace Inventario.Controllers
             }
             var consulta = new
             {
+                id = id.Substring(0, id.Length - 1),
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),

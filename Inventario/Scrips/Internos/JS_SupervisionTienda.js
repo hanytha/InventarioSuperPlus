@@ -14,15 +14,18 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
+           CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
-            //CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "</div>";
 
+            let id = Data.id;
+            let ArrayId = id.split(',');
             let NoPedido = Data.NoPedido;
             let ArrayNoPedido = NoPedido.split(',');
             let Fecha = Data.Fecha;
@@ -39,10 +42,11 @@ function ConsultaArticuloComp(IDTienda) {
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
 
-            for (var i = 0; i < ArrayNoPedido.length; i++) {
+            for (var i = 0; i < ArrayId.length; i++) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
