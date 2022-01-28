@@ -20,7 +20,7 @@ namespace Inventario.Controllers
         {
             return View();
         }
- //****************************************************************************************************************************
+        //****************************************************************************************************************************
         //****************************Consulta de pedidos internos***********************************************************
 
         public JsonResult ConsultaPedidosNumeroPedido()
@@ -89,17 +89,17 @@ namespace Inventario.Controllers
             }
             var consulta = new
             {
-                NoPedido = NoPedido.Substring(0, NoPedido.Length -1),
-                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length -1),
-                IdTienda = IdTienda.Substring(0, IdTienda.Length -1),
-                NomTienda = NomTienda.Substring(0, NomTienda.Length -1)
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
+                NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
 
         //*************************************************************************************************************
-            //--------------------------------Consulta los artículos por ID-------------------------------------------
-            public JsonResult ConsultaPedidoXNumero(long Num)
+        //--------------------------------Consulta los artículos por ID-------------------------------------------
+        public JsonResult ConsultaPedidoXNumero(long Num)
         {
             var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Num))
                 .Select(p => new
@@ -119,8 +119,8 @@ namespace Inventario.Controllers
                 });
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
- 
-   //*****************Consulta los articulos por pedidos y su stock en la tabala de comprasArticulos*************************
+
+        //*****************Consulta los articulos por pedidos y su stock en la tabala de comprasArticulos*************************
 
         public JsonResult ConsultaPedidosNumero(long Num)
         {
@@ -175,7 +175,9 @@ namespace Inventario.Controllers
 
             }
 
-            var compras = new { solicitada = solicitada.Substring(0, solicitada.Length - 1),
+            var compras = new
+            {
+                solicitada = solicitada.Substring(0, solicitada.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
                 stock = stock.Substring(0, stock.Length - 1),
@@ -199,7 +201,7 @@ namespace Inventario.Controllers
                   //&& p.IdSitio.Equals(DatosCompra.IdSitio)
                   //&& p.Sitio.Equals(DatosCompra.Sitio)
                   //&& p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
-                 
+
                   ).Count();
 
                 if (nveces == 0)
@@ -216,7 +218,7 @@ namespace Inventario.Controllers
              && p.IdSitio.Equals(DatosCompra.IdSitio)
              && p.Sitio.Equals(DatosCompra.Sitio)
              && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
-            
+
               ).First();
                     Afectados = IdCompra.IdCompraInterno;
                 }
@@ -235,7 +237,7 @@ namespace Inventario.Controllers
                 && p.IdSitio.Equals(DatosCompra.IdSitio)
                 && p.Sitio.Equals(DatosCompra.Sitio)
                 && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
-               
+
                 ).Count();
                 if (nveces == 0)
                 {
@@ -248,7 +250,7 @@ namespace Inventario.Controllers
                     obj.IdSitio = DatosCompra.IdSitio;
                     obj.Sitio = DatosCompra.Sitio;
                     obj.IdAsignacion = DatosCompra.IdAsignacion;
-                   
+
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -260,7 +262,20 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-        //**************Termina*********************************************************
+        //**************Termina********************************************************************************
+        public JsonResult ConsultaRestarStock(long ID)
+        {
+            var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
+                .Select(p => new
+                {
+                   p.IdCompra,
+                   p.IdArticulo,
+                   p.Articulo,
+                   p.StockActual,
+
+                });
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
         //*******************************Guarda los datos en la segunda tabla*************************************************
 
         public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
@@ -319,6 +334,8 @@ namespace Inventario.Controllers
 
             return Afectados;
         }
+        //-----------------------Consulta los números para la resta del stock------------------
+
         //----------------------Cambia el estatus de los pedidos solventados--------------------
         public int OcultarPeidos(long No)
         {
@@ -336,6 +353,6 @@ namespace Inventario.Controllers
             }
             return nregistradosAfectados;
         }
-//--------------Termina------------------------------------------------
+        //--------------Termina------------------------------------------------
     }
 }
