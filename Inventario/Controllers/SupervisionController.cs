@@ -343,6 +343,7 @@ namespace Inventario.Controllers
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaIngreso =  CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdAsignacion = CompraInterno.IdAsignacion,
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -353,11 +354,37 @@ namespace Inventario.Controllers
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
 
-                int SumaStock = 0;
+               // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
-                    SumaStock = (int)(SumaStock + numero.stockActual);
-                    Stock += SumaStock + ",";
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.id)
+                     .Select(p => new
+                     {
+                         fechaIngreso = p.FechaIngreso,
+                         ExitenciaActual = p.stockActual,
+                     });
+                    //SumaStock = (int)(SumaStock + numero.stockActual);
+                    //Stock += SumaStock + ",";
+
+                    if (consultaFecha.Count() > 0)
+                    {
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha+= comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
+
+                    }
+
                     if (contador == 0)
                     {
                         tem1 = (int)numero.NoPedido;
@@ -397,6 +424,7 @@ namespace Inventario.Controllers
                 IdSitio += " " + ",";
                 Articulo += " " + ",";
                 Fecha += " " + ",";
+                Stock += " " + ",";
             }
             var consulta = new
             {
