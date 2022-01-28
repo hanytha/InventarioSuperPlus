@@ -129,16 +129,16 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-total sinborde limpiar ' disabled  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input id='" + ArrayIdArticulo +"' class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
@@ -242,7 +242,7 @@ function GuardarCompraInterna() {
         var IdSitio = document.getElementById("TxtIDTienda").value;
         var Sitio = document.getElementById("TxtTiendas").value;
         var IdAsignacion = document.getElementById("TxtAsignacion").value;
-     
+
 
         var frm = new FormData();
 
@@ -272,7 +272,7 @@ function GuardarCompraInterna() {
                 else {
                     alert("Los datos se guardaron de manera exitosa");
 
-                    GuardarDatosArticuloCompra(data, NoPedido );
+                    GuardarDatosArticuloCompra(data, NoPedido);
 
                     document.getElementById("btnCancelar").click();
                 }
@@ -306,8 +306,8 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             var IdArticulo = NomArticulos[i].name;
             var ExitenciaInicial = cantidad[i].value;
             var ExitenciaActual = cantidad[i].value;
-        
 
+            nuevoStock();
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
@@ -369,3 +369,22 @@ function OcultarPedido(id) {
     }
 }
 
+//-----------------------------------Función ontener nuevo stock---------------------------------------
+function nuevoStock() {
+
+    var Articulos = document.getElementsByClassName("input-Articulo");
+    var IDArticulos = document.getElementsByClassName("input-Articulo");
+    var Aprobar = document.getElementsByClassName("input-aprobar");
+
+
+    var total = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar[i].value > 0) {
+
+            total += IDArticulos[i].name + "/" + Articulos[i].value + "/" + Aprobar[i].value + "/";
+        }
+    }
+    alert(total);
+}

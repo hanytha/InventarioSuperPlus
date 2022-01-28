@@ -322,7 +322,7 @@ namespace Inventario.Controllers
             return Afectados;
         }
         //-----------------------Consulta los números para la resta del stock------------------
-        /* public JsonResult ConsultaRestarStock(long ID)
+        /* public JsonResult ConsultaArticulosId(long ID)
          {
              var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
                  .Select(p => new
@@ -342,6 +342,7 @@ namespace Inventario.Controllers
             string IdCompra = "";
             string IdArticulo = "";
             string Articulo = "";
+
             string StockActual = "";
 
             var consultaStock = from comprs in InvBD.ComprasArticulos
@@ -361,6 +362,7 @@ namespace Inventario.Controllers
             int resultado = 0;
             int contador = 0;
             int Afectados = 0;
+
             foreach (var consulta in consultaStock)
             {
 
@@ -373,6 +375,7 @@ namespace Inventario.Controllers
                     obj.StockActual = DatosCompra.StockActual;
                     InvBD.SubmitChanges();
                     Afectados = 1;
+
 
                 }
                 if (resultado > consulta.total)
