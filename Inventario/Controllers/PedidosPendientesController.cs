@@ -263,19 +263,6 @@ namespace Inventario.Controllers
         }
 
         //**************Termina********************************************************************************
-        public JsonResult ConsultaRestarStock(long ID)
-        {
-            var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
-                .Select(p => new
-                {
-                   p.IdCompra,
-                   p.IdArticulo,
-                   p.Articulo,
-                   p.StockActual,
-
-                });
-            return Json(articulo, JsonRequestBehavior.AllowGet);
-        }
         //*******************************Guarda los datos en la segunda tabla*************************************************
 
         public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
@@ -335,6 +322,73 @@ namespace Inventario.Controllers
             return Afectados;
         }
         //-----------------------Consulta los números para la resta del stock------------------
+        /* public JsonResult ConsultaRestarStock(long ID)
+         {
+             var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
+                 .Select(p => new
+                 {
+                     p.IdCompra,
+                     p.IdArticulo,
+                     p.Articulo,
+                     p.StockActual,
+
+                 });
+             return Json(articulo, JsonRequestBehavior.AllowGet);
+         }*/
+        //-----------------------------------------Segunda consulta para restar el stock**************
+
+        public JsonResult ConsultaRestaStock(long ID, ComprasArticulos DatosCompra)
+        {
+            string IdCompra = "";
+            string IdArticulo = "";
+            string Articulo = "";
+            string StockActual = "";
+
+            var consultaStock = from comprs in InvBD.ComprasArticulos
+                                join almacen in InvBD.ExistenciaAlmacenG
+                            on comprs.IdArticulo equals almacen.IdArticulo
+                                where comprs.IdArticulo.Equals(ID)
+                                select new
+                                {
+                                    idCompras = comprs.IdCompra,
+                                    idArticulos = comprs.IdArticulo,
+                                    articulos = comprs.Articulo,
+                                    total = comprs.StockActual,
+                                    resta = almacen.ExitenciaActual,
+
+                                };
+
+            int resultado = 0;
+            int contador = 0;
+            int Afectados = 0;
+            foreach (var consulta in consultaStock)
+            {
+
+                resultado = (int)consulta.total - (int)consulta.resta;
+
+                if (resultado <= consulta.total)
+                {
+
+                    ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).First();
+                    obj.StockActual = DatosCompra.StockActual;
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+
+                }
+                if (resultado > consulta.total)
+                {
+                    while (contador == consulta.resta)
+                    {
+                        contador++;
+                    }
+
+                }
+            }
+
+            return Json(consultaStock, JsonRequestBehavior.AllowGet);
+
+        }
+
 
         //----------------------Cambia el estatus de los pedidos solventados--------------------
         public int OcultarPeidos(long No)
