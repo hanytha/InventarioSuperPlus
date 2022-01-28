@@ -127,7 +127,7 @@
                                 <div class="row">
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">REGISTRAR</button>
-                                     <div>
+                                    <div>
                                         <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
 
                                     </div>
@@ -508,47 +508,47 @@
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
                     @*<button type="button" class="btn btn-primary" onclick="AceptarPedidoInterno()">AceptarPedido</button>
-        <button type="button" class="btn btn-primary" onclick="ImprimirPedidoInterno()">ImprimirPedido</button>
-        <button type="button" class="btn btn-primary" onclick="VisualizarPedidoInterno()">VisualizarPedido</button>*@
+                        <button type="button" class="btn btn-primary" onclick="ImprimirPedidoInterno()">ImprimirPedido</button>
+                        <button type="button" class="btn btn-primary" onclick="VisualizarPedidoInterno()">VisualizarPedido</button>*@
 
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
                     @*<input type="button" class="btn btn-primary" id="btn-1" value="Aceptar pedido" onclick="mostrarBoton()" />*@
                     <button type="button" class="btn btn-success" id="btn-1" onclick="mostrarBoton()">Aceptar pedido</button>
                     @*<button type="button" class="btn btn-success bloquear" id="btn-2">Imprimir</button>
-        <button type="button" class="btn btn-success bloquear" id="btn-3">Visualizar</button>*@
+                        <button type="button" class="btn btn-success bloquear" id="btn-3">Visualizar</button>*@
                     @*<input type="button" class="btn btn-primary" id="btn-2" value="Imprimir" style="display: none;" />
-        <input type="button" class="btn btn-primary" id="btn-3" value="Visualizar" style="display: none;" />*@
+                        <input type="button" class="btn btn-primary" id="btn-3" value="Visualizar" style="display: none;" />*@
                     @*<script>
-            var btn_1 = document.getElementById('btn-1');
-            var btn_2 = document.getElementById('btn-2');
-            var btn_3 = document.getElementById('btn-3');
+                            var btn_1 = document.getElementById('btn-1');
+                            var btn_2 = document.getElementById('btn-2');
+                            var btn_3 = document.getElementById('btn-3');
 
-            function mostrarBoton() {
-                btn_1.disabled = 'false';
-                btn_2.disabled = 'true';
-                btn_3.disabled = 'false';
-            }
-        </script>*@
+                            function mostrarBoton() {
+                                btn_1.disabled = 'false';
+                                btn_2.disabled = 'true';
+                                btn_3.disabled = 'false';
+                            }
+                        </script>*@
 
                     @*<button type="button" class="btn btn-primary" id="button">Acción</button>
-        <button type="button" class="btn btn-primary" id="show">Mostrar botón acción</button>
-        <button type="button" class="btn btn-primary" id="hide">Ocultar botón acción</button>
-        <script>
-            $(function () {
-                $('#button').click(function () {
-                    $('#button').show();
-                });
-                $('#hide').click(function () {
-                    $('#button').hide();
-                });
-            })
-        </script>*@
+                        <button type="button" class="btn btn-primary" id="show">Mostrar botón acción</button>
+                        <button type="button" class="btn btn-primary" id="hide">Ocultar botón acción</button>
+                        <script>
+                            $(function () {
+                                $('#button').click(function () {
+                                    $('#button').show();
+                                });
+                                $('#hide').click(function () {
+                                    $('#button').hide();
+                                });
+                            })
+                        </script>*@
                     @*<button onclick="editarModal(0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos style="display: none;">Imprimir</button>*@
-                    <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos"  value="Imprimir"  style="display: none;" />
+                    <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Imprimir" style="display: none;" />
                     @*<input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" value="Imprimir" style="display: none;" />*@
                     @*<button type="button" id="show">Mostrar botón acción</button>
-        <button type="button" id="hide">Ocultar botón acción</button>*@
+                        <button type="button" id="hide">Ocultar botón acción</button>*@
 
                     <script>
                         $(function () {

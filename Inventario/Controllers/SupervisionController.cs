@@ -382,6 +382,147 @@ namespace Inventario.Controllers
 
 
 
+        public JsonResult ConsultaArticulosAceptarP(long IDTienda)
+        {
+
+            string id = "";
+            string NoPedido = "";
+            string Fecha = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string IdSitio = "";
+            string IdArticulos = "";
+            string Proveedor = "";
+            string Articulo = "";
+            string IdCmpraInt = "";
+            string IdTienda = "";
+            string Sitio = "";
+            var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
+
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1)
+                                   select new
+
+                                   {
+                                       id = ExistenciaAlmacenG.IdArticulo,
+                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
+                                       Proveedor=CompraInterno.Proveedor,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       Tiendas = CompraInterno.Sitio,
+                                       Articulo = ExistenciaAlmacenG.Articulo,
+                                       FechaDeIngreso = CompraInterno.FechaIngreso,
+                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdAsignacion = CompraInterno.IdAsignacion,
+                                   };
+            if (ConsultaArticulo.Count() > 0)
+            {
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+                long tem3 = 0;
+                long tem4 = 0;
+                long pedi = ConsultaArticulo.Count();
+
+                // int SumaStock = 0;
+                foreach (var numero in ConsultaArticulo)
+                {
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
+                     .Select(p => new
+                     {
+                         fechaIngreso = p.FechaDeIngreso,
+                         ExitenciaActual = p.stockActual,
+                     });
+
+                    if (contador == 0)
+                    {
+                        tem1 = (int)numero.NoPedido;
+                        tem2 = (int)numero.IdCmpraInt;
+                        tem3 = (int)numero.IdSitio;
+                        id += numero.id + ",";
+                        NoPedido += numero.NoPedido + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdSitio += numero.IdSitio + ",";
+                        Articulo += numero.Articulo + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
+                        Proveedor
+                            += numero.Articulo + ",";
+
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha += comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
+                    }
+                    if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
+                    {
+                        tem1 = (int)numero.NoPedido;
+                        tem2 = (int)numero.IdCmpraInt;
+                        tem3 = (int)numero.IdSitio;
+
+                        id += numero.id + ",";
+                        NoPedido += numero.NoPedido + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdSitio += numero.IdSitio + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
+                        Articulo += numero.Articulo + ",";
+                        contador++;
+
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha += comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+                //En caso de no encontrar datos
+                id += "No hay ningún articulo " + ",";
+                NoPedido += " " + ",";
+                IdCmpraInt += " " + ",";
+                IdSitio += " " + ",";
+                Articulo += " " + ",";
+                Fecha += " " + ",";
+                Stock += " " + ",";
+            }
+            var consulta = new
+            {
+                id = id.Substring(0, id.Length - 1),
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
+                IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                Stock = Stock.Substring(0, Stock.Length - 1),
+
+            };
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
