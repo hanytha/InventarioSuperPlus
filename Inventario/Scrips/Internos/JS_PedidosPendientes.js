@@ -369,7 +369,7 @@ function OcultarPedido(id) {
     }
 }
 
-//-----------------------------------Función ontener nuevo stock---------------------------------------
+//-----------------------------------Función  nuevo stock---------------------------------------
 function nuevoStock() {
 
     var Articulos = document.getElementsByClassName("input-Articulo");
@@ -383,7 +383,7 @@ function nuevoStock() {
 
         if (Aprobar[i].value > 0) {
 
-            total += IDArticulos[i].name + "/" + Articulos[i].value + "/" + Aprobar[i].value + "/";
+            total += IDArticulos[i].name + "/" + Aprobar[i].value ;
         }
     }
     alert(total);
