@@ -91,7 +91,7 @@ BloquearCTRL();
 
 //            document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
 
-//        });
+//        }); 
 
 //    }
 //}
@@ -921,7 +921,41 @@ function SiguientePedido(Data) {
 
 
 
-function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
+//function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
+//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        //Cambia los bordes lo las casillas a color rojo
+//        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+//    }
+//    if (id == 0) {
+//        LimpiarCampos();
+//        sessionStorage.setItem('IdPedido', '0');
+
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+
+//     //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
+//            sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
+//            document.getElementById("TxtNombreUsr");
+//            document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
+//            document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
+//            document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
+//            document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
+//            document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
+//            //document.getElementById("TblArticulos").value = Data[0].CP;
+//            MostrarArt(id, no);
+//        });
+//    }
+//}
+
+
+
+
+function abrirModalAceptarPedido(id, no) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -938,7 +972,7 @@ function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
     else {
         $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
 
-     //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
+            //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
             sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
             document.getElementById("TxtNombreUsr");
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
@@ -947,10 +981,12 @@ function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
             document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
+            //MostrarArt(id);
             MostrarArt(id, no);
         });
     }
 }
+
 ////PDF de pedidos internos
 
 
@@ -1127,6 +1163,8 @@ function MostrarArticulos(id, no) {
 
 
 
+
+
 function MostrarArticulosPedidos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -1189,7 +1227,8 @@ function MostrarArt(id, no) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
-        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
+        $.get("/Supervision/ConsultaAceptarP/?IdPro=" + id + "&no= " + no, function (Data) {
+       // $.get("/Supervision/ConsultaAceptarP/?IdPro=" + id, function (Data) {
             //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
             var dos = "";
 
@@ -1216,7 +1255,7 @@ function MostrarArt(id, no) {
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
                 //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
-                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].ExitenciaInicial + "</label></td>"
                 //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
                 //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
                 dos += "</tr>"
@@ -1234,6 +1273,71 @@ function MostrarArt(id, no) {
         });
     }
 }
+
+
+
+
+
+//function MostrarArt(id, no) {
+//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+//    }
+//    if (id == 0) {
+//        sessionStorage.setItem('IdPedidosExternos', '0');
+//    }
+//    else {
+
+//      //  $.get("/Supervision/ConsultaIdPro/?IdPro=" + id, function (Data) {
+//            $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
+//            //-----------------------------------------------------------------------------------
+//            var TablaArticulo = "";
+//            TablaArticulo += "<div class='row row-cols-auto'>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Artículos</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Cantidad</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Unidad_Medida</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+//            //TablaArticulo += "<label>Precio_Unitario</label>";
+//            TablaArticulo += "</div>";
+//            for (var i = 0; i < Data.length; i++) {
+//                //-------Crea los chex-box-------------------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
+//                TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+
+//                TablaArticulo += "</div>";
+//                //-------Crea los input-------------------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<label>"
+//                TablaArticulo += "<input type='number' value='' class='input-cantidadPedidos redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+
+//                TablaArticulo += "</label>"
+//                TablaArticulo += "</div>";
+
+//                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
+//                TablaArticulo += "</div>";
+//                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
+//                TablaArticulo += "</div>";
+
+
+//            }
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "</div>";
+//            document.getElementById("TblAceptarArticulos").innerHTML = TablaArticulo;
+//        });
+//    }
+//}
 
 
 function CamposObligatoriosAceptar() {
