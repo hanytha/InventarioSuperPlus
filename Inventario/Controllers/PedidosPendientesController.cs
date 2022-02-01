@@ -394,20 +394,89 @@ namespace Inventario.Controllers
         //--------------------------Funcion para restar a los stpck de los articulos----------------------------
 
 
-        //public JsonResult ConsultaStockArticulo(long Num)
-        //{
-        //    var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
-        //        .Select(p => new
-        //        {
-        //            p.IdCompra,
-        //            p.IdArticulo,
-        //            p.Articulo,
-        //            p.StockActual,
+        public JsonResult ConsultaStockArticulo(string DatosArticulos)
+        {
+            string[] Articulos = DatosArticulos.Split('/');
+            int consulta = 0;
 
-        //        });
-        //    return Json(articulo, JsonRequestBehavior.AllowGet);
+            for (int i = 0; 1 < Articulos.GetLength(0); i++)
+            {
+                string[] Cantidad = Articulos[i].Split(':');
 
-        //}
+                int resultado = 0;
+
+                var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.StockActual > 0).OrderBy(p => p.FechaIngreso)
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.StockActual
+
+                });
+
+                Double Diferencia = Convert.ToInt32(Cantidad[1]);
+
+                foreach (var con in ConsultaIDArticulo)
+                {
+                    if (Diferencia > 0)
+                    {
+                        Double NExistencia = 0;
+
+                        if (con.StockActual == Diferencia)
+                        {
+                            Diferencia = 0;
+                            NExistencia = 0;
+                        }
+                        else if (con.StockActual > Diferencia)
+                        {
+                            
+                            NExistencia = (Double)con.StockActual - Diferencia;
+                            Diferencia = 0;
+                        }
+                        else
+                        {
+                            Diferencia = Diferencia - (Double)con.StockActual;
+                            NExistencia = 0;
+                        }
+                        
+                      consulta = GuardarNStock((long)con.IdArticulo, NExistencia);
+                        if (consulta == 0) {
+                            break;
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+
+            }
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //---------Guardar el nuevo Stock----------------------
+        public int GuardarNStock(long ID, double NExistencia)
+        {
+            int nregistradosAfectados = 0;
+            try
+            {
+                ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).First();
+                mpag.StockActual = NExistencia;//Cambia el estatus en 0
+                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+                nregistradosAfectados = 1;//Se pudo realizar
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
+            return nregistradosAfectados;
+        }
+
+
+
 
         //----------------------Cambia el estatus de los pedidos solventados--------------------
         public int OcultarPeidos(long No)

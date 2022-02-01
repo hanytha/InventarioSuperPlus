@@ -154,29 +154,23 @@ function MostrarArticulosPorId(id) {
 function Verificar() {
     var total = document.getElementsByClassName("input-total");
     var aprobar = document.getElementsByClassName("input-aprobar");
-    var contador = 0;
-    var contadorAprobada = 0;
-
-    for (let i = 0; i < aprobar.length; i++) {
-
-        if (aprobar[i].value > 0 || aprobar[i].value < 0) {
-
-            contador++;
+    //var contador = 0;
+    //var contadorAprobada = 0;
+    var exito = true;
+    for (let i = 0; i < total.length; i++) {
+        if (aprobar[i].value < 0 || aprobar[i].value > total[i].value) {
+            swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+            exito = false;
         }
-        if (aprobar[i].value < total[i].value) {
-
-            contadorAprobada++;
-        }
-
     }
+    return exito;
+    //if (contador == contadorAprobada && contador >= 1) {
 
-    if (contador == contadorAprobada && contador >= 1) {
-
-        GuardarCompraInterna();
-    }
-    else {
-        swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
-    }
+    //    GuardarCompraInterna();
+    //}
+    //else {
+    //    swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+    //}
 }
 
 
@@ -231,7 +225,7 @@ function CalcularFecha() {
 function GuardarCompraInterna() {
 
     if (confirm("¿Desea aplicar los cambios?") == 1) {
-
+        //  if (Verificar() == true) {
         var IdCompraInterno = sessionStorage.getItem('IDExt');
         var NoPedido = document.getElementById("TxtNumPedido").value;
         var NoPedidoProveedor = document.getElementById("TxtNoProveedor").value;
@@ -243,7 +237,7 @@ function GuardarCompraInterna() {
         var Sitio = document.getElementById("TxtTiendas").value;
         var IdAsignacion = document.getElementById("TxtAsignacion").value;
 
-
+        nuevoStock();
         var frm = new FormData();
 
         frm.append("IdCompraInterno", IdCompraInterno);
@@ -278,6 +272,7 @@ function GuardarCompraInterna() {
                 }
             }
         });
+        // }
     }
 
 }
@@ -307,7 +302,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             var ExitenciaInicial = cantidad[i].value;
             var ExitenciaActual = cantidad[i].value;
 
-            nuevoStock();
+            
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
@@ -383,12 +378,14 @@ function nuevoStock() {
 
         if (Aprobar[i].value > 0) {
 
-            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" ;
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+      
         }
     }
-    if (total != "") {
 
+    $.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        if (Data == 1) { alert("hOLA") }
 
-    }
-   
+    });
 }
