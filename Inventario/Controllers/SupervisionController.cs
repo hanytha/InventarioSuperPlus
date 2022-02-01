@@ -414,6 +414,7 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
+
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -445,8 +446,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
-                        Proveedor
-                            += numero.Articulo + ",";
+                        Proveedor += numero.Proveedor + ",";
 
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -475,6 +475,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Fecha += numero.FechaDeIngreso + ",";
                         Articulo += numero.Articulo + ",";
+                        Proveedor += numero.Proveedor + ",";
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -507,6 +508,7 @@ namespace Inventario.Controllers
                 IdSitio += " " + ",";
                 Articulo += " " + ",";
                 Fecha += " " + ",";
+                Proveedor += " " + ",";
                 Stock += " " + ",";
             }
             var consulta = new
@@ -516,6 +518,7 @@ namespace Inventario.Controllers
                 IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 Fecha = Fecha.Substring(0, Fecha.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
 
