@@ -383,8 +383,12 @@ function nuevoStock() {
 
         if (Aprobar[i].value > 0) {
 
-            total += IDArticulos[i].name + "/" + Aprobar[i].value ;
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" ;
         }
     }
-    alert(total);
+    if (total != "") {
+
+
+    }
+   
 }
