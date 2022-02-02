@@ -406,7 +406,7 @@ namespace Inventario.Controllers
 
                 int resultado = 0;
 
-                var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.StockActual > 0).OrderBy(p => p.FechaIngreso)
+                var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.StockActual > 0).OrderBy(p => p.NoCompra)
                 .Select(p => new
                 {
                     p.IdCompra,
