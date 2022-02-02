@@ -263,7 +263,7 @@ namespace Inventario.Controllers
 
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
-                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       NoPedido = CompraInterno.NoPedido,
                                        IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
                                        //    Proveedor=CompraInterno.Proveedor,
                                        IdSitio = CompraInterno.IdSitio,
@@ -294,9 +294,11 @@ namespace Inventario.Controllers
 
                     if (contador == 0)
                     {
-                        tem1 = (int)numero.NoPedido;
+                      
+                        tem1 = (int)numero.id;
                         tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
+                          //tem1 = (int)numero.NoPedido;
                         id += numero.id + ",";
                         NoPedido += numero.NoPedido + ",";
                         IdCmpraInt += numero.IdCmpraInt + ",";
@@ -318,9 +320,9 @@ namespace Inventario.Controllers
                         }
                         Stock += SumaStock + ",";
                     }
-                    if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
+                    if (numero.id != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
                     {
-                        tem1 = (int)numero.NoPedido;
+                        tem1 = (int)numero.id;
                         tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
 
@@ -400,7 +402,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(0)
                                    select new
 
                                    {
@@ -445,8 +447,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
-                        Proveedor
-                            += numero.Articulo + ",";
+                        Proveedor += numero.Proveedor + ",";
 
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -475,6 +476,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Fecha += numero.FechaDeIngreso + ",";
                         Articulo += numero.Articulo + ",";
+                        Proveedor += numero.Proveedor + ",";
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -508,6 +510,7 @@ namespace Inventario.Controllers
                 Articulo += " " + ",";
                 Fecha += " " + ",";
                 Stock += " " + ",";
+                Proveedor += " " + ",";
             }
             var consulta = new
             {
@@ -518,6 +521,7 @@ namespace Inventario.Controllers
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 Fecha = Fecha.Substring(0, Fecha.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
 
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
@@ -1064,6 +1068,19 @@ namespace Inventario.Controllers
         public JsonResult ConsultaIdPro(string IdPro)
         {
             var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.Unidad
+                });
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult ConsultaAcept(string id, long no)
+        {
+            var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(id) && p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.NombreEmpresa,
