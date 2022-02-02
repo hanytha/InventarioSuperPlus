@@ -6,98 +6,6 @@ BloquearCTRL();
 
 
 
-
-//function ConsultaArticuloComp(IDTienda) {
-//    if (IDTienda == 0) {
-//        sessionStorage.setItem('IDTienda', '0');
-//    }
-//    else {
-//        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
-//            var CodigoHtmlArticuloComp = "";
-
-//            CodigoHtmlArticuloComp += "<div id='contenedor1'>";
-//            CodigoHtmlArticuloComp += "<hr class='solid'>";
-//            CodigoHtmlArticuloComp += "<div class='row'>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-//            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-//            CodigoHtmlArticuloComp += "</div>";
-//            CodigoHtmlArticuloComp += "<hr class='solid'>";
-//            CodigoHtmlArticuloComp += "</div>";
-
-//            //let IdPedido = Data.IdPedido;
-//            //let ArrayIdPedido = IdPedido.split(',');
-//            let id = Data.id;
-//            let ArrayId = id.split(',');
-//            let NoPedido = Data.NoPedido;
-//            let ArrayNoPedido = NoPedido.split(',');
-//            let Nombre = Data.Nombre;
-//            let Arraynombre = Nombre.split(',');
-//            let Fechas = Data.Fechas;
-//            let Arrayfechas = Fechas.split(',');
-//            let Stock = Data.Stock;
-//            let Arraystock = Stock.split(',');
-//            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-//            let IdSitio = Data.IdSitio;
-//            let ArrayIdSitio = IdSitio.split(',');
-
-
-
-
-//            //let Costos = Data.Costos;
-//            //let Arraycostos = Costos.split(',');
-
-//            for (var i = 0; i < ArrayId.length; i++) {
-
-//                CodigoHtmlArticuloComp += "<div>";
-//                CodigoHtmlArticuloComp += "<div class='row'>";
-//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
-//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
-//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-
-//                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
-//                //-----------------Botón para desplegar la primera tabla--------------
-//                CodigoHtmlArticuloComp += "<div class='col'>"
-//                CodigoHtmlArticuloComp += "<label>"
-//                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-//             //   CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-//                CodigoHtmlArticuloComp += "<button title='Clic para realizar un movimiento' class='btn btn-primary' onclick='editarModal(" + ArrayId[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-archive'></i></button>";
-//                CodigoHtmlArticuloComp += "<td><button class='btn btn-primary '  id='btn-2' data-title='Ver pedido' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
-
-//                //CodigoHtmlArticuloComp += "<button title='Clic para Aceptar un pedido' class='btn btn-primary' onclick='abrirModalAceptarPedido(" + ArrayId[i] + ")' data-toggle='modal' data-target='#abrirModalAceptarPedido'><i class='fas fa-archive'></i></button>";
-//                //CodigoHtmlArticuloComp += "</label>"; 
-
-//                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-
-//                CodigoHtmlArticuloComp += "</div>";
-//                //-------------Termina----------------------------------------
-//                CodigoHtmlArticuloComp += "</div>";
-//                CodigoHtmlArticuloComp += "</div>";
-//                //------------------------Despliega primer grid-----------------------------------------------------------------------
-//                //CodigoHtmlArticuloComp += "<div class='row'>";
-//                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
-//                CodigoHtmlArticuloComp += "</div>";
-//                //---------------------------------------Termina----------------------------------------------------------------------------
-//            }
-//            CodigoHtmlArticuloComp += "</div>";
-//            CodigoHtmlArticuloComp += "</br>";
-//            CodigoHtmlArticuloComp += "</br>";
-//            let contenedor1 = "contenedor1" + IDTienda;
-
-//            document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
-
-//        }); 
-
-//    }
-//}
-
-
-
 function ConsultaArticuloComp(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
@@ -151,7 +59,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                //CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 //CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -179,12 +87,14 @@ function ConsultaArticuloComp(IDTienda) {
 }
 
 
+
+
 function ConsultaArticuloCompra(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArticulosAceptarP/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/Supervision/ConsultaArticulosAceptar/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
 
             CodigoHtmlArticuloComp += "<div id='contenedorAceptar'>";
@@ -202,20 +112,19 @@ function ConsultaArticuloCompra(IDTienda) {
 
             //let IdPedido = Data.IdPedido;
             //let ArrayIdPedido = IdPedido.split(',');
-
             let id = Data.id;
             let ArrayId = id.split(',');
             let NoPedido = Data.NoPedido;
             let ArrayNoPedido = NoPedido.split(',');
             let Proveedor = Data.Proveedor;
             let ArrayProveedor = Proveedor.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
-            // let Stock = Data.Stock;
-            // let Arraystock = Stock.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfechas = Fechas.split(',');
+            //let Stock = Data.Stock;
+            //let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            //let IdSitio = Data.IdSitio;
-            //let ArrayIdSitio = IdSitio.split(',');
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
 
 
 
@@ -230,7 +139,7 @@ function ConsultaArticuloCompra(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
 
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayIdSitio[i] + "</div>";
@@ -255,7 +164,7 @@ function ConsultaArticuloCompra(IDTienda) {
                 CodigoHtmlArticuloComp += "</div>";
                 //------------------------Despliega primer grid-----------------------------------------------------------------------
                 //CodigoHtmlArticuloComp += "<div class='row'>";
-                // CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
                 CodigoHtmlArticuloComp += "</div>";
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
@@ -270,7 +179,6 @@ function ConsultaArticuloCompra(IDTienda) {
 
     }
 }
-
 function mostrarBoton() {
     //btn_1.disabled = 'true';
     //btn_2.disabled = 'true';
@@ -921,40 +829,6 @@ function SiguientePedido(Data) {
 
 
 
-//function abrirModalAceptarPedido(id,no) {//la clase  Obligatorio
-//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-//    var ncontroles = controlesObligatorio.length;
-//    for (var i = 0; i < ncontroles; i++) {//recorre
-//        //Cambia los bordes lo las casillas a color rojo
-//        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
-//    }
-//    if (id == 0) {
-//        LimpiarCampos();
-//        sessionStorage.setItem('IdPedido', '0');
-
-//    }
-//    else {
-//        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-
-//     //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
-//            sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
-//            document.getElementById("TxtNombreUsr");
-//            document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
-//            document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
-//            document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
-//            document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
-//            document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
-//            //document.getElementById("TblArticulos").value = Data[0].CP;
-//            MostrarArt(id, no);
-//        });
-//    }
-//}
-
-
-
-
 function abrirModalAceptarPedido(id, no) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -981,12 +855,10 @@ function abrirModalAceptarPedido(id, no) {//la clase  Obligatorio
             document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
-            //MostrarArt(id);
             MostrarArt(id, no);
         });
     }
 }
-
 ////PDF de pedidos internos
 
 
@@ -1163,8 +1035,6 @@ function MostrarArticulos(id, no) {
 
 
 
-
-
 function MostrarArticulosPedidos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
@@ -1227,8 +1097,7 @@ function MostrarArt(id, no) {
         sessionStorage.setItem('IdPedidosInternos', '0');
     }
     else {
-        $.get("/Supervision/ConsultaAceptarP/?IdPro=" + id + "&no= " + no, function (Data) {
-            // $.get("/Supervision/ConsultaAceptarP/?IdPro=" + id, function (Data) {
+        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
             //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
             var dos = "";
 
@@ -1255,7 +1124,7 @@ function MostrarArt(id, no) {
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
                 //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
-                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].ExitenciaInicial + "</label></td>"
+                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
                 //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
                 //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
                 dos += "</tr>"
@@ -1273,71 +1142,6 @@ function MostrarArt(id, no) {
         });
     }
 }
-
-
-
-
-
-//function MostrarArt(id, no) {
-//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-//    var ncontroles = controlesObligatorio.length;
-//    for (var i = 0; i < ncontroles; i++) {//recorre
-//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-//    }
-//    if (id == 0) {
-//        sessionStorage.setItem('IdPedidosExternos', '0');
-//    }
-//    else {
-
-//      //  $.get("/Supervision/ConsultaIdPro/?IdPro=" + id, function (Data) {
-//            $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
-//            //-----------------------------------------------------------------------------------
-//            var TablaArticulo = "";
-//            TablaArticulo += "<div class='row row-cols-auto'>";
-//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//            TablaArticulo += "<label>Artículos</label>";
-//            TablaArticulo += "</div>";
-//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//            TablaArticulo += "<label>Cantidad</label>";
-//            TablaArticulo += "</div>";
-//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//            TablaArticulo += "<label>Unidad_Medida</label>";
-//            TablaArticulo += "</div>";
-//            TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
-//            //TablaArticulo += "<label>Precio_Unitario</label>";
-//            TablaArticulo += "</div>";
-//            for (var i = 0; i < Data.length; i++) {
-//                //-------Crea los chex-box-------------------------------------------------------------------------
-//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//                //TablaArticulo += "<input  class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
-//                TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-
-//                TablaArticulo += "</div>";
-//                //-------Crea los input-------------------------------------------------------------------------
-//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//                TablaArticulo += "<label>"
-//                TablaArticulo += "<input type='number' value='' class='input-cantidadPedidos redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-
-//                TablaArticulo += "</label>"
-//                TablaArticulo += "</div>";
-
-//                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
-//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-//                TablaArticulo += "<label   id='" + Data[i].IdArticulos + "' ></label><span class='help-block text-muted small-font'>" + Data[i].Unidad + "</span>";
-//                TablaArticulo += "</div>";
-//                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-//                TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
-//                //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
-//                TablaArticulo += "</div>";
-
-
-//            }
-//            TablaArticulo += "</div>";
-//            TablaArticulo += "</div>";
-//            document.getElementById("TblAceptarArticulos").innerHTML = TablaArticulo;
-//        });
-//    }
-//}
 
 
 function CamposObligatoriosAceptar() {
