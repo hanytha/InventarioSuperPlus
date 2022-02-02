@@ -321,78 +321,7 @@ namespace Inventario.Controllers
 
             return Afectados;
         }
-        //-----------------------Consulta los números para la resta del stock------------------
-        /* public JsonResult ConsultaArticulosId(long ID)
-         {
-             var articulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).OrderBy(p => p.FechaIngreso)
-                 .Select(p => new
-                 {
-                     p.IdCompra,
-                     p.IdArticulo,
-                     p.Articulo,
-                     p.StockActual,
-
-                 });
-             return Json(articulo, JsonRequestBehavior.AllowGet);
-         }*/
-        //-----------------------------------------Segunda consulta para restar el stock**************
-
-        //public JsonResult ConsultaRestaStock(long ID, ComprasArticulos DatosCompra)
-        //{
-        //    string IdCompra = "";
-        //    string IdArticulo = "";
-        //    string Articulo = "";
-
-        //    string StockActual = "";
-
-        //    var consultaStock = from comprs in InvBD.ComprasArticulos
-        //                        join almacen in InvBD.ExistenciaAlmacenG
-        //                    on comprs.IdArticulo equals almacen.IdArticulo
-        //                        where comprs.IdArticulo.Equals(ID)
-        //                        select new
-        //                        {
-        //                            idCompras = comprs.IdCompra,
-        //                            idArticulos = comprs.IdArticulo,
-        //                            articulos = comprs.Articulo,
-        //                            total = comprs.StockActual,
-        //                            resta = almacen.ExitenciaActual,
-
-        //                        };
-
-        //    int resultado = 0;
-        //    int contador = 0;
-        //    int Afectados = 0;
-
-        //    foreach (var consulta in consultaStock)
-        //    {
-
-        //        resultado = (int)consulta.total - (int)consulta.resta;
-
-        //        if (resultado <= consulta.total)
-        //        {
-
-        //            ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).First();
-        //            obj.StockActual = DatosCompra.StockActual;
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-
-
-        //        }
-        //        if (resultado > consulta.total)
-        //        {
-        //            while (contador == consulta.resta)
-        //            {
-        //                contador++;
-        //            }
-
-        //        }
-        //    }
-
-        //    return Json(consultaStock, JsonRequestBehavior.AllowGet);
-
-        //}
-        //--------------------------Funcion para restar a los stpck de los articulos----------------------------
-
+        //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada-----------------
 
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
@@ -444,7 +373,7 @@ namespace Inventario.Controllers
                             NExistencia = 0;
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompra,(long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -463,13 +392,13 @@ namespace Inventario.Controllers
 
         }
 
-        //---------Guardar el nuevo Stock----------------------
-        public int GuardarNStock(long ID,long IDA, double NExistencia)
+        //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
+        public int GuardarNStock(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID)&& p.IdArticulo.Equals(IDA)).First();
+            ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
@@ -480,8 +409,6 @@ namespace Inventario.Controllers
             //}
             return nregistradosAfectados;
         }
-
-
 
 
         //----------------------Cambia el estatus de los pedidos solventados--------------------
