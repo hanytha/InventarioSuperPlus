@@ -237,7 +237,7 @@ function GuardarCompraInterna() {
         var Sitio = document.getElementById("TxtTiendas").value;
         var IdAsignacion = document.getElementById("TxtAsignacion").value;
 
-        nuevoStock();
+       
         var frm = new FormData();
 
         frm.append("IdCompraInterno", IdCompraInterno);
@@ -343,7 +343,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
         }
     }
-
+    nuevoStock();
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Se guardó exitosamente!", "", "success");
 }

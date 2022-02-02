@@ -396,6 +396,7 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
+
             string[] Articulos = DatosArticulos.Split('/');
             int consulta = 0;
 
@@ -419,6 +420,9 @@ namespace Inventario.Controllers
 
                 foreach (var con in ConsultaIDArticulo)
                 {
+                    long IDCompras = Convert.ToInt32(con.IdCompra);
+                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
+
                     if (Diferencia > 0)
                     {
                         Double NExistencia = 0;
@@ -430,7 +434,7 @@ namespace Inventario.Controllers
                         }
                         else if (con.StockActual > Diferencia)
                         {
-                            
+
                             NExistencia = (Double)con.StockActual - Diferencia;
                             Diferencia = 0;
                         }
@@ -439,13 +443,15 @@ namespace Inventario.Controllers
                             Diferencia = Diferencia - (Double)con.StockActual;
                             NExistencia = 0;
                         }
-                        
-                      consulta = GuardarNStock((long)con.IdArticulo, NExistencia);
-                        if (consulta == 0) {
+
+                        consulta = GuardarNStock((long)con.IdCompra,(long)con.IdArticulo, NExistencia);
+                        if (consulta == 0)
+                        {
                             break;
                         }
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
                 }
@@ -458,20 +464,20 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock----------------------
-        public int GuardarNStock(long ID, double NExistencia)
+        public int GuardarNStock(long ID,long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
-            try
-            {
-                ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(ID)).First();
-                mpag.StockActual = NExistencia;//Cambia el estatus en 0
-                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-                nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
+            //try
+            //{
+            ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID)&& p.IdArticulo.Equals(IDA)).First();
+            mpag.StockActual = NExistencia;//Cambia el estatus en 0
+            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            nregistradosAfectados = 1;//Se pudo realizar
+            //}
+            //catch (Exception ex)
+            //{
+            //    nregistradosAfectados = 0;
+            //}
             return nregistradosAfectados;
         }
 
