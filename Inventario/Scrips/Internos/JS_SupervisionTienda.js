@@ -725,11 +725,11 @@ function GuardarUsados() {
 
             var UnidadM = document.getElementsByClassName("input-Unidad");
 
-            var Precio = document.getElementsByClassName("input-Precio");
+          //  var Precio = document.getElementsByClassName("input-Precio");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
-
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+// if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
                     var Movimiento = document.getElementById("TxtMovUsados").value;
