@@ -927,7 +927,7 @@ namespace Inventario.Controllers
                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                          join areas in InvBD.Areas
                      on Compra.IdProveedor equals areas.IdAreas
-                         where Compra.IdSitio.Equals(IdPro)
+                         where Compra.IdSitio.Equals(IdPro)&&Compra.EstatusPedido.Equals(1)
                          select new
                          {
                              NombreEmpresa = ExistAlm.Articulo,
