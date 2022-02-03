@@ -1512,6 +1512,125 @@ namespace Inventario.Controllers
 
 
 
+        public int GuardarDev(ExistenciaAlmacenG AceptarPedido)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = AceptarPedido.IdExistenciaAlmacenG;
+            if (id.Equals(0))
+            {
+                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
+
+                int nveces = InvBD.ExistenciaAlmacenG.Count();
+                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.ExistenciaAlmacenG.InsertOnSubmit(AceptarPedido);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+
+                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
+                //if (nveces == 0)
+                //{
+                ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+                obj.Observaciones = AceptarPedido.Observaciones;
+                obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
+                //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
+                InvBD.SubmitChanges();
+                Afectados = 1;
+                //}
+                //else
+                //{
+                //    Afectados = -1;
+                //}
+            }
+
+            return Afectados;
+        }
+
+
+        //public int GuardarDevolucion(ExistenciaAlmacenG DatosDevolucion)
+        //{
+        //    int Afectados = 0;
+        //    //try
+        //    //{
+        //    long id = DatosDevolucion.IdExistenciaAlmacenG;
+        //    if (id.Equals(0))
+        //    {
+        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)).Count();
+
+        //        //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+        //        if (nveces >= 0)
+        //        {
+        //            InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosDevolucion);
+        //            InvBD.SubmitChanges();
+        //            Afectados = 1;
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)
+        //        && p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)
+        //        && p.IdCompra.Equals(DatosDevolucion.IdCompra)
+        //         && p.IdCompraInterno.Equals(DatosDevolucion.IdCompraInterno)
+        //         && p.ExitenciaInicial.Equals(DatosDevolucion.ExitenciaInicial)
+        //         && p.ExitenciaActual.Equals(DatosDevolucion.ExitenciaActual)
+        //         && p.IdArticulo.Equals(DatosDevolucion.IdArticulo)
+        //         && p.Articulo.Equals(DatosDevolucion.Articulo)
+        //         && p.NoPedidoG.Equals(DatosDevolucion.NoPedidoG)
+        //         && p.TipoDeOperacion.Equals(DatosDevolucion.TipoDeOperacion)
+        //         && p.Observaciones.Equals(DatosDevolucion.Observaciones)
+        //         && p.ExistenciaActDevolucion.Equals(DatosDevolucion.ExistenciaActDevolucion)
+        //         && p.ExistenciaInicDevolucion.Equals(DatosDevolucion.ExistenciaInicDevolucion)
+        //         ).Count();
+        //        if (nveces == 0)
+        //        {
+        //            ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+        //            obj.IdExistenciaAlmacenG = DatosDevolucion.IdExistenciaAlmacenG;
+        //            obj.IdCompra = DatosDevolucion.IdCompra;
+        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
+        //            obj.IdCompraInterno = DatosDevolucion.IdCompraInterno;
+        //            obj.ExitenciaInicial = DatosDevolucion.ExitenciaInicial;
+        //            obj.ExitenciaActual = DatosDevolucion.ExitenciaActual;
+        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
+        //            obj.Articulo = DatosDevolucion.Articulo;
+        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
+        //            obj.NoPedidoG = DatosDevolucion.NoPedidoG;
+        //            obj.TipoDeOperacion = DatosDevolucion.TipoDeOperacion;
+        //            obj.Observaciones = DatosDevolucion.Observaciones;
+        //            obj.ExistenciaActDevolucion = DatosDevolucion.ExistenciaActDevolucion;
+        //            obj.ExistenciaInicDevolucion = DatosDevolucion.ExistenciaInicDevolucion;
+        //            InvBD.SubmitChanges();
+        //            Afectados = 1;
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    //}
+        //    //    catch (Exception ex)
+        //    //    {
+        //    //        Afectados = 0;
+        //    //    }
+        //    return Afectados;
+        //}
+
 
     }
 }

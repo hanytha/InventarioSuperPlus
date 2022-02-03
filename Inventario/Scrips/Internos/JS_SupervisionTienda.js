@@ -359,7 +359,7 @@ function abrirModalDevoluciones(idArt, id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-           // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
@@ -368,7 +368,7 @@ function abrirModalDevoluciones(idArt, id, idS) {
         $.get("/Supervision/ConsultaDevA/?idArt=" + idArt, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-           // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+            // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
@@ -931,7 +931,7 @@ function GuardarUsados() {
 
 function GuardarDevolucion() {
     if (CamposObligatoriosDevolucion() == true) {
-        if (confirm("¿Desea aplica  r los cambios?") == 1) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
