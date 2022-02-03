@@ -163,6 +163,8 @@ namespace Inventario.Controllers
         //    return Json(comps, JsonRequestBehavior.AllowGet);
 
         //}
+
+
    //----------------------------------Consulta los datos por id de proveedor en la tabla de proveedores-------------------------------------------------
 
         public JsonResult ConsultaProveedorModal(string Id)
@@ -182,6 +184,8 @@ namespace Inventario.Controllers
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
 
+
+//-----------------------------------------------------------------------------------------------------------------------
  //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
         public JsonResult ConsultaIdPro(string IdPro)
         {
@@ -196,20 +200,57 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-////--------------------------------------------------------------------------
-//        public JsonResult ConsultaIdProveedor(string IdPro)
-//        {
-//            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
-//                .Select(p => new
-//                {
-//                    p.NombreEmpresa,
-//                    p.IdArticulos,
-//                    p.Unidad,
+//--------------------------------------------------------------------------
+        public JsonResult ConsultaIdProveedorArticulos(string IdPro)
+        {
+            string Articulo = "";
+            string IDA = "";
+            string Unidad = "";
+            string Precio = "";
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    NombreEmpresa = p.NombreEmpresa,
+                    IdArticulos = p.IdArticulos,
+                    Unidad = p.Unidad,
 
-//                });
+                });
 
-//            return Json(compra, JsonRequestBehavior.AllowGet);
-//        }
+                foreach (var g in compra)
+                {
+                    Articulo += g.NombreEmpresa + ",";
+                    IDA += g.IdArticulos + ",";
+                    Unidad += g.Unidad + ",";
+
+                    var articulos = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(g.IdArticulos) && p.Estatus.Equals(1)).OrderBy(p => p.NoCompra)
+                  .Select(p => new
+                  {
+                      precio = p.PrecioUnitario,
+
+                  });
+
+                if (articulos.Count() > 0)
+                {
+                    int UltimoReg = articulos.Count() - 1;
+                    int cont = 0;
+
+                    foreach (var f in articulos)
+                    {
+                        if (cont == UltimoReg) {
+                            Precio += f.precio + ",";
+                        }
+                        cont++;
+                    }
+                }
+            }
+            var resul = new { Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IDA = IDA.Substring(0, IDA.Length - 1),
+                Unidad = Unidad.Substring(0, Unidad.Length - 1),
+                Precio = Precio.Substring(0, Precio.Length - 1)
+            };
+
+            return Json(resul, JsonRequestBehavior.AllowGet);
+        }
 
         //****************************************************************************************************
 
