@@ -237,7 +237,7 @@ function MostrarArticulos(id) {
     }
 }
 
-//-----------------------------------------------------------------------------------
+//------------------------------Función para habilitar el input de precio cuando este sea 0--------------------------------------
 function habilitar() {
 
     var Precio = document.getElementsByClassName("input-Precio");
@@ -250,6 +250,42 @@ function habilitar() {
             Precio[i].disabled = false;
             Precio[i].style.backgroundColor = 'PaleTurquoise';
         }
+    }
+}
+
+//------------------------------Función para verificar que --------------------------------------
+function Verificar() {
+
+    var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+    var contador = 0;
+    var contadorPrecio = 0;
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (Precio[i].value == 0) {
+
+            Precio[i].disabled = false;
+            Precio[i].style.backgroundColor = 'PaleTurquoise';
+        }
+
+        if (Precio[i].value < 0 && NumPedidos[i].value > 0 || Precio[i].value > 0 && NumPedidos[i].value > 0 || Precio[i].value == 0 && NumPedidos[i].value > 0 || Precio[i].value < 0 && NumPedidos[i].value < 0 || Precio[i].value > 0 && NumPedidos[i].value < 0 || Precio[i].value == 0 && NumPedidos[i].value < 0) {
+
+            contador++;
+        }
+        if (Precio[i].value > 0 && NumPedidos[i].value > 0) {
+
+            contadorPrecio++;
+        }
+    }
+
+    if (contador == contadorPrecio) {
+        GuardarPedidoExterno();
+    }
+    else {
+
+        swal("¡Los datos son icorrectos!", "verifique los datos ingresados", "warning");
+
     }
 }
 
@@ -271,7 +307,7 @@ function GuardarPedidoExterno() {
             var Precio = document.getElementsByClassName("input-Precio");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value > 0) {
 
 
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
