@@ -930,6 +930,7 @@ namespace Inventario.Controllers
                          where Compra.IdSitio.Equals(IdPro)&&Compra.EstatusPedido.Equals(1)
                          select new
                          {
+                             IdExistencia = ExistAlm.IdExistenciaAlmacenG,
                              NombreEmpresa = ExistAlm.Articulo,
                              IdArticulos = ExistAlm.IdArticulo,
                              Tipo = ExistAlm.TipoDeOperacion,
@@ -1475,6 +1476,7 @@ namespace Inventario.Controllers
             else
             {
                 int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)
+                  && p.IdExistencia.Equals(DatosUsados.IdExistencia)
                 && p.IdExistencia.Equals(DatosUsados.IdExistencia)
                 && p.IdCompra.Equals(DatosUsados.IdCompra)
                  && p.IdArticulo.Equals(DatosUsados.IdArticulo)
