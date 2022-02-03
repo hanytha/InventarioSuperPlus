@@ -218,7 +218,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input onkeyup='habilitar()' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i]  + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
@@ -237,7 +237,20 @@ function MostrarArticulos(id) {
     }
 }
 
+//-----------------------------------------------------------------------------------
+function habilitar() {
 
+    var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (Precio[i].value == 0) {
+
+            Precio[i].disabled = false;
+        }
+    }
+}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //----------------------Guardar datos de los pedidos-----------------------------------------------
