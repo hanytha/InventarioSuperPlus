@@ -37,7 +37,8 @@ function ConsultaArticuloComp(IDTienda) {
             let ArrayIdSitio = IdSitio.split(',');
             let Articulo = Data.Articulo;
             let ArrayArticulo = Articulo.split(',');
-
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
 
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
@@ -56,7 +57,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 //CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -347,7 +348,7 @@ function abrirModalMovimiento(IDTienda) {
 
 
 
-function abrirModalDevoluciones(id, idS) {
+function abrirModalDevoluciones(idArt, id, idS) {
 
     LimpiarCampos();
     if (idS == 0) {
@@ -364,7 +365,7 @@ function abrirModalDevoluciones(id, idS) {
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        $.get("/Supervision/ConsultaArtDevolucion/?id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaDevA/?idArt=" + idArt, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
            // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
@@ -930,7 +931,7 @@ function GuardarUsados() {
 
 function GuardarDevolucion() {
     if (CamposObligatoriosDevolucion() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+        if (confirm("¿Desea aplica  r los cambios?") == 1) {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
