@@ -135,34 +135,54 @@ namespace Inventario.Controllers
             return Json(compras, JsonRequestBehavior.AllowGet);
 
         }
+
         //-----------Consulta los datos por ID del proveedor pero en la tabla de compras JOIN Proveedor------------------
-        public JsonResult ConsultaComJoinProveedorModal(long Id)
+
+        //public JsonResult ConsultaComJoinProveedorModal(long Id)
+        //{
+        //    var comps = from comprs in InvBD.Compra
+        //                join provedor in InvBD.Proveedores
+        //            on comprs.IdProveedor equals provedor.IdProveedores
+        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
+        //                select new
+        //                {
+        //                    Articulo = comprs.Articulo,
+        //                    IdArticulo = comprs.IdArticulo,
+        //                    IdProveedor = provedor.IdProveedores,
+        //                    Proveedor = provedor.Nombre,
+        //                    Correo = provedor.Correo,
+        //                    Clabe = provedor.ClaveInterbancaria,
+        //                    Telefono = provedor.Telefono,
+        //                    RFC = provedor.RFC,
+        //                    UsoCFDI = provedor.UsoCFDI,
+        //                    Direccion = provedor.Direccion,
+
+        //                };
+
+
+        //    return Json(comps, JsonRequestBehavior.AllowGet);
+
+        //}
+   //----------------------------------Consulta los datos por id de proveedor en la tabla de proveedores-------------------------------------------------
+
+        public JsonResult ConsultaProveedorModal(string Id)
         {
-            var comps = from comprs in InvBD.Compra
-                        join provedor in InvBD.Proveedores
-                    on comprs.IdProveedor equals provedor.IdProveedores
-                        where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-                        select new
-                        {
-                            Articulo = comprs.Articulo,
-                            IdArticulo = comprs.IdArticulo,
-                            IdProveedor = provedor.IdProveedores,
-                            Proveedor = provedor.Nombre,
-                            Correo = provedor.Correo,
-                            Clabe = provedor.ClaveInterbancaria,
-                            Telefono = provedor.Telefono,
-                            RFC = provedor.RFC,
-                            UsoCFDI = provedor.UsoCFDI,
-                            Direccion = provedor.Direccion,
+            var compra = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdProveedores,
+                    p.Nombre,
+                    p.RFC,
+                    p.Correo,
+                    p.Telefono,
+                    p.UsoCFDI,
+                    p.Direccion,
+                });
 
-                        };
-
-
-            return Json(comps, JsonRequestBehavior.AllowGet);
-
+            return Json(compra, JsonRequestBehavior.AllowGet);
         }
 
-        //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
+ //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
         public JsonResult ConsultaIdPro(string IdPro)
         {
             var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
@@ -176,6 +196,21 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
+////--------------------------------------------------------------------------
+//        public JsonResult ConsultaIdProveedor(string IdPro)
+//        {
+//            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+//                .Select(p => new
+//                {
+//                    p.NombreEmpresa,
+//                    p.IdArticulos,
+//                    p.Unidad,
+
+//                });
+
+//            return Json(compra, JsonRequestBehavior.AllowGet);
+//        }
+
         //****************************************************************************************************
 
         //****************************Consulta el último número de pedido*************************************************

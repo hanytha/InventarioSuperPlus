@@ -132,8 +132,8 @@ function abrirModal(id) {
     }
     else {
 
-        $.get("/ExistenciasG/ConsultaComJoinProveedorModal/?Id=" + id, function (Data) {
-            document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+        $.get("/ExistenciasG/ConsultaProveedorModal/?Id=" + id, function (Data) {
+            document.getElementById("cmbProveedor").value = Data[0].IdProveedores;
             document.getElementById("TxtRFC").value = Data[0].RFC;
             document.getElementById("TxtCorreo").value = Data[0].Correo;
             document.getElementById("TxtTelefono").value = Data[0].Telefono;
