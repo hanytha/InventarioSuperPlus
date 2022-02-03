@@ -803,6 +803,26 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ConsultaArtDevolucion(long id)
+        {
+            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join areas in InvBD.Areas
+                        on Compra.IdProveedor equals areas.IdAreas
+                            where ExistAlm.IdArticulo.Equals(id)
+                            select new
+                            {
+                                IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+                                Articulo = ExistAlm.Articulo,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                IdProveedor = areas.IdAreas,
+                                Proveedor = areas.Nombre,
+                                Tienda = Compra.IdSitio,
+                            };
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        }
 
 
         //public JsonResult BDNoPedido(long Id)

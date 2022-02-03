@@ -358,16 +358,16 @@ function abrirModalDevoluciones(id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+           // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+        $.get("/Supervision/ConsultaArtDevolucion/?id=" + id, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
-            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+           // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
