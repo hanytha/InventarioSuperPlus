@@ -56,7 +56,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                //CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 //CodigoHtmlArticuloComp += "</label>";
 
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -351,18 +351,25 @@ function abrirModalDevoluciones(id, idS) {
 
     LimpiarCampos();
     if (idS == 0) {
-        sessionStorage.setItem('IDG', '0');
+        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
 
     }
 
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
-            document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
-            document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
+        });
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
         ConsultaArt(id);
         ProvDev(id);
@@ -921,8 +928,117 @@ function GuardarUsados() {
 
 }
 
+function GuardarDevolucion() {
+    if (CamposObligatoriosDevolucion() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
+            var Observaciones = document.getElementById("TxtDescripcionDev").value;
+            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+            //var EstatusPedido = value"1";
+            //var IdProveedor = document.getElementById("TxtRazonSocial").value;
+            //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
+            //var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+            //var Usuario = document.getElementById("TxtNombreUsr").value;
+            var frm = new FormData();
+            frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+            frm.append("Observaciones", Observaciones);
+            frm.append("TipoDeOperacion", TipoDeOperacion);
+            //frm.append("IdProveedor", IdProveedor);
+            //frm.append("Proveedor", Proveedor);
+            //frm.append("FechaIngreso", FechaIngreso);
+            //frm.append("Usuario", Usuario);
+            frm.append("EstatusPedido", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Supervision/GuardarDev",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
 
+                    if (data == 0) {
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
+                    }
+                    else if (data == -1) {
+                        Swal.fire(
+                            '',
+                            'Ya existe',
+                            'warning'
+                        )
+                    }
 
+                }
+            });
+            alert("Los datos se guardaron correctamente");
+            ConsultaArticuloComp();
+            document.getElementById("btnCancelar").click();
+        }
+    }
+}
+
+//function GuardarDevolucion() {
+//    if (CamposObligatoriosDevolucion() == true) {
+//        if (confirm("¿Desea aplicar los cambios?") == 1) {
+//            //var IDPerfil = document.getElementById("TxtIDPerfil").value;
+//            var IdExistenciaAlmagenG = sessionStorage.getItem('IdExistenciaAlmagenG');
+//            var Observaciones = document.getElementById("TxtDescripcionDev").value;
+//            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+//            //var ChevPermisos = document.getElementsByClassName("checkbox-area");
+//            //let seleccionados = "";
+//            //for (let i = 0; i < ChevPermisos.length; i++) {
+//            //    if (ChevPermisos[i].checked == true) {
+//            //        seleccionados += ChevPermisos[i].id;
+//            //        seleccionados += "#";
+//            //    }
+//            //}
+//            //var Permisos = seleccionados.substring(0, seleccionados.length - 1);
+//            //var Comentarios = document.getElementById("TxtComentarios").value;
+//            var frm = new FormData();
+//            frm.append("IdExistenciaAlmagenG", IdExistenciaAlmagenG);
+//            frm.append("Observaciones", Observaciones);
+//            frm.append("TipoDeOperacion", TipoDeOperacion);
+//            //frm.append("Permisos", Permisos);
+//            //frm.append("Comentarios", Comentarios);
+//            frm.append("Estatus", 1);
+//            $.ajax({
+//                type: "POST",
+//                url: "/Supervision/GuardarDevolucion",
+//                data: frm,
+//                contentType: false,
+//                processData: false,
+//                success: function (data) {
+//                    if (data == 0) {
+//                        Swal.fire(
+//                            '',
+//                            'Ocurrió un error',
+//                            'danger'
+//                        )
+//                    }
+//                    else if (data == -1) {
+//                        Swal.fire(
+//                            '',
+//                            'Ya existe',
+//                            'warning'
+//                        )
+//                    }
+//                    else {
+//                        Swal.fire(
+//                            '¡GUARDADO!',
+//                            'Se guardó correctamente.',
+//                            'success'
+//                        )
+//                        ConsultaArticuloComp();
+//                        document.getElementById("btnCancelarDevolucion").click();
+//                    }
+//                }
+//            });
+//        }
+//    }
+//}
 
 
 
@@ -947,6 +1063,23 @@ function CamposObligatorios() {
 function CamposObligatoriosUsados() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorioUsados");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+            exito = false;
+            controlesObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            controlesObligatorio[i].classList.remove("border-danger");
+
+        }
+    }
+    return exito;
+}
+
+function CamposObligatoriosDevolucion() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorioDevolucion");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
         if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
