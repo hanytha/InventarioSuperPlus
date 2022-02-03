@@ -410,14 +410,30 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+        //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
+        public JsonResult ConsultaOcultar(long No)
+        {
+            var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No))
+                .Select(p => new
+                {
+                    p.NumeroPedido,
+                    p.IdArticulo,
+                    p.Articulo,
 
-        //----------------------Cambia el estatus de los pedidos solventados--------------------
-        public int OcultarPeidos(long No)
+                });
+            foreach (var b in articulo)
+            {
+                OcultarPeidos((long) b.NumeroPedido, (long) b.IdArticulo);
+            }
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+        //----------------------Cambia el estatus de los pedidos solventados en la tabla de pedidos internos--------------------
+        public int OcultarPeidos(long No, long ID)
         {
             int nregistradosAfectados = 0;
             try
             {
-                PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No)).First();
+                PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No) && p.IdArticulo.Equals(ID)).First();
                 mpag.Estatus = 0;//Cambia el estatus en 0
                 InvBD.SubmitChanges();//Guarda los datos en la Base de datos
                 nregistradosAfectados = 1;//Se pudo realizar

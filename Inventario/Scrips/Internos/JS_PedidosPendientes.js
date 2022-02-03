@@ -312,7 +312,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("NoPedidoG", NumeroPedido);
-
+         
             $.ajax({
                 type: "POST",
                 url: "/PedidosPendientes/GuardarArticulosAlmacen",
@@ -344,27 +344,29 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
         }
     }
     nuevoStock();
-    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+
+    OcultarPedido(NumeroPedido);
+
+    ConsultaCompras();
+   //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Se guardó exitosamente!", "", "success");
+    
 }
 
-//------Funcion para ocultar los pedidos una vez solventados--------------
+//------------Función para cambiar el estatus a cero una vez solventado el pedido--------------
 
-function OcultarPedido(id) {
-    if (confirm("¿Desea eliminar el registro?") == 1) {
+function OcultarPedido(no) {
 
-        $.get("/PedidosPendientes/OcultarPeidos/?No=" + id, function (DatoCategoria) {
-            if (DatoCategoria == 1) {
-                swal("El método de pago se eliminó exitosamente!", "", "success");
-                ConsultaCategorias();
-            } else {
-                swal("¡Ocurrio un error!", "", "danger");
-            }
+    $.get("/PedidosPendientes/ConsultaOcultar/?No=" + no, function (Data) {
+            let sum = Data;
+        if (Data == 1) {
+            alert("hOLA")
+        }
         });
-    }
+    
 }
 
-//-----------------------------------Función  nuevo stock---------------------------------------
+//-----------------------------------Función  para el nuevo stock---------------------------------------
 function nuevoStock() {
 
     var Articulos = document.getElementsByClassName("input-Articulo");
