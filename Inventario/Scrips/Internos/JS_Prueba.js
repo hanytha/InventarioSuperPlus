@@ -248,6 +248,7 @@ function habilitar() {
         if (Precio[i].value == 0) {
 
             Precio[i].disabled = false;
+            Precio[i].style.backgroundColor = 'PaleTurquoise';
         }
     }
 }
