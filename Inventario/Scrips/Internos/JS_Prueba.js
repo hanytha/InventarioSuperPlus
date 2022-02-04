@@ -56,10 +56,12 @@ function CrearArticuloComp(Data) {
         //-------------Termina----------------------------------------
         CodigoHtmlArticuloComp += "</div>";
         CodigoHtmlArticuloComp += "</div>";
+      
         //------------------------Despliega primer grid-----------------------------------------------------------------------
         CodigoHtmlArticuloComp += "<div class='row'>";
         CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
         CodigoHtmlArticuloComp += "</div>";
+        CodigoHtmlArticuloComp += "<hr class='solid8'>";
         //---------------------------------------Termina----------------------------------------------------------------------------
     }
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
