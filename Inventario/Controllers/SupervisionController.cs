@@ -923,6 +923,8 @@ namespace Inventario.Controllers
             //return Json(compra, JsonRequestBehavior.AllowGet);
 
             var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
+                         join Articulos in InvBD.Articulos
+                    on ExistAlm.IdArticulo equals Articulos.IdArticulos
                          join Compra in InvBD.CompraInterno
                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                          join areas in InvBD.Areas
@@ -937,6 +939,7 @@ namespace Inventario.Controllers
                              IdProveedor = areas.IdAreas,
                              Proveedor = areas.Nombre,
                              Tienda = Compra.IdSitio,
+                             PrecioUnitarioPromedio = Articulos.PrecioUnitarioPromedio
                          };
             return Json(compra, JsonRequestBehavior.AllowGet);
 

@@ -273,10 +273,10 @@ function CalcularCosto(id) {
 
         var UnidadM = document.getElementsByClassName("input-Unidad");
 
-        //  var Precio = document.getElementsByClassName("input-Precio");
+        var PrecioU = document.getElementsByClassName("input-PrecioU");
 
         for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && PrecioU[i].value) {
                 // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                 var IdMovimiento = sessionStorage.getItem('IdMovimiento');
@@ -291,10 +291,10 @@ function CalcularCosto(id) {
                 //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
                 var Unidad = UnidadM[i].value;
                 //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                /// var PrecioUnitario = Precio[i].value;
+                var PrecioUnitario = PrecioU[i].value;
                 //-------------------------------------------------------------------------------------------------------------
                 var frm = new FormData();
-                var resultado = parseFloat(IdArticulo) - parseFloat(CantidadSolicitada);
+                var resultado = parseFloat(PrecioUnitario) * parseFloat(CantidadSolicitada);
                 var Result = res[i].value = resultado;
             }
         }
@@ -806,13 +806,13 @@ function MostrarArticulosUsados(idS) {
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
 
-            TablaArticulo += "<label>res</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Precio</label>";
+            TablaArticulo += "<label>Costo</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Precio Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
@@ -837,7 +837,7 @@ function MostrarArticulosUsados(idS) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Precio sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
