@@ -61,7 +61,7 @@ function CrearArticuloComp(Data) {
         CodigoHtmlArticuloComp += "<div class='row'>";
         CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
         CodigoHtmlArticuloComp += "</div>";
-        CodigoHtmlArticuloComp += "<hr class='solid8'>";
+      //  CodigoHtmlArticuloComp += "<hr class='solid8'>";
         //---------------------------------------Termina----------------------------------------------------------------------------
     }
     document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
@@ -354,7 +354,6 @@ function restablecerBordesInput() {
 //----------------------Guardar datos de los pedidos-----------------------------------------------
 
 function GuardarPedidoExterno() {
-
 
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
     var NumPedidos = document.getElementsByClassName("input-cantidad");

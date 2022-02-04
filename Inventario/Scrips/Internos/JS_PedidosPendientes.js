@@ -173,8 +173,30 @@ function Verificar() {
     //}
 }
 
+//-------------------------Validacion---------------------------
+function validacion() {
+    var total = document.getElementsByClassName("input-total");
+    var aprobar = document.getElementsByClassName("input-aprobar");
 
+    var aprobacion = 0;
+    var sumaS = 0;
 
+    for (let i = 0; i < aprobar.length; i++) {
+
+        var aprobacion = (aprobar[i].value) * 1;
+        var sumaS = (total[i].value) * 1;
+
+        if (aprobacion < 0 || aprobacion > sumaS) {
+
+            aprobar[i].style.borderColor = 'Red';
+        }
+        else {
+            aprobar[i].style.borderColor = 'LimeGreen';
+        }
+    }
+    
+
+}
 //-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
 function BordeInput() {
 
