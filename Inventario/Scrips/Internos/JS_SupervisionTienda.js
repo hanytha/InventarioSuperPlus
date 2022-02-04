@@ -860,10 +860,10 @@ function GuardarUsados() {
 
             var UnidadM = document.getElementsByClassName("input-Unidad");
 
-          //  var Precio = document.getElementsByClassName("input-Precio");
+            var Precio = document.getElementsByClassName("input-res");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
@@ -878,7 +878,8 @@ function GuardarUsados() {
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
                     var Unidad = UnidadM[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                   /// var PrecioUnitario = Precio[i].value;
+                   // var PrecioUnitario = Precio[i].value;
+                    var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdMovimiento", IdMovimiento);
@@ -892,7 +893,7 @@ function GuardarUsados() {
                     frm.append("IdExistencia", Unidad);
                    // frm.append("PrecioUnitario", PrecioUnitario);
                    
-                    //frm.append("UsoCFDI", UsoCFDI);
+                    frm.append("Costo", Costo);
                     //frm.append("IdArea", IdArea);
                     //frm.append("Area", Area);
                     //frm.append("Direccion", Direccion);
