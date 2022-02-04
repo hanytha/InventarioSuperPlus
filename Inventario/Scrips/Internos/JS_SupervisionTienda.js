@@ -173,10 +173,98 @@ function MovimientoModal(id) {
 
 
 
+//function CalcularCosto(id) {
+
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+
+
+//        var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+//        var UnidadM = document.getElementsByClassName("input-Unidad");
+
+//        var Precio = document.getElementsByClassName("input-Precio");
+//        var res = document.getElementsByClassName("input-res");
+
+//        //  var Precio = document.getElementsByClassName("input-Precio");
+
+//        for (let i = 0; i < NumPedidos.length; i++) {
+//            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+//                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+
+//                var IdMovimiento = sessionStorage.getItem('IdMovimiento');
+//                var Movimiento = document.getElementById("TxtMovUsados").value;
+//                var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+
+//                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+//                var IdArticulo = NomArticulos[i].name;
+//                var Articulo = NomArticulos[i].value;
+//                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+//                var CantidadSolicitada = NumPedidos[i].value;
+//                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+//                var Unidad = UnidadM[i].value;
+
+//                var Precio = Precio[i].value;
+
+//                var resultado = parseFloat(IdArticulo) - parseFloat(CantidadSolicitada);
+
+//                let x = document.getElementsByClassName("input-Precio").value;
+
+//                let y = document.getElementsByClassName("input-cantidadUsados").value;
+//              //  let resultado = parseFloat(x) - parseFloat(y);
+
+//               // document.getElementsByClassName('input-res').value = resultado;
+//            //    document.getElementsByClassName("input-res").value = resultado;
+//               // var Precio2 = res[i].value;
+
+//                var Result = res[i].value = resultado;
+//                //if (document.getElementsByClassName("input-Unidad").value = 2) {
+//                //    document.getElementsByClassName("input-Unidad").value = 0;
+//                //    Swal.fire(
+//                //        '!',
+//                //        'La cantidad excede al stock',
+//                //        'alert'
+//                //    )
+//                //}
+
+//            }
+//        }
+
+
+                
+                
+          
+//        //if (document.getElementsByClassName("input-cantidadUsados") <= document.getElementsByClassName("input-Unidad")) {
+//            //if (y <= x) {
+//            //let x = document.getElementsByClassName("input-Precio").value;
+
+//            //let y = document.getElementsByClassName("TxtCantidad").value;
+//            //let resultado = parseFloat(x) - parseFloat(y);
+
+//            //document.getElementsByClassName("TxtStockTotal").value = resultado;
+
+//            //if (document.getElementsByClassName("TxtStockTotal").value < 0) {
+
+//            //    Swal.fire(
+//            //        '!',
+//            //        'La cantidad excede al stock',
+//            //        'alert'
+//            //    )
+//            //}
+//       // }
+
+//    });
+//}
+
+
+
 function CalcularCosto(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
+        var res = document.getElementsByClassName("input-res");
 
 
         var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
@@ -185,13 +273,10 @@ function CalcularCosto(id) {
 
         var UnidadM = document.getElementsByClassName("input-Unidad");
 
-        var Precio = document.getElementsByClassName("input-Precio");
-        var res = document.getElementsByClassName("input-res");
-
         //  var Precio = document.getElementsByClassName("input-Precio");
 
         for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
                 // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                 var IdMovimiento = sessionStorage.getItem('IdMovimiento');
@@ -205,56 +290,14 @@ function CalcularCosto(id) {
                 var CantidadSolicitada = NumPedidos[i].value;
                 //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
                 var Unidad = UnidadM[i].value;
-
-                var Precio = Precio[i].value;
-
+                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                /// var PrecioUnitario = Precio[i].value;
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
                 var resultado = parseFloat(IdArticulo) - parseFloat(CantidadSolicitada);
-
-                let x = document.getElementsByClassName("input-Precio").value;
-
-                let y = document.getElementsByClassName("input-cantidadUsados").value;
-              //  let resultado = parseFloat(x) - parseFloat(y);
-
-               // document.getElementsByClassName('input-res').value = resultado;
-            //    document.getElementsByClassName("input-res").value = resultado;
-               // var Precio2 = res[i].value;
-
                 var Result = res[i].value = resultado;
-                //if (document.getElementsByClassName("input-Unidad").value = 2) {
-                //    document.getElementsByClassName("input-Unidad").value = 0;
-                //    Swal.fire(
-                //        '!',
-                //        'La cantidad excede al stock',
-                //        'alert'
-                //    )
-                //}
-
             }
         }
-
-
-                
-                
-          
-        //if (document.getElementsByClassName("input-cantidadUsados") <= document.getElementsByClassName("input-Unidad")) {
-            //if (y <= x) {
-            //let x = document.getElementsByClassName("input-Precio").value;
-
-            //let y = document.getElementsByClassName("TxtCantidad").value;
-            //let resultado = parseFloat(x) - parseFloat(y);
-
-            //document.getElementsByClassName("TxtStockTotal").value = resultado;
-
-            //if (document.getElementsByClassName("TxtStockTotal").value < 0) {
-
-            //    Swal.fire(
-            //        '!',
-            //        'La cantidad excede al stock',
-            //        'alert'
-            //    )
-            //}
-       // }
-
     });
 }
 
