@@ -282,7 +282,21 @@ function Verificar() {
     }
 
     if (contador == contadorPrecio && contadorPrecio >= 1) {
-        GuardarPedidoExterno();
+     
+        swal({
+            title: "Desea guardar el Pedido?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    GuardarPedidoExterno();
+                }
+            });
     }
     else {
 
@@ -325,9 +339,7 @@ function restablecerBordesInput() {
 
 function GuardarPedidoExterno() {
 
-    if (CamposObligatorios() == true) {
-
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+ 
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-cantidad");
 
@@ -411,8 +423,8 @@ function GuardarPedidoExterno() {
             }
             //-----Mensaje de confirmación-----------------------
             swal("Su pedido se generó correctamente!", "", "success");
-        }
-    }
+        
+    
 
 }
 
