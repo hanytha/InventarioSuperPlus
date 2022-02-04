@@ -184,7 +184,7 @@ function validacion() {
     var contadorA = 0;
 
     for (let i = 0; i < aprobar.length; i++) {
-       
+
 
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
@@ -205,15 +205,30 @@ function validacion() {
         }
     }
     if (contador == contadorA && contadorA >= 1) {
-       
-        GuardarCompraInterna();
+
+        //-------------------------------------------------------------------
+        swal({
+            title: "Desea guardar los datos?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    GuardarCompraInterna();
+                }
+            });
+        //-------------------------------------------------------------------
     }
     else {
         swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
 
     }
 }
-    
+
 
 
 //-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
@@ -270,57 +285,54 @@ function CalcularFecha() {
 
 function GuardarCompraInterna() {
 
-    if (confirm("¿Desea aplicar los cambios?") == 1) {
-        //  if (Verificar() == true) {
-        var IdCompraInterno = sessionStorage.getItem('IDExt');
-        var NoPedido = document.getElementById("TxtNumPedido").value;
-        var NoPedidoProveedor = document.getElementById("TxtNoProveedor").value;
-        var IdProveedor = document.getElementById("TxtProveedor").name;
-        var Proveedor = document.getElementById("TxtProveedor").value;
-        var FechaIngreso = document.getElementById("TxtFechaAprobada").value;
+    //  if (Verificar() == true) {
+    var IdCompraInterno = sessionStorage.getItem('IDExt');
+    var NoPedido = document.getElementById("TxtNumPedido").value;
+    var NoPedidoProveedor = document.getElementById("TxtNoProveedor").value;
+    var IdProveedor = document.getElementById("TxtProveedor").name;
+    var Proveedor = document.getElementById("TxtProveedor").value;
+    var FechaIngreso = document.getElementById("TxtFechaAprobada").value;
 
-        var IdSitio = document.getElementById("TxtIDTienda").value;
-        var Sitio = document.getElementById("TxtTiendas").value;
-        var IdAsignacion = document.getElementById("TxtAsignacion").value;
+    var IdSitio = document.getElementById("TxtIDTienda").value;
+    var Sitio = document.getElementById("TxtTiendas").value;
+    var IdAsignacion = document.getElementById("TxtAsignacion").value;
 
 
-        var frm = new FormData();
+    var frm = new FormData();
 
-        frm.append("IdCompraInterno", IdCompraInterno);
-        frm.append("NoPedido", NoPedido);
-        frm.append("NoPedidoProveedor", NoPedidoProveedor);
-        frm.append("IdProveedor", IdProveedor);
-        frm.append("Proveedor", Proveedor);
-        frm.append("FechaIngreso", FechaIngreso);
-        frm.append("IdSitio", IdSitio);
-        frm.append("Sitio", Sitio);
-        frm.append("IdAsignacion", IdAsignacion);
+    frm.append("IdCompraInterno", IdCompraInterno);
+    frm.append("NoPedido", NoPedido);
+    frm.append("NoPedidoProveedor", NoPedidoProveedor);
+    frm.append("IdProveedor", IdProveedor);
+    frm.append("Proveedor", Proveedor);
+    frm.append("FechaIngreso", FechaIngreso);
+    frm.append("IdSitio", IdSitio);
+    frm.append("Sitio", Sitio);
+    frm.append("IdAsignacion", IdAsignacion);
 
-        $.ajax({
-            type: "POST",
-            url: "/PedidosPendientes/GuardarProveedorInterno",
-            data: frm,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                if (data == 0) {
-                    swal("¡Ocurrio un error!", "", "danger");
-                }
-                else if (data == -1) {
-                    swal("¡La compra ya existe!", "", "warning");
-                }
-                else {
-                    alert("Los datos se guardaron de manera exitosa");
-
-                    GuardarDatosArticuloCompra(data, NoPedido);
-
-                    document.getElementById("btnCancelar").click();
-                }
+    $.ajax({
+        type: "POST",
+        url: "/PedidosPendientes/GuardarProveedorInterno",
+        data: frm,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data == 0) {
+                swal("¡Ocurrio un error!", "", "danger");
             }
-        });
-        // }
-    }
+            else if (data == -1) {
+                swal("¡La compra ya existe!", "", "warning");
+            }
+            else {
+                alert("Los datos se guardaron de manera exitosa");
 
+                GuardarDatosArticuloCompra(data, NoPedido);
+
+                document.getElementById("btnCancelar").click();
+            }
+        }
+    });
+    // }
 }
 
 //----------------------------------------------Termina------------------------------------------------------------------------
@@ -395,7 +407,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
     ConsultaCompras();
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
-    swal("Se guardó exitosamente!", "", "success");
+    swal("Sus datos se guardaron correctamente!", "", "success");
 
 }
 
