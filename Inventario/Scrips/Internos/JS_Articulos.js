@@ -57,6 +57,7 @@ function CrearTablaArticulos(Data) {
 function abrirModal(id) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     MostrarProveedores();
+    consultaFecha();
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
 
@@ -313,3 +314,9 @@ function llenarCombo(data, control) {
     control.innerHTML = contenido;
 }
 
+//------------------------Consulta fecha------------------------------------------
+function consultaFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngreso').value = fecha;
+}
