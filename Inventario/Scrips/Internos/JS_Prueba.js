@@ -262,6 +262,7 @@ function Verificar() {
 
     var Precio = document.getElementsByClassName("input-Precio");
     var NumPedidos = document.getElementsByClassName("input-cantidad");
+    var combo = document.getElementById("cmbArea").value;
     var contador = 0;
     var contadorPrecio = 0;
 
@@ -283,7 +284,7 @@ function Verificar() {
         }
     }
 
-    if (contador == contadorPrecio && contadorPrecio >= 1) {
+    if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0) {
 
         swal({
             title: "Desea guardar el Pedido?",
@@ -319,6 +320,11 @@ function Verificar() {
                 Precio[i].style.backgroundColor = 'Red';
 
             }
+        }
+
+        if (combo == 0) {
+
+            swal("¡Seleccione su departamento!", "", "warning");
         }
     }
 }
