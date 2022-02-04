@@ -279,7 +279,7 @@ function Verificar() {
         }
     }
 
-    if (contador == contadorPrecio) {
+    if (contador == contadorPrecio && contadorPrecio >= 1) {
         GuardarPedidoExterno();
     }
     else {
