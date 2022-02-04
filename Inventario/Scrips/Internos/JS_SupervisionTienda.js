@@ -173,6 +173,91 @@ function MovimientoModal(id) {
 
 
 
+function CalcularCosto(id) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+
+
+        var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+
+        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+        var UnidadM = document.getElementsByClassName("input-Unidad");
+
+        var Precio = document.getElementsByClassName("input-Precio");
+        var res = document.getElementsByClassName("input-res");
+
+        //  var Precio = document.getElementsByClassName("input-Precio");
+
+        for (let i = 0; i < NumPedidos.length; i++) {
+            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+
+                var IdMovimiento = sessionStorage.getItem('IdMovimiento');
+                var Movimiento = document.getElementById("TxtMovUsados").value;
+                var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+
+                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                var IdArticulo = NomArticulos[i].name;
+                var Articulo = NomArticulos[i].value;
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var CantidadSolicitada = NumPedidos[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = UnidadM[i].value;
+
+                var Precio = Precio[i].value;
+
+                var resultado = parseFloat(IdArticulo) - parseFloat(CantidadSolicitada);
+
+                let x = document.getElementsByClassName("input-Precio").value;
+
+                let y = document.getElementsByClassName("input-cantidadUsados").value;
+              //  let resultado = parseFloat(x) - parseFloat(y);
+
+               // document.getElementsByClassName('input-res').value = resultado;
+            //    document.getElementsByClassName("input-res").value = resultado;
+               // var Precio2 = res[i].value;
+
+                var Result = res[i].value = resultado;
+                //if (document.getElementsByClassName("input-Unidad").value = 2) {
+                //    document.getElementsByClassName("input-Unidad").value = 0;
+                //    Swal.fire(
+                //        '!',
+                //        'La cantidad excede al stock',
+                //        'alert'
+                //    )
+                //}
+
+            }
+        }
+
+
+                
+                
+          
+        //if (document.getElementsByClassName("input-cantidadUsados") <= document.getElementsByClassName("input-Unidad")) {
+            //if (y <= x) {
+            //let x = document.getElementsByClassName("input-Precio").value;
+
+            //let y = document.getElementsByClassName("TxtCantidad").value;
+            //let resultado = parseFloat(x) - parseFloat(y);
+
+            //document.getElementsByClassName("TxtStockTotal").value = resultado;
+
+            //if (document.getElementsByClassName("TxtStockTotal").value < 0) {
+
+            //    Swal.fire(
+            //        '!',
+            //        'La cantidad excede al stock',
+            //        'alert'
+            //    )
+            //}
+       // }
+
+    });
+}
+
 
 //****************************************************************************************************************
 
@@ -632,7 +717,7 @@ function SiguientePedidoProveedor(id) {
 //                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
 //                TablaArticulo += "<label>"
 //                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-//                TablaArticulo += "</label>"
+//                TablaArticulo += "</label>" 
 //                TablaArticulo += "</div>";
 
 //                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
@@ -668,42 +753,49 @@ function MostrarArticulosUsados(idS) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
      
             TablaArticulo += "<label>Id Existencia</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-       
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>res</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            //TablaArticulo += "<label>Precio</label>";
-            //TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Precio</label>";
+            TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
               //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
                  TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input class='input-Precio sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-Precio sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
