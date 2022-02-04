@@ -69,10 +69,10 @@ function CrearArticuloComp(Data) {
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
-    
+
     if (id == 0) {
         sessionStorage.setItem('IDArt', '0');
-       
+
     }
     else {
         $.get("/ExistenciasG/ConsultaIdArticulo/?Id=" + id, function (Data) {
@@ -126,6 +126,8 @@ function Desplegar(id) {
 function abrirModal(id) {
     LlenarCMCProveedores();
     LimpiarCampos();
+
+
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
 
@@ -218,7 +220,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input onkeyup='habilitar()' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i]  + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input onkeyup='habilitar()' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
@@ -286,6 +288,35 @@ function Verificar() {
 
         swal("¡Los datos son icorrectos!", "verifique los datos ingresados", "warning");
 
+        for (let i = 0; i < NumPedidos.length; i++) {
+            if (NumPedidos[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+            }
+            if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
+
+                Precio[i].style.backgroundColor = 'Red';
+            }
+            if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+                Precio[i].style.backgroundColor = 'Red';
+
+            }
+        }
+    }
+}
+
+
+//*******************************Restablecer el color de borde de los inputs cuando el modal se sierra*****************************
+function restablecerBordesInput() {
+    var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        NumPedidos[i].style.borderColor = 'DimGray';
+        Precio[i].style.backgroundColor = 'White';
     }
 }
 
@@ -433,7 +464,7 @@ function llenarCombo(data, control) {
 function Desplegar2(no) {
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
-        
+
     }
     else {
 
