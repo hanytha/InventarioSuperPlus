@@ -54,13 +54,11 @@ namespace Inventario.Controllers
                     {
 
                         SumaStock = (int)(SumaStock + comp.stockActual);
-                        if (cont == 0)
-                        {
-                            Costos += comp.costo + ",";
-                        }
+
                         if (cont == UltimoReg)
                         {
                             Fechas += comp.fechaIngreso + ",";
+                            Costos += comp.costo + ",";
                         }
                         cont++;
                     }

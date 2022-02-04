@@ -282,7 +282,7 @@ function Verificar() {
     }
 
     if (contador == contadorPrecio && contadorPrecio >= 1) {
-     
+
         swal({
             title: "Desea guardar el Pedido?",
             text: "",
@@ -353,92 +353,92 @@ function restablecerBordesInput() {
 
 function GuardarPedidoExterno() {
 
- 
-            //----------Guardar los inputs de manera individual en la Base de datos--------------------
-            var NumPedidos = document.getElementsByClassName("input-cantidad");
 
-            var NomArticulos = document.getElementsByClassName("input-Articulo");
+    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
 
-            var UnidadM = document.getElementsByClassName("input-Unidad");
+    var NomArticulos = document.getElementsByClassName("input-Articulo");
 
-            var Precio = document.getElementsByClassName("input-Precio");
+    var UnidadM = document.getElementsByClassName("input-Unidad");
 
-            for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value > 0) {
+    var Precio = document.getElementsByClassName("input-Precio");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+        if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value > 0) {
 
 
-                    var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
-                    var IdProveedor = document.getElementById("cmbProveedor").value;
-                    var TempProvedor = document.getElementById("cmbProveedor");
-                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+            var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempProvedor = document.getElementById("cmbProveedor");
+            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
 
-                    var Correo = document.getElementById("TxtCorreo").value;
-                    var RFC = document.getElementById("TxtRFC").value;
-                    var Telefono = document.getElementById("TxtTelefono").value;
-                    var NumeroPedido = document.getElementById("TxtNumPedido").value;
-                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProve").value;
-                    var Fecha = document.getElementById("TxtFechaSistema").value;
+            var Correo = document.getElementById("TxtCorreo").value;
+            var RFC = document.getElementById("TxtRFC").value;
+            var Telefono = document.getElementById("TxtTelefono").value;
+            var NumeroPedido = document.getElementById("TxtNumPedido").value;
+            var NumPedidoProveedor = document.getElementById("TxtNumPedidoProve").value;
+            var Fecha = document.getElementById("TxtFechaSistema").value;
 
-                    var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
-                    var Direccion = document.getElementById("TxtDireccion").value;
+            var UsoCFDI = document.getElementById("TxtUsoCFDI").value;
+            var Direccion = document.getElementById("TxtDireccion").value;
 
-                    var IdArea = document.getElementById("cmbArea").value;
-                    var TempArea = document.getElementById("cmbArea");
-                    var Area = TempArea.options[TempArea.selectedIndex].text;
-                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                    var Articulo = NomArticulos[i].value;
-                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                    var CantidadSolicitada = NumPedidos[i].value;
-                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                    var Unidad = UnidadM[i].value;
-                    //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                    var PrecioUnitario = Precio[i].value;
-                    //-------------------------------------------------------------------------------------------------------------
-                    var frm = new FormData();
-                    frm.append("IdPedidosExternos", IdPedidosExternos);
-                    frm.append("IdProveedor", IdProveedor);
-                    frm.append("Proveedor", Proveedor);
-                    frm.append("Correo", Correo);
-                    frm.append("RFC", RFC);
-                    frm.append("Telefono", Telefono);
-                    frm.append("Articulo", Articulo);
-                    frm.append("NumeroPedido", NumeroPedido);
-                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
-                    frm.append("CantidadSolicitada", CantidadSolicitada);
-                    frm.append("Unidad", Unidad);
-                    frm.append("PrecioUnitario", PrecioUnitario);
-                    frm.append("Fecha", Fecha);
-                    frm.append("UsoCFDI", UsoCFDI);
-                    frm.append("IdArea", IdArea);
-                    frm.append("Area", Area);
-                    frm.append("Direccion", Direccion);
-                    frm.append("Estatus", 1);
-                    $.ajax({
-                        type: "POST",
-                        url: "/ExistenciasG/GuardarPedidoExterno",
-                        data: frm,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            if (data == 0) {
-                                swal("¡Ocurrio un error!", "", "danger");
-                            }
-                            else if (data == -1) {
-                                swal("¡El pedido ya exixste!", "", "warning");
-                            }
-                            else {
-                                ConsultaArticuloComp();
-                                document.getElementById("btnCancelar").click();
-                            }
-                        }
-                    });
-
+            var IdArea = document.getElementById("cmbArea").value;
+            var TempArea = document.getElementById("cmbArea");
+            var Area = TempArea.options[TempArea.selectedIndex].text;
+            //------------------------Guarda el nombre del artículo solicitado----------------------------------
+            var Articulo = NomArticulos[i].value;
+            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+            var CantidadSolicitada = NumPedidos[i].value;
+            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+            var Unidad = UnidadM[i].value;
+            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+            var PrecioUnitario = Precio[i].value;
+            //-------------------------------------------------------------------------------------------------------------
+            var frm = new FormData();
+            frm.append("IdPedidosExternos", IdPedidosExternos);
+            frm.append("IdProveedor", IdProveedor);
+            frm.append("Proveedor", Proveedor);
+            frm.append("Correo", Correo);
+            frm.append("RFC", RFC);
+            frm.append("Telefono", Telefono);
+            frm.append("Articulo", Articulo);
+            frm.append("NumeroPedido", NumeroPedido);
+            frm.append("NumPedidoProveedor", NumPedidoProveedor);
+            frm.append("CantidadSolicitada", CantidadSolicitada);
+            frm.append("Unidad", Unidad);
+            frm.append("PrecioUnitario", PrecioUnitario);
+            frm.append("Fecha", Fecha);
+            frm.append("UsoCFDI", UsoCFDI);
+            frm.append("IdArea", IdArea);
+            frm.append("Area", Area);
+            frm.append("Direccion", Direccion);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/ExistenciasG/GuardarPedidoExterno",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        swal("¡Ocurrio un error!", "", "danger");
+                    }
+                    else if (data == -1) {
+                        swal("¡El pedido ya exixste!", "", "warning");
+                    }
+                    else {
+                        ConsultaArticuloComp();
+                        document.getElementById("btnCancelar").click();
+                    }
                 }
-            }
-            //-----Mensaje de confirmación-----------------------
-            swal("Su pedido se generó correctamente!", "", "success");
-        
-    
+            });
+
+        }
+    }
+    //-----Mensaje de confirmación-----------------------
+    swal("Su pedido se generó correctamente!", "", "success");
+
+
 
 }
 
