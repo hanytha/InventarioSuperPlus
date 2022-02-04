@@ -220,7 +220,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input onkeyup='habilitar()' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input onkeyup='habilitar(); boordeInput();' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
@@ -229,7 +229,7 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input class='input-Precio sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'   value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input onkeyup='boordeInput()' class='input-Precio sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'   value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
@@ -321,7 +321,21 @@ function Verificar() {
     }
 }
 
+//****************Función para restablecer el borde de los inputs cuando su valor sea correcto*******************
+function boordeInput() {
+    var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
 
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
+            NumPedidos[i].style.borderColor = 'DimGray';
+        }
+        if (Precio[i].value > 0 && Precio[i].disabled == false) {
+            Precio[i].style.backgroundColor = 'PaleTurquoise';
+        }
+    }
+}
 //*******************************Restablecer el color de borde de los inputs cuando el modal se sierra*****************************
 function restablecerBordesInput() {
     var Precio = document.getElementsByClassName("input-Precio");
