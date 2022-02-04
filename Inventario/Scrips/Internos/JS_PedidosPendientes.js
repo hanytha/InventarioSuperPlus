@@ -138,7 +138,7 @@ function MostrarArticulosPorId(id) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-aprobar  limpiar redondeado'  onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-aprobar  limpiar redondeado'   type='number' onkeyup='BordeInput()' value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
 
