@@ -811,7 +811,11 @@ function MostrarArticulosUsados(idS) {
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Costo</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Precio Unitario</label>";
+            TablaArticulo += "</div>";
+
+            TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Precio Unitario</label>";
             TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
@@ -836,9 +840,17 @@ function MostrarArticulosUsados(idS) {
                 TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
+
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-prueba redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+
+                //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
