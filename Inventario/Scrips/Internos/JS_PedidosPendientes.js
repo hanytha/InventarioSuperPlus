@@ -129,7 +129,7 @@ function MostrarArticulosPorId(id) {
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-solicitada sinborde limpiar ' disabled   value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input id='" + ArrayIdArticulo + "' class='input-solicitada sinborde limpiar ' disabled onkeyup=''  value='" + Arraysolicitada[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -151,27 +151,27 @@ function MostrarArticulosPorId(id) {
 }
 
 //-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
-function Verificar() {
-    var total = document.getElementsByClassName("input-total");
-    var aprobar = document.getElementsByClassName("input-aprobar");
-    //var contador = 0;
-    //var contadorAprobada = 0;
-    var exito = true;
-    for (let i = 0; i < total.length; i++) {
-        if (aprobar[i].value < 0 || aprobar[i].value > total[i].value) {
-            swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
-            exito = false;
-        }
-    }
-    return exito;
-    //if (contador == contadorAprobada && contador >= 1) {
+//function Verificar() {
+//    var total = document.getElementsByClassName("input-total");
+//    var aprobar = document.getElementsByClassName("input-aprobar");
+//    //var contador = 0;
+//    //var contadorAprobada = 0;
+//    var exito = true;
+//    for (let i = 0; i < total.length; i++) {
+//        if (aprobar[i].value < 0 || aprobar[i].value > total[i].value) {
+//            swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+//            exito = false;
+//        }
+//    }
+//    return exito;
+//    //if (contador == contadorAprobada && contador >= 1) {
 
-    //    GuardarCompraInterna();
-    //}
-    //else {
-    //    swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
-    //}
-}
+//    //    GuardarCompraInterna();
+//    //}
+//    //else {
+//    //    swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+//    //}
+//}
 
 //-------------------------Validacion---------------------------
 function validacion() {
@@ -180,33 +180,57 @@ function validacion() {
 
     var aprobacion = 0;
     var sumaS = 0;
+    var contador = 0;
+    var contadorA = 0;
 
     for (let i = 0; i < aprobar.length; i++) {
+       
 
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
+
+        if (aprobacion < 0 || aprobacion > 0) {
+            contador++;
+        }
+
 
         if (aprobacion < 0 || aprobacion > sumaS) {
 
             aprobar[i].style.borderColor = 'Red';
         }
-        else {
-            aprobar[i].style.borderColor = 'LimeGreen';
+        if (sumaS > aprobacion && aprobacion > 0 || sumaS == aprobacion) {
+
+            aprobar[i].style.borderColor = 'DimGray';
+            contadorA++;
         }
     }
+    if (contador == contadorA && contadorA >= 1) {
+       
+        GuardarCompraInterna();
+    }
+    else {
+        swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+
+    }
+}
     
 
-}
+
 //-------Funcion para cambiar el color del input cuando el valor ingresado se positivo y menor al stock de artículo---------
 function BordeInput() {
 
     var stock = document.getElementsByClassName("input-total");
     var aprobar = document.getElementsByClassName("input-aprobar");
+    var aprobacion = 0;
+    var sumaS = 0;
 
     for (i = 0; i < aprobar.length; i++) {
 
+        var aprobacion = (aprobar[i].value) * 1;
+        var sumaS = (stock[i].value) * 1;
 
-        if (aprobar[i].value > 0 && aprobar[i].value <= stock[i].value || aprobar[i].value == 0) {
+
+        if (aprobacion > 0 && aprobacion <= sumaS || aprobacion == 0) {
 
             aprobar[i].style.borderColor = 'DimGray';
         }
@@ -259,7 +283,7 @@ function GuardarCompraInterna() {
         var Sitio = document.getElementById("TxtTiendas").value;
         var IdAsignacion = document.getElementById("TxtAsignacion").value;
 
-       
+
         var frm = new FormData();
 
         frm.append("IdCompraInterno", IdCompraInterno);
@@ -324,7 +348,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             var ExitenciaInicial = cantidad[i].value;
             var ExitenciaActual = cantidad[i].value;
 
-            
+
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
@@ -334,7 +358,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             frm.append("ExitenciaInicial", ExitenciaInicial);
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("NoPedidoG", NumeroPedido);
-         
+
             $.ajax({
                 type: "POST",
                 url: "/PedidosPendientes/GuardarArticulosAlmacen",
@@ -370,9 +394,9 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
     OcultarPedido(NumeroPedido);
 
     ConsultaCompras();
-   //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Se guardó exitosamente!", "", "success");
-    
+
 }
 
 //------------Función para cambiar el estatus a cero una vez solventado el pedido--------------
@@ -380,12 +404,12 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 function OcultarPedido(no) {
 
     $.get("/PedidosPendientes/ConsultaOcultar/?No=" + no, function (Data) {
-            let sum = Data;
+        let sum = Data;
         if (Data == 1) {
             alert("hOLA")
         }
-        });
-    
+    });
+
 }
 
 //-----------------------------------Función  para el nuevo stock---------------------------------------
@@ -403,7 +427,7 @@ function nuevoStock() {
         if (Aprobar[i].value > 0) {
 
             total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
-      
+
         }
     }
 
