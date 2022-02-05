@@ -173,6 +173,46 @@ function MovimientoModal(id) {
 
 
 
+
+function ExisteciaDevolucion(id) {
+
+ 
+
+        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+        //if (document.getElementById("cmbMovimiento").value == 1) {
+
+        //    let bonificacion = parseFloat(x) + parseFloat(y);
+
+        //    document.getElementById("TxtStockTotal").value = bonificacion;
+        //}
+        //else {
+
+
+        //}
+
+
+            if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+            //if (y <= x) {
+                let x = document.getElementById("TxtExistenciaInicDev").value;
+
+                let y = document.getElementById("TxtCantidadDev").value;
+            let resultado = parseFloat(x) - parseFloat(y);
+
+                document.getElementById("TxtExistenciaActDev").value = resultado;
+
+                if (document.getElementById("TxtExistenciaActDev").value < 0) {
+
+                Swal.fire(
+                    '!',
+                    'La cantidad excede al stock',
+                    'alert'
+                )
+            }
+        }
+
+    });
+}
+
 //function CalcularCosto(id) {
 
 //    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
@@ -495,7 +535,7 @@ function abrirModalDevoluciones(idArt, id, idS) {
         });
         $.get("/Supervision/ConsultaDevA/?idArt=" + idArt, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
             // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;

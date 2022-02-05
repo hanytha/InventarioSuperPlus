@@ -825,6 +825,7 @@ namespace Inventario.Controllers
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
                                 Tienda = Compra.IdSitio,
+                                ExistenciaInicial= ExistAlm.ExitenciaInicial
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
