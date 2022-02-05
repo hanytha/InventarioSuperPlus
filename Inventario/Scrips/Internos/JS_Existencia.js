@@ -40,7 +40,7 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
+      //  CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
