@@ -547,7 +547,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
     }
 }
 function ConsultaArt(idExist) {
-    $.get("/Supervision/ConsultaArticuloModal/?idS=" + idExist, function (Data) {
+    $.get("/Supervision/ConsultaArticuloModal/?id=" + idExist, function (Data) {
         //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
         //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 

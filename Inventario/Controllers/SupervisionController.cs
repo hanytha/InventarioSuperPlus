@@ -489,7 +489,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where ExistenciaAlmacenG.IdExistenciaAlmacenG.Equals(idS)
+                                   where ExistenciaAlmacenG.IdExistenciaAlmacenG.Equals(id)
                                    select new
 
                                    {
