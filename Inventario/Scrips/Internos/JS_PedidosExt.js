@@ -125,8 +125,8 @@ function MostrarArticulos(num) {
             dos += "<th></th>"
             dos += "<th></th>"
             dos += "<th></th>"
-            dos += "<th>Total</th>"
-            dos += "<th>$"+ total+"</th>"
+            dos += "<th style='text-align: center;'>Total</th>"
+            dos += "<th style='text-align: center;'>$"+ total+"</th>"
             dos += "</tfoot>"
 
             dos += "</tbody>"
