@@ -727,6 +727,7 @@ function deshabilitar() {
     var Precio = document.getElementsByClassName("input-Precio");
     var provee = document.getElementById("cmbProveedor");
     var metodo = document.getElementById("cmbMPago");
+    var boton = document.getElementById("GCompras");
 
     for (let i = 0; i < cantidad.length; i++) {
 
@@ -738,9 +739,11 @@ function deshabilitar() {
                 Precio[i].disabled = true;
                 provee.disabled = true;
                 metodo.disabled = true;
+                boton.disabled = true;
             }
         }
     }
+    
 }
 
 //-------Función para habilitar los inputs en el modal de compras-------------------------------
@@ -749,9 +752,11 @@ function habilitar() {
     var Precio = document.getElementsByClassName("input-Precio");
     var provee = document.getElementById("cmbProveedor");
     var metodo = document.getElementById("cmbMPago");
+    var boton = document.getElementById("GCompras");
 
     cantidad.disabled = false;
     Precio.disabled = false;
     provee.disabled = false;
     metodo.disabled = false;
+    boton.disabled = false;
 }
