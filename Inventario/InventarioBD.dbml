@@ -57,7 +57,6 @@
       <Column Name="IdArticulos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
@@ -110,14 +109,6 @@
       <Column Name="NoCompraProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="ExitenciaActual" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Impuesto" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdImpuesto" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="PrecioUnitario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
@@ -266,7 +257,7 @@
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Movimiento" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cantidad" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Costo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

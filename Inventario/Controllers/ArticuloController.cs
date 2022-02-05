@@ -31,7 +31,6 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
-                    p.IdProveedor,
                     p.Proveedor,
                     p.Categoria,
                     p.NombreProveedor,
@@ -62,7 +61,6 @@ namespace Inventario.Controllers
                     p.IdAreas,
                     p.IdMarca,
                     p.IdCategorias,
-                    p.IdProveedor,
                     p.Proveedor,
                     p.Categoria,
                     p.NombreProveedor,
@@ -116,7 +114,6 @@ namespace Inventario.Controllers
                     IdAreas = p.IdAreas,
                     IdMarca = p.IdMarca,
                     IdCategorias = p.IdCategorias,
-                    IdProveedor = p.IdProveedor,
                     Proveedor = p.Proveedor,
                     Categoria = p.Categoria,
                     NombreProveedor = p.NombreProveedor,
@@ -141,7 +138,7 @@ namespace Inventario.Controllers
                 IdAreas += pro.IdAreas + ",";
                 IdMarca += pro.IdMarca + ",";
                 IdCategorias += pro.IdCategorias + ",";
-                IdProveedor += pro.IdProveedor + ",";
+
 
                 //string[] nombre = pro.Proveedor.Split('#');
 
@@ -174,7 +171,6 @@ namespace Inventario.Controllers
                 IdAreas = IdAreas.Substring(0, IdAreas.Length - 1),
                 IdMarca = IdMarca.Substring(0, IdMarca.Length - 1),
                 IdCategorias = IdCategorias.Substring(0, IdCategorias.Length - 1),
-                IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 Categoria = Categoria.Substring(0, Categoria.Length - 1),
                 NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1),
@@ -222,7 +218,6 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)
                 && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
-                && p.IdProveedor.Equals(DatosArticulo.IdProveedor)
                 && p.Proveedor.Equals(DatosArticulo.Proveedor)
                 && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
                 && p.Unidad.Equals(DatosArticulo.Unidad)
@@ -248,7 +243,6 @@ namespace Inventario.Controllers
 
                     obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
                     obj.NombreProveedor = DatosArticulo.NombreProveedor;
-                    obj.IdProveedor = DatosArticulo.IdProveedor;
                     obj.Proveedor = DatosArticulo.Proveedor;
                     obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
                     obj.Unidad = DatosArticulo.Unidad;

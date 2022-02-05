@@ -109,30 +109,30 @@ namespace Inventario.Controllers
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
         //------------------------------------------------------------
-        //-----------Consulta los datos por ID del artículo pero en la tabla de compras JOIN Proveedores------------------
-        public JsonResult ConsultaCompraJoinProveedor(long Id)
-        {
-            var compras = from comprs in InvBD.Compra
-                          join provedor in InvBD.Proveedores
-                      on comprs.IdProveedor equals provedor.IdProveedores
-                          where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
-                          select new
-                          {
-                              FechaDeIngreso = comprs.FechaDeIngreso,
-                              NoCompra = comprs.NoCompra,
-                              Articulo = comprs.Articulo,
-                              Coste = comprs.Coste,
-                              IdArticulo = comprs.IdArticulo,
-                              IdProveedor = provedor.IdProveedores,
-                              Proveedor = provedor.Nombre,
+        ////-----------Consulta los datos por ID del artículo pero en la tabla de compras JOIN Proveedores------------------
+        //public JsonResult ConsultaCompraJoinProveedor(long Id)
+        //{
+        //    var compras = from comprs in InvBD.ComprasArticulos
+        //                  join provedor in InvBD.Proveedores
+        //              on comprs.IdCompra equals provedor.IdProveedores
+        //                  where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
+        //                  select new
+        //                  {
+        //                      FechaDeIngreso = comprs.FechaDeIngreso,
+        //                      NoCompra = comprs.NoCompra,
+        //                      Articulo = comprs.Articulo,
+        //                      Coste = comprs.Coste,
+        //                      IdArticulo = comprs.IdArticulo,
+        //                      IdProveedor = provedor.IdProveedores,
+        //                      Proveedor = provedor.Nombre,
 
 
-                          };
+        //                  };
 
 
-            return Json(compras, JsonRequestBehavior.AllowGet);
+        //    return Json(compras, JsonRequestBehavior.AllowGet);
 
-        }
+        //}
 
         //-----------Consulta los datos por ID del proveedor pero en la tabla de compras JOIN Proveedor------------------
 

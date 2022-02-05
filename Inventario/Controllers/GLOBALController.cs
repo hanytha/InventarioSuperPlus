@@ -343,17 +343,17 @@ namespace Inventario.Controllers
                 });
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult BDArt(int IDP)
-        {
-            var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
-                .Select(p => new
-                {
-                    ID = p.IdArticulos,
-                    Nombre = p.NombreEmpresa
-                });
-            return Json(datos, JsonRequestBehavior.AllowGet);
+        //public JsonResult BDArt(int IDP)
+        //{
+        //    var datos = InvBD.Articulos.Where(p => p.Estatus.Equals(1) && p.IdProveedor.Equals(IDP))
+        //        .Select(p => new
+        //        {
+        //            ID = p.IdArticulos,
+        //            Nombre = p.NombreEmpresa
+        //        });
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
 
-        }
+        //}
 
 
         public JsonResult BDUnidadM(int IDAR)

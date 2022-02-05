@@ -20,7 +20,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaCategorias()
         {
-            var Categorias = InvBD.Compra.Where(p => p.Estatus.Equals(1))
+            var Categorias = InvBD.ComprasArticulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdCompra,
@@ -31,7 +31,7 @@ namespace Inventario.Controllers
         }
         public JsonResult ConsultaCategoria(long Id)
         {
-            var Categoria = InvBD.Compra.Where(p => p.IdCompra.Equals(Id) && p.IdArticulo.Equals(p.IdArticulo))
+            var Categoria = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(Id) && p.IdArticulo.Equals(p.IdArticulo))
                 .Select(p => new
                 {
                     p.IdCompra,
