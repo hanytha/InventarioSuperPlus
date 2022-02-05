@@ -271,7 +271,7 @@ function verificar() {
         //---------------------------------------------------------------
     }
     else {
-        swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
+        swal("¡No se han ingresado datos!", "", "warning");
 
         //**********************Marca el borde del input que este falatante de datos*********************************
         changeBGColor();
@@ -289,7 +289,15 @@ function verificar() {
 
                     precio[i].style.borderColor = 'Red';
                 }
-
+                if (cantidad[i].value < 0) {
+                    swal("¡La cantidad no puede ser igual o inferiror a cero!", "", "warning");
+                }
+                if (Precio[i].value < 0) {
+                    swal("¡El precio no puede ser igual o inferiror a cero!", "", "warning");
+                }
+                if (cantidad[i].value < 0 && Precio[i].value < 0) {
+                    swal("¡Los datos no pueden ser igual o inferirores a cero!", "", "warning");
+                }
             }
 
             if (pago == 0) {
