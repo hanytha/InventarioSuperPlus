@@ -192,7 +192,7 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "<label>Cantidad_Solicitada</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Unidad_Medida</label>";
@@ -303,12 +303,15 @@ function Verificar() {
     }
     else {
 
-        swal("¡Los datos son icorrectos!", "verifique los datos ingresados", "warning");
+        if (combo > 0) {
+            swal("¡No se han ingresado datos!", "", "warning");
+        }
 
         for (let i = 0; i < NumPedidos.length; i++) {
             if (NumPedidos[i].value < 0) {
 
                 NumPedidos[i].style.borderColor = 'Red';
+                swal("¡La cantidad solicitada no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
             }
             if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
 
@@ -320,12 +323,18 @@ function Verificar() {
                 Precio[i].style.backgroundColor = 'Red';
 
             }
+            if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
+
+                swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+            }
         }
 
         if (combo == 0) {
 
             swal("¡Seleccione su departamento!", "", "warning");
         }
+
+
     }
 }
 
