@@ -1277,6 +1277,12 @@ function GuardarDevolucion() {
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
             var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
             var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
+
+            //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
+
+          //  var IdAsignacion = NoPedido;
+
+
             //var EstatusPedido = value"1";
             //var IdProveedor = document.getElementById("TxtRazonSocial").value;
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;

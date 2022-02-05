@@ -1516,7 +1516,33 @@ namespace Inventario.Controllers
         }
 
 
-
+           public JsonResult usado(long id, long no)
+        //{(long Id)
+        {
+            var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
+                         join Compra in InvBD.CompraInterno
+                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                         join areas in InvBD.Areas
+                     on Compra.IdProveedor equals areas.IdAreas
+                         where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+                         select new
+                         {
+                             IdPedidosInternos = ExistAlm.IdCompraInterno,
+                             NumeroPedido = ExistAlm.Articulo,
+                             NumPedidoProveedor = Compra.NoPedidoProveedor,
+                             Articulo = ExistAlm.Articulo,
+                             CantidadSolicitada = ExistAlm.ExitenciaInicial,
+                             CantidadAprobada = ExistAlm.ExitenciaActual,
+                             Tipo = ExistAlm.TipoDeOperacion,
+                             IdProveedor = Compra.IdProveedor,
+                             Proveedor = Compra.Proveedor,
+                             IdTienda = Compra.IdSitio,
+                             IdArticulo = ExistAlm.IdArticulo,
+                             //Articulo = ExistAlm.NombreEmpresa,
+                             Fecha = Compra.FechaIngreso,
+                         };
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
         //public JsonResult ConsultaAceptarPedido(long Id)
         //{
         //    var pedidosInt = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id) && p.Estatus.Equals(1))
@@ -1768,6 +1794,54 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
+        //public int GuardarExistenciasAlm(ExistenciaAlmacenG AceptarPedido)
+        //{
+        //    int Afectados = 0;
+        //    //try
+        //    //{
+        //    long id = AceptarPedido.IdExistenciaAlmacenG;
+        //    if (id.Equals(0))
+        //    {
+        //        //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
+
+        //        int nveces = InvBD.ExistenciaAlmacenG.Count();
+        //        //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+        //        // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+        //        if (nveces == 0)
+        //        {
+        //            InvBD.ExistenciaAlmacenG.InsertOnSubmit(AceptarPedido);
+        //            InvBD.SubmitChanges();
+        //            Afectados = 1;
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //        //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
+        //        //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
+        //        //if (nveces == 0)
+        //        //{
+        //        ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
+        //        obj.Observaciones = AceptarPedido.Observaciones;
+        //        obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
+        //        obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
+        //        obj.ExistenciaActDevolucion = AceptarPedido.ExistenciaActDevolucion;
+        //        // obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
+        //        InvBD.SubmitChanges();
+        //        Afectados = 1;
+        //        //}
+        //        //else
+        //        //{
+        //        //    Afectados = -1;
+        //        //}
+        //    }
+
+        //    return Afectados;
+        //}
 
         //public int GuardarDevolucion(ExistenciaAlmacenG DatosDevolucion)
         //{
