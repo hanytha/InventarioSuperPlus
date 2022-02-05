@@ -852,7 +852,9 @@ namespace Inventario.Controllers
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
                                 Tienda = Compra.IdSitio,
-                                ExistenciaInicial= ExistAlm.ExitenciaInicial
+                                ExistenciaInicial= ExistAlm.ExitenciaInicial,
+                                ExistenciaInicDevolucion = ExistAlm.ExistenciaInicDevolucion,
+                                ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }

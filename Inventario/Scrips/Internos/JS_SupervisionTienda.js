@@ -535,7 +535,12 @@ function abrirModalDevoluciones(idExist, id, idS) {
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
+            if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
+            //if (Data[0].ExistenciaInicDevolucion =="NULL") {
+                document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
+            } else if (Data[0].ExistenciaActDevolucion >=0) {
+                document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
+            }
             // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
