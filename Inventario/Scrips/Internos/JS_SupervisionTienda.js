@@ -1291,7 +1291,13 @@ function GuardarDevolucion() {
             //frm.append("Proveedor", Proveedor);
             //frm.append("FechaIngreso", FechaIngreso);
             //frm.append("Usuario", Usuario);
-            frm.append("EstatusPedido", 1);
+
+
+
+            if (ExistenciaActDevolucion==0) {
+                frm.append("EstatusArticulo", 0);
+            }
+          
             $.ajax({
                 type: "POST",
                 url: "/Supervision/GuardarDev",

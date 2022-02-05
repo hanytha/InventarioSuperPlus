@@ -1583,7 +1583,7 @@ namespace Inventario.Controllers
                 obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
                 obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
                 obj.ExistenciaActDevolucion = AceptarPedido.ExistenciaActDevolucion;
-                //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
+                obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
                 InvBD.SubmitChanges();
                 Afectados = 1;
                 //}
