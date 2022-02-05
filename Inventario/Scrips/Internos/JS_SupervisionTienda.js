@@ -1294,9 +1294,9 @@ function GuardarDevolucion() {
 
 
 
-            if (ExistenciaActDevolucion==0) {
-                frm.append("EstatusArticulo", 0);
-            }
+            //if (ExistenciaActDevolucion==0) {
+            //    frm.append("EstatusArticulo", 0);
+            //}
           
             $.ajax({
                 type: "POST",

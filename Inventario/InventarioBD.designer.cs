@@ -117,7 +117,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -4395,8 +4395,6 @@ namespace Inventario
 		
 		private System.Nullable<long> _ExistenciaActDevolucion;
 		
-		private System.Nullable<int> _EstatusArticulo;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4425,8 +4423,6 @@ namespace Inventario
     partial void OnExistenciaInicDevolucionChanged();
     partial void OnExistenciaActDevolucionChanging(System.Nullable<long> value);
     partial void OnExistenciaActDevolucionChanged();
-    partial void OnEstatusArticuloChanging(System.Nullable<int> value);
-    partial void OnEstatusArticuloChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4670,26 +4666,6 @@ namespace Inventario
 					this._ExistenciaActDevolucion = value;
 					this.SendPropertyChanged("ExistenciaActDevolucion");
 					this.OnExistenciaActDevolucionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstatusArticulo", DbType="Int")]
-		public System.Nullable<int> EstatusArticulo
-		{
-			get
-			{
-				return this._EstatusArticulo;
-			}
-			set
-			{
-				if ((this._EstatusArticulo != value))
-				{
-					this.OnEstatusArticuloChanging(value);
-					this.SendPropertyChanging();
-					this._EstatusArticulo = value;
-					this.SendPropertyChanged("EstatusArticulo");
-					this.OnEstatusArticuloChanged();
 				}
 			}
 		}
