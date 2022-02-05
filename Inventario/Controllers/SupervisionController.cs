@@ -1552,6 +1552,8 @@ namespace Inventario.Controllers
                 ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                 obj.Observaciones = AceptarPedido.Observaciones;
                 obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
+                obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
+                obj.ExistenciaActDevolucion = AceptarPedido.ExistenciaActDevolucion;
                 //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
                 InvBD.SubmitChanges();
                 Afectados = 1;

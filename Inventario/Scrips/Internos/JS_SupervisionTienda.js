@@ -1270,6 +1270,8 @@ function GuardarDevolucion() {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+            var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
+            var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
             //var EstatusPedido = value"1";
             //var IdProveedor = document.getElementById("TxtRazonSocial").value;
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
@@ -1279,7 +1281,8 @@ function GuardarDevolucion() {
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
             frm.append("Observaciones", Observaciones);
             frm.append("TipoDeOperacion", TipoDeOperacion);
-            //frm.append("IdProveedor", IdProveedor);
+            frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
+            frm.append("ExistenciaActDevolucion", ExistenciaActDevolucion);
             //frm.append("Proveedor", Proveedor);
             //frm.append("FechaIngreso", FechaIngreso);
             //frm.append("Usuario", Usuario);
