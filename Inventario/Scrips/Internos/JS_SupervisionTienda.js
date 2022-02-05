@@ -516,7 +516,7 @@ function abrirModalMovimiento(IDTienda) {
 
 
 
-function abrirModalDevoluciones(idArt, id, idS) {
+function abrirModalDevoluciones(idExist, id, idS) {
 
     LimpiarCampos();
     if (idS == 0) {
@@ -533,21 +533,21 @@ function abrirModalDevoluciones(idArt, id, idS) {
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        $.get("/Supervision/ConsultaDevA/?idArt=" + idArt, function (Data) {
+        $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
             // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        ConsultaArt(idArt);
+        ConsultaArt(idExist);
         ProvDev(id);
         //     BDNoPedido(id);
 
     }
 }
-function ConsultaArt(idArt) {
-    $.get("/Supervision/ConsultaArticuloModal/?idS=" + idArt, function (Data) {
+function ConsultaArt(idExist) {
+    $.get("/Supervision/ConsultaArticuloModal/?idS=" + idExist, function (Data) {
         //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
         //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 

@@ -483,7 +483,7 @@ namespace Inventario.Controllers
 
 
 
-        public JsonResult ConsultaArticuloModal(long idS)
+        public JsonResult ConsultaArticuloModal(long id)
         {
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
@@ -835,14 +835,14 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ConsultaDevA(long idArt)
+        public JsonResult ConsultaDevA(long idExist)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.IdExistenciaAlmacenG.Equals(idArt)
+                            where ExistAlm.IdExistenciaAlmacenG.Equals(idExist)
                             select new
                             {
                                 IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
