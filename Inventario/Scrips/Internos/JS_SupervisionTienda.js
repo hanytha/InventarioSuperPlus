@@ -540,18 +540,18 @@ function abrirModalDevoluciones(idArt, id, idS) {
             //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
             //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
-        ConsultaArt(id);
+        ConsultaArt(idArt);
         ProvDev(id);
         //     BDNoPedido(id);
 
     }
 }
-function ConsultaArt(id) {
-    $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
+function ConsultaArt(idArt) {
+    $.get("/Supervision/ConsultaArticuloModal/?idS=" + idArt, function (Data) {
         //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
         //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 
-        document.getElementById("TxtArtDev").value = Data.Nombre;
+        document.getElementById("TxtArtDev").value = Data[0].Nombre;
 
         //Muestra el número de pedido que le corresponde por proveedor-------
         //SiguientePedidoProveedor(id);

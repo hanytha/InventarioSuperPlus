@@ -483,6 +483,33 @@ namespace Inventario.Controllers
 
 
 
+        public JsonResult ConsultaArticuloModal(long idS)
+        {
+            var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
+
+                                   where ExistenciaAlmacenG.IdExistenciaAlmacenG.Equals(idS)
+                                   select new
+
+                                   {
+                                       //id = ExistenciaAlmacenG.IdArticulo,
+                                       //NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       //IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
+                                       ////    Proveedor=CompraInterno.Proveedor,
+                                       //IdSitio = CompraInterno.IdSitio,
+                                       //Tiendas = CompraInterno.Sitio,
+                                       Nombre = ExistenciaAlmacenG.Articulo,
+                                       NoPedido = CompraInterno.NoPedido,
+                                       IdProveedor = CompraInterno.IdProveedor
+                                       //stockActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       //IdAsignacion = CompraInterno.IdAsignacion,
+                                       //IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                   };
+            return Json(ConsultaArticulo, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
 
