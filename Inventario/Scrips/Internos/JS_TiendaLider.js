@@ -855,7 +855,7 @@ function abrirModalAceptarPedido(id, no) {//la clase  Obligatorio
             document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
-            MostrarArt(id, no);
+            MostrarArt(id, no); 
         });
     }
 }
@@ -1146,7 +1146,7 @@ function MostrarArticulosPedidos(id) {
 
 
 function MostrarArt(id, no) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+   // var controlesObligatorio = document.getElementsByClassName("obligatorio");
    // var ncontroles = controlesObligatorio.length;
     //for (var i = 0; i < ncontroles; i++) {//recorre
     //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
