@@ -332,7 +332,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.EstatusArticulo.Equals(1)
                                    select new
 
                                    {
@@ -344,9 +344,10 @@ namespace Inventario.Controllers
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
-                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       stockActual = ExistenciaAlmacenG.ExistenciaActDevolucion,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                       EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -360,7 +361,7 @@ namespace Inventario.Controllers
                 // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
-                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda) && p.EstatusArticulo.Equals(1)).OrderBy(p => p.NoPedido)
                      .Select(p => new
                      {
                          fechaIngreso = p.FechaDeIngreso,
@@ -745,7 +746,7 @@ namespace Inventario.Controllers
                              on CompraInterno.IdProveedor equals provedor.IdAreas
                                  join Tienda in InvBD.Tienda
                                    on CompraInterno.IdSitio equals Tienda.IdTienda
-                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && CompraInterno.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
+                                 where ExistenciAAlmacen.NoPedidoG.Equals(No) && CompraInterno.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1) && ExistenciAAlmacen.EstatusArticulo.Equals(1)
                                  select new
                                  {
                                      FechaDeIngreso = CompraInterno.FechaIngreso,
