@@ -970,7 +970,8 @@ namespace Inventario.Controllers
                              IdProveedor = areas.IdAreas,
                              Proveedor = areas.Nombre,
                              Tienda = Compra.IdSitio,
-                             PrecioUnitarioPromedio = Articulos.PrecioUnitarioPromedio
+                             PrecioUnitarioPromedio = Articulos.PrecioUnitarioPromedio,
+                             ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
                          };
             return Json(compra, JsonRequestBehavior.AllowGet);
 
