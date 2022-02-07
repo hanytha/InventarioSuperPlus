@@ -160,7 +160,6 @@ namespace Inventario.Controllers
                     p.NombreEmpresa,
                     p.IdArticulos,
                     p.Unidad,
-                    p.PrecioUnitarioPromedio,
                     p.Impuesto,
                 });
 

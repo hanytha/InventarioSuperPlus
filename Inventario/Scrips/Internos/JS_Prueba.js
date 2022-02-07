@@ -19,7 +19,7 @@ function CrearArticuloComp(Data) {
     CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Costo</div>";
+    CodigoHtmlArticuloComp += "<div class='col-sm'>Precio_Unitario</div>";
     CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
     CodigoHtmlArticuloComp += "</div>";
     CodigoHtmlArticuloComp += "<hr class='solid'>";

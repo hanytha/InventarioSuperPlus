@@ -1566,8 +1566,6 @@ namespace Inventario
 		
 		private string _Categoria;
 		
-		private string _PrecioUnitarioPromedio;
-		
 		private string _Descripcion;
 		
 		private string _UnidadSAT;
@@ -1622,8 +1620,6 @@ namespace Inventario
     partial void OnIdCategoriasChanged();
     partial void OnCategoriaChanging(string value);
     partial void OnCategoriaChanged();
-    partial void OnPrecioUnitarioPromedioChanging(string value);
-    partial void OnPrecioUnitarioPromedioChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
     partial void OnUnidadSATChanging(string value);
@@ -1904,26 +1900,6 @@ namespace Inventario
 					this._Categoria = value;
 					this.SendPropertyChanged("Categoria");
 					this.OnCategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitarioPromedio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string PrecioUnitarioPromedio
-		{
-			get
-			{
-				return this._PrecioUnitarioPromedio;
-			}
-			set
-			{
-				if ((this._PrecioUnitarioPromedio != value))
-				{
-					this.OnPrecioUnitarioPromedioChanging(value);
-					this.SendPropertyChanging();
-					this._PrecioUnitarioPromedio = value;
-					this.SendPropertyChanged("PrecioUnitarioPromedio");
-					this.OnPrecioUnitarioPromedioChanged();
 				}
 			}
 		}

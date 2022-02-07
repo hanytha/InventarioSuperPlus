@@ -193,7 +193,6 @@ namespace Inventario.Controllers
                     p.NombreEmpresa,
                     p.IdArticulos,
                     p.Unidad,
-                    p.PrecioUnitarioPromedio
                 });
 
             return Json(compra, JsonRequestBehavior.AllowGet);

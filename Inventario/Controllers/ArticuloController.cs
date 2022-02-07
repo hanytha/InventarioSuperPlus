@@ -105,7 +105,6 @@ namespace Inventario.Controllers
                     p.Proveedor,
                     p.Categoria,
                     p.NombreProveedor,
-                    p.PrecioUnitarioPromedio,
                     p.Descripcion,
                     p.UnidadSAT,
                     p.ClaveSAT,
@@ -158,7 +157,6 @@ namespace Inventario.Controllers
                     Proveedor = p.Proveedor,
                     Categoria = p.Categoria,
                     NombreProveedor = p.NombreProveedor,
-                    PrecioUnitarioPromedio = p.PrecioUnitarioPromedio,
                     Descripcion = p.Descripcion,
                     UnidadSAT = p.UnidadSAT,
                     ClaveSAT = p.ClaveSAT,
@@ -191,7 +189,6 @@ namespace Inventario.Controllers
                 Proveedor += pro.Proveedor + ",";
                 Categoria += pro.Categoria + ",";
                 NombreProveedor += pro.NombreProveedor + ",";
-                PrecioUnitarioPromedio += pro.PrecioUnitarioPromedio + ",";
                 Descripcion += pro.Descripcion + ",";
                 UnidadSAT += pro.UnidadSAT + ",";
                 ClaveSAT += pro.ClaveSAT + ",";
@@ -215,7 +212,6 @@ namespace Inventario.Controllers
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 Categoria = Categoria.Substring(0, Categoria.Length - 1),
                 NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1),
-                PrecioUnitarioPromedio = PrecioUnitarioPromedio.Substring(0, PrecioUnitarioPromedio.Length - 1),
                 Descripcion = Descripcion.Substring(0, Descripcion.Length - 1),
                 UnidadSAT = UnidadSAT.Substring(0, UnidadSAT.Length - 1),
                 ClaveSAT = ClaveSAT.Substring(0, ClaveSAT.Length - 1),
@@ -268,7 +264,6 @@ namespace Inventario.Controllers
                 && p.Area.Equals(DatosArticulo.Area)
                 && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
                 && p.Categoria.Equals(DatosArticulo.Categoria)
-                && p.PrecioUnitarioPromedio.Equals(DatosArticulo.PrecioUnitarioPromedio)
                 && p.Descripcion.Equals(DatosArticulo.Descripcion)
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
@@ -293,7 +288,6 @@ namespace Inventario.Controllers
                     obj.Area = DatosArticulo.Area;
                     obj.IdCategorias = DatosArticulo.IdCategorias;
                     obj.Categoria = DatosArticulo.Categoria;
-                    obj.PrecioUnitarioPromedio = DatosArticulo.PrecioUnitarioPromedio;
                     obj.Descripcion = DatosArticulo.Descripcion;
                     obj.UnidadSAT = DatosArticulo.UnidadSAT;
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;

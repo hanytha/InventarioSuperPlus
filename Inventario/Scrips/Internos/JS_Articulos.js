@@ -102,7 +102,6 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("TxtDescripcion").value = Data[0].Descripcion;
             document.getElementById("cmbCategoria").value = Data[0].IdCategorias;
             document.getElementById("cmbUnidad").value = Data[0].IdUnidadDeMedida;
-            document.getElementById("TxtPrecioUnitarioPromedio").value = Data[0].PrecioUnitarioPromedio;
             document.getElementById("TxtUnidadSAT").value = Data[0].UnidadSAT;
             document.getElementById("TxtClaveSAT").value = Data[0].ClaveSAT;
             document.getElementById("TxtFecha").value = Data[0].Fecha;
@@ -181,7 +180,6 @@ function GuardarArticulo() {
             var TempMedida = document.getElementById("cmbUnidad");
             var Unidad = TempMedida.options[TempMedida.selectedIndex].text;
 
-            var PrecioUnitarioPromedio = document.getElementById("TxtPrecioUnitarioPromedio").value;
             var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
@@ -209,7 +207,6 @@ function GuardarArticulo() {
             frm.append("Categoria", Categoria);
             frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
             frm.append("Unidad", Unidad);
-            frm.append("PrecioUnitarioPromedio", PrecioUnitarioPromedio);
             frm.append("UnidadSAT", UnidadSAT);
             frm.append("ClaveSAT", ClaveSAT);
             frm.append("Fecha", Fecha);
