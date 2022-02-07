@@ -40,7 +40,8 @@ function ConsultaArticuloComp(IDTienda) {
             let ArrayIdSitio = IdSitio.split(',');
             let Articulo = Data.Articulo;
             let ArrayArticulo = Articulo.split(',');
-
+            let Proveedor = Data.Proveedor;
+            let ArrayProveedor = Proveedor.split(',');
 
             //let Costos = Data.Costos;
             //let Arraycostos = Costos.split(',');
@@ -51,7 +52,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='row'>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
@@ -335,8 +336,11 @@ function Desplegar(no, id) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + Data[i].IdExistenciaAlmacenG + "," + Data[i].id + "," + Data[i].IdSitio + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+
                 DespXArt += "</div>";
-            }
+
+                 }
             DespXArt += "</div>";
             DespXArt += "</br>";
             DespXArt += "</br>";
@@ -349,6 +353,67 @@ function Desplegar(no, id) {
 }
 
 
+
+
+function abrirModalDevoluciones(idExist, id, idS) {
+
+    LimpiarCampos();
+    if (idS == 0) {
+        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
+
+    }
+
+    else {
+
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
+        });
+        $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
+            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExitenciaActual;
+            //if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
+
+            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
+            //} else if (Data[0].ExistenciaActDevolucion >=0) {
+            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
+            //}
+
+        });
+        ConsultaArt(idExist);
+        ProvDev(id);
+        //     BDNoPedido(id);
+
+    }
+}
+
+function ConsultaArt(idExist) {
+    $.get("/Supervision/ConsultaArticuloModal/?id=" + idExist, function (Data) {
+        //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+        //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+
+        document.getElementById("TxtArtDev").value = Data[0].Nombre;
+
+        //Muestra el número de pedido que le corresponde por proveedor-------
+        //SiguientePedidoProveedor(id);
+        ////Muestra el número de pedido que le corresponde-------
+        //ConsultaSiguientePedido();
+
+    });
+}
+
+
+function ProvDev(id) {
+
+    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+        document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+        document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
+
+    });
+}
 
 function abrirModal(id, idS) {
 

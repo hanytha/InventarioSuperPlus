@@ -693,6 +693,132 @@
         </div>
     </div>
 </div>
+
+
+
+
+<div class="container">
+    <div class="modal fade" id="ModalDevoluciones">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            MOVIMIENTO: Devoluciones
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
+                                    <input type="text" id="TxtMovDev" class="form-control bloquear" value="Devolución">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngresoDev">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngresoDev" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtExistenciaInicDev">Existencia Inicial<span class="required">*</span></label>
+                                    <input type="number" id="TxtExistenciaInicDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtExistenciaActDev">Existencia Actual<span class="required">*</span></label>
+                                    <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
+                                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtArtDev">Articulo<span class="required">*</span></label>
+                                    <input type="text" id="TxtArtDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
+                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedorDevolucion">Proveedor<span class="required">*</span></label>
+                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevolucion" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+
+                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarDevolucion()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-------------------------------------------------------------------------------------------------------------->
 <!--------------------------Función para imprimir el contenido del div------------------------------------------>
 <script language="Javascript">

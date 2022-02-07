@@ -35,6 +35,7 @@ function ConsultaArticuloComp(IDTienda) {
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
+
             let Articulo = Data.Articulo;
             let ArrayArticulo = Articulo.split(',');
             let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;

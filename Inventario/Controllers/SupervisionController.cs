@@ -327,6 +327,8 @@ namespace Inventario.Controllers
             string IdCmpraInt = "";
             string IdTienda = "";
             string Sitio = "";
+            string Proveedor = "";
+            
             string IdExistenciaAlmacenG = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
@@ -339,7 +341,7 @@ namespace Inventario.Controllers
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-                                       //    Proveedor=CompraInterno.Proveedor,
+                                          Proveedor=CompraInterno.Proveedor,
                                        IdSitio = CompraInterno.IdSitio,
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
@@ -400,6 +402,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
+                        Proveedor += numero.Proveedor + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -427,6 +430,7 @@ namespace Inventario.Controllers
                         IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
                         Fecha += numero.FechaDeIngreso + ",";
+                        Proveedor += numero.Proveedor + ",";
                         Articulo += numero.Articulo + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         contador++;
@@ -461,6 +465,7 @@ namespace Inventario.Controllers
                 Articulo += " " + ",";
                 Fecha += " " + ",";
                 Stock += " " + ",";
+                Proveedor += " " + ",";
                 IdExistenciaAlmacenG += " " + ",";
             }
             var consulta = new
@@ -472,6 +477,7 @@ namespace Inventario.Controllers
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 Fecha = Fecha.Substring(0, Fecha.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
 
             };
@@ -926,6 +932,20 @@ namespace Inventario.Controllers
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
                                      //    IdProveedor = provedor.IdAreas,
                                      //    Proveedor = provedor.Nombre
+
+
+
+                                     id = ExistenciAAlmacen.IdArticulo,
+                                    // NoPedido = ExistenciAAlmacen.NoPedidoG,
+                                     IdCmpraInt = ExistenciAAlmacen.IdCompraInterno,
+                                     //    Proveedor=CompraInterno.Proveedor,
+                                     IdSitio = CompraInterno.IdSitio,
+                                     Tiendas = CompraInterno.Sitio,
+                                     //Articulo = ExistenciAAlmacen.Articulo,
+                                    // FechaDeIngreso = CompraInterno.FechaIngreso,
+                                     stockActual = ExistenciAAlmacen.ExitenciaActual,
+                                     IdAsignacion = CompraInterno.IdAsignacion,
+                                     IdExistenciaAlmacenG = ExistenciAAlmacen.IdExistenciaAlmacenG,
                                  };
             return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
         }
