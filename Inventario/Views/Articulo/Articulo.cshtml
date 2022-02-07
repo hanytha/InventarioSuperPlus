@@ -119,15 +119,6 @@
                         <fieldset>
                             <h5 align="right">Paso 2</h5>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-
-                                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
@@ -151,7 +142,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
+                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="H87">
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +150,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                        <input type="text" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="Paquete">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -183,8 +174,17 @@
                                     </div>
                                 </div>
                             </div>
-                                <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                                <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción del artículo<span class="required">*</span></label>
+
+                                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agregue una breve descripción del artículo..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                            <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
                         </fieldset>
                     </form>
                 </div>
