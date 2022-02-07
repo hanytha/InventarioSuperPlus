@@ -186,7 +186,7 @@ function MostrarPaginasPerfiles() {
         CodigoHtmlTablaPagina += "<div class='row'>";
         for (var i = 0; i < InfPaginas.length; i++) {
             CodigoHtmlTablaPagina += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            CodigoHtmlTablaPagina += "<input type='checkbox' class='checkbox-area' id='" + InfPaginas[i].ID + "' ><span class='help-block text-muted small-font'>" + InfPaginas[i].Descripcion + "</span>";
+            CodigoHtmlTablaPagina += "<input type='checkbox' class='checkbox-area' id='" + InfPaginas[i].ID + "' ><span class='help-block text-muted small-font'>" + InfPaginas[i].Nombre + "</span>";
             CodigoHtmlTablaPagina += "</div>";
         }
         CodigoHtmlTablaPagina += "</div>";
