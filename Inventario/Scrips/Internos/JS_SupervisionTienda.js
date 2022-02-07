@@ -535,15 +535,14 @@ function abrirModalDevoluciones(idExist, id, idS) {
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
-            //if (Data[0].ExistenciaInicDevolucion =="NULL") {
-                document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
-            } else if (Data[0].ExistenciaActDevolucion >=0) {
-                document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
-            }
-            // document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
-            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
-            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
+            //if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
+
+            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
+            //} else if (Data[0].ExistenciaActDevolucion >=0) {
+            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
+            //}
+            
         });
         ConsultaArt(idExist);
         ProvDev(id);
@@ -882,7 +881,7 @@ function MostrarArticulosUsados(idS) {
                 TablaArticulo += "</div>";
 
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' disabled id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
