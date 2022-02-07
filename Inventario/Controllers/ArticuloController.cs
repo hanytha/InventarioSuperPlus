@@ -20,35 +20,76 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        public JsonResult ConsultaArticulos()
+        //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
+        public JsonResult ConsultaPrecioPromedio()
         {
+            string Fecha = "";
+            string Articulo = "";
+            string IDA = "";
+            string Area = "";
+            string PrecioPro = "";
+
             var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
-                    p.IdArticulos,
-                    p.NombreEmpresa,
-                    p.IdUnidadDeMedida,
-                    p.IdAreas,
-                    p.IdMarca,
-                    p.IdCategorias,
-                    p.Proveedor,
-                    p.Categoria,
-                    p.NombreProveedor,
-                    p.PrecioUnitarioPromedio,
-                    p.Descripcion,
-                    p.UnidadSAT,
-                    p.ClaveSAT,
-                    p.Fecha,
-                    p.FechaSistema,
-                    p.Unidad,
-                    p.Area,
-                    p.Marca,
-                    p.IdImpuesto,
-                    p.Impuesto,
-                    p.Estatus,
+                    FechaI = p.FechaSistema,
+                    Nombre = p.NombreEmpresa,
+                    areas = p.Area,
+                    ID = p.IdArticulos
                 });
-            return Json(articulos, JsonRequestBehavior.AllowGet);
+            foreach (var art in articulos)
+            {
+                IDA += art.ID + ",";
+                Articulo += art.Nombre + ",";
+                Fecha += art.FechaI + ",";
+                Area += art.areas + ",";
+
+                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.ID) && p.PrecioUnitario > 0)
+             .Select(p => new
+             {
+                 stock = p.ExistenciaInicial,
+                 precio = p.PrecioUnitario,
+
+             });
+
+
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int SumaStock = 0;
+                    int SumaPrecio = 0;
+                    int Promedio = 0;
+
+                    foreach (var com in consultaFecha)
+                    {
+
+                       
+                        SumaStock = (int)(SumaStock + com.stock);
+                        SumaPrecio = (int)(SumaPrecio + ((com.stock) * (com.precio)));
+                        
+                    }
+                    Promedio = SumaPrecio / SumaStock;
+
+                    PrecioPro += Promedio + ",";
+                }
+                else
+                {
+                    PrecioPro += "0" + ",";
+                }
+
+            }
+
+            var Resultado = new
+            {
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IDA = IDA.Substring(0, IDA.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+                PrecioPro = PrecioPro.Substring(0, PrecioPro.Length - 1)
+            };
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+        //*************************************************************************************************************
         //--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaArticulo(long Id)
         {
@@ -183,7 +224,7 @@ namespace Inventario.Controllers
                 Unidad = Unidad.Substring(0, Unidad.Length - 1),
                 Area = Area.Substring(0, Area.Length - 1),
                 Marca = Marca.Substring(0, Marca.Length - 1),
-               IdImpuesto = IdImpuesto.Substring(0, IdImpuesto.Length - 1),
+                IdImpuesto = IdImpuesto.Substring(0, IdImpuesto.Length - 1),
                 Impuesto = Impuesto.Substring(0, Impuesto.Length - 1),
             };
 

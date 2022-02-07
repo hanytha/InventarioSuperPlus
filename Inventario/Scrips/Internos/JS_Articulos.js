@@ -7,7 +7,7 @@ LlenarCMCMarca();
 LlenarCMCImpuesto();
 //---------------Crea una tabla de todos los artículos de la BD---------------
 function ConsultaArticulos() {
-    $.get("/Articulo/ConsultaArticulos", function (Data) {
+    $.get("/Articulo/ConsultaPrecioPromedio", function (Data) {
         CrearTablaArticulos(Data);
     }
     );
@@ -24,25 +24,38 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaArticulos += "<thead>";
     CodigoHtmlTablaArticulos += "<tr>";
-    CodigoHtmlTablaArticulos += "<th>Fecha_Ingreso</th>";
     CodigoHtmlTablaArticulos += "<th>Artículo</th>";
+    CodigoHtmlTablaArticulos += "<th></th>";
     CodigoHtmlTablaArticulos += "<th>Área</th>";
     CodigoHtmlTablaArticulos += "<th></th>";
-    CodigoHtmlTablaArticulos += "<th>Clasificación</th>";
+    CodigoHtmlTablaArticulos += "<th>Precio_Unitario_Promedio</th>";
     CodigoHtmlTablaArticulos += "<th>Opciones</th>";
     CodigoHtmlTablaArticulos += "</tr>";
     CodigoHtmlTablaArticulos += "</thead>";
     CodigoHtmlTablaArticulos += "<tbody>";
 
-    for (var i = 0; i < Data.length; i++) {
+
+    let Fecha = Data.Fecha;
+    let ArrayFecha = Fecha.split(',');
+    let Articulo = Data.Articulo;
+    let ArrayArticulo = Articulo.split(',');
+    let IDA = Data.IDA;
+    let ArrayIDA = IDA.split(',');
+    let Area = Data.Area;
+    let ArrayArea = Area.split(',');
+    let PrecioPro = Data.PrecioPro;
+    let ArrayPrecioPro = PrecioPro.split(',');
+
+
+
+    for (var i = 0; i < ArrayIDA.length; i++) {
         CodigoHtmlTablaArticulos += "<tr>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].FechaSistema + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].NombreEmpresa + "</td>";
-        CodigoHtmlTablaArticulos += "<td colspan='2'>" + Data[i].Area + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].Categoria + "</td>";
+        CodigoHtmlTablaArticulos += "<td colspan='2'>" + ArrayArticulo[i] + "</td>";
+        CodigoHtmlTablaArticulos += "<td colspan='2'>" + ArrayArea[i] + "</td>";
+        CodigoHtmlTablaArticulos += "<td>" + ArrayPrecioPro[i] + "</td>";
         CodigoHtmlTablaArticulos += "<td>";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulos + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulos + ",this)' ><i class='far fa-trash-alt'></i></button>";
+        CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + ArrayIDA[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + ArrayIDA[i] + ",this)' ><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaArticulos += "</td>";
         CodigoHtmlTablaArticulos += "</tr>";

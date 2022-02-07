@@ -3148,7 +3148,7 @@ namespace Inventario
 		
 		private string _Impuesto;
 		
-		private string _PrecioUnitario;
+		private System.Nullable<double> _PrecioUnitario;
 		
 		private string _FechaIngreso;
 		
@@ -3178,7 +3178,7 @@ namespace Inventario
     partial void OnUnidadChanged();
     partial void OnImpuestoChanging(string value);
     partial void OnImpuestoChanged();
-    partial void OnPrecioUnitarioChanging(string value);
+    partial void OnPrecioUnitarioChanging(System.Nullable<double> value);
     partial void OnPrecioUnitarioChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
@@ -3391,8 +3391,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="VarChar(10)")]
-		public string PrecioUnitario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="Float")]
+		public System.Nullable<double> PrecioUnitario
 		{
 			get
 			{
