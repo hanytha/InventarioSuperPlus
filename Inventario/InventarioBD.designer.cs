@@ -5636,8 +5636,6 @@ namespace Inventario
 		
 		private long _Cantidad;
 		
-		private string _Costo;
-		
 		private System.Nullable<int> _Estatus;
 		
 		private string _Articulo;
@@ -5660,8 +5658,6 @@ namespace Inventario
     partial void OnFechaChanged();
     partial void OnCantidadChanging(long value);
     partial void OnCantidadChanged();
-    partial void OnCostoChanging(string value);
-    partial void OnCostoChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
     partial void OnArticuloChanging(string value);
@@ -5809,26 +5805,6 @@ namespace Inventario
 					this._Cantidad = value;
 					this.SendPropertyChanged("Cantidad");
 					this.OnCantidadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Costo", DbType="NChar(10)")]
-		public string Costo
-		{
-			get
-			{
-				return this._Costo;
-			}
-			set
-			{
-				if ((this._Costo != value))
-				{
-					this.OnCostoChanging(value);
-					this.SendPropertyChanging();
-					this._Costo = value;
-					this.SendPropertyChanged("Costo");
-					this.OnCostoChanged();
 				}
 			}
 		}

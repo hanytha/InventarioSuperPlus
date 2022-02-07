@@ -257,7 +257,6 @@
       <Column Name="Movimiento" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Costo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>

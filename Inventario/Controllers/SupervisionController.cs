@@ -1734,7 +1734,7 @@ namespace Inventario.Controllers
                 int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)
                   && p.IdExistencia.Equals(DatosUsados.IdExistencia)
                 && p.IdExistencia.Equals(DatosUsados.IdExistencia)
-                && p.IdCompra.Equals(DatosUsados.IdCompra)
+              //  && p.IdCompra.Equals(DatosUsados.IdCompra)
                  && p.IdArticulo.Equals(DatosUsados.IdArticulo)
                  && p.Movimiento.Equals(DatosUsados.Movimiento)
                  && p.Fecha.Equals(DatosUsados.Fecha)
@@ -1746,7 +1746,7 @@ namespace Inventario.Controllers
                 {
                     MovimientosTienda obj = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(id)).First();
                     obj.IdExistencia = DatosUsados.IdExistencia;
-                    obj.IdCompra = DatosUsados.IdCompra;
+                //    obj.IdCompra = DatosUsados.IdCompra;
                     obj.IdArticulo = DatosUsados.IdArticulo;
                     obj.Movimiento = DatosUsados.Movimiento;
                     obj.Movimiento = DatosUsados.Movimiento;
