@@ -535,7 +535,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExitenciaActual;
             //if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
 
             //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;

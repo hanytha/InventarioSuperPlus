@@ -513,7 +513,7 @@ namespace Inventario.Controllers
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
-                                       stockActual = ExistenciaAlmacenG.ExistenciaActDevolucion,
+                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        Proveedor = CompraInterno.Proveedor,
@@ -1023,9 +1023,9 @@ namespace Inventario.Controllers
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
                                 Tienda = Compra.IdSitio,
-                                ExistenciaInicial= ExistAlm.ExitenciaInicial,
-                                ExistenciaInicDevolucion = ExistAlm.ExistenciaInicDevolucion,
-                                ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
+                                ExitenciaActual = ExistAlm.ExitenciaActual,
+                                //ExistenciaInicDevolucion = ExistAlm.ExistenciaInicDevolucion,
+                                //ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
@@ -1137,7 +1137,7 @@ namespace Inventario.Controllers
                              Proveedor = areas.Nombre,
                              Tienda = Compra.IdSitio,
                            //  PrecioUnitarioPromedio = CompraArticulos.PrecioUnitario,
-                             ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
+                             ExistenciaActDevolucion = ExistAlm.ExitenciaActual
                          };
             return Json(compra, JsonRequestBehavior.AllowGet);
 
@@ -1804,7 +1804,7 @@ namespace Inventario.Controllers
                 ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                 obj.Observaciones = AceptarPedido.Observaciones;
                 obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
-                obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
+               // obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
                 obj.ExitenciaActual = AceptarPedido.ExitenciaActual;
                // obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
                 InvBD.SubmitChanges();

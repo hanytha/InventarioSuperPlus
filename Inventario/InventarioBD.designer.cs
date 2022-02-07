@@ -4367,10 +4367,6 @@ namespace Inventario
 		
 		private string _Observaciones;
 		
-		private System.Nullable<long> _ExistenciaInicDevolucion;
-		
-		private System.Nullable<long> _ExistenciaActDevolucion;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4395,10 +4391,6 @@ namespace Inventario
     partial void OnTipoDeOperacionChanged();
     partial void OnObservacionesChanging(string value);
     partial void OnObservacionesChanged();
-    partial void OnExistenciaInicDevolucionChanging(System.Nullable<long> value);
-    partial void OnExistenciaInicDevolucionChanged();
-    partial void OnExistenciaActDevolucionChanging(System.Nullable<long> value);
-    partial void OnExistenciaActDevolucionChanged();
     #endregion
 		
 		public ExistenciaAlmacenG()
@@ -4602,46 +4594,6 @@ namespace Inventario
 					this._Observaciones = value;
 					this.SendPropertyChanged("Observaciones");
 					this.OnObservacionesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaInicDevolucion", DbType="BigInt")]
-		public System.Nullable<long> ExistenciaInicDevolucion
-		{
-			get
-			{
-				return this._ExistenciaInicDevolucion;
-			}
-			set
-			{
-				if ((this._ExistenciaInicDevolucion != value))
-				{
-					this.OnExistenciaInicDevolucionChanging(value);
-					this.SendPropertyChanging();
-					this._ExistenciaInicDevolucion = value;
-					this.SendPropertyChanged("ExistenciaInicDevolucion");
-					this.OnExistenciaInicDevolucionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExistenciaActDevolucion", DbType="BigInt")]
-		public System.Nullable<long> ExistenciaActDevolucion
-		{
-			get
-			{
-				return this._ExistenciaActDevolucion;
-			}
-			set
-			{
-				if ((this._ExistenciaActDevolucion != value))
-				{
-					this.OnExistenciaActDevolucionChanging(value);
-					this.SendPropertyChanging();
-					this._ExistenciaActDevolucion = value;
-					this.SendPropertyChanged("ExistenciaActDevolucion");
-					this.OnExistenciaActDevolucionChanged();
 				}
 			}
 		}

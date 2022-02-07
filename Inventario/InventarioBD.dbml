@@ -196,8 +196,6 @@
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="ExistenciaInicDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ExistenciaActDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">
