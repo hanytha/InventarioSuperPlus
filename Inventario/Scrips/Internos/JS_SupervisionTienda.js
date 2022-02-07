@@ -535,7 +535,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
             //if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
 
             //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
@@ -1274,8 +1274,8 @@ function GuardarDevolucion() {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
-            var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
-            var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
+          //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
+            var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
 
             //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
 
@@ -1291,8 +1291,8 @@ function GuardarDevolucion() {
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
             frm.append("Observaciones", Observaciones);
             frm.append("TipoDeOperacion", TipoDeOperacion);
-            frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
-            frm.append("ExistenciaActDevolucion", ExistenciaActDevolucion);
+          //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
+            frm.append("ExitenciaActual", ExitenciaActual);
             //frm.append("Proveedor", Proveedor);
             //frm.append("FechaIngreso", FechaIngreso);
             //frm.append("Usuario", Usuario);

@@ -344,7 +344,7 @@ namespace Inventario.Controllers
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
-                                       stockActual = ExistenciaAlmacenG.ExistenciaActDevolucion,
+                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                        //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
@@ -1805,7 +1805,7 @@ namespace Inventario.Controllers
                 obj.Observaciones = AceptarPedido.Observaciones;
                 obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
                 obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
-                obj.ExistenciaActDevolucion = AceptarPedido.ExistenciaActDevolucion;
+                obj.ExitenciaActual = AceptarPedido.ExitenciaActual;
                // obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
                 InvBD.SubmitChanges();
                 Afectados = 1;
