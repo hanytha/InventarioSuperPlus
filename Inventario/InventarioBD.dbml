@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SuperPlus" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -66,7 +66,6 @@
       <Column Name="Area" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="PrecioUnitarioPromedio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="UnidadSAT" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="ClaveSAT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -139,7 +138,7 @@
       <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Impuesto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PrecioUnitario" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PrecioUnitario" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="FechaIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>

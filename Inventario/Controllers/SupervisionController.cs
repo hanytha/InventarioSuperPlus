@@ -1114,39 +1114,63 @@ namespace Inventario.Controllers
 
         public JsonResult ConsultaArticulosXtienda(string IdPro)
         {
-            //var compra = InvBD.Articulos.Where(p => p.IdAreas.Equals(IdPro) && p.Estatus.Equals(1))
-            //    .Select(p => new
-            //    {
-            //        p.NombreEmpresa,
-            //        p.IdArticulos,
-            //        p.Unidad
-            //    });
-            //return Json(compra, JsonRequestBehavior.AllowGet);
+           
 
             var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
                          join Articulos in InvBD.Articulos
-                    on ExistAlm.IdArticulo equals Articulos.IdArticulos
+                 on ExistAlm.IdArticulo equals Articulos.IdArticulos
+                    //     join CompraArticulos in InvBD.ComprasArticulos
+                    //on ExistAlm.IdArticulo equals CompraArticulos.IdArticulo
+                      
                          join Compra in InvBD.CompraInterno
                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                          join areas in InvBD.Areas
                      on Compra.IdProveedor equals areas.IdAreas
-                         where Compra.IdSitio.Equals(IdPro)&&Compra.EstatusPedido.Equals(1)
+                         where Compra.IdSitio.Equals(IdPro) && Compra.EstatusPedido.Equals(1)
                          select new
                          {
                              IdExistencia = ExistAlm.IdExistenciaAlmacenG,
-                             NombreEmpresa = ExistAlm.Articulo,
+                             NombreEmpresa = Articulos.NombreEmpresa,
                              IdArticulos = ExistAlm.IdArticulo,
                              Tipo = ExistAlm.TipoDeOperacion,
                              IdProveedor = areas.IdAreas,
                              Proveedor = areas.Nombre,
                              Tienda = Compra.IdSitio,
-                             PrecioUnitarioPromedio = Articulos.PrecioUnitarioPromedio,
+                           //  PrecioUnitarioPromedio = CompraArticulos.PrecioUnitario,
                              ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
                          };
             return Json(compra, JsonRequestBehavior.AllowGet);
 
 
         }
+
+
+        //    var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
+        //                 join Articulos in InvBD.Articulos
+        //            on ExistAlm.IdArticulo equals Articulos.IdArticulos
+        //                 // join CompraArt in InvBD.ComprasArticulos
+        //                 //on Articulos.IdArticulos equals CompraArt.IdArticulo
+        //                 join Compra in InvBD.CompraInterno
+        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+        //                 join areas in InvBD.Areas
+        //             on Compra.IdProveedor equals areas.IdAreas
+        //                 where Compra.IdSitio.Equals(IdPro) && Compra.EstatusPedido.Equals(1)
+        //                 select new
+        //                 {
+        //                     IdExistencia = ExistAlm.IdExistenciaAlmacenG,
+        //                     NombreEmpresa = ExistAlm.Articulo,
+        //                     IdArticulos = ExistAlm.IdArticulo,
+        //                     Tipo = ExistAlm.TipoDeOperacion,
+        //                     IdProveedor = areas.IdAreas,
+        //                     Proveedor = areas.Nombre,
+        //                     Tienda = Compra.IdSitio,
+        //                     //   PrecioUnitarioPromedio = CompraArt.PrecioUnitario,
+        //                     ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
+        //                 };
+        //        return Json(compra, JsonRequestBehavior.AllowGet);
+
+
+        //}
 
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
@@ -1715,7 +1739,7 @@ namespace Inventario.Controllers
                  && p.Movimiento.Equals(DatosUsados.Movimiento)
                  && p.Fecha.Equals(DatosUsados.Fecha)
                   && p.Cantidad.Equals(DatosUsados.Cantidad)
-                 && p.Costo.Equals(DatosUsados.Costo)
+                 //&& p.Costo.Equals(DatosUsados.Costo)
                  && p.Fecha.Equals(DatosUsados.Fecha)
                  ).Count();
                 if (nveces == 0)
@@ -1727,7 +1751,7 @@ namespace Inventario.Controllers
                     obj.Movimiento = DatosUsados.Movimiento;
                     obj.Movimiento = DatosUsados.Movimiento;
                     obj.Cantidad = DatosUsados.Cantidad;
-                    obj.Costo = DatosUsados.Costo;
+                   // obj.Costo = DatosUsados.Costo;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

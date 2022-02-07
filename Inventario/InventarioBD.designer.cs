@@ -117,7 +117,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1566,8 +1566,6 @@ namespace Inventario
 		
 		private string _Categoria;
 		
-		private string _PrecioUnitarioPromedio;
-		
 		private string _Descripcion;
 		
 		private string _UnidadSAT;
@@ -1622,8 +1620,6 @@ namespace Inventario
     partial void OnIdCategoriasChanged();
     partial void OnCategoriaChanging(string value);
     partial void OnCategoriaChanged();
-    partial void OnPrecioUnitarioPromedioChanging(string value);
-    partial void OnPrecioUnitarioPromedioChanged();
     partial void OnDescripcionChanging(string value);
     partial void OnDescripcionChanged();
     partial void OnUnidadSATChanging(string value);
@@ -1904,26 +1900,6 @@ namespace Inventario
 					this._Categoria = value;
 					this.SendPropertyChanged("Categoria");
 					this.OnCategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitarioPromedio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string PrecioUnitarioPromedio
-		{
-			get
-			{
-				return this._PrecioUnitarioPromedio;
-			}
-			set
-			{
-				if ((this._PrecioUnitarioPromedio != value))
-				{
-					this.OnPrecioUnitarioPromedioChanging(value);
-					this.SendPropertyChanging();
-					this._PrecioUnitarioPromedio = value;
-					this.SendPropertyChanged("PrecioUnitarioPromedio");
-					this.OnPrecioUnitarioPromedioChanged();
 				}
 			}
 		}
@@ -3148,7 +3124,7 @@ namespace Inventario
 		
 		private string _Impuesto;
 		
-		private string _PrecioUnitario;
+		private System.Nullable<double> _PrecioUnitario;
 		
 		private string _FechaIngreso;
 		
@@ -3178,7 +3154,7 @@ namespace Inventario
     partial void OnUnidadChanged();
     partial void OnImpuestoChanging(string value);
     partial void OnImpuestoChanged();
-    partial void OnPrecioUnitarioChanging(string value);
+    partial void OnPrecioUnitarioChanging(System.Nullable<double> value);
     partial void OnPrecioUnitarioChanged();
     partial void OnFechaIngresoChanging(string value);
     partial void OnFechaIngresoChanged();
@@ -3391,8 +3367,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="VarChar(10)")]
-		public string PrecioUnitario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioUnitario", DbType="Float")]
+		public System.Nullable<double> PrecioUnitario
 		{
 			get
 			{

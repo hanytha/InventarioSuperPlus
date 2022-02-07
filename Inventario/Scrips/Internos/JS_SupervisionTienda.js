@@ -840,53 +840,53 @@ function MostrarArticulosUsados(idS) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-     
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
             TablaArticulo += "<label>Id Existencia</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Costo</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Precio Unitario</label>";
-            TablaArticulo += "</div>";
+            ////TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            ////TablaArticulo += "<label>Costo</label>";
+            ////TablaArticulo += "</div>";
+            //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Precio Unitario</label>";
+            //TablaArticulo += "</div>";
 
             //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
             //TablaArticulo += "<label>Existencia Actual</label>";
             //TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-              //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
-                 TablaArticulo += "</div>";
+                TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
 
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' disabled id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</div>";
+                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' disabled id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</div>";
+                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
 
                 //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 //TablaArticulo += "<input  class='input-ExistenciaAct redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].ExistenciaActDevolucion + "' ><span class='help-block text-muted small-font'></span>";
@@ -916,10 +916,10 @@ function GuardarUsados() {
 
             var UnidadM = document.getElementsByClassName("input-Unidad");
 
-            var Precio = document.getElementsByClassName("input-res");
+            //var Precio = document.getElementsByClassName("input-res");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
 // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
@@ -935,7 +935,7 @@ function GuardarUsados() {
                     var Unidad = UnidadM[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
                    // var PrecioUnitario = Precio[i].value;
-                    var Costo = Precio[i].value;
+                   // var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdMovimiento", IdMovimiento);
@@ -949,7 +949,7 @@ function GuardarUsados() {
                     frm.append("IdExistencia", Unidad);
                    // frm.append("PrecioUnitario", PrecioUnitario);
                    
-                    frm.append("Costo", Costo);
+                    //frm.append("Costo", Costo);
                     //frm.append("IdArea", IdArea);
                     //frm.append("Area", Area);
                     //frm.append("Direccion", Direccion);
