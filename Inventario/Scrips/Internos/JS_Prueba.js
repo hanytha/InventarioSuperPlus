@@ -519,7 +519,7 @@ function Desplegar2(no) {
             dos += "<div class='col-sm'>Artículo</div>";
             dos += "<div class='col-sm'>Fecha de Ingreso</div>";
             dos += "<div class='col-sm'>Unidad de medida</div>";
-            dos += "<div class='col-sm'>Costo</div>";
+            dos += "<div class='col-sm'>Precio_Unitario</div>";
             dos += "</div>";
             dos += "<hr class='solid3'>";
 
