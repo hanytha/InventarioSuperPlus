@@ -177,9 +177,9 @@ function MovimientoModal(id) {
 
 function ExisteciaDevolucion(id) {
 
- 
 
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
         //if (document.getElementById("cmbMovimiento").value == 1) {
 
         //    let bonificacion = parseFloat(x) + parseFloat(y);
@@ -192,16 +192,16 @@ function ExisteciaDevolucion(id) {
         //}
 
 
-            if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
             //if (y <= x) {
-                let x = document.getElementById("TxtExistenciaInicDev").value;
+            let x = document.getElementById("TxtExistenciaInicDev").value;
 
-                let y = document.getElementById("TxtCantidadDev").value;
+            let y = document.getElementById("TxtCantidadDev").value;
             let resultado = parseFloat(x) - parseFloat(y);
 
-                document.getElementById("TxtExistenciaActDev").value = resultado;
+            document.getElementById("TxtExistenciaActDev").value = resultado;
 
-                if (document.getElementById("TxtExistenciaActDev").value < 0) {
+            if (document.getElementById("TxtExistenciaActDev").value < 0) {
 
                 Swal.fire(
                     '!',
@@ -274,9 +274,9 @@ function ExisteciaDevolucion(id) {
 //        }
 
 
-                
-                
-          
+
+
+
 //        //if (document.getElementsByClassName("input-cantidadUsados") <= document.getElementsByClassName("input-Unidad")) {
 //            //if (y <= x) {
 //            //let x = document.getElementsByClassName("input-Precio").value;
@@ -543,7 +543,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
             //} else if (Data[0].ExistenciaActDevolucion >=0) {
             //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
             //}
-            
+
         });
         ConsultaArt(idExist);
         ProvDev(id);
@@ -775,14 +775,14 @@ function SiguientePedidoProveedor(id) {
 //            var TablaArticulo = "";
 //            TablaArticulo += "<div class='row row-cols-auto'>";
 //            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-      
+
 //            TablaArticulo += "<label>IdExistencia</label>";
 //            TablaArticulo += "</div>";
 //            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
 //            TablaArticulo += "<label>Artículos</label>";
 //            TablaArticulo += "</div>";
 //            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-       
+
 //            TablaArticulo += "<label>Cantidad</label>";
 //            TablaArticulo += "</div>";
 //            //TablaArticulo += "<div class='col-md- col-sm-2 col-xs-12 justify-content-end'>";
@@ -809,7 +809,7 @@ function SiguientePedidoProveedor(id) {
 //                TablaArticulo += "</div>";
 
 //                //-------Crea la lista de las unidades de medida por artículo-------------------------------------------------------------------
-              
+
 //                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
 //                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
 //                //TablaArticulo += "<label class='label-precio'  id='" + Data[i].IdArticulos + "' ></label>$<span class='help-block text-muted small-font'>" + Data[i].PrecioUnitarioPromedio + "</span>";
@@ -823,6 +823,87 @@ function SiguientePedidoProveedor(id) {
 //        });
 //    }
 //}
+
+
+
+//function MostrarArticulosUsados(idS) {
+//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+//    }
+//    if (idS == 0) {
+//        sessionStorage.setItem('IdPedidosExternos', '0');
+//    }
+//    else {
+
+//        $.get("/Supervision/ConsultaArticulosXtienda/?IdPro=" + idS, function (Data) {
+//            //-----------------------------------------------------------------------------------
+//            var TablaArticulo = "";
+//            TablaArticulo += "<div class='row row-cols-auto'>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+//            TablaArticulo += "<label>Id Existencia</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+//            TablaArticulo += "<label>Artículos</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+//            TablaArticulo += "<label>Cantidad</label>";
+//            TablaArticulo += "</div>";
+//            ////TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//            ////TablaArticulo += "<label>Costo</label>";
+//            ////TablaArticulo += "</div>";
+//            //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//            //TablaArticulo += "<label>Precio Unitario</label>";
+//            //TablaArticulo += "</div>";
+
+//            //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+//            //TablaArticulo += "<label>Existencia Actual</label>";
+//            //TablaArticulo += "</div>";
+//            for (var i = 0; i < Data.length; i++) {
+//                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+//                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
+//                TablaArticulo += "</div>";
+//                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<label>"
+//                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+
+//                TablaArticulo += "</label>"
+//                TablaArticulo += "</div>";
+//                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+//                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+//                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
+//                TablaArticulo += "</div>";
+
+//                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' disabled id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+//                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+//                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+
+//                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-ExistenciaAct redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].ExistenciaActDevolucion + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+
+//                //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+//            }
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "</div>";
+//            document.getElementById("TblArticulosUsados").innerHTML = TablaArticulo;
+//        });
+//    }
+//}
+
 
 
 
@@ -841,49 +922,63 @@ function MostrarArticulosUsados(idS) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Id Existencia</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            ////TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            ////TablaArticulo += "<label>Costo</label>";
-            ////TablaArticulo += "</div>";
-            //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            //TablaArticulo += "<label>Precio Unitario</label>";
-            //TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Existencia Actual</label>";
+            TablaArticulo += "</div>";
 
-            //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-            //TablaArticulo += "<label>Existencia Actual</label>";
-            //TablaArticulo += "</div>";
-            for (var i = 0; i < Data.length; i++) {
+
+
+            let IdArticulos = Data.IdArticulos;
+            let ArrayIdArticulos = IdArticulos.split(',');
+            let NoPedido = Data.NoPedido;
+            let ArrayNoPedido = NoPedido.split(',');
+            let Fecha = Data.Fecha;
+            let Arrayfecha = Fecha.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            //let IdSitio = Data.IdSitio;
+            //let ArrayIdSitio = IdSitio.split(',');
+
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].IdExistencia + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulos + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
 
-                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' disabled id='" + Data[i].IdArticulos + "'  ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<input  class='input-ExistAct sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
@@ -905,6 +1000,8 @@ function MostrarArticulosUsados(idS) {
 }
 
 
+
+
 function GuardarUsados() {
 
     if (CamposObligatoriosUsados() == true) {
@@ -921,12 +1018,12 @@ function GuardarUsados() {
 
             for (let i = 0; i < NumPedidos.length; i++) {
                 if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
-// if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+                    // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
                     var Movimiento = document.getElementById("TxtMovUsados").value;
                     var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
-                   
+
                     //------------------------Guarda el nombre del artículo solicitado----------------------------------
                     var IdArticulo = NomArticulos[i].name;
                     var Articulo = NomArticulos[i].value;
@@ -935,8 +1032,8 @@ function GuardarUsados() {
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
                     var Unidad = UnidadM[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                   // var PrecioUnitario = Precio[i].value;
-                   // var Costo = Precio[i].value;
+                    // var PrecioUnitario = Precio[i].value;
+                    // var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
                     frm.append("IdMovimiento", IdMovimiento);
@@ -948,8 +1045,8 @@ function GuardarUsados() {
                     //frm.append("NumPedidoProveedor", NumPedidoProveedor);
                     frm.append("Cantidad", CantidadSolicitada);
                     frm.append("IdExistencia", Unidad);
-                   // frm.append("PrecioUnitario", PrecioUnitario);
-                   
+                    // frm.append("PrecioUnitario", PrecioUnitario);
+
                     //frm.append("Costo", Costo);
                     //frm.append("IdArea", IdArea);
                     //frm.append("Area", Area);
@@ -1275,12 +1372,12 @@ function GuardarDevolucion() {
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
-          //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
+            //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
             var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
 
             //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
 
-          //  var IdAsignacion = NoPedido;
+            //  var IdAsignacion = NoPedido;
 
 
             //var EstatusPedido = value"1";
@@ -1292,7 +1389,7 @@ function GuardarDevolucion() {
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
             frm.append("Observaciones", Observaciones);
             frm.append("TipoDeOperacion", TipoDeOperacion);
-          //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
+            //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
             frm.append("ExitenciaActual", ExitenciaActual);
             //frm.append("Proveedor", Proveedor);
             //frm.append("FechaIngreso", FechaIngreso);
@@ -1303,7 +1400,7 @@ function GuardarDevolucion() {
             //if (ExistenciaActDevolucion==0) {
             //    frm.append("EstatusArticulo", 0);
             //}
-          
+
             $.ajax({
                 type: "POST",
                 url: "/Supervision/GuardarDev",
