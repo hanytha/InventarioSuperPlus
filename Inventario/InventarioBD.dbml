@@ -196,8 +196,6 @@
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="ExistenciaInicDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ExistenciaActDevolucion" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Impuesto" Member="Impuesto">
@@ -257,7 +255,6 @@
       <Column Name="Movimiento" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Costo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
@@ -316,15 +313,15 @@
     <Type Name="PedidosInternos">
       <Column Name="IdPedidosInternos" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroPedido" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CantidadSolicitada" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumPedidoProveedor" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="IdAsignacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Sitio" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IdProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="UnidadMedida" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

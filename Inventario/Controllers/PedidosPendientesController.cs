@@ -238,11 +238,24 @@ namespace Inventario.Controllers
                 });
             foreach (var area in articulo)
             {
-                ModeloPendientesArea.NumeroPedido.Add(area.NumeroPedido);
-                ModeloPendientesArea.IdAsignacion.Add((int)area.IdAsignacion);
-                ModeloPendientesArea.IdSitio.Add((int)area.IdSitio);
-                ModeloPendientesArea.Sitio.Add(area.Sitio);
-                ModeloPendientesArea.IdProveedor.Add((int)area.IdProveedor);
+                if (area.NumeroPedido == 0 || area.IdAsignacion == 0 || area.IdSitio == 0 || area.Sitio == null)
+                {
+                    ModeloPendientesArea.NumeroPedido.Add(1);
+                    ModeloPendientesArea.IdAsignacion.Add(1);
+                    ModeloPendientesArea.IdSitio.Add(1);
+                    ModeloPendientesArea.Sitio.Add(null);
+                    ModeloPendientesArea.IdProveedor.Add(33);
+
+                }
+                else
+                {
+                    ModeloPendientesArea.NumeroPedido.Add(area.NumeroPedido);
+                    ModeloPendientesArea.IdAsignacion.Add((int)area.IdAsignacion);
+                    ModeloPendientesArea.IdSitio.Add((int)area.IdSitio);
+                    ModeloPendientesArea.Sitio.Add(area.Sitio);
+                    ModeloPendientesArea.IdProveedor.Add((int)area.IdProveedor);
+
+                }
             }
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }

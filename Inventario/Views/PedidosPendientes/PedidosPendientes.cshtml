@@ -15,41 +15,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Botón del modal-->
 <!------------------------------------------------Modal------------------------------------------------------------------>
-<div id="tablaPedidos">
-    @{
-
-        if (ModeloPendientesArea.IdProveedor != null)
-        {
-            <table class="table-success" style="position: relative"
-            <thead>
-            <tr>
-            <th scope="col">Número de pedido</th>
-            <th scope="col">Sitio</th>
-            <th scope="col">Acciones</th>
-            </tr>
-            </thead>
-
-            for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
-            {
-                if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
-                {
-                            <tr>
-
-                                <td>@ModeloPendientesArea.NumeroPedido[i]</td>
-                                <td>@ModeloPendientesArea.Sitio[i]</td>
-                                <td>
-                                    <button class="btn btn-success" onclick="abrirModal(@ModeloPendientesArea.NumeroPedido[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
-                                </td>
-                            </tr>
-                      
-                }
-            }
-         
-        }
-    }
-</div>
-
-
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalPedidos">
@@ -137,72 +102,110 @@
 </div>
 
 <!---------------------------------------------------------------------------------->
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid {
-        border-top: 4px solid #D7DBDD;
-    }
 
-    .D1 {
-        background-color: #EBEBEB;
-    }
-</style>
+<div id="tablaPedidos">
+    @{
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 1px solid #f1f507;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid4 {
-        border-top: 1px solid #0B94F8;
-    }
-</style>
-<!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
-<style>
-    .redondeado {
-        border-radius: 5px;
-        border: 1px solid #696969;
-        width: 135px;
-    }
+        if (ModeloPendientesArea.IdProveedor != null)
+        {
 
-    input:focus {
-        background-color: lavender;
-        text-align: center
-    }
-</style>
+            <table class="table-success" style="position: relative"
+            <thead>
+            <tr>
+            <th scope="col">Número de pedido</th>
+            <th scope="col">Sitio</th>
+            <th scope="col">Acciones</th>
+            </tr>
+            </thead>
 
-<!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
-<style>
-    .sinborde {
-        border: 0;
-    }
-</style>
+            for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
+            {
+                if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
+                {
+                            <tr>
 
-<!----------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
+                                <td>@ModeloPendientesArea.NumeroPedido[i]</td>
+                                <td>@ModeloPendientesArea.Sitio[i]</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="abrirModal(@ModeloPendientesArea.NumeroPedido[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                                </td>
+                            </tr>
+
+                }
+            }
+
+        }
+
     }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<script src="~/Scrips/Internos/JS_PedidosPendientes.js"></script>
-<!--Validacion del formulario-->
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
-<!----------------Exportar-------------------------->
+  </div>
+
+
+ <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid {
+                border-top: 4px solid #D7DBDD;
+            }
+
+            .D1 {
+                background-color: #EBEBEB;
+            }
+        </style>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid3 {
+                border-top: 1px solid #f1f507;
+            }
+        </style>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid4 {
+                border-top: 1px solid #0B94F8;
+            }
+        </style>
+        <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+        <style>
+            .redondeado {
+                border-radius: 5px;
+                border: 1px solid #696969;
+                width: 135px;
+            }
+
+            input:focus {
+                background-color: lavender;
+                text-align: center
+            }
+        </style>
+
+        <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+        <style>
+            .sinborde {
+                border: 0;
+            }
+        </style>
+
+        <!----------------------------------------------------------------------------------------------------->
+        <!--Hacer que el modal muestre los pasos por parte-->
+        <style type="text/css">
+            #regiration_form fieldset:not(:first-of-type) {
+                display: none;
+            }
+        </style>
+        <!--Script-->
+        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+        <script src="~/Scrips/Internos/JS_PedidosPendientes.js"></script>
+        <!--Validacion del formulario-->
+        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+        <!--Scripts de la tarjeta y el botón-->
+        <link href="~/Content/tarjeta.css" rel="stylesheet" />
+        <!----------------Exportar-------------------------->
