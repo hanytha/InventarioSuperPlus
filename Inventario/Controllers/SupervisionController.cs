@@ -1456,10 +1456,23 @@ namespace Inventario.Controllers
                     p.IdPedidosInternos,
                     Pedido = p.NumeroPedido,
                 });
-            foreach (var ped in pedidosNum)
+            //foreach (var ped in pedidosNum)
+            //{
+            //    int SumaNum = (int)(ped.Pedido + 1);
+            //    NumeroPedido += SumaNum + ",";
+            //}
+
+            if (pedidosNum.Count() > 0)
             {
-                int SumaNum = (int)(ped.Pedido + 1);
-                NumeroPedido += SumaNum + ",";
+                foreach (var num in pedidosNum)
+                {
+                    int SumaNumero = (int)(num.Pedido + 1);
+                    NumeroPedido = SumaNumero + ",";
+                }
+            }
+            else
+            {
+                NumeroPedido += "1" + ",";
             }
             var compras = new { NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1) };
             return Json(compras, JsonRequestBehavior.AllowGet);
@@ -1468,7 +1481,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaNumPedidoProveedor(long ID)
         {
             string numPedidoProve = "";
-            var numero = InvBD.PedidosInternos.Where(p => p.IdProveedor.Equals(ID) && p.Estatus.Equals(1))
+            var numero = InvBD.PedidosInternos.Where(p => p.IdProveedor.Equals(ID))
                 .Select(p => new
                 {
                     Id = p.IdProveedor,
