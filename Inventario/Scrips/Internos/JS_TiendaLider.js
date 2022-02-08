@@ -1,5 +1,6 @@
 ﻿//LlenarCMTMovimientos();
 LlenarCMCProveedores();
+LlenarComboProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
@@ -327,6 +328,7 @@ function Desplegar(no, id) {
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
             DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXArt += "<div class='col-sm'></div>";
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
@@ -336,8 +338,9 @@ function Desplegar(no, id) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+             
                 DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + Data[i].IdExistenciaAlmacenG + "," + Data[i].id + "," + Data[i].IdSitio + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
-
+                DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
 
                  }
@@ -356,7 +359,7 @@ function Desplegar(no, id) {
 
 
 function abrirModalDevoluciones(idExist, id, idS) {
-
+    ObtenerFecha();
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IdExistenciaAlmacenG', '0');
@@ -384,11 +387,24 @@ function abrirModalDevoluciones(idExist, id, idS) {
 
         });
         ConsultaArt(idExist);
-        ProvDev(id);
+      //  ProvDev(id);
+        ProvDev(id)
         //     BDNoPedido(id);
 
     }
 }
+
+
+
+function LlenarComboProveedores() {
+    $.get("/Supervision/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedor"));
+    });
+    $.get("/Supervision/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedorDevLider"));
+    });
+}
+
 
 function ConsultaArt(idExist) {
     $.get("/Supervision/ConsultaArticuloModal/?id=" + idExist, function (Data) {
@@ -404,12 +420,18 @@ function ConsultaArt(idExist) {
 
     });
 }
+//Obtener la fecha del sistema
+function ObtenerFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngresoDev').value = fecha;
 
+} 
 
 function ProvDev(id) {
 
     $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-        document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+        document.getElementById("cmbProveedorDevLider").value = Data[0].IdProveedor;
         document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
 
     });
@@ -437,8 +459,6 @@ function abrirModal(id, idS) {
 }
 
 
-
-
 function Prov(id) {
     $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
         //document.getElementById("cmbTienda").value = Data[0].IdTienda;
@@ -459,6 +479,47 @@ function Prov(id) {
 
     });
 }
+
+
+function ExisteciaDevolucion(id) {
+
+
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+        //if (document.getElementById("cmbMovimiento").value == 1) {
+
+        //    let bonificacion = parseFloat(x) + parseFloat(y);
+
+        //    document.getElementById("TxtStockTotal").value = bonificacion;
+        //}
+        //else {
+
+
+        //}
+
+
+        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+            //if (y <= x) {
+            let x = document.getElementById("TxtExistenciaInicDev").value;
+
+            let y = document.getElementById("TxtCantidadDev").value;
+            let resultado = parseFloat(x) - parseFloat(y);
+
+            document.getElementById("TxtExistenciaActDev").value = resultado;
+
+            if (document.getElementById("TxtExistenciaActDev").value < 0) {
+
+                Swal.fire(
+                    '!',
+                    'La cantidad excede al stock',
+                    'alert'
+                )
+            }
+        }
+
+    });
+}
+
 
 function abrirModalMovimiento(IDTienda) {
 
@@ -1417,3 +1478,88 @@ function Guardar() {
 //        }
 //    }
 //}
+
+
+function CamposObligatoriosDevolucion() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorioDevolucion");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+            exito = false;
+            controlesObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            controlesObligatorio[i].classList.remove("border-danger");
+
+        }
+    }
+    return exito;
+}
+
+function GuardarDevolucion() {
+    if (CamposObligatoriosDevolucion() == true) {
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
+            var Observaciones = document.getElementById("TxtDescripcionDev").value;
+            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+            //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
+            var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
+
+            //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
+
+            //  var IdAsignacion = NoPedido;
+
+
+            //var EstatusPedido = value"1";
+            //var IdProveedor = document.getElementById("TxtRazonSocial").value;
+            //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
+            //var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+            //var Usuario = document.getElementById("TxtNombreUsr").value;
+            var frm = new FormData();
+            frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+            frm.append("Observaciones", Observaciones);
+            frm.append("TipoDeOperacion", TipoDeOperacion);
+            //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
+            frm.append("ExitenciaActual", ExitenciaActual);
+            //frm.append("Proveedor", Proveedor);
+            //frm.append("FechaIngreso", FechaIngreso);
+            //frm.append("Usuario", Usuario);
+
+
+
+            //if (ExistenciaActDevolucion==0) {
+            //    frm.append("EstatusArticulo", 0);
+            //}
+
+            $.ajax({
+                type: "POST",
+                url: "/Supervision/GuardarDev",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    if (data == 0) {
+                        Swal.fire(
+                            '',
+                            'Ocurrió un error',
+                            'danger'
+                        )
+                    }
+                    else if (data == -1) {
+                        Swal.fire(
+                            '',
+                            'Ya existe',
+                            'warning'
+                        )
+                    }
+
+                }
+            });
+            alert("Los datos se guardaron correctamente");
+            ConsultaArticuloComp();
+            document.getElementById("btnCancelar").click();
+        }
+    }
+}
