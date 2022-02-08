@@ -17,19 +17,39 @@
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <div id="tablaPedidos">
     @{
+
         if (ModeloPendientesArea.IdProveedor != null)
         {
+            <table class="table-success" style="position: relative"
+            <thead>
+            <tr>
+            <th scope="col">Número de pedido</th>
+            <th scope="col">Sitio</th>
+            <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+
             for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
             {
                 if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
                 {
-                    <input value="@ModeloPendientesArea.NumeroPedido[i]" />
+                            <tr>
+
+                                <td>@ModeloPendientesArea.NumeroPedido[i]</td>
+                                <td>@ModeloPendientesArea.Sitio[i]</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="abrirModal(@ModeloPendientesArea.NumeroPedido[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                                </td>
+                            </tr>
+                      
                 }
             }
-
+         
         }
     }
 </div>
+
+
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalPedidos">

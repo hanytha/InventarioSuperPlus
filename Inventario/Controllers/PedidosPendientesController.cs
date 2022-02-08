@@ -94,97 +94,122 @@ namespace Inventario.Controllers
                 IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
             };
-            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+            return Json(Pedidos, JsonRequestBehavior.AllowGet);
         }
         //------------------------------------------------------------------------------------------------
         ////----------------------Mostrar los pedidos por proveedor-----------------------------------------------------
-        //public void ConsultaPedidosNumeroPedidoArea()
-        //{
-        //    ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
-        //    ModeloPendientesArea.NumeroPedido = new List<long>();
-        //    ModeloPendientesArea.IdAsignacion = new List<long>();
-        //    ModeloPendientesArea.IdSitio = new List<long>();
-        //    ModeloPendientesArea.IdProveedor = new long();
-        //    ModeloPendientesArea.Sitio = new List<string>();
 
-        //    string NoPedido = "";
-        //    string IdAsignacion = "";
-        //    string IdTienda = "";
-        //    string NomTienda = "";
+        public void ConsultaPedidosNumeroPedidoArea()
+        {
+            ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
+            ModeloPendientesArea.NumeroPedido = new List<long>();
+            ModeloPendientesArea.IdAsignacion = new List<long>();
+            ModeloPendientesArea.IdSitio = new List<long>();
+            ModeloPendientesArea.IdProveedor = new List<long>();
+            ModeloPendientesArea.Sitio = new List<string>();
 
-        //    var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
-        //       .Select(p => new
-        //       {
-        //           pedido = p.NumeroPedido,
-        //           asignacion = p.IdAsignacion,
-        //           Idtienda = p.IdSitio,
-        //           tiendas = p.Sitio,
-        //           IDProveedor = p.IdProveedor,
-        //       });
-        //    if (Pedidos.Count() > 0)
-        //    {
-        //        long contador = 0;
-        //        long tem1 = 0;
-        //        long tem2 = 0;
-        //        long tem3 = 0;
-        //        long pedi = Pedidos.Count();
+            string NoPedido = "";
+            string IdAsignacion = "";
+            string IdTienda = "";
+            string NomTienda = "";
+            string IDProveedor = "";
 
-        //        foreach (var numero in Pedidos)
-        //        {
-        //            if (contador == 0)
-        //            {
-        //                tem1 = numero.pedido;
-        //                tem2 = (int)numero.asignacion;
-        //                tem3 = (int)numero.Idtienda;
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
+                .Select(p => new
+                {
+                    pedido = p.NumeroPedido,
+                    asignacion = p.IdAsignacion,
+                    Idtienda = p.IdSitio,
+                    tiendas = p.Sitio,
+                    IDProveedores = p.IdProveedor,
+                });
+            if (Pedidos.Count() > 0)
+            {
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+                long tem3 = 0;
+                long pedi = Pedidos.Count();
 
-        //                NoPedido += numero.pedido + ",";
-        //                IdAsignacion += numero.asignacion + ",";
-        //                IdTienda += numero.Idtienda + ",";
-        //                NomTienda += numero.tiendas + ",";
+                foreach (var numero in Pedidos)
+                {
+                    if (contador == 0)
+                    {
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                        tem3 = (int)numero.Idtienda;
 
-        //            }
-        //            if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
-        //            {
-        //                NoPedido += numero.pedido + ",";
-        //                IdAsignacion += numero.asignacion + ",";
-        //                IdTienda += numero.Idtienda + ",";
-        //                NomTienda += numero.tiendas + ",";
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                        IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
+                        IDProveedor += numero.IDProveedores + ",";
 
-        //                tem1 = numero.pedido;
-        //                tem2 = (int)numero.asignacion;
-        //                tem3 = (int)numero.Idtienda;
+                    }
+                    if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
+                    {
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                        IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
+                        IDProveedor += numero.IDProveedores + ",";
 
-        //                contador++;
-        //            }
-        //            else
-        //            {
-        //                contador++;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        NoPedido += "0" + ",";
-        //        IdAsignacion += "0" + ",";
-        //        IdTienda += "0" + ",";
-        //        NomTienda += "0" + ",";
-        //    }
-        //    foreach (var area in Pedidos)
-        //    {
-        //        ModeloPendientesArea.NumeroPedido.Add(area.pedido);
-        //        ModeloPendientesArea.IdAsignacion.Add((int)area.asignacion);
-        //        ModeloPendientesArea.IdSitio.Add((int)area.Idtienda);
-        //        ModeloPendientesArea.Sitio.Add(area.tiendas);
-        //    }
-        //    var consulta = new
-        //    {
-        //        NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-        //        IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-        //        IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
-        //        NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
-        //    };
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                        tem3 = (int)numero.Idtienda;
 
-        //}
+                        contador++;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+                NoPedido += "0" + ",";
+                IdAsignacion += "0" + ",";
+                IdTienda += "0" + ",";
+                NomTienda += "0" + ",";
+                IDProveedor += "0" + ",";
+            }
+            var consulta = new
+            {
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
+                NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
+                IDProveedor = IDProveedor.Substring(0, IDProveedor.Length - 1)
+
+
+            };
+
+            string[] NoPedidos = NoPedido.Substring(0, NoPedido.Length - 1).Split(',');
+            string[] IDAsignaciones = IdAsignacion.Substring(0, IdAsignacion.Length - 1).Split(',');
+            string[] IDTiendas = IdTienda.Substring(0, IdTienda.Length - 1).Split(',');
+            string[] NOMTiendas = NomTienda.Substring(0, NomTienda.Length - 1).Split(',');
+            string[] IDProveedores = IDProveedor.Substring(0, IDProveedor.Length - 1).Split(',');
+
+            //string[] NoPedidos = NoPedido.Split(',');
+            //string[] IDAsignaciones = IdAsignacion.Split(',');
+            //string[] IDTiendas = IdTienda.Split(',');
+            //string[] NOMTiendas = NomTienda.Split(',');
+            //string[] IDProveedores = IDProveedor.Split(',');
+
+            for (int i = 0; 1 < NoPedidos.GetLength(0); i++)
+            {
+                ModeloPendientesArea.Sitio.Add(NOMTiendas[i]);
+                ModeloPendientesArea.NumeroPedido.Add(Convert.ToInt32(NoPedidos[i]));
+                ModeloPendientesArea.IdAsignacion.Add(Convert.ToInt32(IDAsignaciones[i]));
+                ModeloPendientesArea.IdSitio.Add(Convert.ToInt32(IDTiendas[i]));
+                ModeloPendientesArea.IdProveedor.Add(Convert.ToInt32(IDProveedores[i]));
+            }
+
+        }
+
+        //-------------------------------------------------------------------------------------------------------------
         //***************************************Consulta Prueba******************************************
         public JsonResult ConsultaPrueba()
         {
@@ -546,7 +571,7 @@ namespace Inventario.Controllers
                 });
             foreach (var b in articulo)
             {
-                OcultarPeidos((long) b.NumeroPedido, (long) b.IdArticulo);
+                OcultarPeidos((long)b.NumeroPedido, (long)b.IdArticulo);
             }
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
