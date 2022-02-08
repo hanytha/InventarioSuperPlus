@@ -105,7 +105,6 @@
 
 <div id="tablaPedidos">
     @{
-
         if (ModeloPendientesArea.IdProveedor != null)
         {
 
@@ -117,6 +116,7 @@
             <th scope="col">Acciones</th>
             </tr>
             </thead>
+
 
             for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
             {
@@ -132,13 +132,14 @@
                             </tr>
 
                 }
+                
             }
-
+            
         }
 
     }
-  </div>
 
+        </div>
 
  <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
         <style>

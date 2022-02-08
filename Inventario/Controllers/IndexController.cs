@@ -23,7 +23,7 @@ namespace Inventario.Controllers
 
             //-------CONSULTA PARA OBTENER LOS PEDIDOS PENDIENTES POR ÁREA----------------------------- 
             PedidosPendientesController pendientesArea = new PedidosPendientesController();
-            pendientesArea.ConsultaPrueba();
+            pendientesArea.ConsultaPedidosNumeroPedidoArea();
             //--------------------------------------------------------------------------------------
 
             //Al entrar en el inicio se cargen los estados

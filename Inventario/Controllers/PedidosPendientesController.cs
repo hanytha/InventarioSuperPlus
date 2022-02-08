@@ -198,7 +198,7 @@ namespace Inventario.Controllers
             //string[] NOMTiendas = NomTienda.Split(',');
             //string[] IDProveedores = IDProveedor.Split(',');
 
-            for (int i = 0; 1 < NoPedidos.GetLength(0); i++)
+            for (int i = 0; i < NoPedidos.GetLength(0); i++)
             {
                 ModeloPendientesArea.Sitio.Add(NOMTiendas[i]);
                 ModeloPendientesArea.NumeroPedido.Add(Convert.ToInt32(NoPedidos[i]));
