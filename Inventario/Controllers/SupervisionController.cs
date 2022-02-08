@@ -346,6 +346,7 @@ namespace Inventario.Controllers
                                        Proveedor = CompraInterno.Proveedor,
                                        IdSitio = CompraInterno.IdSitio,
                                        Tiendas = CompraInterno.Sitio,
+                                       IdArticulo = ExistenciaAlmacenG.IdArticulo,
                                        Articulo = ExistenciaAlmacenG.Articulo,
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
@@ -402,10 +403,12 @@ namespace Inventario.Controllers
                         NoPedido += numero.NoPedido + ",";
                         IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
+                        IdArticulos += numero.Proveedor + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
+                       
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -435,6 +438,7 @@ namespace Inventario.Controllers
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
+                        IdArticulos += numero.Proveedor + ",";
                         Articulo += numero.Articulo + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         contador++;
@@ -466,6 +470,7 @@ namespace Inventario.Controllers
                 NoPedido += "No hay ningún articulo" + ",";
                 IdCmpraInt += " " + ",";
                 IdSitio += " " + ",";
+                IdArticulos += " " + ",";
                 Articulo += " " + ",";
                 Fecha += " " + ",";
                 Stock += " " + ",";
@@ -479,6 +484,7 @@ namespace Inventario.Controllers
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
+                IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 Fecha = Fecha.Substring(0, Fecha.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),

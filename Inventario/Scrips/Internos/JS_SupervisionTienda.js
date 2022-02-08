@@ -918,7 +918,7 @@ function MostrarArticulosUsados(idS) {
     }
     else {
 
-        $.get("/Supervision/ConsultaArticulosXtienda/?IdPro=" + idS, function (Data) {
+        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + idS, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -931,6 +931,7 @@ function MostrarArticulosUsados(idS) {
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+
 
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
