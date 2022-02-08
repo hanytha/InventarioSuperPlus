@@ -210,6 +210,7 @@
     <Compile Include="Models\ModeloExistAlm.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
+    <Compile Include="Models\ModeloPendientesArea.cs" />
     <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />

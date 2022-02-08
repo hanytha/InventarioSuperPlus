@@ -1,5 +1,4 @@
-﻿
-ConsultaCompras();
+﻿//ConsultaCompras();
 BloquearCTRL();
 function ConsultaCompras() {
     $.get("/PedidosPendientes/ConsultaPedidosNumeroPedido", function (Data) {

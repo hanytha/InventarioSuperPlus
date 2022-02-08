@@ -1,4 +1,4 @@
-﻿
+﻿@using Inventario.Models;
 @{
     ViewBag.Title = "PedidosPendientes";
 }
@@ -15,7 +15,21 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Botón del modal-->
 <!------------------------------------------------Modal------------------------------------------------------------------>
-<div id="tablaPedidos"></div>
+<div id="tablaPedidos">
+    @{
+        if (ModeloPendientesArea.IdProveedor != null)
+        {
+            for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
+            {
+                if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
+                {
+                    <input value="@ModeloPendientesArea.NumeroPedido[i]" />
+                }
+            }
+
+        }
+    }
+</div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalPedidos">
