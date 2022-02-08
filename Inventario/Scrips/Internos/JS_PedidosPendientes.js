@@ -188,7 +188,7 @@ function validacion() {
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
 
-        if (aprobacion < 0 || aprobacion > 0) {
+        if (aprobacion < 0 || aprobacion > 0 || aprobacion == 0 && sumaS == 0) {
             contador++;
         }
 
@@ -197,7 +197,7 @@ function validacion() {
 
             aprobar[i].style.borderColor = 'Red';
         }
-        if (sumaS > aprobacion && aprobacion > 0 || sumaS == aprobacion) {
+        if (sumaS > aprobacion && aprobacion > 0 || sumaS == aprobacion || aprobacion == 0 && sumaS == 0) {
 
             aprobar[i].style.borderColor = 'DimGray';
             contadorA++;
