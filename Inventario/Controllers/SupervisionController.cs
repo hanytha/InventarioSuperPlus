@@ -488,6 +488,7 @@ namespace Inventario.Controllers
 
 
 
+
         public JsonResult ConsultaArticulosAceptar(long IDTienda)
         {
 

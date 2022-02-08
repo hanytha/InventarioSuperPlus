@@ -18,11 +18,10 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
+           // CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -34,8 +33,8 @@ function ConsultaArticuloComp(IDTienda) {
             let ArrayNoPedido = NoPedido.split(',');
             let Fecha = Data.Fecha;
             let Arrayfecha = Fecha.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
+            //let Stock = Data.Stock;
+            //let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
@@ -51,11 +50,11 @@ function ConsultaArticuloComp(IDTienda) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+               // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
                 //-----------------Botón para desplegar la primera tabla--------------
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
@@ -328,7 +327,9 @@ function Desplegar(no, id) {
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
             DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXArt += "<div class='col-sm'>Stock</div>";
             DespXArt += "<div class='col-sm'></div>";
+
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
@@ -338,7 +339,7 @@ function Desplegar(no, id) {
                 DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
                 DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-             
+                DespXArt += "<div class='col-sm'>" + Data[i].stockActual + "</div>";
                 DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + Data[i].IdExistenciaAlmacenG + "," + Data[i].id + "," + Data[i].IdSitio + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
