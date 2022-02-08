@@ -18,11 +18,14 @@ namespace Inventario.Controllers
         // GET: PedidosPendientes
         public ActionResult PedidosPendientes()
         {
+            PedidosPendientesController pendientesArea = new PedidosPendientesController();
+            pendientesArea.ConsultaPedidosNumeroPedidoArea();
             return View();
         }
         //****************************************************************************************************************************
         //****************************Consulta de pedidos internos***********************************************************
 
+/*
         public JsonResult ConsultaPedidosNumeroPedido()
         {
             string NoPedido = "";
@@ -97,8 +100,10 @@ namespace Inventario.Controllers
 
             return Json(Pedidos, JsonRequestBehavior.AllowGet);
         }
+*/
+
         //------------------------------------------------------------------------------------------------
-        ////----------------------Mostrar los pedidos por proveedor-----------------------------------------------------
+        ////----------------------Mostrar los pedidos por proveedor en razor-----------------------------------------------------
 
         public void ConsultaPedidosNumeroPedidoArea()
         {
@@ -192,12 +197,6 @@ namespace Inventario.Controllers
             string[] NOMTiendas = NomTienda.Substring(0, NomTienda.Length - 1).Split(',');
             string[] IDProveedores = IDProveedor.Substring(0, IDProveedor.Length - 1).Split(',');
 
-            //string[] NoPedidos = NoPedido.Split(',');
-            //string[] IDAsignaciones = IdAsignacion.Split(',');
-            //string[] IDTiendas = IdTienda.Split(',');
-            //string[] NOMTiendas = NomTienda.Split(',');
-            //string[] IDProveedores = IDProveedor.Split(',');
-
             for (int i = 0; i < NoPedidos.GetLength(0); i++)
             {
                 ModeloPendientesArea.Sitio.Add(NOMTiendas[i]);
@@ -209,9 +208,11 @@ namespace Inventario.Controllers
 
         }
 
+
         //-------------------------------------------------------------------------------------------------------------
         //***************************************Consulta Prueba******************************************
-        public JsonResult ConsultaPrueba()
+      
+        /*public JsonResult ConsultaPrueba()
         {
             ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
             ModeloPendientesArea.NumeroPedido = new List<long>();
@@ -258,7 +259,9 @@ namespace Inventario.Controllers
                 }
             }
             return Json(articulo, JsonRequestBehavior.AllowGet);
-        }
+        }*/
+
+
         //--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaPedidoXNumero(long Num)
         {
