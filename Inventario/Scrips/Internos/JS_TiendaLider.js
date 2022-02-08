@@ -314,12 +314,62 @@ function BloquearCTRL() {
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 //función que muestra la tabla del artículo
 //Pasar los parametros(No.Pedido, Id del sitio para desplegar solo los pedidos que tiene esa tienda)
+
+
+
+//////////////////////////////
+//function Desplegar(no, id) {
+//    if (no == 0 && id == 0) {
+//        sessionStorage.setItem('IDArt', '0');
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no + "&Id= " + id, function (Data) {
+//            var DespXArt = "";
+//            //---Encabezado del grid---------
+//            DespXArt += "<hr class='solid4'>";
+//            DespXArt += "<div class='row'>";
+//            DespXArt += "<div class='col-sm'>NoPedido</div>";
+//            DespXArt += "<div class='col-sm'>Artículo</div>";
+//            DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+//            DespXArt += "<div class='col-sm'>Stock</div>";
+//            DespXArt += "<div class='col-sm'></div>";
+
+//            DespXArt += "</div>";
+//            DespXArt += "<hr class='solid4'>";
+
+
+
+//            for (var i = 0; i < Data.length; i++) {
+//                //----Cuerpo del grid-------------
+//                DespXArt += "<div class='row'>";
+//                DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
+//                DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
+//                DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+//                DespXArt += "<div class='col-sm'>" + Data[i].stockActual + "</div>";
+//                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + Data[i].IdExistenciaAlmacenG + "," + Data[i].id + "," + Data[i].IdSitio + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+//                DespXArt += "<div class='col-sm'></div>";
+//                DespXArt += "</div>";
+
+//                 }
+//            DespXArt += "</div>";
+//            DespXArt += "</br>";
+//            DespXArt += "</br>";
+//            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
+//            let compraArticulo = "desplegable" + no + "," + id;
+//            document.getElementById(compraArticulo).innerHTML = DespXArt;
+
+//        });
+//    }
+//}
+//////////////////////// 
+
+
 function Desplegar(no, id) {
     if (no == 0 && id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaLider/?No=" + no + "&Id= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -333,18 +383,37 @@ function Desplegar(no, id) {
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
-            for (var i = 0; i < Data.length; i++) {
+
+            let IdArticulos = Data.IdArticulos;
+            let ArrayIdArticulos = IdArticulos.split(',');
+            let NoPedido = Data.NoPedido;
+            let ArrayNoPedido = NoPedido.split(',');
+            let Fecha = Data.Fecha;
+            let Arrayfecha = Fecha.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
                 //----Cuerpo del grid-------------
                 DespXArt += "<div class='row'>";
-                DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].stockActual + "</div>";
-                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + Data[i].IdExistenciaAlmacenG + "," + Data[i].id + "," + Data[i].IdSitio + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+
+                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
 
-                 }
+            }
             DespXArt += "</div>";
             DespXArt += "</br>";
             DespXArt += "</br>";
@@ -353,6 +422,91 @@ function Desplegar(no, id) {
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
         });
+    }
+}
+
+
+function Despl111111111111(IDTienda) {
+    if (IDTienda == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+            var CodigoHtmlArticuloComp = "";
+
+            CodigoHtmlArticuloComp += "<div id='desplegable'>";
+            CodigoHtmlArticuloComp += "<hr class='solid'>";
+            CodigoHtmlArticuloComp += "<div class='row'>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
+            CodigoHtmlArticuloComp += "</div>";
+            CodigoHtmlArticuloComp += "<hr class='solid'>";
+            CodigoHtmlArticuloComp += "</div>";
+
+            let id = Data.id;
+            let ArrayId = id.split(',');
+            let NoPedido = Data.NoPedido;
+            let ArrayNoPedido = NoPedido.split(',');
+            let Fecha = Data.Fecha;
+            let Arrayfecha = Fecha.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            //let Costos = Data.Costos;
+            //let Arraycostos = Costos.split(',');
+
+            for (var i = 0; i < ArrayId.length; i++) {
+
+                CodigoHtmlArticuloComp += "<div>";
+                CodigoHtmlArticuloComp += "<div class='row'>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                //-----------------Botón para desplegar la primera tabla--------------
+                CodigoHtmlArticuloComp += "<div class='col'>"
+                CodigoHtmlArticuloComp += "<label>"
+                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+                //CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ")'><i class='fas fa-angle-down'></i></button>";
+             //   CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+
+               // CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                //CodigoHtmlArticuloComp += "</label>";
+
+                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+
+                CodigoHtmlArticuloComp += "</div>";
+                //-------------Termina----------------------------------------
+                CodigoHtmlArticuloComp += "</div>";
+                CodigoHtmlArticuloComp += "</div>";
+                //------------------------Despliega primer grid-----------------------------------------------------------------------
+                CodigoHtmlArticuloComp += "<div class='row'>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] +  "' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "</div>";
+                //---------------------------------------Termina----------------------------------------------------------------------------
+            }
+            CodigoHtmlArticuloComp += "</div>";
+            CodigoHtmlArticuloComp += "</br>";
+            CodigoHtmlArticuloComp += "</br>";
+            let compraArticulo = "desplegable" + IDTienda;
+
+            document.getElementById(compraArticulo).innerHTML = CodigoHtmlArticuloComp;
+
+        });
+
     }
 }
 
