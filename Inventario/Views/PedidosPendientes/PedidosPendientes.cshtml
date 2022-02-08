@@ -3,7 +3,9 @@
     ViewBag.Title = "PedidosPendientes";
 }
 
-
+<h2 class="form-control-label" style="font-size: 20px;">
+    PEDIDOS PENDIENTES
+</h2>
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
@@ -13,95 +15,8 @@
 <!-- Inicia tarjeta-->
 <!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal-->
-<!------------------------------------------------Modal------------------------------------------------------------------>
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="ModalPedidos">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Registro de pedidos</h5>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtTiendas">Enviar a:<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTiendas]" id="TxtTiendas" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtFecha">Fecha de pedido<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtFechaAprobada">Fecha de aprobación<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtFechaAprobada]" id="TxtFechaAprobada" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoProveedor">Número por proveedor<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtNoProveedor]" id="TxtNoProveedor" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtAsignacion">ID_Asignación<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtAsignacion]" id="TxtAsignacion" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtIDTienda">ID_Sitio<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtIDTienda]" id="TxtIDTienda" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
-                                    <input type="text" name="" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblArticulos">Artículo(s) del proveedor</div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" validacion()">Guardar</button>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!---------------------------------------------------------------------------------->
+<!------------------------GENERA LA TABAL DE PEDIDOS PENDIENTES--------------------------------->
 
 <div id="tablaPedidos">
     @{
@@ -132,16 +47,104 @@
                             </tr>
 
                 }
-                
+
             }
-            
+
         }
 
     }
 
+    </table>
         </div>
 
- <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+        <!------------------------------------------------Modal------------------------------------------------------------------>
+        <!-- Encabezado del Modal -->
+        <div class="container">
+            <div class="modal fade" id="ModalPedidos">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registro de pedidos</h5>
+                            <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                        </div>
+                        <!-- Contenido del modal -->
+                        <div class="modal-body">
+                            <form id="regiration_form" novalidate method="post">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtTiendas">Enviar a:<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtTiendas]" id="TxtTiendas" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtFecha">Fecha de pedido<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtFechaAprobada">Fecha de aprobación<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtFechaAprobada]" id="TxtFechaAprobada" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtNoProveedor">Número por proveedor<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtNoProveedor]" id="TxtNoProveedor" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtAsignacion">ID_Asignación<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtAsignacion]" id="TxtAsignacion" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtIDTienda">ID_Sitio<span class="required">*</span></label>
+                                            <input type="number" name="data[TxtIDTienda]" id="TxtIDTienda" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
+                                            <input type="text" name="" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                            <div id="TblArticulos">Artículo(s) del proveedor</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- pie del modal-->
+                        <div class="modal-footer">
+                            <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" validacion()">Guardar</button>
+                            <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
         <style>
             body {
                 font-family: Arial, Helvetica, sans-serif;
