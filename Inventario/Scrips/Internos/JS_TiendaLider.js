@@ -43,8 +43,8 @@ function ConsultaArticuloComp(IDTienda) {
             let Proveedor = Data.Proveedor;
             let ArrayProveedor = Proveedor.split(',');
 
-            //let Costos = Data.Costos;
-            //let Arraycostos = Costos.split(',');
+            let IdProveedor = Data.IdProveedor;
+            let ArrayIdProveedor = IdProveedor.split(',');
 
             for (var i = 0; i < ArrayId.length; i++) {
 
@@ -55,7 +55,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
                 //CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                //-----------------Botón para desplegar la primera tabla--------------
+                //-----------------Botón para desplegar la primera tabla-------------- 
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
@@ -422,91 +422,6 @@ function Desplegar(no, id) {
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
         });
-    }
-}
-
-
-function Despl111111111111(IDTienda) {
-    if (IDTienda == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
-            var CodigoHtmlArticuloComp = "";
-
-            CodigoHtmlArticuloComp += "<div id='desplegable'>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "<div class='row'>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "</div>";
-
-            let id = Data.id;
-            let ArrayId = id.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
-
-            let Articulo = Data.Articulo;
-            let ArrayArticulo = Articulo.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
-
-            //let Costos = Data.Costos;
-            //let Arraycostos = Costos.split(',');
-
-            for (var i = 0; i < ArrayId.length; i++) {
-
-                CodigoHtmlArticuloComp += "<div>";
-                CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                //-----------------Botón para desplegar la primera tabla--------------
-                CodigoHtmlArticuloComp += "<div class='col'>"
-                CodigoHtmlArticuloComp += "<label>"
-                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-                //CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ")'><i class='fas fa-angle-down'></i></button>";
-             //   CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-
-               // CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
-                //CodigoHtmlArticuloComp += "</label>";
-
-                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-
-                CodigoHtmlArticuloComp += "</div>";
-                //-------------Termina----------------------------------------
-                CodigoHtmlArticuloComp += "</div>";
-                CodigoHtmlArticuloComp += "</div>";
-                //------------------------Despliega primer grid-----------------------------------------------------------------------
-                CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] +  "' class='collapse'></div></div>";
-                CodigoHtmlArticuloComp += "</div>";
-                //---------------------------------------Termina----------------------------------------------------------------------------
-            }
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "</br>";
-            CodigoHtmlArticuloComp += "</br>";
-            let compraArticulo = "desplegable" + IDTienda;
-
-            document.getElementById(compraArticulo).innerHTML = CodigoHtmlArticuloComp;
-
-        });
-
     }
 }
 

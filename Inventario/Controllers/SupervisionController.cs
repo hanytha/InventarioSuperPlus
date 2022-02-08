@@ -327,6 +327,7 @@ namespace Inventario.Controllers
             string IdCmpraInt = "";
             string IdTienda = "";
             string Sitio = "";
+            string IdProveedor = "";
             string Proveedor = "";
             
             string IdExistenciaAlmacenG = "";
@@ -339,9 +340,10 @@ namespace Inventario.Controllers
 
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
-                                       NoPedido = ExistenciaAlmacenG.NoPedidoG,
+                                       NoPedido = CompraInterno.NoPedido,
                                        IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-                                          Proveedor=CompraInterno.Proveedor,
+                                       IdProveedor = CompraInterno.IdProveedor,
+                                       Proveedor =CompraInterno.Proveedor,
                                        IdSitio = CompraInterno.IdSitio,
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
@@ -402,6 +404,7 @@ namespace Inventario.Controllers
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
+                        IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -430,6 +433,7 @@ namespace Inventario.Controllers
                         IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
                         Fecha += numero.FechaDeIngreso + ",";
+                        IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
                         Articulo += numero.Articulo + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
@@ -465,6 +469,7 @@ namespace Inventario.Controllers
                 Articulo += " " + ",";
                 Fecha += " " + ",";
                 Stock += " " + ",";
+                IdProveedor += " " + ",";
                 Proveedor += " " + ",";
                 IdExistenciaAlmacenG += " " + ",";
             }
@@ -477,6 +482,7 @@ namespace Inventario.Controllers
                 Articulo = Articulo.Substring(0, Articulo.Length - 1),
                 Fecha = Fecha.Substring(0, Fecha.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
+                IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
 
@@ -931,7 +937,7 @@ namespace Inventario.Controllers
                                  select new
                                  {
                                      FechaDeIngreso = CompraInterno.FechaIngreso,
-                                     NoPedido = ExistenciAAlmacen.NoPedidoG,
+                                     NoPedido = CompraInterno.NoPedido,
                                      Articulo = ExistenciAAlmacen.Articulo,
                                      // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
@@ -984,7 +990,7 @@ namespace Inventario.Controllers
                                  select new
                                  {
                                      FechaDeIngreso = CompraInterno.FechaIngreso,
-                                     NoPedido = ExistenciAAlmacen.NoPedidoG,
+                                     NoPedido = CompraInterno.NoPedido,
                                      Articulo = ExistenciAAlmacen.Articulo,
                                      // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
