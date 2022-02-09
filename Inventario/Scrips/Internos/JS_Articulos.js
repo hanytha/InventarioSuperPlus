@@ -237,7 +237,7 @@ function GuardarArticulo() {
                     else {
                         //-----Mensaje de confirmación-----------------------
                         swal("El artículo se registró exitosamente!", "", "success");
-                        LimpiarCampos();
+                        consultaFecha();
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -271,7 +271,7 @@ function EliminarArticulo(id) {
         $.get("/Articulo/EliminarArticulo/?Id=" + id, function (DatoArt) {
             if (DatoArt == 1) {
                 swal("El artículo se eliminó exitosamente!", "", "success");
-                ConsultaArticulos();
+                consultaFecha();
             } else {
                 swal("¡Ocurrio un error!", "", "danger");
             }
