@@ -4355,7 +4355,7 @@ namespace Inventario
 		
 		private System.Nullable<long> _ExitenciaInicial;
 		
-		private System.Nullable<long> _ExitenciaActual;
+		private System.Nullable<double> _ExitenciaActual;
 		
 		private long _IdArticulo;
 		
@@ -4379,7 +4379,7 @@ namespace Inventario
     partial void OnIdCompraInternoChanged();
     partial void OnExitenciaInicialChanging(System.Nullable<long> value);
     partial void OnExitenciaInicialChanged();
-    partial void OnExitenciaActualChanging(System.Nullable<long> value);
+    partial void OnExitenciaActualChanging(System.Nullable<double> value);
     partial void OnExitenciaActualChanged();
     partial void OnIdArticuloChanging(long value);
     partial void OnIdArticuloChanged();
@@ -4478,8 +4478,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="BigInt")]
-		public System.Nullable<long> ExitenciaActual
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaActual", DbType="Float")]
+		public System.Nullable<double> ExitenciaActual
 		{
 			get
 			{

@@ -109,6 +109,7 @@ namespace Inventario.Controllers
         {
             ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
             ModeloPendientesArea.NumeroPedido = new List<long>();
+            ModeloPendientesArea.NumeroPedidoProve = new List<long>();
             ModeloPendientesArea.IdAsignacion = new List<long>();
             ModeloPendientesArea.IdSitio = new List<long>();
             ModeloPendientesArea.IdProveedor = new List<long>();
@@ -119,11 +120,13 @@ namespace Inventario.Controllers
             string IdTienda = "";
             string NomTienda = "";
             string IDProveedor = "";
+            string NoPedidoProve = "";
 
             var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
                 .Select(p => new
                 {
                     pedido = p.NumeroPedido,
+                    pedidoPro = p.NumPedidoProveedor,
                     asignacion = p.IdAsignacion,
                     Idtienda = p.IdSitio,
                     tiendas = p.Sitio,
@@ -150,6 +153,7 @@ namespace Inventario.Controllers
                         IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IDProveedor += numero.IDProveedores + ",";
+                        NoPedidoProve += numero.pedidoPro + ",";
 
                     }
                     if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
@@ -159,6 +163,8 @@ namespace Inventario.Controllers
                         IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IDProveedor += numero.IDProveedores + ",";
+                        NoPedidoProve += numero.pedidoPro + ",";
+
 
                         tem1 = numero.pedido;
                         tem2 = (int)numero.asignacion;
@@ -179,6 +185,7 @@ namespace Inventario.Controllers
                 IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 IDProveedor += "0" + ",";
+                NoPedidoProve += "0" + ",";
             }
             var consulta = new
             {
@@ -186,8 +193,8 @@ namespace Inventario.Controllers
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
                 IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
-                IDProveedor = IDProveedor.Substring(0, IDProveedor.Length - 1)
-
+                IDProveedor = IDProveedor.Substring(0, IDProveedor.Length - 1),
+                NoPedidoProve = NoPedidoProve.Substring(0, NoPedidoProve.Length - 1)
 
             };
 
@@ -196,6 +203,7 @@ namespace Inventario.Controllers
             string[] IDTiendas = IdTienda.Substring(0, IdTienda.Length - 1).Split(',');
             string[] NOMTiendas = NomTienda.Substring(0, NomTienda.Length - 1).Split(',');
             string[] IDProveedores = IDProveedor.Substring(0, IDProveedor.Length - 1).Split(',');
+            string[] NoPProveedor = NoPedidoProve.Substring(0, NoPedidoProve.Length - 1).Split(',');
 
             for (int i = 0; i < NoPedidos.GetLength(0); i++)
             {
@@ -204,6 +212,7 @@ namespace Inventario.Controllers
                 ModeloPendientesArea.IdAsignacion.Add(Convert.ToInt32(IDAsignaciones[i]));
                 ModeloPendientesArea.IdSitio.Add(Convert.ToInt32(IDTiendas[i]));
                 ModeloPendientesArea.IdProveedor.Add(Convert.ToInt32(IDProveedores[i]));
+                ModeloPendientesArea.NumeroPedidoProve.Add(Convert.ToInt32(NoPProveedor[i]));
             }
 
         }
