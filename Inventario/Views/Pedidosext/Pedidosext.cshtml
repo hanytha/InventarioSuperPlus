@@ -66,22 +66,39 @@
     @{
         if (ModeloPedidosExternos.IdArea != null)
         {
+
             <table class="table-success" style="position: relative"
             <thead>
-                    <tr>
+
+            </thead>
+            if (Accesos.NIvel == 1)
+            {
+                      <tr>
+                        <th>No_Pedido_General</th>
                         <th scope="col">Fecha_Solicitud_Pedido</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Área</th>
                         <th scope="col">Ver_Pedido</th>
-
                     </tr>
-            </thead>
+            }
+
+            else
+            {
+            <tr>
+                <th scope="col">Fecha_Solicitud_Pedido</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Área</th>
+                <th scope="col">Ver_Pedido</th>
+            </tr>
+            }
+
             for (var i = 0; i < ModeloPedidosExternos.IdArea.Count(); i++)
             {
                 if (Accesos.NIvel == 1)
                 {
 
             <tr>
+                <td>@ModeloPedidosExternos.NoPedidoG[i]</td>
                 <td>@ModeloPedidosExternos.Fecha[i]</td>
                 <td>@ModeloPedidosExternos.ProveedorE[i]</td>
                 <td>@ModeloPedidosExternos.Area[i]</td>
