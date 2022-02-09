@@ -1,4 +1,4 @@
-﻿
+﻿@using Inventario.Models;
 @{
     ViewBag.Title = "Articulo";
 }
@@ -58,8 +58,57 @@
 </script>
 
 
+
+<div class="input-group mb-3 float-right">
+    <input style="border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;" class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search....">
+    <span class="input-group-text" style="border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; " id="basic-addon1"><i class="fas fa-search"></i></span>
+</div>
+
 <!----------------------Crea Tabla de artículos----------------------------------->
-<div id="tablaArticulos"></div>
+<div id="tablaArticulos">
+    @{
+        if (ModeloArticulos.IDArea != null)
+        {
+            <table class="table-success" style="position: relative"
+            <thead>
+                    <tr>
+                        <th scope="col">Artículo</th>
+                        <th scope="col">Precio_Unitario_Promedio</th>
+                        <th scope="col">Área</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+            </thead>
+
+            for (var i = 0; i < ModeloArticulos.IDArea.Count(); i++)
+            {
+
+                if (Accesos.NIvel == 1)
+                {
+                    <tr>
+                        <td>@ModeloArticulos.Articulo[i]</td>
+                        <td>@ModeloArticulos.PrecioU[i]</td>
+                        <td>@ModeloArticulos.Area[i]</td>
+                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button></td>
+                        <td><button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
+                    </tr>
+                }
+                else if ((long)ModeloArticulos.IDArea[i] == Accesos.IdArea)
+                {
+                      <tr>
+                        <td>@ModeloArticulos.Articulo[i]</td>
+                        <td>@ModeloArticulos.PrecioU[i]</td>
+                        <td>@ModeloArticulos.Area[i]</td>
+                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
+                    </tr>
+                }
+
+            }
+        }
+        } 
+
+    </table>
+        </div>
 <!-------------------------------------------------------------------------->
 <!-- Encabezado del Modal -->
 <div class="container">

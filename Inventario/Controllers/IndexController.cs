@@ -25,6 +25,10 @@ namespace Inventario.Controllers
             PedidosPendientesController pendientesArea = new PedidosPendientesController();
             pendientesArea.ConsultaPedidosNumeroPedidoArea();
             //--------------------------------------------------------------------------------------
+            //-------CONSULTA PARA OBTENER LOS ARTÍCULOS POR ÁREA----------------------------- 
+            //ArticuloController ARTICULOS = new ArticuloController();
+            //ARTICULOS.ConsultaPrecioPromedioRazor();
+            //--------------------------------------------------------------------------------------
 
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();

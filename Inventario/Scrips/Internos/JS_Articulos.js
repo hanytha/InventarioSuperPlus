@@ -1,4 +1,4 @@
-﻿ConsultaArticulos();
+﻿//ConsultaArticulos();
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
@@ -6,7 +6,7 @@ LlenarCMCArea();
 LlenarCMCMarca();
 LlenarCMCImpuesto();
 //---------------Crea una tabla de todos los artículos de la BD---------------
-function ConsultaArticulos() {
+/*  function ConsultaArticulos() {
     $.get("/Articulo/ConsultaPrecioPromedio", function (Data) {
         CrearTablaArticulos(Data);
     }
@@ -20,6 +20,8 @@ function CrearTablaArticulos(Data) {
 
     CodigoHtmlTablaArticulos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
     CodigoHtmlTablaArticulos += "</div>";
+
+
     CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
     CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaArticulos += "<thead>";
@@ -64,7 +66,7 @@ function CrearTablaArticulos(Data) {
     CodigoHtmlTablaArticulos += "</table>";
     document.getElementById("tablaArticulos").innerHTML = CodigoHtmlTablaArticulos;
 }
-
+*/
 
 //--------------------Limpia la información y carga la informacion de Artículos---------------------
 function abrirModal(id) {//la clase  Obligatorio
@@ -235,7 +237,7 @@ function GuardarArticulo() {
                     else {
                         //-----Mensaje de confirmación-----------------------
                         swal("El artículo se registró exitosamente!", "", "success");
-                        ConsultaArticulos();
+                        LimpiarCampos();
                         document.getElementById("btnCancelar").click();
                     }
                 }

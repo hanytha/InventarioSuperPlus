@@ -18,6 +18,8 @@ namespace Inventario.Controllers
         // GET: Articulo
         public ActionResult Articulo()
         {
+            ArticuloController ARTICULOS = new ArticuloController();
+            ARTICULOS.ConsultaPrecioPromedioRazor();
             return View();
         }
         //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
@@ -88,6 +90,101 @@ namespace Inventario.Controllers
                 PrecioPro = PrecioPro.Substring(0, PrecioPro.Length - 1)
             };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
+        public void ConsultaPrecioPromedioRazor()
+        {
+
+            ModeloArticulos modeloArticulos = new ModeloArticulos();
+            ModeloArticulos.Articulo = new List<string>();
+            ModeloArticulos.Area = new List<string>();
+            ModeloArticulos.PrecioU = new List<long>();
+            ModeloArticulos.IDArea = new List<long>();
+            ModeloArticulos.IDArticulo = new List<long>();
+
+            string Articulo = "";
+            string IDA = "";
+            string PrecioPro = "";
+            string IDProveedor = "";
+            string Area = "";
+          
+
+            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                   
+                    Nombre = p.NombreEmpresa,
+                    areas = p.Area,
+                    ID = p.IdArticulos,
+                    Idproveedores = p.IdAreas
+                });
+            foreach (var art in articulos)
+            {
+                IDA += art.ID + ",";
+                IDProveedor += art.Idproveedores + ",";
+                Articulo += art.Nombre + ",";
+                Area += art.areas + ",";
+
+                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.ID) && p.PrecioUnitario > 0)
+             .Select(p => new
+             {
+                 stock = p.ExistenciaInicial,
+                 precio = p.PrecioUnitario,
+
+             });
+
+
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int SumaStock = 0;
+                    int SumaPrecio = 0;
+                    int Promedio = 0;
+
+                    foreach (var com in consultaFecha)
+                    {
+
+
+                        SumaStock = (int)(SumaStock + com.stock);
+                        SumaPrecio = (int)(SumaPrecio + ((com.stock) * (com.precio)));
+
+                    }
+                    Promedio = SumaPrecio / SumaStock;
+
+                    PrecioPro += Promedio + ",";
+                }
+                else
+                {
+                    PrecioPro += "0" + ",";
+                }
+
+            }
+
+            var Resultado = new
+            {
+              
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IDA = IDA.Substring(0, IDA.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+                PrecioPro = PrecioPro.Substring(0, PrecioPro.Length - 1),
+                IDProveedor = IDProveedor.Substring(0, IDProveedor.Length - 1),
+            };
+           
+            string[] Articulos = Articulo.Substring(0, Articulo.Length - 1).Split(',');
+            string[] Areas = Area.Substring(0, Area.Length - 1).Split(',');
+            string[] IDArti = IDA.Substring(0, IDA.Length - 1).Split(',');
+            string[] PrecioProme = PrecioPro.Substring(0, PrecioPro.Length - 1).Split(',');
+            string[] IDproveedors = IDProveedor.Substring(0, IDProveedor.Length - 1).Split(',');
+
+            for (int i = 0; i < Articulos.GetLength(0); i++)
+            {
+                ModeloArticulos.Articulo.Add(Articulos[i]);
+                ModeloArticulos.Area.Add(Areas[i]);
+                ModeloArticulos.IDArticulo.Add(Convert.ToInt32(IDArti[i]));
+                ModeloArticulos.IDArea.Add(Convert.ToInt32(IDproveedors[i]));
+                ModeloArticulos.PrecioU.Add(Convert.ToInt32(PrecioProme[i]));
+            }
         }
         //*************************************************************************************************************
         //--------------------------------Consulta los artículos por ID-------------------------------------------
