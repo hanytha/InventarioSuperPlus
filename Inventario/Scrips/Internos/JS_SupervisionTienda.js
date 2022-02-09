@@ -1118,12 +1118,13 @@ function GuardarExistAlm(IdArticulo) {
 
             var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
+            var UnidadM = document.getElementsByClassName("input-Unidad");
             //var UnidadM = document.getElementsByClassName("input-Unidad");
 
             //var Precio = document.getElementsByClassName("input-res");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
                     // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
@@ -1136,13 +1137,13 @@ function GuardarExistAlm(IdArticulo) {
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                   // var Unidad = UnidadM[i].value;
+                   var Unidad = UnidadM[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
                     // var PrecioUnitario = Precio[i].value;
                     // var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
-                    frm.append("IdExistenciaAlmacenG", IdArticulo);
+                    frm.append("IdExistenciaAlmacenG", Unidad);
                     //frm.append("Movimiento", Movimiento);
                     //frm.append("Fecha", Fecha);
                     //frm.append("IdArticulo", IdArticulo);
