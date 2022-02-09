@@ -403,7 +403,7 @@ namespace Inventario.Controllers
                         NoPedido += numero.NoPedido + ",";
                         IdCmpraInt += numero.IdCmpraInt + ",";
                         IdSitio += numero.IdSitio + ",";
-                        IdArticulos += numero.Proveedor + ",";
+                        IdArticulos += numero.IdArticulo + ",";
                         Articulo += numero.Articulo + ",";
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
@@ -438,7 +438,7 @@ namespace Inventario.Controllers
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
-                        IdArticulos += numero.Proveedor + ",";
+                        IdArticulos += numero.IdArticulo + ",";
                         Articulo += numero.Articulo + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         contador++;
@@ -2464,5 +2464,9 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+
+
+
+        
     }
 }
