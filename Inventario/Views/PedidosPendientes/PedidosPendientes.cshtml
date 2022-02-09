@@ -36,7 +36,17 @@
             for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
             {
 
-                if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
+                if (Accesos.NIvel == 1)
+                {
+                 <tr>
+                     <td>@ModeloPendientesArea.NumeroPedido[i]</td>
+                     <td>@ModeloPendientesArea.Sitio[i]</td>
+                     <td>
+                         <button class="btn btn-success" onclick="abrirModal(@ModeloPendientesArea.NumeroPedido[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                     </td>
+                 </tr>
+                }
+                else if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
                 {
                             <tr>
 
