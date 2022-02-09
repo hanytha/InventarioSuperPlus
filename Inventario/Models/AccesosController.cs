@@ -9,6 +9,7 @@ namespace Inventario.Models
 
         //Modelo que se ocupa para mostrar las paginas según los perfiles
         public static string Perfil { get; set; }
+        public static long NIvel { get; set; }
         public static List<string> Accion { get; set; }
         public static List<string> Controlador { get; set; }
         public static List<string> Mensaje { get; set; }
