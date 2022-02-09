@@ -88,8 +88,8 @@
                         <td>@ModeloArticulos.Articulo[i]</td>
                         <td>@ModeloArticulos.PrecioU[i]</td>
                         <td>@ModeloArticulos.Area[i]</td>
-                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button></td>
-                        <td><button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
+                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
                     </tr>
                 }
                 else if ((long)ModeloArticulos.IDArea[i] == Accesos.IdArea)

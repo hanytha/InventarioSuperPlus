@@ -23,7 +23,8 @@ namespace Inventario.Controllers
             return View();
         }
         //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
-        public JsonResult ConsultaPrecioPromedio()
+       
+        /* public JsonResult ConsultaPrecioPromedio()
         {
             string Fecha = "";
             string Articulo = "";
@@ -91,7 +92,7 @@ namespace Inventario.Controllers
             };
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
-
+        */
         //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
         public void ConsultaPrecioPromedioRazor()
         {
@@ -218,7 +219,7 @@ namespace Inventario.Controllers
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
         //------------------------------------------------------------------------------------------------------------------------
-        public JsonResult ConsultaArticuloXProveedor()
+   /*     public JsonResult ConsultaArticuloXProveedor()
         {
             string IdArticulos = "";
             string NombreEmpresa = "";
@@ -323,14 +324,15 @@ namespace Inventario.Controllers
 
             return Json(Resultado, JsonRequestBehavior.AllowGet);
         }
+   */
+
+
         //------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------
         //Guardar los datos de la compra
         public int GuardarArticulo(Articulos DatosArticulo)
         {
             int Afectados = 0;
-            //try
-            //{
             long id = DatosArticulo.IdArticulos;
             if (id.Equals(0))
             {
@@ -407,6 +409,7 @@ namespace Inventario.Controllers
             //    Afectados = 0;
             //}
             return Afectados;
+
         }
 
 
