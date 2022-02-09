@@ -14,7 +14,7 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
+            //CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
@@ -48,7 +48,7 @@ function ConsultaArticuloComp(IDTienda) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+              // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
@@ -713,7 +713,7 @@ function abrirModalUsados(id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
+            sessionStorage.setItem('IDG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaUsados").value = Data[0].Tienda;
 
@@ -930,7 +930,7 @@ function MostrarArticulosUsados(idS) {
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     }
     if (idS == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
+        sessionStorage.setItem('IdMovimiento', '0');
     }
     else {
 
@@ -997,7 +997,7 @@ function MostrarArticulosUsados(idS) {
                 TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>"; 
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
 
                 //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
@@ -1090,7 +1090,8 @@ function GuardarUsados() {
                                 alert("Ya existe este registro");
                             }
                             else {
-                                ConsultaArticuloComp();
+                                //alert("Guardado correctamente");
+                                GuardarExistAlm(IdArticulo);
                                 document.getElementById("btnCancelar").click();
                             }
                         }
@@ -1098,12 +1099,93 @@ function GuardarUsados() {
 
                 }
             }
-            nuevoStock();
+            //nuevoStock();
             //-----Mensaje de confirmación-----------------------
-            alert("Guardado correctamente");
+           // alert("Guardado correctamente");
         }
     }
 
+}
+
+
+
+function GuardarExistAlm(IdArticulo) {
+    if (CamposObligatoriosUsados() == true) {
+
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            //----------Guardar los inputs de manera individual en la Base de datos--------------------
+            var NumPedidos = document.getElementsByClassName("input-existAct");
+
+            var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+            //var UnidadM = document.getElementsByClassName("input-Unidad");
+
+            //var Precio = document.getElementsByClassName("input-res");
+
+            for (let i = 0; i < NumPedidos.length; i++) {
+                if (NumPedidos[i].value >= 1 && NomArticulos[i].value) {
+                    // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+
+                    var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
+                    //var Movimiento = document.getElementById("TxtMovUsados").value;
+                    //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+
+                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
+                    var IdArticulo = NomArticulos[i].name;
+                    var Articulo = NomArticulos[i].value;
+                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                    var CantidadSolicitada = NumPedidos[i].value;
+                    //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                   // var Unidad = UnidadM[i].value;
+                    //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                    // var PrecioUnitario = Precio[i].value;
+                    // var Costo = Precio[i].value;
+                    //-------------------------------------------------------------------------------------------------------------
+                    var frm = new FormData();
+                    frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+                    //frm.append("Movimiento", Movimiento);
+                    //frm.append("Fecha", Fecha);
+                    //frm.append("IdArticulo", IdArticulo);
+                    //frm.append("Articulo", Articulo);
+                    //frm.append("NumeroPedido", NumeroPedido);
+                    //frm.append("NumPedidoProveedor", NumPedidoProveedor);
+                    
+                    frm.append("ExitenciaActual", CantidadSolicitada);
+                    //frm.append("IdExistencia", Unidad);
+                    // frm.append("PrecioUnitario", PrecioUnitario);
+
+                    //frm.append("Costo", Costo);
+                    //frm.append("IdArea", IdArea);
+                    //frm.append("Area", Area);
+                    //frm.append("Direccion", Direccion);
+                    //frm.append("Estatus", 1);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Supervision/GuardarExt",
+                        data: frm,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == 0) {
+                                alert("Ocurrió un error");
+                            }
+                            else if (data == -1) {
+                                alert("Ya existe este registro");
+                            }
+                            else {
+                                alert("Guardado correctamente");
+                                document.getElementById("btnCancelar").click();
+                            }
+                        }
+                    });
+
+                }
+            }
+           // nuevoStock();
+            //-----Mensaje de confirmación-----------------------
+      
+        }
+    }
 }
 
 
