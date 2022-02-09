@@ -1111,7 +1111,7 @@ function GuardarUsados() {
 
 function GuardarExistAlm() {
     if (CamposObligatoriosUsados() == true) {
-
+        var cantidad = document.getElementsByClassName("input-cantidadUsados");
     //    if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-existAct");
@@ -1124,7 +1124,7 @@ function GuardarExistAlm() {
             //var Precio = document.getElementsByClassName("input-res");
 
             for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+                if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
                     // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
@@ -1143,6 +1143,22 @@ function GuardarExistAlm() {
                     // var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
+
+                    //var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+
+                    //if (resultado < 0) {
+
+                    //    Swal.fire(
+                    //        '!',
+                    //        'La cantidad excede al stock',
+                    //        'alert'
+                    //    )
+                    //    resultado == 0;
+                    //    var Result = NumPedidos[i].value = "";
+                    //    var cantidad = res[i].value = "";
+                    //} else {
+                    //    var Result = res[i].value = resultado;
+                    //}
                     frm.append("IdExistenciaAlmacenG", Unidad);
                     //frm.append("Movimiento", Movimiento);
                     //frm.append("Fecha", Fecha);
