@@ -84,38 +84,6 @@ function ConsultaArticuloComp(IDTienda) {
 
     }
 }
-
-
-
-
-
-//function editarModal(id) {
-//    LimpiarCampos();
-//    if (id == 0) {
-
-//    }
-//    else {
-
-//        $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-//            document.getElementById("TxtStock").value = Data.Stock;
-//            document.getElementById("cmbMovimiento").value;
-//            document.getElementById("TxtCantidad").value;
-
-//            let x = document.getElementById("TxtStock").value = Data.Stock;
-//            let y = document.getElementById("TxtCantidad").value;
-
-//            if (document.getElementById("cmbMovimiento").value = 1) {
-
-//                let bonificacion = parseFloat(x) + parseFloat(y);
-
-//                document.getElementById("TxtStockTotal").value = bonificacion;
-//            }
-
-//        });
-
-//    }
-//}
-
 function editarModal(id) {
     LimpiarCampos();
     if (id == 0) {
@@ -136,18 +104,6 @@ function editarModal(id) {
 function MovimientoModal(id) {
 
     $.get("/Supervision/ConsultaArticulo/?Id=" + id, function (Data) {
-
-
-        //if (document.getElementById("cmbMovimiento").value == 1) {
-
-        //    let bonificacion = parseFloat(x) + parseFloat(y);
-
-        //    document.getElementById("TxtStockTotal").value = bonificacion;
-        //}
-        //else {
-
-
-        //}
 
 
         if (document.getElementById("TxtCantidad") <= document.getElementById("TxtStock")) {
@@ -180,16 +136,6 @@ function ExisteciaDevolucion(id) {
 
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-        //if (document.getElementById("cmbMovimiento").value == 1) {
-
-        //    let bonificacion = parseFloat(x) + parseFloat(y);
-
-        //    document.getElementById("TxtStockTotal").value = bonificacion;
-        //}
-        //else {
-
-
-        //}
 
 
         if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
@@ -214,94 +160,6 @@ function ExisteciaDevolucion(id) {
     });
 }
 
-//function CalcularCosto(id) {
-
-//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-
-
-
-//        var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
-
-//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-//        var UnidadM = document.getElementsByClassName("input-Unidad");
-
-//        var Precio = document.getElementsByClassName("input-Precio");
-//        var res = document.getElementsByClassName("input-res");
-
-//        //  var Precio = document.getElementsByClassName("input-Precio");
-
-//        for (let i = 0; i < NumPedidos.length; i++) {
-//            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
-//                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
-
-//                var IdMovimiento = sessionStorage.getItem('IdMovimiento');
-//                var Movimiento = document.getElementById("TxtMovUsados").value;
-//                var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
-
-//                //------------------------Guarda el nombre del artículo solicitado----------------------------------
-//                var IdArticulo = NomArticulos[i].name;
-//                var Articulo = NomArticulos[i].value;
-//                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-//                var CantidadSolicitada = NumPedidos[i].value;
-//                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-//                var Unidad = UnidadM[i].value;
-
-//                var Precio = Precio[i].value;
-
-//                var resultado = parseFloat(IdArticulo) - parseFloat(CantidadSolicitada);
-
-//                let x = document.getElementsByClassName("input-Precio").value;
-
-//                let y = document.getElementsByClassName("input-cantidadUsados").value;
-//              //  let resultado = parseFloat(x) - parseFloat(y);
-
-//               // document.getElementsByClassName('input-res').value = resultado;
-//            //    document.getElementsByClassName("input-res").value = resultado;
-//               // var Precio2 = res[i].value;
-
-//                var Result = res[i].value = resultado;
-//                //if (document.getElementsByClassName("input-Unidad").value = 2) {
-//                //    document.getElementsByClassName("input-Unidad").value = 0;
-//                //    Swal.fire(
-//                //        '!',
-//                //        'La cantidad excede al stock',
-//                //        'alert'
-//                //    )
-//                //}
-
-//            }
-//        }
-
-
-
-
-
-//        //if (document.getElementsByClassName("input-cantidadUsados") <= document.getElementsByClassName("input-Unidad")) {
-//            //if (y <= x) {
-//            //let x = document.getElementsByClassName("input-Precio").value;
-
-//            //let y = document.getElementsByClassName("TxtCantidad").value;
-//            //let resultado = parseFloat(x) - parseFloat(y);
-
-//            //document.getElementsByClassName("TxtStockTotal").value = resultado;
-
-//            //if (document.getElementsByClassName("TxtStockTotal").value < 0) {
-
-//            //    Swal.fire(
-//            //        '!',
-//            //        'La cantidad excede al stock',
-//            //        'alert'
-//            //    )
-//            //}
-//       // }
-
-//    });
-//}
-
-
-
-
 
 function CalcularExistenciaAct(id) {
 
@@ -310,31 +168,31 @@ function CalcularExistenciaAct(id) {
         var res = document.getElementsByClassName("input-existAct");
 
 
-        var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
 
         var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-        var UnidadM = document.getElementsByClassName("input-Stock");
+        var Stock = document.getElementsByClassName("input-Stock");
 
-        var PrecioU = document.getElementsByClassName("input-existAct");
+        var Existencia = document.getElementsByClassName("input-existAct");
 
-        for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
                 // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
-                var IdMovimiento = sessionStorage.getItem('IdMovimiento');
-                var Movimiento = document.getElementById("TxtMovUsados").value;
-                var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+                //var IdMovimiento = sessionStorage.getItem('IdMovimiento');
+                //var Movimiento = document.getElementById("TxtMovUsados").value;
+                //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
 
                 //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                var IdArticulo = NomArticulos[i].name;
-                var Articulo = NomArticulos[i].value;
+                //var IdArticulo = NomArticulos[i].name;
+                //var Articulo = NomArticulos[i].value;
                 //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = NumPedidos[i].value;
+                var CantidadSolicitada = cantidadUsados[i].value;
                 //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = UnidadM[i].value;
+                var Unidad = Stock[i].value;
                 //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                var PrecioUnitario = PrecioU[i].value;
+                //var ExistenciaAct = Existencia[i].value;
                 //-------------------------------------------------------------------------------------------------------------
                 var frm = new FormData();
                 var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
@@ -346,8 +204,8 @@ function CalcularExistenciaAct(id) {
                         'La cantidad excede al stock',
                         'alert'
                     )
-                    resultado == 0;
-                    var Result = NumPedidos[i].value = "";
+                    //resultado == 0;
+                    var Result = cantidadUsados[i].value = "";
                     var cantidad = res[i].value = "";
                 } else {
                     var Result = res[i].value = resultado;
@@ -979,7 +837,7 @@ function MostrarArticulosUsados(idS) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -1032,16 +890,16 @@ function GuardarUsados() {
 
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
-            var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+            var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
 
             var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-            var UnidadM = document.getElementsByClassName("input-Unidad");
+            var IdExistencia = document.getElementsByClassName("input-IdExistencia");
 
             //var Precio = document.getElementsByClassName("input-res");
 
-            for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+            for (let i = 0; i < cantidadUsados.length; i++) {
+                if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && IdExistencia[i].value) {
                     // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdMovimiento = sessionStorage.getItem('IdMovimiento');
@@ -1052,9 +910,9 @@ function GuardarUsados() {
                     var IdArticulo = NomArticulos[i].name;
                     var Articulo = NomArticulos[i].value;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                    var CantidadSolicitada = NumPedidos[i].value;
+                    var CantidadSolicitada = cantidadUsados[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                    var Unidad = UnidadM[i].value;
+                    var Unidad = IdExistencia[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
                     // var PrecioUnitario = Precio[i].value;
                     // var Costo = Precio[i].value;
@@ -1114,17 +972,17 @@ function GuardarExistAlm() {
         var cantidad = document.getElementsByClassName("input-cantidadUsados");
     //    if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
-            var NumPedidos = document.getElementsByClassName("input-existAct");
+        var ExistAct = document.getElementsByClassName("input-existAct");
 
             var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-            var UnidadM = document.getElementsByClassName("input-Unidad");
+        var IdExistencia = document.getElementsByClassName("input-IdExistencia");
             //var UnidadM = document.getElementsByClassName("input-Unidad");
 
             //var Precio = document.getElementsByClassName("input-res");
 
-            for (let i = 0; i < NumPedidos.length; i++) {
-                if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value) {
+        for (let i = 0; i < ExistAct.length; i++) {
+                if (cantidad[i].value >= 1 && NomArticulos[i].value && IdExistencia[i].value) {
                     // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
                     var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
@@ -1135,9 +993,9 @@ function GuardarExistAlm() {
                     var IdArticulo = NomArticulos[i].name;
                     var Articulo = NomArticulos[i].value;
                     //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                    var CantidadSolicitada = NumPedidos[i].value;
+                    var CantidadSolicitada = ExistAct[i].value;
                     //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                   var Unidad = UnidadM[i].value;
+                    var Unidad = IdExistencia[i].value;
                     //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
                     // var PrecioUnitario = Precio[i].value;
                     // var Costo = Precio[i].value;
@@ -1154,7 +1012,7 @@ function GuardarExistAlm() {
                     //        'alert'
                     //    )
                     //    resultado == 0;
-                    //    var Result = NumPedidos[i].value = "";
+                    //    var Result = ExistAct[i].value = "";
                     //    var cantidad = res[i].value = "";
                     //} else {
                     //    var Result = res[i].value = resultado;
