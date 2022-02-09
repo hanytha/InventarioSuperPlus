@@ -1696,3 +1696,31 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNumeroPedido").value = ultimoElemento;
 
 }
+//-----Stock actual-------------
+
+
+//-----------------------------------Función  para el nuevo stock---------------------------------------
+function nuevoStock() {
+
+    var Articulos = document.getElementsByClassName("input-Articulo");
+    var IDArticulos = document.getElementsByClassName("input-Articulo");
+    var Aprobar = document.getElementsByClassName("input-aprobar");
+
+
+    var total = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar[i].value > 0) {
+
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+
+        }
+    }
+
+    $.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        if (Data == 1) { alert("hOLA") }
+
+    });
+}

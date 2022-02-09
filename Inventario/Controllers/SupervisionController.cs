@@ -2373,5 +2373,96 @@ namespace Inventario.Controllers
         //}
 
 
+
+
+        //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada----------------- 
+
+        public JsonResult ConsultaStockArticulo(string DatosArticulos)
+        {
+
+            string[] Articulos = DatosArticulos.Split('/');
+            int consulta = 0;
+
+            for (int i = 0; 1 < Articulos.GetLength(0); i++)
+            {
+                string[] Cantidad = Articulos[i].Split(':');
+
+                int resultado = 0;
+
+                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0).OrderBy(p => p.NoPedidoG)
+                    .Select(p => new
+                    {
+                        p.IdCompraInterno,
+                        p.IdArticulo,
+                        p.Articulo,
+                        p.ExitenciaActual
+
+                    });
+
+                Double Diferencia = Convert.ToInt32(Cantidad[1]);
+
+                foreach (var con in ConsultaIDArticulo)
+                {
+                    long IDCompras = Convert.ToInt32(con.IdCompraInterno);
+                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
+
+                    if (Diferencia > 0)
+                    {
+                        Double NExistencia = 0;
+
+                        if (con.ExitenciaActual == Diferencia)
+                        {
+                            Diferencia = 0;
+                            NExistencia = 0;
+                        }
+                        else if (con.ExitenciaActual > Diferencia)
+                        {
+
+                            NExistencia = (Double)con.ExitenciaActual - Diferencia;
+                            Diferencia = 0;
+                        }
+                        else
+                        {
+                            Diferencia = Diferencia - (Double)con.ExitenciaActual;
+                            NExistencia = 0;
+                        }
+
+                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        if (consulta == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            }
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
+        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        {
+            int nregistradosAfectados = 0;
+            //try
+            //{
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
+           // mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            nregistradosAfectados = 1;//Se pudo realizar
+                                      //}
+                                      //catch (Exception ex)
+                                      //{
+                                      //    nregistradosAfectados = 0;
+                                      //}
+            return nregistradosAfectados;
+        }
+
     }
 }
