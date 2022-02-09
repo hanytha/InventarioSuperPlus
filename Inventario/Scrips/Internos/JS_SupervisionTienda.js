@@ -713,7 +713,7 @@ function abrirModalUsados(id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            sessionStorage.setItem('IDG', Data[0].IdExistenciaAlmacenG);
+            sessionStorage.setItem('IDG', Data[0].Tienda);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaUsados").value = Data[0].Tienda;
 
@@ -1142,7 +1142,7 @@ function GuardarExistAlm(IdArticulo) {
                     // var Costo = Precio[i].value;
                     //-------------------------------------------------------------------------------------------------------------
                     var frm = new FormData();
-                    frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+                    frm.append("IdExistenciaAlmacenG", IdArticulo);
                     //frm.append("Movimiento", Movimiento);
                     //frm.append("Fecha", Fecha);
                     //frm.append("IdArticulo", IdArticulo);
