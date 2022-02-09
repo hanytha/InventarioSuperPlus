@@ -1,5 +1,6 @@
 ﻿
 //*****************Crea la tabla de todos los pedidos quee se realizan a los proveedores*****************************
+/*
 ConsultaPedidos();
 function ConsultaPedidos() {
     $.get("/Pedidosext/ConsultaPedidosNumeroPedido", function (Data) {
@@ -57,6 +58,7 @@ function CrearTablaPedidos(Data) {
     document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
 }
 
+*/
 //******************************************************************************************************************************
 //*******************Despliega el modal deacuerdo con el número de pedido************************************************
 
