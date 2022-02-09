@@ -713,7 +713,7 @@ function abrirModalUsados(id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            sessionStorage.setItem('IDG', Data[0].Tienda);
+            sessionStorage.setItem('IDG', Data[0].IdExistenciaAlmacenG);
             //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTiendaUsados").value = Data[0].Tienda;
 
@@ -1091,7 +1091,7 @@ function GuardarUsados() {
                             }
                             else {
                                 //alert("Guardado correctamente");
-                                GuardarExistAlm(IdArticulo);
+                                GuardarExistAlm();
                                 document.getElementById("btnCancelar").click();
                             }
                         }
@@ -1109,10 +1109,10 @@ function GuardarUsados() {
 
 
 
-function GuardarExistAlm(IdArticulo) {
+function GuardarExistAlm() {
     if (CamposObligatoriosUsados() == true) {
 
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+    //    if (confirm("¿Desea aplicar los cambios?") == 1) {
             //----------Guardar los inputs de manera individual en la Base de datos--------------------
             var NumPedidos = document.getElementsByClassName("input-existAct");
 
@@ -1174,7 +1174,7 @@ function GuardarExistAlm(IdArticulo) {
                                 alert("Ya existe este registro");
                             }
                             else {
-                                alert("Guardado correctamente");
+                         
                                 document.getElementById("btnCancelar").click();
                             }
                         }
@@ -1182,11 +1182,13 @@ function GuardarExistAlm(IdArticulo) {
 
                 }
             }
+     
            // nuevoStock();
             //-----Mensaje de confirmación-----------------------
       
-        }
     }
+    alert("Guardado correctamente");
+    //}
 }
 
 
