@@ -992,7 +992,7 @@ namespace Inventario.Controllers
                                on CompraInterno.IdProveedor equals provedor.IdAreas
                                    join Tienda in InvBD.Tienda
                                      on CompraInterno.IdSitio equals Tienda.IdTienda
-                                   where ExistenciAAlmacen.NoPedidoG.Equals(No) && CompraInterno.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
+                                   where ExistenciAAlmacen.IdCompraInterno.Equals(No) && CompraInterno.IdSitio.Equals(Id) && CompraInterno.EstatusPedido.Equals(1)
                                    select new
                                    {
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
