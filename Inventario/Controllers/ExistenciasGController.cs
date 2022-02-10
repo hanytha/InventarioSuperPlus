@@ -16,6 +16,8 @@ namespace Inventario.Controllers
         // GET: Prueba
         public ActionResult ExistenciasG()
         {
+            ExistenciasGController departamento = new ExistenciasGController();
+            departamento.BDDepartamento();
             return View();
         }
         public JsonResult ConsultaArticulos()
@@ -388,6 +390,28 @@ namespace Inventario.Controllers
             }
 
             return Afectados;
+        }
+
+        //-----------------------------------------------Consulta razor área----------------------------------
+
+        public void BDDepartamento()
+        {
+            ModeloAreas modeloAreas = new ModeloAreas();
+            ModeloAreas.IdAreas = new List<long>();
+            ModeloAreas.Nombre = new List<string>();
+
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            foreach (var a in datos)
+            {
+                ModeloAreas.IdAreas.Add(a.ID);
+                ModeloAreas.Nombre.Add(a.Nombre);
+            }
+           
         }
     }
 }

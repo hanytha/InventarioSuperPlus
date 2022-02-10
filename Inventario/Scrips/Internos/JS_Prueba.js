@@ -1,6 +1,6 @@
 ﻿BloquearCTRL();
 //--------Combobox de las áreas----------------
-LlenarCMCArea();
+//LlenarCMCArea();
 //-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ConsultaArticuloComp();
 function ConsultaArticuloComp() {
