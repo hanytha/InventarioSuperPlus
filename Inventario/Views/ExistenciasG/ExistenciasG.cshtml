@@ -96,15 +96,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbArea">Área que solicita el(los) artículo(s)<span>*</span></label>
-                                    <select id="cmbArea" style="width: 100%" class="form-control bloquear">
+                                    <select id="cmbArea" style="width: 100%" class="form-control">
                                        
                                             @if (ModeloAreas.IdAreas != null)
                                             {
                                                 for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                                 {
+                                                    if (Accesos.NIvel == 1)
+                                                    {
+                                                        <option  selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                    }
+
                                                     if (Accesos.IdArea == ModeloAreas.IdAreas[i])
                                                     {
-                                                        <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                        <option disabled  selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                     }
                                                 }
 
