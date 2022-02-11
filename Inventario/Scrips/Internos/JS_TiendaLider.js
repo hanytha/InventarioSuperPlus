@@ -1132,6 +1132,7 @@ function VerPedido(id, no) {
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
             document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
             MostrarArticulos(id, no);
+            //MostrarArt(id, no); 
         });
     }
 }
@@ -1190,58 +1191,130 @@ function VerPedido(id, no) {
 //}
 
 
+//function MostrarArticulos(id, no) {
+//    if (id == 0) {
+//        sessionStorage.setItem('IdPedidosInternos', '0');
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
+//            //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
+//            var dos = "";
+
+//            dos += "<div style='width: 100%'>"
+//            dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+//            dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+//            dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+//            dos += "<thead>"
+//            dos += "<tr align='left'>"
+//            dos += "<th >Artículo</th>"
+//            //dos += "<th >Unidad_Medida</th>"
+//            dos += "<th >Cantidad Aprobada</th>"
+//            ////dos += "<th >Precio_Unitario</th>"
+//            //dos += "<th >Total</th>"
+//            dos += "</tr>"
+//            dos += "</thead>"
+//            dos += "<tbody>"
+
+//            for (var i = 0; i < Data.length; i++) {
+
+//                //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
+//                //let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
+//                //------------------------Cuerpo de la tabla------------------------------------------
+//                dos += "<tr>"
+//                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
+//                //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
+//                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
+//                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
+//                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
+//                dos += "</tr>"
+//            }
+//            dos += "<tfoot>"
+//            //dos += "<th>Total</th>"
+//            dos += "</tfoot>"
+
+//            dos += "</tbody>"
+//            dos += "</table>"
+//            dos += "</div>";
+//            dos += "</div>";
+
+//            document.getElementById("TblArt").innerHTML = dos;
+//        });
+//    }
+//}
+
 function MostrarArticulos(id, no) {
+    // var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    // var ncontroles = controlesObligatorio.length;
+    //for (var i = 0; i < ncontroles; i++) {//recorre
+    //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    //}
     if (id == 0) {
-        sessionStorage.setItem('IdPedidosInternos', '0');
+        sessionStorage.setItem('IdPedidosExternos', '0');
     }
     else {
-        $.get("/Supervision/ConsultaPedidosArticulos/?id=" + id + "&no= " + no, function (Data) {
-            //$.get("/Supervision/ConsultaPedidosArticulos/?id=" + id, function (Data) {
-            var dos = "";
 
-            dos += "<div style='width: 100%'>"
-            dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
-            dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
-            dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
-            dos += "<thead>"
-            dos += "<tr align='left'>"
-            dos += "<th >Artículo</th>"
-            //dos += "<th >Unidad_Medida</th>"
-            dos += "<th >Cantidad Aprobada</th>"
-            ////dos += "<th >Precio_Unitario</th>"
-            //dos += "<th >Total</th>"
-            dos += "</tr>"
-            dos += "</thead>"
-            dos += "<tbody>"
+        $.get("/Supervision/usado/?id=" + id + "&no= " + no, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
 
+            TablaArticulo += "<label>Articulo</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Cantidad Solicitada</label>";
+            TablaArticulo += "</div>";
+            //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+            ////TablaArticulo += "<label>Precio Unitario</label>"; 
+            //TablaArticulo += "</div>";
+            //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>PrecioUnitario</label>"; 
+            //TablaArticulo += "</div>";
+
+
+            //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Existencia Actual</label>"; 
+            //TablaArticulo += "</div>";
             for (var i = 0; i < Data.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulo + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
 
-                //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
-                //let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
-                //------------------------Cuerpo de la tabla------------------------------------------
-                dos += "<tr>"
-                dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
-                //dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
-                dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
-                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
-                //dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
-                dos += "</tr>"
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + Data[i].IdArticulo + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
+
+                //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input type='number' value='' class='input-res redondeado limpiar' id='" + Data[i].IdArticulo + "'  ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
+                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+
+
+                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input  class='input-ExistenciaAct redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].ExistenciaActDevolucion + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
+
+                //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</div>";
             }
-            dos += "<tfoot>"
-            //dos += "<th>Total</th>"
-            dos += "</tfoot>"
-
-            dos += "</tbody>"
-            dos += "</table>"
-            dos += "</div>";
-            dos += "</div>";
-
-            document.getElementById("TblArt").innerHTML = dos;
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArt").innerHTML = TablaArticulo;
         });
     }
 }
-
-
 
 function MostrarArticulosPedidos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
