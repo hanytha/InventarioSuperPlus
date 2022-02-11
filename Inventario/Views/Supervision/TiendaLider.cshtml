@@ -249,13 +249,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumeroPedido">No. Pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorioPedido bloquear" placeholder="Número de Pedido">
+                                    <input type="number" id="TxtNumeroPedido" class="form-control limpiar obligatorioPedidoInt bloquear" placeholder="Número de Pedido">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
-                                    <input type="number" id="TxtNumPedidoProveedor" class="form-control limpiar obligatorioPedido bloquear" placeholder="Número de Pedido">
+                                    <input type="number" id="TxtNumPedidoProveedor" class="form-control limpiar obligatorioPedidoInt bloquear" placeholder="Número de Pedido">
                                 </div>
                             </div>
                         </div>
@@ -269,7 +269,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
+                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
