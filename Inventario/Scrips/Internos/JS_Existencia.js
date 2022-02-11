@@ -104,19 +104,22 @@ function MostrarArticulos(id) {
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
             TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Artículos</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Unidad_Medida</label>";
+            TablaArticulo += "<label>Artículo</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>ud. Medida</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Impuesto</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Precio_Unitario</label>";
+            TablaArticulo += "<label>Prec. Unit.</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Conversión</label>";
             TablaArticulo += "</div>";
 
             for (var i = 0; i < Data.length; i++) {
@@ -125,17 +128,23 @@ function MostrarArticulos(id) {
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' "+ Data[i].IdArticulos +"'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
@@ -153,8 +162,7 @@ function MostrarArticulos(id) {
     }
 }
 
-
-//------------------limpiar campos-------------------------------
+//-----------------------------------------------------------limpiar campos---------------------------------------------------------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
