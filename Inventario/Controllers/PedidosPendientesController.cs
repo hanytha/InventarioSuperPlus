@@ -499,10 +499,11 @@ namespace Inventario.Controllers
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
 
-            string[] Articulos = DatosArticulos.Split('/');
+            // string[] Articulos = DatosArticulos.Split('/');
+            string[] Articulos = DatosArticulos.Substring(0, DatosArticulos.Length - 1).Split('/');
             int consulta = 0;
 
-            for (int i = 0; 1 < Articulos.GetLength(0); i++)
+            for (int i = 0; i < Articulos.GetLength(0); i++)
             {
                 string[] Cantidad = Articulos[i].Split(':');
 

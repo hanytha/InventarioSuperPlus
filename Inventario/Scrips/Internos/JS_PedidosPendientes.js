@@ -444,7 +444,7 @@ function nuevoStock() {
 
     $.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("hOLA") }
+        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
 
     });
 }
