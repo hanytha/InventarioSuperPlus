@@ -1063,6 +1063,7 @@ function abrirModalAceptarPedido(id, no) {//la clase  Obligatorio
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
             MostrarArt(id, no); 
+            VerPedido(id, no);
         });
     }
 }
