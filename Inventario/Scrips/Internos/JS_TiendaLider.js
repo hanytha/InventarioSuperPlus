@@ -469,7 +469,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
         });
         ConsultaArt(idExist);
       //  ProvDev(id);
-        ProvDev(id)
+        ProvDev(idExist)
         //     BDNoPedido(id);
 
     }
@@ -509,9 +509,9 @@ function ObtenerFecha() {
 
 } 
 
-function ProvDev(id) {
+function ProvDev(idExist) {
 
-    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
+    $.get("/Supervision/ConsultaArtDev/?Id=" + idExist, function (Data) {
         document.getElementById("cmbProveedorDevLider").value = Data[0].IdProveedor;
         document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
 

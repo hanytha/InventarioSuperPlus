@@ -1300,7 +1300,7 @@ namespace Inventario.Controllers
                             join ExistenciaAlmacen in InvBD.ExistenciaAlmacenG
                                on Art.IdArticulos equals ExistenciaAlmacen.IdArticulo
 
-                            where Art.IdArticulos.Equals(Id)
+                            where ExistenciaAlmacen.IdExistenciaAlmacenG.Equals(Id)
                             select new
                             {
                                 Nombre = Art.NombreEmpresa,
