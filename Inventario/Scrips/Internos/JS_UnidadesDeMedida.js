@@ -9,8 +9,9 @@ function ConsultaUnidadDeMedida() {
 }
 function CrearTablaUnidadDeMedida(Data) {
     var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<br />";
     CodigoHtmlTablaCompra += "<div class='table-responsive'>";
-    CodigoHtmlTablaCompra += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaCompra += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaCompra += "<thead>";
     CodigoHtmlTablaCompra += "<tr>";
     CodigoHtmlTablaCompra += "<th>Unidad de Medida</th>";
@@ -23,7 +24,7 @@ function CrearTablaUnidadDeMedida(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Unidad + "</td>";
 
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdUnidadDeMedida + ")' data-toggle='modal' data-target='#ModalUnidad'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-success' onclick='editarModal(" + Data[i].IdUnidadDeMedida + ")' data-toggle='modal' data-target='#ModalUnidad'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarUnidadDeMedida(" + Data[i].IdUnidadDeMedida + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";

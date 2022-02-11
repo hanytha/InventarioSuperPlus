@@ -7,8 +7,9 @@ function ConsultaImpuesto() {
 }
 function CrearTablaImpuesto(Data) {
     var CodigoHtmlTablaCompra = "";
+    CodigoHtmlTablaCompra += "<br />";
     CodigoHtmlTablaCompra += "<div class='table-responsive'>";
-    CodigoHtmlTablaCompra += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaCompra += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaCompra += "<thead>";
     CodigoHtmlTablaCompra += "<tr>";
     CodigoHtmlTablaCompra += "<th>Impuesto</th>";
@@ -23,7 +24,7 @@ function CrearTablaImpuesto(Data) {
         CodigoHtmlTablaCompra += "<td>" + Data[i].Porcentaje + "</td>";
 
         CodigoHtmlTablaCompra += "<td>";
-        CodigoHtmlTablaCompra += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCompra += "<button class='btn btn-success' onclick='editarModal(" + Data[i].IdImpuesto + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCompra += "<button class='btn btn-danger' onclick='EliminarImpuesto(" + Data[i].IdImpuesto + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaCompra += "</td>";

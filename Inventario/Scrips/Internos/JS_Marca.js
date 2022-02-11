@@ -7,9 +7,11 @@ function ConsultaMarcas() {
 }
 function CrearTablaMarcas(Data) {
     var CodigoHtmlTablaMarcas = "";
+    CodigoHtmlTablaMarcas += "<br />";
     CodigoHtmlTablaMarcas += "<table id='tablas' class='table table table-sm table-success'>";
     CodigoHtmlTablaMarcas  += "<thead><tr><th>Nombre</th><th>Acción</thead>";
-    CodigoHtmlTablaMarcas  += "<tbody>";
+    CodigoHtmlTablaMarcas += "<tbody>";
+
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaMarcas  += "<tr>";
         CodigoHtmlTablaMarcas  += "<td>" + Data[i].Nombre + "</td>";
