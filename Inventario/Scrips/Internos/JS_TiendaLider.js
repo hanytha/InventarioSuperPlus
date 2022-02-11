@@ -1563,7 +1563,7 @@ function Guardar() {
 
                 }
             });
-            alert("Los datos se guardaron correctamente");
+            alert("¡¡Pedido aceptado satisfactoriamente!!");
             ConsultaArticuloCompra();
             document.getElementById("btnCancelar").click();
         }
