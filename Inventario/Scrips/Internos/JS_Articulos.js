@@ -111,7 +111,7 @@ function abrirModal(id) {//la clase  Obligatorio
             document.getElementById("cmbArea").value = Data[0].IdAreas;
             document.getElementById("cmbMarca").value = Data[0].IdMarca;
             document.getElementById("cmbImpuesto").value = Data[0].IdImpuesto;
-
+            document.getElementById("TxtClaveCoversion").value = Data[0].Conversion;
 
         });
     }
@@ -186,6 +186,7 @@ function GuardarArticulo() {
             var ClaveSAT = document.getElementById("TxtClaveSAT").value;
             var Fecha = document.getElementById("TxtFecha").value;
             var FechaSistema = document.getElementById("TxtFechaIngreso").value;
+            var Conversion = document.getElementById("TxtClaveCoversion").value;
 
             var IdAreas = document.getElementById("cmbArea").value;
             var TempArea = document.getElementById("cmbArea");
@@ -213,6 +214,7 @@ function GuardarArticulo() {
             frm.append("ClaveSAT", ClaveSAT);
             frm.append("Fecha", Fecha);
             frm.append("FechaSistema", FechaSistema);
+            frm.append("Conversion", Conversion);
             frm.append("IdAreas", IdAreas);
             frm.append("Area", Area);
             frm.append("IdMarca", IdMarca);

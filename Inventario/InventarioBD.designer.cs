@@ -1550,6 +1550,12 @@ namespace Inventario
 		
 		private string _Proveedor;
 		
+		private System.Nullable<long> _IdAreas;
+		
+		private string _Area;
+		
+		private string _Conversion;
+		
 		private System.Nullable<long> _IdUnidadDeMedida;
 		
 		private string _Unidad;
@@ -1557,10 +1563,6 @@ namespace Inventario
 		private System.Nullable<long> _IdMarca;
 		
 		private string _Marca;
-		
-		private System.Nullable<long> _IdAreas;
-		
-		private string _Area;
 		
 		private System.Nullable<long> _IdCategorias;
 		
@@ -1604,6 +1606,12 @@ namespace Inventario
     partial void OnNombreProveedorChanged();
     partial void OnProveedorChanging(string value);
     partial void OnProveedorChanged();
+    partial void OnIdAreasChanging(System.Nullable<long> value);
+    partial void OnIdAreasChanged();
+    partial void OnAreaChanging(string value);
+    partial void OnAreaChanged();
+    partial void OnConversionChanging(string value);
+    partial void OnConversionChanged();
     partial void OnIdUnidadDeMedidaChanging(System.Nullable<long> value);
     partial void OnIdUnidadDeMedidaChanged();
     partial void OnUnidadChanging(string value);
@@ -1612,10 +1620,6 @@ namespace Inventario
     partial void OnIdMarcaChanged();
     partial void OnMarcaChanging(string value);
     partial void OnMarcaChanged();
-    partial void OnIdAreasChanging(System.Nullable<long> value);
-    partial void OnIdAreasChanged();
-    partial void OnAreaChanging(string value);
-    partial void OnAreaChanged();
     partial void OnIdCategoriasChanging(System.Nullable<long> value);
     partial void OnIdCategoriasChanged();
     partial void OnCategoriaChanging(string value);
@@ -1728,6 +1732,70 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreas", DbType="BigInt")]
+		public System.Nullable<long> IdAreas
+		{
+			get
+			{
+				return this._IdAreas;
+			}
+			set
+			{
+				if ((this._IdAreas != value))
+				{
+					if (this._Areas.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdAreasChanging(value);
+					this.SendPropertyChanging();
+					this._IdAreas = value;
+					this.SendPropertyChanged("IdAreas");
+					this.OnIdAreasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(150)")]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this.OnAreaChanging(value);
+					this.SendPropertyChanging();
+					this._Area = value;
+					this.SendPropertyChanged("Area");
+					this.OnAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Conversion", DbType="NVarChar(250)")]
+		public string Conversion
+		{
+			get
+			{
+				return this._Conversion;
+			}
+			set
+			{
+				if ((this._Conversion != value))
+				{
+					this.OnConversionChanging(value);
+					this.SendPropertyChanging();
+					this._Conversion = value;
+					this.SendPropertyChanged("Conversion");
+					this.OnConversionChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadDeMedida", DbType="BigInt")]
 		public System.Nullable<long> IdUnidadDeMedida
 		{
@@ -1812,50 +1880,6 @@ namespace Inventario
 					this._Marca = value;
 					this.SendPropertyChanged("Marca");
 					this.OnMarcaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreas", DbType="BigInt")]
-		public System.Nullable<long> IdAreas
-		{
-			get
-			{
-				return this._IdAreas;
-			}
-			set
-			{
-				if ((this._IdAreas != value))
-				{
-					if (this._Areas.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdAreasChanging(value);
-					this.SendPropertyChanging();
-					this._IdAreas = value;
-					this.SendPropertyChanged("IdAreas");
-					this.OnIdAreasChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(150)")]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this.OnAreaChanging(value);
-					this.SendPropertyChanging();
-					this._Area = value;
-					this.SendPropertyChanged("Area");
-					this.OnAreaChanged();
 				}
 			}
 		}

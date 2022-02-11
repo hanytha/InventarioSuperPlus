@@ -58,12 +58,13 @@
       <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="NombreProveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Proveedor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Area" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Conversion" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Column Name="IdUnidadDeMedida" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdMarca" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Marca" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="IdAreas" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Area" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdCategorias" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Categoria" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />

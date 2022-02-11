@@ -213,6 +213,7 @@ namespace Inventario.Controllers
                     p.Marca,
                     p.IdImpuesto,
                     p.Impuesto,
+                    p.Conversion,
                     p.Estatus
 
                 });
@@ -367,6 +368,7 @@ namespace Inventario.Controllers
                 && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
                 && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
                 && p.Fecha.Equals(DatosArticulo.Fecha)
+                && p.Conversion.Equals(DatosArticulo.Conversion)
                 && p.IdImpuesto.Equals(DatosArticulo.IdImpuesto)
                 && p.Impuesto.Equals(DatosArticulo.Impuesto)
                 && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
@@ -391,6 +393,7 @@ namespace Inventario.Controllers
                     obj.UnidadSAT = DatosArticulo.UnidadSAT;
                     obj.ClaveSAT = DatosArticulo.ClaveSAT;
                     obj.Fecha = DatosArticulo.Fecha;
+                    obj.Conversion = DatosArticulo.Conversion;
                     obj.IdImpuesto = DatosArticulo.IdImpuesto;
                     obj.Impuesto = DatosArticulo.Impuesto;
                     obj.FechaSistema = DatosArticulo.FechaSistema;
