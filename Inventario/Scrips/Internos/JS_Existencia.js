@@ -110,7 +110,7 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>ud. Medida</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Impuesto</label>";
+            TablaArticulo += "<label>Impto</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
