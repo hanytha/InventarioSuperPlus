@@ -493,7 +493,7 @@ function ConsultaArt(idExist) {
         //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 
         document.getElementById("TxtArtDev").value = Data[0].Nombre;
-
+        document.getElementById("TxtIdArtDev").value = Data[0].IdArticulo;
         //Muestra el número de pedido que le corresponde por proveedor-------
         //SiguientePedidoProveedor(id);
         ////Muestra el número de pedido que le corresponde-------
@@ -1823,6 +1823,7 @@ function GuardarDevolucion() {
 
                 }
             });
+            nuevoStock();
             alert("Los datos se guardaron correctamente");
             ConsultaArticuloComp();
             document.getElementById("btnCancelar").click();
@@ -2234,4 +2235,31 @@ function CamposObligatoriosUsados() {
         }
     }
     return exito;
+}
+
+function nuevoStock() {
+
+    //var Articulos = document.getElementsByClassName("input-Articulo");
+    //var IDArticulos = document.getElementsByClassName("input-Articulo");
+    //var Aprobar = document.getElementsByClassName("input-cantidad");
+    var Articulos = document.getElementById("TxtArtDev").value;
+    var IDArticulos = document.getElementById("TxtIdArtDev").value;
+    var Aprobar = document.getElementById("TxtCantidadDev").value;
+
+    var total = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar > 0) {
+
+            total += IDArticulos + ":" + Aprobar + "/";
+
+        }
+    }
+
+    $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        if (Data == 1) { alert("--Alerta---") }
+
+    });
 }

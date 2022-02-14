@@ -426,12 +426,12 @@ function abrirModalDevoluciones(idExist, id, idS) {
     }
 }
 function ConsultaArt(idExist) {
-    $.get("/Supervision/ConsultaArticuloModal/?id=" + idExist, function (Data) {
+    $.get("/Supervision/IdArticulo/?id=" + idExist, function (Data) {
         //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
         //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 
         document.getElementById("TxtArtDev").value = Data[0].Nombre;
-
+        //document.getElementById("TxtIdArtDev").value = Data[0].IdArticulo;
         //Muestra el número de pedido que le corresponde por proveedor-------
         //SiguientePedidoProveedor(id);
         ////Muestra el número de pedido que le corresponde-------
@@ -1711,10 +1711,12 @@ function SiguientePedido(Data) {
 //-----------------------------------Función  para el nuevo stock---------------------------------------
 function nuevoStock() {
 
-    var Articulos = document.getElementsByClassName("input-Articulo");
-    var IDArticulos = document.getElementsByClassName("input-Articulo");
-    var Aprobar = document.getElementsByClassName("input-cantidad");
-
+    //var Articulos = document.getElementsByClassName("input-Articulo");
+    //var IDArticulos = document.getElementsByClassName("input-Articulo");
+    //var Aprobar = document.getElementsByClassName("input-cantidad");
+    var Articulos = sessionStorage.getItem('IdMovimiento');
+    var IDArticulos = document.getElementById("TxtMovUsados").value;
+    var Aprobar = document.getElementById("TxtFechaIngresoUsados").value;
 
     var total = "";
 

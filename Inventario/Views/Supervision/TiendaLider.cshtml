@@ -676,13 +676,19 @@
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
+                                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
                                     <input type="text" id="TxtMovDev" class="form-control bloquear" value="Devolución">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtFechaIngresoDev">Fecha de Ingreso<span></span></label>
                                     <input type="text" id="TxtFechaIngresoDev" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
@@ -706,8 +712,8 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                                    <label class="form-control-label" for="TxtIdArtDev">Id Articulo<span class="required">*</span></label>
+                                    <input type="text" id="TxtIdArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
                             <div class="col-lg-6">

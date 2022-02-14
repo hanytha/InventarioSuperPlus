@@ -694,6 +694,7 @@ namespace Inventario.Controllers
                                        //IdSitio = CompraInterno.IdSitio,
                                        //Tiendas = CompraInterno.Sitio,
                                        Nombre = ExistenciaAlmacenG.Articulo,
+                                       IdArticulo = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
                                        IdProveedor = CompraInterno.IdProveedor
                                        //stockActual = ExistenciaAlmacenG.ExitenciaActual,
@@ -2400,8 +2401,8 @@ namespace Inventario.Controllers
 
                     });
 
+               // Double Diferencia = Convert.ToInt32(Cantidad);
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
-
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
@@ -2454,7 +2455,7 @@ namespace Inventario.Controllers
             //try
             //{
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-           // mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
                                       //}
