@@ -324,6 +324,62 @@ namespace Inventario.Controllers
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
         //-------------------Termina------------------------------------------------------------------------------------------
+        //-------------------------------Consulta Modal y conversión----------------------------------------------------------
+        public JsonResult ConsultaModalConversion(string IdPro)
+        {
+            string IDArticulo = "";
+            string Articulo = "";
+            string Unidad = "";
+            string Impuesto = "";
+            string Conversion = "";
+
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+             .Select(p => new
+             {
+                 Articulo = p.NombreEmpresa,
+                 IdArticulos = p.IdArticulos,
+                 Unid = p.Unidad,
+                 Impus = p.Impuesto,
+                 conver = p.Conversion,
+
+             });
+
+            if (compra.Count() > 0)
+            {
+                foreach (var num in compra)
+                {
+
+                    IDArticulo += num.IdArticulos + ",";
+                    Articulo += num.Articulo + ",";
+                    Unidad += num.Unid + ",";
+                    Impuesto += num.Impus + ",";
+                    Conversion += num.conver + "/";
+                }
+
+            }
+            //****************Condición para concatenar con uno el número de pedido cuand est sea null**************************
+            else
+            {
+                IDArticulo += "0" + ",";
+                Articulo += "0" + ",";
+                Unidad += "0" + ",";
+                Impuesto += "0" + ",";
+                Conversion += "0" + "/";
+            }
+
+
+            var numeros = new { IDArticulo = IDArticulo.Substring(0, IDArticulo.Length - 1),
+                                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                                Unidad = Unidad.Substring(0, Unidad.Length - 1),
+                                Impuesto = Impuesto.Substring(0, Impuesto.Length - 1),
+                                Conversion = Conversion.Substring(0, Conversion.Length - 1),
+            };
+           
+
+
+            return Json(numeros, JsonRequestBehavior.AllowGet);
+        }
+        //---------------------------------------Termina-----------------------------------------------------------------------
 
     }
 
