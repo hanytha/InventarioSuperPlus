@@ -2324,14 +2324,14 @@ function nuevoStock() {
 
     var total = "";
 
-    for (let i = 0; i < Articulos.length; i++) {
+    //for (let i = 0; i < Articulos.length; i++) {
 
-        if (Aprobar > 0) {
+    //    if (Aprobar > 0) {
 
             total += IDArticulos + ":" + Aprobar + "/";
 
-        }
-    }
+    //    }
+    //}
 
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;

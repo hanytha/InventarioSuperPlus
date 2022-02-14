@@ -2401,7 +2401,7 @@ namespace Inventario.Controllers
 
                     });
 
-               // Double Diferencia = Convert.ToInt32(Cantidad);
+                //Double Diferencia = Convert.ToInt32(Cantidad);
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
                 foreach (var con in ConsultaIDArticulo)
                 {
