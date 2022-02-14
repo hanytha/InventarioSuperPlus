@@ -467,6 +467,26 @@ function abrirModalDevoluciones(idExist, id, idS) {
             //}
 
         });
+
+
+       // $.get("/Supervision/ConsultaArtTiendaLider/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/ConsultaStockArticulos/?IDTienda=" + idS + "&IdArt= " + id,  function (Data) {
+            // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            //let id = Data.id;
+            //let ArrayId = id.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //document.getElementById("TxtExistenciaActDev").value = Data[0].Stock;
+
+            //for (var i = 0; i < ArrayId.length; i++) {
+
+                document.getElementById("TxtExistenciaActDev").value = Arraystock[1];
+            //}
+            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
+            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
+        });
+
         ConsultaArt(idExist);
       //  ProvDev(id);
         ProvDev(idExist)
