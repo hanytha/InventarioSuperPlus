@@ -268,7 +268,7 @@ function CalcularConver() {
 
             if (aprobacion > 0) {
                 var conversion = aprobacion * sumaS;
-                alert("El resultado es: " + conversion);
+              //  alert("El resultado es: " + conversion);
             }
         }
 
