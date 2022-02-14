@@ -1763,14 +1763,87 @@ function CamposObligatoriosDevolucion() {
     return exito;
 }
 
+//function GuardarDevolucion() {
+//    if (CamposObligatoriosDevolucion() == true) {
+//        if (confirm("¿Desea aplicar los cambios?") == 1) {
+//            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
+//            var Observaciones = document.getElementById("TxtDescripcionDev").value;
+//            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+//            //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
+//            var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
+
+//            //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
+
+//            //  var IdAsignacion = NoPedido;
+
+
+//            //var EstatusPedido = value"1";
+//            //var IdProveedor = document.getElementById("TxtRazonSocial").value;
+//            //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
+//            //var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+//            //var Usuario = document.getElementById("TxtNombreUsr").value;
+//            var frm = new FormData();
+//            frm.append("IdCompraInterno", IdCompraInterno);
+//            frm.append("NoPedido", NoPedido);
+//            frm.append("NoCompraProveedor", NoCompraProveedor);
+//            //frm.append("IdProveedor", IdProveedor);
+//            //frm.append("Proveedor", Proveedor);
+//            frm.append("FechaIngreso", FechaIngreso);
+//            frm.append("Usuario", Usuario);
+//            frm.append("EstatusPedido", 1);
+
+//            $.ajax({
+//                type: "POST",
+//                url: "/Supervision/GuardarDev",
+//                data: frm,
+//                contentType: false,
+//                processData: false,
+//                success: function (data) {
+
+//                    if (data == 0) {
+//                        Swal.fire(
+//                            '',
+//                            'Ocurrió un error',
+//                            'danger'
+//                        )
+//                    }
+//                    else if (data == -1) {
+//                        Swal.fire(
+//                            '',
+//                            'Ya existe',
+//                            'warning'
+//                        )
+//                    }
+
+//                }
+//            });
+//            nuevoStock();
+//            alert("Los datos se guardaron correctamente");
+//            ConsultaArticuloComp();
+//            document.getElementById("btnCancelar").click();
+//        }
+//    }
+//}
+
+
+
 function GuardarDevolucion() {
-    if (CamposObligatoriosDevolucion() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+
+    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+    var cantidad = document.getElementById("TxtCantidadDev").value;
+    var NomArticulos = document.getElementById("TxtArtDev").value;
+
+    for (let i = 0; i < cantidad.length; i++) {
+
+
+        if (cantidad >= 1) {
+//  if (cantidad[i].value >= 1) {
+            //------------------------Guarda el nombre del artículo solicitado----------------------------------
             var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
             var Observaciones = document.getElementById("TxtDescripcionDev").value;
             var TipoDeOperacion = document.getElementById("TxtMovDev").value;
             //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
-            var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
+            var ExitenciaActual = document.getElementById("TxtExistenciaInicDev").value;
 
             //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
 
@@ -1782,21 +1855,18 @@ function GuardarDevolucion() {
             //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
             //var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
             //var Usuario = document.getElementById("TxtNombreUsr").value;
+
+
+            //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
             frm.append("Observaciones", Observaciones);
             frm.append("TipoDeOperacion", TipoDeOperacion);
-            //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
-            frm.append("ExitenciaActual", ExitenciaActual);
+            //frm.append("IdProveedor", IdProveedor);
             //frm.append("Proveedor", Proveedor);
-            //frm.append("FechaIngreso", FechaIngreso);
+            frm.append("ExitenciaActual", ExitenciaActual);
             //frm.append("Usuario", Usuario);
-
-
-
-            //if (ExistenciaActDevolucion==0) {
-            //    frm.append("EstatusArticulo", 0);
-            //}
+            frm.append("EstatusPedido", 1);
 
             $.ajax({
                 type: "POST",
@@ -1805,32 +1875,38 @@ function GuardarDevolucion() {
                 contentType: false,
                 processData: false,
                 success: function (data) {
-
                     if (data == 0) {
-                        Swal.fire(
-                            '',
-                            'Ocurrió un error',
-                            'danger'
-                        )
+                        swal("¡Ocurrio un error!", "", "danger");
                     }
                     else if (data == -1) {
-                        Swal.fire(
-                            '',
-                            'Ya existe',
-                            'warning'
-                        )
+                        swal({
+                            title: "Verifique la actualización de sus datos",
+                            text: "",
+                            icon: "info",
+                            buttons: true,
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                        })
                     }
+                    else {
 
+                        ConsultaCompras();
+                        document.getElementById("btnCancelar").click();
+                    }
                 }
             });
-            nuevoStock();
-            alert("Los datos se guardaron correctamente");
-            ConsultaArticuloComp();
-            document.getElementById("btnCancelar").click();
+
         }
     }
-}
+    nuevoStock();
 
+    OcultarPedido(NumeroPedido);
+
+    ConsultaCompras();
+    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+    swal("Sus datos se guardaron correctamente!", "", "success");
+
+}
 
 //////////////////Usados////////////////////
 function CalcularExistenciaAct(id) {
