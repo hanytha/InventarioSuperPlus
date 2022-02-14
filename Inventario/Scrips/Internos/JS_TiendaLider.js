@@ -1876,17 +1876,19 @@ function GuardarDevolucion() {
                 processData: false,
                 success: function (data) {
                     if (data == 0) {
-                        swal("¡Ocurrio un error!", "", "danger");
+                        //swal("¡Ocurrio un error!", "", "danger");
+                        alert("¡Ocurrio un error!");
                     }
                     else if (data == -1) {
-                        swal({
-                            title: "Verifique la actualización de sus datos",
-                            text: "",
-                            icon: "info",
-                            buttons: true,
-                            showCancelButton: true,
-                            cancelButtonColor: '#d33',
-                        })
+                        //swal({
+                        //    title: "Verifique la actualización de sus datos",
+                        //    text: "",
+                        //    icon: "info",
+                        //    buttons: true,
+                        //    showCancelButton: true,
+                        //    cancelButtonColor: '#d33',
+                        //})
+                        alert("Verifique la actualización de sus datos");
                     }
                     else {
 
@@ -1900,11 +1902,11 @@ function GuardarDevolucion() {
     }
     nuevoStock();
 
-    OcultarPedido(NumeroPedido);
+    //OcultarPedido(NumeroPedido);
 
-    ConsultaCompras();
+    //ConsultaCompras();
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
-    swal("Sus datos se guardaron correctamente!", "", "success");
+    alert("Los datos se guardaron correctamente");
 
 }
 

@@ -2400,9 +2400,10 @@ namespace Inventario.Controllers
                         p.ExitenciaActual
 
                     });
-
+                 
                 //Double Diferencia = Convert.ToInt32(Cantidad);
-                Double Diferencia = Convert.ToInt32(Cantidad[1]);
+                 var Diferencia = Convert.ToInt32(Cantidad[1]);
+    
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
@@ -2410,7 +2411,7 @@ namespace Inventario.Controllers
 
                     if (Diferencia > 0)
                     {
-                        Double NExistencia = 0;
+                        var NExistencia = 0;
 
                         if (con.ExitenciaActual == Diferencia)
                         {
@@ -2420,12 +2421,12 @@ namespace Inventario.Controllers
                         else if (con.ExitenciaActual > Diferencia)
                         {
 
-                            NExistencia = (Double)con.ExitenciaActual - Diferencia;
+                            NExistencia = (int)con.ExitenciaActual - Diferencia;
                             Diferencia = 0;
                         }
                         else
                         {
-                            Diferencia = Diferencia - (Double)con.ExitenciaActual;
+                            Diferencia = Diferencia - (int)con.ExitenciaActual;
                             NExistencia = 0;
                         }
 
