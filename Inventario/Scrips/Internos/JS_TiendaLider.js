@@ -1361,7 +1361,7 @@ function nuevoStock() {
 
     //    if (Aprobar > 0) {
 
-    total += IDArticulos + ":" + Aprobar + "/" + Observaciones + "#" + IDTienda + "&";
+    total += IDArticulos + ":" + Aprobar + "/" + IDTienda + ","+ Observaciones + "#" ;
 
     //    }
     //}

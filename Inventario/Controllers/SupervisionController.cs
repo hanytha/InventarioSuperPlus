@@ -2493,13 +2493,19 @@ namespace Inventario.Controllers
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
 
-            string[] Articulos = DatosArticulos.Split('/');
+            string[] Articulos = DatosArticulos.Split(',');
+            string[] Articulos2 = DatosArticulos.Split('/');
             int consulta = 0;
 
             for (int i = 0; 1 < Articulos.GetLength(0); i++)
             {
                 string[] Cantidad = Articulos[i].Split(':');
-                string[] Observaciones = Articulos[i].Split('#');
+                string[] Aprobar = Articulos[i].Split('/');
+                string[] Observaciones = Cantidad[i].Split(':');
+
+                string[] prueba = Articulos2[i].Split(':');
+
+                string[] prueba2 = prueba[i].Split(':');
                 int resultado = 0;
 
                 var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
@@ -2513,11 +2519,13 @@ namespace Inventario.Controllers
                        
 
                     });
-
-                //Double Diferencia = Convert.ToInt32(Cantidad);
-                var Diferencia = Convert.ToInt32(Cantidad[1]);
-                //var Observacion = Convert.ToInt64(Observaciones[1]);
                 var Observacion = Articulos[1];
+                //Double Diferencia = Convert.ToInt32(Cantidad);
+                var IdtIENDA = prueba[1];
+                var Diferencia = Convert.ToInt32(Cantidad[0]);
+             
+                //var Observacion = Convert.ToInt64(Observaciones[1]);
+             
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
