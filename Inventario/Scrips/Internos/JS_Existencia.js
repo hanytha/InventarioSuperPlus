@@ -264,6 +264,20 @@ function CalcularConver() {
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
 
+
+        if (aprobacion == "" && sumaS > 0) {
+
+            let resul = sumaS * 1;
+            alert(resul);
+        }
+
+
+        if (aprobacion > 0 && sumaS > 1) {
+
+            let resul = sumaS * aprobacion;
+            alert(resul);
+        }
+
         //if (!isNaN(aprobacion)) {
 
         //    if (aprobacion > 0) {
