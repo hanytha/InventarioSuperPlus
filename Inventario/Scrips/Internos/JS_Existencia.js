@@ -264,13 +264,13 @@ function CalcularConver() {
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
 
-        if (!isNaN(aprobacion)) {
+        //if (!isNaN(aprobacion)) {
 
-            if (aprobacion > 0) {
-                var conversion = aprobacion * sumaS;
-              //  alert("El resultado es: " + conversion);
-            }
-        }
+        //    if (aprobacion > 0) {
+        //        var conversion = aprobacion * sumaS;
+        //      //  alert("El resultado es: " + conversion);
+        //    }
+        //}
 
     }
 
