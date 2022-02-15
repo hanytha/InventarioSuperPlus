@@ -996,52 +996,52 @@ function CamposObligatoriosDevolucion() {
 
 function GuardarDevolucion() {
 
-    //----------Guardar los inputs de manera individual en la Base de datos--------------------
-    var cantidad = document.getElementById("TxtCantidadDev").value;
-    var NomArticulos = document.getElementById("TxtArtDev").value;
+    ////----------Guardar los inputs de manera individual en la Base de datos--------------------
+    //var cantidad = document.getElementById("TxtCantidadDev").value;
+    //var NomArticulos = document.getElementById("TxtArtDev").value;
 
-    for (let i = 0; i < cantidad.length; i++) {
+    //for (let i = 0; i < cantidad.length; i++) {
 
 
-        if (cantidad >= 1) {
-            //------------------------Guarda el nombre del artículo solicitado----------------------------------
-            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
-            var Observaciones = document.getElementById("TxtDescripcionDev").value;
-            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
-            var ExitenciaActual = document.getElementById("TxtExistenciaInicDev").value;
-            //-------------------------------------------------------------------------------------------------------------
-            var frm = new FormData();
-            frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("Observaciones", Observaciones);
-            frm.append("TipoDeOperacion", TipoDeOperacion);
-            frm.append("ExitenciaActual", ExitenciaActual);
-            frm.append("EstatusPedido", 1);
+    //    if (cantidad >= 1) {
+    //        //------------------------Guarda el nombre del artículo solicitado----------------------------------
+    //        var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
+    //        var Observaciones = document.getElementById("TxtDescripcionDev").value;
+    //        var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+    //        var ExitenciaActual = document.getElementById("TxtExistenciaInicDev").value;
+    //        //-------------------------------------------------------------------------------------------------------------
+    //        var frm = new FormData();
+    //        frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+    //        frm.append("Observaciones", Observaciones);
+    //        frm.append("TipoDeOperacion", TipoDeOperacion);
+    //        frm.append("ExitenciaActual", ExitenciaActual);
+    //        frm.append("EstatusPedido", 1);
 
-            $.ajax({
-                type: "POST",
-                url: "/Supervision/GuardarDev",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "/Supervision/GuardarDev",
+    //            data: frm,
+    //            contentType: false,
+    //            processData: false,
+    //            success: function (data) {
+    //                if (data == 0) {
                       
-                        alert("¡Ocurrio un error!");
-                    }
-                    else if (data == -1) {
+    //                    alert("¡Ocurrio un error!");
+    //                }
+    //                else if (data == -1) {
                      
-                        alert("Verifique la actualización de sus datos");
-                    }
-                    else {
+    //                    alert("Verifique la actualización de sus datos");
+    //                }
+    //                else {
 
-                        ConsultaCompras();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
+    //                    ConsultaCompras();
+    //                    document.getElementById("btnCancelar").click();
+    //                }
+    //            }
+    //        });
 
-        }
-    }
+    //    }
+    //}
     nuevoStock();
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
