@@ -2502,7 +2502,7 @@ namespace Inventario.Controllers
                 string[] Observaciones = Articulos[i].Split('#');
                 int resultado = 0;
 
-                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0).OrderBy(p => p.NoPedidoG)
+                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
                     .Select(p => new
                     {
                         p.IdCompraInterno,

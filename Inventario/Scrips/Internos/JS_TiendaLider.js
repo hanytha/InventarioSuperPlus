@@ -327,6 +327,7 @@ function abrirModalDevoluciones(idExist, id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            document.getElementById("TxtIdTiendaDev").value = Data[0].Tienda;
             document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
@@ -1353,13 +1354,14 @@ function nuevoStock() {
     var IDArticulos = document.getElementById("TxtIdArtDev").value;
     var Aprobar = document.getElementById("TxtCantidadDev").value;
     var Observaciones = document.getElementById("TxtDescripcionDev").value;
+    var IDTienda = document.getElementById("TxtIdTiendaDev").value;
     var total = "";
 
     //for (let i = 0; i < Articulos.length; i++) {
 
     //    if (Aprobar > 0) {
 
-    total += IDArticulos + ":" + Aprobar + "/" + Observaciones + "#";
+    total += IDArticulos + ":" + Aprobar + "/" + Observaciones + "#" + IDTienda + "&";
 
     //    }
     //}
