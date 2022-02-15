@@ -210,6 +210,7 @@ function MostrarArticulos(id) {
             let ArrayConversion = Conversion.split('/');
 
             const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
+
            // alert(arrFiltrado);
 
             //for (var i = 0; i < ArrayIDArticulo.length; i++) {
@@ -222,7 +223,16 @@ function MostrarArticulos(id) {
             //        alert(ArrayConversion[i]);
             //    }
             //}
+            var nueva = "";
+            for (var i = 0; i < ArrayConversion.length; i++) {
 
+                if (/[a-z][a-z]*/.test(ArrayConversion[i])) {
+
+                    //alert("Conversión" + ArrayConversion[i]);
+                    nueva += ArrayConversion[i] + ":";
+                }
+            }
+            alert(nueva);
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
                 
