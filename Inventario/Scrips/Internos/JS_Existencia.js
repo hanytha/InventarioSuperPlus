@@ -212,6 +212,18 @@ function MostrarArticulos(id) {
             const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
            // alert(arrFiltrado);
 
+            //for (var i = 0; i < ArrayIDArticulo.length; i++) {
+            //    if (!isNaN(ArrayConversion[i])) {
+
+            //        alert(ArrayConversion[i]);
+            //    }
+            //    else {
+
+            //        alert(ArrayConversion[i]);
+            //    }
+            //}
+
+
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
                 
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
@@ -241,7 +253,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' value='" + arrFiltrado [i]+"' disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='text' name='" + ArrayConversion[i] + "'  value='" + arrFiltrado[i] + "' disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -263,20 +275,27 @@ function CalcularConver() {
     for (let i = 0; i < aprobar.length; i++) {
         var aprobacion = (aprobar[i].value) * 1;
         var sumaS = (total[i].value) * 1;
+        var nam = aprobar[i].name;
 
-
-        if (aprobacion == "" && sumaS > 0) {
-
-            let resul = sumaS * 1;
-            alert(resul);
+        if (/[a-z][a-z]*/.test(nam)) {
+            alert("Conversión" + nam);
+        }
+        else {
+            alert("Cantidad" + nam)
         }
 
+        //if (aprobacion == "" && sumaS > 0) {
 
-        if (aprobacion > 0 && sumaS > 1) {
+        //    let resul = sumaS * 1;
+        //    alert(resul);
+        //}
 
-            let resul = sumaS * aprobacion;
-            alert(resul);
-        }
+
+        //if (aprobacion > 0 && sumaS > 1) {
+
+        //    let resul = sumaS * aprobacion;
+        //    alert(resul);
+        //}
 
         //if (!isNaN(aprobacion)) {
 
