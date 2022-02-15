@@ -46,8 +46,6 @@ function ConsultaArticuloComp(IDTienda) {
             let IdProveedor = Data.IdProveedor;
             let ArrayIdProveedor = IdProveedor.split(',');
 
-            
-
             let IdCmpraInt = Data.IdCmpraInt;
             let ArrayIdCmpraInt = IdCmpraInt.split(',');
 
@@ -2358,6 +2356,8 @@ function nuevoStock() {
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         if (Data == 1) { alert("--Alerta---") }
+
+
 
     });
 }

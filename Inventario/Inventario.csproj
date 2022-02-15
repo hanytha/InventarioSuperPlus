@@ -131,6 +131,7 @@
     <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
+    <Content Include="Scrips\Internos\JS_PedidoOficina.js" />
     <Content Include="Scrips\Internos\JS_TiendaLider.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
     <Content Include="Views\Supervision\TiendaLider.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciasTiendas.cshtml" />
+    <Content Include="Views\Supervision\PedidosOficina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

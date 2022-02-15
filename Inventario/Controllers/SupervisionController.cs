@@ -497,7 +497,7 @@ namespace Inventario.Controllers
         }
 
 
-
+        //-----Consulta para Mostrar el stock general de los articulos en la tienda del lider----
         public JsonResult ConsultaStockArticulos(long IDTienda, long IdArt)
         {
 
@@ -2559,6 +2559,8 @@ namespace Inventario.Controllers
 
 
 
+
+
         //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada----------------- 
 
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
@@ -2579,17 +2581,20 @@ namespace Inventario.Controllers
                         p.IdCompraInterno,
                         p.IdArticulo,
                         p.Articulo,
-                        p.ExitenciaActual
+                        p.ExitenciaActual,
+                        p.Observaciones
+                       
 
                     });
-                 
+              
                 //Double Diferencia = Convert.ToInt32(Cantidad);
-                 var Diferencia = Convert.ToInt32(Cantidad[1]);
+                var Diferencia = Convert.ToInt32(Cantidad[1]);
     
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
+                   
 
                     if (Diferencia > 0)
                     {
@@ -2610,8 +2615,9 @@ namespace Inventario.Controllers
                         {
                             Diferencia = Diferencia - (int)con.ExitenciaActual;
                             NExistencia = 0;
-                        }
 
+                        }
+                       
                         consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
                         if (consulta == 0)
                         {
@@ -2637,9 +2643,15 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
             //try
             //{
+
+            int consulta = 0;
+
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
+           // mpag.Observaciones = Observacion;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+         
             nregistradosAfectados = 1;//Se pudo realizar
                                       //}
                                       //catch (Exception ex)
@@ -2693,6 +2705,10 @@ namespace Inventario.Controllers
         }
 
 
+        public ActionResult PedidosOficina()
+        {
+            return View();
+        }
 
     }
 }
