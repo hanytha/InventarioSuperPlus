@@ -2572,7 +2572,7 @@ namespace Inventario.Controllers
             for (int i = 0; 1 < Articulos.GetLength(0); i++)
             {
                 string[] Cantidad = Articulos[i].Split(':');
-
+                string[] Observaciones = Articulos[i].Split('#');
                 int resultado = 0;
 
                 var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0).OrderBy(p => p.NoPedidoG)
@@ -2586,10 +2586,11 @@ namespace Inventario.Controllers
                        
 
                     });
-              
+
                 //Double Diferencia = Convert.ToInt32(Cantidad);
                 var Diferencia = Convert.ToInt32(Cantidad[1]);
-    
+                //var Observacion = Convert.ToInt64(Observaciones[1]);
+                var Observacion = Articulos[1];
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
@@ -2618,7 +2619,7 @@ namespace Inventario.Controllers
 
                         }
                        
-                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia, Observacion);
                         if (consulta == 0)
                         {
                             break;
@@ -2638,7 +2639,7 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        public int GuardarNStock(long ID, long IDA, double NExistencia, String Observacion)
         {
             int nregistradosAfectados = 0;
             //try
@@ -2649,7 +2650,7 @@ namespace Inventario.Controllers
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
             mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
-           // mpag.Observaciones = Observacion;
+            mpag.Observaciones = Observacion;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
          
             nregistradosAfectados = 1;//Se pudo realizar

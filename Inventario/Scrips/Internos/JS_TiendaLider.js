@@ -2343,14 +2343,14 @@ function nuevoStock() {
     var Articulos = document.getElementById("TxtArtDev").value;
     var IDArticulos = document.getElementById("TxtIdArtDev").value;
     var Aprobar = document.getElementById("TxtCantidadDev").value;
-
+    var Observaciones = document.getElementById("TxtDescripcionDev").value;
     var total = "";
 
     //for (let i = 0; i < Articulos.length; i++) {
 
     //    if (Aprobar > 0) {
 
-            total += IDArticulos + ":" + Aprobar + "/";
+    total += IDArticulos + ":" + Aprobar + "/" + Observaciones + "#";
 
     //    }
     //}
