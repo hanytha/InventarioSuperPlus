@@ -305,6 +305,17 @@ function CalcularConversion() {
                 conversiones[i].value = total
             }
         }
+        if (unidades[i].value == 'Litro') {
+            if (conversiones[i].name == 'Galones' && cantidad > 0) {
+
+                var total = cantidad * 0.26417205;
+                conversiones[i].value = total
+            }
+        }
+
+
+
+        //__________________________________________________________________________________________________________________________
         if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
 
             var total = cantidad * 1;
