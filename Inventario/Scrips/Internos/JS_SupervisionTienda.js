@@ -1,5 +1,6 @@
 ﻿//LlenarCMTMovimientos();
-LlenarCMCProveedores();
+//LlenarCMCProveedores();
+LlenarComboProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
@@ -527,8 +528,6 @@ function abrirModalMovimiento(IDTienda) {
 
 
 
-
-
 function abrirModalDevoluciones(idExist, id, idS) {
     ObtenerFecha();
     LimpiarCampos();
@@ -575,10 +574,10 @@ function ConsultaArt(idExist) {
 }
 
 
-function ProvDev(id) {
+function ProvDev(idExist) {
 
-    $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-        document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
+    $.get("/Supervision/ConsultaArtDev/?Id=" + idExist, function (Data) {
+        document.getElementById("cmbProveedorDevLider").value = Data[0].IdProveedor;
         document.getElementById("TxtNoPedidoDev").value = Data[0].NoPedido;
 
     });
@@ -1757,12 +1756,22 @@ function BloquearCTRL() {
 
 //}
 
-function LlenarCMCProveedores() {
+//function LlenarCMCProveedores() {
+//    $.get("/Supervision/BDProveedor", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedor"));
+//    });
+//    $.get("/Supervision/BDProveedor", function (data) {
+//        llenarCombo(data, document.getElementById("cmbProveedorDevolucion"));
+//    });
+//}
+
+//llenar combo de proveedores-devoluciones
+function LlenarComboProveedores() {
     $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
     });
     $.get("/Supervision/BDProveedor", function (data) {
-        llenarCombo(data, document.getElementById("cmbProveedorDevolucion"));
+        llenarCombo(data, document.getElementById("cmbProveedorDevLider"));
     });
 }
 
