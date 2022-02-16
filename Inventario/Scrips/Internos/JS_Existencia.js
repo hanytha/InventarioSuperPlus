@@ -211,6 +211,21 @@ function MostrarArticulos(id) {
 
             const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
 
+            var arrayNuevo = "";
+            var contador = 0;
+            for (var i = 0; i < ArrayConversion.length; i++) {
+
+                if (!isNaN(ArrayConversion[i]) && ArrayConversion[i] != "") {
+
+                    contador++;
+                }
+                else {
+                    arrayNuevo += ArrayConversion[i] + ":";
+                }
+            }
+
+            var Nuevo = arrayNuevo.split(':');
+            Nuevo.length;
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
                 
