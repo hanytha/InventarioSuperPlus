@@ -386,8 +386,25 @@ function ProvDev(idExist) {
     });
 }
 
-function abrirModal(id, idS) {
+function llenarComboTienda(data, control) {
+    var contenido = "";
+    //contenido += "<option value='0'>--Seleccione--</option>";
 
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+function LlenarCMBTienda(Id) {
+
+    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
+        llenarComboTienda(data, document.getElementById("cmbTienda"));
+    });
+}
+
+
+function abrirModal(id, idS) {
+    LlenarCMBTienda(idS);
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -687,12 +704,7 @@ function CamposObligatorios() {
 }
 
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-function LlenarCMBTienda(Id) {
 
-    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
-        llenarCombo(data, document.getElementById("cmbTienda"));
-    });
-}
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {
@@ -704,7 +716,6 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-
 
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
