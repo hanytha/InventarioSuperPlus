@@ -282,12 +282,16 @@ function CalcularConversion() {
         var cantidad = (cantidades[i].value) * 1;
         var conversion = (conversiones[i].id) * 1;
 
-        if (conversiones[i].name == 'Paquete') {
+        if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0) {
 
             var total = cantidad * conversion;
             alert(total);
         }
+        if (conversiones[i].name == "" && cantidad > 0) {
 
+            var total = cantidad * 1;
+            alert(total);
+        }
 
     }
 
