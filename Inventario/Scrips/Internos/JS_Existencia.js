@@ -211,28 +211,6 @@ function MostrarArticulos(id) {
 
             const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
 
-           // alert(arrFiltrado);
-
-            //for (var i = 0; i < ArrayIDArticulo.length; i++) {
-            //    if (!isNaN(ArrayConversion[i])) {
-
-            //        alert(ArrayConversion[i]);
-            //    }
-            //    else {
-
-            //        alert(ArrayConversion[i]);
-            //    }
-            //}
-            var nueva = "";
-            for (var i = 0; i < ArrayConversion.length; i++) {
-
-                if (/[a-z][a-z]*/.test(ArrayConversion[i])) {
-
-                    //alert("Conversión" + ArrayConversion[i]);
-                    nueva += ArrayConversion[i] + ":";
-                }
-            }
-            alert(nueva);
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
                 
@@ -263,7 +241,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' name='" + ArrayConversion[i] + "'  value='" + arrFiltrado[i] + "' disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='text' value='" + arrFiltrado[i] + "' disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
