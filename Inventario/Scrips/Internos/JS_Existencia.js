@@ -245,7 +245,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo(); CalcularConversion(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
@@ -257,7 +257,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' name='" + arrFiltrado[i] + "'   id='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='text' id='" + arrFiltrado[i] + "'   name='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -270,6 +270,7 @@ function MostrarArticulos(id) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 function CalcularConversion() {
+
     var cantidades = document.getElementsByClassName("input-cantidad");
     var conversiones = document.getElementsByClassName("input-conversion");
 
@@ -279,7 +280,14 @@ function CalcularConversion() {
     for (let i = 0; i < cantidades.length; i++) {
 
         var cantidad = (cantidades[i].value) * 1;
-        var conversion = (conversiones[i].value) * 1;
+        var conversion = (conversiones[i].id) * 1;
+
+        if (conversiones[i].name == 'Paquete') {
+
+            var total = cantidad * conversion;
+            alert(total);
+        }
+
 
     }
 
