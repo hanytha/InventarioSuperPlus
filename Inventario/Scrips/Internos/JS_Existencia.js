@@ -285,13 +285,27 @@ function CalcularConversion() {
 
 
         if (unidades[i].value == 'Caja' ) {
-            if (conversiones[i].name == 'Paquetes' && cantidad > 0 || conversiones[i].name == 'Piezas' && cantidad > 0 || conversiones[i].name == 'Unidades' && cantidad > 0 || conversiones[i].name == 'Bolsas' && cantidad > 0) {
+            if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
 
                 var total = cantidad * conversion;
                 alert(total);
             }
         }
-        if (conversiones[i].name == "" && cantidad > 0) {
+        if (unidades[i].value == 'Paquete') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
+
+                var total = cantidad * conversion;
+                alert(total);
+            }
+        }
+        if (unidades[i].value == 'Bolsa') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Paquete' && cantidad > 0) {
+
+                var total = cantidad * conversion;
+                alert(total);
+            }
+        }
+        if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
 
             var total = cantidad * 1;
             alert(total);
