@@ -1186,7 +1186,7 @@ function MostrarArticulosUsados(idS) {
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Stock</label>";
+            TablaArticulo += "<label>Stock Actualizado</label>";
             TablaArticulo += "</div>";
 
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
