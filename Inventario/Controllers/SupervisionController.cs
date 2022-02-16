@@ -2503,9 +2503,9 @@ namespace Inventario.Controllers
                 string[] Aprobar = Articulos[i].Split('/');
                 string[] Observaciones = Cantidad[i].Split(':');
 
-                string[] prueba = Articulos2[i].Split(':');
+                string[] IdTienda = Articulos2[i].Split(':');
 
-                string[] prueba2 = prueba[i].Split(':');
+                string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
 
                 var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
@@ -2521,8 +2521,9 @@ namespace Inventario.Controllers
                     });
                 var Observacion = Articulos[1];
                 //Double Diferencia = Convert.ToInt32(Cantidad);
-                var IdtIENDA = prueba[1];
-                var Diferencia = Convert.ToInt32(Cantidad[0]);
+                var IdArt = IdTienda[0];
+                var IdDeTienda = Aprobar[1];
+                var Diferencia = Convert.ToInt32(IdTienda[1]);
              
                 //var Observacion = Convert.ToInt64(Observaciones[1]);
              
