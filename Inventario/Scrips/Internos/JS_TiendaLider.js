@@ -338,8 +338,9 @@ function abrirModalDevoluciones(idExist, id, idS) {
         $.get("/Supervision/ConsultaStockArticulos/?IDTienda=" + idS + "&IdArt= " + id, function (Data) {
             let Stock = Data.Stock;
             let Arraystock = Stock.split(',');
-            document.getElementById("TxtExistenciaActDev").value = Arraystock[1];
+            document.getElementById("TxtExistenciaActDev").value = Arraystock[0];
         });
+     
 
         ConsultaArt(idExist);
         ProvDev(idExist);
