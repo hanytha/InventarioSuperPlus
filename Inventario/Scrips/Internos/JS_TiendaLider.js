@@ -422,25 +422,44 @@ function ExisteciaDevolucion(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
-            //if (y <= x) {
+        //if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+       
+        //    let x = document.getElementById("TxtExistenciaInicDev").value;
+
+        //    let y = document.getElementById("TxtCantidadDev").value;
+        //    let resultado = parseFloat(x) - parseFloat(y);
+
+        //    document.getElementById("TxtExistenciaActDev").value = resultado;
+
+        //    if (document.getElementById("TxtExistenciaActDev").value < 0) {
+
+        //        Swal.fire(
+        //            '!',
+        //            'La cantidad excede al stock',
+        //            'alert'
+        //        )
+        //    }
+        //}
+
+        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaActDev")) {
+
             let x = document.getElementById("TxtExistenciaInicDev").value;
 
             let y = document.getElementById("TxtCantidadDev").value;
-            let resultado = parseFloat(x) - parseFloat(y);
+            //let resultado = parseFloat(x) - parseFloat(y);
 
-            document.getElementById("TxtExistenciaActDev").value = resultado;
+            //document.getElementById("TxtExistenciaActDev").value = resultado;
 
-            if (document.getElementById("TxtExistenciaActDev").value < 0) {
+            if (document.getElementById("TxtCantidadDev").value > document.getElementById("TxtExistenciaActDev").value) {
 
                 Swal.fire(
                     '!',
-                    'La cantidad excede al stock',
+                    'La cantidad excede al stock general',
                     'alert'
                 )
+                let cantidad = document.getElementById("TxtCantidadDev").value="";
             }
         }
-
     });
 }
 
@@ -997,6 +1016,13 @@ function CamposObligatoriosDevolucion() {
 
 function GuardarDevolucion() {
 
+
+    if (CamposObligatoriosDevolucion() == true) {
+
+        if (confirm("¿Desea aplicar los cambios?") == 1) {
+            nuevoStock();
+        }
+    }
     ////----------Guardar los inputs de manera individual en la Base de datos--------------------
     //var cantidad = document.getElementById("TxtCantidadDev").value;
     //var NomArticulos = document.getElementById("TxtArtDev").value;
@@ -1043,7 +1069,7 @@ function GuardarDevolucion() {
 
     //    }
     //}
-    nuevoStock();
+ 
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     alert("Los datos se guardaron correctamente");
