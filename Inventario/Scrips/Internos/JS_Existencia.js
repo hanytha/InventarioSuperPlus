@@ -40,7 +40,7 @@ function CrearTablaCompras(Data) {
         CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
         CodigoHtmlTablaPedidos += "<td>";
         CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-      //  CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
+        //  CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
 
         CodigoHtmlTablaPedidos += "</td>";
         CodigoHtmlTablaPedidos += "</tr>";
@@ -73,9 +73,9 @@ function abrirModal(id) {
     else {
 
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
- 
+
             habilitar();
- 
+
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
             document.getElementById("TxtNoCompra").value = Data[0].NoCompra;
@@ -229,7 +229,7 @@ function MostrarArticulos(id) {
             Nuevo.length;
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
-                
+
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + ArrayIDArticulo[i] + "'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
@@ -273,6 +273,7 @@ function CalcularConversion() {
 
     var cantidades = document.getElementsByClassName("input-cantidad");
     var conversiones = document.getElementsByClassName("input-conversion");
+    var unidades = document.getElementsByClassName("input-Unidad");
 
     var cantidad = 0;
     var conversion = 0;
@@ -282,10 +283,13 @@ function CalcularConversion() {
         var cantidad = (cantidades[i].value) * 1;
         var conversion = (conversiones[i].id) * 1;
 
-        if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0) {
 
-            var total = cantidad * conversion;
-            alert(total);
+        if (unidades[i].value == 'Caja' ) {
+            if (conversiones[i].name == 'Paquetes' && cantidad > 0 || conversiones[i].name == 'Piezas' && cantidad > 0 || conversiones[i].name == 'Unidades' && cantidad > 0 || conversiones[i].name == 'Bolsas' && cantidad > 0) {
+
+                var total = cantidad * conversion;
+                alert(total);
+            }
         }
         if (conversiones[i].name == "" && cantidad > 0) {
 
@@ -349,7 +353,7 @@ function verificar() {
 
     var pago = document.getElementById("cmbMPago").value;
 
-   //-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
     for (let i = 0; i < cantidad.length; i++) {
 
         //----Cuenta todos los inputs con un valor
@@ -466,7 +470,7 @@ function BordeInput() {
         if (cols[i].value > 0) {
             cols[i].style.borderColor = 'DimGray';
         }
-        if (precio[i].value  > 0) {
+        if (precio[i].value > 0) {
             precio[i].style.borderColor = 'DimGray';
         }
         if (precio[i].value == 0 && cols[i].value == 0) {
@@ -802,7 +806,7 @@ function CalcularFecha() {
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaDeIngreso').value = fecha;
 
-} 
+}
 
 //----------------------Función para ver las compras por id de compra-----------------------------------
 function MostrarArticulosPorIdCompra(id) {
@@ -836,7 +840,7 @@ function MostrarArticulosPorIdCompra(id) {
             for (var i = 0; i < Data.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo +"'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -893,7 +897,7 @@ function deshabilitar() {
             }
         }
     }
-    
+
 }
 
 //-------Función para habilitar los inputs en el modal de compras-------------------------------
