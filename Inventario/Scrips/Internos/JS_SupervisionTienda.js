@@ -300,9 +300,25 @@ function Desplegar(no, id) {
 }
 
 
+function llenarComboTienda(data, control) {
+    var contenido = "";
+    //contenido += "<option value='0'>--Seleccione--</option>";
+
+    for (var i = 0; i < data.length; i++) {
+        contenido += "<option value='" + data[i].ID + "'>" + data[i].Nombre + "</option>";
+    }
+    control.innerHTML = contenido;
+}
+function LlenarCMBTienda(Id) {
+
+    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
+        llenarComboTienda(data, document.getElementById("cmbTienda"));
+    });
+}
+
 
 function abrirModal(id, idS) {
-
+    LlenarCMBTienda(idS);
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -312,15 +328,13 @@ function abrirModal(id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            //sessionStorage.setItem('IdPedidosInternos', Data[0].IdPedidosInternos);
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbTienda").value = Data[0].Tienda;
-
 
         });
         Prov(id)
     }
 }
+
 
 
 
@@ -1561,14 +1575,14 @@ function CamposObligatoriosDevolucion() {
     return exito;
 }
 //-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
-function LlenarCMBTienda(Id) {
-    //$.get("/Supervision/BDProveedor", function (data) {
-    //    llenarCombo(data, document.getElementById("cmbProveedor"));
-    //});
-    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
-        llenarCombo(data, document.getElementById("cmbTienda"));
-    });
-}
+//function LlenarCMBTienda(Id) {
+//    //$.get("/Supervision/BDProveedor", function (data) {
+//    //    llenarCombo(data, document.getElementById("cmbProveedor"));
+//    //});
+//    $.get("/Supervision/BDTienda/?Id=" + Id, function (data) {
+//        llenarCombo(data, document.getElementById("cmbTienda"));
+//    });
+//}
 
 //funcion general para llenar los select
 function llenarCombo(data, control) {
