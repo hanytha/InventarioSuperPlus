@@ -245,7 +245,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo();CalcularConver(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
@@ -257,7 +257,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' name='" + arrFiltrado[i] + "'   value='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='text' name='" + arrFiltrado[i] + "'   id='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -269,45 +269,17 @@ function MostrarArticulos(id) {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-function CalcularConver() {
-    var total = document.getElementsByClassName("input-cantidad");
-    var aprobar = document.getElementsByClassName("input-conversion");
+function CalcularConversion() {
+    var cantidades = document.getElementsByClassName("input-cantidad");
+    var conversiones = document.getElementsByClassName("input-conversion");
 
-    var aprobacion = 0;
-    var sumaS = 0;
+    var cantidad = 0;
+    var conversion = 0;
 
-    for (let i = 0; i < aprobar.length; i++) {
-        var aprobacion = (aprobar[i].value) * 1;
-        var sumaS = (total[i].value) * 1;
-        var nam = aprobar[i].name;
+    for (let i = 0; i < cantidades.length; i++) {
 
-        if (/[a-z][a-z]*/.test(nam)) {
-            alert("Conversión" + nam);
-        }
-        else {
-            alert("Cantidad" + nam)
-        }
-
-        //if (aprobacion == "" && sumaS > 0) {
-
-        //    let resul = sumaS * 1;
-        //    alert(resul);
-        //}
-
-
-        //if (aprobacion > 0 && sumaS > 1) {
-
-        //    let resul = sumaS * aprobacion;
-        //    alert(resul);
-        //}
-
-        //if (!isNaN(aprobacion)) {
-
-        //    if (aprobacion > 0) {
-        //        var conversion = aprobacion * sumaS;
-        //      //  alert("El resultado es: " + conversion);
-        //    }
-        //}
+        var cantidad = (cantidades[i].value) * 1;
+        var conversion = (conversiones[i].value) * 1;
 
     }
 
