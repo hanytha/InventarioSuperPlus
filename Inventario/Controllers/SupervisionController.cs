@@ -2508,17 +2508,30 @@ namespace Inventario.Controllers
                 //string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
 
-                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
-                    .Select(p => new
-                    {
-                        p.IdCompraInterno,
-                        p.IdArticulo,
-                        p.Articulo,
-                        p.ExitenciaActual,
-                        p.Observaciones
+                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
+                //    .Select(p => new
+                //    {
+                //        p.IdCompraInterno,
+                //        p.IdArticulo,
+                //        p.Articulo,
+                //        p.ExitenciaActual,
+                //        p.Observaciones
                        
 
-                    });
+                //    });
+                var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
+                             join Compra in InvBD.CompraInterno
+                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                             where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && (ExistAlm.ExitenciaActual>0)
+                             select new
+                             {
+                                 IdCompraInterno = ExistAlm.IdCompraInterno,
+                                 IdArticulo = ExistAlm.IdArticulo,
+                                 Articulo = ExistAlm.Articulo,
+                                 ExitenciaActual = ExistAlm.ExitenciaActual,
+                                 Observaciones = ExistAlm.Observaciones
+                             };
+
                 var Observacion = Articulos[1];
                 //Double Diferencia = Convert.ToInt32(Cantidad);
                 //var IdArt = valor[0];
