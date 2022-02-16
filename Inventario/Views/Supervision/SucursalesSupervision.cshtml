@@ -85,7 +85,7 @@
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
                                     <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
-                                   
+
                                     <div>
                                         <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
 
@@ -209,7 +209,7 @@
                                     <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                   
+
                                     </select>
                                 </div>
                             </div>
@@ -329,7 +329,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
 
                         <div class="row">
                             <div class="col-md-12">
@@ -345,7 +345,7 @@
                 <div class="modal-footer">
                     @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
                     <button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>
-                    
+
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -416,7 +416,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
-                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar ">
+                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
                                 </div>
                             </div>
                         </div>
@@ -455,7 +455,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
 
-                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
+                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorio obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -555,6 +555,118 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="ModalPedidos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            PEDIDOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                    <br />
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de orden:</label><label id="TxtNumeroPedido"></label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <thead>
+                                                    <tr align="center">
+                                                        <th scope="col">Proveedor</th>
+                                                        <th scope="col">Enviar a</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedor"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccion"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                </div>
+                                                <div id="TblArt">Artículo(s) de el pedido</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();

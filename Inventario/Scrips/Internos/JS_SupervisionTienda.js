@@ -3,6 +3,7 @@ LlenarCMCProveedores();
 BloquearCTRL();
 ////----------Tabla------------////
 //-----------------------Crea el grid con las consultas de la tabla artículos por tienda---------------------------------------------------
+
 function ConsultaArticuloComp(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
@@ -14,11 +15,10 @@ function ConsultaArticuloComp(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
-            //CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
+            // CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+            CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -30,38 +30,38 @@ function ConsultaArticuloComp(IDTienda) {
             let ArrayNoPedido = NoPedido.split(',');
             let Fecha = Data.Fecha;
             let Arrayfecha = Fecha.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
+            //let Stock = Data.Stock;
+            //let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
-
             let Articulo = Data.Articulo;
             let ArrayArticulo = Articulo.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+            let Proveedor = Data.Proveedor;
+            let ArrayProveedor = Proveedor.split(',');
 
-            //let Costos = Data.Costos;
-            //let Arraycostos = Costos.split(',');
+            let IdProveedor = Data.IdProveedor;
+            let ArrayIdProveedor = IdProveedor.split(',');
+
+
+
+            let IdCmpraInt = Data.IdCmpraInt;
+            let ArrayIdCmpraInt = IdCmpraInt.split(',');
+
 
             for (var i = 0; i < ArrayId.length; i++) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                //-----------------Botón para desplegar la primera tabla--------------
+                //-----------------Botón para desplegar la primera tabla-------------- 
                 CodigoHtmlArticuloComp += "<div class='col'>"
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
-                //CodigoHtmlArticuloComp += "</label>";
-
-                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayIdCmpraInt[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
 
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -69,7 +69,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "</div>";
                 //------------------------Despliega primer grid-----------------------------------------------------------------------
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
+                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
                 CodigoHtmlArticuloComp += "</div>";
                 //---------------------------------------Termina----------------------------------------------------------------------------
             }
@@ -84,6 +84,87 @@ function ConsultaArticuloComp(IDTienda) {
 
     }
 }
+//function ConsultaArticuloComp(IDTienda) {
+//    if (IDTienda == 0) {
+//        sessionStorage.setItem('IDTienda', '0');
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+//            var CodigoHtmlArticuloComp = "";
+
+//            CodigoHtmlArticuloComp += "<div id='contenedor1'>";
+//            CodigoHtmlArticuloComp += "<hr class='solid'>";
+//            CodigoHtmlArticuloComp += "<div class='row'>";
+//            //CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
+//            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
+//            CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+//            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
+//            CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
+//            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
+//            CodigoHtmlArticuloComp += "</div>";
+//            CodigoHtmlArticuloComp += "<hr class='solid'>";
+//            CodigoHtmlArticuloComp += "</div>";
+
+//            let id = Data.id;
+//            let ArrayId = id.split(',');
+//            let NoPedido = Data.NoPedido;
+//            let ArrayNoPedido = NoPedido.split(',');
+//            let Fecha = Data.Fecha;
+//            let Arrayfecha = Fecha.split(',');
+//            let Stock = Data.Stock;
+//            let Arraystock = Stock.split(',');
+//            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+//            let IdSitio = Data.IdSitio;
+//            let ArrayIdSitio = IdSitio.split(',');
+
+//            let Articulo = Data.Articulo;
+//            let ArrayArticulo = Articulo.split(',');
+//            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+//            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+//            //let Costos = Data.Costos;
+//            //let Arraycostos = Costos.split(',');
+
+//            for (var i = 0; i < ArrayId.length; i++) {
+
+//                CodigoHtmlArticuloComp += "<div>";
+//                CodigoHtmlArticuloComp += "<div class='row'>";
+//                // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+//                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+//                //-----------------Botón para desplegar la primera tabla--------------
+//                CodigoHtmlArticuloComp += "<div class='col'>"
+//                CodigoHtmlArticuloComp += "<label>"
+//                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+//                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
+//                CodigoHtmlArticuloComp += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayId[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+//                //CodigoHtmlArticuloComp += "</label>";
+
+//                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
+
+//                CodigoHtmlArticuloComp += "</div>";
+//                //-------------Termina----------------------------------------
+//                CodigoHtmlArticuloComp += "</div>";
+//                CodigoHtmlArticuloComp += "</div>";
+//                //------------------------Despliega primer grid-----------------------------------------------------------------------
+//                CodigoHtmlArticuloComp += "<div class='row'>";
+//                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
+//                CodigoHtmlArticuloComp += "</div>";
+//                //---------------------------------------Termina----------------------------------------------------------------------------
+//            }
+//            CodigoHtmlArticuloComp += "</div>";
+//            CodigoHtmlArticuloComp += "</br>";
+//            CodigoHtmlArticuloComp += "</br>";
+//            let contenedor1 = "contenedor1" + IDTienda;
+
+//            document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
+
+//        });
+
+//    }
+//}
 function editarModal(id) {
     LimpiarCampos();
     if (id == 0) {
@@ -133,87 +214,104 @@ function MovimientoModal(id) {
 
 function ExisteciaDevolucion(id) {
 
-
-
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
+        //if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
 
-        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
-            //if (y <= x) {
+        //    let x = document.getElementById("TxtExistenciaInicDev").value;
+
+        //    let y = document.getElementById("TxtCantidadDev").value;
+        //    let resultado = parseFloat(x) - parseFloat(y);
+
+        //    document.getElementById("TxtExistenciaActDev").value = resultado;
+
+        //    if (document.getElementById("TxtExistenciaActDev").value < 0) {
+
+        //        Swal.fire(
+        //            '!',
+        //            'La cantidad excede al stock',
+        //            'alert'
+        //        )
+        //    }
+        //}
+
+        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaActDev")) {
+
             let x = document.getElementById("TxtExistenciaInicDev").value;
 
             let y = document.getElementById("TxtCantidadDev").value;
-            let resultado = parseFloat(x) - parseFloat(y);
+            //let resultado = parseFloat(x) - parseFloat(y);
 
-            document.getElementById("TxtExistenciaActDev").value = resultado;
+            //document.getElementById("TxtExistenciaActDev").value = resultado;
 
-            if (document.getElementById("TxtExistenciaActDev").value < 0) {
+            if (document.getElementById("TxtCantidadDev").value > document.getElementById("TxtExistenciaActDev").value) {
 
                 Swal.fire(
                     '!',
-                    'La cantidad excede al stock',
+                    'La cantidad excede al stock general',
                     'alert'
                 )
-            }
-        }
-
-    });
-}
-
-
-function CalcularExistenciaAct(id) {
-
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-
-        var res = document.getElementsByClassName("input-existAct");
-
-
-        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
-
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-        var Stock = document.getElementsByClassName("input-Stock");
-
-        var Existencia = document.getElementsByClassName("input-existAct");
-
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
-
-                //var IdMovimiento = sessionStorage.getItem('IdMovimiento');
-                //var Movimiento = document.getElementById("TxtMovUsados").value;
-                //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
-
-                //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                //var IdArticulo = NomArticulos[i].name;
-                //var Articulo = NomArticulos[i].value;
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = cantidadUsados[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = Stock[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                //var ExistenciaAct = Existencia[i].value;
-                //-------------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
-                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
-
-                if (resultado < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede al stock',
-                        'alert'
-                    )
-                    //resultado == 0;
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                } else {
-                    var Result = res[i].value = resultado;
-                }
+                let cantidad = document.getElementById("TxtCantidadDev").value = "";
             }
         }
     });
 }
+
+
+
+//function CalcularExistenciaAct(id) {
+
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+//        var res = document.getElementsByClassName("input-existAct");
+
+
+//        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+//        var Stock = document.getElementsByClassName("input-Stock");
+
+//        var Existencia = document.getElementsByClassName("input-existAct");
+
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+//                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+
+//                //var IdMovimiento = sessionStorage.getItem('IdMovimiento');
+//                //var Movimiento = document.getElementById("TxtMovUsados").value;
+//                //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+
+//                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+//                //var IdArticulo = NomArticulos[i].name;
+//                //var Articulo = NomArticulos[i].value;
+//                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+//                var CantidadSolicitada = cantidadUsados[i].value;
+//                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+//                var Unidad = Stock[i].value;
+//                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+//                //var ExistenciaAct = Existencia[i].value;
+//                //-------------------------------------------------------------------------------------------------------------
+//                var frm = new FormData();
+//                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+
+//                if (resultado < 0) {
+
+//                    Swal.fire(
+//                        '!',
+//                        'La cantidad excede al stock',
+//                        'alert'
+//                    )
+//                    //resultado == 0;
+//                    var Result = cantidadUsados[i].value = "";
+//                    var cantidad = res[i].value = "";
+//                } else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//    });
+//}
 
 
 
@@ -269,7 +367,7 @@ function Desplegar(no, id) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaExistenciaAlmGJoinProveedor/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaLider/?No=" + no + "&Id= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -277,16 +375,42 @@ function Desplegar(no, id) {
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
             DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXArt += "<div class='col-sm'>Stock</div>";
+            DespXArt += "<div class='col-sm'></div>";
+
             DespXArt += "</div>";
             DespXArt += "<hr class='solid4'>";
 
-            for (var i = 0; i < Data.length; i++) {
+
+            let IdArticulos = Data.IdArticulos;
+            let ArrayIdArticulos = IdArticulos.split(',');
+            let NoPedido = Data.NoPedido;
+            let ArrayNoPedido = NoPedido.split(',');
+            let Fecha = Data.Fecha;
+            let Arrayfecha = Fecha.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
                 //----Cuerpo del grid-------------
                 DespXArt += "<div class='row'>";
-                DespXArt += "<div class='col-sm'>" + Data[i].NoPedido + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].Articulo + "</div>";
-                DespXArt += "<div class='col-sm'>" + Data[i].FechaDeIngreso + "</div>";
+
+                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
+
             }
             DespXArt += "</div>";
             DespXArt += "</br>";
@@ -406,7 +530,7 @@ function abrirModalMovimiento(IDTienda) {
 
 
 function abrirModalDevoluciones(idExist, id, idS) {
-
+    ObtenerFecha();
     LimpiarCampos();
     if (idS == 0) {
         sessionStorage.setItem('IdExistenciaAlmacenG', '0');
@@ -416,40 +540,36 @@ function abrirModalDevoluciones(idExist, id, idS) {
     else {
 
         $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            // sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+            document.getElementById("TxtIdTiendaDev").value = Data[0].Tienda;
             document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
-            //document.getElementById("TxtNoPedidoDev").value = Data[0].Tienda;
-            //document.getElementById("TxtNoPedidoProvDev").value = Data[0].Tienda;
         });
         $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
             sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtExistenciaInicDev").value = Data[0].ExitenciaActual;
-            //if (Data[0].ExistenciaInicDevolucion <= 0 || Data[0].ExistenciaInicDevolucion == 'NULL') {
-
-            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaInicial;
-            //} else if (Data[0].ExistenciaActDevolucion >=0) {
-            //    document.getElementById("TxtExistenciaInicDev").value = Data[0].ExistenciaActDevolucion;
-            //}
-
         });
-        ConsultaArt(idExist);
-        ProvDev(id);
-        //     BDNoPedido(id);
+        //-----Mostrando el stock general de los articulos----
+        $.get("/Supervision/ConsultaStockArticulos/?IDTienda=" + idS + "&IdArt= " + id, function (Data) {
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            document.getElementById("TxtExistenciaActDev").value = Arraystock[0];
+        });
 
+
+        ConsultaArt(idExist);
+        ProvDev(idExist);
     }
 }
-function ConsultaArt(idExist) {
-    $.get("/Supervision/IdArticulo/?id=" + idExist, function (Data) {
-        //   $.get("/Supervision/ConsultaArtDev/?Id=" + id, function (Data) {
-        //    document.getElementById("cmbProveedorDevolucion").value = Data[0].IdProveedor;
 
+function ObtenerFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFechaIngresoDev').value = fecha;
+
+}
+function ConsultaArt(idExist) {
+    $.get("/Supervision/ConsultaArticuloModal/?id=" + idExist, function (Data) {
         document.getElementById("TxtArtDev").value = Data[0].Nombre;
-        //document.getElementById("TxtIdArtDev").value = Data[0].IdArticulo;
-        //Muestra el número de pedido que le corresponde por proveedor-------
-        //SiguientePedidoProveedor(id);
-        ////Muestra el número de pedido que le corresponde-------
-        //ConsultaSiguientePedido();
+        document.getElementById("TxtIdArtDev").value = Data[0].IdArticulo;
 
     });
 }
@@ -1393,72 +1513,17 @@ function GuardarPedidoInterno() {
 }
 
 
-
 function GuardarDevolucion() {
+
+
     if (CamposObligatoriosDevolucion() == true) {
+
         if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
-            var Observaciones = document.getElementById("TxtDescripcionDev").value;
-            var TipoDeOperacion = document.getElementById("TxtMovDev").value;
-            //  var ExistenciaInicDevolucion = document.getElementById("TxtExistenciaInicDev").value;
-            var ExitenciaActual = document.getElementById("TxtExistenciaActDev").value;
-
-            //var ExistenciaActDevolucion = document.getElementById("TxtExistenciaActDev").value;
-
-            //  var IdAsignacion = NoPedido;
-
-
-            //var EstatusPedido = value"1";
-            //var IdProveedor = document.getElementById("TxtRazonSocial").value;
-            //var Proveedor = document.getElementById("cmbAceptarProveedor").value;
-            //var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
-            //var Usuario = document.getElementById("TxtNombreUsr").value;
-            var frm = new FormData();
-            frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-            frm.append("Observaciones", Observaciones);
-            frm.append("TipoDeOperacion", TipoDeOperacion);
-            //  frm.append("ExistenciaInicDevolucion", ExistenciaInicDevolucion);
-            frm.append("ExitenciaActual", ExitenciaActual);
-            //frm.append("Proveedor", Proveedor);
-            //frm.append("FechaIngreso", FechaIngreso);
-            //frm.append("Usuario", Usuario);
-
-
-
-            //if (ExistenciaActDevolucion==0) {
-            //    frm.append("EstatusArticulo", 0);
-            //}
-
-            $.ajax({
-                type: "POST",
-                url: "/Supervision/GuardarDev",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-
-                    if (data == 0) {
-                        Swal.fire(
-                            '',
-                            'Ocurrió un error',
-                            'danger'
-                        )
-                    }
-                    else if (data == -1) {
-                        Swal.fire(
-                            '',
-                            'Ya existe',
-                            'warning'
-                        )
-                    }
-
-                }
-            });
+            nuevoStock();
             alert("Los datos se guardaron correctamente");
-            ConsultaArticuloComp();
-            document.getElementById("btnCancelar").click();
         }
     }
+   
 }
 
 //function GuardarDevolucion() {
@@ -1725,27 +1790,96 @@ function SiguientePedido(Data) {
 //-----------------------------------Función  para el nuevo stock---------------------------------------
 function nuevoStock() {
 
-    //var Articulos = document.getElementsByClassName("input-Articulo");
-    //var IDArticulos = document.getElementsByClassName("input-Articulo");
-    //var Aprobar = document.getElementsByClassName("input-cantidad");
-    var Articulos = sessionStorage.getItem('IdMovimiento');
-    var IDArticulos = document.getElementById("TxtMovUsados").value;
-    var Aprobar = document.getElementById("TxtFechaIngresoUsados").value;
 
+    var Articulos = document.getElementById("TxtArtDev").value;
+    var IDArticulos = document.getElementById("TxtIdArtDev").value;
+    var Aprobar = document.getElementById("TxtCantidadDev").value;
+    var Observaciones = document.getElementById("TxtDescripcionDev").value;
+    var IDTienda = document.getElementById("TxtIdTiendaDev").value;
     var total = "";
 
-    for (let i = 0; i < Articulos.length; i++) {
+    //for (let i = 0; i < Articulos.length; i++) {
 
-        if (Aprobar[i].value > 0) {
+    //    if (Aprobar > 0) {
 
-            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+    total += IDArticulos + ":" + Aprobar + "/" + IDTienda + "," + Observaciones + "#";
 
-        }
-    }
+    //    }
+    //}
 
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         if (Data == 1) { alert("--Alerta---") }
 
     });
+}
+
+
+
+function VerPedido(id, no) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+
+            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+            document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
+            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
+            document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
+            MostrarArticulos(id, no);
+            //MostrarArt(id, no); 
+        });
+    }
+}
+
+
+function MostrarArticulos(id, no) {
+    // var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    // var ncontroles = controlesObligatorio.length;
+    //for (var i = 0; i < ncontroles; i++) {//recorre
+    //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    //}
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/Supervision/usado/?id=" + id + "&no= " + no, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Articulo</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Cantidad Solicitada</label>";
+            TablaArticulo += "</div>";
+
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulo + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArt").innerHTML = TablaArticulo;
+        });
+    }
 }

@@ -1033,6 +1033,7 @@ function GuardarDevolucion() {
 
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             nuevoStock();
+            alert("Los datos se guardaron correctamente");
         }
     }
     ////----------Guardar los inputs de manera individual en la Base de datos--------------------
@@ -1084,7 +1085,7 @@ function GuardarDevolucion() {
  
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
-    alert("Los datos se guardaron correctamente");
+ 
 
 }
 
