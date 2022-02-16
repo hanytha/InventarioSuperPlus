@@ -2516,14 +2516,14 @@ namespace Inventario.Controllers
                 //        p.Articulo,
                 //        p.ExitenciaActual,
                 //        p.Observaciones
-                       
+
 
                 //    });
                 var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
-                             join Compra in InvBD.CompraInterno
-                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                             where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && (ExistAlm.ExitenciaActual>0)
-                             select new
+                                         join Compra in InvBD.CompraInterno
+                                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                                         where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) &&Compra.EstatusPedido.Equals(1)
+                                         select new
                              {
                                  IdCompraInterno = ExistAlm.IdCompraInterno,
                                  IdArticulo = ExistAlm.IdArticulo,
