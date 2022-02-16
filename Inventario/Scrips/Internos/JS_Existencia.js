@@ -225,6 +225,7 @@ function MostrarArticulos(id) {
             }
 
             var Nuevo = arrayNuevo.split(':');
+            Nuevo.pop();
             Nuevo.length;
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
@@ -256,7 +257,7 @@ function MostrarArticulos(id) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' value='" + arrFiltrado[i] + "' disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='text' name='" + arrFiltrado[i] + "'   value='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
