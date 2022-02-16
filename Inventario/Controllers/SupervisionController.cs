@@ -2499,16 +2499,16 @@ namespace Inventario.Controllers
 
             for (int i = 0; 1 < Articulos.GetLength(0); i++)
             {
-                string[] Cantidad = Articulos[i].Split(':');
-                string[] Aprobar = Articulos[i].Split('/');
-                string[] Observaciones = Cantidad[i].Split(':');
+                string[] IdArticulo = Articulos[i].Split(':');
+                string[] IdTienda = Articulos[i].Split('/');
+                //string[] Observaciones = IdArticulo[i].Split(':');
 
-                string[] IdTienda = Articulos2[i].Split(':');
+                string[] Cantidad = Articulos2[i].Split(':');
 
-                string[] prueba2 = IdTienda[i].Split(':');
+                //string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
 
-                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
+                var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
                     .Select(p => new
                     {
                         p.IdCompraInterno,
@@ -2521,9 +2521,9 @@ namespace Inventario.Controllers
                     });
                 var Observacion = Articulos[1];
                 //Double Diferencia = Convert.ToInt32(Cantidad);
-                var IdArt = IdTienda[0];
-                var IdDeTienda = Aprobar[1];
-                var Diferencia = Convert.ToInt32(IdTienda[1]);
+                //var IdArt = valor[0];
+                var IdDeTienda = IdTienda[1];
+                var Diferencia = Convert.ToInt32(Cantidad[1]);
              
                 //var Observacion = Convert.ToInt64(Observaciones[1]);
              
