@@ -236,11 +236,11 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayUnidad[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<select style='width: 100 %'><option>uno dos</option></select>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayImpuesto[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;' name='" + ArrayUnidad[i] + "' value='" + ArrayImpuesto[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
@@ -695,7 +695,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
             Precio[i].name = 0;
         }
 
-        if (cantidad[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value && impuestos[i].value && Precio[i].name && NomArticulos[i].name) {
+        if (cantidad[i].value >= 1 && NomArticulos[i].value && Precio[i].value && impuestos[i].value && impuestos[i].name && Precio[i].name && NomArticulos[i].name) {
 
             var IdExistenciaCompra = Precio[i].name;
             var NoCompra = document.getElementById("TxtNoCompra").value;
@@ -710,7 +710,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
             var ExistenciaInicial = cantidad[i].value;
             //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-            var Unidad = UnidadM[i].value;
+            var Unidad = impuestos[i].name;
             //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
             var PrecioUnitario = Precio[i].value;
             //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
