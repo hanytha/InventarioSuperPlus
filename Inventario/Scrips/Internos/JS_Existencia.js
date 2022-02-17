@@ -354,6 +354,14 @@ function CalcularConversion() {
                 conversiones[i].value = total
             }
         }
+
+        if (unidades[i].value == 'Kilogramo') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 && conversion > 0) {
+
+                var total = (cantidad) * (conversion);
+                conversiones[i].value = total
+            }
+        }
         //__________________________________________________________________________________________________________________________
         if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
 
