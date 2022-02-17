@@ -312,8 +312,34 @@ function CalcularConversion() {
                 conversiones[i].value = total
             }
         }
+        if (unidades[i].value == 'Galones') {
+            if (conversiones[i].name == 'Litro' && cantidad > 0) {
 
+                var total = cantidad * 3.78541;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Metro') {
+            if (conversiones[i].name == 'Km' && cantidad > 0) {
 
+                var total = (cantidad) / (1000);
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Metro') {
+            if (conversiones[i].name == 'cm' && cantidad > 0) {
+
+                var total = cantidad * 100;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'cm') {
+            if (conversiones[i].name == 'Metro' && cantidad > 0) {
+
+                var total = (cantidad) / (100);
+                conversiones[i].value = total
+            }
+        }
 
         //__________________________________________________________________________________________________________________________
         if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
