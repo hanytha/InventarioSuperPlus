@@ -843,7 +843,7 @@ function MostrarArticulos(id, no) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-ArticuloVerPedido sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
@@ -929,7 +929,7 @@ function MostrarArt(id, no) {
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-ArticuloAcept sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
 
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
@@ -1009,6 +1009,8 @@ function Guardar() {
     }
 }
 
+
+
 function CamposObligatoriosDevolucion() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorioDevolucion");
@@ -1087,51 +1089,6 @@ function GuardarDevolucion() {
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
  
 
-}
-
-//////////////////Usados////////////////////
-function CalcularExistenciaAct(id) {
-
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-
-        var res = document.getElementsByClassName("input-existAct");
-
-
-        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
-
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-        var Stock = document.getElementsByClassName("input-Stock");
-
-        var Existencia = document.getElementsByClassName("input-existAct");
-
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-               
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = cantidadUsados[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = Stock[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                //-------------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
-                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
-
-                if (resultado < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede al stock',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                } else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-    });
 }
 
 
@@ -1217,7 +1174,7 @@ function MostrarArticulosUsados(idS) {
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<label>"
                     TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
-
+                     
                     TablaArticulo += "</label>"
                     TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
@@ -1293,7 +1250,8 @@ function GuardarUsados() {
                             }
                             else {
                                 //alert("Guardado correctamente");
-                                GuardarExistAlm();
+                               // GuardarExistAlm();
+                                nuevoStockUsados();
                                 document.getElementById("btnCancelar").click();
                             }
                         }
@@ -1303,7 +1261,7 @@ function GuardarUsados() {
             }
             //nuevoStock();
             //-----Mensaje de confirmación-----------------------
-            // alert("Guardado correctamente");
+             alert("Guardado correctamente");
         }
     }
 
@@ -1364,9 +1322,83 @@ function GuardarExistAlm() {
         }
 
     }
-    alert("Guardado correctamente");
+    //nuevoStockUsados();
+    //alert("Guardado correctamente");
     //}
 }
+
+//-----------------------------------Función  para el nuevo stock---------------------------------------
+function nuevoStockUsados() {
+
+    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
+    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
+    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
+    var IDTienda = document.getElementById("cmbTiendaUsados").value;
+
+    var total = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar[i].value > 0) {
+
+            //total += IDArticulos + ":" + Aprobar + "/" + IDTienda + ",";
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+        }
+    }
+
+    $.get("/Supervision/ConsultaStockArticuloUsados/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        if (Data == 1) { alert("Alerta") }
+
+    });
+}
+
+
+//////////////////Usados////////////////////
+function CalcularExistenciaAct(id) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+        var res = document.getElementsByClassName("input-existAct");
+
+
+        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+        var Stock = document.getElementsByClassName("input-Stock");
+
+        var Existencia = document.getElementsByClassName("input-existAct");
+
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var CantidadSolicitada = cantidadUsados[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = Stock[i].value;
+                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+
+                if (resultado < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'La cantidad excede al stock',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                    var cantidad = res[i].value = "";
+                } else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+    });
+}
+
 
 
 function CamposObligatoriosUsados() {
