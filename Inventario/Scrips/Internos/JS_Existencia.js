@@ -284,95 +284,95 @@ function CalcularConversion() {
         var conversion = (conversiones[i].id) * 1;
 
 
-            if (unidades[i].value == 'Caja') {
-                if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
+        if (unidades[i].value == 'Caja') {
+            if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
 
-                    var total = cantidad * conversion;
-                    conversiones[i].value = total;
-                }
+                var total = cantidad * conversion;
+                conversiones[i].value = total;
             }
-            if (unidades[i].value == 'Paquete') {
-                if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
+        }
+        if (unidades[i].value == 'Paquete') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
 
-                    var total = cantidad * conversion;
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Bolsa') {
-                if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Paquete' && cantidad > 0) {
-
-                    var total = cantidad * conversion;
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Litro') {
-                if (conversiones[i].name == 'Galones' && cantidad > 0) {
-
-                    var total = cantidad * 0.26417205;
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Galones') {
-                if (conversiones[i].name == 'Litro' && cantidad > 0) {
-
-                    var total = cantidad * 3.78541;
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Metro') {
-                if (conversiones[i].name == 'Km' && cantidad > 0) {
-
-                    var total = (cantidad) / (1000);
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Metro') {
-                if (conversiones[i].name == 'cm' && cantidad > 0) {
-
-                    var total = cantidad * 100;
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'cm') {
-                if (conversiones[i].name == 'Metro' && cantidad > 0) {
-
-                    var total = (cantidad) / (100);
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Kilogramo') {
-                if (conversiones[i].name == 'Libra' && cantidad > 0) {
-
-                    var total = (cantidad) * (2.20462);
-                    conversiones[i].value = total
-                }
-            }
-            if (unidades[i].value == 'Libra') {
-                if (conversiones[i].name == 'Kilogramo' && cantidad > 0) {
-
-                    var total = (cantidad) / (2.20462);
-                    conversiones[i].value = total
-                }
-            }
-
-            if (unidades[i].value == 'Kilogramo') {
-                if (conversiones[i].name == 'Pieza' && cantidad > 0 && conversion > 0) {
-
-                    var total = (cantidad) * (conversion);
-                    conversiones[i].value = total
-                }
-            }
-            //__________________________________________________________________________________________________________________________
-            if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
-
-                var total = cantidad * 1;
+                var total = cantidad * conversion;
                 conversiones[i].value = total
             }
+        }
+        if (unidades[i].value == 'Bolsa') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Paquete' && cantidad > 0) {
+
+                var total = cantidad * conversion;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Litro') {
+            if (conversiones[i].name == 'Galones' && cantidad > 0) {
+
+                var total = cantidad * 0.26417205;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Galones') {
+            if (conversiones[i].name == 'Litro' && cantidad > 0) {
+
+                var total = cantidad * 3.78541;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Metro') {
+            if (conversiones[i].name == 'Km' && cantidad > 0) {
+
+                var total = (cantidad) / (1000);
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Metro') {
+            if (conversiones[i].name == 'cm' && cantidad > 0) {
+
+                var total = cantidad * 100;
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'cm') {
+            if (conversiones[i].name == 'Metro' && cantidad > 0) {
+
+                var total = (cantidad) / (100);
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Kilogramo') {
+            if (conversiones[i].name == 'Libra' && cantidad > 0) {
+
+                var total = (cantidad) * (2.20462);
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Libra') {
+            if (conversiones[i].name == 'Kilogramo' && cantidad > 0) {
+
+                var total = (cantidad) / (2.20462);
+                conversiones[i].value = total
+            }
+        }
+
+        if (unidades[i].value == 'Kilogramo') {
+            if (conversiones[i].name == 'Pieza' && cantidad > 0 && conversion > 0) {
+
+                var total = (cantidad) * (conversion);
+                conversiones[i].value = total
+            }
+        }
+        //__________________________________________________________________________________________________________________________
+        if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
+
+            var total = cantidad * 1;
+            conversiones[i].value = total
+        }
 
         if (cantidad == "" || cantidad < 0) {
             conversiones[i].value = "";
         }
-        
+
     }
 }
 //-----------------------------------------------------------limpiar campos---------------------------------------------------------------------------------
@@ -427,7 +427,7 @@ function verificar() {
     var contadorbonificacion = 0;
 
     var pago = document.getElementById("cmbMPago").value;
-
+    var proveedor = document.getElementById("cmbProveedor").value;
     //-----------------------------------------------------------------------
     for (let i = 0; i < cantidad.length; i++) {
 
@@ -452,7 +452,7 @@ function verificar() {
         }
     }
     //--determina si es una compra o una bonificación o un error
-    if (contador == contadorCantidad && contador >= 1 && pago > 0) {
+    if (contador == contadorCantidad && contador >= 1 && pago > 0 && proveedor > 0) {
 
         //-------------------------------------------------------------------
         swal({
@@ -471,7 +471,7 @@ function verificar() {
             });
         //-----------------------------------------------------------------------------
     }
-    else if (contador == contadorbonificacion && contador >= 1 && pago > 0) {
+    else if (contador == contadorbonificacion && contador >= 1 && pago > 0 && proveedor > 0) {
         BordeInputPrecio();
         //-----------------------------------------------------------
         swal({
@@ -523,6 +523,10 @@ function verificar() {
             if (pago == 0) {
 
                 swal("¡Seleccione un método de pago!", "", "warning");
+            }
+            if (proveedor == 0) {
+
+                swal("¡Seleccione un proveedor para guardar los datos!", "", "warning");
             }
         }
 
