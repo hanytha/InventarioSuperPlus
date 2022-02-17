@@ -185,18 +185,18 @@ function MostrarArticulos(id) {
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>ud. Medida</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Impto</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Prec. Unit.</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Conversión</label>";
-            TablaArticulo += "</div>";
+            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Conversión</label>";
+            //TablaArticulo += "</div>";
 
             let IDArticulo = Data.IDArticulo;
             let ArrayIDArticulo = IDArticulo.split(',');
@@ -207,10 +207,11 @@ function MostrarArticulos(id) {
             let Impuesto = Data.Impuesto;
             let ArrayImpuesto = Impuesto.split(',');
             let Conversion = Data.Conversion;
-            let ArrayConversion = Conversion.split('/');
+            let ArrayConversion = Conversion.split(',');
 
+
+            /*
             const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
-
             var arrayNuevo = "";
             var contador = 0;
             for (var i = 0; i < ArrayConversion.length; i++) {
@@ -227,25 +228,26 @@ function MostrarArticulos(id) {
             var Nuevo = arrayNuevo.split(':');
             Nuevo.pop();
             Nuevo.length;
+            */
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
-
+                
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + ArrayIDArticulo[i] + "'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<select style='width: 100 %'><option>uno dos</option></select>"
+                TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: " + ArrayUnidad[i] + "' id='cmbConversion(" + ArrayIDArticulo[i]+")'><option>--Seleccione--</option></select>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;' name='" + ArrayUnidad[i] + "' value='" + ArrayImpuesto[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo(); CalcularConversion(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input type='number' value='' onkeyup='costo();BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
@@ -255,11 +257,11 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='text' id='" + arrFiltrado[i] + "'   name='" + Nuevo[i] + "'  disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
+                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                //TablaArticulo += "<label>"
+                //TablaArticulo += "<input type='text' disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
+                //TablaArticulo += "</label>"
+                //TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
@@ -268,7 +270,10 @@ function MostrarArticulos(id) {
     }
 }
 
+
 //-----------------------------------------------------------------------------------------------------------------------------------
+
+/*
 function CalcularConversion() {
 
     var cantidades = document.getElementsByClassName("input-cantidad");
@@ -362,7 +367,10 @@ function CalcularConversion() {
                 conversiones[i].value = total
             }
         }
-        //__________________________________________________________________________________________________________________________
+
+
+
+
         if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
 
             var total = cantidad * 1;
@@ -375,6 +383,9 @@ function CalcularConversion() {
 
     }
 }
+
+
+*/
 //-----------------------------------------------------------limpiar campos---------------------------------------------------------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");

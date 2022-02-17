@@ -353,7 +353,7 @@ namespace Inventario.Controllers
                     Articulo += num.Articulo + ",";
                     Unidad += num.Unid + ",";
                     Impuesto += num.Impus + ",";
-                    Conversion += num.conver + "/";
+                    Conversion += num.conver + ",";
                 }
 
             }
@@ -364,7 +364,7 @@ namespace Inventario.Controllers
                 Articulo += "0" + ",";
                 Unidad += "0" + ",";
                 Impuesto += "0" + ",";
-                Conversion += "0" + "/";
+                Conversion += "0" + ",";
             }
 
 
@@ -380,7 +380,49 @@ namespace Inventario.Controllers
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
         //---------------------------------------Termina-----------------------------------------------------------------------
+        public JsonResult ConsultaSeclt(string Id)
+        {
+            string IDArticulo = "";
+            string Conversion = "";
 
+            var compra = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
+                .Select(p => new
+                {
+                 articulo = p.IdArticulos,
+                 convesiones = p.Conversion,
+                });
+            if (compra.Count() > 0)
+            {
+                foreach (var con in compra)
+                {
+                    IDArticulo += con.articulo + ",";
+                    Conversion += con.convesiones + ",";
+                }
+            }
+            else
+            {
+                IDArticulo += "0" + ",";
+                Conversion += "0" + ",";
+            }
+            var resultado = new
+            {
+                IDArticulo = IDArticulo.Substring(0, IDArticulo.Length - 1),
+                Conversion = Conversion.Substring(0, Conversion.Length - 1),
+            };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        //-----------------------------------------------------------------------------------
+        public JsonResult ConsultaCombobox(long Id)
+        {
+            var compra = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdArticulos,
+                    p.Conversion,
+                });
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+        //-------------------------------------------------------------------------------------
     }
 
 }
