@@ -2659,13 +2659,14 @@ namespace Inventario.Controllers
 
 
         //---------------------------Restar pedidos Usados-----------------------------------------------
-        public JsonResult ConsultaStockArticuloUsados(string DatosArticulos)
+        public JsonResult ConsultaStockArticuloUsado(string DatosArticulos)
         {
 
-            string[] Articulos = DatosArticulos.Split('/');
+            // string[] Articulos = DatosArticulos.Split('/');
+            string[] Articulos = DatosArticulos.Substring(0, DatosArticulos.Length - 1).Split('/');
             int consulta = 0;
 
-            for (int i = 0; 1 < Articulos.GetLength(0); i++)
+            for (int i = 0; i < Articulos.GetLength(0); i++)
             {
                 string[] Cantidad = Articulos[i].Split(':');
 
@@ -2681,16 +2682,16 @@ namespace Inventario.Controllers
 
                 });
 
-                Double Diferencia = Convert.ToInt32(Cantidad[1]);
-
+                var Diferencia = Convert.ToInt32(Cantidad[1]);
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
 
+
                     if (Diferencia > 0)
                     {
-                        Double NExistencia = 0;
+                        var NExistencia = 0;
 
                         if (con.ExitenciaActual == Diferencia)
                         {
@@ -2700,16 +2701,17 @@ namespace Inventario.Controllers
                         else if (con.ExitenciaActual > Diferencia)
                         {
 
-                            NExistencia = (Double)con.ExitenciaActual - Diferencia;
+                            NExistencia = (int)con.ExitenciaActual - Diferencia;
                             Diferencia = 0;
                         }
                         else
                         {
-                            Diferencia = Diferencia - (Double)con.ExitenciaActual;
+                            Diferencia = Diferencia - (int)con.ExitenciaActual;
                             NExistencia = 0;
+
                         }
 
-                        consulta = GuardarNStockUsados((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -2729,7 +2731,7 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStockUsados(long ID, long IDA, double NExistencia)
+        public int GuardarNStock(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
             //try
@@ -2745,123 +2747,6 @@ namespace Inventario.Controllers
             //}
             return nregistradosAfectados;
         }
-
-
-        //public JsonResult ConsultaStockArticuloUsados(string DatosArticulos)
-        //{
-
-        //    string[] Articulos = DatosArticulos.Split('/');
-        //    int consulta = 0;
-
-        //    for (int i = 0; 1 < Articulos.GetLength(0); i++)
-        //    {
-        //        string[] Cantidad = Articulos[i].Split(':');
-
-        //        int resultado = 0;
-
-        //        //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
-        //        //    .Select(p => new
-        //        //    {
-        //        //        p.IdCompraInterno,
-        //        //        p.IdArticulo,
-        //        //        p.Articulo,
-        //        //        p.ExitenciaActual,
-        //        //        p.Observaciones
-
-
-        //        //    });
-        //        var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                                 join Compra in InvBD.CompraInterno
-        //                             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                                 where ExistAlm.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
-        //                                 select new
-        //                                 {
-        //                                     IdCompraInterno = ExistAlm.IdCompraInterno,
-        //                                     IdArticulo = ExistAlm.IdArticulo,
-        //                                     Articulo = ExistAlm.Articulo,
-        //                                     ExitenciaActual = ExistAlm.ExitenciaActual,
-        //                                     // Observaciones = ExistAlm.Observaciones
-        //                                 };
-
-        //        //  var Observacion = Articulos[1];
-        //        //Double Diferencia = Convert.ToInt32(Cantidad);
-        //        //var IdArt = valor[0];
-        //        //  var IdDeTienda = IdTienda[1];
-        //        var Diferencia = Convert.ToInt32(Cantidad[1]);
-
-        //        //var Observacion = Convert.ToInt64(Observaciones[1]);
-
-        //        foreach (var con in ConsultaIDArticulo)
-        //        {
-        //            long IDCompras = Convert.ToInt32(con.IdCompraInterno);
-        //            long IDArticulos = Convert.ToInt32(con.IdArticulo);
-
-
-        //            if (Diferencia > 0)
-        //            {
-        //                var NExistencia = 0;
-
-        //                if (con.ExitenciaActual == Diferencia)
-        //                {
-        //                    Diferencia = 0;
-        //                    NExistencia = 0;
-        //                }
-        //                else if (con.ExitenciaActual > Diferencia)
-        //                {
-
-        //                    NExistencia = (int)con.ExitenciaActual - Diferencia;
-        //                    Diferencia = 0;
-        //                }
-        //                else
-        //                {
-        //                    Diferencia = Diferencia - (int)con.ExitenciaActual;
-        //                    NExistencia = 0;
-
-        //                }
-
-        //                consulta = GuardarNStockUsados((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
-        //                if (consulta == 0)
-        //                {
-        //                    break;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                break;
-        //            }
-        //        }
-
-
-        //    }
-
-        //    return Json(consulta, JsonRequestBehavior.AllowGet);
-
-        //}
-
-        ////---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        //public int GuardarNStockUsados(long ID, long IDA, double NExistencia)
-        //{
-        //    int nregistradosAfectados = 0;
-        //    //try
-        //    //{
-
-        //    int consulta = 0;
-
-        //    ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-        //    mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
-        //                                       //  mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
-        //                                       // mpag.Observaciones = Observacion;
-        //    InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-
-        //    nregistradosAfectados = 1;//Se pudo realizar
-        //                              //}
-        //                              //catch (Exception ex)
-        //                              //{
-        //                              //    nregistradosAfectados = 0;
-        //                              //}
-        //    return nregistradosAfectados;
-        //}
-
 
         //---------------------------Usados-----------------------------------------------
         public ActionResult PedidosOficina()

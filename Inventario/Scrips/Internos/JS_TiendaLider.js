@@ -1333,7 +1333,7 @@ function nuevoStockUsados() {
     var Articulos = document.getElementsByClassName("input-ArticuloUsados");
     var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
     var Aprobar = document.getElementsByClassName("input-cantidadUsados");
-    var IDTienda = document.getElementById("cmbTiendaUsados").value;
+
 
     var total = "";
 
@@ -1341,14 +1341,14 @@ function nuevoStockUsados() {
 
         if (Aprobar[i].value > 0) {
 
-            //total += IDArticulos + ":" + Aprobar + "/" + IDTienda + ",";
             total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+
         }
     }
 
-    $.get("/Supervision/ConsultaStockArticuloUsados/?DatosArticulos=" + total, function (Data) {
+    $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("Alerta") }
+        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
 
     });
 }
