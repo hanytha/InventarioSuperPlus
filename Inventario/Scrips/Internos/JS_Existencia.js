@@ -340,7 +340,20 @@ function CalcularConversion() {
                 conversiones[i].value = total
             }
         }
+        if (unidades[i].value == 'Kilogramo') {
+            if (conversiones[i].name == 'Libra' && cantidad > 0) {
 
+                var total = (cantidad) * (2.20462);
+                conversiones[i].value = total
+            }
+        }
+        if (unidades[i].value == 'Libra') {
+            if (conversiones[i].name == 'Kilogramo' && cantidad > 0) {
+
+                var total = (cantidad) / (2.20462);
+                conversiones[i].value = total
+            }
+        }
         //__________________________________________________________________________________________________________________________
         if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
 
