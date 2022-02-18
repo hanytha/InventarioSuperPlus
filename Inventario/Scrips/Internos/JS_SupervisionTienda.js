@@ -1258,12 +1258,37 @@ function GuardarUsados() {
 
 
 
+//function nuevoStockUsados() {
+
+//    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
+//    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
+//    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
+
+
+//    var total = "";
+
+//    for (let i = 0; i < Articulos.length; i++) {
+
+//        if (Aprobar[i].value > 0) {
+
+//            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+
+//        }
+//    }
+
+//    $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
+//        let RES = Data;
+//        GuardarUsados();
+//        if (Data == 1) { alert("Guardado correctamente") }
+
+//    });
+//}
 function nuevoStockUsados() {
 
     var Articulos = document.getElementsByClassName("input-ArticuloUsados");
     var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
     var Aprobar = document.getElementsByClassName("input-cantidadUsados");
-
+    var IDTienda = document.getElementById("cmbTiendaUsados").value;
 
     var total = "";
 
@@ -1271,16 +1296,17 @@ function nuevoStockUsados() {
 
         if (Aprobar[i].value > 0) {
 
-            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" + IDTienda + ",";
 
         }
     }
-
-    $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
+    alert("Guardado correctamente");
+    $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         GuardarUsados();
-        if (Data == 1) { alert("Guardado correctamente") }
-
+     
+        if (Data == 1) { alert("===Guardado correctamente===") }
+ 
     });
 }
 

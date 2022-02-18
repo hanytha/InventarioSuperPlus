@@ -2890,6 +2890,114 @@ namespace Inventario.Controllers
 
 
 
+
+        public JsonResult ConsultaStockArticuloUsadoSuper(string DatosArticulos)
+        {
+
+
+            string[] Articulos = DatosArticulos.Split(',');
+            string[] Articulos2 = DatosArticulos.Split('/');
+            int consulta = 0;
+
+            for (int i = 0; i < Articulos.GetLength(0); i++)
+            {
+
+                string[] IdArticulo = Articulos[i].Split(':');
+                string[] IdTienda = Articulos[i].Split('/');
+                //string[] Observaciones = IdArticulo[i].Split(':');
+
+                string[] Cantidad = Articulos2[i].Split(':');
+
+                int resultado = 0;
+
+                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0).OrderBy(p => p.NoPedidoG)
+                //.Select(p => new
+                //{
+                //    p.IdCompraInterno,
+                //    p.IdArticulo,
+                //    p.Articulo,
+                //    p.ExitenciaActual
+
+                //});
+
+                var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
+                                         join Compra in InvBD.CompraInterno
+                                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                                         where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
+                                         select new
+                                         {
+                                             IdCompraInterno = ExistAlm.IdCompraInterno,
+                                             IdArticulo = ExistAlm.IdArticulo,
+                                             Articulo = ExistAlm.Articulo,
+                                             ExitenciaActual = ExistAlm.ExitenciaActual,
+                                             Observaciones = ExistAlm.Observaciones
+                                         };
+
+                var Diferencia = Convert.ToInt32(Cantidad[1]);
+                foreach (var con in ConsultaIDArticulo)
+                {
+                    long IDCompras = Convert.ToInt32(con.IdCompraInterno);
+                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
+
+
+                    if (Diferencia > 0)
+                    {
+                        var NExistencia = 0;
+
+                        if (con.ExitenciaActual == Diferencia)
+                        {
+                            Diferencia = 0;
+                            NExistencia = 0;
+                        }
+                        else if (con.ExitenciaActual > Diferencia)
+                        {
+
+                            NExistencia = (int)con.ExitenciaActual - Diferencia;
+                            Diferencia = 0;
+                        }
+                        else
+                        {
+                            Diferencia = Diferencia - (int)con.ExitenciaActual;
+                            NExistencia = 0;
+
+                        }
+
+                        consulta = GuardarNStockUsadoSuper((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        if (consulta == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            }
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public int GuardarNStockUsadoSuper(long ID, long IDA, double NExistencia)
+        {
+            int nregistradosAfectados = 0;
+            //try
+            //{
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
+            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            nregistradosAfectados = 1;//Se pudo realizar
+            //}
+            //catch (Exception ex)
+            //{
+            //    nregistradosAfectados = 0;
+            //}
+            return nregistradosAfectados;
+        }
+
         //public JsonResult ConsultaPedidosNumeroPedido( long IDTienda)
         //{
         //    string IdSitios = "";
