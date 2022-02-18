@@ -2744,7 +2744,7 @@ namespace Inventario.Controllers
             string IdArticulos = "";
             string Articulos = "";
             string NoPedidoGs = "";
-
+            string IdExistenciaAlmacenG = "";
             string Stock = "";//Es la suma del stock atcual de todas las compras
             var ConsultaUsado = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
                  .Select(p => new
@@ -2752,7 +2752,7 @@ namespace Inventario.Controllers
                      //NoPedido = p.NoPedido,
                      //IdCmpraInt = p.IdCompraInterno,
                      IdSitio = p.IdSitio,
-                 
+                
                      IdCompraInterno = p.IdCompraInterno
 
                  });
@@ -2785,7 +2785,8 @@ namespace Inventario.Controllers
                      NoPedidoG = p.NoPedidoG,
                      Articulo = p.Articulo,
                      IdArticulo = p.IdArticulo,
-                         StockActual = p.ExitenciaActual
+                         StockActual = p.ExitenciaActual,
+                     idIdExistenciaAlmacenG = p.IdExistenciaAlmacenG
                  });
 
                     //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.ExitenciaActual>0 ).OrderBy(p => p.NoPedidoG)
@@ -2807,7 +2808,7 @@ namespace Inventario.Controllers
                             NoPedidoGs += usado.NoPedidoG + ",";
                             Articulos += usado.Articulo + ",";
                             IdArticulos += usado.IdArticulo + ",";
-
+                            IdExistenciaAlmacenG += usado.idIdExistenciaAlmacenG + ",";
                             int UltimoReg = ConsultaUsadoss.Count() - 1;
                             int cont = 0;
                         
@@ -2833,6 +2834,8 @@ namespace Inventario.Controllers
                             Articulos += usado.Articulo + ",";
                             IdArticulos += usado.IdArticulo + ",";
                             //IdArticulos += usado.IdArticulo + ",";
+
+                            IdExistenciaAlmacenG += usado.idIdExistenciaAlmacenG + ",";
                             int UltimoReg = ConsultaUsadoss.Count() - 1;
                             int cont = 0;
 
@@ -2867,6 +2870,7 @@ namespace Inventario.Controllers
                 Articulos += "0" + ",";
                 IdArticulos += "0" + ",";
                 Stock += "0" + ",";
+                IdExistenciaAlmacenG += "0" + ",";
             }
                 var cons = new
                 {
@@ -2876,7 +2880,7 @@ namespace Inventario.Controllers
                     IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
                     IdSitios = IdSitios.Substring(0, IdSitios.Length - 1),
                     Stock = Stock.Substring(0, Stock.Length - 1),
-
+                    IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
                 };
                 return Json(cons, JsonRequestBehavior.AllowGet);
             }
