@@ -1309,7 +1309,7 @@ function nuevoStockUsados() {
  
     });
     GuardarUsados();
-    alert("//Guardado correctamente//");
+    alert("Guardado correctamente");
 }
 
 

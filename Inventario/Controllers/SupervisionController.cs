@@ -2708,7 +2708,7 @@ namespace Inventario.Controllers
 
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
-            mpag.TipoDeOperacion = "USADO";//Cambia el estatus en 0
+           // mpag.TipoDeOperacion = "USADO";//Cambia el estatus en 0
            // mpag.Observaciones = Observacion;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
 
