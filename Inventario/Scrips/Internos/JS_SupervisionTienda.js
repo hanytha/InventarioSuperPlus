@@ -1139,7 +1139,7 @@ function GuardarUsados() {
                             }
                             else {
                         
-                                nuevoStockUsados();
+                               // nuevoStockUsados();
                                 // alert("Guardado correctamente");
                                 document.getElementById("btnCancelar").click();
                             }
@@ -1278,6 +1278,7 @@ function nuevoStockUsados() {
 
     $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
+        GuardarUsados();
         if (Data == 1) { alert("Guardado correctamente") }
 
     });
