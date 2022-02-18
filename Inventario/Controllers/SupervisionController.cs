@@ -2649,7 +2649,7 @@ namespace Inventario.Controllers
         public JsonResult ConsultaStockArticuloUsado(string DatosArticulos)
         {
 
-            // string[] Articulos = DatosArticulos.Split('/');
+            
             string[] Articulos = DatosArticulos.Substring(0, DatosArticulos.Length - 1).Split('/');
             int consulta = 0;
 

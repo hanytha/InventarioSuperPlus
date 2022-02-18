@@ -1355,6 +1355,24 @@ function nuevoStockUsados() {
 }
 
 
+
+
+function CamposObligatoriosUsados() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorioUsados");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
+            exito = false;
+            controlesObligatorio[i].classList.add("border-danger");
+        }
+        else {
+            controlesObligatorio[i].classList.remove("border-danger");
+
+        }
+    }
+    return exito;
+}
 //////////////////Usados////////////////////
 function CalcularExistenciaAct(id) {
 
@@ -1400,24 +1418,6 @@ function CalcularExistenciaAct(id) {
     });
 }
 
-
-
-function CamposObligatoriosUsados() {
-    var exito = true;
-    var controlesObligatorio = document.getElementsByClassName("obligatorioUsados");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {
-        if (controlesObligatorio[i].value == "" || controlesObligatorio[i].value == "0") {
-            exito = false;
-            controlesObligatorio[i].classList.add("border-danger");
-        }
-        else {
-            controlesObligatorio[i].classList.remove("border-danger");
-
-        }
-    }
-    return exito;
-}
 
 function nuevoStock() {
 
