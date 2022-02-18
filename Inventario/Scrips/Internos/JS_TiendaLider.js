@@ -1154,10 +1154,10 @@ function MostrarArticulosUsados(idS) {
             let ArrayIdArticulos = IdArticulos.split(',');
             let NoPedidoGs = Data.NoPedidoGs;
             let ArrayNoPedido = NoPedidoGs.split(',');
-            let Fecha = Data.Fecha;
+            //let Fecha = Data.Fecha;
             //let Arrayfecha = Fecha.split(',');
-            //let Stock = Data.Stock;
-            //let Arraystock = Stock.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
             let Articulos = Data.Articulos;
             let ArrayArticulo = Articulos.split(',');
             //let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
@@ -1180,12 +1180,12 @@ function MostrarArticulosUsados(idS) {
                     TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                    //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    ////TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                    //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
                     //TablaArticulo += "</div>";
+                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "</div>";
                 }
 
             }
