@@ -102,7 +102,7 @@ function ConsultaArticuloCompra(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedorAceptar'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
+           // CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
@@ -130,7 +130,7 @@ function ConsultaArticuloCompra(IDTienda) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+               // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
@@ -1002,9 +1002,10 @@ function Guardar() {
 
                 }
             });
-            alert("¡¡Pedido aceptado satisfactoriamente!!");
             ConsultaArticuloCompra();
-            document.getElementById("btnCancelar").click();
+            alert("¡¡Pedido aceptado satisfactoriamente!!");
+        
+            //document.getElementById("btnCancelar").click();
         }
     }
 }

@@ -2698,7 +2698,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStockUsado((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -2718,7 +2718,7 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        public int GuardarNStockUsado(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
             //try

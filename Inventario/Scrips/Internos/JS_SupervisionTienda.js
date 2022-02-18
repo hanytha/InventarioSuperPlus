@@ -1138,8 +1138,9 @@ function GuardarUsados() {
                                 alert("Ya existe este registro");
                             }
                             else {
-                                //alert("Guardado correctamente");
-                                GuardarExistAlm();
+                        
+                                nuevoStockUsados();
+                                // alert("Guardado correctamente");
                                 document.getElementById("btnCancelar").click();
                             }
                         }
@@ -1157,111 +1158,111 @@ function GuardarUsados() {
 
 
 
-function GuardarExistAlm() {
-    if (CamposObligatoriosUsados() == true) {
-        var cantidad = document.getElementsByClassName("input-cantidadUsados");
-        //    if (confirm("¿Desea aplicar los cambios?") == 1) {
-        //----------Guardar los inputs de manera individual en la Base de datos--------------------
-        var ExistAct = document.getElementsByClassName("input-existAct");
+//function GuardarExistAlm() {
+//    if (CamposObligatoriosUsados() == true) {
+//        var cantidad = document.getElementsByClassName("input-cantidadUsados");
+//        //    if (confirm("¿Desea aplicar los cambios?") == 1) {
+//        //----------Guardar los inputs de manera individual en la Base de datos--------------------
+//        var ExistAct = document.getElementsByClassName("input-existAct");
 
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-        var IdExistencia = document.getElementsByClassName("input-IdExistencia");
-        //var UnidadM = document.getElementsByClassName("input-Unidad");
+//        var IdExistencia = document.getElementsByClassName("input-IdExistencia");
+//        //var UnidadM = document.getElementsByClassName("input-Unidad");
 
-        //var Precio = document.getElementsByClassName("input-res");
+//        //var Precio = document.getElementsByClassName("input-res");
 
-        for (let i = 0; i < ExistAct.length; i++) {
-            if (cantidad[i].value >= 1 && NomArticulos[i].value && IdExistencia[i].value) {
-                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
+//        for (let i = 0; i < ExistAct.length; i++) {
+//            if (cantidad[i].value >= 1 && NomArticulos[i].value && IdExistencia[i].value) {
+//                // if (NumPedidos[i].value >= 1 && NomArticulos[i].value && UnidadM[i].value && Precio[i].value) {
 
-                var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
-                //var Movimiento = document.getElementById("TxtMovUsados").value;
-                //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
+//                var IdExistenciaAlmacenG = sessionStorage.getItem('IDG');
+//                //var Movimiento = document.getElementById("TxtMovUsados").value;
+//                //var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
 
-                //------------------------Guarda el nombre del artículo solicitado----------------------------------
-                var IdArticulo = NomArticulos[i].name;
-                var Articulo = NomArticulos[i].value;
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = ExistAct[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = IdExistencia[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                // var PrecioUnitario = Precio[i].value;
-                // var Costo = Precio[i].value;
-                //-------------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
+//                //------------------------Guarda el nombre del artículo solicitado----------------------------------
+//                var IdArticulo = NomArticulos[i].name;
+//                var Articulo = NomArticulos[i].value;
+//                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+//                var CantidadSolicitada = ExistAct[i].value;
+//                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+//                var Unidad = IdExistencia[i].value;
+//                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+//                // var PrecioUnitario = Precio[i].value;
+//                // var Costo = Precio[i].value;
+//                //-------------------------------------------------------------------------------------------------------------
+//                var frm = new FormData();
 
-                //var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+//                //var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
 
-                //if (resultado < 0) {
+//                //if (resultado < 0) {
 
-                //    Swal.fire(
-                //        '!',
-                //        'La cantidad excede al stock',
-                //        'alert'
-                //    )
-                //    resultado == 0;
-                //    var Result = ExistAct[i].value = "";
-                //    var cantidad = res[i].value = "";
-                //} else {
-                //    var Result = res[i].value = resultado;
-                //}
-                frm.append("IdExistenciaAlmacenG", Unidad);
-                //frm.append("Movimiento", Movimiento);
-                //frm.append("Fecha", Fecha);
-                //frm.append("IdArticulo", IdArticulo);
-                //frm.append("Articulo", Articulo);
-                //frm.append("NumeroPedido", NumeroPedido);
-                //frm.append("NumPedidoProveedor", NumPedidoProveedor);
+//                //    Swal.fire(
+//                //        '!',
+//                //        'La cantidad excede al stock',
+//                //        'alert'
+//                //    )
+//                //    resultado == 0;
+//                //    var Result = ExistAct[i].value = "";
+//                //    var cantidad = res[i].value = "";
+//                //} else {
+//                //    var Result = res[i].value = resultado;
+//                //}
+//                frm.append("IdExistenciaAlmacenG", Unidad);
+//                //frm.append("Movimiento", Movimiento);
+//                //frm.append("Fecha", Fecha);
+//                //frm.append("IdArticulo", IdArticulo);
+//                //frm.append("Articulo", Articulo);
+//                //frm.append("NumeroPedido", NumeroPedido);
+//                //frm.append("NumPedidoProveedor", NumPedidoProveedor);
 
-                frm.append("ExitenciaActual", CantidadSolicitada);
-                //frm.append("IdExistencia", Unidad);
-                // frm.append("PrecioUnitario", PrecioUnitario);
+//                frm.append("ExitenciaActual", CantidadSolicitada);
+//                //frm.append("IdExistencia", Unidad);
+//                // frm.append("PrecioUnitario", PrecioUnitario);
 
-                //frm.append("Costo", Costo);
-                //frm.append("IdArea", IdArea);
-                //frm.append("Area", Area);
-                //frm.append("Direccion", Direccion);
-                //frm.append("Estatus", 1);
-                $.ajax({
-                    type: "POST",
-                    url: "/Supervision/GuardarExt",
-                    data: frm,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data == 0) {
-                            alert("Ocurrió un error");
-                        }
-                        else if (data == -1) {
-                            alert("Ya existe este registro");
-                        }
-                        else {
+//                //frm.append("Costo", Costo);
+//                //frm.append("IdArea", IdArea);
+//                //frm.append("Area", Area);
+//                //frm.append("Direccion", Direccion);
+//                //frm.append("Estatus", 1);
+//                $.ajax({
+//                    type: "POST",
+//                    url: "/Supervision/GuardarExt",
+//                    data: frm,
+//                    contentType: false,
+//                    processData: false,
+//                    success: function (data) {
+//                        if (data == 0) {
+//                            alert("Ocurrió un error");
+//                        }
+//                        else if (data == -1) {
+//                            alert("Ya existe este registro");
+//                        }
+//                        else {
 
-                            document.getElementById("btnCancelar").click();
-                        }
-                    }
-                });
+//                            document.getElementById("btnCancelar").click();
+//                        }
+//                    }
+//                });
 
-            }
-        }
+//            }
+//        }
 
-        // nuevoStock();
-        //-----Mensaje de confirmación-----------------------
-        nuevoStockUsados
-    }
-    alert("Guardado correctamente");
-    //}
-}
+//        // nuevoStock();
+//        //-----Mensaje de confirmación-----------------------
+//        nuevoStockUsados
+//    }
+//    alert("Guardado correctamente");
+//    //}
+//}
 
 
 
 function nuevoStockUsados() {
 
-    var Articulos = document.getElementsByClassName("input-Articulo");
-    var IDArticulos = document.getElementsByClassName("input-Articulo");
-    var Aprobar = document.getElementsByClassName("input-aprobar");
+    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
+    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
+    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
 
 
     var total = "";
@@ -1275,9 +1276,9 @@ function nuevoStockUsados() {
         }
     }
 
-    $.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+    $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("hOLA") }
+        if (Data == 1) { alert("ardado correctamente") }
 
     });
 }
