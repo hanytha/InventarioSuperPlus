@@ -1440,7 +1440,7 @@ function nuevoStock() {
 
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("--Alerta---") }
+        if (Data == 1) { alert("--Guardado---") }
 
     });
 }

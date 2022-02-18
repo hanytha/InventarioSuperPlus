@@ -965,7 +965,7 @@ function MostrarArticulosUsados(idS) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
             TablaArticulo += "<label>Id Existencia</label>";
             TablaArticulo += "</div>";
@@ -973,14 +973,14 @@ function MostrarArticulosUsados(idS) {
 
             TablaArticulo += "<label>Artículos</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Cantidad</label>";
             TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Stock</label>";
-            TablaArticulo += "</div>";
+            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            //TablaArticulo += "<label>Stock</label>";
+            //TablaArticulo += "</div>";
 
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Existencia Actual</label>";
             TablaArticulo += "</div>";
 
@@ -1020,7 +1020,7 @@ function MostrarArticulosUsados(idS) {
                 //}
 
                 if (ArrayIdArticulos[i] > 0) {
-                    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
@@ -1031,13 +1031,13 @@ function MostrarArticulosUsados(idS) {
 
                     TablaArticulo += "</label>"
                     TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                    //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                    //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "</div>";
+                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                 }
@@ -1278,7 +1278,7 @@ function nuevoStockUsados() {
 
     $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("ardado correctamente") }
+        if (Data == 1) { alert("Guardado correctamente") }
 
     });
 }
@@ -1799,6 +1799,51 @@ function llenarCombo(data, control) {
 //        });
 //    }
 //}
+
+function CalcularExistenciaAct(id) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+        var res = document.getElementsByClassName("input-existAct");
+
+
+        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+        var Stock = document.getElementsByClassName("input-Stock");
+
+        var Existencia = document.getElementsByClassName("input-existAct");
+
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var CantidadSolicitada = cantidadUsados[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = Stock[i].value;
+                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+
+                if (resultado < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'La cantidad excede al stock',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                    var cantidad = res[i].value = "";
+                } else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+    });
+}
+
 
 
 function BloquearCTRL() {
