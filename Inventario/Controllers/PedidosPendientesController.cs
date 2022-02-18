@@ -410,6 +410,7 @@ namespace Inventario.Controllers
                 && p.IdSitio.Equals(DatosCompra.IdSitio)
                 && p.Sitio.Equals(DatosCompra.Sitio)
                 && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+                && p.EstatusPedido.Equals(DatosCompra.EstatusPedido)
 
                 ).Count();
                 if (nveces == 0)
@@ -423,6 +424,7 @@ namespace Inventario.Controllers
                     obj.IdSitio = DatosCompra.IdSitio;
                     obj.Sitio = DatosCompra.Sitio;
                     obj.IdAsignacion = DatosCompra.IdAsignacion;
+                    obj.EstatusPedido = DatosCompra.EstatusPedido;
 
                     InvBD.SubmitChanges();
                     Afectados = 1;
@@ -468,6 +470,7 @@ namespace Inventario.Controllers
                 && p.IdArticulo.Equals(DatosTienda.IdArticulo)
                 && p.Articulo.Equals(DatosTienda.Articulo)
                 && p.NoPedidoG.Equals(DatosTienda.NoPedidoG)
+ 
                 ).Count();
 
 
@@ -576,16 +579,16 @@ namespace Inventario.Controllers
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
-            //}
-            //catch (Exception ex)
-            //{
-            //    nregistradosAfectados = 0;
-            //}
             return nregistradosAfectados;
         }
 
+        //-------------------------Guardar el id de la compra interna---------------------------------------
+
+
+
         //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
         public JsonResult ConsultaOcultar(long No)
+
         {
             var articulo = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No))
                 .Select(p => new

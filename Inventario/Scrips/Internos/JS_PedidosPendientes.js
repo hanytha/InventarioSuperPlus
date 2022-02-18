@@ -308,6 +308,7 @@ function GuardarCompraInterna() {
     frm.append("IdSitio", IdSitio);
     frm.append("Sitio", Sitio);
     frm.append("IdAsignacion", IdAsignacion);
+    frm.append("EstatusPedido", 0);
 
     $.ajax({
         type: "POST",
@@ -404,7 +405,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
     OcultarPedido(NumeroPedido);
 
-    consultaCompra(IdCompras, NumeroPedido);
+  //  consultaCompra(IdCompras, NumeroPedido);
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Sus datos se guardaron correctamente!", "", "success");
@@ -452,28 +453,28 @@ function nuevoStock() {
 
 
 //-----------------------------------Función  para el nuevo stock---------------------------------------
-function consultaCompra(IdComprIn, NoPedido) {
+//function consultaCompra(IdComprIn, NoPedido) {
 
-    var Articulos = document.getElementsByClassName("input-Articulo");
-    var IDArticulos = document.getElementsByClassName("input-Articulo");
-    var Aprobar = document.getElementsByClassName("input-aprobar");
+//    var Articulos = document.getElementsByClassName("input-Articulo");
+//    var IDArticulos = document.getElementsByClassName("input-Articulo");
+//    var Aprobar = document.getElementsByClassName("input-aprobar");
 
 
-    var resultado = "";
+//    var resultado = "";
 
-    for (let i = 0; i < Articulos.length; i++) {
+//    for (let i = 0; i < Articulos.length; i++) {
 
-        if (Aprobar[i].value > 0) {
+//        if (Aprobar[i].value > 0) {
 
-            resultado += IDArticulos[i].name + ":" + Articulos[i].value + "#" + IdComprIn + "%" + NoPedido + "/";
+//            resultado += IDArticulos[i].name + ":" + Articulos[i].value + "#" + IdComprIn + "%" + NoPedido + "/";
 
-        }
-    }
-    alert(resultado);
-    //$.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
-    //    let RES = Data;
-    //    if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+//        }
+//    }
+//    alert(resultado);
+//    //$.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+//    //    let RES = Data;
+//    //    if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
 
-    //});
+//    //});
 
-}
+//}

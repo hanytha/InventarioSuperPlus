@@ -3191,7 +3191,7 @@ namespace Inventario
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdExistenciaCompra", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdExistenciaCompra", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
 		public long IdExistenciaCompra
 		{
 			get
@@ -4381,7 +4381,7 @@ namespace Inventario
 		
 		private System.Nullable<double> _ExitenciaActual;
 		
-		private long _IdArticulo;
+		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
 		
@@ -4405,7 +4405,7 @@ namespace Inventario
     partial void OnExitenciaInicialChanged();
     partial void OnExitenciaActualChanging(System.Nullable<double> value);
     partial void OnExitenciaActualChanged();
-    partial void OnIdArticuloChanging(long value);
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
@@ -4522,8 +4522,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt NOT NULL")]
-		public long IdArticulo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
 		{
 			get
 			{
