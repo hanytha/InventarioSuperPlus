@@ -1300,14 +1300,16 @@ function nuevoStockUsados() {
 
         }
     }
-    alert("Guardado correctamente");
-    $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+
+    $.get("/Supervision/ConsultaMovimientoUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        GuardarUsados();
+       
      
-        if (Data == 1) { alert("===Guardado correctamente===") }
+        //if (Data == 1) { alert("===Guardado correctamente===") }
  
     });
+    GuardarUsados();
+    alert("//Guardado correctamente//");
 }
 
 
