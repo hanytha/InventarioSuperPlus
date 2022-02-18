@@ -2742,7 +2742,7 @@ namespace Inventario.Controllers
             string Articulos = "";
             string NoPedidoGs = "";
 
-            var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
+            var ConsultaUsado = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
                  .Select(p => new
                  {
                      //NoPedido = p.NoPedido,
@@ -2751,31 +2751,32 @@ namespace Inventario.Controllers
                      IdCompraInterno = p.IdCompraInterno
 
                  });
-            foreach (var comp in ConsultaArticulo)
+
+
+            if (ConsultaUsado.Count() > 0)
             {
-                IdSitios += comp.IdSitio + ",";
-                IdCompraInternos += comp.IdCompraInterno + ",";
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
 
-                var ConsultaUsado = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(comp.IdCompraInterno)).OrderBy(p => p.NoPedidoG)
-             .Select(p => new
-             {
+                long pedi = ConsultaUsado.Count();
 
-                 IdCompraInterno = p.IdCompraInterno,
-                 NoPedidoG = p.NoPedidoG,
-                 Articulo = p.Articulo,
-                 IdArticulo = p.IdArticulo
-
-             });
-
-                if (ConsultaUsado.Count() > 0)
+                foreach (var comp in ConsultaUsado)
                 {
-                    long contador = 0;
-                    long tem1 = 0;
-                    long tem2 = 0;
+                    IdSitios += comp.IdSitio + ",";
+                    IdCompraInternos += comp.IdCompraInterno + ",";
 
-                    long pedi = ConsultaUsado.Count();
+                    var ConsultaUsadoss = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(comp.IdCompraInterno)).OrderBy(p => p.NoPedidoG)
+                 .Select(p => new
+                 {
 
-                    foreach (var usado in ConsultaUsado)
+                     IdCompraInterno = p.IdCompraInterno,
+                     NoPedidoG = p.NoPedidoG,
+                     Articulo = p.Articulo,
+                     IdArticulo = p.IdArticulo
+
+                 });
+                    foreach (var usado in ConsultaUsadoss)
                     {
                         if (contador == 0)
                         {
@@ -2809,14 +2810,15 @@ namespace Inventario.Controllers
                         }
                     }
                 }
-                else
-                {
-                    IdCompraInternos += "0" + ",";
-                    NoPedidoGs += "0" + ",";
+            }
+            else
+            {
+                IdCompraInternos += "0" + ",";
+                NoPedidoGs += "0" + ",";
 
-                    Articulos += "0" + ",";
-                    IdArticulos += "0" + ",";
-                }
+                Articulos += "0" + ",";
+                IdArticulos += "0" + ",";
+            }
                 var cons = new
                 {
                     IdCompraInternos = IdCompraInternos.Substring(0, IdCompraInternos.Length - 1),
@@ -2828,8 +2830,92 @@ namespace Inventario.Controllers
                 };
                 return Json(cons, JsonRequestBehavior.AllowGet);
             }
-        }
+        //}
 
+
+
+
+
+        //public JsonResult ConsultaPedidosNumeroPedido( long IDTienda)
+        //{
+        //    string IdSitios = "";
+        //    string IdCompraInternos = "";
+        //    string IdArticulos = "";
+        //    string Articulos = "";
+        //    string NoPedidoGs = "";
+
+
+
+        //    var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
+        //         .Select(p => new
+        //         {
+        //             //NoPedido = p.NoPedido,
+        //             //IdCmpraInt = p.IdCompraInterno,
+        //             IdSitio = p.IdSitio,
+        //             IdCompraInterno = p.IdCompraInterno
+
+        //         });
+
+        //    if (ConsultaUsado.Count() > 0)
+        //    {
+        //        long contador = 0;
+        //        long tem1 = 0;
+        //        long tem2 = 0;
+
+        //        long pedi = ConsultaUsado.Count();
+
+        //        foreach (var usado in ConsultaUsado)
+        //        {
+        //            if (contador == 0)
+        //            {
+        //                tem1 = (int)usado.IdCompraInterno;
+        //                tem2 = (int)usado.NoPedidoG;
+
+
+        //                IdCompraInternos += usado.IdCompraInterno + ",";
+        //                NoPedidoGs += usado.NoPedidoG + ",";
+        //                Articulos += usado.Articulo + ",";
+        //                IdArticulos += usado.IdArticulo + ",";
+
+        //            }
+        //            if (usado.IdCompraInterno != tem1 || usado.NoPedidoG != tem2)
+        //            {
+        //                IdCompraInternos += usado.IdCompraInterno + ",";
+        //                NoPedidoGs += usado.NoPedidoG + ",";
+        //                Articulos += usado.Articulo + ",";
+        //                IdArticulos += usado.IdArticulo + ",";
+
+        //                tem1 = (int)usado.IdCompraInterno;
+        //                tem2 = (int)usado.NoPedidoG;
+
+
+
+        //                contador++;
+        //            }
+        //            else
+        //            {
+        //                contador++;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        IdCompraInternos += "0" + ",";
+        //        NoPedidoGs += "0" + ",";
+
+        //        Articulos += "0" + ",";
+        //        IdArticulos += "0" + ",";
+        //    }
+        //    var consulta = new
+        //    {
+        //        IdCompraInternos = IdCompraInternos.Substring(0, IdCompraInternos.Length - 1),
+        //        NoPedidoGs = NoPedidoGs.Substring(0, NoPedidoGs.Length - 1),
+        //        Articulos = Articulos.Substring(0, Articulos.Length - 1),
+        //        IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
+        //        IdSitios = IdSitios.Substring(0, IdSitios.Length - 1)
+        //    };
+        //    return Json(consulta, JsonRequestBehavior.AllowGet);
+        //}
 
 
         //public JsonResult ConsultaArticulosUsados(long IDTienda)
