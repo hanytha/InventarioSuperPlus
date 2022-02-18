@@ -404,7 +404,8 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
     OcultarPedido(NumeroPedido);
 
-    ConsultaCompras();
+    consultaCompra(IdCompras, NumeroPedido);
+
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Sus datos se guardaron correctamente!", "", "success");
 
@@ -447,4 +448,32 @@ function nuevoStock() {
         if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
 
     });
+}
+
+
+//-----------------------------------Función  para el nuevo stock---------------------------------------
+function consultaCompra(IdComprIn, NoPedido) {
+
+    var Articulos = document.getElementsByClassName("input-Articulo");
+    var IDArticulos = document.getElementsByClassName("input-Articulo");
+    var Aprobar = document.getElementsByClassName("input-aprobar");
+
+
+    var resultado = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar[i].value > 0) {
+
+            resultado += IDArticulos[i].name + ":" + Articulos[i].value + "#" + IdComprIn + "%" + NoPedido + "/";
+
+        }
+    }
+    alert(resultado);
+    //$.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+    //    let RES = Data;
+    //    if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+
+    //});
+
 }
