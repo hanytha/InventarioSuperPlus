@@ -687,7 +687,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
     var NomArticulos = document.getElementsByClassName("input-Articulo");
 
-    var UnidadM = document.getElementsByClassName("input-Unidad");
+    //var UnidadM = document.getElementsByClassName("input-Unidad");
 
     var Precio = document.getElementsByClassName("input-Precio");
 

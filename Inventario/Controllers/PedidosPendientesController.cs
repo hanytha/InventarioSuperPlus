@@ -25,82 +25,82 @@ namespace Inventario.Controllers
         //****************************************************************************************************************************
         //****************************Consulta de pedidos internos***********************************************************
 
-/*
-        public JsonResult ConsultaPedidosNumeroPedido()
-        {
-            string NoPedido = "";
-            string IdAsignacion = "";
-            string IdTienda = "";
-            string NomTienda = "";
-
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
-               .Select(p => new
-               {
-                   pedido = p.NumeroPedido,
-                   asignacion = p.IdAsignacion,
-                   Idtienda = p.IdSitio,
-                   tiendas = p.Sitio,
-
-               });
-            if (Pedidos.Count() > 0)
-            {
-                long contador = 0;
-                long tem1 = 0;
-                long tem2 = 0;
-                long tem3 = 0;
-                long pedi = Pedidos.Count();
-
-                foreach (var numero in Pedidos)
+        /*
+                public JsonResult ConsultaPedidosNumeroPedido()
                 {
-                    if (contador == 0)
+                    string NoPedido = "";
+                    string IdAsignacion = "";
+                    string IdTienda = "";
+                    string NomTienda = "";
+
+                    var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
+                       .Select(p => new
+                       {
+                           pedido = p.NumeroPedido,
+                           asignacion = p.IdAsignacion,
+                           Idtienda = p.IdSitio,
+                           tiendas = p.Sitio,
+
+                       });
+                    if (Pedidos.Count() > 0)
                     {
-                        tem1 = numero.pedido;
-                        tem2 = (int)numero.asignacion;
-                        tem3 = (int)numero.Idtienda;
+                        long contador = 0;
+                        long tem1 = 0;
+                        long tem2 = 0;
+                        long tem3 = 0;
+                        long pedi = Pedidos.Count();
 
-                        NoPedido += numero.pedido + ",";
-                        IdAsignacion += numero.asignacion + ",";
-                        IdTienda += numero.Idtienda + ",";
-                        NomTienda += numero.tiendas + ",";
+                        foreach (var numero in Pedidos)
+                        {
+                            if (contador == 0)
+                            {
+                                tem1 = numero.pedido;
+                                tem2 = (int)numero.asignacion;
+                                tem3 = (int)numero.Idtienda;
 
-                    }
-                    if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
-                    {
-                        NoPedido += numero.pedido + ",";
-                        IdAsignacion += numero.asignacion + ",";
-                        IdTienda += numero.Idtienda + ",";
-                        NomTienda += numero.tiendas + ",";
+                                NoPedido += numero.pedido + ",";
+                                IdAsignacion += numero.asignacion + ",";
+                                IdTienda += numero.Idtienda + ",";
+                                NomTienda += numero.tiendas + ",";
 
-                        tem1 = numero.pedido;
-                        tem2 = (int)numero.asignacion;
-                        tem3 = (int)numero.Idtienda;
+                            }
+                            if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
+                            {
+                                NoPedido += numero.pedido + ",";
+                                IdAsignacion += numero.asignacion + ",";
+                                IdTienda += numero.Idtienda + ",";
+                                NomTienda += numero.tiendas + ",";
 
-                        contador++;
+                                tem1 = numero.pedido;
+                                tem2 = (int)numero.asignacion;
+                                tem3 = (int)numero.Idtienda;
+
+                                contador++;
+                            }
+                            else
+                            {
+                                contador++;
+                            }
+                        }
                     }
                     else
                     {
-                        contador++;
+                        NoPedido += "0" + ",";
+                        IdAsignacion += "0" + ",";
+                        IdTienda += "0" + ",";
+                        NomTienda += "0" + ",";
                     }
-                }
-            }
-            else
-            {
-                NoPedido += "0" + ",";
-                IdAsignacion += "0" + ",";
-                IdTienda += "0" + ",";
-                NomTienda += "0" + ",";
-            }
-            var consulta = new
-            {
-                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
-                NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
-            };
+                    var consulta = new
+                    {
+                        NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                        IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                        IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
+                        NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
+                    };
 
-            return Json(Pedidos, JsonRequestBehavior.AllowGet);
-        }
-*/
+                    return Json(Pedidos, JsonRequestBehavior.AllowGet);
+                }
+        */
 
         //------------------------------------------------------------------------------------------------
         ////----------------------Mostrar los pedidos por proveedor en razor-----------------------------------------------------
@@ -220,7 +220,7 @@ namespace Inventario.Controllers
 
         //-------------------------------------------------------------------------------------------------------------
         //***************************************Consulta Prueba******************************************
-      
+
         /*public JsonResult ConsultaPrueba()
         {
             ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
@@ -470,7 +470,7 @@ namespace Inventario.Controllers
                 && p.IdArticulo.Equals(DatosTienda.IdArticulo)
                 && p.Articulo.Equals(DatosTienda.Articulo)
                 && p.NoPedidoG.Equals(DatosTienda.NoPedidoG)
- 
+
                 ).Count();
 
 
@@ -573,8 +573,10 @@ namespace Inventario.Controllers
         public int GuardarNStock(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
+
+            var con = ConsultaArt((long)ID, (long)IDA);
+
+
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
@@ -582,11 +584,60 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-        //-------------------------Guardar el id de la compra interna---------------------------------------
+
+        //-------------------------------------Guardar el id de la compra-------------------------------------------------------------
+
+        public JsonResult ConsultaArt(long ID, long IDA)
+
+        {
+
+
+            var articulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(IDA)).OrderByDescending(p => p.IdCompraInterno)
+                .Select(p => new
+                {
+
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.NoPedidoG,
+                    p.IdCompraInterno,
+                    p.IdCompra,
+
+                });
+            foreach (var b in articulo)
+            {
+
+                var IdCompra = ID;
+                var IdCompraInterno = b.IdCompraInterno;
+                var IdArticulo = b.IdArticulo;
+                var Articulo = b.Articulo;
+                var NoPedidoG = b.NoPedidoG;
+
+                var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG);
+            }
+
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------
+
+        public int GuardarCom(long IdCompra, long IdCompraInterno, long IdArticulo, string Articulo, int NoPedidoG)
+        {
+            int nregistradosAfectados = 0;
+            ExistenciaAlmacenG com = InvBD.ExistenciaAlmacenG.First();
+            com.IdCompra = IdCompra;
+            com.IdCompraInterno = IdCompraInterno;
+            com.IdArticulo = IdArticulo;
+            com.Articulo = Articulo;
+            com.NoPedidoG = NoPedidoG;
+            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            nregistradosAfectados = 1;//Se pudo realizar
+            return nregistradosAfectados;
+
+        }
 
 
 
-        //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
+//-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
         public JsonResult ConsultaOcultar(long No)
 
         {
