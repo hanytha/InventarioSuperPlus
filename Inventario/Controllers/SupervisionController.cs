@@ -2070,34 +2070,7 @@ namespace Inventario.Controllers
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult MostrarArtUsado(long id)
-        //{(long Id)
-        {
-            var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
-                         join Compra in InvBD.CompraInterno
-                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                         join areas in InvBD.Areas
-                     on Compra.IdProveedor equals areas.IdAreas
-                         where Compra.IdSitio.Equals(id)
-                         //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-                         select new
-                         {
-                             IdPedidosInternos = ExistAlm.IdCompraInterno,
-                             NumeroPedido = ExistAlm.Articulo,
-                             NumPedidoProveedor = Compra.NoPedidoProveedor,
-                             Articulo = ExistAlm.Articulo,
-                             CantidadSolicitada = ExistAlm.ExitenciaInicial,
-                             CantidadAprobada = ExistAlm.ExitenciaActual,
-                             Tipo = ExistAlm.TipoDeOperacion,
-                             IdProveedor = Compra.IdProveedor,
-                             Proveedor = Compra.Proveedor,
-                             IdTienda = Compra.IdSitio,
-                             IdArticulo = ExistAlm.IdArticulo,
-                             //Articulo = ExistAlm.NombreEmpresa,
-                             Fecha = Compra.FechaIngreso,
-                         };
-            return Json(numero, JsonRequestBehavior.AllowGet);
-        }
+        
         public JsonResult usado(long id, long no)
         //{(long Id)
         {
@@ -3380,9 +3353,133 @@ namespace Inventario.Controllers
 
 
 
+        public JsonResult ConsultaArticuloUs(long Id)
+        {
+            string id = "";
+            string Nombre = "";
+            string NombreProveedor = "";
+            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
+            string NumeroPedido = "";
+            string Fecha = "";
+            string IdExistenciaAlmacenG = "";
+            var ConsultaArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
+                                   join Compra in InvBD.CompraInterno
+                               on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                                   join areas in InvBD.Areas
+                               on Compra.IdProveedor equals areas.IdAreas
+                                   where Compra.IdSitio.Equals(Id) && Compra.EstatusPedido.Equals(1)
+                                   //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+                                   select new
+                                   {
+                                       IdPedidosInternos = ExistAlm.IdCompraInterno,
+                                       NumeroPedido = ExistAlm.Articulo,
+                                       NumPedidoProveedor = Compra.NoPedidoProveedor,
+                                       nombres = ExistAlm.Articulo,
+                                       CantidadSolicitada = ExistAlm.ExitenciaInicial,
+                                       CantidadAprobada = ExistAlm.ExitenciaActual,
+                                       Tipo = ExistAlm.TipoDeOperacion,
+                                       IdProveedor = Compra.IdProveedor,
+                                       Proveedor = Compra.Proveedor,
+                                       IdTienda = Compra.IdSitio,
+                                       Id = ExistAlm.IdArticulo,
+                                       IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+                                       FechaDeIngreso = Compra.FechaIngreso,
+                                       ExitenciaActual= ExistAlm.ExitenciaActual,
+                                       IdAsignacion=Compra.IdAsignacion
+                                   };
+            foreach (var art in ConsultaArticulo)
+            {
+                id += art.Id + ",";
+                Nombre += art.nombres + ",";
+                NombreProveedor += art.nombres + ",";
+                NumeroPedido += art.NumeroPedido + ",";
+                Fecha += art.NumeroPedido + ",";
+                IdExistenciaAlmacenG += art.IdExistenciaAlmacenG + ",";
+                var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdAsignacion)
+                    .Select(p => new
+                    {
+                        fechaIngreso = p.FechaDeIngreso,
+                        stockActual = p.ExitenciaActual,
+                        //  costo = p.PrecioUnitario,
+                    });
+
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int cont = 0;
+                    int SumaStock = 0;
+                    //inicia
+                    //DateTime FultCompra;                
+                    foreach (var comp in consultaFecha)
+                    {
+
+                        SumaStock = (int)(SumaStock + comp.stockActual);
+                        if (cont == 0)
+                        {
+                            // Costos += comp.costo + ",";
+                        }
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                        }
+                        cont++;
+                    }
+                    Stock += SumaStock + ",";
+                    //termina
+                }
+                else
+                {
+                    Costos += "0" + ",";
+
+                    Fechas += "2010-08-10" + ",";
+                    Stock += "0" + ",";
+                }
+            }
+            var ResultadoId = new { 
+                id = id.Substring(0, id.Length - 1), 
+                Nombre = Nombre.Substring(0, Nombre.Length - 1), 
+                Fechas = Fechas.Substring(0, Fechas.Length - 1), 
+                Stock = Stock.Substring(0, Stock.Length - 1),
+                NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
+                NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1) };
+            return Json(ResultadoId, JsonRequestBehavior.AllowGet);
+        }
 
 
 
+
+        //public JsonResult MostrarArtUsado(long id)
+        ////{(long Id)
+        //{
+        //    var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
+        //                 join Compra in InvBD.CompraInterno
+        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+        //                 join areas in InvBD.Areas
+        //             on Compra.IdProveedor equals areas.IdAreas
+        //                 where Compra.IdSitio.Equals(id) && Compra.EstatusPedido.Equals(1)
+        //                 //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+        //                 select new
+        //                 {
+        //                     IdPedidosInternos = ExistAlm.IdCompraInterno,
+        //                     NumeroPedido = ExistAlm.Articulo,
+        //                     NumPedidoProveedor = Compra.NoPedidoProveedor,
+        //                     Articulo = ExistAlm.Articulo,
+        //                     CantidadSolicitada = ExistAlm.ExitenciaInicial,
+        //                     CantidadAprobada = ExistAlm.ExitenciaActual,
+        //                     Tipo = ExistAlm.TipoDeOperacion,
+        //                     IdProveedor = Compra.IdProveedor,
+        //                     Proveedor = Compra.Proveedor,
+        //                     IdTienda = Compra.IdSitio,
+        //                     IdArticulo = ExistAlm.IdArticulo,
+        //                     //Articulo = ExistAlm.NombreEmpresa,
+        //                     Fecha = Compra.FechaIngreso,
+        //                 };
+        //    return Json(numero, JsonRequestBehavior.AllowGet);
+        //}
 
 
 
