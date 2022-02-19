@@ -603,14 +603,16 @@ namespace Inventario.Controllers
                     p.IdCompra,
 
                 });
+
             foreach (var b in articulo)
             {
 
-                var IdCompra = ID;
-                var IdCompraInterno = b.IdCompraInterno;
-                var IdArticulo = b.IdArticulo;
-                var Articulo = b.Articulo;
-                var NoPedidoG = b.NoPedidoG;
+                    var IdCompra = ID;
+                    var IdCompraInterno = b.IdCompraInterno;
+                    var IdArticulo = b.IdArticulo;
+                    var Articulo = b.Articulo;
+                    var NoPedidoG = b.NoPedidoG;
+                
 
                 var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG);
             }
@@ -623,12 +625,13 @@ namespace Inventario.Controllers
         public int GuardarCom(long IdCompra, long IdCompraInterno, long IdArticulo, string Articulo, int NoPedidoG)
         {
             int nregistradosAfectados = 0;
-            ExistenciaAlmacenG com = InvBD.ExistenciaAlmacenG.First();
+            ExistenciaAlmacenG com = new ExistenciaAlmacenG();
             com.IdCompra = IdCompra;
             com.IdCompraInterno = IdCompraInterno;
             com.IdArticulo = IdArticulo;
             com.Articulo = Articulo;
             com.NoPedidoG = NoPedidoG;
+            InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
