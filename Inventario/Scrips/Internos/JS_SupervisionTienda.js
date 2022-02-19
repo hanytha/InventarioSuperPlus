@@ -2093,14 +2093,14 @@ function MostrarUs(no, id) {
             TablaArticulo += "<label>Existencia Actual</label>";
             TablaArticulo += "</div>";
 
-            let id = Data.id;
-            let ArrayIdArticulos = id.split(',');
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
             let NumeroPedido = Data.NumeroPedido;
             let ArrayNoPedido = NumeroPedido.split(',');
             let Fechas = Data.Fechas;
             let Arrayfecha = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
+            //let Stock = Data.Stock;
+            //let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             //let IdSitio = Data.IdSitio;
             //let ArrayIdSitio = IdSitio.split(',');
@@ -2147,7 +2147,7 @@ function MostrarUs(no, id) {
                     //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
                     //TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                 }
 
