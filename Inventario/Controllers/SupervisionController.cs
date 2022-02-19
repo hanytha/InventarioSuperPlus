@@ -2070,7 +2070,34 @@ namespace Inventario.Controllers
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
-
+        public JsonResult MostrarArtUsado(long id)
+        //{(long Id)
+        {
+            var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
+                         join Compra in InvBD.CompraInterno
+                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                         join areas in InvBD.Areas
+                     on Compra.IdProveedor equals areas.IdAreas
+                         where Compra.IdSitio.Equals(id)
+                         //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+                         select new
+                         {
+                             IdPedidosInternos = ExistAlm.IdCompraInterno,
+                             NumeroPedido = ExistAlm.Articulo,
+                             NumPedidoProveedor = Compra.NoPedidoProveedor,
+                             Articulo = ExistAlm.Articulo,
+                             CantidadSolicitada = ExistAlm.ExitenciaInicial,
+                             CantidadAprobada = ExistAlm.ExitenciaActual,
+                             Tipo = ExistAlm.TipoDeOperacion,
+                             IdProveedor = Compra.IdProveedor,
+                             Proveedor = Compra.Proveedor,
+                             IdTienda = Compra.IdSitio,
+                             IdArticulo = ExistAlm.IdArticulo,
+                             //Articulo = ExistAlm.NombreEmpresa,
+                             Fecha = Compra.FechaIngreso,
+                         };
+            return Json(numero, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult usado(long id, long no)
         //{(long Id)
         {

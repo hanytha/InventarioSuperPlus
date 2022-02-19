@@ -85,7 +85,7 @@
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
                                     <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
-
+                                    <button onclick="abrirModalUs(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#Usados">Usados</button>
                                     <div>
                                         <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
 
@@ -272,6 +272,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
@@ -683,6 +685,94 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+div class="container">
+<div class="modal fade" id="Usados">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <label class="form-control-label" style="font-size: 18px;">
+                        MOVIMIENTO: Usados
+                    </label>
+                </h2>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+
+            </div>
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                    <!-----formulario-->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
+                                <input type="text" id="TxtMovUs" class="form-control bloquear" value="Usados">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TxtFechaIngresoUs">Fecha de Ingreso<span></span></label>
+                                <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="cmbTiendaUs">Tienda<span class="required">*</span></label>
+                                <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                    <option value="0">--Seleccione--</option>
+                                    @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                    @{
+                                        if (@TiendasSupervision.IDTienda != null)
+                                        {
+                                            for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                            {
+                                                <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="TblArticulosUs">Artículo(s)<span class="required">*</span></label>
+                                <div id="TblArtUs">No hay Ningún artículo de este proveedor</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
+                <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
+
+                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
 
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">

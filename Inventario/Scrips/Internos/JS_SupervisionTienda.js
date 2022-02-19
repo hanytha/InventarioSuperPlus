@@ -2030,3 +2030,76 @@ function MostrarArticulos(id, no) {
         });
     }
 }
+
+
+
+
+
+function abrirModalUs(id, no) {
+
+    LimpiarCampos();
+    if (no == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+
+    else {
+
+        //$.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+        //    sessionStorage.setItem('IDG', Data[0].IdExistenciaAlmacenG);
+        //    //document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
+        //    document.getElementById("cmbTiendaUsados").value = Data[0].Tienda;
+
+
+        //});
+
+        //Prov(id)
+        MostrarUs(id, no);
+    }
+}
+
+function MostrarUs(no, id) {
+    // var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    // var ncontroles = controlesObligatorio.length;
+    //for (var i = 0; i < ncontroles; i++) {//recorre
+    //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    //}
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+        $.get("/Supervision/MostrarArtUsado/?id=" + id, function (Data) {
+        //$.get("/Supervision/usado/?id=" + id + "&no= " + no, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Articulo</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Cantidad Solicitada</label>";
+            TablaArticulo += "</div>";
+
+            for (var i = 0; i < Data.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + Data[i].IdArticulo + "'  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "</div>";
+                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<label>"
+                TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + Data[i].IdArticulo + "'  id='" + Data[i].IdArticulo + "'  value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+
+                TablaArticulo += "</label>"
+                TablaArticulo += "</div>";
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArtUs").innerHTML = TablaArticulo;
+        });
+    }
+}
