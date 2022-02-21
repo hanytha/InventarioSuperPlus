@@ -3621,7 +3621,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio > 0
+                          where Compra.IdSitio.Equals(Id)
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
