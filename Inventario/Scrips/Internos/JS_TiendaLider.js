@@ -163,24 +163,41 @@ function ConsultaArticuloCompra(IDTienda) {
 function mostrarBoton() {
 
     $('#btn-1').prop('disabled', true);
-
+    $('#button').prop('disabled', false);
     Guardar();
+    Mostrar();
 }
 
-jQuery.fn.extend({
-    disable: function (state) {
-        return this.each(function () {
-            this.disabled = state;
-        });
-    }
 
-});
+function ocultarBoton() {
 
-// Disabled with:
-$('input[type="submit"], input[type="button"], button').disable(true);
+    $('#btn-1').prop('disabled', false);
+    $('#button').prop('disabled', true);
 
-// Enabled with:
-$('input[type="submit"], input[type="button"], button').disable(false);
+}
+
+
+function Mostrar() {
+
+    //$('#btn-1').prop('disabled', false);
+    $('#button').prop('disabled', false);
+
+}
+
+//jQuery.fn.extend({
+//    disable: function (state) {
+//        return this.each(function () {
+//            this.disabled = state;
+//        });
+//    }
+
+//});
+
+//// Disabled with:
+//$('input[type="submit"], input[type="button"], button').disable(true);
+
+//// Enabled with:
+//$('input[type="submit"], input[type="button"], button').disable(false);
 
 
 function editarModal(id) {
@@ -251,6 +268,18 @@ function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
+
+
+function LimpiarCampos() {
+    var controlesTXT = document.getElementsByClassName("limpiar");
+    for (var i = 0; i < controlesTXT.length; i++) {
+        controlesTXT[i].value = "";
+    }
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
     }
 }
 
