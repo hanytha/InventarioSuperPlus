@@ -2071,7 +2071,7 @@ function MostrarUs(no, id) {
     }
     else {
 
-        $.get("/Supervision/ConsultaPedidosNumeroPedido/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaPedidosUs/?Id=" + id, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
