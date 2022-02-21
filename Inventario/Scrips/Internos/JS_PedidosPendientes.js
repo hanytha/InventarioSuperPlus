@@ -149,29 +149,6 @@ function MostrarArticulosPorId(id) {
     }
 }
 
-//-------------Función para verificar que la cantidad aprobada no sea mayor al stock----------------------
-//function Verificar() {
-//    var total = document.getElementsByClassName("input-total");
-//    var aprobar = document.getElementsByClassName("input-aprobar");
-//    //var contador = 0;
-//    //var contadorAprobada = 0;
-//    var exito = true;
-//    for (let i = 0; i < total.length; i++) {
-//        if (aprobar[i].value < 0 || aprobar[i].value > total[i].value) {
-//            swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
-//            exito = false;
-//        }
-//    }
-//    return exito;
-//    //if (contador == contadorAprobada && contador >= 1) {
-
-//    //    GuardarCompraInterna();
-//    //}
-//    //else {
-//    //    swal("¡Datos incorrectos!", "Verifique los datos ingresados", "warning");
-//    //}
-//}
-
 //-------------------------Validacion---------------------------
 function validacion() {
     var total = document.getElementsByClassName("input-total");
@@ -448,30 +425,3 @@ function nuevoStock() {
     });
 }
 
-
-//-----------------------------------Función  para el nuevo stock---------------------------------------
-//function consultaCompra(IdComprIn, NoPedido) {
-
-//    var Articulos = document.getElementsByClassName("input-Articulo");
-//    var IDArticulos = document.getElementsByClassName("input-Articulo");
-//    var Aprobar = document.getElementsByClassName("input-aprobar");
-
-
-//    var resultado = "";
-
-//    for (let i = 0; i < Articulos.length; i++) {
-
-//        if (Aprobar[i].value > 0) {
-
-//            resultado += IDArticulos[i].name + ":" + Articulos[i].value + "#" + IdComprIn + "%" + NoPedido + "/";
-
-//        }
-//    }
-//    alert(resultado);
-//    //$.get("/PedidosPendientes/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
-//    //    let RES = Data;
-//    //    if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
-
-//    //});
-
-//}

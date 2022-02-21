@@ -23,76 +23,7 @@ namespace Inventario.Controllers
             return View();
         }
         //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
-       
-        /* public JsonResult ConsultaPrecioPromedio()
-        {
-            string Fecha = "";
-            string Articulo = "";
-            string IDA = "";
-            string Area = "";
-            string PrecioPro = "";
 
-            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    FechaI = p.FechaSistema,
-                    Nombre = p.NombreEmpresa,
-                    areas = p.Area,
-                    ID = p.IdArticulos
-                });
-            foreach (var art in articulos)
-            {
-                IDA += art.ID + ",";
-                Articulo += art.Nombre + ",";
-                Fecha += art.FechaI + ",";
-                Area += art.areas + ",";
-
-                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.ID) && p.PrecioUnitario > 0)
-             .Select(p => new
-             {
-                 stock = p.ExistenciaInicial,
-                 precio = p.PrecioUnitario,
-
-             });
-
-
-                if (consultaFecha.Count() > 0)
-                {
-                    int UltimoReg = consultaFecha.Count() - 1;
-                    int SumaStock = 0;
-                    int SumaPrecio = 0;
-                    int Promedio = 0;
-
-                    foreach (var com in consultaFecha)
-                    {
-
-                       
-                        SumaStock = (int)(SumaStock + com.stock);
-                        SumaPrecio = (int)(SumaPrecio + ((com.stock) * (com.precio)));
-                        
-                    }
-                    Promedio = SumaPrecio / SumaStock;
-
-                    PrecioPro += Promedio + ",";
-                }
-                else
-                {
-                    PrecioPro += "0" + ",";
-                }
-
-            }
-
-            var Resultado = new
-            {
-                Fecha = Fecha.Substring(0, Fecha.Length - 1),
-                Articulo = Articulo.Substring(0, Articulo.Length - 1),
-                IDA = IDA.Substring(0, IDA.Length - 1),
-                Area = Area.Substring(0, Area.Length - 1),
-                PrecioPro = PrecioPro.Substring(0, PrecioPro.Length - 1)
-            };
-            return Json(Resultado, JsonRequestBehavior.AllowGet);
-        }
-        */
         //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
         public void ConsultaPrecioPromedioRazor()
         {

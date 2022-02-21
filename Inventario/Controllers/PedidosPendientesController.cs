@@ -23,86 +23,6 @@ namespace Inventario.Controllers
             return View();
         }
         //****************************************************************************************************************************
-        //****************************Consulta de pedidos internos***********************************************************
-
-        /*
-                public JsonResult ConsultaPedidosNumeroPedido()
-                {
-                    string NoPedido = "";
-                    string IdAsignacion = "";
-                    string IdTienda = "";
-                    string NomTienda = "";
-
-                    var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderBy(p => p.NumeroPedido)
-                       .Select(p => new
-                       {
-                           pedido = p.NumeroPedido,
-                           asignacion = p.IdAsignacion,
-                           Idtienda = p.IdSitio,
-                           tiendas = p.Sitio,
-
-                       });
-                    if (Pedidos.Count() > 0)
-                    {
-                        long contador = 0;
-                        long tem1 = 0;
-                        long tem2 = 0;
-                        long tem3 = 0;
-                        long pedi = Pedidos.Count();
-
-                        foreach (var numero in Pedidos)
-                        {
-                            if (contador == 0)
-                            {
-                                tem1 = numero.pedido;
-                                tem2 = (int)numero.asignacion;
-                                tem3 = (int)numero.Idtienda;
-
-                                NoPedido += numero.pedido + ",";
-                                IdAsignacion += numero.asignacion + ",";
-                                IdTienda += numero.Idtienda + ",";
-                                NomTienda += numero.tiendas + ",";
-
-                            }
-                            if (numero.pedido != tem1 || numero.asignacion != tem2 || numero.Idtienda != tem3)
-                            {
-                                NoPedido += numero.pedido + ",";
-                                IdAsignacion += numero.asignacion + ",";
-                                IdTienda += numero.Idtienda + ",";
-                                NomTienda += numero.tiendas + ",";
-
-                                tem1 = numero.pedido;
-                                tem2 = (int)numero.asignacion;
-                                tem3 = (int)numero.Idtienda;
-
-                                contador++;
-                            }
-                            else
-                            {
-                                contador++;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        NoPedido += "0" + ",";
-                        IdAsignacion += "0" + ",";
-                        IdTienda += "0" + ",";
-                        NomTienda += "0" + ",";
-                    }
-                    var consulta = new
-                    {
-                        NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-                        IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                        IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
-                        NomTienda = NomTienda.Substring(0, NomTienda.Length - 1)
-                    };
-
-                    return Json(Pedidos, JsonRequestBehavior.AllowGet);
-                }
-        */
-
-        //------------------------------------------------------------------------------------------------
         ////----------------------Mostrar los pedidos por proveedor en razor-----------------------------------------------------
 
         public void ConsultaPedidosNumeroPedidoArea()
@@ -218,59 +138,6 @@ namespace Inventario.Controllers
         }
 
 
-        //-------------------------------------------------------------------------------------------------------------
-        //***************************************Consulta Prueba******************************************
-
-        /*public JsonResult ConsultaPrueba()
-        {
-            ModeloPendientesArea modeloPedidosPendientes = new ModeloPendientesArea();
-            ModeloPendientesArea.NumeroPedido = new List<long>();
-            ModeloPendientesArea.IdAsignacion = new List<long>();
-            ModeloPendientesArea.IdSitio = new List<long>();
-            ModeloPendientesArea.IdProveedor = new List<long>();
-            ModeloPendientesArea.Sitio = new List<string>();
-
-            var articulo = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
-                .Select(p => new
-                {
-                    p.NumeroPedido,
-                    p.NumPedidoProveedor,
-                    p.CantidadSolicitada,
-                    p.IdAsignacion,
-                    p.IdSitio,
-                    p.Sitio,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.IdProveedor,
-                    p.Proveedor,
-                    p.Fecha,
-
-                });
-            foreach (var area in articulo)
-            {
-                if (area.NumeroPedido == 0 || area.IdAsignacion == 0 || area.IdSitio == 0 || area.Sitio == null)
-                {
-                    ModeloPendientesArea.NumeroPedido.Add(1);
-                    ModeloPendientesArea.IdAsignacion.Add(1);
-                    ModeloPendientesArea.IdSitio.Add(1);
-                    ModeloPendientesArea.Sitio.Add(null);
-                    ModeloPendientesArea.IdProveedor.Add(33);
-
-                }
-                else
-                {
-                    ModeloPendientesArea.NumeroPedido.Add(area.NumeroPedido);
-                    ModeloPendientesArea.IdAsignacion.Add((int)area.IdAsignacion);
-                    ModeloPendientesArea.IdSitio.Add((int)area.IdSitio);
-                    ModeloPendientesArea.Sitio.Add(area.Sitio);
-                    ModeloPendientesArea.IdProveedor.Add((int)area.IdProveedor);
-
-                }
-            }
-            return Json(articulo, JsonRequestBehavior.AllowGet);
-        }*/
-
-
         //--------------------------------Consulta los artículos por ID-------------------------------------------
         public JsonResult ConsultaPedidoXNumero(long Num)
         {
@@ -368,12 +235,7 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
                   //&& p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
-                  //&& p.IdProveedor.Equals(DatosCompra.IdProveedor)
-                  //&& p.Proveedor.Equals(DatosCompra.Proveedor)
-                  //&& p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
-                  //&& p.IdSitio.Equals(DatosCompra.IdSitio)
-                  //&& p.Sitio.Equals(DatosCompra.Sitio)
-                  //&& p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
+
 
                   ).Count();
 
@@ -438,65 +300,6 @@ namespace Inventario.Controllers
         }
 
         //**************Termina********************************************************************************
-        //*******************************Guarda los datos en la segunda tabla*************************************************
-
-        //public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
-        //{
-        //    int Afectados = 0;
-
-        //    long id = (long)DatosTienda.IdExistenciaAlmacenG;
-        //    if (id.Equals(0))
-        //    {
-        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosTienda.IdExistenciaAlmacenG)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosTienda);
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosTienda.IdExistenciaAlmacenG)
-        //        && p.IdCompra.Equals(DatosTienda.IdCompra)
-        //        && p.IdCompraInterno.Equals(DatosTienda.IdCompraInterno)
-        //        && p.ExitenciaInicial.Equals(DatosTienda.ExitenciaInicial)
-        //        && p.ExitenciaActual.Equals(DatosTienda.ExitenciaActual)
-        //        && p.IdArticulo.Equals(DatosTienda.IdArticulo)
-        //        && p.Articulo.Equals(DatosTienda.Articulo)
-        //        && p.NoPedidoG.Equals(DatosTienda.NoPedidoG)
-
-        //        ).Count();
-
-
-        //        if (nveces == 0)
-        //        {
-        //            ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
-
-        //            obj.IdCompra = DatosTienda.IdCompra;
-        //            obj.IdCompraInterno = DatosTienda.IdCompraInterno;
-        //            obj.ExitenciaInicial = DatosTienda.ExitenciaInicial;
-        //            obj.ExitenciaActual = DatosTienda.ExitenciaActual;
-        //            obj.IdArticulo = DatosTienda.IdArticulo;
-        //            obj.Articulo = DatosTienda.Articulo;
-        //            obj.NoPedidoG = DatosTienda.NoPedidoG;
-
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-
-        //    return Afectados;
-        //}
         //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada-----------------
 
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
@@ -646,6 +449,9 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+
+
+        //************************************************************************************************************************
         //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
         public JsonResult ConsultaOcultar(long No)
 
