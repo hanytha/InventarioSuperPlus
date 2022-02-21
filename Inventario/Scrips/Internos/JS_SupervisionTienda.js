@@ -1970,6 +1970,7 @@ function VerPedido(id, no) {
     else {
         $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
 
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;

@@ -521,7 +521,7 @@
                     @*   <input onclick="mostrarBoton()" type="button" class="btn btn-primary" id="btn-1" data-toggle="modal" data-target="#ModalPedidos" value="Imprimir" />*@
                     @* <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
                     @*<input onclick="Guardar()" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
-                    <button type="button" class="btn btn-success ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
+                    <button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
                     <!-- Mostrar y ocultar botones-->
                     <script>
                         $(function () {
@@ -579,7 +579,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de orden:</label><label id="TxtNumeroPedido"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArt"></label></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -643,7 +643,7 @@
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    @*<button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>*@
                 </div>
             </div>
         </div>

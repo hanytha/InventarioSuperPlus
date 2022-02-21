@@ -2140,7 +2140,7 @@ namespace Inventario.Controllers
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
-                                NoCompraProveedor = Compra.NoPedidoProveedor,
+                                NoCompraProveedor = Compra.NoPedido,
                                 // CantidadSolicitada = ExistAlm.CantidadSolicitada,
                                 // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,

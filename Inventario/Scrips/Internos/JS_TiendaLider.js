@@ -825,6 +825,7 @@ function VerPedido(id, no) {
     else {
         $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
 
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
@@ -832,7 +833,7 @@ function VerPedido(id, no) {
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
-            document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
+
             MostrarArticulos(id, no);
             //MostrarArt(id, no); 
         });
@@ -991,7 +992,7 @@ function CamposObligatoriosAceptar() {
 
 function Guardar() {
     if (CamposObligatoriosAceptar() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+        //if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdCompraInterno = sessionStorage.getItem('IdPedido');
             var NoPedido = document.getElementById("TxtAceptarNumeroPedidoAceptar").value;
             var NoCompraProveedor = document.getElementById("TxtAceptarNumPedidoProveedor").value;
@@ -1035,7 +1036,7 @@ function Guardar() {
             alert("¡¡Pedido aceptado satisfactoriamente!!");
         
             //document.getElementById("btnCancelar").click();
-        }
+        //}
     }
 }
 
