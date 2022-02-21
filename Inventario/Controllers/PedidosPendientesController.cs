@@ -532,25 +532,29 @@ namespace Inventario.Controllers
                     if (Diferencia > 0)
                     {
                         Double NExistencia = 0;
+                        Double NCantidad = 0;
 
                         if (con.StockActual == Diferencia)
                         {
                             Diferencia = 0;
                             NExistencia = 0;
+                            NCantidad = (double)con.StockActual;
                         }
                         else if (con.StockActual > Diferencia)
                         {
 
                             NExistencia = (Double)con.StockActual - Diferencia;
                             Diferencia = 0;
+                            NCantidad = Diferencia;
                         }
                         else
                         {
                             Diferencia = Diferencia - (Double)con.StockActual;
                             NExistencia = 0;
+                            NCantidad = (double)con.StockActual;
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, NCantidad);
                         if (consulta == 0)
                         {
                             break;
@@ -570,11 +574,11 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        public int GuardarNStock(long ID, long IDA, double NExistencia, double NCantidad)
         {
             int nregistradosAfectados = 0;
 
-            var con = ConsultaArt((long)ID, (long)IDA);
+            var con = ConsultaArt((long)ID, (long)IDA, (double) NCantidad);
 
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
@@ -589,7 +593,7 @@ namespace Inventario.Controllers
 
         //-------------------------------------Guardar el id de la compra-------------------------------------------------------------
 
-        public JsonResult ConsultaArt(long ID, long IDA)
+        public JsonResult ConsultaArt(long ID, long IDA, double NCantidad)
 
         {
 
@@ -603,6 +607,7 @@ namespace Inventario.Controllers
                     p.NoPedidoG,
                     p.IdCompraInterno,
                     p.IdCompra,
+                    p.ExitenciaInicial,
 
 
                 });
@@ -617,7 +622,8 @@ namespace Inventario.Controllers
                     var IdArticulo = b.IdArticulo;
                     var Articulo = b.Articulo;
                     var NoPedidoG = b.NoPedidoG;
-                    var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG);
+                    var ExitenciaInicial = NCantidad;
+                    var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG, (double)ExitenciaInicial);
                 }
             }
 
@@ -627,7 +633,7 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
 
-        public int GuardarCom(long IdCompra, long IdCompraInterno, long IdArticulo, string Articulo, int NoPedidoG)
+        public int GuardarCom(long IdCompra, long IdCompraInterno, long IdArticulo, string Articulo, int NoPedidoG, double ExitenciaInicial)
         {
             int nregistradosAfectados = 0;
             ExistenciaAlmacenG com = new ExistenciaAlmacenG();
@@ -636,6 +642,7 @@ namespace Inventario.Controllers
             com.IdArticulo = IdArticulo;
             com.Articulo = Articulo;
             com.NoPedidoG = NoPedidoG;
+            com.ExitenciaInicial = ExitenciaInicial;
             InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
