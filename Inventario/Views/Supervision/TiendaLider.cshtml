@@ -516,9 +516,13 @@
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-                    <button type="button" class="btn btn-success ocultarBoton" id="btn-1" onclick="mostrarBoton()">Aceptar pedido</button>
-                    <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Imprimir" style="display: none;" />
+                    @*<button type="button" class="btn btn-success ocultarBoton" id="btn-1" onclick="mostrarBoton()">Aceptar pedido</button>*@
 
+                    @*   <input onclick="mostrarBoton()" type="button" class="btn btn-primary" id="btn-1" data-toggle="modal" data-target="#ModalPedidos" value="Imprimir" />*@
+                    @* <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
+                    @*<input onclick="Guardar()" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
+                    <button type="button" class="btn btn-success ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
+                    <!-- Mostrar y ocultar botones-->
                     <script>
                         $(function () {
                             $('#btn-1').click(function () {

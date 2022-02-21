@@ -2094,8 +2094,8 @@ namespace Inventario.Controllers
                              Proveedor = Compra.Proveedor,
                              IdTienda = Compra.IdSitio,
                              IdArticulo = ExistAlm.IdArticulo,
-                             //Articulo = ExistAlm.NombreEmpresa,
-                             Fecha = Compra.FechaIngreso,
+                             ////Articulo = ExistAlm.NombreEmpresa,
+                             //Fecha = Compra.FechaIngreso,
                          };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
