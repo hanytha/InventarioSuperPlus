@@ -574,14 +574,15 @@ namespace Inventario.Controllers
         {
             int nregistradosAfectados = 0;
 
-            var con = ConsultaArt((long)ID, (long)IDA);
-
-
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+
+            var con = ConsultaArt((long)ID, (long)IDA);
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
+
+           
         }
 
 
@@ -602,20 +603,23 @@ namespace Inventario.Controllers
                     p.IdCompraInterno,
                     p.IdCompra,
 
-                });
 
+                });
+            var contador = 0;
             foreach (var b in articulo)
             {
+                contador++;
 
+                if (contador == 1) {
                     var IdCompra = ID;
                     var IdCompraInterno = b.IdCompraInterno;
                     var IdArticulo = b.IdArticulo;
                     var Articulo = b.Articulo;
                     var NoPedidoG = b.NoPedidoG;
-                
-
-                var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG);
+                    var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG);
+                }
             }
+
 
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
@@ -640,7 +644,7 @@ namespace Inventario.Controllers
 
 
 
-//-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
+        //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
         public JsonResult ConsultaOcultar(long No)
 
         {
