@@ -6958,7 +6958,7 @@ namespace Inventario
 		
 		private string _Fecha;
 		
-		private int _Estatus;
+		private System.Nullable<int> _Estatus;
 		
 		private EntityRef<Articulos> _Articulos;
 		
@@ -6994,7 +6994,7 @@ namespace Inventario
     partial void OnUnidadMedidaChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
-    partial void OnEstatusChanging(int value);
+    partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
     #endregion
 		
@@ -7273,8 +7273,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int NOT NULL")]
-		public int Estatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
 		{
 			get
 			{

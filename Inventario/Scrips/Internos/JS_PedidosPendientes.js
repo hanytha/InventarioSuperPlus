@@ -402,13 +402,9 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
         }
     }
-  //  nuevoStock();
-
-    OcultarPedido(NumeroPedido);
-
-  //  consultaCompra(IdCompras, NumeroPedido);
-
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+    OcultarPedido(NumeroPedido);
+    //-------------------------------------------
     swal("Sus datos se guardaron correctamente!", "", "success");
 
 }
@@ -420,7 +416,7 @@ function OcultarPedido(no) {
     $.get("/PedidosPendientes/ConsultaOcultar/?No=" + no, function (Data) {
         let sum = Data;
         if (Data == 1) {
-            alert("hOLA")
+            alert("Ejecución correcta")
         }
     });
 

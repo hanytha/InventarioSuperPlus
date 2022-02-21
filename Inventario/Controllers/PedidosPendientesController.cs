@@ -542,10 +542,10 @@ namespace Inventario.Controllers
                         }
                         else if (con.StockActual > Diferencia)
                         {
-
+                            NCantidad = Diferencia;
                             NExistencia = (Double)con.StockActual - Diferencia;
                             Diferencia = 0;
-                            NCantidad = Diferencia;
+                            
                         }
                         else
                         {
@@ -554,7 +554,7 @@ namespace Inventario.Controllers
                             NCantidad = (double)con.StockActual;
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, NCantidad);
+                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, NCantidad, (string)con.Articulo);
                         if (consulta == 0)
                         {
                             break;
@@ -574,17 +574,17 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia, double NCantidad)
+        public int GuardarNStock(long ID, long IDA, double NExistencia, double NCantidad, string Articulo)
         {
             int nregistradosAfectados = 0;
 
-           var con = ConsultaArt((long)ID, (long)IDA, (double) NCantidad);
+           var con = ConsultaArt((long)ID, (long)IDA, (double) NCantidad, (string)Articulo);
 
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.StockActual = NExistencia;//Cambia el estatus en 0
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            mpag.StockActual = NExistencia;
+            InvBD.SubmitChanges();
 
-            nregistradosAfectados = 1;//Se pudo realizar
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
 
            
@@ -593,7 +593,7 @@ namespace Inventario.Controllers
         //------------------------------------------------------------------------------------------------------------
 
 
-        public JsonResult ConsultaArt(long ID, long IDA, double NCantidad)
+        public JsonResult ConsultaArt(long ID, long IDA, double NCantidad, string Articulo)
 
         {
 
@@ -617,7 +617,8 @@ namespace Inventario.Controllers
                     var IdCompraInterno = b.IdCompraInterno;
                     var NoPedidoG = b.NoPedido;
                     var ExitenciaInicial = NCantidad;
-                    var cons = GuardarCom((long)IdCompra,(long) IDA, (long)IdCompraInterno, (int)NoPedidoG, (double)ExitenciaInicial);
+                    var NomArticulo = Articulo;
+                    var cons = GuardarCom((long)IdCompra,(long) IDA, (long)IdCompraInterno, (int)NoPedidoG, (double)ExitenciaInicial, (string)NomArticulo);
                 }
             }
 
@@ -627,96 +628,23 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
 
-        public int GuardarCom(long IdCompra,long IDA, long IdCompraInterno, int NoPedidoG, double ExitenciaInicial)
+        public int GuardarCom(long IdCompra,long IDA, long IdCompraInterno, int NoPedidoG, double ExitenciaInicial, string NomArticulo)
         {
             int nregistradosAfectados = 0;
+
             ExistenciaAlmacenG com = new ExistenciaAlmacenG();
             com.IdCompra = IdCompra;
             com.IdCompraInterno = IdCompraInterno;
             com.NoPedidoG = NoPedidoG;
             com.ExitenciaInicial = ExitenciaInicial;
             com.ExitenciaActual = ExitenciaInicial;
-            com.IdArticulo = IDA; 
+            com.IdArticulo = IDA;
+            com.Articulo = NomArticulo;
             InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
-
         }
-
-
-        //----------------------------------------------------------------------------------------------------------------
-
-        public int GuardarArticulosAlmacen(ExistenciaAlmacenG DatosTienda)
-            {
-                int Afectados = 0;
-                InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosTienda);
-                InvBD.SubmitChanges();
-                Afectados = 1;
-
-                return Afectados;
-            }
-
-        //-------------------------------------Guardar el id de la compra-------------------------------------------------------------
-
-        //public JsonResult ConsultaArt(long ID, long IDA, double NCantidad)
-
-        //{
-
-
-        //    var articulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(IDA)).OrderByDescending(p => p.IdCompraInterno)
-        //        .Select(p => new
-        //        {
-
-        //            p.IdArticulo,
-        //            p.Articulo,
-        //            p.NoPedidoG,
-        //            p.IdCompraInterno,
-        //            p.IdCompra,
-        //            p.ExitenciaInicial,
-
-
-        //        });
-        //    var contador = 0;
-        //    foreach (var b in articulo)
-        //    {
-        //        contador++;
-
-        //        if (contador == 1) {
-        //            var IdCompra = ID;
-        //            var IdCompraInterno = b.IdCompraInterno;
-        //            var IdArticulo = b.IdArticulo;
-        //            var Articulo = b.Articulo;
-        //            var NoPedidoG = b.NoPedidoG;
-        //            var ExitenciaInicial = NCantidad;
-        //            var cons = GuardarCom((long)IdCompra, (long)IdCompraInterno, (long)IdArticulo, Articulo, (int)NoPedidoG, (double)ExitenciaInicial);
-        //        }
-        //    }
-
-
-        //    return Json(articulo, JsonRequestBehavior.AllowGet);
-        //}
-
-        ////----------------------------------------------------------------------------------------------------------------
-
-        //public int GuardarCom(long IdCompra, long IdCompraInterno, long IdArticulo, string Articulo, int NoPedidoG, double ExitenciaInicial)
-        //{
-        //    int nregistradosAfectados = 0;
-        //    ExistenciaAlmacenG com = new ExistenciaAlmacenG();
-        //    com.IdCompra = IdCompra;
-        //    com.IdCompraInterno = IdCompraInterno;
-        //    com.IdArticulo = IdArticulo;
-        //    com.Articulo = Articulo;
-        //    com.NoPedidoG = NoPedidoG;
-        //    com.ExitenciaInicial = ExitenciaInicial;
-        //    InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
-        //    InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-        //    nregistradosAfectados = 1;//Se pudo realizar
-        //    return nregistradosAfectados;
-
-        //}
-
-
 
         //-----------------------------Consulta los pedidos por número de comra para cambiar el estatus--------------------------------
         public JsonResult ConsultaOcultar(long No)
@@ -740,17 +668,12 @@ namespace Inventario.Controllers
         public int OcultarPeidos(long No, long ID)
         {
             int nregistradosAfectados = 0;
-            try
-            {
+
                 PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No) && p.IdArticulo.Equals(ID)).First();
-                mpag.Estatus = 0;//Cambia el estatus en 0
-                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-                nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
+                mpag.Estatus = 0;
+                InvBD.SubmitChanges();
+                nregistradosAfectados = 1;
+
             return nregistradosAfectados;
         }
         //--------------Termina------------------------------------------------
