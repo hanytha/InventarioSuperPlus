@@ -372,33 +372,33 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
             frm.append("ExitenciaActual", ExitenciaActual);
             frm.append("NoPedidoG", NumeroPedido);
 
-            $.ajax({
-                type: "POST",
-                url: "/PedidosPendientes/GuardarArticulosAlmacen",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data == 0) {
-                        swal("¡Ocurrio un error!", "", "danger");
-                    }
-                    else if (data == -1) {
-                        swal({
-                            title: "Verifique la actualización de sus datos",
-                            text: "",
-                            icon: "info",
-                            buttons: true,
-                            showCancelButton: true,
-                            cancelButtonColor: '#d33',
-                        })
-                    }
-                    else {
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/PedidosPendientes/GuardarArticulosAlmacen",
+            //    data: frm,
+            //    contentType: false,
+            //    processData: false,
+            //    success: function (data) {
+            //        if (data == 0) {
+            //            swal("¡Ocurrio un error!", "", "danger");
+            //        }
+            //        else if (data == -1) {
+            //            swal({
+            //                title: "Verifique la actualización de sus datos",
+            //                text: "",
+            //                icon: "info",
+            //                buttons: true,
+            //                showCancelButton: true,
+            //                cancelButtonColor: '#d33',
+            //            })
+            //        }
+            //        else {
 
-                        ConsultaCompras();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
+            //            ConsultaCompras();
+            //            document.getElementById("btnCancelar").click();
+            //        }
+            //    }
+            //});
 
         }
     }
