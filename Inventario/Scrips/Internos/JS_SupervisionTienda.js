@@ -2061,17 +2061,17 @@ function abrirModalUs(no, id) {
 
 
 function MostrarUs(no, id) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
+    //var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    //var ncontroles = controlesObligatorio.length;
+    //for (var i = 0; i < ncontroles; i++) {//recorre
+    //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    //}
     if (id == 0) {
         sessionStorage.setItem('IdMovimiento', '0');
     }
     else {
 
-        $.get("/Supervision/ConsultaArticuloUs/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaPedidosNumeroPedido/?Id=" + id, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";

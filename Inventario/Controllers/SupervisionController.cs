@@ -3562,6 +3562,114 @@ namespace Inventario.Controllers
         }
 
 
+        ///////////-------------------------------------------
+        public JsonResult ConsultaPedidosNumeroPedido(long Id)
+        {
+            string NoPedido = "";
+            string IdAsignacion = "";
+            string IdTienda = "";
+            string NomTienda = "";
+            string IdArticulo = "";
+            string NumeroPedido = "";
+            string Fechas = "";
+            string Nombre = "";
+            string IdExistenciaAlmacenG = "";
+
+            var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
+               .Select(p => new
+               {
+                   pedido = p.Articulo,
+                   asignacion = p.IdArticulo,
+                   //Idtienda = p.IdCompraInterno,
+                   tiendas = p.ExitenciaActual,
+                   IdArticulo = p.IdArticulo,
+                   NumeroPedido=p.NoPedidoG,
+                   Nombre=p.Articulo,
+                   Fechas = p.ExitenciaInicial,
+                    IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
+               });
+            if (Pedidos.Count() > 0)
+            {
+                long contador = 0;
+                String tem1 = "";
+                long tem2 = 0;
+                long tem3 = 0;
+                long pedi = Pedidos.Count();
+
+                foreach (var numero in Pedidos)
+                {
+                    if (contador == 0)
+                    {
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                       // tem3 = (int)numero.Idtienda;
+
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                      //  IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
+                         IdArticulo+= numero.IdArticulo + ",";
+                         NumeroPedido += numero.NumeroPedido + ",";
+                         Fechas += numero.Fechas + ",";
+                         Nombre += numero.Nombre + ",";
+                         IdExistenciaAlmacenG+= numero.IdExistenciaAlmacenG + ",";
+                    }
+                    if (numero.pedido != tem1 || numero.asignacion != tem2)
+                    {
+                        NoPedido += numero.pedido + ",";
+                        IdAsignacion += numero.asignacion + ",";
+                       //IdTienda += numero.Idtienda + ",";
+                        NomTienda += numero.tiendas + ",";
+                        IdArticulo += numero.IdArticulo + ",";
+                        NumeroPedido += numero.NumeroPedido + ",";
+                        Fechas += numero.Fechas + ",";
+                        Nombre += numero.Nombre + ",";
+                        IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
+                        tem1 = numero.pedido;
+                        tem2 = (int)numero.asignacion;
+                        //tem3 = (int)numero.Idtienda;
+
+                        contador++;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+                NoPedido += "0" + ",";
+                IdAsignacion += "0" + ",";
+                //IdTienda += "0" + ",";
+                NomTienda += "0" + ",";
+
+                IdArticulo += "0" + ",";
+                NumeroPedido += "0" + ",";
+                Fechas += "0" + ",";
+                Nombre += "0" + ",";
+                IdExistenciaAlmacenG += "0" + ",";
+            }
+            var consulta = new
+            {
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
+                NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
+
+                IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
+                NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
+                Fechas = Fechas.Substring(0, Fechas.Length - 1),
+                Nombre = Nombre.Substring(0, Nombre.Length - 1),
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
+            };
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+        }
+
+        ///------------------------------------------------
+
+
 
         //public JsonResult MostrarArtUsado(long id)
         ////{(long Id)
