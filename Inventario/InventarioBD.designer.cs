@@ -117,7 +117,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -4377,11 +4377,11 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCompraInterno;
 		
-		private System.Nullable<long> _ExitenciaInicial;
+		private System.Nullable<double> _ExitenciaInicial;
 		
 		private System.Nullable<double> _ExitenciaActual;
 		
-		private long _IdArticulo;
+		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
 		
@@ -4401,11 +4401,11 @@ namespace Inventario
     partial void OnIdCompraChanged();
     partial void OnIdCompraInternoChanging(System.Nullable<long> value);
     partial void OnIdCompraInternoChanged();
-    partial void OnExitenciaInicialChanging(System.Nullable<long> value);
+    partial void OnExitenciaInicialChanging(System.Nullable<double> value);
     partial void OnExitenciaInicialChanged();
     partial void OnExitenciaActualChanging(System.Nullable<double> value);
     partial void OnExitenciaActualChanged();
-    partial void OnIdArticuloChanging(long value);
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
@@ -4482,8 +4482,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="BigInt")]
-		public System.Nullable<long> ExitenciaInicial
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExitenciaInicial", DbType="Float")]
+		public System.Nullable<double> ExitenciaInicial
 		{
 			get
 			{
@@ -4522,8 +4522,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt NOT NULL")]
-		public long IdArticulo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
 		{
 			get
 			{
