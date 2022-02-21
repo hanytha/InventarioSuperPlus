@@ -574,11 +574,12 @@ namespace Inventario.Controllers
         {
             int nregistradosAfectados = 0;
 
+            var con = ConsultaArt((long)ID, (long)IDA);
+
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;//Cambia el estatus en 0
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
 
-            var con = ConsultaArt((long)ID, (long)IDA);
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
 
