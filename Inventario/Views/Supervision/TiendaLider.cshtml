@@ -142,7 +142,7 @@
                                 <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                 <div class="row">
 
-                        
+
                                     <div>
                                         <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
 
@@ -271,7 +271,7 @@
                                     <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
                                     <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -651,6 +651,116 @@
 </div>
 
 
+
+
+
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="VisualizarModalPedidos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            PEDIDOS
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                    <br />
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFechaVisualizar"></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArtVisualizar"></label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <thead>
+                                                    <tr align="center">
+                                                        <th scope="col">Proveedor</th>
+                                                        <th scope="col">Enviar a</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedorVisualizar"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreoVisualizar"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamentoVisualizar"></label></td>
+                                                    </tr>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefonoVisualizar"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccionVisualizar"></label></td>
+                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                </div>
+                                                <div id="TblArt">No hay ningún Artículo</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pie del diálogo -->
+                <!--<div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>-->
+                    @*<button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>*@
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="container">

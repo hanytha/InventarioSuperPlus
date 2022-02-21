@@ -64,7 +64,7 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayIdCmpraInt[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
+                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VisualizarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
 
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -832,6 +832,28 @@ function VerPedido(id, no) {
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
+            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
+
+            MostrarArticulos(id, no);
+            //MostrarArt(id, no); 
+        });
+    }
+}
+
+function VisualizarPedido(id, no) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
+            document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
+
+            document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreoVisualizar").textContent = Data[0].Correo;
+            document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Fecha;
+            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
 
             MostrarArticulos(id, no);

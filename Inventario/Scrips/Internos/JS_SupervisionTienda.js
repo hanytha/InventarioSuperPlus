@@ -1978,7 +1978,7 @@ function VerPedido(id, no) {
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
-            document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
+          //  document.getElementById("TxtNumeroPedido").textContent = Data[0].NoCompraProveedor;
             MostrarArticulos(id, no);
             //MostrarArt(id, no); 
         });
