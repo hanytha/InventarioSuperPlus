@@ -3601,19 +3601,46 @@ namespace Inventario.Controllers
             string Nombre = "";
             string IdExistenciaAlmacenG = "";
 
-            var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
-               .Select(p => new
-               {
-                   pedido = p.Articulo,
-                   asignacion = p.IdArticulo,
-                   //Idtienda = p.IdCompraInterno,
-                   tiendas = p.ExitenciaActual,
-                   IdArticulo = p.IdArticulo,
-                   NumeroPedido=p.NoPedidoG,
-                   Nombre=p.Articulo,
-                   Fechas = p.ExitenciaInicial,
-                    IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
-               });
+            //var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
+            //   .Select(p => new
+            //   {
+            //       pedido = p.Articulo,
+            //       asignacion = p.IdArticulo,
+            //       //Idtienda = p.IdCompraInterno,
+            //       tiendas = p.ExitenciaActual,
+            //       IdArticulo = p.IdArticulo,
+            //       NumeroPedido=p.NoPedidoG,
+            //       Nombre=p.Articulo,
+            //       Fechas = p.ExitenciaInicial,
+            //        IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
+            //   });
+
+
+            var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
+                          join Compra in InvBD.CompraInterno
+                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                          join areas in InvBD.Areas
+                      on Compra.IdProveedor equals areas.IdAreas
+                          where Compra.IdSitio > 0
+                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+                          select new
+                          {
+                              IdCompraInterno = ExistAlm.IdCompraInterno,
+                              pedido=ExistAlm.Articulo,
+                              NumeroPedido = ExistAlm.NoPedidoG,
+                              NumPedidoProveedor = Compra.NoPedidoProveedor,
+                              nombres = ExistAlm.Articulo,
+                              IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+                              asignacion = ExistAlm.IdArticulo,
+                              Tipo = ExistAlm.TipoDeOperacion,
+                              IdProveedor = Compra.IdProveedor,
+                              Proveedor = Compra.Proveedor,
+                              tiendas = Compra.IdSitio,
+                              IdArticulo = ExistAlm.IdArticulo,
+                              Nombre = ExistAlm.Articulo,
+                              Fechas = Compra.FechaIngreso,
+                          };
+
             if (Pedidos.Count() > 0)
             {
                 long contador = 0;
