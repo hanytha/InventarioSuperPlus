@@ -326,6 +326,7 @@ function GuardarCompraInterna() {
             else {
                 alert("Los datos se guardaron de manera exitosa");
 
+                nuevoStock();
                 GuardarDatosArticuloCompra(data, NoPedido);
 
                 document.getElementById("btnCancelar").click();
@@ -401,7 +402,7 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
 
         }
     }
-    nuevoStock();
+  //  nuevoStock();
 
     OcultarPedido(NumeroPedido);
 
