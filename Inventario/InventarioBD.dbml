@@ -247,7 +247,6 @@
       <Column Name="StockActual" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Observaciones" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>

@@ -5400,8 +5400,6 @@ namespace Inventario
 		
 		private string _Observaciones;
 		
-		private string _Unidad;
-		
 		private string _Fecha;
 		
 		private System.Nullable<int> _Estatus;
@@ -5428,8 +5426,6 @@ namespace Inventario
     partial void OnNoPedidoGChanged();
     partial void OnObservacionesChanging(string value);
     partial void OnObservacionesChanged();
-    partial void OnUnidadChanging(string value);
-    partial void OnUnidadChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
@@ -5617,26 +5613,6 @@ namespace Inventario
 					this._Observaciones = value;
 					this.SendPropertyChanged("Observaciones");
 					this.OnObservacionesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(150)")]
-		public string Unidad
-		{
-			get
-			{
-				return this._Unidad;
-			}
-			set
-			{
-				if ((this._Unidad != value))
-				{
-					this.OnUnidadChanging(value);
-					this.SendPropertyChanging();
-					this._Unidad = value;
-					this.SendPropertyChanged("Unidad");
-					this.OnUnidadChanged();
 				}
 			}
 		}
