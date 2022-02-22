@@ -2612,51 +2612,34 @@ namespace Inventario.Controllers
             {
                 string[] IdArticulo = Articulos[i].Split(':');
                 string[] IdTienda = Articulos[i].Split('/');
-                //string[] Observaciones = IdArticulo[i].Split(':');
-
                 string[] Cantidad = Articulos2[i].Split(':');
 
-                //string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
 
-                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
-                //    .Select(p => new
-                //    {
-                //        p.IdCompraInterno,
-                //        p.IdArticulo,
-                //        p.Articulo,
-                //        p.ExitenciaActual,
-                //        p.Observaciones
-
-
-                //    });
                 var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                          where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
-                                         orderby Compra.NoPedidoProveedor
+                                         orderby Compra.NoPedido
+                                          //orderby ExistAlm.IdExistenciaAlmacenG
                                          select new
                                          {
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
                                              IdArticulo = ExistAlm.IdArticulo,
                                              Articulo = ExistAlm.Articulo,
                                              ExitenciaActual = ExistAlm.ExitenciaActual,
-                                             Observaciones = ExistAlm.Observaciones
+                                             Observaciones = ExistAlm.Observaciones,
+                                             IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG
                                          };
 
-                var Observacion = Articulos[1];
-                //Double Diferencia = Convert.ToInt32(Cantidad);
-                //var IdArt = valor[0];
                 var IdDeTienda = IdTienda[1];
                 var Diferencia = Convert.ToInt32(Cantidad[1]);
-
-                //var Observacion = Convert.ToInt64(Observaciones[1]);
 
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
-
+                    long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
 
                     if (Diferencia > 0)
                     {
@@ -2680,7 +2663,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStockMovUsado((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdArticulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -2707,7 +2690,7 @@ namespace Inventario.Controllers
 
             int consulta = 0;
 
-            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
            // mpag.TipoDeOperacion = "USADO";//Cambia el estatus en 0
            // mpag.Observaciones = Observacion;
