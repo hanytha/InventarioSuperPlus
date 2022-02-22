@@ -4,7 +4,6 @@
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="IdUsuario" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="UNombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Telefono" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
@@ -13,7 +12,6 @@
       <Association Name="Areas_Articulos" Member="Articulos" ThisKey="IdAreas" OtherKey="IdAreas" Type="Articulos" />
       <Association Name="Areas_SubAreas" Member="SubAreas" ThisKey="IdAreas" OtherKey="IdArea" Type="SubAreas" />
       <Association Name="Areas_Supervision" Member="Supervision" ThisKey="IdAreas" OtherKey="IdAreas" Type="Supervision" />
-      <Association Name="Usuarios_Areas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuarios" Type="Usuarios" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
@@ -49,7 +47,6 @@
       <Column Name="IdSitio" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="NombreSitio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Usuarios_Areas" Member="Areas" ThisKey="IdUsuarios" OtherKey="IdUsuario" Type="Areas" />
     </Type>
   </Table>
   <Table Name="dbo.Articulos" Member="Articulos">
@@ -237,6 +234,19 @@
       <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Marca_Articulos" Member="Articulos" ThisKey="IdMarca" OtherKey="IdMarca" Type="Articulos" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MermasGeneral" Member="MermasGeneral">
+    <Type Name="MermasGeneral">
+      <Column Name="IdMermas" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Cantidad" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.MetodoPago" Member="MetodoPago">

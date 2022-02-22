@@ -72,6 +72,9 @@ namespace Inventario
     partial void InsertMarca(Marca instance);
     partial void UpdateMarca(Marca instance);
     partial void DeleteMarca(Marca instance);
+    partial void InsertMermasGeneral(MermasGeneral instance);
+    partial void UpdateMermasGeneral(MermasGeneral instance);
+    partial void DeleteMermasGeneral(MermasGeneral instance);
     partial void InsertMetodoPago(MetodoPago instance);
     partial void UpdateMetodoPago(MetodoPago instance);
     partial void DeleteMetodoPago(MetodoPago instance);
@@ -258,6 +261,14 @@ namespace Inventario
 			}
 		}
 		
+		public System.Data.Linq.Table<MermasGeneral> MermasGeneral
+		{
+			get
+			{
+				return this.GetTable<MermasGeneral>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MetodoPago> MetodoPago
 		{
 			get
@@ -381,8 +392,6 @@ namespace Inventario
 		
 		private string _Nombre;
 		
-		private System.Nullable<long> _IdUsuario;
-		
 		private string _UNombre;
 		
 		private string _Correo;
@@ -399,8 +408,6 @@ namespace Inventario
 		
 		private EntitySet<Supervision> _Supervision;
 		
-		private EntityRef<Usuarios> _Usuarios;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -409,8 +416,6 @@ namespace Inventario
     partial void OnIdAreasChanged();
     partial void OnNombreChanging(string value);
     partial void OnNombreChanged();
-    partial void OnIdUsuarioChanging(System.Nullable<long> value);
-    partial void OnIdUsuarioChanged();
     partial void OnUNombreChanging(string value);
     partial void OnUNombreChanged();
     partial void OnCorreoChanging(string value);
@@ -428,7 +433,6 @@ namespace Inventario
 			this._Articulos = new EntitySet<Articulos>(new Action<Articulos>(this.attach_Articulos), new Action<Articulos>(this.detach_Articulos));
 			this._SubAreas = new EntitySet<SubAreas>(new Action<SubAreas>(this.attach_SubAreas), new Action<SubAreas>(this.detach_SubAreas));
 			this._Supervision = new EntitySet<Supervision>(new Action<Supervision>(this.attach_Supervision), new Action<Supervision>(this.detach_Supervision));
-			this._Usuarios = default(EntityRef<Usuarios>);
 			OnCreated();
 		}
 		
@@ -468,30 +472,6 @@ namespace Inventario
 					this._Nombre = value;
 					this.SendPropertyChanged("Nombre");
 					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="BigInt")]
-		public System.Nullable<long> IdUsuario
-		{
-			get
-			{
-				return this._IdUsuario;
-			}
-			set
-			{
-				if ((this._IdUsuario != value))
-				{
-					if (this._Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._IdUsuario = value;
-					this.SendPropertyChanged("IdUsuario");
-					this.OnIdUsuarioChanged();
 				}
 			}
 		}
@@ -635,40 +615,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuarios_Areas", Storage="_Usuarios", ThisKey="IdUsuario", OtherKey="IdUsuarios", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Usuarios Usuarios
-		{
-			get
-			{
-				return this._Usuarios.Entity;
-			}
-			set
-			{
-				Usuarios previousValue = this._Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuarios.Entity = null;
-						previousValue.Areas.Remove(this);
-					}
-					this._Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.Areas.Add(this);
-						this._IdUsuario = value.IdUsuarios;
-					}
-					else
-					{
-						this._IdUsuario = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("Usuarios");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -794,8 +740,6 @@ namespace Inventario
 		
 		private int _Estatus;
 		
-		private EntitySet<Areas> _Areas;
-		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -866,7 +810,6 @@ namespace Inventario
 		
 		public Usuarios()
 		{
-			this._Areas = new EntitySet<Areas>(new Action<Areas>(this.attach_Areas), new Action<Areas>(this.detach_Areas));
 			OnCreated();
 		}
 		
@@ -1490,19 +1433,6 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuarios_Areas", Storage="_Areas", ThisKey="IdUsuarios", OtherKey="IdUsuario")]
-		public EntitySet<Areas> Areas
-		{
-			get
-			{
-				return this._Areas;
-			}
-			set
-			{
-				this._Areas.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1521,18 +1451,6 @@ namespace Inventario
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Areas(Areas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuarios = this;
-		}
-		
-		private void detach_Areas(Areas entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuarios = null;
 		}
 	}
 	
@@ -5455,6 +5373,260 @@ namespace Inventario
 		{
 			this.SendPropertyChanging();
 			entity.Marca1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MermasGeneral")]
+	public partial class MermasGeneral : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _IdMermas;
+		
+		private System.Nullable<long> _IdCompra;
+		
+		private System.Nullable<long> _IdArticulo;
+		
+		private string _Articulo;
+		
+		private System.Nullable<double> _Cantidad;
+		
+		private string _Unidad;
+		
+		private string _Fecha;
+		
+		private string _Observaciones;
+		
+		private System.Nullable<int> _Estatus;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdMermasChanging(long value);
+    partial void OnIdMermasChanged();
+    partial void OnIdCompraChanging(System.Nullable<long> value);
+    partial void OnIdCompraChanged();
+    partial void OnIdArticuloChanging(System.Nullable<long> value);
+    partial void OnIdArticuloChanged();
+    partial void OnArticuloChanging(string value);
+    partial void OnArticuloChanged();
+    partial void OnCantidadChanging(System.Nullable<double> value);
+    partial void OnCantidadChanged();
+    partial void OnUnidadChanging(string value);
+    partial void OnUnidadChanged();
+    partial void OnFechaChanging(string value);
+    partial void OnFechaChanged();
+    partial void OnObservacionesChanging(string value);
+    partial void OnObservacionesChanged();
+    partial void OnEstatusChanging(System.Nullable<int> value);
+    partial void OnEstatusChanged();
+    #endregion
+		
+		public MermasGeneral()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMermas", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long IdMermas
+		{
+			get
+			{
+				return this._IdMermas;
+			}
+			set
+			{
+				if ((this._IdMermas != value))
+				{
+					this.OnIdMermasChanging(value);
+					this.SendPropertyChanging();
+					this._IdMermas = value;
+					this.SendPropertyChanged("IdMermas");
+					this.OnIdMermasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCompra", DbType="BigInt")]
+		public System.Nullable<long> IdCompra
+		{
+			get
+			{
+				return this._IdCompra;
+			}
+			set
+			{
+				if ((this._IdCompra != value))
+				{
+					this.OnIdCompraChanging(value);
+					this.SendPropertyChanging();
+					this._IdCompra = value;
+					this.SendPropertyChanged("IdCompra");
+					this.OnIdCompraChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
+		public System.Nullable<long> IdArticulo
+		{
+			get
+			{
+				return this._IdArticulo;
+			}
+			set
+			{
+				if ((this._IdArticulo != value))
+				{
+					this.OnIdArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._IdArticulo = value;
+					this.SendPropertyChanged("IdArticulo");
+					this.OnIdArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Articulo", DbType="VarChar(150)")]
+		public string Articulo
+		{
+			get
+			{
+				return this._Articulo;
+			}
+			set
+			{
+				if ((this._Articulo != value))
+				{
+					this.OnArticuloChanging(value);
+					this.SendPropertyChanging();
+					this._Articulo = value;
+					this.SendPropertyChanged("Articulo");
+					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Float")]
+		public System.Nullable<double> Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this.OnCantidadChanging(value);
+					this.SendPropertyChanging();
+					this._Cantidad = value;
+					this.SendPropertyChanged("Cantidad");
+					this.OnCantidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unidad", DbType="VarChar(150)")]
+		public string Unidad
+		{
+			get
+			{
+				return this._Unidad;
+			}
+			set
+			{
+				if ((this._Unidad != value))
+				{
+					this.OnUnidadChanging(value);
+					this.SendPropertyChanging();
+					this._Unidad = value;
+					this.SendPropertyChanged("Unidad");
+					this.OnUnidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(150)")]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this.OnFechaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha = value;
+					this.SendPropertyChanged("Fecha");
+					this.OnFechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Observaciones", DbType="VarChar(200)")]
+		public string Observaciones
+		{
+			get
+			{
+				return this._Observaciones;
+			}
+			set
+			{
+				if ((this._Observaciones != value))
+				{
+					this.OnObservacionesChanging(value);
+					this.SendPropertyChanging();
+					this._Observaciones = value;
+					this.SendPropertyChanged("Observaciones");
+					this.OnObservacionesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Int")]
+		public System.Nullable<int> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this.OnEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._Estatus = value;
+					this.SendPropertyChanged("Estatus");
+					this.OnEstatusChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
