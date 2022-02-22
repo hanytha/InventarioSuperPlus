@@ -240,12 +240,15 @@
     <Type Name="MermasGeneral">
       <Column Name="IdMermas" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdCompraInterna" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Cantidad" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="StockInicial" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="StockActual" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NoPedidoG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Unidad" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Observaciones" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>

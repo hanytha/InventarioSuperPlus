@@ -5386,17 +5386,23 @@ namespace Inventario
 		
 		private System.Nullable<long> _IdCompra;
 		
+		private System.Nullable<long> _IdCompraInterna;
+		
 		private System.Nullable<long> _IdArticulo;
 		
 		private string _Articulo;
 		
-		private System.Nullable<double> _Cantidad;
+		private System.Nullable<double> _StockInicial;
+		
+		private System.Nullable<double> _StockActual;
+		
+		private System.Nullable<int> _NoPedidoG;
+		
+		private string _Observaciones;
 		
 		private string _Unidad;
 		
 		private string _Fecha;
-		
-		private string _Observaciones;
 		
 		private System.Nullable<int> _Estatus;
 		
@@ -5408,18 +5414,24 @@ namespace Inventario
     partial void OnIdMermasChanged();
     partial void OnIdCompraChanging(System.Nullable<long> value);
     partial void OnIdCompraChanged();
+    partial void OnIdCompraInternaChanging(System.Nullable<long> value);
+    partial void OnIdCompraInternaChanged();
     partial void OnIdArticuloChanging(System.Nullable<long> value);
     partial void OnIdArticuloChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
-    partial void OnCantidadChanging(System.Nullable<double> value);
-    partial void OnCantidadChanged();
+    partial void OnStockInicialChanging(System.Nullable<double> value);
+    partial void OnStockInicialChanged();
+    partial void OnStockActualChanging(System.Nullable<double> value);
+    partial void OnStockActualChanged();
+    partial void OnNoPedidoGChanging(System.Nullable<int> value);
+    partial void OnNoPedidoGChanged();
+    partial void OnObservacionesChanging(string value);
+    partial void OnObservacionesChanged();
     partial void OnUnidadChanging(string value);
     partial void OnUnidadChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
-    partial void OnObservacionesChanging(string value);
-    partial void OnObservacionesChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
     #endregion
@@ -5469,6 +5481,26 @@ namespace Inventario
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCompraInterna", DbType="BigInt")]
+		public System.Nullable<long> IdCompraInterna
+		{
+			get
+			{
+				return this._IdCompraInterna;
+			}
+			set
+			{
+				if ((this._IdCompraInterna != value))
+				{
+					this.OnIdCompraInternaChanging(value);
+					this.SendPropertyChanging();
+					this._IdCompraInterna = value;
+					this.SendPropertyChanged("IdCompraInterna");
+					this.OnIdCompraInternaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArticulo", DbType="BigInt")]
 		public System.Nullable<long> IdArticulo
 		{
@@ -5509,22 +5541,82 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Float")]
-		public System.Nullable<double> Cantidad
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockInicial", DbType="Float")]
+		public System.Nullable<double> StockInicial
 		{
 			get
 			{
-				return this._Cantidad;
+				return this._StockInicial;
 			}
 			set
 			{
-				if ((this._Cantidad != value))
+				if ((this._StockInicial != value))
 				{
-					this.OnCantidadChanging(value);
+					this.OnStockInicialChanging(value);
 					this.SendPropertyChanging();
-					this._Cantidad = value;
-					this.SendPropertyChanged("Cantidad");
-					this.OnCantidadChanged();
+					this._StockInicial = value;
+					this.SendPropertyChanged("StockInicial");
+					this.OnStockInicialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockActual", DbType="Float")]
+		public System.Nullable<double> StockActual
+		{
+			get
+			{
+				return this._StockActual;
+			}
+			set
+			{
+				if ((this._StockActual != value))
+				{
+					this.OnStockActualChanging(value);
+					this.SendPropertyChanging();
+					this._StockActual = value;
+					this.SendPropertyChanged("StockActual");
+					this.OnStockActualChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPedidoG", DbType="Int")]
+		public System.Nullable<int> NoPedidoG
+		{
+			get
+			{
+				return this._NoPedidoG;
+			}
+			set
+			{
+				if ((this._NoPedidoG != value))
+				{
+					this.OnNoPedidoGChanging(value);
+					this.SendPropertyChanging();
+					this._NoPedidoG = value;
+					this.SendPropertyChanged("NoPedidoG");
+					this.OnNoPedidoGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Observaciones", DbType="VarChar(200)")]
+		public string Observaciones
+		{
+			get
+			{
+				return this._Observaciones;
+			}
+			set
+			{
+				if ((this._Observaciones != value))
+				{
+					this.OnObservacionesChanging(value);
+					this.SendPropertyChanging();
+					this._Observaciones = value;
+					this.SendPropertyChanged("Observaciones");
+					this.OnObservacionesChanged();
 				}
 			}
 		}
@@ -5565,26 +5657,6 @@ namespace Inventario
 					this._Fecha = value;
 					this.SendPropertyChanged("Fecha");
 					this.OnFechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Observaciones", DbType="VarChar(200)")]
-		public string Observaciones
-		{
-			get
-			{
-				return this._Observaciones;
-			}
-			set
-			{
-				if ((this._Observaciones != value))
-				{
-					this.OnObservacionesChanging(value);
-					this.SendPropertyChanging();
-					this._Observaciones = value;
-					this.SendPropertyChanged("Observaciones");
-					this.OnObservacionesChanged();
 				}
 			}
 		}

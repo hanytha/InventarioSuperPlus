@@ -184,6 +184,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\MermasController.cs" />
     <Compile Include="Controllers\MPagoController.cs" />
     <Compile Include="Controllers\PedidosextController.cs" />
     <Compile Include="Controllers\PedidosintController.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Views\Traspasos\Traspasos.cshtml" />
     <Content Include="Views\MPago\MPago.cshtml" />
     <Content Include="Views\PedidosPendientes\PedidosPendientes.cshtml" />
+    <Content Include="Views\Mermas\Mermas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
