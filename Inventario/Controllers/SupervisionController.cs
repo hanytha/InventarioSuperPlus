@@ -2859,7 +2859,7 @@ namespace Inventario.Controllers
 
 
         ///////////-------------------------------------------
-        public JsonResult ConsultaPedidosUs(long Id)
+        public JsonResult ConsultaPedidosUs(long idS)
         {
             string NoPedido = "";
             string IdAsignacion = "";
@@ -2891,7 +2891,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio.Equals(Id)&& Compra.EstatusPedido.Equals(1)&& ExistAlm.ExitenciaActual>0
+                          where Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1)&& ExistAlm.ExitenciaActual>0
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
@@ -2927,7 +2927,7 @@ namespace Inventario.Controllers
                 foreach (var numero in Pedidos)
                 {
 
-                    var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(Id)).OrderBy(p => p.IdArticulo)
+                    var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
                  fechaIngreso = p.FechaDeIngreso,

@@ -748,7 +748,8 @@ function abrirModalUsados(id, idS) {
         });
 
         //Prov(id)
-        MostrarArticulosUsados(idS);
+        //MostrarArticulosUsados(idS);
+        MostrarUs(id, idS);
     }
 }
 
@@ -950,126 +951,126 @@ function SiguientePedidoProveedor(id) {
 
 
 
-function MostrarArticulosUsados(idS) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
-    if (idS == 0) {
-        sessionStorage.setItem('IdMovimiento', '0');
-    }
-    else {
+//function MostrarArticulosUsados(idS) {
+//    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+//    var ncontroles = controlesObligatorio.length;
+//    for (var i = 0; i < ncontroles; i++) {//recorre
+//        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+//    }
+//    if (idS == 0) {
+//        sessionStorage.setItem('IdMovimiento', '0');
+//    }
+//    else {
 
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + idS, function (Data) {
-            //-----------------------------------------------------------------------------------
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + idS, function (Data) {
+//            //-----------------------------------------------------------------------------------
+//            var TablaArticulo = "";
+//            TablaArticulo += "<div class='row row-cols-auto'>";
+//            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
-            TablaArticulo += "<label>Id Existencia</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Id Existencia</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
 
-            TablaArticulo += "<label>Artículos</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Cantidad</label>";
-            TablaArticulo += "</div>";
-            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            //TablaArticulo += "<label>Stock</label>";
-            //TablaArticulo += "</div>";
+//            TablaArticulo += "<label>Artículos</label>";
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Cantidad</label>";
+//            TablaArticulo += "</div>";
+//            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//            //TablaArticulo += "<label>Stock</label>";
+//            //TablaArticulo += "</div>";
 
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Existencia Actual</label>";
-            TablaArticulo += "</div>";
+//            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//            TablaArticulo += "<label>Existencia Actual</label>";
+//            TablaArticulo += "</div>";
 
-            let IdArticulos = Data.IdArticulos;
-            let ArrayIdArticulos = IdArticulos.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            //let IdSitio = Data.IdSitio;
-            //let ArrayIdSitio = IdSitio.split(',');
+//            let IdArticulos = Data.IdArticulos;
+//            let ArrayIdArticulos = IdArticulos.split(',');
+//            let NoPedido = Data.NoPedido;
+//            let ArrayNoPedido = NoPedido.split(',');
+//            let Fecha = Data.Fecha;
+//            let Arrayfecha = Fecha.split(',');
+//            let Stock = Data.Stock;
+//            let Arraystock = Stock.split(',');
+//            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+//            //let IdSitio = Data.IdSitio;
+//            //let ArrayIdSitio = IdSitio.split(',');
 
-            let Articulo = Data.Articulo;
-            let ArrayArticulo = Articulo.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+//            let Articulo = Data.Articulo;
+//            let ArrayArticulo = Articulo.split(',');
+//            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+//            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
 
 
-            for (var i = 0; i < ArrayIdArticulos.length; i++) {
-                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+//            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+//                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
            
 
-                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado sinborde limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+//                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+//                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado sinborde limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
 
 
-                //if (ArrayIdArticulos[i] == 0) {
-                //    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados  sinborde limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
-                //    TablaArticulo += "</div>";
+//                //if (ArrayIdArticulos[i] == 0) {
+//                //    TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                //    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados  sinborde limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
+//                //    TablaArticulo += "</div>";
 
-                //}
+//                //}
 
-                if (ArrayIdArticulos[i] > 0) {
-                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<label>"
-                    TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                if (ArrayIdArticulos[i] > 0) {
+//                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                    //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+//                    TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                    TablaArticulo += "</div>";
+//                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+//                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                    TablaArticulo += "<label>"
+//                    TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
 
-                    TablaArticulo += "</label>"
-                    TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                    //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                    //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    //TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                }
+//                    TablaArticulo += "</label>"
+//                    TablaArticulo += "</div>";
+//                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
+//                    TablaArticulo += "</div>";
+//                    //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                    //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                    //TablaArticulo += "</div>";
+//                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                    TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                    TablaArticulo += "</div>";
+//                }
 
 
                
-                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+//                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
 
-                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input type='number' value='' class='input-usados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
-                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+//                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input type='number' value='' class='input-usados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularCosto(this.value)' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+//                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+//                //TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
 
-                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input  class='input-ExistenciaAct redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].ExistenciaActDevolucion + "' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
+//                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-ExistenciaAct redondeado limpiar' id='" + Data[i].IdArticulos + "'  value='" + Data[i].ExistenciaActDevolucion + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
 
-                //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</div>";
-            }
-            TablaArticulo += "</div>";
-            TablaArticulo += "</div>";
-            document.getElementById("TblArticulosUsados").innerHTML = TablaArticulo;
-        });
-    }
-}
+//                //TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
+//                //TablaArticulo += "<input  class='input-PrecioU sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'   value='" + Data[i].PrecioUnitarioPromedio + "' ><span class='help-block text-muted small-font'></span>";
+//                //TablaArticulo += "</div>";
+//            }
+//            TablaArticulo += "</div>";
+//            TablaArticulo += "</div>";
+//            document.getElementById("TblArticulosUsados").innerHTML = TablaArticulo;
+//        });
+//    }
+//}
 
 
 
@@ -2060,18 +2061,18 @@ function abrirModalUs(no, id) {
 }
 
 
-function MostrarUs(no, id) {
+function MostrarUs(id, idS) {
     //var controlesObligatorio = document.getElementsByClassName("obligatorio");
     //var ncontroles = controlesObligatorio.length;
     //for (var i = 0; i < ncontroles; i++) {//recorre
     //    controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
     //}
-    if (id == 0) {
+    if (idS == 0) {
         sessionStorage.setItem('IdMovimiento', '0');
     }
     else {
 
-        $.get("/Supervision/ConsultaPedidosUs/?Id=" + id, function (Data) {
+        $.get("/Supervision/ConsultaPedidosUs/?idS=" + idS, function (Data) {
             //-----------------------------------------------------------------------------------
             var TablaArticulo = "";
             TablaArticulo += "<div class='row row-cols-auto'>";
@@ -2176,7 +2177,7 @@ function MostrarUs(no, id) {
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
-            document.getElementById("TblArtUs").innerHTML = TablaArticulo;
+            document.getElementById("TblArticulosUsados").innerHTML = TablaArticulo;
         });
     }
 }
