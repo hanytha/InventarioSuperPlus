@@ -2629,7 +2629,8 @@ namespace Inventario.Controllers
                                              Articulo = ExistAlm.Articulo,
                                              ExitenciaActual = ExistAlm.ExitenciaActual,
                                              Observaciones = ExistAlm.Observaciones,
-                                             IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG
+                                             IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+                                             IdCompraExterna = ExistAlm.IdCompra
                                          };
 
                 var IdDeTienda = IdTienda[1];
@@ -2640,7 +2641,7 @@ namespace Inventario.Controllers
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
                     long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
-
+                    long IdCompraExterna = Convert.ToInt32(con.IdCompraExterna);
                     if (Diferencia > 0)
                     {
                         var NExistencia = 0;
@@ -2663,7 +2664,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdArticulo, (string)con.Articulo, NExistencia);
+                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -2682,12 +2683,12 @@ namespace Inventario.Controllers
 
         }
         ///
-        public int GuardarNStockMovUsado(long ID, long IDA, string Articulo, double NExistencia)
+        public int GuardarNStockMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double NExistencia)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            var con = ConsultaArt((long)ID, (long)IDA, (double)NExistencia, (string)Articulo);
+            var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)NExistencia, (string)Articulo);
             int consulta = 0;
 
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
@@ -2706,7 +2707,7 @@ namespace Inventario.Controllers
         }
 
 
-        public JsonResult ConsultaArt(long ID, long IDA, double NCantidad, string Articulo)
+        public JsonResult ConsultaArt(long ID, long IDCompraExt, long IDA, double NCantidad, string Articulo)
 
         {
 
@@ -2731,7 +2732,7 @@ namespace Inventario.Controllers
                    // var NoPedidoG = b.NoPedido;
                     var ExitenciaInicial = NCantidad;
                     var NomArticulo = Articulo;
-                    var cons = GuardarCom((long)IdCompra, (long)IDA, (long)IdCompraInterno, (double)ExitenciaInicial, (string)NomArticulo);
+                    var cons = GuardarCom((long)IdCompra, (long)IDA, (long)IDCompraExt, (double)ExitenciaInicial, (string)NomArticulo);
                 }
             }
 
@@ -2741,18 +2742,21 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
 
-        public int GuardarCom(long IdCompra, long IDA, long IdCompraInterno,  double ExitenciaInicial, string NomArticulo)
+        public int GuardarCom(long IdCompra, long IDA, long IDCompraExt,  double ExitenciaInicial, string NomArticulo)
         {
             int nregistradosAfectados = 0;
 
             MovimientosTienda com = new MovimientosTienda();
             com.IdExistencia = IdCompra;
-         //   com.IdCompraInterno = IdCompraInterno;
+            com.IdCompra = IDCompraExt;
+            com.Movimiento = "Usados";
+            //   com.IdCompraInterno = IdCompraInterno;
             //com.NoPedidoG = NoPedidoG;
-          //  com.ExitenciaInicial = ExitenciaInicial;
-           // com.ExitenciaActual = ExitenciaInicial;
+            //  com.ExitenciaInicial = ExitenciaInicial;
+            // com.ExitenciaActual = ExitenciaInicial;
             com.IdArticulo = IDA;
             com.Articulo = NomArticulo;
+            com.Estatus = 1;
             InvBD.MovimientosTienda.InsertOnSubmit(com);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
             nregistradosAfectados = 1;//Se pudo realizar
