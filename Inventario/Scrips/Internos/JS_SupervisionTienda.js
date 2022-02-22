@@ -2100,8 +2100,8 @@ function MostrarUs(no, id) {
             let ArrayNoPedido = NumeroPedido.split(',');
             let Fechas = Data.Fechas;
             let Arrayfecha = Fechas.split(',');
-            //let Stock = Data.Stock;
-            //let Arraystock = Stock.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             //let IdSitio = Data.IdSitio;
             //let ArrayIdSitio = IdSitio.split(',');
@@ -2132,7 +2132,7 @@ function MostrarUs(no, id) {
                 if (ArrayIdArticulos[i] > 0) {
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                   TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "<input  class='input-IdExistencia sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdExistenciaAlmacenG[i] + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                     //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
@@ -2148,7 +2148,7 @@ function MostrarUs(no, id) {
                     //TablaArticulo += "<input type='number' value='' class='input-existAct redondeado limpiar' disabled id='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
                     //TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    //TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                 }
 
