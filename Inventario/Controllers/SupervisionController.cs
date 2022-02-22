@@ -2663,7 +2663,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdArticulo, (string)con.Articulo, NExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -2682,12 +2682,12 @@ namespace Inventario.Controllers
 
         }
         ///
-        public int GuardarNStockMovUsado(long ID, long IDA, double NExistencia)
+        public int GuardarNStockMovUsado(long ID, long IDA, string Articulo, double NExistencia)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-
+            var con = ConsultaArt((long)ID, (long)IDA, (double)NExistencia, (string)Articulo);
             int consulta = 0;
 
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
@@ -2704,6 +2704,61 @@ namespace Inventario.Controllers
                                       //}
             return nregistradosAfectados;
         }
+
+
+        public JsonResult ConsultaArt(long ID, long IDA, double NCantidad, string Articulo)
+
+        {
+
+
+            var articulo = InvBD.MovimientosTienda.Where(p => p.IdArticulo>0).OrderByDescending(p => p.IdMovimiento)
+                .Select(p => new
+                {
+                    p.IdMovimiento,
+                  //  p.NoPedido,
+
+
+                });
+            var contador = 0;
+            foreach (var b in articulo)
+            {
+                contador++;
+
+                if (contador == 1)
+                {
+                    var IdCompra = ID;
+                    var IdCompraInterno = b.IdMovimiento;
+                   // var NoPedidoG = b.NoPedido;
+                    var ExitenciaInicial = NCantidad;
+                    var NomArticulo = Articulo;
+                    var cons = GuardarCom((long)IdCompra, (long)IDA, (long)IdCompraInterno, (double)ExitenciaInicial, (string)NomArticulo);
+                }
+            }
+
+
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------
+
+        public int GuardarCom(long IdCompra, long IDA, long IdCompraInterno,  double ExitenciaInicial, string NomArticulo)
+        {
+            int nregistradosAfectados = 0;
+
+            MovimientosTienda com = new MovimientosTienda();
+            com.IdCompra = IdCompra;
+         //   com.IdCompraInterno = IdCompraInterno;
+            //com.NoPedidoG = NoPedidoG;
+          //  com.ExitenciaInicial = ExitenciaInicial;
+           // com.ExitenciaActual = ExitenciaInicial;
+            com.IdArticulo = IDA;
+            com.Articulo = NomArticulo;
+            InvBD.MovimientosTienda.InsertOnSubmit(com);
+            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            nregistradosAfectados = 1;//Se pudo realizar
+            return nregistradosAfectados;
+        }
+
 
         public int GuardarExt(ExistenciaAlmacenG DatosExistenciaAlmacenG)
         {
