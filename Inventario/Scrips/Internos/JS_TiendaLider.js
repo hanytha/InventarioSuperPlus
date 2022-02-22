@@ -1399,7 +1399,7 @@ function nuevoStockUsados() {
         }
     }
 
-    $.get("/Supervision/ConsultaStockArticuloUsado/?DatosArticulos=" + total, function (Data) {
+    $.get("/Supervision/ConsultaStockArticuloUsadoLider/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
 
