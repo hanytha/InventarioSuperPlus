@@ -1309,7 +1309,7 @@ function nuevoStockUsados() {
         //if (Data == 1) { alert("===Guardado correctamente===") }
  
     });
-    GuardarUsados();
+    //GuardarUsados();
     alert("Guardado correctamente");
 }
 

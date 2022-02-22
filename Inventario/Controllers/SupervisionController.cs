@@ -2746,7 +2746,7 @@ namespace Inventario.Controllers
             int nregistradosAfectados = 0;
 
             MovimientosTienda com = new MovimientosTienda();
-            com.IdCompra = IdCompra;
+            com.IdExistencia = IdCompra;
          //   com.IdCompraInterno = IdCompraInterno;
             //com.NoPedidoG = NoPedidoG;
           //  com.ExitenciaInicial = ExitenciaInicial;
