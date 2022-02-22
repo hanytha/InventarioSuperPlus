@@ -2634,6 +2634,7 @@ namespace Inventario.Controllers
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                          where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
+                                         orderby Compra.NoPedidoProveedor
                                          select new
                                          {
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
