@@ -40,3 +40,15 @@ function LimpiarCampos() {
 
 }
 //-------------------------------------------------------------------------------------------------------------------
+function verficar() {
+    var combo = document.getElementById("cmbMovimiento");
+
+    if (combo.value == 1) {
+
+        alert("es uno");
+    }
+    if (combo.value == 2) {
+
+        alert("dos");
+    }
+}

@@ -111,10 +111,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="cmbMovimiento">Selecciona el movimiento a realizar con la devolución<span>*</span></label>
-                                            <select id="cmbMovimiento" style="width: 100%" class="form-control limpiarSelect ">
+                                            <select id="cmbMovimiento" name="" style="width: 100%" class="form-control limpiarSelect ">
                                                 <option style="text-align:center" id="comb" value="0" selected>Seleccione una opción</option>
-                                                <option style="text-align:center" id="resta">Realizar la merma</option>
-                                                <option style="text-align:center" id="suma">Reintegrar la devolucón al stock</option>
+                                                <option style="text-align:center" value="1">Realizar la merma</option>
+                                                <option style="text-align:center" value="2">Reintegrar la devolucón al stock</option>
                                             </select>
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                 </div>
                                 <!-- pie del modal-->
                                 <div class="modal-footer">
-                                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" validacion()">Guardar</button>
+                                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" verficar()">Guardar</button>
                                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
