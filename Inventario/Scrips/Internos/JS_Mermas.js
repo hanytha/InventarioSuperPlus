@@ -19,6 +19,7 @@ function abrirModal(id) {
             document.getElementById("TxtNumPedido").value = Data[0].NoPedidoG;
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtArticulo").value = Data[0].Articulo;
+            document.getElementById("TxtArticulo").name = Data[0].IdArticulo;
             document.getElementById("TxtCantidad").value = Data[0].ExitenciaActual;
             document.getElementById("TxtNoObservaciones").value = Data[0].Observaciones;
 
@@ -38,3 +39,4 @@ function LimpiarCampos() {
     document.getElementById("cmbMovimiento").value = 0;
 
 }
+//-------------------------------------------------------------------------------------------------------------------
