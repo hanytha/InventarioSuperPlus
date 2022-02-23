@@ -2513,12 +2513,13 @@ namespace Inventario.Controllers
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                          where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
+                                         orderby Compra.FechaIngreso
                                          select new
                                          {
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
                                              IdArticulo = ExistAlm.IdArticulo,
                                              Articulo = ExistAlm.Articulo,
-                                             ExitenciaActual = ExistAlm.ExitenciaActual,
+                                             ExitenciaAct = ExistAlm.ExitenciaActual,
                                              Observaciones = ExistAlm.Observaciones
                                          };
 
@@ -2526,7 +2527,7 @@ namespace Inventario.Controllers
                 //Double Diferencia = Convert.ToInt32(Cantidad);
                 //var IdArt = valor[0];
                 var IdDeTienda = IdTienda[1];
-                var Diferencia = Convert.ToInt32(Cantidad[1]);
+                Double Diferencia = Convert.ToInt32(Cantidad[1]);
 
                 //var Observacion = Convert.ToInt64(Observaciones[1]);
 
@@ -2538,27 +2539,32 @@ namespace Inventario.Controllers
 
                     if (Diferencia > 0)
                     {
-                        var NExistencia = 0;
+                        Double ExistenciaActual = 0;
+                        Double CantidadAct = 0;
+                        //var NExistencia = 0;
 
-                        if (con.ExitenciaActual == Diferencia)
+                        if (con.ExitenciaAct == Diferencia)
                         {
                             Diferencia = 0;
-                            NExistencia = 0;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
                         }
-                        else if (con.ExitenciaActual > Diferencia)
+                        else if (con.ExitenciaAct > Diferencia)
                         {
 
-                            NExistencia = (int)con.ExitenciaActual - Diferencia;
+                            CantidadAct = Diferencia;
+                            ExistenciaActual = (Double)con.ExitenciaAct - Diferencia;
                             Diferencia = 0;
                         }
                         else
                         {
-                            Diferencia = Diferencia - (int)con.ExitenciaActual;
-                            NExistencia = 0;
+                            Diferencia = Diferencia - (Double)con.ExitenciaAct;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
 
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, NExistencia, Observacion);
+                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, ExistenciaActual, CantidadAct, Observacion);
                         if (consulta == 0)
                         {
                             break;
@@ -2578,18 +2584,19 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia, String Observacion)
+        public int GuardarNStock(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, String Observacion)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-
+            var cons = GuardarMovimientoDev((long)IdCompraInterno, (long)IdArticulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion);
             int consulta = 0;
-
-            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            //ExistenciaAlmacenG mpag = new ExistenciaAlmacenG();
+             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(IdCompraInterno) && p.IdArticulo.Equals(IdArticulo)).First();
+            mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
             mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
             mpag.Observaciones = Observacion;
+            //InvBD.ExistenciaAlmacenG.InsertOnSubmit(mpag);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
 
             nregistradosAfectados = 1;//Se pudo realizar
@@ -2601,7 +2608,26 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
+        public int GuardarMovimientoDev(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, string Observacion)
+        {
+            int nregistradosAfectados = 0;
 
+            ExistenciaAlmacenG com = new ExistenciaAlmacenG();
+            com.IdCompra = IdCompraInterno;
+     
+            //com.Movimiento = "Usados";
+            //DateTime thisDay = DateTime.Today;
+
+            //com.Fecha = (thisDay.ToString());
+            //com.Cantidad = CantidadAct;
+            com.IdArticulo = IdArticulo;
+            //com.Articulo = Articulo;
+            //com.Estatus = 1;
+            InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;//Se pudo realizar
+            return nregistradosAfectados;
+        }
 
         ///USADO////////
         public JsonResult ConsultaMovimientoUsado(string DatosArticulos)
