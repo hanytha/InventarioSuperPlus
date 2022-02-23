@@ -106,5 +106,51 @@ namespace Inventario.Controllers
             return Json(Categoria, JsonRequestBehavior.AllowGet);
         }
 
+        //-------------------------Guardar la devolución en mermas-----------------------------------
+
+        public int GuardarMerma(MermasGeneral DatosMerma)
+        {
+            int Afectados = 0;
+
+
+                    InvBD.MermasGeneral.InsertOnSubmit(DatosMerma);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+               
+               
+            
+            return Afectados;
+        }
+        //-----------------------------------------------------------------
+        public void ConsultaDevolución(long Id)
+        {
+            var devolucion = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+                .Select(p => new
+                {
+                    
+                    p.IdExistenciaAlmacenG,
+                    p.TipoDeOperacion,
+
+
+                });
+            foreach (var g in devolucion)
+            {
+                Devolucion((long)g.IdExistenciaAlmacenG);
+            }
+ 
+        }
+        //------------------------------------------------------------
+        public int Devolucion(long IDE)
+        {
+            int nregistradosAfectados = 0;
+
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IDE)).First();
+            mpag.TipoDeOperacion = "DEVOLUCION-ACEPTADA";
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
+
+            return nregistradosAfectados;
+        }
+        //------------------------------------------------------------
     }
 }

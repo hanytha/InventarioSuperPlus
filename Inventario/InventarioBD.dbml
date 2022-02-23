@@ -267,7 +267,7 @@
       <Column Name="IdArticulo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Movimiento" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Fecha" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cantidad" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Articulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>

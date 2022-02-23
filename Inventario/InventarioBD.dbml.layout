@@ -2,318 +2,318 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 21, 27.625" name="InventarioBD">
   <DataContextMoniker Name="/InventarioBDDataContext" />
   <nestedChildShapes>
-    <classShape Id="1f8299f4-ec0b-4c5f-9254-57798b6625a5" absoluteBounds="0.75, 9.5, 2, 2.1554996744791666">
+    <classShape Id="875bd840-f040-4c96-bc27-e92e6828f938" absoluteBounds="0.75, 9.5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/InventarioBDDataContext/Areas" />
       <nestedChildShapes>
-        <elementListCompartment Id="248031a7-fe0e-44bd-9b90-4ebdc1284ca5" absoluteBounds="0.765, 9.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="24aa60a0-10eb-487e-a147-3516616823f3" absoluteBounds="0.765, 9.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ad35b252-06c1-4572-9181-1a3b940645f3" absoluteBounds="12.75, 11.375, 2, 6.7707340494791666">
+    <classShape Id="aeed96e1-e9b2-466c-a5a4-6ed6ab36cadf" absoluteBounds="12.75, 11.375, 2, 6.7707340494791666">
       <DataClassMoniker Name="/InventarioBDDataContext/Usuarios" />
       <nestedChildShapes>
-        <elementListCompartment Id="675b0019-7b2d-455f-acf7-13bcb5cdebee" absoluteBounds="12.765, 11.835, 1.9700000000000002, 6.2107340494791661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="85713900-7c4b-4b02-a6d7-82b39556d4d2" absoluteBounds="12.765, 11.835, 1.9700000000000002, 6.2107340494791661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" absoluteBounds="6.5, 12.125, 2, 4.8477197265625005">
+    <classShape Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" absoluteBounds="6.5, 12.125, 2, 4.8477197265625005">
       <DataClassMoniker Name="/InventarioBDDataContext/Articulos" />
       <nestedChildShapes>
-        <elementListCompartment Id="106c2737-47a1-45d9-acaf-2569c3f48ef1" absoluteBounds="6.515, 12.585, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="42fe935b-6411-464b-96c4-fb6a47ffdf93" absoluteBounds="6.515, 12.585, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bf7affad-c244-4871-9749-841c687f24f8" absoluteBounds="6.75, 1.375, 2, 1.3862939453125005">
+    <classShape Id="8285c764-e185-44b2-9749-42543824b01f" absoluteBounds="6.75, 1.375, 2, 1.3862939453125005">
       <DataClassMoniker Name="/InventarioBDDataContext/Asignacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="82ba7832-e395-47ce-b1d1-88ac92bb4c48" absoluteBounds="6.765, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="58a41bfb-32ef-4aef-a827-8c11383af287" absoluteBounds="6.765, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4d230150-931d-4f5a-9b2b-ee0550555249" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
+    <classShape Id="8e530b18-671d-4965-a66c-67b8b28b25f4" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
       <DataClassMoniker Name="/InventarioBDDataContext/Categorias" />
       <nestedChildShapes>
-        <elementListCompartment Id="f4c1b35d-f39c-4cc1-9b33-d812274768c6" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="da9a2cb3-6193-471e-b30e-d2cb858dd2f1" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="14a08054-c584-4653-8c9c-c401ffb38a89" absoluteBounds="9.75, 1.375, 2, 2.9247054036458326">
+    <classShape Id="c341440c-0da1-42b3-9ab8-458e30f21a2f" absoluteBounds="9.75, 1.375, 2, 2.9247054036458326">
       <DataClassMoniker Name="/InventarioBDDataContext/Compra" />
       <nestedChildShapes>
-        <elementListCompartment Id="e82decda-0d43-4942-b0e8-11caa566bdc8" absoluteBounds="9.765, 1.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6d0d74aa-f11e-4f88-be3c-8b1a71ac54fb" absoluteBounds="9.765, 1.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="485e6eb6-785a-4cea-a582-04896eb08b9f" absoluteBounds="15.75, 11.375, 2, 2.9247054036458309">
+    <classShape Id="1acfea50-2a0c-4470-9035-811aad3454e0" absoluteBounds="15.75, 11.375, 2, 2.9247054036458309">
       <DataClassMoniker Name="/InventarioBDDataContext/CompraInterno" />
       <nestedChildShapes>
-        <elementListCompartment Id="98d97ac9-9782-4abc-a4bf-aeb802b715ee" absoluteBounds="15.765, 11.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="035e50e0-35e5-4e8c-85c3-087ef9fb498d" absoluteBounds="15.765, 11.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bb56cabe-d8af-455f-a304-d09f2987eeae" absoluteBounds="15.75, 15.375, 2, 3.3093082682291666">
+    <classShape Id="7670c399-77dd-4048-9980-736f0938f495" absoluteBounds="15.75, 15.375, 2, 3.3093082682291666">
       <DataClassMoniker Name="/InventarioBDDataContext/ComprasArticulos" />
       <nestedChildShapes>
-        <elementListCompartment Id="90067ea0-93aa-40ca-a67f-c3f1469bac6a" absoluteBounds="15.765, 15.835, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c44d751b-40e5-42ce-84d5-2ec57ed741bc" absoluteBounds="15.765, 15.835, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="34d8455c-5f8c-41af-898e-2c31c7c8b11f" absoluteBounds="14.5, 4.75, 2, 5.6169254557291657">
+    <classShape Id="92b84f25-9b4c-4120-b05f-e8362cc8e825" absoluteBounds="14.5, 4.75, 2, 5.6169254557291657">
       <DataClassMoniker Name="/InventarioBDDataContext/Configuracion" />
       <nestedChildShapes>
-        <elementListCompartment Id="7d0401f9-32e1-4ad6-b2ce-8d776881a057" absoluteBounds="14.515, 5.21, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fb62e0b0-f594-40a1-8e43-22e7d76703b6" absoluteBounds="14.515, 5.21, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c3789b44-1aa7-4077-bc47-9f00a8027996" absoluteBounds="1.5, 20.75, 2, 1.7708968098958309">
+    <classShape Id="80e9a9fa-efe5-465b-bdc4-4e4ed00ba9a8" absoluteBounds="1.5, 20.75, 2, 1.7708968098958309">
       <DataClassMoniker Name="/InventarioBDDataContext/estados" />
       <nestedChildShapes>
-        <elementListCompartment Id="0b72333a-cc57-48a0-b269-c668718941f7" absoluteBounds="1.5150000000000001, 21.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7eb11abe-7b89-4437-a1b0-c0c6615bd996" absoluteBounds="1.5150000000000001, 21.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5f12a947-c699-46c3-b375-0e921509dd0a" absoluteBounds="17.75, 1.375, 2, 2.7324039713541666">
+    <classShape Id="23867153-b9ec-4c4a-9d08-7ef90939098a" absoluteBounds="17.75, 1.375, 2, 2.7324039713541666">
       <DataClassMoniker Name="/InventarioBDDataContext/ExistenciaAlmacenG" />
       <nestedChildShapes>
-        <elementListCompartment Id="9c6a389d-71c6-45d6-823d-4630acdae326" absoluteBounds="17.765, 1.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2fb31e6f-48e6-4c19-b32d-ce34e3148eb9" absoluteBounds="17.765, 1.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="919addf4-3b51-4579-9ae2-35cc6e7c0362" absoluteBounds="17.75, 5.375, 2, 1.5785953776041666">
+    <classShape Id="a403d987-2c74-4a8e-ba00-3c9500e49a9f" absoluteBounds="17.75, 5.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/InventarioBDDataContext/Impuesto" />
       <nestedChildShapes>
-        <elementListCompartment Id="cd9bb3e4-2016-4d23-8e21-f3e9e8485345" absoluteBounds="17.765, 5.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bb016b30-e98c-44da-8254-7c3ebb3b30b4" absoluteBounds="17.765, 5.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1f1778e7-0070-4a00-b6ea-14ab3feda719" absoluteBounds="3.5, 15.625, 2, 4.0785139973958309">
+    <classShape Id="d9923fa9-d543-41db-ba2c-1a8526ba645b" absoluteBounds="3.5, 15.625, 2, 4.0785139973958309">
       <DataClassMoniker Name="/InventarioBDDataContext/localidades" />
       <nestedChildShapes>
-        <elementListCompartment Id="236747d4-c5a6-4784-b4a5-47e78b05f295" absoluteBounds="3.515, 16.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c709d70d-406a-4baa-ab5b-b03406ff97e4" absoluteBounds="3.515, 16.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="478a475c-a26d-4ccd-89ea-18760d3cd745" absoluteBounds="3.75, 23.875, 2, 1.3862939453125023">
+    <classShape Id="145b18c0-0447-4e34-bcc9-717641c5bc63" absoluteBounds="3.75, 23.875, 2, 1.3862939453125023">
       <DataClassMoniker Name="/InventarioBDDataContext/Marca" />
       <nestedChildShapes>
-        <elementListCompartment Id="c3f84389-f299-4792-a76a-30a41e4fcb50" absoluteBounds="3.765, 24.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8cd687a4-8b76-4cfb-9c6c-fc0fb7bedb42" absoluteBounds="3.765, 24.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ea7312d5-0056-4458-87a7-c005883de39c" absoluteBounds="18.75, 8.375, 2, 2.9247054036458309">
+    <classShape Id="5415daba-3bb6-4025-9312-af2affaa9dcf" absoluteBounds="18.75, 8.375, 2, 2.9247054036458309">
       <DataClassMoniker Name="/InventarioBDDataContext/MermasGeneral" />
       <nestedChildShapes>
-        <elementListCompartment Id="0edf92b6-37b4-479e-ac22-180eae944a10" absoluteBounds="18.765, 8.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f9ff0496-63e2-46b7-b5fe-8f40567d79bc" absoluteBounds="18.765, 8.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="48b9f4b2-5479-43ea-ae04-975acc4b17ab" absoluteBounds="18.75, 12.375, 2, 1.5785953776041666">
+    <classShape Id="dafdf5fb-977b-4298-b3bb-e829d5ca897b" absoluteBounds="18.75, 12.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/InventarioBDDataContext/MetodoPago" />
       <nestedChildShapes>
-        <elementListCompartment Id="a55ccf6f-075d-4d7d-889c-f96494ee9555" absoluteBounds="18.765, 12.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ff821dbe-f3c1-46cc-a203-461172367048" absoluteBounds="18.765, 12.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b453ccbd-c0ee-4647-9422-d9eedfb28d20" absoluteBounds="18.75, 15.375, 2, 2.5401025390625005">
+    <classShape Id="46c6dee2-8666-4ca0-b480-644701a2a232" absoluteBounds="18.75, 15.375, 2, 2.5401025390625005">
       <DataClassMoniker Name="/InventarioBDDataContext/MovimientosTienda" />
       <nestedChildShapes>
-        <elementListCompartment Id="0f8b7bd3-faf7-438f-9b31-c6656d8bd74a" absoluteBounds="18.765, 15.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="abc79467-5bec-4a86-be01-e1ef80757e66" absoluteBounds="18.765, 15.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7665d5ed-8aea-4cac-aff2-98f7017c4ee4" absoluteBounds="0.75, 16.75, 2, 1.7708968098958309">
+    <classShape Id="4c2a1af0-5f94-4b98-8acb-46860a501b47" absoluteBounds="0.75, 16.75, 2, 1.7708968098958309">
       <DataClassMoniker Name="/InventarioBDDataContext/municipios" />
       <nestedChildShapes>
-        <elementListCompartment Id="490a79d2-177d-4c44-8ef2-f7118489ebcd" absoluteBounds="0.765, 17.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="322aa99a-9bae-403c-928d-d00eb9ffdd70" absoluteBounds="0.765, 17.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3741d4f7-c54c-4e01-9a25-c909205c9ed7" absoluteBounds="11.75, 5, 2, 2.1554996744791666">
+    <classShape Id="00b5d626-c23e-4698-b4d2-505b5566c2ff" absoluteBounds="11.75, 5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/InventarioBDDataContext/Pagina" />
       <nestedChildShapes>
-        <elementListCompartment Id="bbc18786-3986-4cd2-8daf-159226165eb9" absoluteBounds="11.765, 5.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5a69259d-c336-4249-a3be-9b15058585d2" absoluteBounds="11.765, 5.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b906caf8-4533-428c-b8bd-95c58b12a97e" absoluteBounds="10, 18.75, 2, 4.4631168619791666">
+    <classShape Id="7913cfef-6dbf-41f1-9c39-a68054e6ffae" absoluteBounds="10, 18.75, 2, 4.4631168619791666">
       <DataClassMoniker Name="/InventarioBDDataContext/PedidosExternos" />
       <nestedChildShapes>
-        <elementListCompartment Id="584174f1-80cc-424e-ba6b-058b6fd2fec9" absoluteBounds="10.015, 19.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="17a2b693-6fe4-4534-b078-bf7beea435c3" absoluteBounds="10.015, 19.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="26293a4d-ee05-4add-b378-ce4e1e34121d" absoluteBounds="9.25, 9.25, 2, 3.5016097005208309">
+    <classShape Id="3339d779-8667-4ade-9006-34940d61e2e6" absoluteBounds="9.25, 9.25, 2, 3.5016097005208309">
       <DataClassMoniker Name="/InventarioBDDataContext/PedidosInternos" />
       <nestedChildShapes>
-        <elementListCompartment Id="c2e058c1-0274-44f3-8756-0e01fa830c6d" absoluteBounds="9.265, 9.71, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9b7d12a7-fb87-459f-b812-6edbd5c7b175" absoluteBounds="9.265, 9.71, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fa9375c2-ad1b-484d-9564-843e69a58347" absoluteBounds="14.5, 1.875, 2, 2.1554996744791666">
+    <classShape Id="fc029f54-10b8-4a34-9f13-a03f2460a679" absoluteBounds="14.5, 1.875, 2, 2.1554996744791666">
       <DataClassMoniker Name="/InventarioBDDataContext/PerfilDeUsuario" />
       <nestedChildShapes>
-        <elementListCompartment Id="41115b83-aa57-4dbf-b998-aa607f4acb3b" absoluteBounds="14.515, 2.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3f3e8b4f-abc6-4a84-8089-3d6363aa8891" absoluteBounds="14.515, 2.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="92b355e3-d335-4a24-962c-362b99ea3acb" absoluteBounds="7.25, 18.625, 2, 4.8477197265625023">
+    <classShape Id="c74d314d-7582-4511-ac38-168912c8969d" absoluteBounds="7.25, 18.625, 2, 4.8477197265625023">
       <DataClassMoniker Name="/InventarioBDDataContext/Proveedores" />
       <nestedChildShapes>
-        <elementListCompartment Id="73fc5cff-2ac5-4fc0-887b-b17dada140fd" absoluteBounds="7.265, 19.085, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e1ab6b1a-d775-44b9-b5bb-cc5fdc5acc4d" absoluteBounds="7.265, 19.085, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="45bb6cfb-c6c1-4a7b-a744-0299c06bcd04" absoluteBounds="3.5, 9.75, 2, 4.4631168619791666">
+    <classShape Id="f6b253b7-dfef-470a-b74c-bdd8892b1605" absoluteBounds="3.5, 9.75, 2, 4.4631168619791666">
       <DataClassMoniker Name="/InventarioBDDataContext/SubAreas" />
       <nestedChildShapes>
-        <elementListCompartment Id="56de5010-9f70-42dd-ae9e-3154ff0a9169" absoluteBounds="3.515, 10.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4b2e8aaf-9ae1-4f4c-9e72-94d51fd3df1e" absoluteBounds="3.515, 10.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1c1fb1b6-5f1a-40d7-bd0e-ba11cf9cc9b0" absoluteBounds="3.5, 6.875, 2, 2.1554996744791657">
+    <classShape Id="315e9113-4801-4a52-af47-9681dc427fb2" absoluteBounds="3.5, 6.875, 2, 2.1554996744791657">
       <DataClassMoniker Name="/InventarioBDDataContext/Supervision" />
       <nestedChildShapes>
-        <elementListCompartment Id="e1776354-578c-49b5-bad3-94ae66f71954" absoluteBounds="3.515, 7.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bdbcc049-6a6b-4fcf-a731-9f59f7ae4dce" absoluteBounds="3.515, 7.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="71020467-62ab-4b28-8ef8-5d48e76b7df2" absoluteBounds="3.5, 3.25, 2, 2.5401025390625005">
+    <classShape Id="3d2fe309-dbd7-46e9-9f1a-54d0e1ce1db9" absoluteBounds="3.5, 3.25, 2, 2.5401025390625005">
       <DataClassMoniker Name="/InventarioBDDataContext/Supervisor" />
       <nestedChildShapes>
-        <elementListCompartment Id="bfe23c17-abd6-4c9f-98ad-19947307ab7d" absoluteBounds="3.515, 3.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d197a4cc-c2dc-4d78-a511-e5084240c1bd" absoluteBounds="3.515, 3.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" absoluteBounds="6.25, 5.125, 2, 5.8092268880208309">
+    <classShape Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" absoluteBounds="6.25, 5.125, 2, 5.8092268880208309">
       <DataClassMoniker Name="/InventarioBDDataContext/Tienda" />
       <nestedChildShapes>
-        <elementListCompartment Id="634ee013-6060-4376-a657-4e0f3abb2d50" absoluteBounds="6.265, 5.585, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7f026736-6a7a-426b-89f6-9ad58247038a" absoluteBounds="6.265, 5.585, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4ed70be5-5f87-4ec0-a646-ac7b33c8d629" absoluteBounds="18.75, 19.375, 2, 1.3862939453125023">
+    <classShape Id="67a17490-501e-4739-91de-9788890a2188" absoluteBounds="18.75, 19.375, 2, 1.3862939453125023">
       <DataClassMoniker Name="/InventarioBDDataContext/TipoDeMovimientos" />
       <nestedChildShapes>
-        <elementListCompartment Id="0f561a9b-bc4b-4511-b37b-cea2ac49e00a" absoluteBounds="18.765, 19.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="db3529d5-1483-4f05-ae77-ecc603ddccec" absoluteBounds="18.765, 19.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5f8db967-6a30-4c52-b728-4200b6f4d07a" absoluteBounds="3.75, 26, 2, 1.3862939453125023">
+    <classShape Id="b6d13488-65c0-42d5-8188-a71f5bed0d3a" absoluteBounds="3.75, 26, 2, 1.3862939453125023">
       <DataClassMoniker Name="/InventarioBDDataContext/UnidadDeMedida" />
       <nestedChildShapes>
-        <elementListCompartment Id="a3b79701-c2e9-4114-b3f8-b6900e7bfc1f" absoluteBounds="3.765, 26.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0e13eea2-3c49-472e-9e91-211a6a90c1e1" absoluteBounds="3.765, 26.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(1.75 : 11.6554996744792); (1.75 : 14.9190584309896); (5.91666666666667 : 14.9190584309896 : JumpStart); (6.08333333333333 : 14.9190584309896 : JumpEnd); (6.26041666666667 : 14.9190584309896 : JumpStart); (6.42708333333333 : 14.9190584309896 : JumpEnd); (6.5 : 14.9190584309896)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Areas/Areas_Articulos" />
       <nodes>
-        <classShapeMoniker Id="1f8299f4-ec0b-4c5f-9254-57798b6625a5" />
-        <classShapeMoniker Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" />
+        <classShapeMoniker Id="875bd840-f040-4c96-bc27-e92e6828f938" />
+        <classShapeMoniker Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.65625 : 2.1362939453125); (5.65625 : 14.5660851464844); (5.91666666666667 : 14.5660851464844 : JumpStart); (6.08333333333333 : 14.5660851464844 : JumpEnd); (6.26041666666667 : 14.5660851464844 : JumpStart); (6.42708333333333 : 14.5660851464844 : JumpEnd); (6.5 : 14.5660851464844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Categorias/Categorias_Articulos" />
       <nodes>
-        <classShapeMoniker Id="4d230150-931d-4f5a-9b2b-ee0550555249" />
-        <classShapeMoniker Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" />
+        <classShapeMoniker Id="8e530b18-671d-4965-a66c-67b8b28b25f4" />
+        <classShapeMoniker Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.703125 : 23.875); (5.703125 : 15.2720317154948); (5.91666666666667 : 15.2720317154948 : JumpStart); (6.08333333333333 : 15.2720317154948 : JumpEnd); (6.26041666666667 : 15.2720317154948 : JumpStart); (6.42708333333333 : 15.2720317154948 : JumpEnd); (6.5 : 15.2720317154948)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Marca/Marca_Articulos" />
       <nodes>
-        <classShapeMoniker Id="478a475c-a26d-4ccd-89ea-18760d3cd745" />
-        <classShapeMoniker Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" />
+        <classShapeMoniker Id="145b18c0-0447-4e34-bcc9-717641c5bc63" />
+        <classShapeMoniker Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 17.6354484049479); (3.5 : 17.6354484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/municipios/municipios_localidades" />
       <nodes>
-        <classShapeMoniker Id="7665d5ed-8aea-4cac-aff2-98f7017c4ee4" />
-        <classShapeMoniker Id="1f1778e7-0070-4a00-b6ea-14ab3feda719" />
+        <classShapeMoniker Id="4c2a1af0-5f94-4b98-8acb-46860a501b47" />
+        <classShapeMoniker Id="d9923fa9-d543-41db-ba2c-1a8526ba645b" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.125 : 20.75); (2.125 : 18.5208968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/estados/estados_municipios" />
       <nodes>
-        <classShapeMoniker Id="c3789b44-1aa7-4077-bc47-9f00a8027996" />
-        <classShapeMoniker Id="7665d5ed-8aea-4cac-aff2-98f7017c4ee4" />
+        <classShapeMoniker Id="80e9a9fa-efe5-465b-bdc4-4e4ed00ba9a8" />
+        <classShapeMoniker Id="4c2a1af0-5f94-4b98-8acb-46860a501b47" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(13.75 : 6.07774983723958); (14.5 : 6.07774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Pagina/Pagina_Configuracion" />
       <nodes>
-        <classShapeMoniker Id="3741d4f7-c54c-4e01-9a25-c909205c9ed7" />
-        <classShapeMoniker Id="34d8455c-5f8c-41af-898e-2c31c7c8b11f" />
+        <classShapeMoniker Id="00b5d626-c23e-4698-b4d2-505b5566c2ff" />
+        <classShapeMoniker Id="92b84f25-9b4c-4120-b05f-e8362cc8e825" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.5 : 12.4383048502604); (9.25 : 12.4383048502604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Articulos/Articulos_PedidosInternos" />
       <nodes>
-        <classShapeMoniker Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" />
-        <classShapeMoniker Id="26293a4d-ee05-4add-b378-ce4e1e34121d" />
+        <classShapeMoniker Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" />
+        <classShapeMoniker Id="3339d779-8667-4ade-9006-34940d61e2e6" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(12.78125 : 5); (12.78125 : 2.95274983723958); (14.5 : 2.95274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Pagina/Pagina_PerfilDeUsuario" />
       <nodes>
-        <classShapeMoniker Id="3741d4f7-c54c-4e01-9a25-c909205c9ed7" />
-        <classShapeMoniker Id="fa9375c2-ad1b-484d-9564-843e69a58347" />
+        <classShapeMoniker Id="00b5d626-c23e-4698-b4d2-505b5566c2ff" />
+        <classShapeMoniker Id="fc029f54-10b8-4a34-9f13-a03f2460a679" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(9.25 : 20.9815584309896); (10 : 20.9815584309896)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Proveedores/Proveedores_PedidosExternos" />
       <nodes>
-        <classShapeMoniker Id="92b355e3-d335-4a24-962c-362b99ea3acb" />
-        <classShapeMoniker Id="b906caf8-4533-428c-b8bd-95c58b12a97e" />
+        <classShapeMoniker Id="c74d314d-7582-4511-ac38-168912c8969d" />
+        <classShapeMoniker Id="7913cfef-6dbf-41f1-9c39-a68054e6ffae" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(3.5 : 21.6354484049479); (5.61979166666667 : 21.6354484049479 : JumpStart); (5.78645833333333 : 21.6354484049479 : JumpEnd); (6.76041666666667 : 21.6354484049479 : JumpStart); (6.92708333333333 : 21.6354484049479 : JumpEnd); (7.25 : 21.6354484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/estados/estados_Proveedores" />
       <nodes>
-        <classShapeMoniker Id="c3789b44-1aa7-4077-bc47-9f00a8027996" />
-        <classShapeMoniker Id="92b355e3-d335-4a24-962c-362b99ea3acb" />
+        <classShapeMoniker Id="80e9a9fa-efe5-465b-bdc4-4e4ed00ba9a8" />
+        <classShapeMoniker Id="c74d314d-7582-4511-ac38-168912c8969d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 19.1642569986979); (5.61979166666667 : 19.1642569986979 : JumpStart); (5.78645833333333 : 19.1642569986979 : JumpEnd); (6.76041666666667 : 19.1642569986979 : JumpStart); (6.92708333333333 : 19.1642569986979 : JumpEnd); (7.25 : 19.1642569986979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/localidades/localidades_Proveedores" />
       <nodes>
-        <classShapeMoniker Id="1f1778e7-0070-4a00-b6ea-14ab3feda719" />
-        <classShapeMoniker Id="92b355e3-d335-4a24-962c-362b99ea3acb" />
+        <classShapeMoniker Id="d9923fa9-d543-41db-ba2c-1a8526ba645b" />
+        <classShapeMoniker Id="c74d314d-7582-4511-ac38-168912c8969d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.09375 : 18.5208968098958); (1.09375 : 20.2267569986979); (2.04166666666667 : 20.2267569986979 : JumpStart); (2.20833333333333 : 20.2267569986979 : JumpEnd); (5.61979166666667 : 20.2267569986979 : JumpStart); (5.78645833333333 : 20.2267569986979 : JumpEnd); (6.76041666666667 : 20.2267569986979 : JumpStart); (6.92708333333333 : 20.2267569986979 : JumpEnd); (7.25 : 20.2267569986979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/municipios/municipios_Proveedores" />
       <nodes>
-        <classShapeMoniker Id="7665d5ed-8aea-4cac-aff2-98f7017c4ee4" />
-        <classShapeMoniker Id="92b355e3-d335-4a24-962c-362b99ea3acb" />
+        <classShapeMoniker Id="4c2a1af0-5f94-4b98-8acb-46860a501b47" />
+        <classShapeMoniker Id="c74d314d-7582-4511-ac38-168912c8969d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 10.7027498372396); (3.5 : 10.7027498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Areas/Areas_SubAreas" />
       <nodes>
-        <classShapeMoniker Id="1f8299f4-ec0b-4c5f-9254-57798b6625a5" />
-        <classShapeMoniker Id="45bb6cfb-c6c1-4a7b-a744-0299c06bcd04" />
+        <classShapeMoniker Id="875bd840-f040-4c96-bc27-e92e6828f938" />
+        <classShapeMoniker Id="f6b253b7-dfef-470a-b74c-bdd8892b1605" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.75 : 9.5); (1.75 : 7.95274983723958); (3.5 : 7.95274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Areas/Areas_Supervision" />
       <nodes>
-        <classShapeMoniker Id="1f8299f4-ec0b-4c5f-9254-57798b6625a5" />
-        <classShapeMoniker Id="1c1fb1b6-5f1a-40d7-bd0e-ba11cf9cc9b0" />
+        <classShapeMoniker Id="875bd840-f040-4c96-bc27-e92e6828f938" />
+        <classShapeMoniker Id="315e9113-4801-4a52-af47-9681dc427fb2" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 10.0921134440104); (9.25 : 10.0921134440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Tienda/Tienda_PedidosInternos" />
       <nodes>
-        <classShapeMoniker Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" />
-        <classShapeMoniker Id="26293a4d-ee05-4add-b378-ce4e1e34121d" />
+        <classShapeMoniker Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" />
+        <classShapeMoniker Id="3339d779-8667-4ade-9006-34940d61e2e6" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 17.7988598632813); (5.61979166666667 : 17.7988598632813 : JumpStart); (5.78645833333333 : 17.7988598632813 : JumpEnd); (6.34375 : 17.7988598632813); (6.34375 : 10.9342268880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/localidades/localidades_Tienda" />
       <nodes>
-        <classShapeMoniker Id="1f1778e7-0070-4a00-b6ea-14ab3feda719" />
-        <classShapeMoniker Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" />
+        <classShapeMoniker Id="d9923fa9-d543-41db-ba2c-1a8526ba645b" />
+        <classShapeMoniker Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 17.161472202474); (3.25 : 17.161472202474); (3.25 : 15.5); (5.61979166666667 : 15.5 : JumpStart); (5.78645833333333 : 15.5 : JumpEnd); (6 : 15.5); (6 : 11.875); (6.26041666666667 : 11.875 : JumpStart); (6.42708333333333 : 11.875 : JumpEnd); (7.328127 : 11.875); (7.328127 : 10.9342268880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/municipios/municipios_Tienda" />
       <nodes>
-        <classShapeMoniker Id="7665d5ed-8aea-4cac-aff2-98f7017c4ee4" />
-        <classShapeMoniker Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" />
+        <classShapeMoniker Id="4c2a1af0-5f94-4b98-8acb-46860a501b47" />
+        <classShapeMoniker Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 7.95274983723958); (5.57291666666667 : 7.95274983723958 : JumpStart); (5.73958333333333 : 7.95274983723958 : JumpEnd); (6.25 : 7.95274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Supervision/Supervision_Tienda" />
       <nodes>
-        <classShapeMoniker Id="1c1fb1b6-5f1a-40d7-bd0e-ba11cf9cc9b0" />
-        <classShapeMoniker Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" />
+        <classShapeMoniker Id="315e9113-4801-4a52-af47-9681dc427fb2" />
+        <classShapeMoniker Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 5.45755126953125); (5.57291666666667 : 5.45755126953125 : JumpStart); (5.73958333333333 : 5.45755126953125 : JumpEnd); (6.25 : 5.45755126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/Supervisor/Supervisor_Tienda" />
       <nodes>
-        <classShapeMoniker Id="71020467-62ab-4b28-8ef8-5d48e76b7df2" />
-        <classShapeMoniker Id="a6598239-9e11-4afa-bbce-2142f7b9a50f" />
+        <classShapeMoniker Id="3d2fe309-dbd7-46e9-9f1a-54d0e1ce1db9" />
+        <classShapeMoniker Id="90b5cb66-0cf3-401d-9c8a-f72037052fd3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.75 : 26.6931469726563); (6.84375 : 26.6931469726563); (6.84375 : 16.9727197265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/InventarioBDDataContext/UnidadDeMedida/UnidadDeMedida_Articulos" />
       <nodes>
-        <classShapeMoniker Id="5f8db967-6a30-4c52-b728-4200b6f4d07a" />
-        <classShapeMoniker Id="97ca90ba-7d8a-4b6d-9989-86bb5164301b" />
+        <classShapeMoniker Id="b6d13488-65c0-42d5-8188-a71f5bed0d3a" />
+        <classShapeMoniker Id="0de59af5-b02d-4ff4-9435-511dc1cc9c15" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

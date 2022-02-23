@@ -16,8 +16,12 @@ function abrirModal(id) {
             sessionStorage.setItem('IDTiend', Data[0].IdExistenciaAlmacenG);
             document.getElementById("TxtIdCompra").value = Data[0].IdCompra;
             document.getElementById("TxtIdCompraInterna").value = Data[0].IdCompraInterno;
+
+            document.getElementById("TxtNumPedido").name = Data[0].IdExistenciaAlmacenG;
             document.getElementById("TxtNumPedido").value = Data[0].NoPedidoG;
+
             document.getElementById("TxtProveedor").value = Data[0].Proveedor;
+
             document.getElementById("TxtArticulo").value = Data[0].Articulo;
             document.getElementById("TxtArticulo").name = Data[0].IdArticulo;
             document.getElementById("TxtCantidad").value = Data[0].ExitenciaActual;
@@ -45,10 +49,80 @@ function verficar() {
 
     if (combo.value == 1) {
 
-        alert("es uno");
+        GuardarMerma();
     }
     if (combo.value == 2) {
 
         alert("dos");
     }
+}
+
+//-----------------------Guardar los datos en la tabla de mermasGeneral-------------------------------------------
+function GuardarMerma() {
+
+    var IdMermas = sessionStorage.getItem('IDTiend')
+    var IdCompra = document.getElementById("TxtIdCompra").value;
+    var IdCompraInterna = document.getElementById("TxtIdCompraInterna").value;
+
+    var NoPedidoG = document.getElementById("TxtNumPedido").value;
+    var NoName = document.getElementById("TxtNumPedido").name;
+
+    var IdArticulo = document.getElementById("TxtArticulo").name;
+    var Articulo = document.getElementById("TxtArticulo").value;
+    var StockInicial = document.getElementById("TxtCantidad").value;
+    var Observaciones = document.getElementById("TxtNoObservaciones").value;
+    var fecha = document.getElementById('TxtFecha').value;
+
+    CambiarDev(NoName);
+
+    var frm = new FormData();
+
+    frm.append("IdMermas", IdMermas);
+    frm.append("IdCompra", IdCompra);
+    frm.append("IdCompraInterna", IdCompraInterna);
+    frm.append("NoPedidoG", NoPedidoG);
+    frm.append("IdArticulo", IdArticulo);
+    frm.append("Articulo", Articulo);
+    frm.append("StockInicial", StockInicial);
+    frm.append("StockActual", StockInicial);
+    frm.append("Observaciones", Observaciones);
+    frm.append("fecha", fecha);
+    frm.append("Estatus", 1);
+
+    $.ajax({
+        type: "POST",
+        url: "/Mermas/GuardarMerma",
+        data: frm,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data == 0) {
+                swal("¡Ocurrio un error!", "", "danger");
+            }
+            else if (data == -1) {
+                swal("¡El método de pago ya existe!", "", "warning");
+            }
+            else {
+              
+                swal("Datos guardados exitosamente!", "", "success");
+                consultaFecha();
+                document.getElementById("btnCancelar").click();
+            }
+        }
+    });
+
+
+}
+
+//------------------------------------------------------------------------------------
+
+function CambiarDev(ID) {
+
+    $.get("/Mermas/ConsultaDevolución/?Id=" + ID, function (Data) {
+        let sum = Data;
+        if (Data == 1) {
+            alert("Ejecución correcta")
+        }
+    });
+
 }

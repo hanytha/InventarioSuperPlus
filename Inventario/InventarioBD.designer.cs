@@ -5830,7 +5830,7 @@ namespace Inventario
 		
 		private string _Fecha;
 		
-		private long _Cantidad;
+		private double _Cantidad;
 		
 		private System.Nullable<int> _Estatus;
 		
@@ -5852,7 +5852,7 @@ namespace Inventario
     partial void OnMovimientoChanged();
     partial void OnFechaChanging(string value);
     partial void OnFechaChanged();
-    partial void OnCantidadChanging(long value);
+    partial void OnCantidadChanging(double value);
     partial void OnCantidadChanged();
     partial void OnEstatusChanging(System.Nullable<int> value);
     partial void OnEstatusChanged();
@@ -5985,8 +5985,8 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="BigInt NOT NULL")]
-		public long Cantidad
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Float NOT NULL")]
+		public double Cantidad
 		{
 			get
 			{
