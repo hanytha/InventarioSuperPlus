@@ -83,21 +83,26 @@ namespace Inventario.Controllers
         //------------------------------------------------------------------------------------------------------------------------
         public JsonResult ConsultaArticuloM(long Id)
         {
-            var Categoria = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdExistenciaAlmacenG,
-                    p.IdArticulo,
-                    p.IdCompra,
-                    p.IdCompraInterno,
-                    p.NoPedidoG,
-                    p.Articulo,
-                    p.TipoDeOperacion,
-                    p.Observaciones,
-                    p.ExitenciaActual,
-                    p.ExitenciaInicial,
+            var Categoria = from comprs in InvBD.CompraInterno
+                            join exist in InvBD.ExistenciaAlmacenG
+                        on comprs.IdCompraInterno equals exist.IdCompraInterno
+                            where exist.IdExistenciaAlmacenG.Equals(Id) && comprs.EstatusPedido.Equals(1)
+                            select new
+                            {
+                                IdProveedor = comprs.IdProveedor,
+                                Proveedor = comprs.Proveedor,
+                                IdCompra = exist.IdCompra,
+                                IdCompraInterno = exist.IdCompraInterno,
+                                IdArticulo = exist.IdArticulo,
+                                Articulo = exist.Articulo,
+                                ExitenciaInicial = exist.ExitenciaInicial,
+                                ExitenciaActual = exist.ExitenciaActual,
+                                NoPedidoG = exist.NoPedidoG,
+                                Observaciones = exist.Observaciones,
+                                TipoDeOperacion = exist.TipoDeOperacion,
+                                IdExistenciaAlmacenG = exist.IdExistenciaAlmacenG,
 
-                });
+                            };
             return Json(Categoria, JsonRequestBehavior.AllowGet);
         }
 

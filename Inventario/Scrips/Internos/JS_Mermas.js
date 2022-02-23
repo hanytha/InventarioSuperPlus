@@ -16,10 +16,10 @@ function abrirModal(id) {
             document.getElementById("TxtIdCompra").value = Data[0].IdCompra;
             document.getElementById("TxtIdCompraInterna").value = Data[0].IdCompraInterno;
             document.getElementById("TxtNumPedido").value = Data[0].NoPedidoG;
-           // document.getElementById("TxtProveedor").value = Data[0].E1Nombre;
+            document.getElementById("TxtProveedor").value = Data[0].Proveedor;
             document.getElementById("TxtArticulo").value = Data[0].Articulo;
             document.getElementById("TxtCantidad").value = Data[0].ExitenciaActual;
-            document.getElementById("Observaciones").value = Data[0].A1Nombre;
+            document.getElementById("TxtNoObservaciones").value = Data[0].Observaciones;
         });
     }
 }
