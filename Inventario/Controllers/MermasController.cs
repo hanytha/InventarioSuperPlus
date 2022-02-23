@@ -80,6 +80,26 @@ namespace Inventario.Controllers
 
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        public JsonResult ConsultaArticuloM(long Id)
+        {
+            var Categoria = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdExistenciaAlmacenG,
+                    p.IdArticulo,
+                    p.IdCompra,
+                    p.IdCompraInterno,
+                    p.NoPedidoG,
+                    p.Articulo,
+                    p.TipoDeOperacion,
+                    p.Observaciones,
+                    p.ExitenciaActual,
+                    p.ExitenciaInicial,
+
+                });
+            return Json(Categoria, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

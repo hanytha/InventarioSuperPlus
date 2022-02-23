@@ -1,50 +1,32 @@
 ﻿//ConsultaArticulos();
 //ConsultaArticulos();
-
+consultaFecha();
 //---------------Crea una tabla de todos los artículos de la BD---------------
 
+function abrirModal(id) {
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IDTiend', '0');
 
-
-function ConsultaArticulos() {
-    $.get("/Mermas/ConsultaCompraInternaJoinExistenciasAlmacen", function (Data) {
-        CrearTablaArticulos(Data);
     }
-    );
-}
-function CrearTablaArticulos(Data) {
-    var CodigoHtmlTablaArticulos = "";
+    else {
 
-    CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
-    CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
-    CodigoHtmlTablaArticulos += "<thead>";
-    CodigoHtmlTablaArticulos += "<tr>";
-    CodigoHtmlTablaArticulos += "<th>Artículo</th>";
-    CodigoHtmlTablaArticulos += "<th></th>";
-    CodigoHtmlTablaArticulos += "<th>Área</th>";
-    CodigoHtmlTablaArticulos += "<th></th>";
-    CodigoHtmlTablaArticulos += "<th>Precio_Unitario_Promedio</th>";
-    CodigoHtmlTablaArticulos += "<th>Opciones</th>";
-    CodigoHtmlTablaArticulos += "</tr>";
-    CodigoHtmlTablaArticulos += "</thead>";
-    CodigoHtmlTablaArticulos += "<tbody>";
-
-
-    for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaArticulos += "<tr>";
-        CodigoHtmlTablaArticulos += "<td colspan='2'>" + Data[i].IdCompra + "</td>";
-        CodigoHtmlTablaArticulos += "<td colspan='2'>" + Data[i].IdArticulo + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + Data[i].Articulo + "</td>";
-        CodigoHtmlTablaArticulos += "<td>";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + Data[i].IdArticulo + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + Data[i].IdArticulo + ",this)' ><i class='far fa-trash-alt'></i></button>";
-
-        CodigoHtmlTablaArticulos += "</td>";
-        CodigoHtmlTablaArticulos += "</tr>";
+        $.get("/Mermas/ConsultaArticuloM/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IDTiend', Data[0].IdExistenciaAlmacenG);
+            document.getElementById("TxtIdCompra").value = Data[0].IdCompra;
+            document.getElementById("TxtIdCompraInterna").value = Data[0].IdCompraInterno;
+            document.getElementById("TxtNumPedido").value = Data[0].NoPedidoG;
+           // document.getElementById("TxtProveedor").value = Data[0].E1Nombre;
+            document.getElementById("TxtArticulo").value = Data[0].Articulo;
+            document.getElementById("TxtCantidad").value = Data[0].ExitenciaActual;
+            document.getElementById("Observaciones").value = Data[0].A1Nombre;
+        });
     }
-    CodigoHtmlTablaArticulos += "</tbody>";
-    CodigoHtmlTablaArticulos += "</table>";
-    document.getElementById("tablaMermas").innerHTML = CodigoHtmlTablaArticulos;
 }
 
-
-//
+//--------------------------------------------------------------------------------------------------------
+function consultaFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFecha').value = fecha;
+}
