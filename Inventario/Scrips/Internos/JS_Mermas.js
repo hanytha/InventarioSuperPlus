@@ -1,7 +1,10 @@
 ﻿//ConsultaArticulos();
-ConsultaArticulos();
+//ConsultaArticulos();
 
 //---------------Crea una tabla de todos los artículos de la BD---------------
+
+
+
 function ConsultaArticulos() {
     $.get("/Mermas/ConsultaCompraInternaJoinExistenciasAlmacen", function (Data) {
         CrearTablaArticulos(Data);

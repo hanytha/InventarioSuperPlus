@@ -17,6 +17,8 @@ namespace Inventario.Controllers
         // GET: Mermas
         public ActionResult Mermas()
         {
+            MermasController mermas = new MermasController();
+            mermas.ConsultaCompraInternaJoinExistenciasAlmacen();
             return View();
         }
 
