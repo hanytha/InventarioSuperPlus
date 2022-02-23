@@ -1314,76 +1314,7 @@ function nuevoStockUsados() {
 }
 
 
-//function GuardarUsados() {
 
-//    if (CamposObligatoriosUsados() == true) {
-
-//        if (confirm("¿Desea aplicar los cambios?") == 1) {
-//            //----------Guardar los inputs de manera individual en la Base de datos--------------------
-//            var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
-
-//            var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-//            var IdExistencia = document.getElementsByClassName("input-IdExistencia");
-
-//            for (let i = 0; i < NumPedidos.length; i++) {
-//                if (NumPedidos[i].value >= 1 && NomArticulos[i].value && IdExistencia[i].value) {
-
-
-//                    var IdMovimiento = sessionStorage.getItem('IdMovimiento');
-//                    //var IdExistencia = sessionStorage.getItem('IdExistencia');
-
-//                    var Movimiento = document.getElementById("TxtMovUsados").value;
-//                    var Fecha = document.getElementById("TxtFechaIngresoUsados").value;
-//                    //------------------------Guarda el nombre del artículo solicitado----------------------------------
-//                    var IdArticulo = NomArticulos[i].name;
-//                    var Articulo = NomArticulos[i].value;
-//                    //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-//                    var Cantidad = NumPedidos[i].value;
-//                    //  var IdExistencia = IdExistencia[i].name;
-//                    //------------------------Guarda el IdExistencia de los artículos solicitados----------------------------------
-//                    //var IdExistencia = IdExistencia[i].value;
-//                    //-------------------------------------------------------------------------------------------------------------
-//                    var frm = new FormData();
-
-//                    frm.append("IdMovimiento", IdMovimiento);
-//                    //  frm.append("IdExistencia", IdExistencia);
-//                    frm.append("Movimiento", Movimiento);
-//                    frm.append("Fecha", Fecha);
-
-
-//                    frm.append("IdArticulo", IdArticulo);
-//                    frm.append("Articulo", Articulo);
-//                    frm.append("Cantidad", Cantidad);
-
-//                    frm.append("Estatus", 1);
-//                    $.ajax({
-//                        type: "POST",
-//                        url: "/Supervision/GuardarUsados",
-//                        data: frm,
-//                        contentType: false,
-//                        processData: false,
-//                        success: function (data) {
-//                            if (data == 0) {
-//                                alert("Ocurrió un error");
-//                            }
-//                            else if (data == -1) {
-//                                alert("Ya existe este registro");
-//                            }
-
-//                        }
-//                    });
-
-//                }
-//            }
-//            //-----Mensaje de confirmación-----------------------
-//            alert("Guardado correctamente");
-//            ConsultaArticuloComp();
-//            document.getElementById("btnCancelar").click();
-//        }
-//    }
-
-//}
 
 
 
