@@ -2630,12 +2630,13 @@ namespace Inventario.Controllers
                                              ExitenciaActual = ExistAlm.ExitenciaActual,
                                              Observaciones = ExistAlm.Observaciones,
                                              IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-                                             IdCompraExterna = ExistAlm.IdCompra
+                                             IdCompraExterna = ExistAlm.IdCompra,
+                                             StockActual = ExistAlm.ExitenciaActual
                                          };
 
                 var IdDeTienda = IdTienda[1];
-                var Diferencia = Convert.ToInt32(Cantidad[1]);
-
+                //var Diferencia = Convert.ToInt32(Cantidad[1]);
+                Double Diferencia = Convert.ToInt32(Cantidad[1]);
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
@@ -2644,23 +2645,27 @@ namespace Inventario.Controllers
                     long IdCompraExterna = Convert.ToInt32(con.IdCompraExterna);
                     if (Diferencia > 0)
                     {
-                        var NExistencia = 0;
+                        Double NExistencia = 0;
+                        Double NCantidad = 0;
 
-                        if (con.ExitenciaActual == Diferencia)
+                        if (con.StockActual == Diferencia)
                         {
                             Diferencia = 0;
                             NExistencia = 0;
+                            NCantidad = (double)con.StockActual;
                         }
-                        else if (con.ExitenciaActual > Diferencia)
+                        else if (con.StockActual > Diferencia)
                         {
 
-                            NExistencia = (int)con.ExitenciaActual - Diferencia;
+                            NCantidad = Diferencia;
+                            NExistencia = (Double)con.StockActual - Diferencia;
                             Diferencia = 0;
                         }
                         else
                         {
-                            Diferencia = Diferencia - (int)con.ExitenciaActual;
+                            Diferencia = Diferencia - (Double)con.StockActual;
                             NExistencia = 0;
+                            NCantidad = (double)con.StockActual;
 
                         }
 
