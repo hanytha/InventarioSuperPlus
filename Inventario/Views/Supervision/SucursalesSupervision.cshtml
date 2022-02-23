@@ -374,13 +374,13 @@
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <!-----formulario-->
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
+                            @*<div class="col-lg-3">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
+                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                </div>
+            </div>*@
+                            <div class="col-lg-8">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
                                     <input type="text" id="TxtMovDev" class="form-control bloquear" value="Devolución">
@@ -394,92 +394,88 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtExistenciaInicDev">Stock del pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtExistenciaInicDev" class="form-control limpiar bloquear">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
-                                    <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtIdArtDev">Id Articulo<span class="required">*</span></label>
                                     <input type="text" id="TxtIdArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtArtDev">Articulo<span class="required">*</span></label>
                                     <input type="text" id="TxtArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
+                            </div>
 
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
-                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
+
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
+                                        <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
+                                        <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
+                                        <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
-                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
+
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
+                                        <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
-                                    <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                        <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                        @{
-                                            if (@TiendasSupervision.IDTienda != null)
-                                            {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                        <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                            <option value="0">--Seleccione--</option>
+                                            @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                            @{
+                                                if (@TiendasSupervision.IDTienda != null)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                    {
+                                                        <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    }
                                                 }
                                             }
-                                        }
-                                    </select>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+
+                                        <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
+                                    </div>
                                 </div>
                             </div>
 
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-
-                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
+</form>
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
