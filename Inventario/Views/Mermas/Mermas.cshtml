@@ -62,7 +62,7 @@
         </div>
 
 
-<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+        <!---------------------------------------------------------------------------------------------------------------------------------------------------->
         <!-- Encabezado del Modal -->
         <div class="container">
             <div class="modal fade" id="ModalPedidos">
@@ -104,105 +104,108 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtProveedor]" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="TxtCantidad">Cantidad<span class="required">*</span></label>
+                                            <input type="text" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar obligatorio bloquear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="TxtNoObservaciones">Observaciones<span class="required">*</span></label>
                                             <textarea type="text" id="TxtNoObservaciones" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega observaciones acerca del movimiento..."></textarea>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TxtProveedor">Proveedor<span class="required">*</span></label>
-                                            <input type="text" name="" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
-                                        </div>
-                                    </div>
+                                <!-- pie del modal-->
+                                <div class="modal-footer">
+                                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" validacion()">Guardar</button>
+                                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
-                                            <div id="TblArticulos">Artículo(s) del proveedor</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- pie del modal-->
-                        <div class="modal-footer">
-                            <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" validacion()">Guardar</button>
-                            <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            /* Solid border */
-            hr.solid {
-                border-top: 4px solid #D7DBDD;
-            }
+            <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+                /* Solid border */
+                hr.solid {
+                    border-top: 4px solid #D7DBDD;
+                }
 
-            .D1 {
-                background-color: #EBEBEB;
-            }
-        </style>
+                .D1 {
+                    background-color: #EBEBEB;
+                }
+            </style>
 
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            /* Solid border */
-            hr.solid3 {
-                border-top: 1px solid #f1f507;
-            }
-        </style>
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            /* Solid border */
-            hr.solid4 {
-                border-top: 1px solid #0B94F8;
-            }
-        </style>
-        <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
-        <style>
-            .redondeado {
-                border-radius: 5px;
-                border: 1px solid #696969;
-                width: 135px;
-            }
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+                /* Solid border */
+                hr.solid3 {
+                    border-top: 1px solid #f1f507;
+                }
+            </style>
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+                /* Solid border */
+                hr.solid4 {
+                    border-top: 1px solid #0B94F8;
+                }
+            </style>
+            <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+            <style>
+                .redondeado {
+                    border-radius: 5px;
+                    border: 1px solid #696969;
+                    width: 135px;
+                }
 
-            input:focus {
-                background-color: lavender;
-                text-align: center
-            }
-        </style>
+                input:focus {
+                    background-color: lavender;
+                    text-align: center
+                }
+            </style>
 
-        <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
-        <style>
-            .sinborde {
-                border: 0;
-            }
-        </style>
+            <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+            <style>
+                .sinborde {
+                    border: 0;
+                }
+            </style>
 
-        <!----------------------------------------------------------------------------------------------------->
-        <!--Hacer que el modal muestre los pasos por parte-->
-        <style type="text/css">
-            #regiration_form fieldset:not(:first-of-type) {
-                display: none;
-            }
-        </style>
-        <!--Script-->
-        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-        <script src="~/Scrips/Internos/JS_Mermas.js"></script>
-        <!--Validacion del formulario-->
-        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-        <!--Scripts de la tarjeta y el botón-->
-        <link href="~/Content/tarjeta.css" rel="stylesheet" />
-        <!----------------Exportar-------------------------->
+            <!----------------------------------------------------------------------------------------------------->
+            <!--Hacer que el modal muestre los pasos por parte-->
+            <style type="text/css">
+                #regiration_form fieldset:not(:first-of-type) {
+                    display: none;
+                }
+            </style>
+            <!--Script-->
+            <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+            <script src="~/Scrips/Internos/JS_Mermas.js"></script>
+            <!--Validacion del formulario-->
+            <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+            <!--Scripts de la tarjeta y el botón-->
+            <link href="~/Content/tarjeta.css" rel="stylesheet" />
+            <!----------------Exportar-------------------------->
