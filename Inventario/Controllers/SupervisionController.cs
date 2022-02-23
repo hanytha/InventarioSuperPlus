@@ -270,7 +270,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)&&ExistenciaAlmacenG.ExitenciaActual>=0
                                    select new
 
                                    {
@@ -2604,7 +2604,7 @@ namespace Inventario.Controllers
              ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(IdCompraInterno) && p.IdArticulo.Equals(IdArticulo)).First();
             mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
             mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
-            mpag.Observaciones = Observacion;
+            //mpag.Observaciones = Observacion;
             //InvBD.ExistenciaAlmacenG.InsertOnSubmit(mpag);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
 
