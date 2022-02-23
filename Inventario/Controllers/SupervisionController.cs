@@ -2638,7 +2638,7 @@ namespace Inventario.Controllers
                                          };
 
                 var IdDeTienda = IdTienda[1];
-                //var Diferencia = Convert.ToInt32(Cantidad[1]);
+   
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
                 foreach (var con in ConsultaIDArticulo)
                 {
@@ -2691,20 +2691,19 @@ namespace Inventario.Controllers
 
         }
         ///
-        public int GuardarExistenciaActMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double ExistenciaActual, double CantidadAct)
+        public int GuardarExistenciaActMovUsado(long IdExistencia, long IDCompraExt, long IDArticulo, string Articulo, double ExistenciaActual, double CantidadAct)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            // var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)CantidadAct, (string)Articulo);
-            var cons = GuardarMovimientoUsado((long)ID, (long)IDA, (long)IDCompraExt, (double)CantidadAct, (string)Articulo);
+          
+            var cons = GuardarMovimientoUsado((long)IdExistencia, (long)IDArticulo, (long)IDCompraExt, (double)CantidadAct, (string)Articulo);
             int consulta = 0;
 
-            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
-           // mpag.TipoDeOperacion = "USADO";//Cambia el estatus en 0
-           // mpag.Observaciones = Observacion;
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistencia) && p.IdArticulo.Equals(IDArticulo)).First();
+            mpag.ExitenciaActual = ExistenciaActual;
+         
+            InvBD.SubmitChanges();
 
             nregistradosAfectados = 1;//Se pudo realizar
                                       //}
@@ -2714,63 +2713,26 @@ namespace Inventario.Controllers
                                       //}
             return nregistradosAfectados;
         }
-
-
-        //public JsonResult ConsultaArt(long ID, long IDCompraExt, long IDA, double CantidadAct, string Articulo)
-
-        //{
-
-
-        //    var articulo = InvBD.MovimientosTienda.Where(p => p.IdArticulo>0).OrderByDescending(p => p.IdMovimiento)
-        //        .Select(p => new
-        //        {
-        //            p.IdMovimiento,
-        //          //  p.NoPedido,
-
-
-        //        });
-        //    var contador = 0;
-        //    foreach (var b in articulo)
-        //    {
-        //        contador++;
-
-        //        if (contador == 1)
-        //        {
-        //            var IdCompra = ID;
-        //            var IdCompraInterno = b.IdMovimiento;
-        //           // var NoPedidoG = b.NoPedido;
-        //            var ExitenciaInicial = CantidadAct;
-        //            var NomArticulo = Articulo;
-        //            var cons = GuardarCom((long)ID, (long)IDA, (long)IDCompraExt, (double)CantidadAct, (string)Articulo);
-        //        }
-        //    }
-
-
-        //    return Json(articulo, JsonRequestBehavior.AllowGet);
-        //}
-
         //----------------------------------------------------------------------------------------------------------------
+        //Obtener la fecha de manera automática
         public static DateTime Today { get; }
-        public int GuardarMovimientoUsado(long ID, long IDA, long IDCompraExt,  double CantidadAct, string Articulo)
+        public int GuardarMovimientoUsado(long IdExistencia, long IDArticulo, long IDCompraExt,  double CantidadAct, string Articulo)
         {
             int nregistradosAfectados = 0;
             
         MovimientosTienda com = new MovimientosTienda();
-            com.IdExistencia = ID;
+            com.IdExistencia = IdExistencia;
             com.IdCompra = IDCompraExt;
             com.Movimiento = "Usados";
-            //   com.IdCompraInterno = IdCompraInterno;
-            //com.NoPedidoG = NoPedidoG;
-       
             DateTime thisDay = DateTime.Today;
-            //Console.WriteLine(thisDay.ToString());
+       
             com.Fecha = (thisDay.ToString());
             com.Cantidad = CantidadAct;
-            com.IdArticulo = IDA;
+            com.IdArticulo = IDArticulo;
             com.Articulo = Articulo;
             com.Estatus = 1;
             InvBD.MovimientosTienda.InsertOnSubmit(com);
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            InvBD.SubmitChanges();
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
         }
