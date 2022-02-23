@@ -19,8 +19,8 @@ namespace Inventario.Models
         public static List<long> ExitenciaActual { get; set; }
         public static List<long> NoPedidoG { get; set; }
         public static List<string> TipoDeOperacion { get; set; }
+        public static List<string> Articulo { get; set; }
         public static List<string> Observaciones { get; set; }
-
 
 
     }

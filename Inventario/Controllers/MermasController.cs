@@ -20,12 +20,28 @@ namespace Inventario.Controllers
             return View();
         }
 
-        public JsonResult ConsultaCompraInternaJoinExistenciasAlmacen()
+        public void ConsultaCompraInternaJoinExistenciasAlmacen()
         {
-            var compras = from comprs in InvBD.CompraInterno
+
+            ModeloMermas modeloMermas = new ModeloMermas();
+            ModeloMermas.IdCompraInterno = new List<long>();
+            ModeloMermas.IdProveedor = new List<long>();
+            ModeloMermas.Proveedor = new List<string>();
+
+            ModeloMermas.IdExistenciaAlmacenG = new List<long>();
+            ModeloMermas.IdCompra = new List<long>();
+            ModeloMermas.IdArticulo = new List<long>();
+            ModeloMermas.ExitenciaInicial = new List<long>();
+            ModeloMermas.ExitenciaActual = new List<long>();
+            ModeloMermas.NoPedidoG = new List<long>();
+            ModeloMermas.Articulo = new List<string>();
+            ModeloMermas.TipoDeOperacion = new List<string>();
+            ModeloMermas.Observaciones = new List<string>();
+
+            var merma = from comprs in InvBD.CompraInterno
                           join exist in InvBD.ExistenciaAlmacenG
                       on comprs.IdCompraInterno equals exist.IdCompraInterno
-                          where comprs.EstatusPedido.Equals(1)
+                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("DEVOLUCION")
                           orderby exist.IdCompraInterno
                           select new
                           {
@@ -37,13 +53,28 @@ namespace Inventario.Controllers
                               Articulo = exist.Articulo,
                               ExitenciaInicial = exist.ExitenciaInicial,
                               ExitenciaActual = exist.ExitenciaActual,
+                              NoPedidoG = exist.NoPedidoG,
                               Observaciones = exist.Observaciones,
-                              TipoDeOperacion = exist.TipoDeOperacion
+                              TipoDeOperacion = exist.TipoDeOperacion,
+                              IdExistenciaAlmacenG = exist.IdExistenciaAlmacenG,
 
                           };
+            foreach (var mer in merma)
+            {
+                ModeloMermas.IdCompraInterno.Add((long)mer.IdCompraInterno);
+                ModeloMermas.IdProveedor.Add((long)mer.IdProveedor);
+                ModeloMermas.Proveedor.Add(mer.Proveedor);
 
-
-            return Json(compras, JsonRequestBehavior.AllowGet);
+                ModeloMermas.IdExistenciaAlmacenG.Add((long)mer.IdExistenciaAlmacenG);
+                ModeloMermas.IdCompra.Add((long)mer.IdCompra);
+                ModeloMermas.IdArticulo.Add((long)mer.IdArticulo);
+                ModeloMermas.ExitenciaInicial.Add((long)mer.ExitenciaInicial);
+                ModeloMermas.ExitenciaActual.Add((long)mer.ExitenciaActual);
+                ModeloMermas.NoPedidoG.Add((long)mer.NoPedidoG);
+                ModeloMermas.Articulo.Add(mer.Articulo);
+                ModeloMermas.TipoDeOperacion.Add(mer.TipoDeOperacion);
+                ModeloMermas.Observaciones.Add(mer.Observaciones);
+            }
 
         }
 
