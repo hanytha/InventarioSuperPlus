@@ -2914,17 +2914,17 @@ namespace Inventario.Controllers
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
-                              pedido = ExistAlm.Articulo,
+                              Articulo = ExistAlm.Articulo,
                               NumeroPedido = ExistAlm.NoPedidoG,
                               NumPedidoProveedor = Compra.NoPedidoProveedor,
                               nombres = ExistAlm.Articulo,
                               IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-                              asignacion = ExistAlm.IdArticulo,
+                              IdArticulo = ExistAlm.IdArticulo,
                               Tipo = ExistAlm.TipoDeOperacion,
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              IdArticulo = ExistAlm.IdArticulo,
+                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
                               //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
@@ -2953,12 +2953,12 @@ namespace Inventario.Controllers
 
                     if (contador == 0)
                     {
-                        tem1 = numero.pedido;
-                        tem2 = (int)numero.asignacion;
+                        tem1 = numero.Articulo;
+                        tem2 = (int)numero.IdArticulo;
                         // tem3 = (int)numero.Idtienda;
 
-                        NoPedido += numero.pedido + ",";
-                        IdAsignacion += numero.asignacion + ",";
+                        NoPedido += numero.Articulo + ",";
+                        IdAsignacion += numero.IdArticulo + ",";
                         //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
@@ -2982,10 +2982,10 @@ namespace Inventario.Controllers
                         }
                         Stock += SumaStock + ",";
                     }
-                    if (numero.pedido != tem1 || numero.asignacion != tem2)
+                    if (numero.Articulo != tem1 || numero.IdArticulo != tem2)
                     {
-                        NoPedido += numero.pedido + ",";
-                        IdAsignacion += numero.asignacion + ",";
+                        NoPedido += numero.Articulo + ",";
+                        IdAsignacion += numero.IdArticulo + ",";
                         //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
@@ -2993,8 +2993,8 @@ namespace Inventario.Controllers
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-                        tem1 = numero.pedido;
-                        tem2 = (int)numero.asignacion;
+                        tem1 = numero.Articulo;
+                        tem2 = (int)numero.IdArticulo;
                         //tem3 = (int)numero.Idtienda;
 
                         contador++;
