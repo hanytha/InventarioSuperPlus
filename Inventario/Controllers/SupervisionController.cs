@@ -2740,7 +2740,7 @@ namespace Inventario.Controllers
                    // var NoPedidoG = b.NoPedido;
                     var ExitenciaInicial = NCantidad;
                     var NomArticulo = Articulo;
-                    var cons = GuardarCom((long)IdCompra, (long)IDA, (long)IDCompraExt, (double)ExitenciaInicial, (string)NomArticulo);
+                    var cons = GuardarCom((long)ID, (long)IDA, (long)IDCompraExt, (double)NCantidad, (string)Articulo);
                 }
             }
 
@@ -2750,12 +2750,12 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
         public static DateTime Today { get; }
-        public int GuardarCom(long IdCompra, long IDA, long IDCompraExt,  double ExitenciaInicial, string NomArticulo)
+        public int GuardarCom(long ID, long IDA, long IDCompraExt,  double NCantidad, string Articulo)
         {
             int nregistradosAfectados = 0;
             
         MovimientosTienda com = new MovimientosTienda();
-            com.IdExistencia = IdCompra;
+            com.IdExistencia = ID;
             com.IdCompra = IDCompraExt;
             com.Movimiento = "Usados";
             //   com.IdCompraInterno = IdCompraInterno;
@@ -2764,9 +2764,9 @@ namespace Inventario.Controllers
             DateTime thisDay = DateTime.Today;
             //Console.WriteLine(thisDay.ToString());
             com.Fecha = (thisDay.ToString());
-            com.Cantidad = ExitenciaInicial;
+            com.Cantidad = NCantidad;
             com.IdArticulo = IDA;
-            com.Articulo = NomArticulo;
+            com.Articulo = Articulo;
             com.Estatus = 1;
             InvBD.MovimientosTienda.InsertOnSubmit(com);
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
