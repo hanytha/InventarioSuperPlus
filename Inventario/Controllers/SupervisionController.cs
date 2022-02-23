@@ -10,6 +10,9 @@ namespace Inventario.Controllers
     public class SupervisionController : Controller
     {
         InventarioBDDataContext InvBD = new InventarioBDDataContext();
+
+        public object Datetime { get; private set; }
+
         // GET: Supervision
         public ActionResult Supervision()
         {
@@ -2746,19 +2749,22 @@ namespace Inventario.Controllers
         }
 
         //----------------------------------------------------------------------------------------------------------------
-
+        public static DateTime Today { get; }
         public int GuardarCom(long IdCompra, long IDA, long IDCompraExt,  double ExitenciaInicial, string NomArticulo)
         {
             int nregistradosAfectados = 0;
-
-            MovimientosTienda com = new MovimientosTienda();
+            
+        MovimientosTienda com = new MovimientosTienda();
             com.IdExistencia = IdCompra;
             com.IdCompra = IDCompraExt;
             com.Movimiento = "Usados";
             //   com.IdCompraInterno = IdCompraInterno;
             //com.NoPedidoG = NoPedidoG;
-            //  com.ExitenciaInicial = ExitenciaInicial;
-             com.Cantidad = ExitenciaInicial;
+       
+            DateTime thisDay = DateTime.Today;
+            //Console.WriteLine(thisDay.ToString());
+            com.Fecha = (thisDay.ToString());
+            com.Cantidad = ExitenciaInicial;
             com.IdArticulo = IDA;
             com.Articulo = NomArticulo;
             com.Estatus = 1;
