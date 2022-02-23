@@ -43,7 +43,7 @@ namespace Inventario.Controllers
             var merma = from comprs in InvBD.CompraInterno
                           join exist in InvBD.ExistenciaAlmacenG
                       on comprs.IdCompraInterno equals exist.IdCompraInterno
-                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("DEVOLUCION")
+                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("DEVOLUCION")&& exist.ExitenciaActual < 0
                           orderby exist.IdCompraInterno
                           select new
                           {
@@ -86,7 +86,8 @@ namespace Inventario.Controllers
             var Categoria = from comprs in InvBD.CompraInterno
                             join exist in InvBD.ExistenciaAlmacenG
                         on comprs.IdCompraInterno equals exist.IdCompraInterno
-                            where exist.IdExistenciaAlmacenG.Equals(Id) && comprs.EstatusPedido.Equals(1)
+                            where exist.IdExistenciaAlmacenG.Equals(Id) && comprs.EstatusPedido.Equals(1) 
+                            orderby exist.NoPedidoG
                             select new
                             {
                                 IdProveedor = comprs.IdProveedor,
@@ -124,7 +125,7 @@ namespace Inventario.Controllers
         //-----------------------------------------------------------------
         public void ConsultaDevolución(long Id)
         {
-            var devolucion = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id))
+            var devolucion = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id) && p.ExitenciaActual < 0)
                 .Select(p => new
                 {
                     
@@ -152,5 +153,6 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
         //------------------------------------------------------------
+
     }
 }
