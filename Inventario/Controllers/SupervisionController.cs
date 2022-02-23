@@ -2516,10 +2516,14 @@ namespace Inventario.Controllers
                                          orderby Compra.FechaIngreso
                                          select new
                                          {
+                                             IdCompra = ExistAlm.IdCompra,
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
+                                          ExistenciaInicial=ExistAlm.ExitenciaInicial,
+                                             ExistenciaActual=ExistAlm.ExitenciaActual,
                                              IdArticulo = ExistAlm.IdArticulo,
                                              Articulo = ExistAlm.Articulo,
                                              ExitenciaAct = ExistAlm.ExitenciaActual,
+                                             NoPedidoG=ExistAlm.NoPedidoG,
                                              Observaciones = ExistAlm.Observaciones
                                          };
 
@@ -2534,8 +2538,12 @@ namespace Inventario.Controllers
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompraInterno);
+                    long IdCompraInterno = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
-
+                    long ExistenciaInicial = Convert.ToInt32(con.ExistenciaInicial);
+                    long ExitenciaAct = Convert.ToInt32(con.ExitenciaAct);
+                    long NoPedidoG = Convert.ToInt32(con.NoPedidoG);
+                    //long Observaciones = Convert.ToInt32(con.Observaciones);
 
                     if (Diferencia > 0)
                     {
@@ -2564,7 +2572,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, ExistenciaActual, CantidadAct, Observacion);
+                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, ExistenciaActual, CantidadAct, Observacion, ExistenciaInicial);
                         if (consulta == 0)
                         {
                             break;
@@ -2584,12 +2592,12 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, String Observacion)
+        public int GuardarNStock(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, String Observacion, long ExistenciaInicial)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            var cons = GuardarMovimientoDev((long)IdCompraInterno, (long)IdArticulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion);
+            var cons = GuardarMovimientoDev((long)IdCompraInterno, (long)IdArticulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion, ExistenciaInicial);
             int consulta = 0;
             //ExistenciaAlmacenG mpag = new ExistenciaAlmacenG();
              ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(IdCompraInterno) && p.IdArticulo.Equals(IdArticulo)).First();
@@ -2608,14 +2616,14 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-        public int GuardarMovimientoDev(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, string Observacion)
+        public int GuardarMovimientoDev(long IdCompraInterno, long IdArticulo, double ExistenciaActual, double CantidadAct, string Observacion, long ExistenciaInicial)
         {
             int nregistradosAfectados = 0;
 
             ExistenciaAlmacenG com = new ExistenciaAlmacenG();
-            com.IdCompra = IdCompraInterno;
+            com.IdCompraInterno = IdCompraInterno;
      
-            //com.Movimiento = "Usados";
+            com.ExitenciaInicial = ExistenciaInicial;
             //DateTime thisDay = DateTime.Today;
 
             //com.Fecha = (thisDay.ToString());
