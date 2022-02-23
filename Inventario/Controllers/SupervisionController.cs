@@ -2624,6 +2624,7 @@ namespace Inventario.Controllers
             com.IdCompraInterno = IdCompraInterno;
      
             com.ExitenciaInicial = ExistenciaInicial;
+            com.ExitenciaActual = CantidadAct;
             //DateTime thisDay = DateTime.Today;
 
             //com.Fecha = (thisDay.ToString());
