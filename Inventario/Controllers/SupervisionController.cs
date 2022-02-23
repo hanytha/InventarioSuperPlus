@@ -2634,7 +2634,7 @@ namespace Inventario.Controllers
                                              Observaciones = ExistAlm.Observaciones,
                                              IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
                                              IdCompraExterna = ExistAlm.IdCompra,
-                                             StockActual = ExistAlm.ExitenciaActual
+                                             ExitenciaAct = ExistAlm.ExitenciaActual
                                          };
 
                 var IdDeTienda = IdTienda[1];
@@ -2648,31 +2648,31 @@ namespace Inventario.Controllers
                     long IdCompraExterna = Convert.ToInt32(con.IdCompraExterna);
                     if (Diferencia > 0)
                     {
-                        Double NExistencia = 0;
-                        Double NCantidad = 0;
+                        Double ExistenciaActual = 0;
+                        Double CantidadAct = 0;
 
-                        if (con.StockActual == Diferencia)
+                        if (con.ExitenciaAct == Diferencia)
                         {
                             Diferencia = 0;
-                            NExistencia = 0;
-                            NCantidad = (double)con.StockActual;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
                         }
-                        else if (con.StockActual > Diferencia)
+                        else if (con.ExitenciaAct > Diferencia)
                         {
 
-                            NCantidad = Diferencia;
-                            NExistencia = (Double)con.StockActual - Diferencia;
+                            CantidadAct = Diferencia;
+                            ExistenciaActual = (Double)con.ExitenciaAct - Diferencia;
                             Diferencia = 0;
                         }
                         else
                         {
-                            Diferencia = Diferencia - (Double)con.StockActual;
-                            NExistencia = 0;
-                            NCantidad = (double)con.StockActual;
+                            Diferencia = Diferencia - (Double)con.ExitenciaAct;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
 
                         }
 
-                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, NExistencia, NCantidad);
+                        consulta = GuardarExistenciaActMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct);
                         if (consulta == 0)
                         {
                             break;
@@ -2691,17 +2691,17 @@ namespace Inventario.Controllers
 
         }
         ///
-        public int GuardarNStockMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double NExistencia, double NCantidad)
+        public int GuardarExistenciaActMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double ExistenciaActual, double CantidadAct)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            // var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)NCantidad, (string)Articulo);
-            var cons = GuardarCom((long)ID, (long)IDA, (long)IDCompraExt, (double)NCantidad, (string)Articulo);
+            // var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)CantidadAct, (string)Articulo);
+            var cons = GuardarMovimientoUsado((long)ID, (long)IDA, (long)IDCompraExt, (double)CantidadAct, (string)Articulo);
             int consulta = 0;
 
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
+            mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
            // mpag.TipoDeOperacion = "USADO";//Cambia el estatus en 0
            // mpag.Observaciones = Observacion;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
@@ -2716,7 +2716,7 @@ namespace Inventario.Controllers
         }
 
 
-        //public JsonResult ConsultaArt(long ID, long IDCompraExt, long IDA, double NCantidad, string Articulo)
+        //public JsonResult ConsultaArt(long ID, long IDCompraExt, long IDA, double CantidadAct, string Articulo)
 
         //{
 
@@ -2739,9 +2739,9 @@ namespace Inventario.Controllers
         //            var IdCompra = ID;
         //            var IdCompraInterno = b.IdMovimiento;
         //           // var NoPedidoG = b.NoPedido;
-        //            var ExitenciaInicial = NCantidad;
+        //            var ExitenciaInicial = CantidadAct;
         //            var NomArticulo = Articulo;
-        //            var cons = GuardarCom((long)ID, (long)IDA, (long)IDCompraExt, (double)NCantidad, (string)Articulo);
+        //            var cons = GuardarCom((long)ID, (long)IDA, (long)IDCompraExt, (double)CantidadAct, (string)Articulo);
         //        }
         //    }
 
@@ -2751,7 +2751,7 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
         public static DateTime Today { get; }
-        public int GuardarCom(long ID, long IDA, long IDCompraExt,  double NCantidad, string Articulo)
+        public int GuardarMovimientoUsado(long ID, long IDA, long IDCompraExt,  double CantidadAct, string Articulo)
         {
             int nregistradosAfectados = 0;
             
@@ -2765,7 +2765,7 @@ namespace Inventario.Controllers
             DateTime thisDay = DateTime.Today;
             //Console.WriteLine(thisDay.ToString());
             com.Fecha = (thisDay.ToString());
-            com.Cantidad = NCantidad;
+            com.Cantidad = CantidadAct;
             com.IdArticulo = IDA;
             com.Articulo = Articulo;
             com.Estatus = 1;
