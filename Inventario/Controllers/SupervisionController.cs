@@ -2669,7 +2669,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, NExistencia);
+                        consulta = GuardarNStockMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, NExistencia, NCantidad);
                         if (consulta == 0)
                         {
                             break;
@@ -2688,12 +2688,12 @@ namespace Inventario.Controllers
 
         }
         ///
-        public int GuardarNStockMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double NExistencia)
+        public int GuardarNStockMovUsado(long ID, long IDCompraExt, long IDA, string Articulo, double NExistencia, double NCantidad)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)NExistencia, (string)Articulo);
+            var con = ConsultaArt((long)ID, (long)IDCompraExt, (long)IDA, (double)NCantidad, (string)Articulo);
             int consulta = 0;
 
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
@@ -2758,7 +2758,7 @@ namespace Inventario.Controllers
             //   com.IdCompraInterno = IdCompraInterno;
             //com.NoPedidoG = NoPedidoG;
             //  com.ExitenciaInicial = ExitenciaInicial;
-            // com.ExitenciaActual = ExitenciaInicial;
+             com.Cantidad = ExitenciaInicial;
             com.IdArticulo = IDA;
             com.Articulo = NomArticulo;
             com.Estatus = 1;
