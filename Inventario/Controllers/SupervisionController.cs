@@ -2516,6 +2516,7 @@ namespace Inventario.Controllers
                                          orderby Compra.FechaIngreso
                                          select new
                                          {
+                                             IdExistenciaAlmacenG=ExistAlm.IdExistenciaAlmacenG,
                                              IdCompra = ExistAlm.IdCompra,
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
                                           ExistenciaInicial=ExistAlm.ExitenciaInicial,
@@ -2540,7 +2541,8 @@ namespace Inventario.Controllers
                     long IDCompras = Convert.ToInt32(con.IdCompra);
                     long IdCompraInterno = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
-                   // string Articulo = Convert.ToInt32(con.Articulo);
+                    long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
+                    // string Articulo = Convert.ToInt32(con.Articulo);
                     long ExistenciaInicial = Convert.ToInt32(con.ExistenciaInicial);
                     long ExitenciaAct = Convert.ToInt32(con.ExitenciaAct);
                     int NoPedidoG = Convert.ToInt32(con.NoPedidoG);
@@ -2573,7 +2575,7 @@ namespace Inventario.Controllers
 
                         }
 
-                        consulta = GuardarNStock((long)con.IdCompraInterno, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
+                        consulta = GuardarNStock((long)con.IdExistenciaAlmacenG, (long)con.IdCompraInterno, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
                         if (consulta == 0)
                         {
                             break;
@@ -2593,15 +2595,15 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long IdCompraInterno, long IdArticulo, String Articulo, double ExistenciaActual, double CantidadAct, String Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
+        public int GuardarNStock(long IdExistenciaAlmacenG, long IdCompraInterno, long IdArticulo, String Articulo, double ExistenciaActual, double CantidadAct, String Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
         {
             int nregistradosAfectados = 0;
             //try
             //{
-            var cons = GuardarMovimientoDev((long)IdCompraInterno, (long)IdArticulo, (string)Articulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
+            var cons = GuardarMovimientoDev((long)IdExistenciaAlmacenG, (long)IdCompraInterno, (long)IdArticulo, (string)Articulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
             int consulta = 0;
             //ExistenciaAlmacenG mpag = new ExistenciaAlmacenG();
-             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(IdCompraInterno) && p.IdArticulo.Equals(IdArticulo)).First();
+             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistenciaAlmacenG) && p.IdArticulo.Equals(IdArticulo)).First();
             mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
            // mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
             //mpag.Observaciones = Observacion;
@@ -2617,7 +2619,7 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-        public int GuardarMovimientoDev(long IdCompraInterno, long IdArticulo, string Articulo, double ExistenciaActual, double CantidadAct, string Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
+        public int GuardarMovimientoDev(long IdExistenciaAlmacenG, long IdCompraInterno, long IdArticulo, string Articulo, double ExistenciaActual, double CantidadAct, string Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
         {
             int nregistradosAfectados = 0;
 

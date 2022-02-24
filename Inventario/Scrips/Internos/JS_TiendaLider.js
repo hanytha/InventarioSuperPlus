@@ -465,50 +465,50 @@ function Prov(id) {
 }
 
 
-function ExisteciaDevolucion(id) {
+//function ExisteciaDevolucion(id) {
 
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        //if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+//        //if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
 
-        //    let x = document.getElementById("TxtExistenciaInicDev").value;
+//        //    let x = document.getElementById("TxtExistenciaInicDev").value;
 
-        //    let y = document.getElementById("TxtCantidadDev").value;
-        //    let resultado = parseFloat(x) - parseFloat(y);
+//        //    let y = document.getElementById("TxtCantidadDev").value;
+//        //    let resultado = parseFloat(x) - parseFloat(y);
 
-        //    document.getElementById("TxtExistenciaActDev").value = resultado;
+//        //    document.getElementById("TxtExistenciaActDev").value = resultado;
 
-        //    if (document.getElementById("TxtExistenciaActDev").value < 0) {
+//        //    if (document.getElementById("TxtExistenciaActDev").value < 0) {
 
-        //        Swal.fire(
-        //            '!',
-        //            'La cantidad excede al stock',
-        //            'alert'
-        //        )
-        //    }
-        //}
+//        //        Swal.fire(
+//        //            '!',
+//        //            'La cantidad excede al stock',
+//        //            'alert'
+//        //        )
+//        //    }
+//        //}
 
-        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaActDev")) {
+//        if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaActDev")) {
 
-            let x = document.getElementById("TxtExistenciaInicDev").value;
+//            let x = document.getElementById("TxtExistenciaInicDev").value;
 
-            let y = document.getElementById("TxtCantidadDev").value;
-            //let resultado = parseFloat(x) - parseFloat(y);
+//            let y = document.getElementById("TxtCantidadDev").value;
+//            //let resultado = parseFloat(x) - parseFloat(y);
 
-            //document.getElementById("TxtExistenciaActDev").value = resultado;
+//            //document.getElementById("TxtExistenciaActDev").value = resultado;
 
-            if (document.getElementById("TxtCantidadDev").value > document.getElementById("TxtExistenciaActDev").value) {
+//            if (document.getElementById("TxtCantidadDev").value > document.getElementById("TxtExistenciaActDev").value) {
 
-                Swal.fire(
-                    '!',
-                    'La cantidad excede al stock general',
-                    'alert'
-                )
-                let cantidad = document.getElementById("TxtCantidadDev").value = "";
-            }
-        }
-    });
-}
+//                Swal.fire(
+//                    '!',
+//                    'La cantidad excede al stock general',
+//                    'alert'
+//                )
+//                let cantidad = document.getElementById("TxtCantidadDev").value = "";
+//            }
+//        }
+//    });
+//}
 
 
 function abrirModalMovimiento(IDTienda) {
