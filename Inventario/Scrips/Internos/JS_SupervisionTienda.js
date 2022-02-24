@@ -220,7 +220,7 @@ function ExisteciaDevolucion(id) {
 
         document.getElementById("TxtExistenciaActDev").value;
         document.getElementById("TxtCantidadDev").value;
-
+        x = document.getElementById("TxtCantidadDev").value;
 
         if (document.getElementById("TxtExistenciaActDev").value < document.getElementById("TxtCantidadDev").value) {
                 Swal.fire(
@@ -229,7 +229,8 @@ function ExisteciaDevolucion(id) {
                     'alert'
                 )
             document.getElementById("TxtCantidadDev").value = "";
-        } else if (document.getElementById("TxtCantidadDev").value<0) {
+        }
+        else if (document.getElementById("TxtCantidadDev").value < 0) {
             Swal.fire(
                 '!',
                 'No se aceptan valores negativos',
@@ -237,7 +238,9 @@ function ExisteciaDevolucion(id) {
             )
             document.getElementById("TxtCantidadDev").value = "";
         }
-
+        else {
+            document.getElementById("TxtCantidadDev").value=x;
+        }
     });
 }
 
