@@ -171,12 +171,10 @@ function nuevoStock() {
 
     total += compra + ":" + articulo + "," + cantidad + "/" + existencia;
 
-    alert(total);
-
     $.get("/Mermas/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
-        consultaFecha();
+
 
     });
 }
