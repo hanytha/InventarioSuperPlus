@@ -1776,6 +1776,7 @@ function CalcularExistenciaAct(id) {
 
         var Existencia = document.getElementsByClassName("input-existAct");
 
+      
         for (let i = 0; i < cantidadUsados.length; i++) {
             if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
 
@@ -1797,7 +1798,38 @@ function CalcularExistenciaAct(id) {
                     )
                     var Result = cantidadUsados[i].value = "";
                     var cantidad = res[i].value = "";
-                } else {
+                }
+           
+                else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value <0 && NomArticulos[i].value && Stock[i].value) {
+
+                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+                var CantidadSolicitada = cantidadUsados[i].value;
+                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+                var Unidad = Stock[i].value;
+                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+                //-------------------------------------------------------------------------------------------------------------
+                var frm = new FormData();
+                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+
+                if (cantidadUsados[i].value < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'La cantidad ----',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                    //var cantidad = res[i].value = "";
+                }
+
+                else {
                     var Result = res[i].value = resultado;
                 }
             }
