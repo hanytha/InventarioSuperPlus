@@ -205,6 +205,7 @@ function MovimientoModal(id) {
                     'alert'
                 )
             }
+           
         }
 
     });
@@ -1822,7 +1823,7 @@ function CalcularExistenciaAct(id) {
 
                     Swal.fire(
                         '!',
-                        'La cantidad ----',
+                        'No se aceptan valores negativos',
                         'alert'
                     )
                     var Result = cantidadUsados[i].value = "";
