@@ -351,7 +351,7 @@ function Desplegar(no, id) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArtTiendaLider/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaLider/?idCompraInt=" + no + "&idS= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -366,20 +366,20 @@ function Desplegar(no, id) {
             DespXArt += "<hr class='solid4'>";
 
 
-            let IdArticulos = Data.IdArticulos;
-            let ArrayIdArticulos = IdArticulos.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
             let Stock = Data.Stock;
             let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
 
-            let Articulo = Data.Articulo;
-            let ArrayArticulo = Articulo.split(',');
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
             let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
             let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
 
@@ -1946,9 +1946,10 @@ function nuevoStock() {
 
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("--Alerta---") }
+       // if (Data == 1) { alert("--Guardado correctamente---") }
 
     });
+    ConsultaArticuloComp();
 }
 
 
