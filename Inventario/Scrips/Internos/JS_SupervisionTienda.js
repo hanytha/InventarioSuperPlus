@@ -218,44 +218,26 @@ function ExisteciaDevolucion(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        //if (document.getElementById("TxtCantidadDev") <= document.getElementById("TxtExistenciaInicDev")) {
+        document.getElementById("TxtExistenciaActDev").value;
+        document.getElementById("TxtCantidadDev").value;
 
-        let x = document.getElementById("TxtExistenciaActDev").value;
 
-            let y = document.getElementById("TxtCantidadDev").value;
-        //    let resultado = parseFloat(x) - parseFloat(y);
-
-        //    document.getElementById("TxtExistenciaActDev").value = resultado;
-
-        //    if (document.getElementById("TxtExistenciaActDev").value < 0) {
-
-        //        Swal.fire(
-        //            '!',
-        //            'La cantidad excede al stock',
-        //            'alert'
-        //        )
-        //    }
-        //}
-
-        if (x<y) {
-
-            //let x = document.getElementById("TxtExistenciaInicDev").value;
-
-            //let y = document.getElementById("TxtCantidadDev").value;
-            //let resultado = parseFloat(x) - parseFloat(y);
-
-            //document.getElementById("TxtExistenciaActDev").value = resultado;
-
-           // if (document.getElementById("TxtCantidadDev").value > document.getElementById("TxtExistenciaActDev").value) {
-
+        if (document.getElementById("TxtExistenciaActDev").value < document.getElementById("TxtCantidadDev").value) {
                 Swal.fire(
                     '!',
                     'La cantidad excede al stock general',
                     'alert'
                 )
-               let cantidad = y.value = " ";
-          //  }
+            document.getElementById("TxtCantidadDev").value = "";
+        } else if (document.getElementById("TxtCantidadDev").value<0) {
+            Swal.fire(
+                '!',
+                'No se aceptan valores negativos',
+                'alert'
+            )
+            document.getElementById("TxtCantidadDev").value = "";
         }
+
     });
 }
 
