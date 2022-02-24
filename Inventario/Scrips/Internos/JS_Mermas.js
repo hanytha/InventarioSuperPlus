@@ -49,11 +49,40 @@ function verficar() {
 
     if (combo.value == 1) {
 
-        GuardarMerma();
+
+        swal({
+            title: "Desea guardar la información?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    GuardarMerma();
+                }
+            });
+
     }
     if (combo.value == 2) {
 
-        alert("dos");
+        swal({
+            title: "Desea guardar la información?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    nuevoStock();
+                }
+            });
+        
     }
 }
 
@@ -126,3 +155,25 @@ function CambiarDev(ID) {
     });
 
 }
+//------------------------------------------------------------------------------------
+function nuevoStock() {
+
+    var compra = document.getElementById("TxtIdCompra").value;
+    var articulo = document.getElementById("TxtArticulo").name;
+    var ncantidad = document.getElementById("TxtCantidad").value;
+
+    var cantidad = (ncantidad)*(-1)
+
+    var total = "";
+
+    total += compra + ":" + articulo + "," + cantidad;
+
+    alert(total);
+
+    $.get("/Mermas/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+
+    });
+}
+

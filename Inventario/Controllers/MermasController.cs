@@ -43,7 +43,7 @@ namespace Inventario.Controllers
             var merma = from comprs in InvBD.CompraInterno
                           join exist in InvBD.ExistenciaAlmacenG
                       on comprs.IdCompraInterno equals exist.IdCompraInterno
-                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("DEVOLUCION")&& exist.ExitenciaActual < 0
+                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("Devolucion")&& exist.ExitenciaActual < 0
                           orderby exist.IdCompraInterno
                           select new
                           {
@@ -152,7 +152,105 @@ namespace Inventario.Controllers
 
             return nregistradosAfectados;
         }
-        //------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------
 
+        public JsonResult ConsultaStockArticulo(string DatosArticulos)
+        {
+
+            // string[] Articulos = DatosArticulos.Split('/');
+            string[] Articulos = DatosArticulos.Split(':',',');
+
+            int consulta = 0;
+
+                int resultado = 0;
+
+                var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Articulos[1])) && p.IdCompra.Equals(Convert.ToInt32(Articulos[0]))).OrderBy(p => p.IdCompra)
+                .Select(p => new
+                {
+                    p.IdCompra,
+                    p.IdArticulo,
+                    p.Articulo,
+                    p.StockActual,
+                    p.ExistenciaInicial,
+
+                });
+
+                Double Diferencia = Convert.ToInt32(Articulos[2]);
+
+                foreach (var con in ConsultaIDArticulo)
+                {
+                    long IDCompras = Convert.ToInt32(con.IdCompra);
+                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
+                  
+                
+
+                    if (Diferencia > 0)
+                    {
+                        Double NExistencia = 0;
+
+                    NExistencia = (double)Diferencia + (double) con.StockActual;
+
+                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia);
+                        if (consulta == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
+        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        {
+            int nregistradosAfectados = 0;
+
+            var consul = ConsultaOcultar((long)ID,(long)IDA);
+
+            ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
+            mpag.StockActual = NExistencia;
+            InvBD.SubmitChanges();
+
+            nregistradosAfectados = 1;
+            return nregistradosAfectados;
+
+        }
+        //----------------------------------------------------------------------------------------------------------------------------------------
+        public JsonResult ConsultaOcultar(long IDCOM, long IDA)
+
+        {
+            var articulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompra.Equals(IDCOM) && p.Articulo.Equals(IDA) && p.TipoDeOperacion.Equals("Devolucion"))
+                .Select(p => new
+                {
+                    p.IdArticulo,
+                    p.IdCompra,
+                    p.TipoDeOperacion,
+
+                });
+            foreach (var b in articulo)
+            {
+                OcultarPeidos((long)b.IdCompra, (long)b.IdArticulo);
+            }
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+        //-------------------------------------------------------------------------------------------------------------------------------------
+        public int OcultarPeidos(long IDC, long ID)
+        {
+            int nregistradosAfectados = 0;
+
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompra.Equals(IDC) && p.IdArticulo.Equals(ID)).First();
+            mpag.TipoDeOperacion = "DEVOLUCION-ACEPTADA";
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
+
+            return nregistradosAfectados;
+        }
+        //-------------------------------------------------------------------------------------------------------------------------------------
     }
 }
