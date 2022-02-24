@@ -1775,7 +1775,7 @@ function CalcularExistenciaAct(id) {
 
         var Stock = document.getElementsByClassName("input-Stock");
 
-        var Existencia = document.getElementsByClassName("input-existAct");
+      //  var Existencia = document.getElementsByClassName("input-existAct");
 
       
         for (let i = 0; i < cantidadUsados.length; i++) {
@@ -1783,12 +1783,12 @@ function CalcularExistenciaAct(id) {
 
                 //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                 var CantidadSolicitada = cantidadUsados[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = Stock[i].value;
+                //------------------------Guarda la Existencia media de los artículos solicitados----------------------------------
+                var Existencia = Stock[i].value;
                 //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
                 //-------------------------------------------------------------------------------------------------------------
                 var frm = new FormData();
-                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
 
                 if (resultado < 0) {
 
@@ -1810,14 +1810,13 @@ function CalcularExistenciaAct(id) {
         for (let i = 0; i < cantidadUsados.length; i++) {
             if (cantidadUsados[i].value <0 && NomArticulos[i].value && Stock[i].value) {
 
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
-                var CantidadSolicitada = cantidadUsados[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = Stock[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                //-------------------------------------------------------------------------------------------------------------
-                var frm = new FormData();
-                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
+                //var CantidadSolicitada = cantidadUsados[i].value;
+    
+                //var Existencia = Stock[i].value;
+               
+                ////-------------------------------------------------------------------------------------------------------------
+                //var frm = new FormData();
+                //var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
 
                 if (cantidadUsados[i].value < 0) {
 
