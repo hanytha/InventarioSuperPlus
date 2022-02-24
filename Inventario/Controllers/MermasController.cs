@@ -158,7 +158,7 @@ namespace Inventario.Controllers
         {
 
             // string[] Articulos = DatosArticulos.Split('/');
-            string[] Articulos = DatosArticulos.Split(':',',');
+            string[] Articulos = DatosArticulos.Split(':',',','/');
 
             int consulta = 0;
 
@@ -176,6 +176,7 @@ namespace Inventario.Controllers
                 });
 
                 Double Diferencia = Convert.ToInt32(Articulos[2]);
+                Double IDExistencia = Convert.ToInt32(Articulos[3]);
 
                 foreach (var con in ConsultaIDArticulo)
                 {
@@ -190,7 +191,7 @@ namespace Inventario.Controllers
 
                     NExistencia = (double)Diferencia + (double) con.StockActual;
 
-                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia);
+                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, IDExistencia);
                         if (consulta == 0)
                         {
                             break;
@@ -207,11 +208,11 @@ namespace Inventario.Controllers
         }
 
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
-        public int GuardarNStock(long ID, long IDA, double NExistencia)
+        public int GuardarNStock(long ID, long IDA, double NExistencia, double IDExistencia)
         {
             int nregistradosAfectados = 0;
 
-            var consul = ConsultaOcultar((long)ID,(long)IDA);
+            var consul = ConsultaOcultar((long)IDA, (double)IDExistencia);
 
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;
@@ -222,29 +223,29 @@ namespace Inventario.Controllers
 
         }
         //----------------------------------------------------------------------------------------------------------------------------------------
-        public JsonResult ConsultaOcultar(long IDCOM, long IDA)
+        public JsonResult ConsultaOcultar(long IDA, double IDExistencia)
 
         {
-            var articulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompra.Equals(IDCOM) && p.Articulo.Equals(IDA) && p.TipoDeOperacion.Equals("Devolucion"))
+            var articulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IDExistencia) && p.IdArticulo.Equals(IDA) && p.TipoDeOperacion.Equals("Devolucion"))
                 .Select(p => new
                 {
                     p.IdArticulo,
                     p.IdCompra,
                     p.TipoDeOperacion,
-
+                    p.IdExistenciaAlmacenG,
                 });
             foreach (var b in articulo)
             {
-                OcultarPeidos((long)b.IdCompra, (long)b.IdArticulo);
+                OcultarPeidos((long)b.IdArticulo, (long)b.IdExistenciaAlmacenG);
             }
             return Json(articulo, JsonRequestBehavior.AllowGet);
         }
         //-------------------------------------------------------------------------------------------------------------------------------------
-        public int OcultarPeidos(long IDC, long ID)
+        public int OcultarPeidos(long ID, long IDE)
         {
             int nregistradosAfectados = 0;
 
-            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompra.Equals(IDC) && p.IdArticulo.Equals(ID)).First();
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IDE) && p.IdArticulo.Equals(ID)).First();
             mpag.TipoDeOperacion = "DEVOLUCION-ACEPTADA";
             InvBD.SubmitChanges();
             nregistradosAfectados = 1;

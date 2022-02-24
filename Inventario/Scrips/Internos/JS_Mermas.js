@@ -47,6 +47,8 @@ function LimpiarCampos() {
 function verficar() {
     var combo = document.getElementById("cmbMovimiento");
 
+
+
     if (combo.value == 1) {
 
 
@@ -132,7 +134,6 @@ function GuardarMerma() {
                 swal("¡El método de pago ya existe!", "", "warning");
             }
             else {
-              
                 swal("Datos guardados exitosamente!", "", "success");
                 consultaFecha();
                 document.getElementById("btnCancelar").click();
@@ -161,18 +162,21 @@ function nuevoStock() {
     var compra = document.getElementById("TxtIdCompra").value;
     var articulo = document.getElementById("TxtArticulo").name;
     var ncantidad = document.getElementById("TxtCantidad").value;
+    var existencia = document.getElementById("TxtNumPedido").name;
+
 
     var cantidad = (ncantidad)*(-1)
 
     var total = "";
 
-    total += compra + ":" + articulo + "," + cantidad;
+    total += compra + ":" + articulo + "," + cantidad + "/" + existencia;
 
     alert(total);
 
     $.get("/Mermas/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+        if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
+        consultaFecha();
 
     });
 }
