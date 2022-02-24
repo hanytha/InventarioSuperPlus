@@ -47,6 +47,10 @@ function LimpiarCampos() {
 function verficar() {
     var combo = document.getElementById("cmbMovimiento");
 
+    if (combo.value == 0) {
+
+        swal("¡Seleccione una opción!", "", "warning");
+    }
 
 
     if (combo.value == 1) {
