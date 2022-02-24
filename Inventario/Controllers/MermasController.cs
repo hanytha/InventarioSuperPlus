@@ -29,6 +29,7 @@ namespace Inventario.Controllers
             ModeloMermas.IdCompraInterno = new List<long>();
             ModeloMermas.IdProveedor = new List<long>();
             ModeloMermas.Proveedor = new List<string>();
+            ModeloMermas.Sitio = new List<string>();
 
             ModeloMermas.IdExistenciaAlmacenG = new List<long>();
             ModeloMermas.IdCompra = new List<long>();
@@ -49,6 +50,7 @@ namespace Inventario.Controllers
                           {
                               IdProveedor = comprs.IdProveedor,
                               Proveedor = comprs.Proveedor,
+                              Sitio = comprs.Sitio,
                               IdCompra = exist.IdCompra,
                               IdCompraInterno = exist.IdCompraInterno,
                               IdArticulo = exist.IdArticulo,
@@ -66,6 +68,7 @@ namespace Inventario.Controllers
                 ModeloMermas.IdCompraInterno.Add((long)mer.IdCompraInterno);
                 ModeloMermas.IdProveedor.Add((long)mer.IdProveedor);
                 ModeloMermas.Proveedor.Add(mer.Proveedor);
+                ModeloMermas.Sitio.Add(mer.Sitio);
 
                 ModeloMermas.IdExistenciaAlmacenG.Add((long)mer.IdExistenciaAlmacenG);
                 ModeloMermas.IdCompra.Add((long)mer.IdCompra);

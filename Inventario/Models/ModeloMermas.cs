@@ -10,6 +10,7 @@ namespace Inventario.Models
         public static List<long> IdCompraInterno { get; set; }
         public static List<long> IdProveedor { get; set; }
         public static List<string> Proveedor { get; set; }
+        public static List<string> Sitio { get; set; }
 
 
         public static List<long> IdExistenciaAlmacenG { get; set; }

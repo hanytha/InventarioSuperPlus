@@ -25,27 +25,30 @@
         {
             <table class="table-success" style="position: relative"
             <thead>
-            <tr>
-            <th scope="col">Número de pedido</th>
-            <th scope="col">Sitio</th>
-            <th scope="col">Acciones</th>
-            </tr>
+                    <tr>
+                        <th scope="col">Lugar de la devolución</th>
+                        <th scope="col">Número de pedido</th>
+                        <th scope="col">Sitio</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
             </thead>
             for (var i = 0; i < ModeloMermas.IdProveedor.Count(); i++)
             {
                 if (Accesos.NIvel == 1)
                 {
-                       <tr>
-                     <td>@ModeloMermas.NoPedidoG[i]</td>
-                     <td>@ModeloMermas.Articulo[i]</td>
-                     <td>
-                         <button class="btn btn-success" onclick="abrirModal(@ModeloMermas.IdExistenciaAlmacenG[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
-                     </td>
-                 </tr>
+            <tr>
+                <td>@ModeloMermas.Sitio[i]</td>
+                <td>@ModeloMermas.NoPedidoG[i]</td>
+                <td>@ModeloMermas.Articulo[i]</td>
+                <td>
+                    <button class="btn btn-success" onclick="abrirModal(@ModeloMermas.IdExistenciaAlmacenG[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                </td>
+            </tr>
                 }
                 else if ((long)ModeloMermas.IdProveedor[i] == Accesos.IdArea)
                 {
                  <tr>
+                 <td>@ModeloMermas.Sitio[i]</td>
                 <td>@ModeloMermas.NoPedidoG[i]</td>
                 <td>@ModeloMermas.Articulo[i]</td>
                 <td>
