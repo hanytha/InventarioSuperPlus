@@ -284,12 +284,12 @@ function LimpiarCampos() {
 }
 
 
-function Desplegar(no, id) {
-    if (no == 0 && id == 0) {
+function Desplegar(IdCmpraInt, id) {
+    if (IdCmpraInt == 0 && id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArtTiendaLider/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaLider/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -304,20 +304,20 @@ function Desplegar(no, id) {
             DespXArt += "<hr class='solid4'>";
 
 
-            let IdArticulos = Data.IdArticulos;
-            let ArrayIdArticulos = IdArticulos.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
             let Stock = Data.Stock;
             let Arraystock = Stock.split(',');
             //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
             let IdSitio = Data.IdSitio;
             let ArrayIdSitio = IdSitio.split(',');
 
-            let Articulo = Data.Articulo;
-            let ArrayArticulo = Articulo.split(',');
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
             let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
             let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
 
@@ -338,7 +338,7 @@ function Desplegar(no, id) {
             DespXArt += "</br>";
             DespXArt += "</br>";
             //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
-            let compraArticulo = "desplegable" + no + "," + id;
+            let compraArticulo = "desplegable" + IdCmpraInt + "," + id;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
         });

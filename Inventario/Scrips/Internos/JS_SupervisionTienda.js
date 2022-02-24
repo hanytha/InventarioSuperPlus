@@ -346,12 +346,12 @@ function BloquearCTRL() {
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 //función que muestra la tabla del artículo
 //Pasar los parametros(No.Pedido, Id del sitio para desplegar solo los pedidos que tiene esa tienda)
-function Desplegar(no, id) {
-    if (no == 0 && id == 0) {
+function Desplegar(IdCmpraInt, id) {
+    if (IdCmpraInt == 0 && id == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArtTiendaLider/?idCompraInt=" + no + "&idS= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaLider/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
@@ -400,7 +400,7 @@ function Desplegar(no, id) {
             DespXArt += "</br>";
             DespXArt += "</br>";
             //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
-            let compraArticulo = "desplegable" + no + "," + id;
+            let compraArticulo = "desplegable" + IdCmpraInt + "," + id;
             document.getElementById(compraArticulo).innerHTML = DespXArt;
 
         });
