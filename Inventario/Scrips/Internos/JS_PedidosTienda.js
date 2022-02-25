@@ -1,6 +1,5 @@
 ﻿//LlenarCMTMovimientos();
 //LlenarCMCProveedores();
-//
 LlenarComboProveedores();
 BloquearCTRL();
 ////----------Tabla------------////

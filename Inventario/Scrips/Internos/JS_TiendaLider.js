@@ -102,7 +102,7 @@ function ConsultaArticuloCompra(IDTienda) {
             CodigoHtmlArticuloComp += "<div id='contenedorAceptar'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
-           // CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
+            // CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
@@ -132,7 +132,7 @@ function ConsultaArticuloCompra(IDTienda) {
 
                 CodigoHtmlArticuloComp += "<div>";
                 CodigoHtmlArticuloComp += "<div class='row'>";
-               // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+                // CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
                 CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
@@ -816,7 +816,7 @@ function SiguientePedido(Data) {
 
 
 
-function abrirModalAceptarPedido(id, no, IdCompInt,idS) {//la clase  Obligatorio
+function abrirModalAceptarPedido(id, no, IdCompInt, idS) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
@@ -865,9 +865,9 @@ function VerPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
-            document.getElementById("TxtDireccion").textContent = Data[0].Localidad +"."+" "+ "Dirección:" + Data[0].Direccion;
+            document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
             MostrarArticulos(IdCompInt, idS);
-         //   MostrarArticulos(id, no);
+            //   MostrarArticulos(id, no);
             //MostrarArt(id, no); 
         });
     }
@@ -888,7 +888,7 @@ function VisualizarPedido(id, no) {
             document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
-  
+
             //MostrarArticulos(id, no);
             //MostrarArt(id, no); 
         });
@@ -1127,49 +1127,49 @@ function CamposObligatoriosAceptar() {
 function Guardar() {
     if (CamposObligatoriosAceptar() == true) {
         //if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdCompraInterno = sessionStorage.getItem('IdPedido');
-            var NoPedido = document.getElementById("TxtAceptarNumeroPedidoAceptar").value;
-            var NoCompraProveedor = document.getElementById("TxtAceptarNumPedidoProveedor").value;
+        var IdCompraInterno = sessionStorage.getItem('IdPedido');
+        var NoPedido = document.getElementById("TxtAceptarNumeroPedidoAceptar").value;
+        var NoCompraProveedor = document.getElementById("TxtAceptarNumPedidoProveedor").value;
 
-            var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
-            var Usuario = document.getElementById("TxtNombreUsr").value;
-            var frm = new FormData();
-            frm.append("IdCompraInterno", IdCompraInterno);
-            frm.append("NoPedido", NoPedido);
-            frm.append("NoCompraProveedor", NoCompraProveedor);
+        var FechaIngreso = document.getElementById("TxtAceptarFechaIngreso").value;
+        var Usuario = document.getElementById("TxtNombreUsr").value;
+        var frm = new FormData();
+        frm.append("IdCompraInterno", IdCompraInterno);
+        frm.append("NoPedido", NoPedido);
+        frm.append("NoCompraProveedor", NoCompraProveedor);
 
-            frm.append("FechaIngreso", FechaIngreso);
-            frm.append("Usuario", Usuario);
-            frm.append("EstatusPedido", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Supervision/Guardar",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
+        frm.append("FechaIngreso", FechaIngreso);
+        frm.append("Usuario", Usuario);
+        frm.append("EstatusPedido", 1);
+        $.ajax({
+            type: "POST",
+            url: "/Supervision/Guardar",
+            data: frm,
+            contentType: false,
+            processData: false,
+            success: function (data) {
 
-                    if (data == 0) {
-                        Swal.fire(
-                            '',
-                            'Ocurrió un error',
-                            'danger'
-                        )
-                    }
-                    else if (data == -1) {
-                        Swal.fire(
-                            '',
-                            'Ya existe',
-                            'warning'
-                        )
-                    }
-
+                if (data == 0) {
+                    Swal.fire(
+                        '',
+                        'Ocurrió un error',
+                        'danger'
+                    )
                 }
-            });
-            ConsultaArticuloCompra();
-            alert("¡¡Pedido aceptado satisfactoriamente!!");
-        
-            //document.getElementById("btnCancelar").click();
+                else if (data == -1) {
+                    Swal.fire(
+                        '',
+                        'Ya existe',
+                        'warning'
+                    )
+                }
+
+            }
+        });
+        ConsultaArticuloCompra();
+        alert("¡¡Pedido aceptado satisfactoriamente!!");
+
+        //document.getElementById("btnCancelar").click();
         //}
     }
 }
