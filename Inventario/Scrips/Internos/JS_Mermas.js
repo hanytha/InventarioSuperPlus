@@ -179,6 +179,7 @@ function nuevoStock() {
         let RES = Data;
         if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
         ver();
+        swal("Datos guardados exitosamente!", "", "success");
     });
 }
 
