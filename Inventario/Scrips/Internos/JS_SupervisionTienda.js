@@ -218,11 +218,11 @@ function ExisteciaDevolucion(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        document.getElementById("TxtExistenciaActDev").value;
+        var cantidadExistencia = document.getElementById("TxtExistenciaActDev").value;
         document.getElementById("TxtCantidadDev").value;
         x = document.getElementById("TxtCantidadDev").value;
-
-        if (document.getElementById("TxtExistenciaActDev").value < document.getElementById("TxtCantidadDev").value) {
+        var Validacion = x * 1;
+        if (Validacion > cantidadExistencia) {
                 Swal.fire(
                     '!',
                     'La cantidad excede al stock general',
@@ -230,12 +230,14 @@ function ExisteciaDevolucion(id) {
                 )
             document.getElementById("TxtCantidadDev").value = "";
         }
-        else if (document.getElementById("TxtCantidadDev").value < 0) {
+        else if (Validacion < 0) {
             Swal.fire(
                 '!',
                 'No se aceptan valores negativos',
                 'alert'
             )
+
+          //  document.getElementById("TxtCantidadDev").value = "";
             document.getElementById("TxtCantidadDev").value = "";
         }
         else {
