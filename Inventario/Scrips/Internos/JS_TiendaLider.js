@@ -865,7 +865,7 @@ function VerPedido(id, no) {
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
-            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
+            document.getElementById("TxtDireccion").textContent = Data[0].Localidad +"."+" "+ "Dirección:" + Data[0].Direccion;
 
             MostrarArticulos(id, no);
             //MostrarArt(id, no); 

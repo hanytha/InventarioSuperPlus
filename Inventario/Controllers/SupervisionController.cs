@@ -2315,6 +2315,7 @@ namespace Inventario.Controllers
                                 Telefono = areas.Telefono,
                                 Correo = areas.Correo,
                                 Tienda = Tienda.Nombre,
+                                Localidad = Tienda.Localidad,
                                 Direccion = Tienda.Direccion
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
