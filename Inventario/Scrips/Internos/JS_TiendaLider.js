@@ -581,7 +581,7 @@ function SiguientePedidoProveedor(id) {
         });
     }
 }
-
+//
 function MostrarArticulos(id) {
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
