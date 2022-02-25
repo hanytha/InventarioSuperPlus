@@ -21,7 +21,7 @@ namespace Inventario.Controllers
             SupervisionController TiendaSupervision = new SupervisionController();
             //Cargar las tiendas al iniciar sesión
             TiendaSupervision.CargarSucursales();
-
+            //PedidosInternos ModeloPedidoInt = new PedidosInternos();
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();
