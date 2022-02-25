@@ -180,6 +180,7 @@ function nuevoStock() {
         if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
         ver();
         swal("Datos guardados exitosamente!", "", "success");
+        window.location.reload();
     });
 }
 
@@ -196,3 +197,4 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
+//--------------------------------------------------------------------------------------------------
