@@ -1,7 +1,7 @@
 ﻿LlenarCMBPrin();
 BloquearCTRL();
 LlenarCMBCompra();
-CrearExistenciasAlmacen();
+//CrearExistenciasAlmacen();
 function CrearExistenciasAlmacen() {
     $.get("/ExistenciaAlmacen/ConsultaExistenciaTienda", function (Data) {
         CrearTablaExistenciasAlmacen(Data);
