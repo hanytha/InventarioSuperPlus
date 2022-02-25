@@ -45,7 +45,7 @@ namespace Inventario.Controllers
                           join exist in InvBD.ExistenciaAlmacenG
                       on comprs.IdCompraInterno equals exist.IdCompraInterno
                           where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("Devolucion")&& exist.ExitenciaActual < 0
-                          orderby exist.IdCompraInterno
+                          orderby exist.NoPedidoG
                           select new
                           {
                               IdProveedor = comprs.IdProveedor,
