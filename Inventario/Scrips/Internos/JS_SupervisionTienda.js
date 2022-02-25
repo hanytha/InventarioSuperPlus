@@ -302,7 +302,62 @@ function ExisteciaDevolucion(id) {
 //    });
 //}
 
+//Validaciones en el modal de usados
+function CalcularExistenciaAct(id) {
 
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+        var res = document.getElementsByClassName("input-existAct");
+
+        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+        var Stock = document.getElementsByClassName("input-Stock");
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+                var CantidadSolicitada = cantidadUsados[i].value;
+                var Existencia = Stock[i].value;
+                var frm = new FormData();
+                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+                //Si la cantidad excede al stock en tienda ( modal de usados )
+                if (resultado < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'La cantidad excede al stock',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                    var cantidad = res[i].value = "";
+                }
+
+                else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+        //Validacion de numeros negativos en el modal de usados 
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+
+                if (cantidadUsados[i].value < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'No se aceptan valores negativos',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                }
+
+                else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+    });
+}
 
 //****************************************************************************************************************
 
@@ -1749,6 +1804,126 @@ function llenarCombo(data, control) {
 //    }
 //}
 
+
+////Validaciones en el modal de usados
+//function CalcularExistenciaAct(id) {
+
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+//        var res = document.getElementsByClassName("input-existAct");
+
+//        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+//        var Stock = document.getElementsByClassName("input-Stock");
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+//                var CantidadSolicitada = cantidadUsados[i].value;
+//                var Existencia = Stock[i].value;
+//                var frm = new FormData();
+//                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+//                //Si la cantidad excede al stock en tienda ( modal de usados )
+//                if (resultado < 0) {
+
+//                    Swal.fire(
+//                        '!',
+//                        'La cantidad excede al stock',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                    var cantidad = res[i].value = "";
+//                }
+           
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//        //Validacion de numeros negativos en el modal de usados 
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value <0 && NomArticulos[i].value && Stock[i].value) {
+
+//                if (cantidadUsados[i].value < 0) {
+
+//                    Swal.fire(
+//                        '!',
+//                        'No se aceptan valores negativos',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                }
+
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//    });
+//}
+
+
+/////////////Validaciones modal devoluciones
+
+//function CalcularExistenciaAct(id) {
+
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+//        let x = document.getElementById("TxtExistenciaInicDev").value;
+
+//        let y = document.getElementById("TxtCantidadDev").value;
+//        //var res = document.getElementsByClassName("TxtExistenciaInicDev");
+
+//        //var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+//        //var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+//        //var Stock = document.getElementsByClassName("input-Stock");
+//        for (let i = 0; i < y; i++) {
+//            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+//                var CantidadSolicitada = cantidadUsados[i].value;
+//                var Existencia = Stock[i].value;
+//                var frm = new FormData();
+//                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+//                //Si la cantidad excede al stock en tienda ( modal de devoluciones )
+//                if (resultado < 0) {
+
+//                    Swal.fire(
+//                        '!',
+//                        'La cantidad excede al stock',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                    var cantidad = res[i].value = "";
+//                }
+
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//        //Validacion de numeros negativos en el modal de devoluciones
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+
+//                if (cantidadUsados[i].value < 0) {
+
+//                    Swal.fire(
+//                        '!',
+//                        'No se aceptan valores negativos',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                }
+
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//    });
+//}
+
+//Validaciones en el modal de usados
 function CalcularExistenciaAct(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
@@ -1777,74 +1952,13 @@ function CalcularExistenciaAct(id) {
                     var Result = cantidadUsados[i].value = "";
                     var cantidad = res[i].value = "";
                 }
-           
+
                 else {
                     var Result = res[i].value = resultado;
                 }
             }
         }
         //Validacion de numeros negativos en el modal de usados 
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value <0 && NomArticulos[i].value && Stock[i].value) {
-
-                if (cantidadUsados[i].value < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'No se aceptan valores negativos',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                }
-
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-    });
-}
-
-
-/////////////Validaciones modal devoluciones
-
-function CalcularExistenciaAct(id) {
-
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-        let x = document.getElementById("TxtExistenciaInicDev").value;
-
-        let y = document.getElementById("TxtCantidadDev").value;
-        //var res = document.getElementsByClassName("TxtExistenciaInicDev");
-
-        //var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
-
-        //var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-        //var Stock = document.getElementsByClassName("input-Stock");
-        for (let i = 0; i < y; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-                var CantidadSolicitada = cantidadUsados[i].value;
-                var Existencia = Stock[i].value;
-                var frm = new FormData();
-                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
-                //Si la cantidad excede al stock en tienda ( modal de devoluciones )
-                if (resultado < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede al stock',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                }
-
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-        //Validacion de numeros negativos en el modal de devoluciones
         for (let i = 0; i < cantidadUsados.length; i++) {
             if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
 
@@ -1865,8 +1979,6 @@ function CalcularExistenciaAct(id) {
         }
     });
 }
-
-
 //////////
 
 

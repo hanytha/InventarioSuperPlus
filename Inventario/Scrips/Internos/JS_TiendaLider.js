@@ -464,6 +464,37 @@ function Prov(id) {
     });
 }
 
+function ExisteciaDevolucion(id) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+        var cantidadExistencia = document.getElementById("TxtExistenciaActDev").value;
+        document.getElementById("TxtCantidadDev").value;
+        x = document.getElementById("TxtCantidadDev").value;
+        var Validacion = x * 1;
+        if (Validacion > cantidadExistencia) {
+            Swal.fire(
+                '!',
+                'La cantidad excede al stock general',
+                'alert'
+            )
+            document.getElementById("TxtCantidadDev").value = "";
+        }
+        else if (Validacion < 0) {
+            Swal.fire(
+                '!',
+                'No se aceptan valores negativos',
+                'alert'
+            )
+
+            //  document.getElementById("TxtCantidadDev").value = "";
+            document.getElementById("TxtCantidadDev").value = "";
+        }
+        else {
+            document.getElementById("TxtCantidadDev").value = x;
+        }
+    });
+}
 
 //function ExisteciaDevolucion(id) {
 
@@ -1505,33 +1536,25 @@ function CamposObligatoriosUsados() {
     return exito;
 }
 //////////////////Usados////////////////////
+//Validaciones en el modal de usados
 function CalcularExistenciaAct(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
         var res = document.getElementsByClassName("input-existAct");
 
-
         var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
 
         var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
         var Stock = document.getElementsByClassName("input-Stock");
-
-        var Existencia = document.getElementsByClassName("input-existAct");
-
         for (let i = 0; i < cantidadUsados.length; i++) {
             if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-
-                //------------------------Guarda la cantidad de artículos solicitados----------------------------------
                 var CantidadSolicitada = cantidadUsados[i].value;
-                //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
-                var Unidad = Stock[i].value;
-                //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
-                //-------------------------------------------------------------------------------------------------------------
+                var Existencia = Stock[i].value;
                 var frm = new FormData();
-                var resultado = parseFloat(Unidad) - parseFloat(CantidadSolicitada);
-
+                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+                //Si la cantidad excede al stock en tienda ( modal de usados )
                 if (resultado < 0) {
 
                     Swal.fire(
@@ -1541,14 +1564,34 @@ function CalcularExistenciaAct(id) {
                     )
                     var Result = cantidadUsados[i].value = "";
                     var cantidad = res[i].value = "";
-                } else {
+                }
+
+                else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+        //Validacion de numeros negativos en el modal de usados 
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+
+                if (cantidadUsados[i].value < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'No se aceptan valores negativos',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                }
+
+                else {
                     var Result = res[i].value = resultado;
                 }
             }
         }
     });
 }
-
 function nuevoStock() {
 
 
