@@ -179,7 +179,14 @@ function nuevoStock() {
         let RES = Data;
         if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
 
-
     });
 }
 
+//-------------------------------------------------------------------------------------------------
+BloquearCTRL();
+function BloquearCTRL() {
+    var CTRL = document.getElementsByClassName("bloquear");
+    for (var i = 0; i < CTRL.length; i++) {
+        $("#" + CTRL[i].id).attr('disabled', 'disabled');
+    }
+}
