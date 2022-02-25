@@ -18,7 +18,6 @@ namespace Inventario.Controllers
         {
             ExistenciasGController departamento = new ExistenciasGController();
             departamento.BDDepartamento();
-
             ExistenciasGController vista = new ExistenciasGController();
             vista.ConsultaArticulosArea();
             return View();
