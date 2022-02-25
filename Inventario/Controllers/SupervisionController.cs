@@ -2057,7 +2057,7 @@ namespace Inventario.Controllers
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
-        ///////////-------------------------------------------
+        ///////////----------------------------------Mostrar los articulos en el modal aceptar pedido----------------------
         public JsonResult ConsultaTablaArtAceptarPedidos(long IdCompInt,long idS)
         {
             string NoPedido = "";
@@ -2110,7 +2110,7 @@ namespace Inventario.Controllers
                               Nombre = ExistAlm.Articulo,
                               //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
-                              stockActual = ExistAlm.ExitenciaActual,
+                              stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
                               IdSitio = Compra.IdSitio,
                           };
