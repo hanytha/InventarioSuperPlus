@@ -128,7 +128,7 @@
     <Type Name="ComprasArticulos">
       <Column Name="IdExistenciaCompra" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ExistenciaInicial" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ExistenciaInicial" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="StockActual" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NoCompra" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="TipoDeOperacion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />

@@ -18,25 +18,114 @@ namespace Inventario.Controllers
         {
             ExistenciasGController departamento = new ExistenciasGController();
             departamento.BDDepartamento();
+
+            ExistenciasGController vista = new ExistenciasGController();
+            vista.ConsultaArticulosArea();
             return View();
         }
-        public JsonResult ConsultaArticulos()
+        //public JsonResult ConsultaArticulos()
+        //{
+        //    string id = "";
+        //    string Nombre = "";
+        //    string Fechas = "";//Es la fecha de la ultima compra reaizada
+        //    string Stock = "";//Es la suma del stock atcual de todas las compras
+        //    string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
+        //    var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+        //    .Select(p => new
+        //    {
+        //        Id = p.IdArticulos,
+        //        nombres = p.NombreEmpresa
+        //    });
+        //    foreach (var art in ConsultaArticulo)
+        //    {
+        //        id += art.Id + ",";
+        //        Nombre += art.nombres + ",";
+        //        var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.Id) && p.StockActual > 0).OrderBy(p => p.IdCompra)
+        //            .Select(p => new
+        //            {
+        //                fechaIngreso = p.FechaIngreso,
+        //                stockActual = p.StockActual,
+        //                costo = p.PrecioUnitario,
+        //            });
+
+        //        if (consultaFecha.Count() > 0)
+        //        {
+        //            int UltimoReg = consultaFecha.Count() - 1;
+        //            int cont = 0;
+        //            int SumaStock = 0;
+        //            //inicia
+        //            //DateTime FultCompra;                
+        //            foreach (var comp in consultaFecha)
+        //            {
+
+        //                SumaStock = (int)(SumaStock + comp.stockActual);
+
+        //                if (cont == UltimoReg)
+        //                {
+        //                    Fechas += comp.fechaIngreso + ",";
+        //                    Costos += comp.costo + ",";
+        //                }
+        //                cont++;
+        //            }
+        //            Stock += SumaStock + ",";
+        //            //termina
+        //        }
+        //        else
+        //        {
+        //            Costos += "0" + ",";
+
+        //            Fechas += "2010-08-10" + ",";
+        //            Stock += "0" + ",";
+        //        }
+        //    }
+        //    var Resultado = new { id = id.Substring(0, id.Length - 1),
+        //        Nombre = Nombre.Substring(0, Nombre.Length - 1),
+        //        Fechas = Fechas.Substring(0, Fechas.Length - 1), 
+        //        Stock = Stock.Substring(0, Stock.Length - 1), 
+        //        Costos = Costos.Substring(0, Costos.Length - 1) };
+        //    return Json(Resultado, JsonRequestBehavior.AllowGet);
+        //}
+        //-------------------------------------------------------------------------------------------------------------
+        //*****************************************************************************************************************
+        public void ConsultaArticulosArea()
         {
+            ModeloExistGe modeloArticulosArea = new ModeloExistGe();
+            ModeloExistGe.IdArticulos = new List<long>();
+            ModeloExistGe.IdAreas = new List<long>();
+            ModeloExistGe.NombreEmpresa = new List<string>();
+            ModeloExistGe.Area = new List<string>();
+
+            ModeloExistGe.FechaIngreso = new List<string>();
+            ModeloExistGe.StockActual = new List<long>();
+            ModeloExistGe.IdCompra = new List<long>();
+            ModeloExistGe.PrecioUnitario = new List<long>();
+
+
+
             string id = "";
             string Nombre = "";
             string Fechas = "";//Es la fecha de la ultima compra reaizada
             string Stock = "";//Es la suma del stock atcual de todas las compras
             string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
+            string IDArea = "";
+            string Area = "";
+
             var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
             .Select(p => new
             {
                 Id = p.IdArticulos,
-                nombres = p.NombreEmpresa
+                nombres = p.NombreEmpresa,
+                IDEDE = p.IdAreas,
+                Area = p.Area,
+
             });
             foreach (var art in ConsultaArticulo)
             {
                 id += art.Id + ",";
                 Nombre += art.nombres + ",";
+                IDArea += art.IDEDE + ",";
+                Area += art.Area + ",";
+
                 var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.Id) && p.StockActual > 0).OrderBy(p => p.IdCompra)
                     .Select(p => new
                     {
@@ -75,9 +164,41 @@ namespace Inventario.Controllers
                     Stock += "0" + ",";
                 }
             }
-            var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1), Costos = Costos.Substring(0, Costos.Length - 1) };
-            return Json(Resultado, JsonRequestBehavior.AllowGet);
+            var Resultado = new
+            {
+                id = id.Substring(0, id.Length - 1),
+                Nombre = Nombre.Substring(0, Nombre.Length - 1),
+                Fechas = Fechas.Substring(0, Fechas.Length - 1),
+                Stock = Stock.Substring(0, Stock.Length - 1),
+                Costos = Costos.Substring(0, Costos.Length - 1),
+                IDArea = IDArea.Substring(0, IDArea.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+
+            };
+            string[] IDA = id.Substring(0, id.Length - 1).Split(',');
+            string[] Articulo = Nombre.Substring(0, Nombre.Length - 1).Split(',');
+            string[] IDDpertamento = IDArea.Substring(0, IDArea.Length - 1).Split(',');
+            string[] Departamento = Area.Substring(0, Area.Length - 1).Split(',');
+
+            string[] Fecha = Fechas.Substring(0, Fechas.Length - 1).Split(',');
+            string[] Stocks = Stock.Substring(0, Stock.Length - 1).Split(',');
+            string[] Precio = Costos.Substring(0, Costos.Length - 1).Split(',');
+
+            for (int i = 0; i < Articulo.GetLength(0); i++)
+            {
+                ModeloExistGe.IdArticulos.Add(Convert.ToInt32 (IDA[i]));
+                ModeloExistGe.IdAreas.Add(Convert.ToInt32(IDDpertamento[i]));
+                ModeloExistGe.NombreEmpresa.Add(Articulo[i]);
+                ModeloExistGe.Area.Add(Departamento[i]);
+
+                ModeloExistGe.FechaIngreso.Add(Fecha[i]);
+                ModeloExistGe.StockActual.Add(Convert.ToInt32(Stocks[i]));
+                ModeloExistGe.PrecioUnitario.Add(Convert.ToInt32(Precio[i]));
+            }
         }
+
+
+
         //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
         public JsonResult ConsultaNumCompra(long No)
         {
@@ -110,59 +231,7 @@ namespace Inventario.Controllers
 
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-        //------------------------------------------------------------
-        ////-----------Consulta los datos por ID del artículo pero en la tabla de compras JOIN Proveedores------------------
-        //public JsonResult ConsultaCompraJoinProveedor(long Id)
-        //{
-        //    var compras = from comprs in InvBD.ComprasArticulos
-        //                  join provedor in InvBD.Proveedores
-        //              on comprs.IdCompra equals provedor.IdProveedores
-        //                  where comprs.IdArticulo.Equals(Id) && comprs.Estatus.Equals(1)
-        //                  select new
-        //                  {
-        //                      FechaDeIngreso = comprs.FechaDeIngreso,
-        //                      NoCompra = comprs.NoCompra,
-        //                      Articulo = comprs.Articulo,
-        //                      Coste = comprs.Coste,
-        //                      IdArticulo = comprs.IdArticulo,
-        //                      IdProveedor = provedor.IdProveedores,
-        //                      Proveedor = provedor.Nombre,
-
-
-        //                  };
-
-
-        //    return Json(compras, JsonRequestBehavior.AllowGet);
-
-        //}
-
-        //-----------Consulta los datos por ID del proveedor pero en la tabla de compras JOIN Proveedor------------------
-
-        //public JsonResult ConsultaComJoinProveedorModal(long Id)
-        //{
-        //    var comps = from comprs in InvBD.Compra
-        //                join provedor in InvBD.Proveedores
-        //            on comprs.IdProveedor equals provedor.IdProveedores
-        //                where comprs.IdProveedor.Equals(Id) && comprs.Estatus.Equals(1)
-        //                select new
-        //                {
-        //                    Articulo = comprs.Articulo,
-        //                    IdArticulo = comprs.IdArticulo,
-        //                    IdProveedor = provedor.IdProveedores,
-        //                    Proveedor = provedor.Nombre,
-        //                    Correo = provedor.Correo,
-        //                    Clabe = provedor.ClaveInterbancaria,
-        //                    Telefono = provedor.Telefono,
-        //                    RFC = provedor.RFC,
-        //                    UsoCFDI = provedor.UsoCFDI,
-        //                    Direccion = provedor.Direccion,
-
-        //                };
-
-
-        //    return Json(comps, JsonRequestBehavior.AllowGet);
-
-        //}
+   //------------------------------------------------------------
 
 
    //----------------------------------Consulta los datos por id de proveedor en la tabla de proveedores-------------------------------------------------

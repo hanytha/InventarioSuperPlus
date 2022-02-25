@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Models\ModeloArticulos.cs" />
     <Compile Include="Models\ModeloExistAlm.cs" />
+    <Compile Include="Models\ModeloExistGe.cs" />
     <Compile Include="Models\ModeloMermas.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />

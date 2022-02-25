@@ -4,7 +4,7 @@
 }
 <center>
     <h2 class="form-control-label" style="font-size: 20px;">
-        EXISTENCIAS GENERALES 
+        EXISTENCIAS GENERALES
     </h2>
 </center>
 <!--Titulo-->
@@ -19,7 +19,83 @@
 <!-- Botón del modal-->
 <button onclick="abrirModal(0); restablecerBordesInput();" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalProveedor">Realizar_Pedido</button>
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
-<div id="contenedor1"></div>
+<div id="contenedor1">
+    @{
+        if (ModeloExistGe.IdAreas != null)
+        {
+            <div id="contenedor1">
+                <hr class="solid">
+                <div class="row">
+                    <div class="col-sm">ID</div>
+                    <div class="col-sm">Artículo</div>
+                    <div class="col-sm">Fecha Ingreso</div>
+                    <div class="col-sm">Stock</div>
+                    <div class="col-sm">Precio_Unitario</div>
+                    <div class="col-sm">Acción</div>
+                </div>
+                <hr class="solid">
+            </div>
+
+            for (var i = 0; i < ModeloExistGe.IdAreas.Count(); i++)
+            {
+
+                if (Accesos.NIvel == 1)
+                {
+                    <div>
+                        <div class="row">
+                            <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
+                            <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
+                            <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
+                            <div class="col-sm">@ModeloExistGe.StockActual[i]</div>
+                            <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
+
+                            <div class="col">
+                                <label>
+                                    <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])" type="button" data-toggle="collapse" data-target="#desplegable @ModeloExistGe.IdArticulos[i]" aria-expanded="false" aria-controls="desplegable(@ModeloExistGe.IdArticulos[i])"><i class="fas fa-angle-down"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col"><div id="desplegable @ModeloExistGe.IdArticulos[i]" class="collapse"></div></div>
+                    </div>
+                }
+                else if ((long)ModeloExistGe.IdAreas[i] == Accesos.IdArea)
+                {
+                    <div>
+                        <div class="row">
+                            <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
+                            <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
+                            <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
+                            <div class="col-sm">@ModeloExistGe.StockActual[i]</div>
+                            <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
+
+                            <div class="col">
+                                <label>
+                                    <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])" type="button" data-toggle="collapse" data-target="#desplegable @ModeloExistGe.IdArticulos[i]" aria-expanded="false" aria-controls="desplegable(@ModeloExistGe.IdArticulos[i])"><i class="fas fa-angle-down"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col"><div id="desplegable @ModeloExistGe.IdArticulos[i]" class="collapse"></div></div>
+                    </div>
+                }
+            }
+        }
+    }
+
+</div>
+
+
+
+
+
+
+
+
 <!------------------------------------------------Modal------------------------------------------------------------------>
 <div id="tablaNum"></div>
 <!-- Encabezado del Modal -->
@@ -101,24 +177,24 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbArea">Área que solicita el(los) artículo(s)<span>*</span></label>
                                     <select id="cmbArea" style="width: 100%" class="form-control">
-                                       
-                                            @if (ModeloAreas.IdAreas != null)
-                                            {
-                                                for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
-                                                {
-                                                    if (Accesos.NIvel == 1)
-                                                    {
-                                                        <option  selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
-                                                    }
 
-                                                    if (Accesos.IdArea == ModeloAreas.IdAreas[i])
-                                                    {
-                                                        <option  selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
-                                                    }
+                                        @if (ModeloAreas.IdAreas != null)
+                                        {
+                                            for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
+                                            {
+                                                if (Accesos.NIvel == 1)
+                                                {
+                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
 
+                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                {
+                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
                                             }
-                                        
+
+                                        }
+
                                     </select>
                                 </div>
                             </div>

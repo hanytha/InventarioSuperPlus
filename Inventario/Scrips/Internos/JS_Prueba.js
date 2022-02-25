@@ -2,7 +2,7 @@
 //--------Combobox de las áreas----------------
 //LlenarCMCArea();
 //-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
-ConsultaArticuloComp();
+///ConsultaArticuloComp();
 function ConsultaArticuloComp() {
     $.get("/ExistenciasG/ConsultaArticulos", function (Data) {
         CrearArticuloComp(Data);
