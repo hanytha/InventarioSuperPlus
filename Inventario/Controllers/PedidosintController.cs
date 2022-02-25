@@ -259,6 +259,7 @@ namespace Inventario.Controllers
                .Select(p => new
                {
                    pedido = p.NumeroPedido,
+                   IdProveedor = p.IdProveedor,
                    proveedors = p.Proveedor,
                    fecha = p.Fecha,
                    noProve = p.NumPedidoProveedor,
@@ -278,7 +279,7 @@ namespace Inventario.Controllers
                     if (contador == 0)
                     {
                         tem1 = (int)numero.pedido;
-                        tem2 = (int)numero.noProve;
+                        tem2 = (int)numero.IdProveedor;
 
 
                         NoPedido += numero.pedido + ",";
@@ -291,7 +292,7 @@ namespace Inventario.Controllers
 
 
                     }
-                    if (numero.pedido != tem1 || numero.noProve != tem2)
+                    if (numero.pedido != tem1 || numero.IdProveedor != tem2)
                     {
                         NoPedido += numero.pedido + ",";
                         NoProvedor += numero.noProve + ",";
@@ -302,7 +303,7 @@ namespace Inventario.Controllers
 
 
                         tem1 = (int)numero.pedido;
-                        tem2 = (int)numero.noProve;
+                        tem2 = (int)numero.IdProveedor;
 
                         contador++;
                     }

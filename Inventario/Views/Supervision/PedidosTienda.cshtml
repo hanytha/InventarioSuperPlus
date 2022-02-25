@@ -1,10 +1,10 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "Pedidosext";
+    ViewBag.Title = "Pedidosintt";
 }
 <center>
     <h2 class="form-control-label" style="font-size: 20px;">
-        PEDIDOS EXTERNOS REALIZADOS
+        PEDIDOS INTERNOS REALIZADOS
     </h2>
 </center>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
@@ -115,7 +115,7 @@
 
                 }
 
-                else if ((long)ModeloPedidosExternos.IdArea[i] == Accesos.IdArea)
+                else if ((long)ModeloPedidosExternos.IdArea[i] == Accesos.IDSitio)
                 {
                     <tr>
                         <td>@ModeloPedidosExternos.Fecha[i]</td>
