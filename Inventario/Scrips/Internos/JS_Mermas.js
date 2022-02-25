@@ -142,6 +142,7 @@ function GuardarMerma() {
                 consultaFecha();
                 document.getElementById("btnCancelar").click();
             }
+            window.location.reload();
         }
     });
 
