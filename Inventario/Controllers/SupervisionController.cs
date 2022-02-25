@@ -4467,7 +4467,6 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
     }
 }
 

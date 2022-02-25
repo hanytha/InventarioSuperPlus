@@ -124,7 +124,7 @@
     <Content Include="Scrips\Internos\JS_Categoria3ra.js" />
     <Content Include="Scrips\Internos\JS_Compra3.js" />
     <Content Include="Scrips\Internos\JS_Compra2.js" />
-    <Content Include="Scrips\Internos\JS_ExistenciasTiendas.js" />
+    <Content Include="Scrips\Internos\JS_PedidosTiendas.js" />
     <Content Include="Scrips\Internos\JS_Impuesto2do.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
     <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
@@ -265,10 +265,13 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
-    <Content Include="Views\Supervision\TiendaLider.cshtml" />
+    <Content Include="Views\Supervision\PedidosTienda.cshtml" />
     <Content Include="Views\ExistenciaAlmacen\ExistenciasTiendas.cshtml" />
     <Content Include="Views\Supervision\PedidosOficina.cshtml" />
+
     <Content Include="Views\Supervision\PedidosTienda.cshtml" />
+
+    <Content Include="Views\Supervision\TiendaLider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
