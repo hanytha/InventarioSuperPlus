@@ -4463,7 +4463,10 @@ namespace Inventario.Controllers
         //{
         //    return View();
         //}
-
+        public ActionResult PedidosTienda()
+        {
+            return View();
+        }
     }
 }
 
