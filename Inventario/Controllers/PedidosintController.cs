@@ -255,15 +255,15 @@ namespace Inventario.Controllers
             string IDArea = "";
 
 
-            var Pedidos = InvBD.PedidosExternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdPedidosExternos)
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.NumeroPedido,
                    proveedors = p.Proveedor,
                    fecha = p.Fecha,
                    noProve = p.NumPedidoProveedor,
-                   depa = p.Area,
-                   IDDepa = p.IdArea,
+                   depa = p.Sitio,
+                   IDDepa = p.IdSitio,
                });
             if (Pedidos.Count() > 0)
             {
