@@ -178,10 +178,15 @@ function nuevoStock() {
     $.get("/Mermas/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
         if (Data == 1) { alert("La cantidad se agrego correctamente en el stock") }
-
+        ver();
     });
 }
 
+//-------------------------------------------------------------------------------------------------
+function ver() {
+    $('#ModalPedidos').hide();
+    $('.modal-backdrop').hide();
+}
 //-------------------------------------------------------------------------------------------------
 BloquearCTRL();
 function BloquearCTRL() {
