@@ -1080,7 +1080,6 @@ function CamposObligatoriosDevolucion() {
     }
     return exito;
 }
-
 function GuardarDevolucion() {
 
 
@@ -1091,58 +1090,70 @@ function GuardarDevolucion() {
             alert("Los datos se guardaron correctamente");
         }
     }
-    ////----------Guardar los inputs de manera individual en la Base de datos--------------------
-    //var cantidad = document.getElementById("TxtCantidadDev").value;
-    //var NomArticulos = document.getElementById("TxtArtDev").value;
-
-    //for (let i = 0; i < cantidad.length; i++) {
-
-
-    //    if (cantidad >= 1) {
-    //        //------------------------Guarda el nombre del artículo solicitado----------------------------------
-    //        var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
-    //        var Observaciones = document.getElementById("TxtDescripcionDev").value;
-    //        var TipoDeOperacion = document.getElementById("TxtMovDev").value;
-    //        var ExitenciaActual = document.getElementById("TxtExistenciaInicDev").value;
-    //        //-------------------------------------------------------------------------------------------------------------
-    //        var frm = new FormData();
-    //        frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
-    //        frm.append("Observaciones", Observaciones);
-    //        frm.append("TipoDeOperacion", TipoDeOperacion);
-    //        frm.append("ExitenciaActual", ExitenciaActual);
-    //        frm.append("EstatusPedido", 1);
-
-    //        $.ajax({
-    //            type: "POST",
-    //            url: "/Supervision/GuardarDev",
-    //            data: frm,
-    //            contentType: false,
-    //            processData: false,
-    //            success: function (data) {
-    //                if (data == 0) {
-
-    //                    alert("¡Ocurrio un error!");
-    //                }
-    //                else if (data == -1) {
-
-    //                    alert("Verifique la actualización de sus datos");
-    //                }
-    //                else {
-
-    //                    ConsultaCompras();
-    //                    document.getElementById("btnCancelar").click();
-    //                }
-    //            }
-    //        });
-
-    //    }
-    //}
-
-
-    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
-
 
 }
+//function GuardarDevolucion() {
+
+
+//    if (CamposObligatoriosDevolucion() == true) {
+
+//        if (confirm("¿Desea aplicar los cambios?") == 1) {
+//            nuevoStock();
+//            alert("Los datos se guardaron correctamente");
+//        }
+//    }
+//    ////----------Guardar los inputs de manera individual en la Base de datos--------------------
+//    //var cantidad = document.getElementById("TxtCantidadDev").value;
+//    //var NomArticulos = document.getElementById("TxtArtDev").value;
+
+//    //for (let i = 0; i < cantidad.length; i++) {
+
+
+//    //    if (cantidad >= 1) {
+//    //        //------------------------Guarda el nombre del artículo solicitado----------------------------------
+//    //        var IdExistenciaAlmacenG = sessionStorage.getItem('IdExistenciaAlmacenG');
+//    //        var Observaciones = document.getElementById("TxtDescripcionDev").value;
+//    //        var TipoDeOperacion = document.getElementById("TxtMovDev").value;
+//    //        var ExitenciaActual = document.getElementById("TxtExistenciaInicDev").value;
+//    //        //-------------------------------------------------------------------------------------------------------------
+//    //        var frm = new FormData();
+//    //        frm.append("IdExistenciaAlmacenG", IdExistenciaAlmacenG);
+//    //        frm.append("Observaciones", Observaciones);
+//    //        frm.append("TipoDeOperacion", TipoDeOperacion);
+//    //        frm.append("ExitenciaActual", ExitenciaActual);
+//    //        frm.append("EstatusPedido", 1);
+
+//    //        $.ajax({
+//    //            type: "POST",
+//    //            url: "/Supervision/GuardarDev",
+//    //            data: frm,
+//    //            contentType: false,
+//    //            processData: false,
+//    //            success: function (data) {
+//    //                if (data == 0) {
+
+//    //                    alert("¡Ocurrio un error!");
+//    //                }
+//    //                else if (data == -1) {
+
+//    //                    alert("Verifique la actualización de sus datos");
+//    //                }
+//    //                else {
+
+//    //                    ConsultaCompras();
+//    //                    document.getElementById("btnCancelar").click();
+//    //                }
+//    //            }
+//    //        });
+
+//    //    }
+//    //}
+
+
+//    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+
+
+//}
 
 
 
@@ -1425,7 +1436,7 @@ function nuevoStockUsados() {
     var Articulos = document.getElementsByClassName("input-ArticuloUsados");
     var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
     var Aprobar = document.getElementsByClassName("input-cantidadUsados");
-
+    var IDTienda = document.getElementById("cmbTiendaUsados").value;
 
     var total = "";
 
@@ -1433,17 +1444,46 @@ function nuevoStockUsados() {
 
         if (Aprobar[i].value > 0) {
 
-            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" + IDTienda + ",";
 
         }
     }
 
-    $.get("/Supervision/ConsultaStockArticuloUsadoLider/?DatosArticulos=" + total, function (Data) {
+    $.get("/Supervision/ConsultaMovimientoUsado/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+
+
+        //if (Data == 1) { alert("===Guardado correctamente===") }
 
     });
+    //GuardarUsados();
+    alert("Guardado correctamente");
 }
+
+//function nuevoStockUsados() {
+
+//    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
+//    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
+//    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
+
+
+//    var total = "";
+
+//    for (let i = 0; i < Articulos.length; i++) {
+
+//        if (Aprobar[i].value > 0) {
+
+//            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/";
+
+//        }
+//    }
+
+//    $.get("/Supervision/ConsultaStockArticuloUsadoLider/?DatosArticulos=" + total, function (Data) {
+//        let RES = Data;
+//        if (Data == 1) { alert("La cantidad se desconto correctamente en el stock") }
+
+//    });
+//}
 
 
 
@@ -1509,7 +1549,6 @@ function CalcularExistenciaAct(id) {
     });
 }
 
-
 function nuevoStock() {
 
 
@@ -1531,7 +1570,33 @@ function nuevoStock() {
 
     $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
         let RES = Data;
-        if (Data == 1) { alert("--Guardado---") }
+        // if (Data == 1) { alert("--Guardado correctamente---") }
 
     });
+    ConsultaArticuloComp();
 }
+//function nuevoStock() {
+
+
+//    var Articulos = document.getElementById("TxtArtDev").value;
+//    var IDArticulos = document.getElementById("TxtIdArtDev").value;
+//    var Aprobar = document.getElementById("TxtCantidadDev").value;
+//    var Observaciones = document.getElementById("TxtDescripcionDev").value;
+//    var IDTienda = document.getElementById("TxtIdTiendaDev").value;
+//    var total = "";
+
+//    //for (let i = 0; i < Articulos.length; i++) {
+
+//    //    if (Aprobar > 0) {
+
+//    total += IDArticulos + ":" + Aprobar + "/" + IDTienda + "," + Observaciones + "#";
+
+//    //    }
+//    //}
+
+//    $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+//        let RES = Data;
+//        if (Data == 1) { alert("--Guardado---") }
+
+//    });
+//}
