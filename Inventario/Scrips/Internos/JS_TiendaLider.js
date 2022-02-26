@@ -1818,7 +1818,7 @@ function DesplegarPedidosInternos(IdCmpraInt, id) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArtPedidos/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
+        $.get("/Supervision/ConsultaArtTiendaDespl/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
             var DespXArt = "";
             //---Encabezado del grid---------
             DespXArt += "<hr class='solid4'>";
