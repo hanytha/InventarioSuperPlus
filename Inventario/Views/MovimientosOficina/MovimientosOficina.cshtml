@@ -53,9 +53,9 @@
     @{
        // if (Accesos.IDAsignacion == 1 || Accesos.IDAsignacion == 2)
       //  {
-            if (TiendasSupervision.IDTienda != null)
+            if (ModeloAreas.IdAreas != null)
             {
-                int NSucursales = TiendasSupervision.IDTienda.Count();
+                int NSucursales = ModeloAreas.IdAreas.Count();
 
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < NSucursales; i++)
@@ -68,16 +68,16 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
+                    string ColapseAceptar = "Accordion" + @ModeloAreas.IdAreas[i];
+                    string Colapse = "Accordion" + @ModeloAreas.IdAreas[i];
+                    string titulo = "titulo" + @ModeloAreas.IdAreas[i];
+                    string contenedor1 = "contenedor1" + @ModeloAreas.IdAreas[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
+                                <a onclick="ConsultaArticuloComp(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                    <span>Articulos de la tienda @ModeloAreas.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@Colapse" class="collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
@@ -86,11 +86,11 @@
                                     <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                     <div class="row">
 
-                                        <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                        <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
 
                                         <div>
-                                            <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
+                                            <h5>Información de la área: @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -143,7 +143,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaPedidosRealizados(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Pedidos realizados en la tienda: @ModeloAreas.Nombre[i]</span>
+                                    <span>Pedidos realizados en la área: @ModeloAreas.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -178,9 +178,9 @@
     @{
      //   if (Accesos.IDAsignacion == 1)
        // {
-            if (TiendasSupervision.IDTienda != null)
+            if (ModeloAreas.IdAreas != null)
             {
-                int NSucursales = TiendasSupervision.IDTienda.Count();
+                int NSucursales = ModeloAreas.IdAreas.Count();
 
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < NSucursales; i++)
@@ -193,16 +193,16 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+                    string ColapseAceptar = "AccordionAceptar" + @ModeloAreas.IdAreas[i];
 
-                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                    string titulo = "titulo" + @ModeloAreas.IdAreas[i];
+                    string contenedorAceptar = "contenedorAceptar" + @ModeloAreas.IdAreas[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                <a onclick="ConsultaArticuloCompra(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                    <span>Aceptar pedidos de la tienda @ModeloAreas.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -213,7 +213,7 @@
 
 
                                         <div>
-                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+                                            <h5>Aceptar pedido: @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -547,11 +547,11 @@
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
-                                            if (@TiendasSupervision.IDTienda != null)
+                                            if (@ModeloAreas.IdAreas != null)
                                             {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -927,11 +927,11 @@
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
-                                            if (@TiendasSupervision.IDTienda != null)
+                                            if (@ModeloAreas.IdAreas != null)
                                             {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -1007,11 +1007,11 @@
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
-                                            if (@TiendasSupervision.IDTienda != null)
+                                            if (@ModeloAreas.IdAreas != null)
                                             {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
                                         }
