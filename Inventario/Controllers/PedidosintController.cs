@@ -279,7 +279,7 @@ namespace Inventario.Controllers
                     if (contador == 0)
                     {
                         tem1 = (int)numero.pedido;
-                        tem2 = (int)numero.IdProveedor;
+                        tem2 = (int)numero.noProve;
 
 
                         NoPedido += numero.pedido + ",";
@@ -292,7 +292,7 @@ namespace Inventario.Controllers
 
 
                     }
-                    if (numero.pedido != tem1 || numero.IdProveedor != tem2)
+                    if (numero.pedido != tem1 || numero.noProve != tem2)
                     {
                         NoPedido += numero.pedido + ",";
                         NoProvedor += numero.noProve + ",";
@@ -303,7 +303,7 @@ namespace Inventario.Controllers
 
 
                         tem1 = (int)numero.pedido;
-                        tem2 = (int)numero.IdProveedor;
+                        tem2 = (int)numero.noProve;
 
                         contador++;
                     }
