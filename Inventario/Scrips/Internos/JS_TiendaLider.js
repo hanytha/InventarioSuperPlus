@@ -64,8 +64,8 @@ function ConsultaArticuloComp(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayIdCmpraInt[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VisualizarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
-
+                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VisualizarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + "," + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")'  data-toggle='modal' data-target='#VisualizarModalPedidos'><i class='fas fa-archive'></i></button>";
+               
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
                 CodigoHtmlArticuloComp += "</div>";
@@ -222,7 +222,7 @@ function ConsultaPedidosRealizados(IDTienda) {
                 CodigoHtmlArticuloComp += "<label>"
                 //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
                 CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='DesplegarPedidosInternos(" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegablePedido" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegablePedido(" + ArrayNoPedido[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + "," + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
+              //  CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VisualizarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + "," + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#VisualizarModalPedidos'><i class='fas fa-archive'></i></button>";
 
                 CodigoHtmlArticuloComp += "</div>";
                 //-------------Termina----------------------------------------
@@ -958,24 +958,87 @@ function VerPedido(id, no, IdCompInt, idS) {
     }
 }
 
-function VisualizarPedido(id, no) {
+function VisualizarPedido(id, no, IdCompInt, idS) {
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
         $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+      //  $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
             document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
             document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
 
             document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreoVisualizar").textContent = Data[0].Correo;
-            document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Fecha;
+            document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
             document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Tienda;
-            document.getElementById("TxtDireccion").textContent = Data[0].Direccion;
 
+            MostrarArticulosVisualizar(IdCompInt, idS);
             //MostrarArticulos(id, no);
             //MostrarArt(id, no); 
+        });
+    }
+}
+
+function MostrarArticulosVisualizar(IdCompInt, idS) {
+    if (idS == 0) {
+        sessionStorage.setItem('IdMovimiento', '0');
+    }
+    else {
+        $.get("/Supervision/ConsultaTablaArtPedidosAceptados/?IdCompInt=" + IdCompInt + "&idS= " + idS, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+            //TablaArticulo += "<label>Id Articulo</label>";
+            //TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+
+                if (ArrayIdArticulos[i] > 0) {
+                    //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                    ////  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "<input  class='input-IdArticulo sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "</div>";
+                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<label>"
+                    TablaArticulo += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+
+                    TablaArticulo += "</label>"
+                    TablaArticulo += "</div>";
+                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<input  class='input-StockAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "</div>";
+                }
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArtVisualizar").innerHTML = TablaArticulo;
         });
     }
 }
@@ -1825,8 +1888,8 @@ function DesplegarPedidosInternos(IdCmpraInt, id) {
             DespXArt += "<div class='row'>";
             DespXArt += "<div class='col-sm'>NoPedido</div>";
             DespXArt += "<div class='col-sm'>Artículo</div>";
-            DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
-            DespXArt += "<div class='col-sm'>Stock</div>";
+            DespXArt += "<div class='col-sm'>Fecha del pedido</div>";
+            DespXArt += "<div class='col-sm'>Cantidad Solicitada</div>";
             DespXArt += "<div class='col-sm'></div>";
 
             DespXArt += "</div>";
@@ -1858,7 +1921,7 @@ function DesplegarPedidosInternos(IdCmpraInt, id) {
                 DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
                 DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
                 DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+               // DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
                 DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
 
