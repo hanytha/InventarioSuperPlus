@@ -4472,7 +4472,7 @@ namespace Inventario.Controllers
             string id = "";
             string Articulo = "";
             
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.IdPedidosInternos)
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.IdSitio.Equals(IDTienda)).OrderByDescending(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.NumeroPedido,
