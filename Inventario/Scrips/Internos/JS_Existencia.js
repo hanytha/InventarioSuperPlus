@@ -85,6 +85,8 @@ function abrirModal(id) {
             document.getElementById("TxtCosto").value = Data[0].Coste;
             document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
             document.getElementById("cmbMPago").value = Data[0].IdMetodoPago;
+            document.getElementById("IDAREA").value = Data[0].IdArea;
+            document.getElementById("NAREA").value = Data[0].NomArea;
             MostrarArticulosPorIdCompra(id);
         });
     }
@@ -240,7 +242,7 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: " + ArrayUnidad[i] + "' id='cmbConversion(" + ArrayIDArticulo[i]+")'><option>--Seleccione--</option></select>"
+                TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: '" + ArrayUnidad[i] + "'  id='cmbConversion(" + ArrayIDArticulo[i]+")'><option>--Seleccione--</option></select>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
@@ -945,7 +947,7 @@ function MostrarArticulosPorIdCompra(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  name='" + Data[i].Unidad + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
