@@ -2,7 +2,7 @@
 //*****************Crea la tabla de todos los pedidos quee se realizan a los proveedores*****************************
 ConsultaPedidos();
 function ConsultaPedidos() {
-    $.get("/PedidosINt/ConsultaPedidosInternos", function (Data) {
+    $.get("/Pedidosint/ConsultaPedidosInternos", function (Data) {
         CrearTablaPedidos(Data);
     }
     );
