@@ -54,7 +54,7 @@
     @{
         if (ModeloCompra.IdArea != null)
         {
-           
+
             <table class="order-table  table-success" style="position: relative"
             <thead>
                     <tr>
@@ -80,9 +80,9 @@
                 </td>
             </tr>
                 }
-                else if ((long)ModeloCompra.IdArea[i] == Accesos.IdArea)
+                else if ((long)ModeloCompra.IdArea[i] == Accesos.IdArea && ModeloCompra.NomArea[i] != "Administrador")
                 {
-                            <tr>
+                 <tr>
                 <td>@ModeloCompra.NoCompra[i]</td>
                 <td>@ModeloCompra.Proveedor[i]</td>
                 <td>@ModeloCompra.TipoOperacion[i]</td>
@@ -90,7 +90,7 @@
                 <td>
                     <button class="btn btn-success" onclick="abrirModal(@ModeloCompra.IdCompra[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
                 </td>
-            </tr>
+                 </tr>
                 }
 
                 }
