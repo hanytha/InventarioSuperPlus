@@ -106,6 +106,8 @@
       <Column Name="NoCompraProveedor" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FechaDeIngreso" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Coste" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IdArea" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NomArea" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>

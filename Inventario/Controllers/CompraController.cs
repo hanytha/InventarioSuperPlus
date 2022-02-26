@@ -15,10 +15,41 @@ namespace Inventario.Controllers
         // GET: Compra
         public ActionResult Compra()
         {
+            CompraController ARTICULOS = new CompraController();
+            ARTICULOS.ConsultasCompras();
             return View();
         }
-        public JsonResult ConsultasCompras()
+        //public JsonResult ConsultasCompras()
+        //{
+        //    var compras = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.NoCompra)
+        //        .Select(p => new
+        //        {
+        //            p.IdCompra,
+        //            p.NoCompra,
+        //            p.MetodoDePago,
+        //            p.Proveedor,
+        //            p.FechaDeIngreso,
+        //            p.Coste,
+        //            p.NoCompraProveedor,
+        //            p.IdProveedor,
+        //            p.TipoOperacion,
+
+
+        //        });
+        //    return Json(compras, JsonRequestBehavior.AllowGet);
+        //}
+        //***********************************************************************************
+        public void ConsultasCompras()
         {
+            ModeloCompra modeloCompras = new ModeloCompra();
+            ModeloCompra.IdArea = new List<long>();
+            ModeloCompra.IdCompra = new List<long>();
+            ModeloCompra.NoCompra = new List<long>();
+            ModeloCompra.Proveedor = new List<string>();
+            ModeloCompra.NomArea = new List<string>();
+            ModeloCompra.TipoOperacion = new List<string>();
+            ModeloCompra.FechaDeIngreso = new List<string>();
+
             var compras = InvBD.Compra.Where(p => p.Estatus.Equals(1)).OrderByDescending(p => p.NoCompra)
                 .Select(p => new
                 {
@@ -31,10 +62,22 @@ namespace Inventario.Controllers
                     p.NoCompraProveedor,
                     p.IdProveedor,
                     p.TipoOperacion,
+                    p.IdArea,
+                    p.NomArea,
 
 
                 });
-            return Json(compras, JsonRequestBehavior.AllowGet);
+            foreach (var com in compras)
+            {
+                ModeloCompra.IdCompra.Add((long)com.IdCompra);
+                ModeloCompra.IdArea.Add((long)com.IdArea);
+                ModeloCompra.NoCompra.Add((long)com.NoCompra);
+                ModeloCompra.Proveedor.Add(com.Proveedor);
+                ModeloCompra.NomArea.Add(com.NomArea);
+                ModeloCompra.TipoOperacion.Add(com.TipoOperacion);
+                ModeloCompra.FechaDeIngreso.Add(com.FechaDeIngreso);
+
+            }
         }
         //***********************************************************************************
         public JsonResult ConsultaCompra(long Id)
@@ -69,6 +112,7 @@ namespace Inventario.Controllers
                   && p.NoCompra.Equals(DatosCompra.NoCompra)
                   && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
                   && p.Coste.Equals(DatosCompra.Coste)
+                  
                   ).Count();
 
                 if (nveces >= 0)
@@ -82,6 +126,7 @@ namespace Inventario.Controllers
               && p.FechaDeIngreso.Equals(DatosCompra.FechaDeIngreso)
               && p.NoCompra.Equals(DatosCompra.NoCompra)
               && p.Coste.Equals(DatosCompra.Coste)
+              && p.IdArea.Equals(DatosCompra.IdArea)
               ).First();
                     Afectados = IdCompra.IdCompra;
                 }
@@ -99,6 +144,7 @@ namespace Inventario.Controllers
                 && p.NoCompra.Equals(DatosCompra.NoCompra)
                 && p.NoCompraProveedor.Equals(DatosCompra.NoCompraProveedor)
                 && p.Coste.Equals(DatosCompra.Coste)
+                && p.IdArea.Equals(DatosCompra.IdArea)
                 ).Count();
                 if (nveces == 0)
                 {
@@ -112,6 +158,8 @@ namespace Inventario.Controllers
                     obj.TipoOperacion = DatosCompra.TipoOperacion;
                     obj.IdMetodoPago = DatosCompra.IdMetodoPago;
                     obj.MetodoDePago = DatosCompra.MetodoDePago;
+                    obj.IdArea = DatosCompra.IdArea;
+                    obj.NomArea = DatosCompra.NomArea;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }

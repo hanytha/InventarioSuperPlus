@@ -1,54 +1,56 @@
 ﻿
-ConsultaCompras();
+//ConsultaCompras();
 LlenarCMBProveedor();
 LlenarCMBMPago();
 BloquearCTRL();
-function ConsultaCompras() {
-    $.get("/Compra/ConsultasCompras", function (Data) {
-        CrearTablaCompras(Data);
-    }
-    );
-}
-function CrearTablaCompras(Data) {
-    var CodigoHtmlTablaPedidos = "";
-    CodigoHtmlTablaPedidos += "<br />"
-    CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
 
-    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
 
-    CodigoHtmlTablaPedidos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumturquoise;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
-    CodigoHtmlTablaPedidos += "</div>";
-    CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
-    CodigoHtmlTablaPedidos += "<table class='table-info table table-bordered order-table'>";
-    CodigoHtmlTablaPedidos += "<thead>";
-    CodigoHtmlTablaPedidos += "<tr>";
-    CodigoHtmlTablaPedidos += "<th>Núm_Compra</th>";
-    CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
-    CodigoHtmlTablaPedidos += "<th></th>";
-    CodigoHtmlTablaPedidos += "<th>Operación</th>";
-    CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
-    CodigoHtmlTablaPedidos += "<th>Opciones</th>";
-    CodigoHtmlTablaPedidos += "</tr>";
-    CodigoHtmlTablaPedidos += "</thead>";
-    CodigoHtmlTablaPedidos += "<tbody>";
+//function ConsultaCompras() {
+//    $.get("/Compra/ConsultasCompras", function (Data) {
+//        CrearTablaCompras(Data);
+//    }
+//    );
+//}
+//function CrearTablaCompras(Data) {
+//    var CodigoHtmlTablaPedidos = "";
+//    CodigoHtmlTablaPedidos += "<br />"
+//    CodigoHtmlTablaPedidos += "<div class='input-group mb-3 float-right '>";
 
-    for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaPedidos += "<tr>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].NoCompra + "</td>";
-        CodigoHtmlTablaPedidos += "<td colspan='2'>" + Data[i].Proveedor + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].TipoOperacion + "</td>";
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
-        CodigoHtmlTablaPedidos += "<td>";
-        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
-        //  CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
+//    CodigoHtmlTablaPedidos += "<input  style='border-style:  outset; border-width: 3px;   border-color:mediumturquoise;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
 
-        CodigoHtmlTablaPedidos += "</td>";
-        CodigoHtmlTablaPedidos += "</tr>";
-    }
-    CodigoHtmlTablaPedidos += "</tbody>";
-    CodigoHtmlTablaPedidos += "</table>";
-    document.getElementById("tablaCompras").innerHTML = CodigoHtmlTablaPedidos;
-}
+//    CodigoHtmlTablaPedidos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumturquoise;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
+//    CodigoHtmlTablaPedidos += "</div>";
+//    CodigoHtmlTablaPedidos += "<div class='table-responsive'>";
+//    CodigoHtmlTablaPedidos += "<table class='table-info table table-bordered order-table'>";
+//    CodigoHtmlTablaPedidos += "<thead>";
+//    CodigoHtmlTablaPedidos += "<tr>";
+//    CodigoHtmlTablaPedidos += "<th>Núm_Compra</th>";
+//    CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+//    CodigoHtmlTablaPedidos += "<th></th>";
+//    CodigoHtmlTablaPedidos += "<th>Operación</th>";
+//    CodigoHtmlTablaPedidos += "<th>Fecha de Ingreso</th>";
+//    CodigoHtmlTablaPedidos += "<th>Opciones</th>";
+//    CodigoHtmlTablaPedidos += "</tr>";
+//    CodigoHtmlTablaPedidos += "</thead>";
+//    CodigoHtmlTablaPedidos += "<tbody>";
+
+//    for (var i = 0; i < Data.length; i++) {
+//        CodigoHtmlTablaPedidos += "<tr>";
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].NoCompra + "</td>";
+//        CodigoHtmlTablaPedidos += "<td colspan='2'>" + Data[i].Proveedor + "</td>";
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].TipoOperacion + "</td>";
+//        CodigoHtmlTablaPedidos += "<td>" + Data[i].FechaDeIngreso + "</td>";
+//        CodigoHtmlTablaPedidos += "<td>";
+//        CodigoHtmlTablaPedidos += "<button class='btn btn-info' onclick='abrirModal(" + Data[i].IdCompra + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+//        //  CodigoHtmlTablaPedidos += "<button class='btn btn-danger' onclick='EliminarCompra(" + Data[i].IdCompra + ",this)'><i class='far fa-trash-alt'></i></button>";
+
+//        CodigoHtmlTablaPedidos += "</td>";
+//        CodigoHtmlTablaPedidos += "</tr>";
+//    }
+//    CodigoHtmlTablaPedidos += "</tbody>";
+//    CodigoHtmlTablaPedidos += "</table>";
+//    document.getElementById("tablaCompras").innerHTML = CodigoHtmlTablaPedidos;
+//}
 
 
 //------------Limpia la información y carga la informacion de la compra------------------------
@@ -623,6 +625,10 @@ function GuardarCompra(movimiento) {
 
     var FechaDeIngreso = document.getElementById("TxtFechaDeIngreso").value;
     var Coste = document.getElementById("TxtCosto").value;
+
+    var IdArea = document.getElementById("IDAREA").value;
+    var NomArea = document.getElementById("NAREA").value;
+
     var TipoOperacion = movimiento;
 
     var frm = new FormData();
@@ -636,6 +642,8 @@ function GuardarCompra(movimiento) {
     frm.append("FechaDeIngreso", FechaDeIngreso);
     frm.append("TipoOperacion", TipoOperacion);
     frm.append("Coste", Coste);
+    frm.append("IdArea", IdArea);
+    frm.append("NomArea", NomArea);
 
 
     frm.append("Estatus", 1);
