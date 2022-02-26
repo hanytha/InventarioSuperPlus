@@ -786,6 +786,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Su " + TipoDeOperacion + " se guardó exitosamente!", "", "success");
+ 
 }
 
 
