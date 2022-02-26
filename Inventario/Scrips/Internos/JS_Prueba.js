@@ -104,14 +104,14 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + ")' type='button' data-toggle='collapse' data-target='#desplegable2" + Data[i].NoCompra + "' aria-expanded='false' aria-controls='desplegable2(" + Data[i].NoCompra + ")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning'                             onclick='Desplegar2(" + Data[i].NoCompra + " , "+ Data[i].IdArticulo +")' type='button' data-toggle='collapse'                                          data-target='#desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' aria-expanded='false'                                                   aria-controls='desplegable2(" + Data[i].NoCompra + Data[i].IdArticulo +")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
                 uno += "</div>";
                 //--------------------Se inserta la segunda tabla atravez de su id---------------------
                 uno += "<div class='row'>";
-                uno += "<div class='col'><div id='desplegable2" + Data[i].NoCompra + "' class='collapse'></div></div>";
+                uno += "<div class='col'><div id='desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' class='collapse'></div></div>";
                 uno += "</div>";
             }
             uno += "</div>";
@@ -503,7 +503,7 @@ function llenarCombo(data, control) {
 //*********************************************************************************************************************************
 //*********************************************************************************************************************************
 //------------- Función que crea el segundo grid para desplegar que se despliega por numero de compra-----------------------------
-function Desplegar2(no) {
+function Desplegar2(no, ID) {
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
 
@@ -538,7 +538,7 @@ function Desplegar2(no) {
             dos += "</br>";
             dos += "</br>";
 
-            let numero = "desplegable2" + no;
+            let numero = "desplegable2" + no + ID;
             document.getElementById(numero).innerHTML = dos;
         });
     }

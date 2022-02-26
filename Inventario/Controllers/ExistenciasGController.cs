@@ -225,7 +225,8 @@ namespace Inventario.Controllers
                     p.FechaIngreso,
                     p.Unidad,
                     p.TipoDeOperacion,
-                    p.PrecioUnitario
+                    p.PrecioUnitario,
+                    p.IdArticulo,
                 });
 
             return Json(compra, JsonRequestBehavior.AllowGet);
