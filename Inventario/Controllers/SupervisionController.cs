@@ -4983,18 +4983,18 @@ namespace Inventario.Controllers
             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                          join areas in InvBD.Areas
-                      on Compra.IdProveedor equals areas.IdAreas
-                          where ExistAlm.IdCompra.Equals(idCompraInt) && Compra.IdSitio.Equals(idS)
+                          join pedido in InvBD.PedidosInternos
+                      on Compra.NoPedido equals pedido.NumeroPedido
+                          where pedido.IdSitio.Equals(idS) 
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
                               Articulo = ExistAlm.Articulo,
-                              NumeroPedido = ExistAlm.NoPedidoG,
+                              NumeroPedido = pedido.NumeroPedido,
                               NumPedidoProveedor = Compra.NoPedidoProveedor,
-                              nombres = ExistAlm.Articulo,
+                              nombres = pedido.Articulo,
                               IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
                               IdArticulo = ExistAlm.IdArticulo,
                               Tipo = ExistAlm.TipoDeOperacion,
@@ -5004,8 +5004,8 @@ namespace Inventario.Controllers
                               //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
                               //Fechas = Compra.FechaIngreso,
-                              FechaDeIngreso = Compra.FechaIngreso,
-                              stockActual = ExistAlm.ExitenciaActual,
+                              FechaDeIngreso = pedido.Fecha,
+                              stockActual = pedido.CantidadSolicitada,
                               IdAsignacion = Compra.IdAsignacion,
                               IdSitio = Compra.IdSitio,
                           };
