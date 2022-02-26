@@ -132,6 +132,8 @@
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_PedidoOficina.js" />
     <Content Include="Scrips\Internos\JS_PedidosTienda.js" />
+    <Content Include="Scrips\Internos\JS_AceptarPedidos.js" />
+    <Content Include="Scrips\Internos\JS_MovimientosOficina.js" />
     <Content Include="Scrips\Internos\JS_TiendaLider.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
@@ -190,6 +192,7 @@
     <Compile Include="Controllers\ExistenciasGController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Controllers\MovimientosOficinaController.cs" />
     <Compile Include="Controllers\SupervisionController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
@@ -224,6 +227,9 @@
       <LastGenOutput>InventarioBD.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="InventarioBD.dbml.layout">
+      <DependentUpon>InventarioBD.dbml</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -269,6 +275,9 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciasTiendas.cshtml" />
     <Content Include="Views\Supervision\PedidosOficina.cshtml" />
     <Content Include="Views\Supervision\PedidosTienda.cshtml" />
+    <Content Include="Views\Supervision\AceptarPedidos.cshtml" />
+    <Content Include="Views\Supervision\MovimientosOficina.cshtml" />
+    <Content Include="Views\MovimientosOficina\MovimientosOficina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -281,11 +290,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="InventarioBD.dbml.layout">
-      <DependentUpon>InventarioBD.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

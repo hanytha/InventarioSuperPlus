@@ -4467,6 +4467,10 @@ namespace Inventario.Controllers
         {
             return View();
         }
+        public ActionResult AceptarPedidos()
+        {
+            return View();
+        }
     }
 }
 
