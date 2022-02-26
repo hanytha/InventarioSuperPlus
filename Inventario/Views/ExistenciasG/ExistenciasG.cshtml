@@ -41,6 +41,10 @@
 
                 if (Accesos.NIvel == 1)
                 {
+                    string desplegable = "Desplegable" + ModeloExistGe.IdArticulos[i], IDTabla = "Tabla_Depto_" + ModeloExistGe.IdArticulos[i];
+                    string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
+                    string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
+
                     <div>
                         <div class="row">
                             <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
@@ -51,36 +55,50 @@
 
                             <div class="col">
                                 <label>
-                                    <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])" type="button" data-toggle="collapse" data-target="#desplegable @ModeloExistGe.IdArticulos[i]" aria-expanded="false" aria-controls="desplegable(@ModeloExistGe.IdArticulos[i])"><i class="fas fa-angle-down"></i></button>
+                                    <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                            type="button" data-toggle="collapse" data-target="#desplegable @ModeloExistGe.IdArticulos[i]"
+                                            aria-expanded="false" aria-controls="desplegable(@ModeloExistGe.IdArticulos[i])">
+                                        <i class="fas fa-angle-down"></i>
+                                    </button>
                                 </label>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="col"><div id="desplegable @ModeloExistGe.IdArticulos[i]" class="collapse"></div></div>
+                        <div class="col"><div id="@GridIDA" class="@collapse"></div></div>
                     </div>
+
+
                 }
                 else if ((long)ModeloExistGe.IdAreas[i] == Accesos.IdArea)
                 {
-                    <div>
-                        <div class="row">
-                            <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
-                            <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
-                            <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
-                            <div class="col-sm">@ModeloExistGe.StockActual[i]</div>
-                            <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
+                    string desplegable = "Desplegable" + ModeloExistGe.IdArticulos[i], IDTabla = "Tabla_Depto_" + ModeloExistGe.IdArticulos[i];
+                    string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
+                    string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
 
-                            <div class="col">
-                                <label>
-                                    <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])" type="button" data-toggle="collapse" data-target="#desplegable @ModeloExistGe.IdArticulos[i]" aria-expanded="false" aria-controls="desplegable(@ModeloExistGe.IdArticulos[i])"><i class="fas fa-angle-down"></i></button>
-                                </label>
-                            </div>
+
+                    <div class="row">
+                        <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
+                        <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
+                        <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
+                        <div class="col-sm">@ModeloExistGe.StockActual[i]</div>
+                        <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
+
+                        <div class="col">
+                            <label>
+                                <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                        type="button" data-toggle="collapse" data-target="#@desplegable @ModeloExistGe.IdArticulos[i]"
+                                        aria-expanded="false" aria-controls="desplegable'(@ModeloExistGe.IdArticulos[i])'">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col"><div id="desplegable @ModeloExistGe.IdArticulos[i]" class="collapse"></div></div>
+                        <div class="col"><div id="@GridIDA" class="@collapse"></div></div>
                     </div>
                 }
             }

@@ -3,70 +3,70 @@
 //LlenarCMCArea();
 //-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
 ///ConsultaArticuloComp();
-function ConsultaArticuloComp() {
-    $.get("/ExistenciasG/ConsultaArticulos", function (Data) {
-        CrearArticuloComp(Data);
-    });
+//function ConsultaArticuloComp() {
+//    $.get("/ExistenciasG/ConsultaArticulos", function (Data) {
+//        CrearArticuloComp(Data);
+//    });
 
-}
+//}
 
-function CrearArticuloComp(Data) {
-    var CodigoHtmlArticuloComp = "";
-    CodigoHtmlArticuloComp += "<div id='contenedor1'>";
-    CodigoHtmlArticuloComp += "<hr class='solid'>";
-    CodigoHtmlArticuloComp += "<div class='row'>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Precio_Unitario</div>";
-    CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-    CodigoHtmlArticuloComp += "</div>";
-    CodigoHtmlArticuloComp += "<hr class='solid'>";
-    CodigoHtmlArticuloComp += "</div>";
-
-
-    let id = Data.id;
-    let ArrayId = id.split(',');
-    let Nombre = Data.Nombre;
-    let Arraynombre = Nombre.split(',');
-    let Fechas = Data.Fechas;
-    let Arrayfechas = Fechas.split(',');
-    let Stock = Data.Stock;
-    let Arraystock = Stock.split(',');
-    let Costos = Data.Costos;
-    let Arraycostos = Costos.split(',');
+//function CrearArticuloComp(Data) {
+//    var CodigoHtmlArticuloComp = "";
+//    CodigoHtmlArticuloComp += "<div id='contenedor1'>";
+//    CodigoHtmlArticuloComp += "<hr class='solid'>";
+//    CodigoHtmlArticuloComp += "<div class='row'>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>Precio_Unitario</div>";
+//    CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
+//    CodigoHtmlArticuloComp += "</div>";
+//    CodigoHtmlArticuloComp += "<hr class='solid'>";
+//    CodigoHtmlArticuloComp += "</div>";
 
 
-    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
+//    let id = Data.id;
+//    let ArrayId = id.split(',');
+//    let Nombre = Data.Nombre;
+//    let Arraynombre = Nombre.split(',');
+//    let Fechas = Data.Fechas;
+//    let Arrayfechas = Fechas.split(',');
+//    let Stock = Data.Stock;
+//    let Arraystock = Stock.split(',');
+//    let Costos = Data.Costos;
+//    let Arraycostos = Costos.split(',');
 
-        CodigoHtmlArticuloComp += "<div>";
-        CodigoHtmlArticuloComp += "<div class='row'>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
-        //-----------------Botón para desplegar la primera tabla--------------
-        CodigoHtmlArticuloComp += "<div class='col'>"
-        CodigoHtmlArticuloComp += "<label>"
-        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i class='fas fa-angle-down'></i></button>";
-        CodigoHtmlArticuloComp += "</label>";
-        CodigoHtmlArticuloComp += "</div>";
-        //-------------Termina----------------------------------------
-        CodigoHtmlArticuloComp += "</div>";
-        CodigoHtmlArticuloComp += "</div>";
+
+//    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
+
+//        CodigoHtmlArticuloComp += "<div>";
+//        CodigoHtmlArticuloComp += "<div class='row'>";
+//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
+//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
+//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
+//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
+//        //-----------------Botón para desplegar la primera tabla--------------
+//        CodigoHtmlArticuloComp += "<div class='col'>"
+//        CodigoHtmlArticuloComp += "<label>"
+//        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-                             toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i                        class='fas fa-angle-down'></i></button>";
+//        CodigoHtmlArticuloComp += "</label>";
+//        CodigoHtmlArticuloComp += "</div>";
+//        //-------------Termina----------------------------------------
+//        CodigoHtmlArticuloComp += "</div>";
+//        CodigoHtmlArticuloComp += "</div>";
       
-        //------------------------Despliega primer grid-----------------------------------------------------------------------
-        CodigoHtmlArticuloComp += "<div class='row'>";
-        CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
-        CodigoHtmlArticuloComp += "</div>";
-      //  CodigoHtmlArticuloComp += "<hr class='solid8'>";
-        //---------------------------------------Termina----------------------------------------------------------------------------
-    }
-    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
+//        //------------------------Despliega primer grid-----------------------------------------------------------------------
+//        CodigoHtmlArticuloComp += "<div class='row'>";
+//        CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
+//        CodigoHtmlArticuloComp += "</div>";
+//      //  CodigoHtmlArticuloComp += "<hr class='solid8'>";
+//        //---------------------------------------Termina----------------------------------------------------------------------------
+//    }
+//    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
 
-}
+//}
 
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
