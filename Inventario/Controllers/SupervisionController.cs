@@ -4965,50 +4965,55 @@ namespace Inventario.Controllers
             string IdExistenciaAlmacenG = "";
             string Stock = "";
             string IdSitio = "";
-            //var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
-            //   .Select(p => new
-            //   {
-            //       pedido = p.Articulo,
-            //       asignacion = p.IdArticulo,
-            //       //Idtienda = p.IdCompraInterno,
-            //       tiendas = p.ExitenciaActual,
-            //       IdArticulo = p.IdArticulo,
-            //       NumeroPedido=p.NoPedidoG,
-            //       Nombre=p.Articulo,
-            //       Fechas = p.ExitenciaInicial,
-            //        IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
-            //   });
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.NumeroPedido.Equals(idCompraInt)&& p.IdSitio.Equals(idS)).OrderBy(p => p.IdPedidosInternos)
+               .Select(p => new
+               {
+                   pedido = p.Articulo,
+                   asignacion = p.IdArticulo,
+                   //Idtienda = p.IdCompraInterno,
+                   tiendas = p.Sitio,
+                   IdArticulo = p.IdArticulo,
+                   NumeroPedido = p.NumeroPedido,
+                   Nombre = p.Articulo,
+                   FechaDeIngreso = p.Fecha,
+                   IdExistenciaAlmacenG = p.IdProveedor,
+                   Articulo=p.Articulo,
+                   IdSitio=p.IdSitio,
+                   stockActual=p.CantidadSolicitada,
+                   IdAsignacion=p.IdAsignacion
+               });
 
 
-            var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
-                          join Compra in InvBD.CompraInterno
-                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                          join pedido in InvBD.PedidosInternos
-                      on Compra.NoPedido equals pedido.NumeroPedido
-                          where pedido.IdSitio.Equals(idS) 
-                          orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-                          select new
-                          {
-                              IdCompraInterno = ExistAlm.IdCompraInterno,
-                              Articulo = ExistAlm.Articulo,
-                              NumeroPedido = pedido.NumeroPedido,
-                              NumPedidoProveedor = Compra.NoPedidoProveedor,
-                              nombres = pedido.Articulo,
-                              IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-                              IdArticulo = ExistAlm.IdArticulo,
-                              Tipo = ExistAlm.TipoDeOperacion,
-                              IdProveedor = Compra.IdProveedor,
-                              Proveedor = Compra.Proveedor,
-                              tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
-                              Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
-                              FechaDeIngreso = pedido.Fecha,
-                              stockActual = pedido.CantidadSolicitada,
-                              IdAsignacion = Compra.IdAsignacion,
-                              IdSitio = Compra.IdSitio,
-                          };
+            //var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
+            //              join Compra in InvBD.CompraInterno
+            //          on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+            //              join pedido in InvBD.PedidosInternos
+            //          on Compra.NoPedido equals pedido.NumeroPedido
+            //              where pedido.IdSitio.Equals(idS)&& pedido.Estatus.Equals(1)
+            //              //&& pedido.NumeroPedido.Equals(idCompraInt)
+            //              //orderby ExistAlm.IdArticulo
+            //              //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+            //              select new
+            //              {
+            //                  IdCompraInterno = ExistAlm.IdCompraInterno,
+            //                  Articulo = ExistAlm.Articulo,
+            //                  NumeroPedido = pedido.NumeroPedido,
+            //                  NumPedidoProveedor = Compra.NoPedidoProveedor,
+            //                  nombres = pedido.Articulo,
+            //                  IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+            //                  IdArticulo = ExistAlm.IdArticulo,
+            //                  Tipo = ExistAlm.TipoDeOperacion,
+            //                  IdProveedor = Compra.IdProveedor,
+            //                  Proveedor = Compra.Proveedor,
+            //                  tiendas = Compra.IdSitio,
+            //                  //IdArticulo = ExistAlm.IdArticulo,
+            //                  Nombre = ExistAlm.Articulo,
+            //                  //Fechas = Compra.FechaIngreso,
+            //                  FechaDeIngreso = pedido.Fecha,
+            //                  stockActual = pedido.CantidadSolicitada,
+            //                  IdAsignacion = Compra.IdAsignacion,
+            //                  IdSitio = Compra.IdSitio,
+            //              };
 
             if (Pedidos.Count() > 0)
             {

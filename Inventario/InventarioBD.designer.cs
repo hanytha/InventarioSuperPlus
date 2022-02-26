@@ -2462,6 +2462,10 @@ namespace Inventario
 		
 		private System.Nullable<long> _Coste;
 		
+		private System.Nullable<long> _IdArea;
+		
+		private string _NomArea;
+		
 		private int _Estatus;
 		
     #region Definiciones de métodos de extensibilidad
@@ -2488,6 +2492,10 @@ namespace Inventario
     partial void OnFechaDeIngresoChanged();
     partial void OnCosteChanging(System.Nullable<long> value);
     partial void OnCosteChanged();
+    partial void OnIdAreaChanging(System.Nullable<long> value);
+    partial void OnIdAreaChanged();
+    partial void OnNomAreaChanging(string value);
+    partial void OnNomAreaChanged();
     partial void OnEstatusChanging(int value);
     partial void OnEstatusChanged();
     #endregion
@@ -2693,6 +2701,46 @@ namespace Inventario
 					this._Coste = value;
 					this.SendPropertyChanged("Coste");
 					this.OnCosteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdArea", DbType="BigInt")]
+		public System.Nullable<long> IdArea
+		{
+			get
+			{
+				return this._IdArea;
+			}
+			set
+			{
+				if ((this._IdArea != value))
+				{
+					this.OnIdAreaChanging(value);
+					this.SendPropertyChanging();
+					this._IdArea = value;
+					this.SendPropertyChanged("IdArea");
+					this.OnIdAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NomArea", DbType="VarChar(150)")]
+		public string NomArea
+		{
+			get
+			{
+				return this._NomArea;
+			}
+			set
+			{
+				if ((this._NomArea != value))
+				{
+					this.OnNomAreaChanging(value);
+					this.SendPropertyChanging();
+					this._NomArea = value;
+					this.SendPropertyChanged("NomArea");
+					this.OnNomAreaChanged();
 				}
 			}
 		}
