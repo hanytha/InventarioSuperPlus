@@ -5,7 +5,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
-    TIENDAS DE LA SUPERVISIÓN
+    MOVIMIENTOS DE OFICINA
 </h2>
 
 <!-- Botón del modal-->
@@ -85,7 +85,7 @@
 
                                     <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
                                     <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
-                                   @* <button onclick="abrirModalUs(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#Usados">Usados</button>*@
+                                    @* <button onclick="abrirModalUs(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#Usados">Usados</button>*@
                                     <div>
                                         <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
 
@@ -375,11 +375,11 @@
                         <!-----formulario-->
                         <div class="row">
                             @*<div class="col-lg-3">
-                <div class="form-group">
-                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
-                </div>
-            </div>*@
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
+                                        <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
+                                    </div>
+                                </div>*@
                             <div class="col-lg-8">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
@@ -406,76 +406,76 @@
                                     <input type="text" id="TxtArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
-                            </div>
+                        </div>
 
 
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
-                                        <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
+                                    <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
-                                        <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
-                                        <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
-                                    </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
+                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
                                 </div>
                             </div>
 
+                        </div>
 
-
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
-                                        <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
+                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
                                 </div>
-                                <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
-                                        <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                            <option value="0">--Seleccione--</option>
-                                            @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                            @{
-                                                if (@TiendasSupervision.IDTienda != null)
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
+                                    <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
                                                 {
-                                                    for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
-                                                    {
-                                                        <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
-                                                    }
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-
-                                        <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
-                                    </div>
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
-</form>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
+
+                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
@@ -674,9 +674,9 @@
                 </div>
                 <!-- pie del diálogo -->
                 @*<div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>*@
+                        <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
+                        <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>*@
             </div>
         </div>
     </div>
@@ -687,79 +687,79 @@
 
 
 <div class="container">
-<div class="modal fade" id="Usados">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">
-                    <label class="form-control-label" style="font-size: 18px;">
-                        MOVIMIENTO: Usados
-                    </label>
-                </h2>
-                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+    <div class="modal fade" id="Usados">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            MOVIMIENTO: Usados
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
 
-            </div>
-            <!-- Contenido del modal -->
-            <div class="modal-body">
-                <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                    <!-----formulario-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
-                                <input type="text" id="TxtMovUs" class="form-control bloquear" value="Usados">
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <!-----formulario-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
+                                    <input type="text" id="TxtMovUs" class="form-control bloquear" value="Usados">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngresoUs">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtFechaIngresoUs">Fecha de Ingreso<span></span></label>
-                                <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="cmbTiendaUs">Tienda<span class="required">*</span></label>
-                                <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                    <option value="0">--Seleccione--</option>
-                                    @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                    @{
-                                        if (@TiendasSupervision.IDTienda != null)
-                                        {
-                                            for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTiendaUs">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
                                             {
-                                                <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
                                             }
                                         }
-                                    }
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TblArticulosUs">Artículo(s)<span class="required">*</span></label>
-                                <div id="TblArtUs">No hay Ningún artículo de este proveedor</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulosUs">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArtUs">No hay Ningún artículo de este proveedor</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
-                <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
+                    </form>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
+                    <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
 
-                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

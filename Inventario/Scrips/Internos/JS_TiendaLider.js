@@ -1874,7 +1874,7 @@ function nuevoStock() {
 //}
 
 
-///////////////////////////Aceptar pedidos--------------------------
+/////////////////////////// Art pedidos Aceptados--------------------------
 
 function DesplegarPedidosInternos(IdCmpraInt, id) {
     if (IdCmpraInt == 0 && id == 0) {
@@ -1936,3 +1936,13 @@ function DesplegarPedidosInternos(IdCmpraInt, id) {
         });
     }
 }
+
+
+
+
+
+
+
+
+
+////-------------------------------------------OFICINA----------------------------------------
