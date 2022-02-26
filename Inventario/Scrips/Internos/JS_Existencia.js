@@ -242,7 +242,7 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: '" + ArrayUnidad[i] + "'  id='cmbConversion(" + ArrayIDArticulo[i]+")'><option>--Seleccione--</option></select>"
+                TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: " + ArrayUnidad[i] + "')'>                <option>--Seleccione--</option></select>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
