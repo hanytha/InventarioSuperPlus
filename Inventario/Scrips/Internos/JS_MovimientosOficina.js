@@ -12,7 +12,7 @@ function ConsultaArticuloComp(IDTienda) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/MovimientosOficina/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
 
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
@@ -96,7 +96,7 @@ function ConsultaArticuloCompra(IDTienda) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArticulosAceptar/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/MovimientosOficina/ConsultaArticulosAceptar/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
 
             CodigoHtmlArticuloComp += "<div id='contenedorAceptar'>";
@@ -170,7 +170,7 @@ function ConsultaPedidosRealizados(IDTienda) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArticulosVisualizarPedidos/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/MovimientosOficina/ConsultaArticulosVisualizarPedidos/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
 
             CodigoHtmlArticuloComp += "<div id='contenedorPedidos'>";
@@ -1618,69 +1618,6 @@ function nuevoStock() {
 //}
 
 
-/////////////////////////// Art pedidos Aceptados--------------------------
-
-function DesplegarPedidosInternos(IdCmpraInt, id) {
-    if (IdCmpraInt == 0 && id == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaArtTiendaDespl/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
-            var DespXArt = "";
-            //---Encabezado del grid---------
-            DespXArt += "<hr class='solid4'>";
-            DespXArt += "<div class='row'>";
-            DespXArt += "<div class='col-sm'>NoPedido</div>";
-            DespXArt += "<div class='col-sm'>Artículo</div>";
-            DespXArt += "<div class='col-sm'>Fecha del pedido</div>";
-            DespXArt += "<div class='col-sm'>Cantidad Solicitada</div>";
-            DespXArt += "<div class='col-sm'></div>";
-
-            DespXArt += "</div>";
-            DespXArt += "<hr class='solid4'>";
-
-
-            let IdArticulo = Data.IdArticulo;
-            let ArrayIdArticulos = IdArticulo.split(',');
-            let NumeroPedido = Data.NumeroPedido;
-            let ArrayNoPedido = NumeroPedido.split(',');
-            let Fechas = Data.Fechas;
-            let Arrayfecha = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
-
-            let Nombre = Data.Nombre;
-            let ArrayArticulo = Nombre.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
-
-            for (var i = 0; i < ArrayIdArticulos.length; i++) {
-                //----Cuerpo del grid-------------
-                DespXArt += "<div class='row'>";
-
-                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                // DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
-                DespXArt += "<div class='col-sm'></div>";
-                DespXArt += "</div>";
-
-            }
-            DespXArt += "</div>";
-            DespXArt += "</br>";
-            DespXArt += "</br>";
-            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
-            let compraArticulo = "desplegablePedido" + IdCmpraInt + "," + id;
-            document.getElementById(compraArticulo).innerHTML = DespXArt;
-
-        });
-    }
-}
-
 
 
 
@@ -1954,3 +1891,68 @@ function SiguientePedido(Data) {
     document.getElementById("TxtNumeroPedido").value = ultimoElemento;
 
 }
+
+
+/////////////////////////// Art pedidos Aceptados--------------------------
+
+function DesplegarPedidosInternos(IdCmpraInt, id) {
+    if (IdCmpraInt == 0 && id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaArtTiendaDespl/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
+            var DespXArt = "";
+            //---Encabezado del grid---------
+            DespXArt += "<hr class='solid4'>";
+            DespXArt += "<div class='row'>";
+            DespXArt += "<div class='col-sm'>NoPedido</div>";
+            DespXArt += "<div class='col-sm'>Artículo</div>";
+            DespXArt += "<div class='col-sm'>Fecha del pedido</div>";
+            DespXArt += "<div class='col-sm'>Cantidad Solicitada</div>";
+            DespXArt += "<div class='col-sm'></div>";
+
+            DespXArt += "</div>";
+            DespXArt += "<hr class='solid4'>";
+
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+                //----Cuerpo del grid-------------
+                DespXArt += "<div class='row'>";
+
+                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                // DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                DespXArt += "<div class='col-sm'></div>";
+                DespXArt += "</div>";
+
+            }
+            DespXArt += "</div>";
+            DespXArt += "</br>";
+            DespXArt += "</br>";
+            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
+            let compraArticulo = "desplegablePedido" + IdCmpraInt + "," + id;
+            document.getElementById(compraArticulo).innerHTML = DespXArt;
+
+        });
+    }
+}
+
