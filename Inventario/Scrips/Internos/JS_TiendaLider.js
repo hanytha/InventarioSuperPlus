@@ -807,6 +807,7 @@ function GuardarPedidoInterno() {
             alert("Los datos se guardaron correctamente");
             ConsultaArticuloComp();
             document.getElementById("btnCancelar").click();
+            window.location.reload();
         }
     }
 }
@@ -1348,10 +1349,12 @@ function GuardarDevolucion() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             nuevoStock();
             alert("Los datos se guardaron correctamente");
+            actualizar();
         }
     }
 
 }
+
 //function GuardarDevolucion() {
 
 

@@ -739,10 +739,12 @@ function GuardarDevolucion() {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             nuevoStock();
             alert("Los datos se guardaron correctamente");
+            actualizar()
         }
     }
 
 }
+
 //function GuardarDevolucion() {
 
 
