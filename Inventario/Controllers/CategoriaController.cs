@@ -100,7 +100,22 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-        //--------------------Retorna las demas vistas de categoría----------------------
+        //---------------------------------------------------------------------------------------------------------------------------
+
+        public JsonResult ConsultaNot()
+        {
+            var compras = InvBD.ComprasArticulos.Where(p => p.Estatus.Equals(1) && p.StockActual <= 5)
+                .Select(p => new
+                {
+                    p.Articulo,
+                    p.StockActual
+
+                }); ;
+            return Json(compras, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //-----------------------------------------Retorna las demas vistas de categoría----------------------------------------------
         // GET: Categoria
         public ActionResult Categoria2da()
         {

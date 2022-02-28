@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Imagenes\ad.png" />
     <Content Include="Assets\Imagenes\clasificacion.png" />
     <Content Include="Assets\Imagenes\cuatro.png" />
     <Content Include="Assets\Imagenes\edit.png" />

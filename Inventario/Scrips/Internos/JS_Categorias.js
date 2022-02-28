@@ -138,4 +138,27 @@ function EliminarCategoria(id) {
 
 
 
+//*******************************************************************************************
+not();
+function not() {
 
+        $.get("/Categoria/ConsultaNot", function (Data) {
+            CrearTablaCategorias(Data);
+        }
+        );
+    
+    function CrearTablaCategorias(Data) {
+
+        for (var i = 0; i < Data.length; i++) {
+
+            Push.create('Advertencia!', {
+                body: '' + Data[i].Articulo + ' Este artículo esta por agotarse ',
+                icon: 'icon.png',
+
+            });
+
+        }
+
+    }
+
+}
