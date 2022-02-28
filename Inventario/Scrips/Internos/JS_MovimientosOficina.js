@@ -369,66 +369,6 @@ function LimpiarCampos() {
 }
 
 
-function Desplegar(IdCmpraInt, id) {
-    if (IdCmpraInt == 0 && id == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaArtTiendaLider/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
-            var DespXArt = "";
-            //---Encabezado del grid---------
-            DespXArt += "<hr class='solid4'>";
-            DespXArt += "<div class='row'>";
-            DespXArt += "<div class='col-sm'>NoPedido</div>";
-            DespXArt += "<div class='col-sm'>Artículo</div>";
-            DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
-            DespXArt += "<div class='col-sm'>Stock</div>";
-            DespXArt += "<div class='col-sm'></div>";
-
-            DespXArt += "</div>";
-            DespXArt += "<hr class='solid4'>";
-
-
-            let IdArticulo = Data.IdArticulo;
-            let ArrayIdArticulos = IdArticulo.split(',');
-            let NumeroPedido = Data.NumeroPedido;
-            let ArrayNoPedido = NumeroPedido.split(',');
-            let Fechas = Data.Fechas;
-            let Arrayfecha = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
-
-            let Nombre = Data.Nombre;
-            let ArrayArticulo = Nombre.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
-
-            for (var i = 0; i < ArrayIdArticulos.length; i++) {
-                //----Cuerpo del grid-------------
-                DespXArt += "<div class='row'>";
-
-                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
-                DespXArt += "<div class='col-sm'></div>";
-                DespXArt += "</div>";
-
-            }
-            DespXArt += "</div>";
-            DespXArt += "</br>";
-            DespXArt += "</br>";
-            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
-            let compraArticulo = "desplegable" + IdCmpraInt + "," + id;
-            document.getElementById(compraArticulo).innerHTML = DespXArt;
-
-        });
-    }
-}
 
 
 
@@ -688,91 +628,6 @@ function LlenarCMCProveedores() {
 
 
 
-
-function VisualizarPedido(id, no, IdCompInt, idS) {
-    if (no == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-            //  $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
-            document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
-            document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
-            document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
-
-            document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
-            document.getElementById("TxtCorreoVisualizar").textContent = Data[0].Correo;
-            document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
-            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Tienda;
-
-            MostrarArticulosVisualizar(IdCompInt, idS);
-            //MostrarArticulos(id, no);
-            //MostrarArt(id, no); 
-        });
-    }
-}
-
-function MostrarArticulosVisualizar(IdCompInt, idS) {
-    if (idS == 0) {
-        sessionStorage.setItem('IdMovimiento', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaTablaArtPedidosAceptados/?IdCompInt=" + IdCompInt + "&idS= " + idS, function (Data) {
-            //-----------------------------------------------------------------------------------
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
-            //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-
-            //TablaArticulo += "<label>Id Articulo</label>";
-            //TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-
-            TablaArticulo += "<label>Artículos</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Cantidad</label>";
-            TablaArticulo += "</div>";
-
-            let IdArticulo = Data.IdArticulo;
-            let ArrayIdArticulos = IdArticulo.split(',');
-            let NumeroPedido = Data.NumeroPedido;
-            let ArrayNoPedido = NumeroPedido.split(',');
-            let Fechas = Data.Fechas;
-            let Arrayfecha = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            let Nombre = Data.Nombre;
-            let ArrayArticulo = Nombre.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
-
-            for (var i = 0; i < ArrayIdArticulos.length; i++) {
-
-                if (ArrayIdArticulos[i] > 0) {
-                    //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                    ////  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                    //TablaArticulo += "<input  class='input-IdArticulo sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    //TablaArticulo += "</div>";
-                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<label>"
-                    TablaArticulo += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
-
-                    TablaArticulo += "</label>"
-                    TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input  class='input-StockAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                }
-
-            }
-            TablaArticulo += "</div>";
-            TablaArticulo += "</div>";
-            document.getElementById("TblArtVisualizar").innerHTML = TablaArticulo;
-        });
-    }
-}
 
 //function MostrarArticulos(id, no) {
 //    // var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -1958,6 +1813,153 @@ function MostrarArticulos(IdCompInt, idS) {
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
             document.getElementById("TblArt").innerHTML = TablaArticulo;
+        });
+    }
+}
+
+
+function Desplegar(IdCmpraInt, id) {
+    if (IdCmpraInt == 0 && id == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaArtOficina/?idCompraInt=" + IdCmpraInt + "&idS= " + id, function (Data) {
+            var DespXArt = "";
+            //---Encabezado del grid---------
+            DespXArt += "<hr class='solid4'>";
+            DespXArt += "<div class='row'>";
+            DespXArt += "<div class='col-sm'>NoPedido</div>";
+            DespXArt += "<div class='col-sm'>Artículo</div>";
+            DespXArt += "<div class='col-sm'>Fecha de Ingreso</div>";
+            DespXArt += "<div class='col-sm'>Stock</div>";
+            DespXArt += "<div class='col-sm'></div>";
+
+            DespXArt += "</div>";
+            DespXArt += "<hr class='solid4'>";
+
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
+            let IdSitio = Data.IdSitio;
+            let ArrayIdSitio = IdSitio.split(',');
+
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+                //----Cuerpo del grid-------------
+                DespXArt += "<div class='row'>";
+
+                DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
+                DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
+                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                DespXArt += "<div class='col-sm'></div>";
+                DespXArt += "</div>";
+
+            }
+            DespXArt += "</div>";
+            DespXArt += "</br>";
+            DespXArt += "</br>";
+            //Pasando los dos parametros(No.Pedido, idSitio) para desplegar los articulos del pedido por tienda
+            let compraArticulo = "desplegable" + IdCmpraInt + "," + id;
+            document.getElementById(compraArticulo).innerHTML = DespXArt;
+
+        });
+    }
+}
+//Visulizar el archivo de los pedidos aceptados
+function VisualizarPedido(id, no, IdCompInt, idS) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaPedidosAceptados/?No=" + no + "&Id= " + id, function (Data) {
+            //  $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
+            document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
+            document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
+
+            document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreoVisualizar").textContent = Data[0].Correo;
+          //  document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
+            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Area;
+
+            MostrarArticulosVisualizar(IdCompInt, idS);
+            //MostrarArticulos(id, no);
+            //MostrarArt(id, no); 
+        });
+    }
+}
+
+function MostrarArticulosVisualizar(IdCompInt, idS) {
+    if (idS == 0) {
+        sessionStorage.setItem('IdMovimiento', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaTablaArtPedidosAceptados/?IdCompInt=" + IdCompInt + "&idS= " + idS, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+            //TablaArticulo += "<label>Id Articulo</label>";
+            //TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+
+                if (ArrayIdArticulos[i] > 0) {
+                    //TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                    ////  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "<input  class='input-IdArticulo sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    //TablaArticulo += "</div>";
+                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<label>"
+                    TablaArticulo += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+
+                    TablaArticulo += "</label>"
+                    TablaArticulo += "</div>";
+                    TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<input  class='input-StockAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "</div>";
+                }
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblArtVisualizar").innerHTML = TablaArticulo;
         });
     }
 }

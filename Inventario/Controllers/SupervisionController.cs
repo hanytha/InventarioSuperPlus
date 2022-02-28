@@ -2453,7 +2453,7 @@ namespace Inventario.Controllers
         //        });
         //    return Json(pedidosInt, JsonRequestBehavior.AllowGet);
         //}
-
+        //Visualizar el archivo de los pedidos aceptados
         public JsonResult ConsultaAceptarPedido(long Id, long No)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
