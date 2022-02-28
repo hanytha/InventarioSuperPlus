@@ -151,12 +151,22 @@ function not() {
 
         for (var i = 0; i < Data.length; i++) {
 
-            Push.create('Advertencia!', {
-                body: '' + Data[i].Articulo + ' Este artículo esta por agotarse ',
-                icon: 'icon.png',
+            if (Data[i].StockActual > 0) {
+                Push.create('Advertencia!', {
+                    body: '' + Data[i].Articulo + ' esta por agotarse ',
+                    icon: 'icon.png',
 
-            });
+                });
+            }
+            if (Data[i].StockActual == 0) {
 
+                Push.create('Advertencia!', {
+                    body: '' + Data[i].Articulo + ' ya no cuenta con stock ',
+                    icon: 'icon.png',
+
+                });
+
+            }
         }
 
     }
