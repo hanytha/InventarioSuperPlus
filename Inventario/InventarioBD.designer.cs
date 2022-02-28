@@ -5884,6 +5884,12 @@ namespace Inventario
 		
 		private string _Articulo;
 		
+		private System.Nullable<long> _IdAsignacion;
+		
+		private System.Nullable<long> _IdSitio;
+		
+		private string _Sitio;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5906,6 +5912,12 @@ namespace Inventario
     partial void OnEstatusChanged();
     partial void OnArticuloChanging(string value);
     partial void OnArticuloChanged();
+    partial void OnIdAsignacionChanging(System.Nullable<long> value);
+    partial void OnIdAsignacionChanged();
+    partial void OnIdSitioChanging(System.Nullable<long> value);
+    partial void OnIdSitioChanged();
+    partial void OnSitioChanging(string value);
+    partial void OnSitioChanged();
     #endregion
 		
 		public MovimientosTienda()
@@ -6089,6 +6101,66 @@ namespace Inventario
 					this._Articulo = value;
 					this.SendPropertyChanged("Articulo");
 					this.OnArticuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAsignacion", DbType="BigInt")]
+		public System.Nullable<long> IdAsignacion
+		{
+			get
+			{
+				return this._IdAsignacion;
+			}
+			set
+			{
+				if ((this._IdAsignacion != value))
+				{
+					this.OnIdAsignacionChanging(value);
+					this.SendPropertyChanging();
+					this._IdAsignacion = value;
+					this.SendPropertyChanged("IdAsignacion");
+					this.OnIdAsignacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSitio", DbType="BigInt")]
+		public System.Nullable<long> IdSitio
+		{
+			get
+			{
+				return this._IdSitio;
+			}
+			set
+			{
+				if ((this._IdSitio != value))
+				{
+					this.OnIdSitioChanging(value);
+					this.SendPropertyChanging();
+					this._IdSitio = value;
+					this.SendPropertyChanged("IdSitio");
+					this.OnIdSitioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sitio", DbType="VarChar(80)")]
+		public string Sitio
+		{
+			get
+			{
+				return this._Sitio;
+			}
+			set
+			{
+				if ((this._Sitio != value))
+				{
+					this.OnSitioChanging(value);
+					this.SendPropertyChanging();
+					this._Sitio = value;
+					this.SendPropertyChanged("Sitio");
+					this.OnSitioChanged();
 				}
 			}
 		}
