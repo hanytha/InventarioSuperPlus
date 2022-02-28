@@ -348,7 +348,7 @@ namespace Inventario.Controllers
                             NCantidad = Diferencia;
                             NExistencia = (Double)con.StockActual - Diferencia;
                             Diferencia = 0;
-                            
+
                         }
                         else
                         {
@@ -381,7 +381,7 @@ namespace Inventario.Controllers
         {
             int nregistradosAfectados = 0;
 
-           var con = ConsultaArt((long)ID, (long)IDA, (double) NCantidad, (string)Articulo);
+            var con = ConsultaArt((long)ID, (long)IDA, (double)NCantidad, (string)Articulo);
 
             ComprasArticulos mpag = InvBD.ComprasArticulos.Where(p => p.IdCompra.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
             mpag.StockActual = NExistencia;
@@ -390,7 +390,7 @@ namespace Inventario.Controllers
             nregistradosAfectados = 1;
             return nregistradosAfectados;
 
-           
+
         }
 
         //------------------------------------------------------------------------------------------------------------
@@ -421,7 +421,7 @@ namespace Inventario.Controllers
                     var NoPedidoG = b.NoPedido;
                     var ExitenciaInicial = NCantidad;
                     var NomArticulo = Articulo;
-                    var cons = GuardarCom((long)IdCompra,(long) IDA, (long)IdCompraInterno, (int)NoPedidoG, (double)ExitenciaInicial, (string)NomArticulo);
+                    var cons = GuardarCom((long)IdCompra, (long)IDA, (long)IdCompraInterno, (int)NoPedidoG, (double)ExitenciaInicial, (string)NomArticulo);
                 }
             }
 
@@ -431,7 +431,7 @@ namespace Inventario.Controllers
 
         //----------------------------------------------------------------------------------------------------------------
 
-        public int GuardarCom(long IdCompra,long IDA, long IdCompraInterno, int NoPedidoG, double ExitenciaInicial, string NomArticulo)
+        public int GuardarCom(long IdCompra, long IDA, long IdCompraInterno, int NoPedidoG, double ExitenciaInicial, string NomArticulo)
         {
             int nregistradosAfectados = 0;
 
@@ -444,7 +444,7 @@ namespace Inventario.Controllers
             com.IdArticulo = IDA;
             com.Articulo = NomArticulo;
             InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+            InvBD.SubmitChanges();
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
         }
@@ -475,14 +475,14 @@ namespace Inventario.Controllers
         {
             int nregistradosAfectados = 0;
 
-                PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No) && p.IdArticulo.Equals(ID)).First();
-                mpag.Estatus = 0;
-                InvBD.SubmitChanges();
-                nregistradosAfectados = 1;
+            PedidosInternos mpag = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(No) && p.IdArticulo.Equals(ID)).First();
+            mpag.Estatus = 0;
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
 
             return nregistradosAfectados;
         }
-        //--------------Termina------------------------------------------------
+        //--------------Termina-------------------------------------------------------------------------------------------------------------------
 
     }
 }

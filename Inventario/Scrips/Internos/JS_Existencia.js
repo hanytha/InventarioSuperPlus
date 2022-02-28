@@ -92,83 +92,6 @@ function abrirModal(id) {
     }
 }
 
-//*********************************************************************************************
-//-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
-
-/*
-function MostrarArticulos(id) {
-
-    if (id == 0) {
-        sessionStorage.setItem('IdPedidosExternos', '0');
-
-    }
-    else {
-
-        $.get("/Compra/ConsultaArticuloxIdProveedor/?IdPro=" + id, function (Data) {
-            ConsultaSiguienteCompraPrveedor(id);
-            //-----------------------------------------------------------------------------------
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Artículo</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>ud. Medida</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Impto</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Cantidad</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Prec. Unit.</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Conversión</label>";
-            TablaArticulo += "</div>";
-
-            for (var i = 0; i < Data.length; i++) {
-                //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' "+ Data[i].IdArticulos +"'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</div>";
-                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Unidad sinborde limpiar redondeado' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Unidad + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</div>";
-                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-1 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;'  id='" + Data[i].IdArticulos + "'  value='" + Data[i].Impuesto + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</div>";
-                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-cantidad redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
-                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-Precio monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
-                //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<label>"
-                TablaArticulo += "<input type='number' value='' disabled class='input-conversion monto redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
-                TablaArticulo += "</label>"
-                TablaArticulo += "</div>";
-
-            }
-            TablaArticulo += "</div>";
-            TablaArticulo += "</div>";
-            document.getElementById("TblArticulos").innerHTML = TablaArticulo;
-        });
-    }
-}
-
-*/
 //-------------------Crear los chex-box de artículos por ID  de proveedor------------------------
 function MostrarArticulos(id) {
 
@@ -198,9 +121,6 @@ function MostrarArticulos(id) {
             TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
             TablaArticulo += "<label>Prec. Unit.</label>";
             TablaArticulo += "</div>";
-            //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-            //TablaArticulo += "<label>Conversión</label>";
-            //TablaArticulo += "</div>";
 
             let IDArticulo = Data.IDArticulo;
             let ArrayIDArticulo = IDArticulo.split(',');
@@ -212,27 +132,6 @@ function MostrarArticulos(id) {
             let ArrayImpuesto = Impuesto.split(',');
             let Conversion = Data.Conversion;
             let ArrayConversion = Conversion.split(',');
-
-
-            /*
-            const arrFiltrado = ArrayConversion.filter(num => num % 1 == 0)
-            var arrayNuevo = "";
-            var contador = 0;
-            for (var i = 0; i < ArrayConversion.length; i++) {
-
-                if (!isNaN(ArrayConversion[i]) && ArrayConversion[i] != "") {
-
-                    contador++;
-                }
-                else {
-                    arrayNuevo += ArrayConversion[i] + ":";
-                }
-            }
-
-            var Nuevo = arrayNuevo.split(':');
-            Nuevo.pop();
-            Nuevo.length;
-            */
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
                 
@@ -261,11 +160,6 @@ function MostrarArticulos(id) {
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                //TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
-                //TablaArticulo += "<label>"
-                //TablaArticulo += "<input type='text' disabled class='input-conversion monto redondeado limpiar' ' ><span class='help-block text-muted small-font'></span>";
-                //TablaArticulo += "</label>"
-                //TablaArticulo += "</div>";
             }
             TablaArticulo += "</div>";
             TablaArticulo += "</div>";
@@ -274,122 +168,6 @@ function MostrarArticulos(id) {
     }
 }
 
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-/*
-function CalcularConversion() {
-
-    var cantidades = document.getElementsByClassName("input-cantidad");
-    var conversiones = document.getElementsByClassName("input-conversion");
-    var unidades = document.getElementsByClassName("input-Unidad");
-
-    var cantidad = 0;
-    var conversion = 0;
-
-    for (let i = 0; i < cantidades.length; i++) {
-
-        var cantidad = (cantidades[i].value) * 1;
-        var conversion = (conversiones[i].id) * 1;
-
-
-        if (unidades[i].value == 'Caja') {
-            if (conversiones[i].name == 'Paquete' && cantidad > 0 || conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
-
-                var total = cantidad * conversion;
-                conversiones[i].value = total;
-            }
-        }
-        if (unidades[i].value == 'Paquete') {
-            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Bolsa' && cantidad > 0) {
-
-                var total = cantidad * conversion;
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Bolsa') {
-            if (conversiones[i].name == 'Pieza' && cantidad > 0 || conversiones[i].name == 'Unidad' && cantidad > 0 || conversiones[i].name == 'Paquete' && cantidad > 0) {
-
-                var total = cantidad * conversion;
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Litro') {
-            if (conversiones[i].name == 'Galones' && cantidad > 0) {
-
-                var total = cantidad * 0.26417205;
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Galones') {
-            if (conversiones[i].name == 'Litro' && cantidad > 0) {
-
-                var total = cantidad * 3.78541;
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Metro') {
-            if (conversiones[i].name == 'Km' && cantidad > 0) {
-
-                var total = (cantidad) / (1000);
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Metro') {
-            if (conversiones[i].name == 'cm' && cantidad > 0) {
-
-                var total = cantidad * 100;
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'cm') {
-            if (conversiones[i].name == 'Metro' && cantidad > 0) {
-
-                var total = (cantidad) / (100);
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Kilogramo') {
-            if (conversiones[i].name == 'Libra' && cantidad > 0) {
-
-                var total = (cantidad) * (2.20462);
-                conversiones[i].value = total
-            }
-        }
-        if (unidades[i].value == 'Libra') {
-            if (conversiones[i].name == 'Kilogramo' && cantidad > 0) {
-
-                var total = (cantidad) / (2.20462);
-                conversiones[i].value = total
-            }
-        }
-
-        if (unidades[i].value == 'Kilogramo') {
-            if (conversiones[i].name == 'Pieza' && cantidad > 0 && conversion > 0) {
-
-                var total = (cantidad) * (conversion);
-                conversiones[i].value = total
-            }
-        }
-
-
-
-
-        if (conversiones[i].name == "" && cantidad > 0 || unidades[i].value == 'Pieza' && cantidad > 0) {
-
-            var total = cantidad * 1;
-            conversiones[i].value = total
-        }
-
-        if (cantidad == "" || cantidad < 0) {
-            conversiones[i].value = "";
-        }
-
-    }
-}
-
-
-*/
 //-----------------------------------------------------------limpiar campos---------------------------------------------------------------------------------
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
