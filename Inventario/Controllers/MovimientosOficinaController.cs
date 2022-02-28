@@ -82,7 +82,7 @@ namespace Inventario.Controllers
                 // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
-                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
                      .Select(p => new
                      {
                          fechaIngreso = p.FechaDeIngreso,
