@@ -650,7 +650,7 @@ namespace Inventario.Controllers
                                 Fecha = Compra.FechaIngreso,
                                 Telefono = areas.Telefono,
                                 Correo = areas.Correo,
-                                Tienda = Tienda.Nombre,
+                                Area = areas.Nombre,
                                 Localidad = Tienda.Localidad,
                                 Direccion = Tienda.Direccion
                             };

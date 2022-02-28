@@ -1804,7 +1804,7 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {//la clase  Obligatori
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
             document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
-            document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
+            document.getElementById("cmbAceptarArea").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             //document.getElementById("TblArticulos").value = Data[0].CP;
             MostrarArt(IdCompInt, idS);
@@ -1829,8 +1829,8 @@ function VerPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
-            document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
-            document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
+            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
+           // document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
             MostrarArticulos(IdCompInt, idS);
             //   MostrarArticulos(id, no);
             //MostrarArt(id, no); 
