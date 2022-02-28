@@ -93,7 +93,7 @@
                                         <button onclick="abrirModalUsados(0,@Accesos.IdArea)" type="button" class="btn btn-primary" data-toggle="modal" id=@Accesos.IdArea data-target="#ModalUsados">Movimiento: Usados</button>
 
                                         <div>
-                                            <h5>Información de la área: @Accesos.NArea</h5>
+                                            <h5>Información de la área de: @Accesos.NArea</h5>
 
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -146,7 +146,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaPedidosRealizados(@Accesos.IdArea)" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Pedidos realizados en la área: @Accesos.NArea</span>
+                                    <span>Pedidos realizados en la área de: @Accesos.NArea</span>
                                 </a>
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -157,7 +157,7 @@
 
 
                                         <div>
-                                            <h5>Pedidos del: @Accesos.NArea</h5>
+                                            <h5>Pedidos de la Área de: @Accesos.NArea</h5>
 
                                         </div>
                                         <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -216,7 +216,7 @@
 
 
                                         <div>
-                                            <h5>Aceptar pedido: @Accesos.NArea</h5>
+                                            <h5>Aceptar pedido de la Área de: @Accesos.NArea</h5>
 
                                         </div>
                                         <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -930,7 +930,7 @@
                             </div>
                             <div class="col-lg-9">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                    <label class="form-control-label" for="cmbTiendaDev">Área<span class="required">*</span></label>
                                     <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
@@ -1010,8 +1010,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTiendaUsados">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect">
+                                    <label class="form-control-label" for="cmbTiendaUsados">Área<span class="required">*</span></label>
+                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @{
                                             if (@ModeloAreas.IdAreas != null)

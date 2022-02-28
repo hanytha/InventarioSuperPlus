@@ -689,63 +689,6 @@ function LlenarCMCProveedores() {
 
 
 
-function abrirModalAceptarPedido(id, no, IdCompInt, idS) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-
-    }
-    if (id == 0) {
-        LimpiarCampos();
-        sessionStorage.setItem('IdPedido', '0');
-
-    }
-    else {
-        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-
-            //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
-            sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
-            document.getElementById("TxtNombreUsr");
-            document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
-            document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
-            document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
-            document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
-            document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
-            //document.getElementById("TblArticulos").value = Data[0].CP;
-            MostrarArt(IdCompInt, idS);
-            VerPedido(id, no, IdCompInt, idS);
-        });
-    }
-}
-
-//******************************************************************************************************************************
-//*******************Despliega el modal deacuerdo con el número de pedido************************************************
-
-function VerPedido(id, no, IdCompInt, idS) {
-    if (no == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
-            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
-            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
-
-            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
-            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
-            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
-            document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
-            document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
-            MostrarArticulos(IdCompInt, idS);
-            //   MostrarArticulos(id, no);
-            //MostrarArt(id, no); 
-        });
-    }
-}
-
 function VisualizarPedido(id, no, IdCompInt, idS) {
     if (no == 0) {
         sessionStorage.setItem('IDArt', '0');
@@ -937,67 +880,7 @@ function MostrarArticulos(IdCompInt, idS) {
 //}
 
 
-//-----------Mostrar los articulos en el modal aceptar pedido----------------------
-function MostrarArt(IdCompInt, idS) {
-    if (idS == 0) {
-        sessionStorage.setItem('IdMovimiento', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaTablaArtAceptarPedidos/?IdCompInt=" + IdCompInt + "&idS= " + idS, function (Data) {
-            //-----------------------------------------------------------------------------------
-            var TablaArticulo = "";
-            TablaArticulo += "<div class='row row-cols-auto'>";
-            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
 
-            TablaArticulo += "<label>Id Articulo</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-5 col-sm-12 col-xs-12 justify-content-end'>";
-
-            TablaArticulo += "<label>Artículos</label>";
-            TablaArticulo += "</div>";
-            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "<label>Cantidad</label>";
-            TablaArticulo += "</div>";
-
-            let IdArticulo = Data.IdArticulo;
-            let ArrayIdArticulos = IdArticulo.split(',');
-            let NumeroPedido = Data.NumeroPedido;
-            let ArrayNoPedido = NumeroPedido.split(',');
-            let Fechas = Data.Fechas;
-            let Arrayfecha = Fechas.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            let Nombre = Data.Nombre;
-            let ArrayArticulo = Nombre.split(',');
-            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
-            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
-
-            for (var i = 0; i < ArrayIdArticulos.length; i++) {
-
-                if (ArrayIdArticulos[i] > 0) {
-                    TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
-                    //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "<input  class='input-IdArticulo sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                    TablaArticulo += "<div class='col-md-5 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<label>"
-                    TablaArticulo += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
-
-                    TablaArticulo += "</label>"
-                    TablaArticulo += "</div>";
-                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input  class='input-StockAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
-                    TablaArticulo += "</div>";
-                }
-
-            }
-            TablaArticulo += "</div>";
-            TablaArticulo += "</div>";
-            document.getElementById("TblAceptarArticulos").innerHTML = TablaArticulo;
-        });
-    }
-}
 function CamposObligatoriosAceptar() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorioAceptar");
@@ -1956,3 +1839,123 @@ function DesplegarPedidosInternos(IdCmpraInt, id) {
     }
 }
 
+//Modal AceptarPedido
+function abrirModalAceptarPedido(id, no, IdCompInt, idS) {//la clase  Obligatorio
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        //Cambia los bordes lo las casillas a color rojo
+        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+
+    }
+    if (id == 0) {
+        LimpiarCampos();
+        sessionStorage.setItem('IdPedido', '0');
+
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+
+            //   $.get("/Supervision/ConsultaAceptarPedido/?Id=" + id, function (Data) {
+            sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
+            document.getElementById("TxtNombreUsr");
+            document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
+            document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
+            document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
+            document.getElementById("cmbAceptarTienda").value = Data[0].IdTienda;
+            document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
+            //document.getElementById("TblArticulos").value = Data[0].CP;
+            MostrarArt(IdCompInt, idS);
+            VerPedido(id, no, IdCompInt, idS);
+        });
+    }
+}
+
+//******************************************************************************************************************************
+//*******************Despliega el modal de aceptar pedidos deacuerdo con el número de pedido************************************************
+
+function VerPedido(id, no, IdCompInt, idS) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
+            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
+            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+
+            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+            document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
+            document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
+            MostrarArticulos(IdCompInt, idS);
+            //   MostrarArticulos(id, no);
+            //MostrarArt(id, no); 
+        });
+
+       
+    }
+}
+//-----------Mostrar los articulos en el modal aceptar pedido----------------------
+function MostrarArt(IdCompInt, idS) {
+    if (idS == 0) {
+        sessionStorage.setItem('IdMovimiento', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaTablaArtAceptarPedidos/?IdCompInt=" + IdCompInt + "&idS= " + idS, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticulo = "";
+            TablaArticulo += "<div class='row row-cols-auto'>";
+            TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Id Articulo</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-5 col-sm-12 col-xs-12 justify-content-end'>";
+
+            TablaArticulo += "<label>Artículos</label>";
+            TablaArticulo += "</div>";
+            TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticulo += "<label>Cantidad</label>";
+            TablaArticulo += "</div>";
+
+            let IdArticulo = Data.IdArticulo;
+            let ArrayIdArticulos = IdArticulo.split(',');
+            let NumeroPedido = Data.NumeroPedido;
+            let ArrayNoPedido = NumeroPedido.split(',');
+            let Fechas = Data.Fechas;
+            let Arrayfecha = Fechas.split(',');
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            let Nombre = Data.Nombre;
+            let ArrayArticulo = Nombre.split(',');
+            let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
+            let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+            for (var i = 0; i < ArrayIdArticulos.length; i++) {
+
+                if (ArrayIdArticulos[i] > 0) {
+                    TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
+                    //  TablaArticulo += "<input  class='input-ArticuloUsados sinborde limpiar' disabled  id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "<input  class='input-IdArticulo sinborde limpiar' disabled  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayIdArticulos[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "</div>";
+                    //-------Crea los input para la cantidad solicitada------------------------------------------------------------
+                    TablaArticulo += "<div class='col-md-5 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<label>"
+                    TablaArticulo += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+
+                    TablaArticulo += "</label>"
+                    TablaArticulo += "</div>";
+                    TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                    TablaArticulo += "<input  class='input-StockAceptarP sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "</div>";
+                }
+
+            }
+            TablaArticulo += "</div>";
+            TablaArticulo += "</div>";
+            document.getElementById("TblAceptarArticulos").innerHTML = TablaArticulo;
+        });
+    }
+}
