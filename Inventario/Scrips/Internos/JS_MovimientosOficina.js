@@ -371,38 +371,6 @@ function LimpiarCampos() {
 
 
 
-
-function abrirModalDevoluciones(idExist, id, idS) {
-    ObtenerFecha();
-    LimpiarCampos();
-    if (idS == 0) {
-        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
-
-    }
-
-    else {
-
-        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
-            document.getElementById("TxtIdTiendaDev").value = Data[0].Tienda;
-            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
-        });
-        $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
-            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
-            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExitenciaActual;
-        });
-        //-----Mostrando el stock general de los articulos----
-        $.get("/Supervision/ConsultaStockArticulos/?IDTienda=" + idS + "&IdArt= " + id, function (Data) {
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            document.getElementById("TxtExistenciaActDev").value = Arraystock[0];
-        });
-
-
-        ConsultaArt(idExist);
-        ProvDev(idExist);
-    }
-}
-
 function LlenarComboProveedores() {
     $.get("/Supervision/BDProveedor", function (data) {
         llenarCombo(data, document.getElementById("cmbProveedor"));
@@ -1961,5 +1929,37 @@ function MostrarArticulosVisualizar(IdCompInt, idS) {
             TablaArticulo += "</div>";
             document.getElementById("TblArtVisualizar").innerHTML = TablaArticulo;
         });
+    }
+}
+
+
+function abrirModalDevoluciones(idExist, id, idS) {
+    ObtenerFecha();
+    LimpiarCampos();
+    if (idS == 0) {
+        sessionStorage.setItem('IdExistenciaAlmacenG', '0');
+
+    }
+
+    else {
+
+        $.get("/Supervision/Consulta/?Id=" + idS, function (Data) {
+            document.getElementById("TxtIdTiendaDev").value = Data[0].Tienda;
+            document.getElementById("cmbTiendaDev").value = Data[0].Tienda;
+        });
+        $.get("/Supervision/ConsultaDevA/?idExist=" + idExist, function (Data) {
+            sessionStorage.setItem('IdExistenciaAlmacenG', Data[0].IdExistenciaAlmacenG);
+            document.getElementById("TxtExistenciaInicDev").value = Data[0].ExitenciaActual;
+        });
+        //-----Mostrando el stock general de los articulos----
+        $.get("/MovimientosOficina/ConsultaStockArticulos/?IDTienda=" + idS + "&IdArt= " + id, function (Data) {
+            let Stock = Data.Stock;
+            let Arraystock = Stock.split(',');
+            document.getElementById("TxtExistenciaActDev").value = Arraystock[0];
+        });
+
+
+        ConsultaArt(idExist);
+        ProvDev(idExist);
     }
 }

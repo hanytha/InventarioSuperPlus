@@ -1169,6 +1169,168 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
+        //-----Consulta para Mostrar el stock general de los articulos en el modal de devoluciones----
+        public JsonResult ConsultaStockArticulos(long IDTienda, long IdArt)
+        {
+
+            string id = "";
+            string NoPedido = "";
+            string Fecha = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string IdSitio = "";
+            string IdArticulos = "";
+            string Articulo = "";
+            string IdCmpraInt = "";
+            string IdTienda = "";
+            string Sitio = "";
+            string IdProveedor = "";
+            string Proveedor = "";
+
+            string IdExistenciaAlmacenG = "";
+            var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
+                                   join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
+                                   on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
+
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1) && CompraInterno.IdAsignacion.Equals(1) && ExistenciaAlmacenG.IdArticulo.Equals(IdArt)
+                                   select new
+
+                                   {
+                                       id = ExistenciaAlmacenG.IdArticulo,
+                                       NoPedido = CompraInterno.NoPedido,
+                                       IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
+                                       IdProveedor = CompraInterno.IdProveedor,
+                                       Proveedor = CompraInterno.Proveedor,
+                                       IdSitio = CompraInterno.IdSitio,
+                                       Tiendas = CompraInterno.Sitio,
+                                       IdArticulo = ExistenciaAlmacenG.IdArticulo,
+                                       Articulo = ExistenciaAlmacenG.Articulo,
+                                       FechaDeIngreso = CompraInterno.FechaIngreso,
+                                       stockActual = ExistenciaAlmacenG.ExitenciaActual,
+                                       IdAsignacion = CompraInterno.IdAsignacion,
+                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
+                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                   };
+            if (ConsultaArticulo.Count() > 0)
+            {
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+                long tem3 = 0;
+                long tem4 = 0;
+                long pedi = ConsultaArticulo.Count();
+
+                // int SumaStock = 0;
+                foreach (var numero in ConsultaArticulo)
+                {
+                    var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
+                     .Select(p => new
+                     {
+                         fechaIngreso = p.FechaDeIngreso,
+                         ExitenciaActual = p.stockActual,
+                     });
+
+                    if (contador == 0)
+                    {
+                        tem1 = (int)numero.NoPedido;
+                        tem2 = (int)numero.IdCmpraInt;
+                        tem3 = (int)numero.IdSitio;
+                        id += numero.id + ",";
+                        NoPedido += numero.NoPedido + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdSitio += numero.IdSitio + ",";
+                        IdArticulos += numero.IdArticulo + ",";
+                        Articulo += numero.Articulo + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
+                        IdProveedor += numero.IdProveedor + ",";
+                        Proveedor += numero.Proveedor + ",";
+
+                        IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha += comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
+                    }
+                    if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
+                    {
+                        tem1 = (int)numero.NoPedido;
+                        tem2 = (int)numero.IdCmpraInt;
+                        tem3 = (int)numero.IdSitio;
+
+                        id += numero.id + ",";
+                        NoPedido += numero.NoPedido + ",";
+                        IdCmpraInt += numero.IdCmpraInt + ",";
+                        IdSitio += numero.IdSitio + ",";
+                        Fecha += numero.FechaDeIngreso + ",";
+                        IdProveedor += numero.IdProveedor + ",";
+                        Proveedor += numero.Proveedor + ",";
+                        IdArticulos += numero.IdArticulo + ",";
+                        Articulo += numero.Articulo + ",";
+                        IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
+                        contador++;
+
+                        int UltimoReg = consultaFecha.Count() - 1;
+                        int cont = 0;
+                        int SumaStock = 0;
+                        foreach (var comp in consultaFecha)
+                        {
+                            SumaStock = (int)(SumaStock + comp.ExitenciaActual);
+
+                            if (cont == UltimoReg)
+                            {
+                                Fecha += comp.fechaIngreso + ",";
+                            }
+                            cont++;
+                        }
+                        Stock += SumaStock + ",";
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+                id += " " + ",";
+                NoPedido += "No hay ningún articulo" + ",";
+                IdCmpraInt += " " + ",";
+                IdSitio += " " + ",";
+                IdArticulos += " " + ",";
+                Articulo += " " + ",";
+                Fecha += " " + ",";
+                Stock += " " + ",";
+                IdProveedor += " " + ",";
+                Proveedor += " " + ",";
+                IdExistenciaAlmacenG += " " + ",";
+            }
+            var consulta = new
+            {
+                id = id.Substring(0, id.Length - 1),
+                NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+                IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
+                IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
+                IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                Stock = Stock.Substring(0, Stock.Length - 1),
+                IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
+
+            };
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
