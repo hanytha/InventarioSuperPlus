@@ -50,9 +50,11 @@
 <div id="accordion"></div>
 
 <div class="accordion" id="AcordeonSucursales">
+
+
     @{
-       // if (Accesos.IDAsignacion == 1 || Accesos.IDAsignacion == 2)
-      //  {
+        if (Accesos.IDAsignacion == 1 || Accesos.IDAsignacion == 2)
+        {
             if (ModeloAreas.IdAreas != null)
             {
                 int NSucursales = ModeloAreas.IdAreas.Count();
@@ -104,7 +106,7 @@
 
                 }
             }
-       // }
+        }
     }
 
 </div>
@@ -176,8 +178,8 @@
 
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
-     //   if (Accesos.IDAsignacion == 1)
-       // {
+        if (ModeloAreas.IdAreas.Equals(Accesos.IdArea))
+        {
             if (ModeloAreas.IdAreas != null)
             {
                 int NSucursales = ModeloAreas.IdAreas.Count();
@@ -225,10 +227,10 @@
                         </div>
                     </div>
 
+                    }
                 }
-            //}
+            }
         }
-    }
 </div>
 
 
@@ -304,7 +306,7 @@
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            REALIZAR  PEDIDOS INTERNOS
+                            REALIZAR  PEDIDOS INTERNOS - AREA
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
@@ -328,6 +330,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -337,14 +340,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect bloquear">
-                                        <option value="0">--Seleccione--</option>
-
-                                    </select>
+                                    <label class="form-control-label" for="TxtNombreAreaPedido">Area:<span class="required">*</span></label>
+                                    <input type="text" id="TxtNombreAreaPedido" class="form-control obligatorioAceptar bloquear" value="@ModeloAreas.Nombre">
                                 </div>
                             </div>
-
                         </div>
 
 
@@ -361,19 +360,19 @@
                         </div>
 
                         @*<div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
-                                    </div>
-                                </div>
-                            </div>*@
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
+                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
+                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
+                </div>
+            </div>
+        </div>*@
 
                         <div class="row">
                             <div class="col-md-12">
@@ -384,13 +383,13 @@
                             </div>
                         </div>
                         @*<div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
-                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
-                                    </div>
-                                </div>
-                            </div>*@
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
+                    <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
+                </div>
+            </div>
+        </div>*@
 
                     </form>
                 </div>
@@ -543,7 +542,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbAceptarTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
+                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -551,7 +550,7 @@
                                             {
                                                 for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
+                                                                                <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -923,7 +922,7 @@
                             <div class="col-lg-9">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
@@ -931,7 +930,7 @@
                                             {
                                                 for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -1003,15 +1002,14 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTiendaUsados">Tienda<span class="required">*</span></label>
-                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
                                             if (@ModeloAreas.IdAreas != null)
                                             {
                                                 for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@ModeloAreas.IdAreas[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -1116,7 +1114,7 @@
 @*<script src="~/Scripts/meg.init.js"></script>*@
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="~/Scrips/Internos/JS_TiendaLider.js"></script>
+<script src="~/Scrips/Internos/JS_MovimientosOficina.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 
 
