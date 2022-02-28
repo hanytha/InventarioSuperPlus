@@ -1720,8 +1720,8 @@ function GuardarPedidoInterno() {
                     var CantidadSolicitada = NumPedidos[i].value;
                     //------------------------------------------------------------------------------------------------------
 
-                    var IdSitio = document.getElementById("cmbTienda").value;
-                    var TempSitio = document.getElementById("cmbTienda");
+                    var IdSitio = document.getElementById("cmbOficina").value;
+                    var TempSitio = document.getElementById("cmbOficina");
                     var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
 
                     var frm = new FormData();
@@ -1736,7 +1736,7 @@ function GuardarPedidoInterno() {
                     frm.append("Sitio", Sitio);
                     frm.append("IdSitio", IdSitio);
                     frm.append("Fecha", Fecha);
-                    frm.append("IdAsignacion", 2);
+                    frm.append("IdAsignacion", 1);
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
@@ -1778,7 +1778,7 @@ function llenarComboTienda(data, control) {
 function LlenarCMBTienda(Id) {
 
     $.get("/MovimientosOficina/BDOficina/?Id=" + Id, function (data) {
-        llenarComboTienda(data, document.getElementById("cmbTienda"));
+        llenarComboTienda(data, document.getElementById("cmbOficina"));
     });
 }
 
