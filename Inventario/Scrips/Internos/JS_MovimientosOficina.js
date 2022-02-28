@@ -936,36 +936,6 @@ function GuardarExistAlm() {
     //}
 }
 
-//-----------------------------------Función  para el nuevo stock---------------------------------------
-function nuevoStockUsados() {
-
-    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
-    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
-    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
-    var IDTienda = document.getElementById("cmbTiendaUsados").value;
-
-    var total = "";
-
-    for (let i = 0; i < Articulos.length; i++) {
-
-        if (Aprobar[i].value > 0) {
-
-            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" + IDTienda + ",";
-
-        }
-    }
-
-    $.get("/Supervision/ConsultaMovimientoUsado/?DatosArticulos=" + total, function (Data) {
-        let RES = Data;
-
-
-        //if (Data == 1) { alert("===Guardado correctamente===") }
-
-    });
-    //GuardarUsados();
-    alert("Guardado correctamente");
-}
-
 //function nuevoStockUsados() {
 
 //    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
@@ -1910,3 +1880,33 @@ function MostrarUs(idS) {
     }
 }
 
+
+//-----------------------------------Función  para el nuevo stock---------------------------------------
+function nuevoStockUsados() {
+
+    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
+    var IDArticulos = document.getElementsByClassName("input-ArticuloUsados");
+    var Aprobar = document.getElementsByClassName("input-cantidadUsados");
+    var IDTienda = document.getElementById("cmbTiendaUsados").value;
+
+    var total = "";
+
+    for (let i = 0; i < Articulos.length; i++) {
+
+        if (Aprobar[i].value > 0) {
+
+            total += IDArticulos[i].name + ":" + Aprobar[i].value + "/" + IDTienda + ",";
+
+        }
+    }
+
+    $.get("/MovimientosOficina/ConsultaMovimientoUsado/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+
+
+        //if (Data == 1) { alert("===Guardado correctamente===") }
+
+    });
+    //GuardarUsados();
+    alert("Guardado correctamente");
+}

@@ -1491,6 +1491,146 @@ namespace Inventario.Controllers
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
 
+        ///USADO////////
+        public JsonResult ConsultaMovimientoUsado(string DatosArticulos)
+        {
+
+            string[] Articulos = DatosArticulos.Split(',');
+            string[] Articulos2 = DatosArticulos.Split('/');
+            int consulta = 0;
+
+            for (int i = 0; 1 < Articulos.GetLength(0); i++)
+            {
+                string[] IdArticulo = Articulos[i].Split(':');
+                string[] IdTienda = Articulos[i].Split('/');
+                string[] Cantidad = Articulos2[i].Split(':');
+
+                int resultado = 0;
+
+                var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
+                                         join Compra in InvBD.CompraInterno
+                                     on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                                         where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
+                                         orderby Compra.NoPedido
+                                         //orderby ExistAlm.IdExistenciaAlmacenG
+                                         select new
+                                         {
+                                             IdCompraInterno = ExistAlm.IdCompraInterno,
+                                             IdArticulo = ExistAlm.IdArticulo,
+                                             Articulo = ExistAlm.Articulo,
+                                             ExitenciaActual = ExistAlm.ExitenciaActual,
+                                             Observaciones = ExistAlm.Observaciones,
+                                             IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
+                                             IdCompraExterna = ExistAlm.IdCompra,
+                                             ExitenciaAct = ExistAlm.ExitenciaActual,
+                                             IdSitio = Compra.IdSitio,
+                                             Sitio = Compra.Sitio
+                                         };
+
+                var IdDeTienda = IdTienda[1];
+
+                Double Diferencia = Convert.ToInt32(Cantidad[1]);
+                foreach (var con in ConsultaIDArticulo)
+                {
+                    long IDCompras = Convert.ToInt32(con.IdCompraInterno);
+                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
+                    long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
+                    long IdCompraExterna = Convert.ToInt32(con.IdCompraExterna);
+                    long IdSitio = Convert.ToInt32(con.IdSitio);
+                    //String Sitio = Convert.ToInt32(con.Sitio);
+                    if (Diferencia > 0)
+                    {
+                        Double ExistenciaActual = 0;
+                        Double CantidadAct = 0;
+
+                        if (con.ExitenciaAct == Diferencia)
+                        {
+                            Diferencia = 0;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
+                        }
+                        else if (con.ExitenciaAct > Diferencia)
+                        {
+
+                            CantidadAct = Diferencia;
+                            ExistenciaActual = (Double)con.ExitenciaAct - Diferencia;
+                            Diferencia = 0;
+                        }
+                        else
+                        {
+                            Diferencia = Diferencia - (Double)con.ExitenciaAct;
+                            ExistenciaActual = 0;
+                            CantidadAct = (double)con.ExitenciaAct;
+
+                        }
+
+                        consulta = GuardarExistenciaActMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, (long)con.IdSitio, (String)con.Sitio);
+                        if (consulta == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            }
+
+            return Json(consulta, JsonRequestBehavior.AllowGet);
+
+        }
+        ///
+        public int GuardarExistenciaActMovUsado(long IdExistencia, long IDCompraExt, long IDArticulo, string Articulo, double ExistenciaActual, double CantidadAct, long IdSitio, String Sitio)
+        {
+            int nregistradosAfectados = 0;
+            //try
+            //{
+
+            var cons = GuardarMovimientoUsado((long)IdExistencia, (long)IDArticulo, (long)IDCompraExt, (double)CantidadAct, (string)Articulo, (long)IdSitio, (String)Sitio);
+            int consulta = 0;
+
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistencia) && p.IdArticulo.Equals(IDArticulo)).First();
+            mpag.ExitenciaActual = ExistenciaActual;
+
+            InvBD.SubmitChanges();
+
+            nregistradosAfectados = 1;//Se pudo realizar
+                                      //}
+                                      //catch (Exception ex)
+                                      //{
+                                      //    nregistradosAfectados = 0;
+                                      //}
+            return nregistradosAfectados;
+        }
+        //----------------------------------------------------------------------------------------------------------------
+        //Obtener la fecha de manera automática
+        public static DateTime Today { get; }
+        public int GuardarMovimientoUsado(long IdExistencia, long IDArticulo, long IDCompraExt, double CantidadAct, string Articulo, long IdSitio, String Sitio)
+        {
+            int nregistradosAfectados = 0;
+
+            MovimientosTienda com = new MovimientosTienda();
+            com.IdExistencia = IdExistencia;
+            com.IdCompra = IDCompraExt;
+            com.Movimiento = "Usados";
+            DateTime thisDay = DateTime.Today;
+
+            com.Fecha = (thisDay.ToString());
+            com.Cantidad = CantidadAct;
+            com.IdArticulo = IDArticulo;
+            com.Articulo = Articulo;
+            com.Estatus = 1;
+            com.IdAsignacion = 1;
+            com.IdSitio = IdSitio;
+            com.Sitio = Sitio;
+            InvBD.MovimientosTienda.InsertOnSubmit(com);
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;//Se pudo realizar
+            return nregistradosAfectados;
+        }
 
     }
 }
