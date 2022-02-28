@@ -1491,7 +1491,7 @@ namespace Inventario.Controllers
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
 
-        ///USADO////////
+        ///Realizar el movimiento usado////////
         public JsonResult ConsultaMovimientoUsado(string DatosArticulos)
         {
 

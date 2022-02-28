@@ -1909,4 +1909,9 @@ function nuevoStockUsados() {
     });
     //GuardarUsados();
     alert("Guardado correctamente");
+    actualizar();
+    // location.reload(forceGet);
+}
+function actualizar() {
+    location.reload(true);
 }

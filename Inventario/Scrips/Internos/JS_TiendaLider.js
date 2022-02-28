@@ -1717,9 +1717,14 @@ function nuevoStockUsados() {
 
     });
     //GuardarUsados();
+  
     alert("Guardado correctamente");
+    actualizar();
+   // location.reload(forceGet);
 }
-
+function actualizar() {
+    location.reload(true);
+}
 //function nuevoStockUsados() {
 
 //    var Articulos = document.getElementsByClassName("input-ArticuloUsados");
