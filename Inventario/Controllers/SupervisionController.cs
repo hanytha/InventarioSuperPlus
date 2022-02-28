@@ -270,7 +270,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1)&&ExistenciaAlmacenG.ExitenciaActual>=0
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1)&&ExistenciaAlmacenG.ExitenciaActual>=0
                                    select new
 
                                    {
@@ -620,7 +620,7 @@ namespace Inventario.Controllers
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
 
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(0)
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(0)
                                    select new
 
                                    {
@@ -1098,7 +1098,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdCompraInterno.Equals(idCompraInt) && Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1) 
+                          where Compra.IdCompraInterno.Equals(idCompraInt) && Compra.IdAsignacion.Equals(2) && Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1) 
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
@@ -2090,7 +2090,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.EstatusPedido.Equals(0) && ExistAlm.ExitenciaActual >= 0
+                          where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(0) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
@@ -2463,7 +2463,7 @@ namespace Inventario.Controllers
                            on Compra.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.NoPedidoG.Equals(No)
+                            where ExistAlm.NoPedidoG.Equals(No)&& Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(0)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
@@ -2488,6 +2488,39 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult VerPedido(long Id, long No)
+        {
+            var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+                            join Compra in InvBD.CompraInterno
+                        on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+                            join Tienda in InvBD.Tienda
+                           on Compra.IdSitio equals Tienda.IdTienda
+                            join areas in InvBD.Areas
+                        on Compra.IdProveedor equals areas.IdAreas
+                            where ExistAlm.NoPedidoG.Equals(No) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1)
+                            select new
+                            {
+                                IdPedidosInternos = ExistAlm.IdCompraInterno,
+                                NumeroPedido = ExistAlm.NoPedidoG,
+                                NumPedidoProveedor = Compra.NoPedidoProveedor,
+                                NoCompraProveedor = Compra.NoPedido,
+                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
+                                // CantidadAprobada = ExistAlm.CantidadAprobada,
+                                Tipo = ExistAlm.TipoDeOperacion,
+                                IdProveedor = Compra.IdProveedor,
+                                Proveedor = Compra.Proveedor,
+                                IdTienda = Compra.IdSitio,
+                                IdArticulo = ExistAlm.IdArticulo,
+                                Articulo = ExistAlm.Articulo,
+                                Fecha = Compra.FechaIngreso,
+                                Telefono = areas.Telefono,
+                                Correo = areas.Correo,
+                                Tienda = Tienda.Nombre,
+                                Localidad = Tienda.Localidad,
+                                Direccion = Tienda.Direccion
+                            };
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        }
 
         //public JsonResult ConsultaPedidoXnum(long Id, long No)
         //{
@@ -3276,7 +3309,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1)&& ExistAlm.ExitenciaActual>0
+                          where Compra.IdSitio.Equals(idS) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1)&& ExistAlm.ExitenciaActual>0
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
@@ -4472,7 +4505,7 @@ namespace Inventario.Controllers
             string id = "";
             string Articulo = "";
             
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.IdSitio.Equals(IDTienda)).OrderByDescending(p => p.IdPedidosInternos)
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.IdSitio.Equals(IDTienda) && p.IdAsignacion.Equals(2)).OrderByDescending(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.NumeroPedido,
@@ -4965,7 +4998,7 @@ namespace Inventario.Controllers
             string IdExistenciaAlmacenG = "";
             string Stock = "";
             string IdSitio = "";
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.NumeroPedido.Equals(idCompraInt)&& p.IdSitio.Equals(idS)).OrderBy(p => p.IdPedidosInternos)
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.NumeroPedido.Equals(idCompraInt)&& p.IdSitio.Equals(idS) && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.Articulo,
@@ -5166,7 +5199,7 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual >= 0
+                          where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new

@@ -963,7 +963,7 @@ function VisualizarPedido(id, no, IdCompInt, idS) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
-        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/Supervision/VerPedido/?No=" + no + "&Id= " + id, function (Data) {
       //  $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             //$.get("/Pedidosint/ConsultaPedidoXnum/?Num=" + num, function (Data) {
             document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
