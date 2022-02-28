@@ -63,7 +63,25 @@
     </table>
         </div>
 
+        <!---------------------------------------------------------------------------------------------------------->
+        <div id="GIDA">
+            @{
+                if (Accesos.IdArea != null)
+                {
+                    if (Accesos.NIvel == 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.NIvel" />
+                        <input style="display:none" id="NAREA" value="@Accesos.Perfil" />
+                    }
+                    if (Accesos.NIvel != 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.IdArea" />
+                        <input style="display:none" id="NAREA" value="@Accesos.NArea" />
+                    }
+                }
+            }
 
+        </div>
         <!---------------------------------------------------------------------------------------------------------------------------------------------------->
         <!-- Encabezado del Modal -->
 

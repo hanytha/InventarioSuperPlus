@@ -108,6 +108,10 @@ function GuardarMerma() {
     var Observaciones = document.getElementById("TxtNoObservaciones").value;
     var fecha = document.getElementById('TxtFecha').value;
 
+    var IdArea = document.getElementById('IDAREA').value;
+    var Area = document.getElementById('NAREA').value;
+
+
     CambiarDev(NoName);
 
     var frm = new FormData();
@@ -122,6 +126,8 @@ function GuardarMerma() {
     frm.append("StockActual", StockInicial);
     frm.append("Observaciones", Observaciones);
     frm.append("fecha", fecha);
+    frm.append("IdArea", IdArea);
+    frm.append("Area", Area);
     frm.append("Estatus", 1);
 
     $.ajax({
