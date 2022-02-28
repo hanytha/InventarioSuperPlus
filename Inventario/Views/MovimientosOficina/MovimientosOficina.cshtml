@@ -333,20 +333,31 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtFechaIngreso">Fecha de Ingreso<span></span></label>
                                     <input type="text" id="TxtFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombreAreaPedido">Area:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreAreaPedido" class="form-control obligatorioAceptar bloquear" value="@Accesos.NArea">
+                                    <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @{
+                                            if (Accesos.IdArea != null)
+                                            {
+                                                for (int i = 0; i < Accesos.IdArea; i++)
+                                                {
+                                                    <option value="@Accesos.IdArea">@Accesos.NArea</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
+                       
                         <div class="row">
 
                             <div class="col-md-12">

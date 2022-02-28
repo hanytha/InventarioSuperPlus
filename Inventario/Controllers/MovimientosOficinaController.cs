@@ -18,7 +18,16 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        
+        public JsonResult BDOficina(long Id)
+        {
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1) && p.IdAreas.Equals(Id))
+                .Select(p => new
+                {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 
