@@ -1,73 +1,4 @@
 ﻿BloquearCTRL();
-//--------Combobox de las áreas----------------
-//LlenarCMCArea();
-//-----------------------Crea el grid con las consultas de la tabla artículo y compra--------------------------
-///ConsultaArticuloComp();
-//function ConsultaArticuloComp() {
-//    $.get("/ExistenciasG/ConsultaArticulos", function (Data) {
-//        CrearArticuloComp(Data);
-//    });
-
-//}
-
-//function CrearArticuloComp(Data) {
-//    var CodigoHtmlArticuloComp = "";
-//    CodigoHtmlArticuloComp += "<div id='contenedor1'>";
-//    CodigoHtmlArticuloComp += "<hr class='solid'>";
-//    CodigoHtmlArticuloComp += "<div class='row'>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>ID</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Artículo</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha Ingreso</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Stock</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Precio_Unitario</div>";
-//    CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-//    CodigoHtmlArticuloComp += "</div>";
-//    CodigoHtmlArticuloComp += "<hr class='solid'>";
-//    CodigoHtmlArticuloComp += "</div>";
-
-
-//    let id = Data.id;
-//    let ArrayId = id.split(',');
-//    let Nombre = Data.Nombre;
-//    let Arraynombre = Nombre.split(',');
-//    let Fechas = Data.Fechas;
-//    let Arrayfechas = Fechas.split(',');
-//    let Stock = Data.Stock;
-//    let Arraystock = Stock.split(',');
-//    let Costos = Data.Costos;
-//    let Arraycostos = Costos.split(',');
-
-
-//    for (var i = 0; i < (ArrayId, Arraynombre, Arrayfechas, Arraystock, Arraycostos).length; i++) {
-
-//        CodigoHtmlArticuloComp += "<div>";
-//        CodigoHtmlArticuloComp += "<div class='row'>";
-//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayId[i] + "</div>";
-//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraynombre[i] + "</div>";
-//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-//        CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arraycostos[i] + "</div>";
-//        //-----------------Botón para desplegar la primera tabla--------------
-//        CodigoHtmlArticuloComp += "<div class='col'>"
-//        CodigoHtmlArticuloComp += "<label>"
-//        CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayId[i] + ")' type='button' data-                             toggle='collapse' data-target='#desplegable" + ArrayId[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayId[i] + ")'><i                        class='fas fa-angle-down'></i></button>";
-//        CodigoHtmlArticuloComp += "</label>";
-//        CodigoHtmlArticuloComp += "</div>";
-//        //-------------Termina----------------------------------------
-//        CodigoHtmlArticuloComp += "</div>";
-//        CodigoHtmlArticuloComp += "</div>";
-      
-//        //------------------------Despliega primer grid-----------------------------------------------------------------------
-//        CodigoHtmlArticuloComp += "<div class='row'>";
-//        CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayId[i] + "' class='collapse'></div></div>";
-//        CodigoHtmlArticuloComp += "</div>";
-//      //  CodigoHtmlArticuloComp += "<hr class='solid8'>";
-//        //---------------------------------------Termina----------------------------------------------------------------------------
-//    }
-//    document.getElementById("contenedor1").innerHTML = CodigoHtmlArticuloComp;
-
-//}
-
 //*********************************************************************************************************************************
 //----------------------------Crea el grid a desplegar con el botón con la función de desplegar------------------------------------
 function Desplegar(id) {
@@ -216,21 +147,21 @@ function MostrarArticulos(id) {
 
             for (var i = 0; i < ArrayArticulo.length; i++) {
                 //-------Crea los input con los nombres de los artículos por proveedor---------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input onkeyup='habilitar(); boordeInput();' type='number' value='' class='input-cantidad redondeado limpiar' id='" + ArrayIDA[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input  class='input-Unidad sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'  value='" + ArrayUnidad[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input onkeyup='boordeInput()' class='input-Precio sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'   value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
             }
@@ -240,6 +171,17 @@ function MostrarArticulos(id) {
         });
     }
 }
+//---------------------------------------------------------------------------------------------------------
+function Borrar() {
+
+    var regre = document.getElementsByClassName("regresar");
+    for (var i = 0; i < regre.length; i++) {
+
+        regre[i].style.display = 'none';
+    }
+
+}
+
 
 //------------------------------Función para habilitar el input de precio cuando este sea 0--------------------------------------
 function habilitar() {
