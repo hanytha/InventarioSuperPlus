@@ -136,25 +136,25 @@ function MostrarArticulos(id) {
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
 
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + ArrayIDArticulo[i] + "'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticulo += "<input  class='input-Articulo sinborde limpiar regresar' disabled name=' " + ArrayIDArticulo[i] + "'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<select style='width: 100 %' disabled title='La ud. de medida de este artículo es: " + ArrayUnidad[i] + "')'>                <option>--Seleccione--</option></select>"
                 TablaArticulo += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input  class='input-impuesto sinborde limpiar redondeado' disabled  style='width:45px;' name='" + ArrayUnidad[i] + "' value='" + ArrayImpuesto[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' onkeyup='costo();BordeInput();' class='input-cantidad redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
                 //-------Crea los input para la cantidad solicitada------------------------------------------------------------
-                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-2 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<label>"
                 TablaArticulo += "<input type='number' value='' onkeyup='costo(); BordeInput();' class='input-Precio monto redondeado limpiar' id='" + ArrayIDArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
@@ -166,6 +166,18 @@ function MostrarArticulos(id) {
             document.getElementById("TblArticulos").innerHTML = TablaArticulo;
         });
     }
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+function Borrar() {
+
+    var regre = document.getElementsByClassName("regresar");
+    for (var i = 0; i < regre.length; i++) {
+
+        regre[i].style.display = 'none';
+    }
+
 }
 
 //-----------------------------------------------------------limpiar campos---------------------------------------------------------------------------------
