@@ -122,102 +122,106 @@ function verifivarPro() {
                 }
             });
 
-       
+
     }
 }
 //-------------Guarda los cambios y altas de los proveedores---------------------------------------
 function GuardarArticulo() {
     if (CamposObligatorios() == true) {
-      //  if (confirm("¿Desea aplicar los cambios?") == 1) {
-            var IdArticulos = sessionStorage.getItem('IDArt');
-            var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
-            var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
+        var IdArticulos = sessionStorage.getItem('IDArt');
+        var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
+        var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
 
-            //--------------------Guarda los checkebox seleccionados-----------------------------------------
-            var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
-            let seleccionados = "";
-            for (let i = 0; i < ChevProveedor.length; i++) {
-                if (ChevProveedor[i].checked == true) {
-                    seleccionados += ChevProveedor[i].id;
-                    seleccionados += "#";
+        //--------------------Guarda los checkebox seleccionados-----------------------------------------
+        var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
+        let seleccionados = "";
+        for (let i = 0; i < ChevProveedor.length; i++) {
+            if (ChevProveedor[i].checked == true) {
+                seleccionados += ChevProveedor[i].id;
+                seleccionados += "#";
+            }
+        }
+        var Proveedor = seleccionados.substring(0, seleccionados.length - 1);
+        //----------------------------------------------------------------------------------------
+        var Descripcion = document.getElementById("TxtDescripcion").value;
+
+        var IdCategorias = document.getElementById("cmbCategoria").value;
+        var TempCategoria = document.getElementById("cmbCategoria");
+        var Categoria = TempCategoria.options[TempCategoria.selectedIndex].text;
+        var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
+        var TempMedida = document.getElementById("cmbUnidad");
+        var Unidad = TempMedida.options[TempMedida.selectedIndex].text;
+
+        var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
+        var ClaveSAT = document.getElementById("TxtClaveSAT").value;
+        var Fecha = document.getElementById("TxtFecha").value;
+        var FechaSistema = document.getElementById("TxtFechaIngreso").value;
+        var Conversion = document.getElementById("TxtClaveCoversion").value;
+
+        var IdAreas = document.getElementById("cmbArea").value;
+        var TempArea = document.getElementById("cmbArea");
+        var Area = TempArea.options[TempArea.selectedIndex].text;
+        var IdMarca = document.getElementById("cmbMarca").value;
+        var TempMarca = document.getElementById("cmbMarca");
+        var Marca = TempMarca.options[TempMarca.selectedIndex].text;
+
+        var IdImpuesto = document.getElementById("cmbImpuesto").value;
+        var TempImpues = document.getElementById("cmbImpuesto");
+        var Impuesto = TempImpues.options[TempImpues.selectedIndex].text;
+
+        var frm = new FormData();
+        frm.append("IdArticulos", IdArticulos);
+        frm.append("NombreEmpresa", NombreEmpresa);
+
+        frm.append("Proveedor", Proveedor);
+        frm.append("NombreProveedor", NombreProveedor);
+        frm.append("Descripcion", Descripcion);
+        frm.append("IdCategorias", IdCategorias);
+        frm.append("Categoria", Categoria);
+        frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
+        frm.append("Unidad", Unidad);
+        frm.append("UnidadSAT", UnidadSAT);
+        frm.append("ClaveSAT", ClaveSAT);
+        frm.append("Fecha", Fecha);
+        frm.append("FechaSistema", FechaSistema);
+        frm.append("Conversion", Conversion);
+        frm.append("IdAreas", IdAreas);
+        frm.append("Area", Area);
+        frm.append("IdMarca", IdMarca);
+        frm.append("Marca", Marca);
+        frm.append("IdImpuesto", IdImpuesto);
+        frm.append("Impuesto", Impuesto);
+        frm.append("Estatus", 1);
+        $.ajax({
+            type: "POST",
+            url: "/Articulo/GuardarArticulo",
+            data: frm,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if (data == 0) {
+                    swal("¡Ocurrio un error!", "", "danger");
+                }
+                else if (data == -1) {
+                    swal("¡El artículo ya existe!", "", "warning");
+                }
+                else {
+                    //-----Mensaje de confirmación-----------------------
+                    swal("El artículo se registró exitosamente!", "", "success");
+                    consultaFecha();
+                    document.getElementById("btnCancelar").click();
+
+                    if (data == 1) {
+                        actulizar();
+                    }
+                    //-----------------------
                 }
             }
-            var Proveedor = seleccionados.substring(0, seleccionados.length - 1);
-            //----------------------------------------------------------------------------------------
-            var Descripcion = document.getElementById("TxtDescripcion").value;
+        });
 
-            var IdCategorias = document.getElementById("cmbCategoria").value;
-            var TempCategoria = document.getElementById("cmbCategoria");
-            var Categoria = TempCategoria.options[TempCategoria.selectedIndex].text;
-            var IdUnidadDeMedida = document.getElementById("cmbUnidad").value;
-            var TempMedida = document.getElementById("cmbUnidad");
-            var Unidad = TempMedida.options[TempMedida.selectedIndex].text;
-
-            var UnidadSAT = document.getElementById("TxtUnidadSAT").value;
-            var ClaveSAT = document.getElementById("TxtClaveSAT").value;
-            var Fecha = document.getElementById("TxtFecha").value;
-            var FechaSistema = document.getElementById("TxtFechaIngreso").value;
-            var Conversion = document.getElementById("TxtClaveCoversion").value;
-
-            var IdAreas = document.getElementById("cmbArea").value;
-            var TempArea = document.getElementById("cmbArea");
-            var Area = TempArea.options[TempArea.selectedIndex].text;
-            var IdMarca = document.getElementById("cmbMarca").value;
-            var TempMarca = document.getElementById("cmbMarca");
-            var Marca = TempMarca.options[TempMarca.selectedIndex].text;
-
-            var IdImpuesto = document.getElementById("cmbImpuesto").value;
-            var TempImpues = document.getElementById("cmbImpuesto");
-            var Impuesto = TempImpues.options[TempImpues.selectedIndex].text;
-
-            var frm = new FormData();
-            frm.append("IdArticulos", IdArticulos);
-            frm.append("NombreEmpresa", NombreEmpresa);
-
-            frm.append("Proveedor", Proveedor);
-            frm.append("NombreProveedor", NombreProveedor);
-            frm.append("Descripcion", Descripcion);
-            frm.append("IdCategorias", IdCategorias);
-            frm.append("Categoria", Categoria);
-            frm.append("IdUnidadDeMedida", IdUnidadDeMedida);
-            frm.append("Unidad", Unidad);
-            frm.append("UnidadSAT", UnidadSAT);
-            frm.append("ClaveSAT", ClaveSAT);
-            frm.append("Fecha", Fecha);
-            frm.append("FechaSistema", FechaSistema);
-            frm.append("Conversion", Conversion);
-            frm.append("IdAreas", IdAreas);
-            frm.append("Area", Area);
-            frm.append("IdMarca", IdMarca);
-            frm.append("Marca", Marca);
-            frm.append("IdImpuesto", IdImpuesto);
-            frm.append("Impuesto", Impuesto);
-            frm.append("Estatus", 1);
-            $.ajax({
-                type: "POST",
-                url: "/Articulo/GuardarArticulo",
-                data: frm,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-
-                    if (data == 0) {
-                        swal("¡Ocurrio un error!", "", "danger");
-                    }
-                    else if (data == -1) {
-                        swal("¡El artículo ya existe!", "", "warning");
-                    }
-                    else {
-                        //-----Mensaje de confirmación-----------------------
-                        swal("El artículo se registró exitosamente!", "", "success");
-                        consultaFecha();
-                        document.getElementById("btnCancelar").click();
-                    }
-                }
-            });
-       // }
     }
- //   actulizar();
+
 }
 
 //--------------------------------------------------------------------------------
