@@ -188,6 +188,7 @@ function GuardarArticulo() {
     actulizar();
 }
 
+//--------------------------------------------------------------------------------
 
 function actulizar() {
     window.location.reload();
