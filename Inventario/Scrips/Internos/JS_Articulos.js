@@ -5,68 +5,7 @@ LlenarCMCUnidad();
 LlenarCMCArea();
 LlenarCMCMarca();
 LlenarCMCImpuesto();
-//---------------Crea una tabla de todos los artículos de la BD---------------
-/*  function ConsultaArticulos() {
-    $.get("/Articulo/ConsultaPrecioPromedio", function (Data) {
-        CrearTablaArticulos(Data);
-    }
-    );
-}
-function CrearTablaArticulos(Data) {
-    var CodigoHtmlTablaArticulos = "";
-    CodigoHtmlTablaArticulos += "<div class='input-group mb-3 float-right '>";
 
-    CodigoHtmlTablaArticulos += "<input  style='border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;' class='form-control col-md-3 light-table-filter'  data-table='order-table' type='text'  placeholder='Search....'>";
-
-    CodigoHtmlTablaArticulos += "<span  class='input-group-text' style='border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; '  id='basic-addon1'><i class='fas fa-search'></i></span>";
-    CodigoHtmlTablaArticulos += "</div>";
-
-
-    CodigoHtmlTablaArticulos += "<div class='table-responsive'>";
-    CodigoHtmlTablaArticulos += "<table class='table-success table table-bordered order-table'>";
-    CodigoHtmlTablaArticulos += "<thead>";
-    CodigoHtmlTablaArticulos += "<tr>";
-    CodigoHtmlTablaArticulos += "<th>Artículo</th>";
-    CodigoHtmlTablaArticulos += "<th></th>";
-    CodigoHtmlTablaArticulos += "<th>Área</th>";
-    CodigoHtmlTablaArticulos += "<th></th>";
-    CodigoHtmlTablaArticulos += "<th>Precio_Unitario_Promedio</th>";
-    CodigoHtmlTablaArticulos += "<th>Opciones</th>";
-    CodigoHtmlTablaArticulos += "</tr>";
-    CodigoHtmlTablaArticulos += "</thead>";
-    CodigoHtmlTablaArticulos += "<tbody>";
-
-
-    let Fecha = Data.Fecha;
-    let ArrayFecha = Fecha.split(',');
-    let Articulo = Data.Articulo;
-    let ArrayArticulo = Articulo.split(',');
-    let IDA = Data.IDA;
-    let ArrayIDA = IDA.split(',');
-    let Area = Data.Area;
-    let ArrayArea = Area.split(',');
-    let PrecioPro = Data.PrecioPro;
-    let ArrayPrecioPro = PrecioPro.split(',');
-
-
-
-    for (var i = 0; i < ArrayIDA.length; i++) {
-        CodigoHtmlTablaArticulos += "<tr>";
-        CodigoHtmlTablaArticulos += "<td colspan='2'>" + ArrayArticulo[i] + "</td>";
-        CodigoHtmlTablaArticulos += "<td colspan='2'>" + ArrayArea[i] + "</td>";
-        CodigoHtmlTablaArticulos += "<td>" + ArrayPrecioPro[i] + "</td>";
-        CodigoHtmlTablaArticulos += "<td>";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-success' onclick='abrirModal(" + ArrayIDA[i] + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-        CodigoHtmlTablaArticulos += "<button class='btn btn-danger' onclick='EliminarArticulo(" + ArrayIDA[i] + ",this)' ><i class='far fa-trash-alt'></i></button>";
-
-        CodigoHtmlTablaArticulos += "</td>";
-        CodigoHtmlTablaArticulos += "</tr>";
-    }
-    CodigoHtmlTablaArticulos += "</tbody>";
-    CodigoHtmlTablaArticulos += "</table>";
-    document.getElementById("tablaArticulos").innerHTML = CodigoHtmlTablaArticulos;
-}
-*/
 
 //--------------------Limpia la información y carga la informacion de Artículos---------------------
 function abrirModal(id) {//la clase  Obligatorio
@@ -246,10 +185,13 @@ function GuardarArticulo() {
             });
         }
     }
+    actulizar();
 }
 
 
-
+function actulizar() {
+    window.location.reload();
+}
 //---------------marca los campos obligatorios------------------------
 function CamposObligatorios() {
     var exito = true;
@@ -279,6 +221,7 @@ function EliminarArticulo(id) {
             }
         });
     }
+    actulizar();
 }
 
 //----------Consultas para obtener los datos de los combobox----------------
