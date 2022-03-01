@@ -91,12 +91,44 @@ function BloquearCTRL() {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
     }
 }
+//----------------------------Validación para  que los artículos tengan un proveedor-------------------------------------------------
+function verifivarPro() {
 
+    var ChevProveedor = document.getElementsByClassName("checkbox-proveedor");
+    let seleccionados = "";
+    for (let i = 0; i < ChevProveedor.length; i++) {
+        if (ChevProveedor[i].checked == true) {
+            seleccionados += ChevProveedor[i].id;
+            seleccionados += "#";
+        }
+    }
+    if (seleccionados == "") {
+        swal("¡Seleccione  un o varios proveedores!", "", "warning");
+    }
+    else {
 
+        swal({
+            title: "Desea guardar los cambios?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    GuardarArticulo();
+                }
+            });
+
+       
+    }
+}
 //-------------Guarda los cambios y altas de los proveedores---------------------------------------
 function GuardarArticulo() {
     if (CamposObligatorios() == true) {
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+      //  if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdArticulos = sessionStorage.getItem('IDArt');
             var NombreEmpresa = document.getElementById("TxtNombreEmpresa").value;
             var NombreProveedor = document.getElementById("TxtNombreProveedor").value;
@@ -183,9 +215,9 @@ function GuardarArticulo() {
                     }
                 }
             });
-        }
+       // }
     }
-    actulizar();
+ //   actulizar();
 }
 
 //--------------------------------------------------------------------------------
