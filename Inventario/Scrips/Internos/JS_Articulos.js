@@ -2,7 +2,7 @@
 BloquearCTRL();
 LlenarCMCategoria();
 LlenarCMCUnidad();
-LlenarCMCArea();
+//LlenarCMCArea();
 LlenarCMCMarca();
 LlenarCMCImpuesto();
 
