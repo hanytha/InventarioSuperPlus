@@ -385,9 +385,13 @@ function GuardarDatosArticuloCompra(IdCompras, NumeroPedido) {
     swal("Sus datos se guardaron correctamente!", "", "success");
 
 
-    window.location.reload();
+    actulizar();
 }
 
+
+function actulizar() {
+    window.location.reload();
+}
 //------------Función para cambiar el estatus a cero una vez solventado el pedido--------------
 
 function OcultarPedido(no) {
