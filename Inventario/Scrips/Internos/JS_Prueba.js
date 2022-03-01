@@ -385,7 +385,7 @@ function GuardarPedidoExterno() {
                         swal("¡El pedido ya exixste!", "", "warning");
                     }
                     else {
-                        ConsultaArticuloComp();
+                        restablecerBordesInput();
                         document.getElementById("btnCancelar").click();
                     }
                 }
