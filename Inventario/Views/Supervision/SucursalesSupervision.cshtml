@@ -51,24 +51,26 @@
 
 <div class="accordion" id="AcordeonSucursales">
     @{
-        if (TiendasSupervision.IDTienda != null)
+        if (Accesos.IDAsignacion == 2)
         {
-            int NSucursales = TiendasSupervision.IDTienda.Count();
-
-            string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-            for (int i = 0; i < NSucursales; i++)
+            if (TiendasSupervision.IDTienda != null)
             {
-                if (i == 0)
+                int NSucursales = TiendasSupervision.IDTienda.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
                 {
-                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-                }
-                else
-                {
-                    InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-                }
-                string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
-                string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
                 <div class="@InsrtClases">
                     <div class="card-header" id="@titulo">
                         <h4 class="m-b-0 list-group list-group-flush  mb-1">
@@ -98,9 +100,10 @@
 
                     </div>
                 </div>
+                    }
+                }
             }
         }
-    }
 </div>
 
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->

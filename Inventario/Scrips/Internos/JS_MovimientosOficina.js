@@ -1039,32 +1039,7 @@ function CalcularExistenciaAct(id) {
         }
     });
 }
-function nuevoStock() {
 
-
-    var Articulos = document.getElementById("TxtArtDev").value;
-    var IDArticulos = document.getElementById("TxtIdArtDev").value;
-    var Aprobar = document.getElementById("TxtCantidadDev").value;
-    var Observaciones = document.getElementById("TxtDescripcionDev").value;
-    var IDTienda = document.getElementById("TxtIdTiendaDev").value;
-    var total = "";
-
-    //for (let i = 0; i < Articulos.length; i++) {
-
-    //    if (Aprobar > 0) {
-
-    total += IDArticulos + ":" + Aprobar + "/" + IDTienda + "," + Observaciones + "#";
-
-    //    }
-    //}
-
-    $.get("/Supervision/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
-        let RES = Data;
-        // if (Data == 1) { alert("--Guardado correctamente---") }
-
-    });
-    ConsultaArticuloComp();
-}
 //function nuevoStock() {
 
 
@@ -1172,6 +1147,7 @@ function GuardarPedidoInterno() {
             alert("Los datos se guardaron correctamente");
             ConsultaArticuloComp();
             document.getElementById("btnCancelar").click();
+            actualizar();
         }
     }
 }
@@ -1916,4 +1892,31 @@ function nuevoStockUsados() {
 }
 function actualizar() {
     location.reload(true);
+}
+//Movimiento devolucion
+function nuevoStock() {
+
+
+    var Articulos = document.getElementById("TxtArtDev").value;
+    var IDArticulos = document.getElementById("TxtIdArtDev").value;
+    var Aprobar = document.getElementById("TxtCantidadDev").value;
+    var Observaciones = document.getElementById("TxtDescripcionDev").value;
+    var IDTienda = document.getElementById("TxtIdTiendaDev").value;
+    var total = "";
+
+    //for (let i = 0; i < Articulos.length; i++) {
+
+    //    if (Aprobar > 0) {
+
+    total += IDArticulos + ":" + Aprobar + "/" + IDTienda + "," + Observaciones + "#";
+
+    //    }
+    //}
+
+    $.get("/MovimientosOficina/ConsultaStockArticulo/?DatosArticulos=" + total, function (Data) {
+        let RES = Data;
+        // if (Data == 1) { alert("--Guardado correctamente---") }
+
+    });
+    ConsultaArticuloComp();
 }
