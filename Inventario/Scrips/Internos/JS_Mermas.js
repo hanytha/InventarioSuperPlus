@@ -1,5 +1,4 @@
-﻿//ConsultaArticulos();
-//ConsultaArticulos();
+﻿
 consultaFecha();
 //---------------Crea una tabla de todos los artículos de la BD---------------
 

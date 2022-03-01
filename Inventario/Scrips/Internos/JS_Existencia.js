@@ -134,7 +134,7 @@ function MostrarArticulos(id) {
             let ArrayConversion = Conversion.split(',');
 
             for (var i = 0; i < ArrayIDArticulo.length; i++) {
-                
+
                 //-------Crea los input con los nombres de los artículos por proveedor--------------------------------
                 TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input  class='input-Articulo sinborde limpiar ' disabled name=' " + ArrayIDArticulo[i] + "'  id='" + ArrayIDArticulo[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
@@ -564,9 +564,14 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     swal("Su " + TipoDeOperacion + " se guardó exitosamente!", "", "success");
- 
+    actulizar();
 }
 
+//-----------------------------------------------------
+
+function actulizar() {
+    window.location.reload();
+}
 
 //----------marca los campos obligatorios--------------------
 function CamposObligatorios() {
