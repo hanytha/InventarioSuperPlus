@@ -258,8 +258,6 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("ObligatoriosSub");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
@@ -348,7 +346,12 @@ function GuardarSubarea() {
                     }
                     else {
                         swal("La subárea se registró exitosamente!", "", "success");
-                        CrearAcordeonSubAreas(IdArea);
+                        consultaFecha();
+                        //---------------------------------
+                        if (data == 1) {
+                            actulizar();
+                        }
+                        //---------------------------------
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -357,7 +360,11 @@ function GuardarSubarea() {
     }
 }
 
-//limpiar campos
+//--------------------------------------------------------------------------------
+function actulizar() {
+    window.location.reload();
+}
+//------------------------limpiar campos-------------------
 function LimpiarCamposSub() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -429,4 +436,10 @@ function LlenarCMBPrin() {
     }
 
 
+}
+
+//-------------------------------Consulta fecha------------------------------------------
+function consultaFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
 }
