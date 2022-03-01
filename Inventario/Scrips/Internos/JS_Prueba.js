@@ -205,6 +205,7 @@ function Verificar() {
     var Precio = document.getElementsByClassName("input-Precio");
     var NumPedidos = document.getElementsByClassName("input-cantidad");
     var combo = document.getElementById("cmbArea").value;
+    var provee =  document.getElementById("cmbProveedor").value;
     var contador = 0;
     var contadorPrecio = 0;
 
@@ -226,7 +227,7 @@ function Verificar() {
         }
     }
 
-    if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0) {
+    if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0 && provee > 0) {
 
         swal({
             title: "Desea guardar el Pedido?",
@@ -244,7 +245,9 @@ function Verificar() {
             });
     }
     else {
-
+        if (provee == "") {
+            swal("¡Seleccione un proveedor!", "", "warning");
+        }
         if (combo > 0) {
             swal("¡No se han ingresado datos!", "", "warning");
         }
