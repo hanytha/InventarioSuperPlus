@@ -4,14 +4,9 @@
 }
 
 <h2 class="form-control-label" style="font-size: 20px;">
-    TIENDA
+    ACEPTAR LOS PEDIDOS DE LAS TIENDAS
 </h2>
 
-<!-- Botón del modal-->
-@*<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
-<!------------------------------------------------------------------------------------------------------------>
-@*<div id="contenedor1"></div>*@
-<!------------------------------------------------>
 <style>
     contenedor2 {
         width: 900px;
@@ -26,7 +21,6 @@
         margin: 16px;
         padding: 16px;
     }
-
 
     .redondeado {
         border-radius: 10px;
@@ -43,14 +37,7 @@
         border: 0;
     }
 </style>
-<!--------------------------------------------------------------------------------------------------------------->
-@*<button class='btn btn-primary' onclick='abrirModalAceptarPedido(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#ModalAceptarPedido'><i class='fas fa-edit'></i></button>*@
-
-
-
-
 <div id="accordionAceptar"></div>
-
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
         if (Accesos.IDAsignacion == 2)
@@ -74,51 +61,41 @@
 
                     string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
                     string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
-                <div class="@InsrtClases">
-                    <div class="card-header" id="@titulo">
-                        <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                            <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
-                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
-                            </a>
-                        </h4>
-                        <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
-                            <div class="card-body">
-
-                                <!--Mostrar la tabla de los articulos por tienda en el accordion-->
-                                <div class="row">
-
-
-                                    <div>
-                                        <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
-
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <!--Mostrar la tabla de los articulos por tienda en el accordion-->
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
-                                    <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+
                                 </div>
-
                             </div>
+
                         </div>
-
                     </div>
-                </div>
 
-                    }
                 }
             }
         }
+    }
 </div>
-
-
-
-
-
-
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
-    /* Color y grosor del borde */
+
     hr.solid {
         border-top: 4px solid #808080;
     }
@@ -127,20 +104,11 @@
         background-color: #EBEBEB;
     }
 </style>
-@*<style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Solid border */
-        hr.solid3 {
-            border-top: 1px solid #f1f507;
-        }
-    </style>*@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
-    /* Solid border */
+
     hr.solid4 {
         border-top: 4px solid #0B94F8;
     }
@@ -161,8 +129,6 @@
         border-color: dodgerblue;
     }
 </style>
-
-
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
@@ -170,11 +136,7 @@
     document.getElementById('TxtFechaSistema').value = fecha;
 
 </script>
-<!------------------------------------------>
-<!------------------------------------------------Modal------------------------------------------------------------------>
 <!-- Encabezado del Modal -->
-
-
 <div class="container">
     <div class="modal fade" id="ModalPedidoInterno">
         <div class="modal-dialog">
@@ -188,10 +150,8 @@
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
 
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -222,12 +182,7 @@
                                     </select>
                                 </div>
                             </div>
-
                         </div>
-
-
-
-
                         <div class="row">
 
                             <div class="col-md-12">
@@ -237,22 +192,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @*<div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
-                                    </div>
-                                </div>
-                            </div>*@
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -261,15 +200,6 @@
                                 </div>
                             </div>
                         </div>
-                        @*<div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
-                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
-                                    </div>
-                                </div>
-                            </div>*@
-
                     </form>
                 </div>
                 <!-- pie del diálogo -->
@@ -281,13 +211,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -299,9 +222,7 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
@@ -312,7 +233,6 @@
                                         <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -368,9 +288,6 @@
         </div>
     </div>
 </div>
-
-
-
 <div class="container">
     <div class="modal fade" id="abrirModalAceptarPedido">
         <div class="modal-dialog modal-lg">
@@ -382,12 +299,9 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -396,7 +310,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -437,9 +350,7 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbAceptarProveedor">Proveedor<span class="required">*</span></label>
@@ -447,7 +358,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -456,18 +366,10 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-                    @*<button type="button" class="btn btn-success ocultarBoton" id="btn-1" onclick="mostrarBoton()">Aceptar pedido</button>*@
-
-                    @*   <input onclick="mostrarBoton()" type="button" class="btn btn-primary" id="btn-1" data-toggle="modal" data-target="#ModalPedidos" value="Imprimir" />*@
-                    @* <input onclick="VerPedido(0,0)" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
-                    @*<input onclick="Guardar()" type="button" class="btn btn-primary" id="button" data-toggle="modal" data-target="#ModalPedidos" value="Aceptar Pedido" />*@
                     <button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
                     <!-- Mostrar y ocultar botones-->
                     <script>
@@ -480,16 +382,11 @@
                             });
                         })
                     </script>
-
-                    @*<button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>*@
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalPedidos">
         <div class="modal-dialog modal-lg">
@@ -502,7 +399,6 @@
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -536,7 +432,6 @@
                                     <br />
                                     <br />
                                     <br />
-                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
                                     <br />
                                     <div style="width: 100%">
                                         <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
@@ -555,14 +450,11 @@
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Localidad: </label><label></label> <label id="TxtDireccion"></label></td>
-
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -588,21 +480,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>
-                    @*<button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>*@
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-<!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="VisualizarModalPedidos">
         <div class="modal-dialog modal-lg">
@@ -615,7 +499,6 @@
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -649,7 +532,6 @@
                                     <br />
                                     <br />
                                     <br />
-                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
                                     <br />
                                     <div style="width: 100%">
                                         <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
@@ -668,14 +550,12 @@
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreoVisualizar"></label></td>
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamentoVisualizar"></label></td>
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefonoVisualizar"></label></td>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccionVisualizar"></label></td>
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
-                                                    </tr>
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -700,17 +580,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- pie del diálogo -->
-                <!--<div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>-->
-                @*<button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>*@
-                <!--</div>-->
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="container">
     <div class="modal fade" id="ModalDevoluciones">
         <div class="modal-dialog">
@@ -722,19 +595,10 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
-                            @*<div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                                        <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
-                                    </div>
-                                </div>*@
                             <div class="col-lg-8">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
@@ -762,8 +626,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="form-group">
@@ -777,9 +639,7 @@
                                     <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
                                 </div>
                             </div>
-
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -788,9 +648,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
@@ -803,7 +660,6 @@
                                     <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
                                     <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
                                             if (@TiendasSupervision.IDTienda != null)
                                             {
@@ -816,10 +672,7 @@
                                     </select>
                                 </div>
                             </div>
-
                         </div>
-
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -829,10 +682,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="GuardarDevolucion()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -841,10 +692,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <div class="container">
     <div class="modal fade" id="ModalUsados">
         <div class="modal-dialog modal-lg">
@@ -856,12 +703,9 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -877,13 +721,11 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTiendaUsados">Tienda<span class="required">*</span></label>
                                     <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
                                             if (@TiendasSupervision.IDTienda != null)
                                             {
@@ -897,8 +739,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -909,19 +749,14 @@
                         </div>
                     </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
                     <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
-
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-------------------------------------------------------------------------------------------------------------->
 <!--------------------------Función para imprimir el contenido del div------------------------------------------>
 <script language="Javascript">
     function imprSelec(nombre) {
@@ -931,7 +766,6 @@
         ventimp.document.close();
         ventimp.print();
         ventimp.close();
-
     }
 </script>
 
@@ -947,7 +781,6 @@
     }
 </style>
 <!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
-
 <style>
 
     [data-title]:hover:after {
@@ -974,25 +807,17 @@
         visibility: hidden;
         border-radius: 6px;
     }
-
     [data-title] {
         position: relative;
     }
 </style>
-
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaIngreso').value = fecha;
-
 </script>
-
-
 <script src="~/Scrips/jquery.min.js"></script>
-@*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
-@*<script src="~/Scripts/meg.init.js"></script>*@
-<!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/Internos/JS_AceptarPedidos.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />

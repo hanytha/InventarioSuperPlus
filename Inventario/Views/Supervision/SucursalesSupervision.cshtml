@@ -1,18 +1,10 @@
 ﻿@using Inventario.Models;
-
 @{
     ViewBag.Title = "Tiendas de la supervisión";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
     TIENDAS DE LA SUPERVISIÓN
 </h2>
-
-<!-- Botón del modal-->
-@*<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>*@
-<!------------------------------------------------------------------------------------------------------------>
-@*<div id="contenedor1"></div>*@
-<!------------------------------------------------>
 <style>
     contenedor2 {
         width: 900px;
@@ -27,7 +19,6 @@
         margin: 16px;
         padding: 16px;
     }
-
 
     .redondeado {
         border-radius: 10px;
@@ -44,11 +35,7 @@
         border: 0;
     }
 </style>
-
-<!--------------------------------------------------------------------------------------------------------------->
-
 <div id="accordion"></div>
-
 <div class="accordion" id="AcordeonSucursales">
     @{
         if (Accesos.IDAsignacion == 2)
@@ -71,42 +58,37 @@
                     string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
                     string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
                     string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
-                <div class="@InsrtClases">
-                    <div class="card-header" id="@titulo">
-                        <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                            <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
-                                <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span>@TiendasSupervision.Nombre[i]</span>
-                            </a>
-                        </h4>
-                        <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
-                            <div class="card-body">
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>@TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                                <div class="card-body">
+                                    <div class="row">
 
-                                <!--Mostrar la tabla de los articulos por tienda en el accordion-->
-                                <div class="row">
+                                        <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <div>
+                                            <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
 
-                                    <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                    <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
-                                   @* <button onclick="abrirModalUs(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#Usados">Usados</button>*@
-                                    <div>
-                                        <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
-
+                                        </div>
+                                        <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
-                                    <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+
                                 </div>
-
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
-                    }
                 }
             }
         }
+    }
 </div>
-
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -120,15 +102,6 @@
         background-color: #EBEBEB;
     }
 </style>
-@*<style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Solid border */
-        hr.solid3 {
-            border-top: 1px solid #f1f507;
-        }
-    </style>*@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -154,20 +127,11 @@
         border-color: dodgerblue;
     }
 </style>
-
-
-<!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaSistema').value = fecha;
-
 </script>
-<!------------------------------------------>
-<!------------------------------------------------Modal------------------------------------------------------------------>
-<!-- Encabezado del Modal -->
-
-
 <div class="container">
     <div class="modal fade" id="ModalPedidoInterno">
         <div class="modal-dialog">
@@ -179,12 +143,9 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -211,19 +172,11 @@
                                     <label class="form-control-label" for="cmbTienda">Tienda<span class="required">*</span></label>
                                     <select id="cmbTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-
                                     </select>
                                 </div>
                             </div>
-
                         </div>
-
-
-
-
                         <div class="row">
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
@@ -231,22 +184,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @*<div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar">
-                                    </div>
-                                </div>
-                            </div>*@
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -255,18 +192,8 @@
                                 </div>
                             </div>
                         </div>
-                        @*<div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtTipo">Tipo de pedido<span class="required">*</span></label>
-                                        <input type="text" id="TxtTipo" class="form-control limpiar obligatorio" placeholder="Tipo">
-                                    </div>
-                                </div>
-                            </div>*@
-
                     </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="GuardarPedidoInterno()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -275,13 +202,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 <div class="container">
     <div class="modal fade" id="ModalUsados">
         <div class="modal-dialog modal-lg">
@@ -293,12 +213,9 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -314,7 +231,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbTiendaUsados">Tienda<span class="required">*</span></label>
@@ -334,8 +250,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -346,19 +260,14 @@
                         </div>
                     </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
-                    @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
                     <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
-
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="container">
     <div class="modal fade" id="ModalDevoluciones">
         <div class="modal-dialog">
@@ -370,19 +279,10 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <!-----formulario-->
                         <div class="row">
-                            @*<div class="col-lg-3">
-                <div class="form-group">
-                    <label class="form-control-label" for="TxtNoPedidoDev">No.Pedido<span class="required">*</span></label>
-                    <input type="text" id="TxtNoPedidoDev" class="form-control limpiar bloquear">
-                </div>
-            </div>*@
                             <div class="col-lg-8">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtMovDev">Movimiento<span class="required">*</span></label>
@@ -409,78 +309,65 @@
                                     <input type="text" id="TxtArtDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
-                                        <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
-                                        <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
-                                        <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtExistenciaActDev">Stock General<span class="required">*</span></label>
+                                    <input type="number" id="TxtExistenciaActDev" class="form-control limpiar bloquear">
                                 </div>
                             </div>
-
-
-
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
-                                        <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
-                                    </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtCantidadDev">Cantidad<span class="required">*</span></label>
+                                    <input type="number" onchange="ExisteciaDevolucion(this.value)" id="TxtCantidadDev" class="form-control limpiar obligatorioDevolucion">
                                 </div>
-                                <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
-                                        <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                            <option value="0">--Seleccione--</option>
-                                            @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                            @{
-                                                if (@TiendasSupervision.IDTienda != null)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedorDevLider">Proveedor<span class="required">*</span></label>
+                                    <select onchange="ProvDev(this.value)" id="cmbProveedorDevLider" style="width: 100%" class="form-control limpiarSelect obligatorio bloquear"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtIdTiendaDev">Id<span class="required">*</span></label>
+                                    <input type="text" id="TxtIdTiendaDev" class="form-control limpiar bloquear">
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTiendaDev">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaDev" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
+                                            {
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
                                                 {
-                                                    for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
-                                                    {
-                                                        <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
-                                                    }
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
                                                 }
                                             }
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-
-                                        <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
-                                    </div>
+                                        }
+                                    </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
 
-</form>
+                                    <textarea type="text" id="TxtDescripcionDev" class="form-control limpiar obligatorioDevolucion" rows="3" wrap="soft" placeholder="Agrega una descripción del artículo..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="GuardarDevolucion()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -489,10 +376,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog modal-lg">
@@ -504,9 +387,7 @@
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
@@ -517,7 +398,6 @@
                                         <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -532,8 +412,6 @@
                                         <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Cantidad">
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -564,7 +442,6 @@
                         </fieldset>
                     </form>
                 </div>
-                <!-- pie del modal-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -573,11 +450,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalPedidos">
         <div class="modal-dialog modal-lg">
@@ -590,7 +462,6 @@
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -643,14 +514,12 @@
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Contacto:</label><label id="TxtDireccion"></label><br /><label>Correo:</label><label id="TxtCorreo"></label></td>*@
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
                                                     </tr>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccion"></label></td>
-                                                        @*<td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>*@
-                                                    </tr>
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -675,104 +544,75 @@
                         </div>
                     </div>
                 </div>
-                <!-- pie del diálogo -->
-                @*<div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>*@
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
 <div class="container">
-<div class="modal fade" id="Usados">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">
-                    <label class="form-control-label" style="font-size: 18px;">
-                        MOVIMIENTO: Usados
-                    </label>
-                </h2>
-                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-
-            </div>
-            <!-- Contenido del modal -->
-            <div class="modal-body">
-                <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                    <!-----formulario-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
-                                <input type="text" id="TxtMovUs" class="form-control bloquear" value="Usados">
+    <div class="modal fade" id="Usados">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <label class="form-control-label" style="font-size: 18px;">
+                            MOVIMIENTO: Usados
+                        </label>
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtMovUsados">Movimiento<span class="required">*</span></label>
+                                    <input type="text" id="TxtMovUs" class="form-control bloquear" value="Usados">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtFechaIngresoUs">Fecha de Ingreso<span></span></label>
+                                    <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TxtFechaIngresoUs">Fecha de Ingreso<span></span></label>
-                                <input type="text" id="TxtFechaIngresoUsados" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="cmbTiendaUs">Tienda<span class="required">*</span></label>
-                                <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
-                                    <option value="0">--Seleccione--</option>
-                                    @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                    @{
-                                        if (@TiendasSupervision.IDTienda != null)
-                                        {
-                                            for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbTiendaUs">Tienda<span class="required">*</span></label>
+                                    <select id="cmbTiendaUsados" style="width: 100%" class="form-control limpiarSelect bloquear">
+                                        <option value="0">--Seleccione--</option>
+                                        @{
+                                            if (@TiendasSupervision.IDTienda != null)
                                             {
-                                                <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                {
+                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                }
                                             }
                                         }
-                                    }
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="TblArticulosUs">Artículo(s)<span class="required">*</span></label>
-                                <div id="TblArtUs">No hay Ningún artículo de este proveedor</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulosUs">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArtUs">No hay Ningún artículo de este proveedor</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-primary" onclick="GuardarUsados()">Guardar</button>*@
-                <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
-
-                <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-
-
-
-
-
-
-
-
-
 <!------------Obtener la fecha-------------->
 <script type="text/javascript">
     var f = new Date();
@@ -781,12 +621,7 @@
     document.getElementById('TxtFechaIngresoDev').value = fecha;
     document.getElementById('TxtFechaIngresoUsados').value = fecha;
 </script>
-
-
 <script src="~/Scrips/jquery.min.js"></script>
-@*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
-@*<script src="~/Scripts/meg.init.js"></script>*@
-<!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />

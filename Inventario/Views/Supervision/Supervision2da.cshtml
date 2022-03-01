@@ -9,11 +9,8 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!--Termina tarjeta-->
-<!-- Botón del modal-->
 <button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<!--Mostrar los registros en la tabla-->
-<div id="tablaSupervicion"></div><!-- Encabezado del Modal -->
+<div id="tablaSupervicion"></div>
 <div class="container">
     <div class="modal fade" id="dialogo1">
         <div class="modal-dialog">
@@ -26,7 +23,6 @@
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>
-                <!-- Contenido del modal -->
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
                         <fieldset>
@@ -58,7 +54,6 @@
                         </fieldset>
                     </form>
                 </div>
-                <!-- pie del modal-->
                 <div class="modal-footer">
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
@@ -71,13 +66,9 @@
         display: none;
     }
 </style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/jquery.min.js"></script> 
 <script src="~/Scrips/Internos/JS_Supervision2da.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
-<!--sweetalert2-->
+<script src="~/Scrips/js.cookie.js"></script> 
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/General/JS_Buscar.js"></script>

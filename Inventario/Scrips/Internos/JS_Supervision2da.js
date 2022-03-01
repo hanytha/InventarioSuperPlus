@@ -59,13 +59,12 @@ function CrearTablaSuperviciones(Data) {
     CodigoHtmlTablaSuperviciones += "</table>";
     document.getElementById("tablaSupervicion").innerHTML = CodigoHtmlTablaSuperviciones;
 }
-//Limpia la información y carga la informacion del proveedor
-function abrirModal(id) {//la clase  Obligatorio
+function abrirModal(id) {
     MostrarTiendas();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("border-danger"); //Cambia los bordes lo las casillas a color rojo
+    for (var i = 0; i < ncontroles; i++) {
+        controlesObligatorio[i].parentNode.classList.remove("border-danger"); 
     }
     if (id == 0) {
         LimpiarCampos();
@@ -73,11 +72,9 @@ function abrirModal(id) {//la clase  Obligatorio
     }
     else {
         $.get("/Supervision/ConsultaSupervicion/?Id=" + id, function (Data) {
-            //Obtener los datos de los proveedores para permitir editar
             sessionStorage.setItem('IDSuper', Data[0].IdSupervision);
             document.getElementById("TxtNomSuper").value = Data[0].TipoSupervicion;
             document.getElementById("cmbEncargado").value = Data[0].IdUsuario;
-            //Se recorre el checkbox de permisos, separando las opciones concatenadas y se activan las casillas guardados
             var activar = Data[0].Tienda.split('#');
             var ChevPermisos = document.getElementsByClassName("checkbox-area");
             for (let j = 0; j < activar.length; j++) {
@@ -88,11 +85,9 @@ function abrirModal(id) {//la clase  Obligatorio
                     }
                 }
             }
-            //document.getElementById("TxtComentarios").value = Data[0].Comentarios;
         });
     }
 }
-//Guarda los cambios y altas de las áreas
 function GuardarSupervision() {
     if (CamposObligatorios("Supervision") == true) {
         var ChevPermisos = document.getElementsByClassName("checkbox-area");
@@ -110,7 +105,6 @@ function GuardarSupervision() {
             if (confirm("¿Desea aplicar los cambios?") == 1) {
                 var IdSupervision = sessionStorage.getItem('IDSuper');
                 var TipoSupervicion = document.getElementById("TxtNomSuper").value;
-                //var nombreUsuario = document.getElementById("TxtNomUser").value;
                 var IdUsuario = document.getElementById("cmbEncargado").value;
                 var temUser = document.getElementById("cmbEncargado");
                 var nombreUsuario = temUser.options[temUser.selectedIndex].text;
@@ -166,7 +160,6 @@ function GuardarSupervision() {
         }
     }
 }
-//limpiar campos
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -180,7 +173,6 @@ function LimpiarCampos() {
     for (var i = 0; i < controlesSLT.length; i++) {
         controlesSLT[i].value = "0";
     }
-    /*Bloquear controles */
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
         $("#" + CTRL[i].id).attr('disabled', 'disabled');
@@ -200,7 +192,6 @@ function Obligatorios(NoClase) {
     }
     return exito;
 }
-//marca los campos obligatorios
 function CamposObligatorios() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
@@ -216,7 +207,6 @@ function CamposObligatorios() {
     }
     return exito;
 }
-//Función para visualizar las tiendas seleccionadas al presionar el botón modificar
 function MostrarTiendas() {
     $.get("/GLOBAL/BDTienda", function (Tiendas) {
         var CodHTML = "";
@@ -230,7 +220,6 @@ function MostrarTiendas() {
         document.getElementById("divPagina").innerHTML = CodHTML;
     });
 }
-//Funcion para llenar los combos
 function llenarCombo(data, control) {
     var contenido = "";
     contenido += "<option value='0'>--Seleccione--</option>";

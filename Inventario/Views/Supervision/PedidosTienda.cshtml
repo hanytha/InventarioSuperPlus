@@ -6,10 +6,7 @@
 <h2 class="form-control-label" style="font-size: 20px;">
     PEDIDOS ACEPTADOS EN LAS TIENDAS
 </h2>
-@*/////Mostrar pedidos realizados/////*@
-
 <div id="accordionPedidos"></div>
-
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
         if (Accesos.IDAsignacion == 2)
@@ -43,21 +40,14 @@
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
                                 <div class="card-body">
-
-                                    <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                     <div class="row">
-
-
                                         <div>
                                             <h5>Pedidos del: @TiendasSupervision.Nombre[i]</h5>
-
                                         </div>
                                         <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -66,8 +56,6 @@
         }
     }
 </div>
-
-
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
@@ -77,7 +65,6 @@
     hr.solid {
         border-top: 4px solid #808080;
     }
-
     .D1 {
         background-color: #EBEBEB;
     }
@@ -108,9 +95,6 @@
         border-color: dodgerblue;
     }
 </style>
-
-
-<!--------------------------------------------------------------------------------------------------------------------------->
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -121,16 +105,12 @@
         width: 50%;
     }
 </style>
-<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
-
 <style>
-
     [data-title]:hover:after {
         opacity: 1;
         transition: all 0.1s ease 0.5s;
         visibility: visible;
     }
-
     [data-title]:after {
         content: attr(data-title);
         background-color: #FFC300;
@@ -149,18 +129,11 @@
         visibility: hidden;
         border-radius: 6px;
     }
-
     [data-title] {
         position: relative;
     }
 </style>
-
-
-
 <script src="~/Scrips/jquery.min.js"></script>
-@*<script src="~/Scripts/jquery.magnific-popup.min.js"></script>*@
-@*<script src="~/Scripts/meg.init.js"></script>*@
-<!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="~/Scrips/Internos/JS_PedidosTienda.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />

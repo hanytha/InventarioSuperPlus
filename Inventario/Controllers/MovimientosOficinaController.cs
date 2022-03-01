@@ -35,8 +35,8 @@ namespace Inventario.Controllers
 
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";//Suma del stock atcual
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -45,15 +45,12 @@ namespace Inventario.Controllers
             string Sitio = "";
             string IdProveedor = "";
             string Proveedor = "";
-
             string IdExistenciaAlmacenG = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(1) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.ExitenciaActual >= 0
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
@@ -67,8 +64,7 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
-                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -78,8 +74,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -103,7 +97,6 @@ namespace Inventario.Controllers
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
-
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -125,7 +118,6 @@ namespace Inventario.Controllers
                         tem1 = (int)numero.NoPedido;
                         tem2 = (int)numero.IdCmpraInt;
                         tem3 = (int)numero.IdSitio;
-
                         id += numero.id + ",";
                         NoPedido += numero.NoPedido + ",";
                         IdCmpraInt += numero.IdCmpraInt + ",";
@@ -137,7 +129,6 @@ namespace Inventario.Controllers
                         Articulo += numero.Articulo + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         contador++;
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -185,15 +176,13 @@ namespace Inventario.Controllers
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
-                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
-
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
         //Mostrar los proveedores de los pedidos por aceptar
         public JsonResult ConsultaArticulosAceptar(long IDTienda)
         {
-
             string id = "";
             string NoPedido = "";
             string Fecha = "";//Es la fecha de la ultima compra reaizada
@@ -209,10 +198,8 @@ namespace Inventario.Controllers
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(1) && CompraInterno.EstatusPedido.Equals(0)
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
@@ -225,8 +212,7 @@ namespace Inventario.Controllers
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       Proveedor = CompraInterno.Proveedor,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       Proveedor = CompraInterno.Proveedor
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -236,8 +222,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -246,9 +230,6 @@ namespace Inventario.Controllers
                          fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
-                    //SumaStock = (int)(SumaStock + numero.stockActual);
-                    //Stock += SumaStock + ",";
-
                     if (consultaFecha.Count() > 0)
                     {
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -360,7 +341,6 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
         ////---------------------------Mostrar los datos de los proveedores de los pedidos realizados-----------------------------------------------
         public JsonResult ConsultaArticulosVisualizarPedidos(long IDTienda)
         {
@@ -492,7 +472,6 @@ namespace Inventario.Controllers
                {
                    pedido = p.Articulo,
                    asignacion = p.IdArticulo,
-                   //Idtienda = p.IdCompraInterno,
                    tiendas = p.Sitio,
                    IdArticulo = p.IdArticulo,
                    NumeroPedido = p.NumeroPedido,
@@ -528,8 +507,6 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
                         IdSitio += numero.IdSitio + ",";
@@ -539,7 +516,6 @@ namespace Inventario.Controllers
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -568,10 +544,7 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -639,8 +612,6 @@ namespace Inventario.Controllers
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
                                 NoCompraProveedor = Compra.NoPedido,
-                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
@@ -677,7 +648,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(0) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -691,9 +661,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
@@ -722,18 +690,14 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -753,7 +717,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -762,10 +725,7 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -791,7 +751,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -804,7 +763,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -851,9 +809,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaActual,
                               IdAsignacion = Compra.IdAsignacion,
@@ -870,20 +826,16 @@ namespace Inventario.Controllers
 
                 foreach (var numero in Pedidos)
                 {
-
                     var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
                  fechaIngreso = p.FechaDeIngreso,
                  ExitenciaActual = p.stockActual,
              });
-
                     if (contador == 0)
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
                         IdSitio += numero.IdSitio + ",";
@@ -893,7 +845,6 @@ namespace Inventario.Controllers
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -922,8 +873,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -993,8 +942,6 @@ namespace Inventario.Controllers
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
                                 NoCompraProveedor = Compra.NoPedido,
-                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
@@ -1030,7 +977,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -1044,9 +990,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
@@ -1060,33 +1004,26 @@ namespace Inventario.Controllers
                 long tem2 = 0;
                 long tem3 = 0;
                 long pedi = Pedidos.Count();
-
                 foreach (var numero in Pedidos)
                 {
-
                     var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
                  fechaIngreso = p.FechaDeIngreso,
                  ExitenciaActual = p.stockActual,
              });
-
                     if (contador == 0)
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -1106,7 +1043,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -1115,8 +1051,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -1144,7 +1078,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -1157,7 +1090,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -1166,17 +1098,15 @@ namespace Inventario.Controllers
                 Nombre = Nombre.Substring(0, Nombre.Length - 1),
                 IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
             };
-
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
         //-----Consulta para Mostrar el stock general de los articulos en el modal de devoluciones----
         public JsonResult ConsultaStockArticulos(long IDTienda, long IdArt)
         {
-
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -1185,15 +1115,12 @@ namespace Inventario.Controllers
             string Sitio = "";
             string IdProveedor = "";
             string Proveedor = "";
-
             string IdExistenciaAlmacenG = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1) && CompraInterno.IdAsignacion.Equals(1) && ExistenciaAlmacenG.IdArticulo.Equals(IdArt)
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
@@ -1207,8 +1134,7 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
-                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -1218,8 +1144,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -1325,8 +1249,7 @@ namespace Inventario.Controllers
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
-                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
-
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
@@ -1351,7 +1274,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual > 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -1365,9 +1287,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaActual,
                               IdAsignacion = Compra.IdAsignacion,
@@ -1384,7 +1304,6 @@ namespace Inventario.Controllers
 
                 foreach (var numero in Pedidos)
                 {
-
                     var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(1) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
@@ -1396,11 +1315,8 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -1427,7 +1343,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -1436,8 +1351,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -1465,7 +1378,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -1478,7 +1390,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -1494,7 +1405,6 @@ namespace Inventario.Controllers
         ///Realizar el movimiento usado////////
         public JsonResult ConsultaMovimientoUsado(string DatosArticulos)
         {
-
             string[] Articulos = DatosArticulos.Split(',');
             string[] Articulos2 = DatosArticulos.Split('/');
             int consulta = 0;
@@ -1512,7 +1422,6 @@ namespace Inventario.Controllers
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                          where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && Compra.IdAsignacion.Equals(1) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
                                          orderby Compra.NoPedido
-                                         //orderby ExistAlm.IdExistenciaAlmacenG
                                          select new
                                          {
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -1563,7 +1472,6 @@ namespace Inventario.Controllers
                             CantidadAct = (double)con.ExitenciaAct;
 
                         }
-
                         consulta = GuardarExistenciaActMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, (long)con.IdSitio, (String)con.Sitio);
                         if (consulta == 0)
                         {
@@ -1575,20 +1483,13 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
-
         }
-        ///
         public int GuardarExistenciaActMovUsado(long IdExistencia, long IDCompraExt, long IDArticulo, string Articulo, double ExistenciaActual, double CantidadAct, long IdSitio, String Sitio)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
-
             var cons = GuardarMovimientoUsado((long)IdExistencia, (long)IDArticulo, (long)IDCompraExt, (double)CantidadAct, (string)Articulo, (long)IdSitio, (String)Sitio);
             int consulta = 0;
 
@@ -1597,12 +1498,7 @@ namespace Inventario.Controllers
 
             InvBD.SubmitChanges();
 
-            nregistradosAfectados = 1;//Se pudo realizar
-                                      //}
-                                      //catch (Exception ex)
-                                      //{
-                                      //    nregistradosAfectados = 0;
-                                      //}
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
         //----------------------------------------------------------------------------------------------------------------
@@ -1631,38 +1527,18 @@ namespace Inventario.Controllers
             nregistradosAfectados = 1;//Se pudo realizar
             return nregistradosAfectados;
         }
-
         //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada----------------- 
-
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
-
             string[] Articulos = DatosArticulos.Split(',');
             string[] Articulos2 = DatosArticulos.Split('/');
             int consulta = 0;
-
             for (int i = 0; 1 < Articulos.GetLength(0); i++)
             {
                 string[] IdArticulo = Articulos[i].Split(':');
                 string[] IdTienda = Articulos[i].Split('/');
-                //string[] Observaciones = IdArticulo[i].Split(':');
-
                 string[] Cantidad = Articulos2[i].Split(':');
-
-                //string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
-
-                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
-                //    .Select(p => new
-                //    {
-                //        p.IdCompraInterno,
-                //        p.IdArticulo,
-                //        p.Articulo,
-                //        p.ExitenciaActual,
-                //        p.Observaciones
-
-
-                //    });
                 var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
@@ -1683,31 +1559,21 @@ namespace Inventario.Controllers
                                          };
 
                 var Observacion = Articulos[1];
-                //Double Diferencia = Convert.ToInt32(Cantidad);
-                //var IdArt = valor[0];
                 var IdDeTienda = IdTienda[1];
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
-
-                //var Observacion = Convert.ToInt64(Observaciones[1]);
-
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompra);
                     long IdCompraInterno = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
                     long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
-                    // string Articulo = Convert.ToInt32(con.Articulo);
                     long ExistenciaInicial = Convert.ToInt32(con.ExistenciaInicial);
                     long ExitenciaAct = Convert.ToInt32(con.ExitenciaAct);
                     int NoPedidoG = Convert.ToInt32(con.NoPedidoG);
-                    //long Observaciones = Convert.ToInt32(con.Observaciones);
-
                     if (Diferencia > 0)
                     {
                         Double ExistenciaActual = 0;
                         Double CantidadAct = 0;
-                        //var NExistencia = 0;
-
                         if (con.ExitenciaAct == Diferencia)
                         {
                             Diferencia = 0;
@@ -1726,9 +1592,7 @@ namespace Inventario.Controllers
                             Diferencia = Diferencia - (Double)con.ExitenciaAct;
                             ExistenciaActual = 0;
                             CantidadAct = (double)con.ExitenciaAct;
-
                         }
-
                         consulta = GuardarNStock((long)con.IdExistenciaAlmacenG, (long)con.IdCompraInterno, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
                         if (consulta == 0)
                         {
@@ -1740,58 +1604,35 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
-
             return Json(consulta, JsonRequestBehavior.AllowGet);
-
         }
-
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
         public int GuardarNStock(long IdExistenciaAlmacenG, long IdCompraInterno, long IdArticulo, String Articulo, double ExistenciaActual, double CantidadAct, String Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
             var cons = GuardarMovimientoDev((long)IdExistenciaAlmacenG, (long)IdCompraInterno, (long)IdArticulo, (string)Articulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
             int consulta = 0;
-            //ExistenciaAlmacenG mpag = new ExistenciaAlmacenG();
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistenciaAlmacenG) && p.IdArticulo.Equals(IdArticulo)).First();
-            mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
-                                                    // mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
-                                                    //mpag.Observaciones = Observacion;
-                                                    //InvBD.ExistenciaAlmacenG.InsertOnSubmit(mpag);
+            mpag.ExitenciaActual = ExistenciaActual;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-
-            nregistradosAfectados = 1;//Se pudo realizar
-                                      //}
-                                      //catch (Exception ex)
-                                      //{
-                                      //    nregistradosAfectados = 0;
-                                      //}
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
 
         public int GuardarMovimientoDev(long IdExistenciaAlmacenG, long IdCompraInterno, long IdArticulo, string Articulo, double ExistenciaActual, double CantidadAct, string Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
         {
             int nregistradosAfectados = 0;
-
             ExistenciaAlmacenG com = new ExistenciaAlmacenG();
             com.IdCompra = IDCompras;
             com.IdCompraInterno = IdCompraInterno;
-
             com.ExitenciaInicial = ExistenciaInicial;
             com.ExitenciaActual = -CantidadAct;
-            //DateTime thisDay = DateTime.Today;
-
-            //com.Fecha = (thisDay.ToString());
             com.NoPedidoG = NoPedidoG;
             com.IdArticulo = IdArticulo;
             com.Articulo = Articulo;
             com.TipoDeOperacion = "Devolucion";
             com.Observaciones = Observacion;
-            //com.Estatus = 1;
             InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
             InvBD.SubmitChanges();
             nregistradosAfectados = 1;//Se pudo realizar

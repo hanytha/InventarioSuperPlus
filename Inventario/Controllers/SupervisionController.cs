@@ -49,7 +49,7 @@ namespace Inventario.Controllers
                 });
             return Json(supervicion, JsonRequestBehavior.AllowGet);
         }
-        //Guardar los datos de la compra
+        //Guardar los datos
         public int GuardarSupervicion(Supervision DatosSupervicion)
         {
             int Afectados = 0;
@@ -243,19 +243,12 @@ namespace Inventario.Controllers
             }
             return Encontrados;
         }
-
-
-
-
-
-
         public JsonResult ConsultaArticulos(long IDTienda)
         {
-
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -264,15 +257,12 @@ namespace Inventario.Controllers
             string Sitio = "";
             string IdProveedor = "";
             string Proveedor = "";
-
             string IdExistenciaAlmacenG = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1)&&ExistenciaAlmacenG.ExitenciaActual>=0
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.ExitenciaActual >= 0
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
@@ -286,8 +276,7 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
-                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -297,8 +286,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -307,7 +294,6 @@ namespace Inventario.Controllers
                          fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
-
                     if (contador == 0)
                     {
                         tem1 = (int)numero.NoPedido;
@@ -322,7 +308,6 @@ namespace Inventario.Controllers
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
-
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -409,16 +394,13 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
         //-----Consulta para Mostrar el stock general de los articulos en la tienda del lider----
         public JsonResult ConsultaStockArticulos(long IDTienda, long IdArt)
         {
-
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -427,15 +409,12 @@ namespace Inventario.Controllers
             string Sitio = "";
             string IdProveedor = "";
             string Proveedor = "";
-
             string IdExistenciaAlmacenG = "";
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.IdArticulo.Equals(IdArt)
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
@@ -449,8 +428,7 @@ namespace Inventario.Controllers
                                        FechaDeIngreso = CompraInterno.FechaIngreso,
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
-                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -460,8 +438,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -470,28 +446,6 @@ namespace Inventario.Controllers
                          fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
-                    //SumaStock = (int)(SumaStock + numero.stockActual);
-                    //Stock += SumaStock + ",";
-
-                    //if (consultaFecha.Count() > 0)
-                    //{
-                    //    int UltimoReg = consultaFecha.Count() - 1;
-                    //    int cont = 0;
-                    //    int SumaStock = 0;
-                    //    foreach (var comp in consultaFecha)
-                    //    {
-                    //        SumaStock = (int)(SumaStock + comp.ExitenciaActual);
-
-                    //        if (cont == UltimoReg)
-                    //        {
-                    //            Fecha+= comp.fechaIngreso + ",";
-                    //        }
-                    //        cont++;
-                    //    }
-                    //    Stock += SumaStock + ",";
-
-                    //}
-
                     if (contador == 0)
                     {
                         tem1 = (int)numero.NoPedido;
@@ -506,7 +460,6 @@ namespace Inventario.Controllers
                         Fecha += numero.FechaDeIngreso + ",";
                         IdProveedor += numero.IdProveedor + ",";
                         Proveedor += numero.Proveedor + ",";
-
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
@@ -593,21 +546,13 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
         public JsonResult ConsultaArticulosAceptar(long IDTienda)
         {
 
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -619,15 +564,12 @@ namespace Inventario.Controllers
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(0)
                                    select new
-
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = ExistenciaAlmacenG.NoPedidoG,
                                        IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-                                       //    Proveedor=CompraInterno.Proveedor,
                                        IdSitio = CompraInterno.IdSitio,
                                        Tiendas = CompraInterno.Sitio,
                                        Articulo = ExistenciaAlmacenG.Articulo,
@@ -635,8 +577,7 @@ namespace Inventario.Controllers
                                        stockActual = ExistenciaAlmacenG.ExitenciaActual,
                                        IdAsignacion = CompraInterno.IdAsignacion,
                                        IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-                                       Proveedor = CompraInterno.Proveedor,
-                                       //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
+                                       Proveedor = CompraInterno.Proveedor
                                    };
             if (ConsultaArticulo.Count() > 0)
             {
@@ -646,8 +587,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
@@ -656,9 +595,6 @@ namespace Inventario.Controllers
                          fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
-                    //SumaStock = (int)(SumaStock + numero.stockActual);
-                    //Stock += SumaStock + ",";
-
                     if (consultaFecha.Count() > 0)
                     {
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -771,49 +707,30 @@ namespace Inventario.Controllers
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public JsonResult ConsultaArticuloModal(long id)
         {
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
                                    where ExistenciaAlmacenG.IdExistenciaAlmacenG.Equals(id)
                                    select new
-
                                    {
-                                       //id = ExistenciaAlmacenG.IdArticulo,
-                                       //NoPedido = ExistenciaAlmacenG.NoPedidoG,
-                                       //IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-                                       ////    Proveedor=CompraInterno.Proveedor,
-                                       //IdSitio = CompraInterno.IdSitio,
-                                       //Tiendas = CompraInterno.Sitio,
                                        Nombre = ExistenciaAlmacenG.Articulo,
                                        IdArticulo = ExistenciaAlmacenG.IdArticulo,
                                        NoPedido = CompraInterno.NoPedido,
                                        IdProveedor = CompraInterno.IdProveedor
-                                       //stockActual = ExistenciaAlmacenG.ExitenciaActual,
-                                       //IdAsignacion = CompraInterno.IdAsignacion,
-                                       //IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
                                    };
             return Json(ConsultaArticulo, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
 
         public JsonResult ConsultaArticulo(long Id)
         {
             string id = "";
             string Nombre = "";
             string NombreProveedor = "";
-            string Fechas = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
-            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
-
+            string Fechas = "";
+            string Stock = "";
+            string Costos = "";
 
             var ConsultaArticulo = from Articulos in InvBD.Articulos
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
@@ -822,7 +739,6 @@ namespace Inventario.Controllers
                                     on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
                                    where Articulos.IdArticulos.Equals(Id)
                                    select new
-
                                    {
 
                                        Id = Articulos.IdArticulos,
@@ -846,8 +762,7 @@ namespace Inventario.Controllers
                     .Select(p => new
                     {
                         fechaIngreso = p.FechaDeIngreso,
-                        stockActual = p.ExitenciaActual,
-                        //  costo = p.PrecioUnitario,
+                        stockActual = p.ExitenciaActual
                     });
 
                 if (consultaFecha.Count() > 0)
@@ -855,15 +770,12 @@ namespace Inventario.Controllers
                     int UltimoReg = consultaFecha.Count() - 1;
                     int cont = 0;
                     int SumaStock = 0;
-                    //inicia
-                    //DateTime FultCompra;                
                     foreach (var comp in consultaFecha)
                     {
 
                         SumaStock = (int)(SumaStock + comp.stockActual);
                         if (cont == 0)
                         {
-                            // Costos += comp.costo + ",";
                         }
                         if (cont == UltimoReg)
                         {
@@ -872,7 +784,6 @@ namespace Inventario.Controllers
                         cont++;
                     }
                     Stock += SumaStock + ",";
-                    //termina
                 }
                 else
                 {
@@ -1042,21 +953,11 @@ namespace Inventario.Controllers
                                      FechaDeIngreso = CompraInterno.FechaIngreso,
                                      NoPedido = CompraInterno.NoPedido,
                                      Articulo = ExistenciAAlmacen.Articulo,
-                                     // Coste = ExistenciAAlmacen.PrecioUnitario,
                                      IdArticulo = ExistenciAAlmacen.IdArticulo,
-                                     //    IdProveedor = provedor.IdAreas,
-                                     //    Proveedor = provedor.Nombre
-
-
-
                                      id = ExistenciAAlmacen.IdArticulo,
-                                     // NoPedido = ExistenciAAlmacen.NoPedidoG,
                                      IdCmpraInt = ExistenciAAlmacen.IdCompraInterno,
-                                     //    Proveedor=CompraInterno.Proveedor,
                                      IdSitio = CompraInterno.IdSitio,
                                      Tiendas = CompraInterno.Sitio,
-                                     //Articulo = ExistenciAAlmacen.Articulo,
-                                     // FechaDeIngreso = CompraInterno.FechaIngreso,
                                      stockActual = ExistenciAAlmacen.ExitenciaActual,
                                      IdAsignacion = CompraInterno.IdAsignacion,
                                      IdExistenciaAlmacenG = ExistenciAAlmacen.IdExistenciaAlmacenG,
@@ -1078,29 +979,13 @@ namespace Inventario.Controllers
             string IdExistenciaAlmacenG = "";
             string Stock = "";
             string IdSitio = "";
-            //var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
-            //   .Select(p => new
-            //   {
-            //       pedido = p.Articulo,
-            //       asignacion = p.IdArticulo,
-            //       //Idtienda = p.IdCompraInterno,
-            //       tiendas = p.ExitenciaActual,
-            //       IdArticulo = p.IdArticulo,
-            //       NumeroPedido=p.NoPedidoG,
-            //       Nombre=p.Articulo,
-            //       Fechas = p.ExitenciaInicial,
-            //        IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
-            //   });
-
-
             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdCompraInterno.Equals(idCompraInt) && Compra.IdAsignacion.Equals(2) && Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1) 
+                          where Compra.IdCompraInterno.Equals(idCompraInt) && Compra.IdAsignacion.Equals(2) && Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1)
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -1114,9 +999,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaActual,
                               IdAsignacion = Compra.IdAsignacion,
@@ -1145,8 +1028,6 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
                         IdSitio += numero.IdSitio + ",";
@@ -1156,7 +1037,6 @@ namespace Inventario.Controllers
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -1185,8 +1065,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -1239,31 +1117,6 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-        //public JsonResult ConsultaExistenciaAlmGJoinProveedor(long No, long Id)
-        //{
-        //    var ExistenciaAlmG = from ExistenciAAlmacen in InvBD.ExistenciaAlmacenG
-        //                         join provedor in InvBD.Areas
-        //                     on ExistenciAAlmacen.IdProveedor equals provedor.IdAreas
-        //                         join Tienda in InvBD.Tienda
-        //                           on ExistenciAAlmacen.IdSitio equals Tienda.IdTienda
-        //                         where ExistenciAAlmacen.NoPedido.Equals(No) && ExistenciAAlmacen.IdSitio.Equals(Id)
-        //                         select new
-        //                         {
-        //                             FechaDeIngreso = ExistenciAAlmacen.FechaDeIngreso,
-        //                             NoPedido = ExistenciAAlmacen.NoPedido,
-        //                             Articulo = ExistenciAAlmacen.NombreEmpresa,
-        //                             Coste = ExistenciAAlmacen.Coste,
-        //                             IdArticulo = ExistenciAAlmacen.IdArticulo,
-        //                             //    IdProveedor = provedor.IdAreas,
-        //                             //    Proveedor = provedor.Nombre
-        //                         };
-        //    return Json(ExistenciaAlmG, JsonRequestBehavior.AllowGet);
-        //}
-
-
 
         //----------------------Lenar el combobox----------------------------
         public JsonResult BDTienda(long Id)
@@ -1333,25 +1186,10 @@ namespace Inventario.Controllers
                                 IdProveedor = areas.IdAreas,
                                 Proveedor = areas.Nombre,
                                 Tienda = Compra.IdSitio,
-                                ExitenciaActual = ExistAlm.ExitenciaActual,
-                                //ExistenciaInicDevolucion = ExistAlm.ExistenciaInicDevolucion,
-                                //ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
+                                ExitenciaActual = ExistAlm.ExitenciaActual
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
-        //public JsonResult BDNoPedido(long Id)
-        //{
-        //    var datos = from Art in InvBD.Articulos
-        //                    join existenciaAlm in InvBD.ExistenciaAlmacenG
-        //              on Art.IdArticulos equals existenciaAlm.IdArticulo
-        //                where Art.IdArticulos.Equals(Id)
-        //                    select new
-        //                    {
-        //                        NoPedido = existenciaAlm.NoPedidoG
-
-        //                    };
-        //    return Json(datos, JsonRequestBehavior.AllowGet);
-        //}
 
         //Consulta de proveedores en la tabla existenciaAlmacenGeneral
         public JsonResult ConsultaComJoinProveedor(long Id)
@@ -1359,18 +1197,13 @@ namespace Inventario.Controllers
             var ExistAlmG = from Art in InvBD.Articulos
                             join areas in InvBD.Areas
                         on Art.IdAreas equals areas.IdAreas
-
-                            //join ExistenciaAlmacen in InvBD.ExistenciaAlmacenG
-                            //   on Art.IdArticulos equals ExistenciaAlmacen.IdArticulo
-
                             where Art.IdAreas.Equals(Id)
                             select new
                             {
                                 Articulo = Art.NombreEmpresa,
                                 IdArticulo = Art.IdArticulos,
                                 IdProveedor = areas.IdAreas,
-                                Proveedor = areas.Nombre,
-                                //NoPedido = ExistenciaAlmacen.NoPedidoG
+                                Proveedor = areas.Nombre
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
@@ -1395,9 +1228,6 @@ namespace Inventario.Controllers
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
-
-
-
         public JsonResult BDProveedor()
         {
             var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
@@ -1420,19 +1250,13 @@ namespace Inventario.Controllers
                 });
             return Json(compra, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
         public JsonResult ConsultaArticulosXtienda(string IdPro)
         {
 
             string id = "";
             string NoPedido = "";
-            string Fecha = "";//Es la fecha de la ultima compra reaizada
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Fecha = "";
+            string Stock = "";
             string IdSitio = "";
             string IdArticulos = "";
             string Articulo = "";
@@ -1444,9 +1268,6 @@ namespace Inventario.Controllers
             var ConsultaArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
                                    join Articulos in InvBD.Articulos
                            on ExistAlm.IdArticulo equals Articulos.IdArticulos
-                                   //     join CompraArticulos in InvBD.ComprasArticulos
-                                   //on ExistAlm.IdArticulo equals CompraArticulos.IdArticulo
-
                                    join Compra in InvBD.CompraInterno
                                on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                    join areas in InvBD.Areas
@@ -1481,8 +1302,6 @@ namespace Inventario.Controllers
                 long tem3 = 0;
                 long tem4 = 0;
                 long pedi = ConsultaArticulo.Count();
-
-                // int SumaStock = 0;
                 foreach (var numero in ConsultaArticulo)
                 {
                     var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IdPro)).OrderBy(p => p.NoPedido)
@@ -1491,9 +1310,6 @@ namespace Inventario.Controllers
                          fechaIngreso = p.FechaDeIngreso,
                          ExitenciaActual = p.stockActual,
                      });
-                    //SumaStock = (int)(SumaStock + numero.stockActual);
-                    //Stock += SumaStock + ",";
-
                     if (consultaFecha.Count() > 0)
                     {
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -1609,74 +1425,6 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
-        //public JsonResult ConsultaArticulosXtienda(string IdPro)
-        //{
-
-
-        //    var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                 join Articulos in InvBD.Articulos
-        //         on ExistAlm.IdArticulo equals Articulos.IdArticulos
-        //            //     join CompraArticulos in InvBD.ComprasArticulos
-        //            //on ExistAlm.IdArticulo equals CompraArticulos.IdArticulo
-
-        //                 join Compra in InvBD.CompraInterno
-        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                 join areas in InvBD.Areas
-        //             on Compra.IdProveedor equals areas.IdAreas
-        //                 where Compra.IdSitio.Equals(IdPro) && Compra.EstatusPedido.Equals(1)
-        //                 select new
-        //                 {
-        //                     IdExistencia = ExistAlm.IdExistenciaAlmacenG,
-        //                     NombreEmpresa = Articulos.NombreEmpresa,
-        //                     IdArticulos = ExistAlm.IdArticulo,
-        //                     Tipo = ExistAlm.TipoDeOperacion,
-        //                     IdProveedor = areas.IdAreas,
-        //                     Proveedor = areas.Nombre,
-        //                     Tienda = Compra.IdSitio,
-        //                   //  PrecioUnitarioPromedio = CompraArticulos.PrecioUnitario,
-        //                     ExistenciaActDevolucion = ExistAlm.ExitenciaActual
-        //                 };
-        //    return Json(compra, JsonRequestBehavior.AllowGet);
-
-
-        //}
-
-
-        //    var compra = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                 join Articulos in InvBD.Articulos
-        //            on ExistAlm.IdArticulo equals Articulos.IdArticulos
-        //                 // join CompraArt in InvBD.ComprasArticulos
-        //                 //on Articulos.IdArticulos equals CompraArt.IdArticulo
-        //                 join Compra in InvBD.CompraInterno
-        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                 join areas in InvBD.Areas
-        //             on Compra.IdProveedor equals areas.IdAreas
-        //                 where Compra.IdSitio.Equals(IdPro) && Compra.EstatusPedido.Equals(1)
-        //                 select new
-        //                 {
-        //                     IdExistencia = ExistAlm.IdExistenciaAlmacenG,
-        //                     NombreEmpresa = ExistAlm.Articulo,
-        //                     IdArticulos = ExistAlm.IdArticulo,
-        //                     Tipo = ExistAlm.TipoDeOperacion,
-        //                     IdProveedor = areas.IdAreas,
-        //                     Proveedor = areas.Nombre,
-        //                     Tienda = Compra.IdSitio,
-        //                     //   PrecioUnitarioPromedio = CompraArt.PrecioUnitario,
-        //                     ExistenciaActDevolucion = ExistAlm.ExistenciaActDevolucion
-        //                 };
-        //        return Json(compra, JsonRequestBehavior.AllowGet);
-
-
-        //}
-
         public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
         {
             int Afectados = 0;
@@ -1687,7 +1435,6 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)).Count();
 
-                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces >= 0)
                 {
                     InvBD.PedidosInternos.InsertOnSubmit(DatosPedidoInterno);
@@ -1723,15 +1470,8 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            //}
-            //    catch (Exception ex)
-            //    {
-            //        Afectados = 0;
-            //    }
             return Afectados;
         }
-
-
 
         public JsonResult ConsultaPedidosDecendiente()
         {
@@ -1742,12 +1482,6 @@ namespace Inventario.Controllers
                     p.IdPedidosInternos,
                     Pedido = p.NumeroPedido,
                 });
-            //foreach (var ped in pedidosNum)
-            //{
-            //    int SumaNum = (int)(ped.Pedido + 1);
-            //    NumeroPedido += SumaNum + ",";
-            //}
-
             if (pedidosNum.Count() > 0)
             {
                 foreach (var num in pedidosNum)
@@ -1789,91 +1523,6 @@ namespace Inventario.Controllers
             var numeros = new { numPedidoProve = numPedidoProve.Substring(0, numPedidoProve.Length - 1) };
             return Json(numeros, JsonRequestBehavior.AllowGet);
         }
-
-
-        //public JsonResult ConsultaArticulosAceptar(long IDTienda)
-        //{
-        //    string id = "";
-        //    string NoPedido = "";
-        //    string Nombre = "";
-        //    string Proveedor = "";
-        //    string Fechas = "";//Es la fecha de la ultima compra reaizada
-        //    string Stock = "";//Es la suma del stock atcual de todas las compras
-        //    string IdSitio = "";
-        //    string IdArticulos = "";
-        //    var ConsultaArticulo = from Articulos in InvBD.Articulos
-        //                           join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-        //                           on Articulos.IdArticulos equals ExistenciaAlmacenG.IdArticulo
-        //                           join CompraInterno in InvBD.CompraInterno
-        //                            on ExistenciaAlmacenG.IdCompraInterno equals CompraInterno.IdCompraInterno
-        //                           where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(0)
-        //                           select new
-        //                           {
-
-        //                               Id = Articulos.IdArticulos,
-        //                               IdExistencia = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-        //                               NoPedido = ExistenciaAlmacenG.NoPedidoG,
-        //                               nombres = Articulos.NombreEmpresa,
-        //                               Proveedor = CompraInterno.Proveedor,
-        //                               IdArticulos = Articulos.IdArticulos,
-        //                               Articulo = Articulos.NombreEmpresa,
-        //                               ExitenciaActual = ExistenciaAlmacenG.ExitenciaActual,
-        //                               IdAsignacion = CompraInterno.IdAsignacion,
-        //                               IdSitio = CompraInterno.IdSitio,
-        //                               FechaDeIngreso = CompraInterno.FechaIngreso
-        //                           };
-        //    foreach (var art in ConsultaArticulo)
-        //    {
-        //        id += art.Id + ",";
-        //        Nombre += art.nombres + ",";
-        //        Proveedor += art.Proveedor + ",";
-        //        NoPedido += art.NoPedido + ",";
-        //        IdSitio += art.IdSitio + ",";
-        //        IdArticulos += art.IdArticulos + ",";
-        //        var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.IdArticulos)
-        //           .Select(p => new
-        //           {
-        //               fechaIngreso = p.FechaDeIngreso,
-        //               stockActual = p.ExitenciaActual,
-        //           });
-        //        if (consultaFecha.Count() > 0)
-        //        {
-        //            int UltimoReg = consultaFecha.Count() - 1;
-        //            int cont = 0;
-        //            int SumaStock = 0;
-        //            foreach (var comp in consultaFecha)
-        //            {
-        //                SumaStock = (int)(SumaStock + comp.stockActual);
-
-        //                if (cont == UltimoReg)
-        //                {
-        //                    Fechas += comp.fechaIngreso + ",";
-        //                }
-        //                cont++;
-        //            }
-        //            Stock += SumaStock + ",";
-
-        //        }
-        //        else
-        //        {
-        //            Fechas += "2010-08-10" + ",";
-        //            Stock += "0" + ",";
-        //        }
-        //    }
-        //    var Resultado = new { id = id.Substring(0, id.Length - 1), Nombre = Nombre.Substring(0, Nombre.Length - 1), Proveedor = Proveedor.Substring(0, Proveedor.Length - 1), NoPedido = NoPedido.Substring(0, NoPedido.Length - 1), IdSitio = IdSitio.Substring(0, IdSitio.Length - 1), Fechas = Fechas.Substring(0, Fechas.Length - 1), Stock = Stock.Substring(0, Stock.Length - 1) };
-        //    return Json(Resultado, JsonRequestBehavior.AllowGet);
-        //}
-
-
-        //public JsonResult BDTiposMovimiento()
-        //{
-        //    var datos = InvBD.TipoDeMovimientos.Where(p => p.Estatus.Equals(1))
-        //        .Select(p => new {
-        //            ID = p.IdMovimientos,
-        //            Nombre = p.TipoDeMovimiento
-        //        });
-        //    return Json(datos, JsonRequestBehavior.AllowGet);
-        //}
 
         //------------------Supervision2da------------------------------------
         public ActionResult Supervision2da()
@@ -2012,25 +1661,7 @@ namespace Inventario.Controllers
             }
             return Encontrados;
         }
-
-
-
-        //public JsonResult ConsultaPedidosArticulos(long Pedi)
-        //{
-        //    var numero = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(Pedi) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.Articulo,
-        //            p.CantidadSolicitada,
-        //            //p.PrecioUnitario,
-        //            //p.Unidad
-        //        });
-        //    return Json(numero, JsonRequestBehavior.AllowGet);
-        //}
-
-
         public JsonResult ConsultaPedidosArticulos(long id, long no)
-        //{(long Id)
         {
             var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
                          join Compra in InvBD.CompraInterno
@@ -2051,14 +1682,13 @@ namespace Inventario.Controllers
                              Proveedor = Compra.Proveedor,
                              IdTienda = Compra.IdSitio,
                              IdArticulo = ExistAlm.IdArticulo,
-                             //Articulo = ExistAlm.NombreEmpresa,
                              Fecha = Compra.FechaIngreso,
                          };
             return Json(numero, JsonRequestBehavior.AllowGet);
         }
 
         ///////////----------------------------------Mostrar los articulos en el modal aceptar pedido----------------------
-        public JsonResult ConsultaTablaArtAceptarPedidos(long IdCompInt,long idS)
+        public JsonResult ConsultaTablaArtAceptarPedidos(long IdCompInt, long idS)
         {
             string NoPedido = "";
             string IdAsignacion = "";
@@ -2070,20 +1700,6 @@ namespace Inventario.Controllers
             string Nombre = "";
             string IdExistenciaAlmacenG = "";
             string Stock = "";
-            //var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
-            //   .Select(p => new
-            //   {
-            //       pedido = p.Articulo,
-            //       asignacion = p.IdArticulo,
-            //       //Idtienda = p.IdCompraInterno,
-            //       tiendas = p.ExitenciaActual,
-            //       IdArticulo = p.IdArticulo,
-            //       NumeroPedido=p.NoPedidoG,
-            //       Nombre=p.Articulo,
-            //       Fechas = p.ExitenciaInicial,
-            //        IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
-            //   });
-
 
             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
@@ -2092,7 +1708,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(0) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -2106,9 +1721,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
@@ -2137,11 +1750,8 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -2168,7 +1778,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -2177,8 +1786,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -2206,7 +1813,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -2219,7 +1825,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -2231,9 +1836,6 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
         ///---------------------Visualizar el formato de pedidos
         public JsonResult ConsultaTablaArtPedidos(long IdCompInt, long idS)
         {
@@ -2254,7 +1856,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -2268,9 +1869,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
@@ -2299,11 +1898,8 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -2330,7 +1926,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -2339,8 +1934,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -2368,7 +1961,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -2381,7 +1973,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -2393,66 +1984,6 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-        //public JsonResult usado(long id, long no)
-        ////{(long Id)
-        //{
-        //    var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                 join Compra in InvBD.CompraInterno
-        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                 join areas in InvBD.Areas
-        //             on Compra.IdProveedor equals areas.IdAreas
-        //                 where Compra.NoPedido.Equals(no)
-        //                 //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-        //                 select new
-        //                 {
-        //                     IdPedidosInternos = ExistAlm.IdCompraInterno,
-        //                     NumeroPedido = ExistAlm.Articulo,
-        //                     NumPedidoProveedor = Compra.NoPedidoProveedor,
-        //                     Articulo = ExistAlm.Articulo,
-        //                     CantidadSolicitada = ExistAlm.ExitenciaInicial,
-        //                     CantidadAprobada = ExistAlm.ExitenciaActual,
-        //                     Tipo = ExistAlm.TipoDeOperacion,
-        //                     IdProveedor = Compra.IdProveedor,
-        //                     Proveedor = Compra.Proveedor,
-        //                     IdTienda = Compra.IdSitio,
-        //                     IdArticulo = ExistAlm.IdArticulo,
-        //                     //Articulo = ExistAlm.NombreEmpresa,
-        //                     Fecha = Compra.FechaIngreso,
-        //                 };
-        //    return Json(numero, JsonRequestBehavior.AllowGet);
-        //}
-        //public JsonResult ConsultaAceptarPedido(long Id)
-        //{
-        //    var pedidosInt = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(Id) && p.Estatus.Equals(1))
-        //        .Select(p => new
-        //        {
-        //            p.IdPedidosInternos,
-        //            p.NumeroPedido,
-        //            p.NumPedidoProveedor,
-        //            p.CantidadSolicitada,
-        //            p.CantidadAprobada,
-        //            p.Tipo,
-        //            p.IdProveedor,
-        //            p.Proveedor,
-        //            //p.IdUnidadDeMedida,
-        //            //p.UnidadDeMedida,
-        //            //p.IdMarca,
-        //            //p.Marca,
-        //            p.IdTienda,
-        //            p.Tienda,
-        //            p.IdArticulo,
-        //            p.Articulo,
-        //            p.Fecha
-        //        });
-        //    return Json(pedidosInt, JsonRequestBehavior.AllowGet);
-        //}
         //Visualizar el archivo de los pedidos aceptados
         public JsonResult ConsultaAceptarPedido(long Id, long No)
         {
@@ -2463,15 +1994,13 @@ namespace Inventario.Controllers
                            on Compra.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.NoPedidoG.Equals(No)&& Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(0)
+                            where ExistAlm.NoPedidoG.Equals(No) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(0)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
                                 NoCompraProveedor = Compra.NoPedido,
-                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
@@ -2504,8 +2033,6 @@ namespace Inventario.Controllers
                                 NumeroPedido = ExistAlm.NoPedidoG,
                                 NumPedidoProveedor = Compra.NoPedidoProveedor,
                                 NoCompraProveedor = Compra.NoPedido,
-                                // CantidadSolicitada = ExistAlm.CantidadSolicitada,
-                                // CantidadAprobada = ExistAlm.CantidadAprobada,
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
@@ -2522,35 +2049,6 @@ namespace Inventario.Controllers
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult ConsultaPedidoXnum(long Id, long No)
-        //{
-        //    var numero = from proveedor in InvBD.Areas
-        //                 join pedido in InvBD.PedidosInternos
-        //             on proveedor.IdAreas equals pedido.IdProveedor
-        //                 join tienda in InvBD.Tienda
-        //                   on pedido.IdTienda equals tienda.IdTienda
-        //                 where pedido.NumeroPedido.Equals(Num) && pedido.Estatus.Equals(1)
-        //                 select new
-        //                 {
-        //                     IdPedidosInternos = pedido.IdPedidosInternos,
-        //                     NumeroPedido = pedido.NumeroPedido,
-        //                     CantidadSolicitada = pedido.CantidadSolicitada,
-
-        //                     IdProveedor = proveedor.IdAreas,
-        //                     Proveedor = proveedor.Nombre,
-        //                     Direccion = tienda.Direccion,
-        //                     NumPedidoProveedor = pedido.NumeroPedido,
-        //                     IdTienda = pedido.IdTienda,
-        //                     Tienda = pedido.Tienda,
-        //                     IdArticulo = pedido.IdArticulo,
-        //                     Fecha = pedido.Fecha,
-        //                     Correo = proveedor.Correo,
-        //                     Telefono = proveedor.Telefono,
-        //                 };
-        //    return Json(numero, JsonRequestBehavior.AllowGet);
-        //}
-
-
         public int Guardar(CompraInterno AceptarPedido)
         {
             int Afectados = 0;
@@ -2559,11 +2057,7 @@ namespace Inventario.Controllers
             long id = AceptarPedido.IdCompraInterno;
             if (id.Equals(0))
             {
-                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
-
                 int nveces = InvBD.CompraInterno.Count();
-                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
                     InvBD.CompraInterno.InsertOnSubmit(AceptarPedido);
@@ -2577,30 +2071,18 @@ namespace Inventario.Controllers
             }
             else
             {
-
-                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
-                //if (nveces == 0)
-                //{
                 CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
                 obj.NoPedido = AceptarPedido.NoPedido;
                 obj.EstatusPedido = AceptarPedido.EstatusPedido;
                 obj.Usuario = AceptarPedido.Usuario;
-                //obj.NoCompraProveedor = AceptarPedido.NoCompraProveedor;
                 InvBD.SubmitChanges();
                 Afectados = 1;
-                //}
-                //else
-                //{
-                //    Afectados = -1;
-                //}
             }
 
             return Afectados;
         }
 
         //----------------Guardar movimiento de  SupervisionTienda------------
-
         public int GuardarUsados(MovimientosTienda DatosUsados)
         {
             int Afectados = 0;
@@ -2611,7 +2093,6 @@ namespace Inventario.Controllers
             {
                 int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)).Count();
 
-                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces >= 0)
                 {
                     InvBD.MovimientosTienda.InsertOnSubmit(DatosUsados);
@@ -2628,24 +2109,20 @@ namespace Inventario.Controllers
                 int nveces = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(DatosUsados.IdMovimiento)
                   && p.IdExistencia.Equals(DatosUsados.IdExistencia)
                 && p.IdExistencia.Equals(DatosUsados.IdExistencia)
-                 //  && p.IdCompra.Equals(DatosUsados.IdCompra)
                  && p.IdArticulo.Equals(DatosUsados.IdArticulo)
                  && p.Movimiento.Equals(DatosUsados.Movimiento)
                  && p.Fecha.Equals(DatosUsados.Fecha)
                   && p.Cantidad.Equals(DatosUsados.Cantidad)
-                 //&& p.Costo.Equals(DatosUsados.Costo)
                  && p.Fecha.Equals(DatosUsados.Fecha)
                  ).Count();
                 if (nveces == 0)
                 {
                     MovimientosTienda obj = InvBD.MovimientosTienda.Where(p => p.IdMovimiento.Equals(id)).First();
                     obj.IdExistencia = DatosUsados.IdExistencia;
-                    //    obj.IdCompra = DatosUsados.IdCompra;
                     obj.IdArticulo = DatosUsados.IdArticulo;
                     obj.Movimiento = DatosUsados.Movimiento;
                     obj.Movimiento = DatosUsados.Movimiento;
                     obj.Cantidad = DatosUsados.Cantidad;
-                    // obj.Costo = DatosUsados.Costo;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -2672,11 +2149,7 @@ namespace Inventario.Controllers
             long id = AceptarPedido.IdExistenciaAlmacenG;
             if (id.Equals(0))
             {
-                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
-
                 int nveces = InvBD.ExistenciaAlmacenG.Count();
-                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
                     InvBD.ExistenciaAlmacenG.InsertOnSubmit(AceptarPedido);
@@ -2690,159 +2163,20 @@ namespace Inventario.Controllers
             }
             else
             {
-
-                //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-                //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
-                //if (nveces == 0)
-                //{
                 ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
                 obj.Observaciones = AceptarPedido.Observaciones;
                 obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
-                // obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
                 obj.ExitenciaActual = AceptarPedido.ExitenciaActual;
-                // obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
                 InvBD.SubmitChanges();
                 Afectados = 1;
-                //}
-                //else
-                //{
-                //    Afectados = -1;
-                //}
             }
 
             return Afectados;
         }
-
-        //public int GuardarExistenciasAlm(ExistenciaAlmacenG AceptarPedido)
-        //{
-        //    int Afectados = 0;
-        //    //try
-        //    //{
-        //    long id = AceptarPedido.IdExistenciaAlmacenG;
-        //    if (id.Equals(0))
-        //    {
-        //        //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(0)).Count();
-
-        //        int nveces = InvBD.ExistenciaAlmacenG.Count();
-        //        //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-        //        // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-        //        if (nveces == 0)
-        //        {
-        //            InvBD.ExistenciaAlmacenG.InsertOnSubmit(AceptarPedido);
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    else
-        //    {
-
-        //        //int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(AceptarPedido.NoPedido)).Count();
-        //        //int nveces = InvBD.CompraInterno.Where(p => p.EstatusPedido.Equals(1)).Count();
-        //        //if (nveces == 0)
-        //        //{
-        //        ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
-        //        obj.Observaciones = AceptarPedido.Observaciones;
-        //        obj.TipoDeOperacion = AceptarPedido.TipoDeOperacion;
-        //        obj.ExistenciaInicDevolucion = AceptarPedido.ExistenciaInicDevolucion;
-        //        obj.ExistenciaActDevolucion = AceptarPedido.ExistenciaActDevolucion;
-        //        // obj.EstatusArticulo = AceptarPedido.EstatusArticulo;
-        //        InvBD.SubmitChanges();
-        //        Afectados = 1;
-        //        //}
-        //        //else
-        //        //{
-        //        //    Afectados = -1;
-        //        //}
-        //    }
-
-        //    return Afectados;
-        //}
-
-        //public int GuardarDevolucion(ExistenciaAlmacenG DatosDevolucion)
-        //{
-        //    int Afectados = 0;
-        //    //try
-        //    //{
-        //    long id = DatosDevolucion.IdExistenciaAlmacenG;
-        //    if (id.Equals(0))
-        //    {
-        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)).Count();
-
-        //        //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
-        //        if (nveces >= 0)
-        //        {
-        //            InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosDevolucion);
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)
-        //        && p.IdExistenciaAlmacenG.Equals(DatosDevolucion.IdExistenciaAlmacenG)
-        //        && p.IdCompra.Equals(DatosDevolucion.IdCompra)
-        //         && p.IdCompraInterno.Equals(DatosDevolucion.IdCompraInterno)
-        //         && p.ExitenciaInicial.Equals(DatosDevolucion.ExitenciaInicial)
-        //         && p.ExitenciaActual.Equals(DatosDevolucion.ExitenciaActual)
-        //         && p.IdArticulo.Equals(DatosDevolucion.IdArticulo)
-        //         && p.Articulo.Equals(DatosDevolucion.Articulo)
-        //         && p.NoPedidoG.Equals(DatosDevolucion.NoPedidoG)
-        //         && p.TipoDeOperacion.Equals(DatosDevolucion.TipoDeOperacion)
-        //         && p.Observaciones.Equals(DatosDevolucion.Observaciones)
-        //         && p.ExistenciaActDevolucion.Equals(DatosDevolucion.ExistenciaActDevolucion)
-        //         && p.ExistenciaInicDevolucion.Equals(DatosDevolucion.ExistenciaInicDevolucion)
-        //         ).Count();
-        //        if (nveces == 0)
-        //        {
-        //            ExistenciaAlmacenG obj = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(id)).First();
-        //            obj.IdExistenciaAlmacenG = DatosDevolucion.IdExistenciaAlmacenG;
-        //            obj.IdCompra = DatosDevolucion.IdCompra;
-        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
-        //            obj.IdCompraInterno = DatosDevolucion.IdCompraInterno;
-        //            obj.ExitenciaInicial = DatosDevolucion.ExitenciaInicial;
-        //            obj.ExitenciaActual = DatosDevolucion.ExitenciaActual;
-        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
-        //            obj.Articulo = DatosDevolucion.Articulo;
-        //            obj.IdArticulo = DatosDevolucion.IdArticulo;
-        //            obj.NoPedidoG = DatosDevolucion.NoPedidoG;
-        //            obj.TipoDeOperacion = DatosDevolucion.TipoDeOperacion;
-        //            obj.Observaciones = DatosDevolucion.Observaciones;
-        //            obj.ExistenciaActDevolucion = DatosDevolucion.ExistenciaActDevolucion;
-        //            obj.ExistenciaInicDevolucion = DatosDevolucion.ExistenciaInicDevolucion;
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    //}
-        //    //    catch (Exception ex)
-        //    //    {
-        //    //        Afectados = 0;
-        //    //    }
-        //    return Afectados;
-        //}
-
-
-
-
-
-
         //-----------------------Consulta los artículos por ID de artículo y IDCompra para restar la cantidad aprobada----------------- 
 
         public JsonResult ConsultaStockArticulo(string DatosArticulos)
         {
-
             string[] Articulos = DatosArticulos.Split(',');
             string[] Articulos2 = DatosArticulos.Split('/');
             int consulta = 0;
@@ -2851,24 +2185,9 @@ namespace Inventario.Controllers
             {
                 string[] IdArticulo = Articulos[i].Split(':');
                 string[] IdTienda = Articulos[i].Split('/');
-                //string[] Observaciones = IdArticulo[i].Split(':');
-
                 string[] Cantidad = Articulos2[i].Split(':');
-
-                //string[] prueba2 = IdTienda[i].Split(':');
                 int resultado = 0;
 
-                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && p.ExitenciaActual > 0 && p.IdArticulo > 0).OrderBy(p => p.NoPedidoG)
-                //    .Select(p => new
-                //    {
-                //        p.IdCompraInterno,
-                //        p.IdArticulo,
-                //        p.Articulo,
-                //        p.ExitenciaActual,
-                //        p.Observaciones
-
-
-                //    });
                 var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
@@ -2876,44 +2195,34 @@ namespace Inventario.Controllers
                                          orderby Compra.FechaIngreso
                                          select new
                                          {
-                                             IdExistenciaAlmacenG=ExistAlm.IdExistenciaAlmacenG,
+                                             IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
                                              IdCompra = ExistAlm.IdCompra,
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
-                                          ExistenciaInicial=ExistAlm.ExitenciaInicial,
-                                             ExistenciaActual=ExistAlm.ExitenciaActual,
+                                             ExistenciaInicial = ExistAlm.ExitenciaInicial,
+                                             ExistenciaActual = ExistAlm.ExitenciaActual,
                                              IdArticulo = ExistAlm.IdArticulo,
                                              Articulo = ExistAlm.Articulo,
                                              ExitenciaAct = ExistAlm.ExitenciaActual,
-                                             NoPedidoG=ExistAlm.NoPedidoG,
+                                             NoPedidoG = ExistAlm.NoPedidoG,
                                              Observaciones = ExistAlm.Observaciones
                                          };
 
                 var Observacion = Articulos[1];
-                //Double Diferencia = Convert.ToInt32(Cantidad);
-                //var IdArt = valor[0];
                 var IdDeTienda = IdTienda[1];
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
-
-                //var Observacion = Convert.ToInt64(Observaciones[1]);
-
                 foreach (var con in ConsultaIDArticulo)
                 {
                     long IDCompras = Convert.ToInt32(con.IdCompra);
                     long IdCompraInterno = Convert.ToInt32(con.IdCompraInterno);
                     long IDArticulos = Convert.ToInt32(con.IdArticulo);
                     long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
-                    // string Articulo = Convert.ToInt32(con.Articulo);
                     long ExistenciaInicial = Convert.ToInt32(con.ExistenciaInicial);
                     long ExitenciaAct = Convert.ToInt32(con.ExitenciaAct);
                     int NoPedidoG = Convert.ToInt32(con.NoPedidoG);
-                    //long Observaciones = Convert.ToInt32(con.Observaciones);
-
                     if (Diferencia > 0)
                     {
                         Double ExistenciaActual = 0;
                         Double CantidadAct = 0;
-                        //var NExistencia = 0;
-
                         if (con.ExitenciaAct == Diferencia)
                         {
                             Diferencia = 0;
@@ -2932,9 +2241,7 @@ namespace Inventario.Controllers
                             Diferencia = Diferencia - (Double)con.ExitenciaAct;
                             ExistenciaActual = 0;
                             CantidadAct = (double)con.ExitenciaAct;
-
                         }
-
                         consulta = GuardarNStock((long)con.IdExistenciaAlmacenG, (long)con.IdCompraInterno, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
                         if (consulta == 0)
                         {
@@ -2946,14 +2253,9 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
-
             return Json(consulta, JsonRequestBehavior.AllowGet);
-
         }
-
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
         public int GuardarNStock(long IdExistenciaAlmacenG, long IdCompraInterno, long IdArticulo, String Articulo, double ExistenciaActual, double CantidadAct, String Observacion, long ExistenciaInicial, long IDCompras, int NoPedidoG)
         {
@@ -2962,20 +2264,11 @@ namespace Inventario.Controllers
             //{
             var cons = GuardarMovimientoDev((long)IdExistenciaAlmacenG, (long)IdCompraInterno, (long)IdArticulo, (string)Articulo, (double)ExistenciaActual, (double)CantidadAct, (string)Observacion, ExistenciaInicial, IDCompras, NoPedidoG);
             int consulta = 0;
-            //ExistenciaAlmacenG mpag = new ExistenciaAlmacenG();
-             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistenciaAlmacenG) && p.IdArticulo.Equals(IdArticulo)).First();
-            mpag.ExitenciaActual = ExistenciaActual;//Cambia el estatus en 0
-           // mpag.TipoDeOperacion = "DEVOLUCION";//Cambia el estatus en 0
-            //mpag.Observaciones = Observacion;
-            //InvBD.ExistenciaAlmacenG.InsertOnSubmit(mpag);
+            ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistenciaAlmacenG) && p.IdArticulo.Equals(IdArticulo)).First();
+            mpag.ExitenciaActual = ExistenciaActual;
             InvBD.SubmitChanges();//Guarda los datos en la Base de datos
 
-            nregistradosAfectados = 1;//Se pudo realizar
-                                      //}
-                                      //catch (Exception ex)
-                                      //{
-                                      //    nregistradosAfectados = 0;
-                                      //}
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
 
@@ -2986,21 +2279,16 @@ namespace Inventario.Controllers
             ExistenciaAlmacenG com = new ExistenciaAlmacenG();
             com.IdCompra = IDCompras;
             com.IdCompraInterno = IdCompraInterno;
-     
             com.ExitenciaInicial = ExistenciaInicial;
             com.ExitenciaActual = -CantidadAct;
-            //DateTime thisDay = DateTime.Today;
-
-            //com.Fecha = (thisDay.ToString());
             com.NoPedidoG = NoPedidoG;
             com.IdArticulo = IdArticulo;
             com.Articulo = Articulo;
             com.TipoDeOperacion = "Devolucion";
             com.Observaciones = Observacion;
-            //com.Estatus = 1;
             InvBD.ExistenciaAlmacenG.InsertOnSubmit(com);
             InvBD.SubmitChanges();
-            nregistradosAfectados = 1;//Se pudo realizar
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
 
@@ -3025,7 +2313,6 @@ namespace Inventario.Controllers
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                                          where ExistAlm.IdArticulo.Equals(Convert.ToInt32(IdArticulo[0])) && Compra.IdAsignacion.Equals(2) && Compra.IdSitio.Equals(Convert.ToInt32(IdTienda[1])) && (ExistAlm.ExitenciaActual > 0) && Compra.EstatusPedido.Equals(1)
                                          orderby Compra.NoPedido
-                                          //orderby ExistAlm.IdExistenciaAlmacenG
                                          select new
                                          {
                                              IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -3037,11 +2324,11 @@ namespace Inventario.Controllers
                                              IdCompraExterna = ExistAlm.IdCompra,
                                              ExitenciaAct = ExistAlm.ExitenciaActual,
                                              IdSitio = Compra.IdSitio,
-                                             Sitio=Compra.Sitio
+                                             Sitio = Compra.Sitio
                                          };
 
                 var IdDeTienda = IdTienda[1];
-   
+
                 Double Diferencia = Convert.ToInt32(Cantidad[1]);
                 foreach (var con in ConsultaIDArticulo)
                 {
@@ -3050,7 +2337,6 @@ namespace Inventario.Controllers
                     long IdExistenciaAlmacenG = Convert.ToInt32(con.IdExistenciaAlmacenG);
                     long IdCompraExterna = Convert.ToInt32(con.IdCompraExterna);
                     long IdSitio = Convert.ToInt32(con.IdSitio);
-                    //String Sitio = Convert.ToInt32(con.Sitio);
                     if (Diferencia > 0)
                     {
                         Double ExistenciaActual = 0;
@@ -3076,7 +2362,6 @@ namespace Inventario.Controllers
                             CantidadAct = (double)con.ExitenciaAct;
 
                         }
-
                         consulta = GuardarExistenciaActMovUsado((long)con.IdExistenciaAlmacenG, (long)con.IdCompraExterna, (long)con.IdArticulo, (string)con.Articulo, ExistenciaActual, CantidadAct, (long)con.IdSitio, (String)con.Sitio);
                         if (consulta == 0)
                         {
@@ -3088,49 +2373,34 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
 
         }
-        ///
         public int GuardarExistenciaActMovUsado(long IdExistencia, long IDCompraExt, long IDArticulo, string Articulo, double ExistenciaActual, double CantidadAct, long IdSitio, String Sitio)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
-          
             var cons = GuardarMovimientoUsado((long)IdExistencia, (long)IDArticulo, (long)IDCompraExt, (double)CantidadAct, (string)Articulo, (long)IdSitio, (String)Sitio);
             int consulta = 0;
-
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(IdExistencia) && p.IdArticulo.Equals(IDArticulo)).First();
             mpag.ExitenciaActual = ExistenciaActual;
-         
             InvBD.SubmitChanges();
-
-            nregistradosAfectados = 1;//Se pudo realizar
-                                      //}
-                                      //catch (Exception ex)
-                                      //{
-                                      //    nregistradosAfectados = 0;
-                                      //}
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
-        //----------------------------------------------------------------------------------------------------------------
         //Obtener la fecha de manera automática
         public static DateTime Today { get; }
-        public int GuardarMovimientoUsado(long IdExistencia, long IDArticulo, long IDCompraExt,  double CantidadAct, string Articulo, long IdSitio, String Sitio)
+        public int GuardarMovimientoUsado(long IdExistencia, long IDArticulo, long IDCompraExt, double CantidadAct, string Articulo, long IdSitio, String Sitio)
         {
             int nregistradosAfectados = 0;
-            
-        MovimientosTienda com = new MovimientosTienda();
+
+            MovimientosTienda com = new MovimientosTienda();
             com.IdExistencia = IdExistencia;
             com.IdCompra = IDCompraExt;
             com.Movimiento = "Usados";
             DateTime thisDay = DateTime.Today;
-       
+
             com.Fecha = (thisDay.ToString());
             com.Cantidad = CantidadAct;
             com.IdArticulo = IDArticulo;
@@ -3141,11 +2411,9 @@ namespace Inventario.Controllers
             com.Sitio = Sitio;
             InvBD.MovimientosTienda.InsertOnSubmit(com);
             InvBD.SubmitChanges();
-            nregistradosAfectados = 1;//Se pudo realizar
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
-
-
         public int GuardarExt(ExistenciaAlmacenG DatosExistenciaAlmacenG)
         {
             int Afectados = 0;
@@ -3155,8 +2423,6 @@ namespace Inventario.Controllers
             if (id.Equals(0))
             {
                 int nveces = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(DatosExistenciaAlmacenG.IdArticulo)).Count();
-
-                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces == 0)
                 {
                     InvBD.ExistenciaAlmacenG.InsertOnSubmit(DatosExistenciaAlmacenG);
@@ -3186,16 +2452,9 @@ namespace Inventario.Controllers
 
             return Afectados;
         }
-
-
-
-
-
         //---------------------------Restar pedidos Usados-----------------------------------------------
         public JsonResult ConsultaStockArticuloUsado(string DatosArticulos)
         {
-
-            
             string[] Articulos = DatosArticulos.Substring(0, DatosArticulos.Length - 1).Split('/');
             int consulta = 0;
 
@@ -3267,22 +2526,12 @@ namespace Inventario.Controllers
         public int GuardarNStockUsado(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-            nregistradosAfectados = 1;//Se pudo realizar
-            //}
-            //catch (Exception ex)
-            //{
-            //    nregistradosAfectados = 0;
-            //}
+            mpag.ExitenciaActual = NExistencia;
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
-
-
-
         //---------------------------Mostrar los articulos disponibles en la tienda con stock mayor a 0 para realizar mov.Usado 
         public JsonResult ConsultaPedidosUs(long idS)
         {
@@ -3301,9 +2550,8 @@ namespace Inventario.Controllers
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio.Equals(idS) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1)&& ExistAlm.ExitenciaActual>0
+                          where Compra.IdSitio.Equals(idS) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual > 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -3317,9 +2565,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaActual,
                               IdAsignacion = Compra.IdAsignacion,
@@ -3333,10 +2579,8 @@ namespace Inventario.Controllers
                 long tem2 = 0;
                 long tem3 = 0;
                 long pedi = Pedidos.Count();
-
                 foreach (var numero in Pedidos)
                 {
-
                     var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
@@ -3348,18 +2592,14 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -3379,7 +2619,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -3388,8 +2627,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -3417,7 +2654,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -3430,7 +2666,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -3443,14 +2678,6 @@ namespace Inventario.Controllers
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
-
-
         public JsonResult NuevaConsultaUsado(long Id)
         {
 
@@ -3460,9 +2687,7 @@ namespace Inventario.Controllers
             string Articulos = "";
             string NoPedidoGs = "";
             string IdExistenciaAlmacenG = "";
-            string Stock = "";//Es la suma del stock atcual de todas las compras
-
-
+            string Stock = "";
             string NoPedido = "";
             string IdAsignacion = "";
             string IdTienda = "";
@@ -3471,25 +2696,13 @@ namespace Inventario.Controllers
             string NumeroPedido = "";
             string Fechas = "";
             string Nombre = "";
-          //  string IdExistenciaAlmacenG = "";
             var ConsultaUsado = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(Id))
                  .Select(p => new
                  {
-                     //NoPedido = p.NoPedido,
-                     //IdCmpraInt = p.IdCompraInterno,
                      IdSitio = p.IdSitio,
-
                      IdCompraInterno = p.IdCompraInterno
 
                  });
-            //    var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
-            //         .Select(p => new
-            //         {
-            //             //NoPedido = p.NoPedido,
-            //             //IdCmpraInt = p.IdCompraInterno,
-            //             IdSitio = p.IdSitio,
-            //             IdCompraInterno = p.IdCompraInterno
-
             if (ConsultaUsado.Count() > 0)
             {
                 long contador = 0;
@@ -3502,25 +2715,11 @@ namespace Inventario.Controllers
                 {
                     IdSitios += comp.IdSitio + ",";
                     IdCompraInternos += comp.IdCompraInterno + ",";
-
-                    //   var ConsultaUsadoss = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(comp.IdCompraInterno)).OrderBy(p => p.NoPedidoG)
-                    //.Select(p => new
-                    //{
-
-                    //    IdCompraInterno = p.IdCompraInterno,
-                    //    NoPedidoG = p.NoPedidoG,
-                    //    Articulo = p.Articulo,
-                    //    IdArticulo = p.IdArticulo,
-                    //    StockActual = p.ExitenciaActual,
-                    //    idIdExistenciaAlmacenG = p.IdExistenciaAlmacenG
-                    //});
-
                     var ConsultaUsadoss = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG > (1)).OrderBy(p => p.IdCompraInterno)
                        .Select(p => new
                        {
                            pedido = p.Articulo,
                            asignacion = p.IdArticulo,
-                           //Idtienda = p.IdCompraInterno,
                            tiendas = p.ExitenciaActual,
                            IdArticulo = p.IdArticulo,
                            NumeroPedido = p.NoPedidoG,
@@ -3528,14 +2727,6 @@ namespace Inventario.Controllers
                            Fechas = p.ExitenciaInicial,
                            IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
                        });
-
-
-                    //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.ExitenciaActual>0 ).OrderBy(p => p.NoPedidoG)
-                    // .Select(p => new
-                    // {
-                    //     //fechaIngreso = p.FechaDeIngreso,
-                    //     ExitenciaActual = p.ExitenciaActual,
-                    // });
                     int SumaStock = 0;
                     foreach (var numero in ConsultaUsadoss)
                     {
@@ -3543,11 +2734,8 @@ namespace Inventario.Controllers
                         {
                             tem1 = numero.pedido;
                             tem2 = (int)numero.asignacion;
-                            // tem3 = (int)numero.Idtienda;
-
                             NoPedido += numero.pedido + ",";
                             IdAsignacion += numero.asignacion + ",";
-                            //  IdTienda += numero.Idtienda + ",";
                             NomTienda += numero.tiendas + ",";
                             IdArticulo += numero.IdArticulo + ",";
                             NumeroPedido += numero.NumeroPedido + ",";
@@ -3563,16 +2751,12 @@ namespace Inventario.Controllers
 
                             NoPedido += numero.pedido + ",";
                             IdAsignacion += numero.asignacion + ",";
-                            //IdTienda += numero.Idtienda + ",";
                             NomTienda += numero.tiendas + ",";
                             IdArticulo += numero.IdArticulo + ",";
                             NumeroPedido += numero.NumeroPedido + ",";
                             Fechas += numero.Fechas + ",";
                             Nombre += numero.Nombre + ",";
                             IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-                     
-                            //tem3 = (int)numero.Idtienda;
-
                             contador++;
                         }
                         else
@@ -3584,19 +2768,9 @@ namespace Inventario.Controllers
             }
             else
             {
-                //IdCompraInternos += "0" + ",";
-                //NoPedidoGs += "0" + ",";
-
-                //Articulos += "0" + ",";
-                //IdArticulos += "0" + ",";
-                //Stock += "0" + ",";
-                //IdExistenciaAlmacenG += "0" + ",";
-
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
-
                 IdArticulo += "0" + ",";
                 NumeroPedido += "0" + ",";
                 Fechas += "0" + ",";
@@ -3607,9 +2781,7 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
-
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
                 NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
                 Fechas = Fechas.Substring(0, Fechas.Length - 1),
@@ -3618,14 +2790,6 @@ namespace Inventario.Controllers
             };
             return Json(cons, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-        //---------------------------------
-
         public JsonResult ConsultaArticulosUsadosMov(long IDTienda)
         {
 
@@ -3635,25 +2799,14 @@ namespace Inventario.Controllers
             string Articulos = "";
             string NoPedidoGs = "";
             string IdExistenciaAlmacenG = "";
-            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Stock = "";
             var ConsultaUsado = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
                  .Select(p => new
                  {
-                     //NoPedido = p.NoPedido,
-                     //IdCmpraInt = p.IdCompraInterno,
                      IdSitio = p.IdSitio,
-                
                      IdCompraInterno = p.IdCompraInterno
 
                  });
-            //    var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
-            //         .Select(p => new
-            //         {
-            //             //NoPedido = p.NoPedido,
-            //             //IdCmpraInt = p.IdCompraInterno,
-            //             IdSitio = p.IdSitio,
-            //             IdCompraInterno = p.IdCompraInterno
-
             if (ConsultaUsado.Count() > 0)
             {
                 long contador = 0;
@@ -3675,16 +2828,9 @@ namespace Inventario.Controllers
                      NoPedidoG = p.NoPedidoG,
                      Articulo = p.Articulo,
                      IdArticulo = p.IdArticulo,
-                         StockActual = p.ExitenciaActual,
+                     StockActual = p.ExitenciaActual,
                      idIdExistenciaAlmacenG = p.IdExistenciaAlmacenG
                  });
-
-                    //var consultaFecha = InvBD.ExistenciaAlmacenG.Where(p => p.ExitenciaActual>0 ).OrderBy(p => p.NoPedidoG)
-                    // .Select(p => new
-                    // {
-                    //     //fechaIngreso = p.FechaDeIngreso,
-                    //     ExitenciaActual = p.ExitenciaActual,
-                    // });
                     int SumaStock = 0;
                     foreach (var usado in ConsultaUsadoss)
                     {
@@ -3692,8 +2838,6 @@ namespace Inventario.Controllers
                         {
                             tem1 = (int)usado.IdCompraInterno;
                             tem2 = (int)usado.NoPedidoG;
-
-
                             IdCompraInternos += usado.IdCompraInterno + ",";
                             NoPedidoGs += usado.NoPedidoG + ",";
                             Articulos += usado.Articulo + ",";
@@ -3701,15 +2845,9 @@ namespace Inventario.Controllers
                             IdExistenciaAlmacenG += usado.idIdExistenciaAlmacenG + ",";
                             int UltimoReg = ConsultaUsadoss.Count() - 1;
                             int cont = 0;
-                        
                             foreach (var comparacion in ConsultaUsadoss)
                             {
                                 SumaStock = (int)(SumaStock + comparacion.StockActual);
-
-                                //if (cont == UltimoReg)
-                                //{
-                                //    Fecha += comp.fechaIngreso + ",";
-                                //}
                                 cont++;
                             }
                             Stock += SumaStock + ",";
@@ -3723,27 +2861,15 @@ namespace Inventario.Controllers
                             NoPedidoGs += usado.NoPedidoG + ",";
                             Articulos += usado.Articulo + ",";
                             IdArticulos += usado.IdArticulo + ",";
-                            //IdArticulos += usado.IdArticulo + ",";
-
                             IdExistenciaAlmacenG += usado.idIdExistenciaAlmacenG + ",";
                             int UltimoReg = ConsultaUsadoss.Count() - 1;
                             int cont = 0;
-
                             foreach (var comparacion in ConsultaUsadoss)
                             {
                                 SumaStock = (int)(SumaStock + comparacion.StockActual);
-
-                                //if (cont == UltimoReg)
-                                //{
-                                //    Fecha += comp.fechaIngreso + ",";
-                                //}
                                 cont++;
                             }
                             Stock += SumaStock + ",";
-
-
-
-                            //contador++;
                         }
                         else
                         {
@@ -3756,60 +2882,34 @@ namespace Inventario.Controllers
             {
                 IdCompraInternos += "0" + ",";
                 NoPedidoGs += "0" + ",";
-
                 Articulos += "0" + ",";
                 IdArticulos += "0" + ",";
                 Stock += "0" + ",";
                 IdExistenciaAlmacenG += "0" + ",";
             }
-                var cons = new
-                {
-                    IdCompraInternos = IdCompraInternos.Substring(0, IdCompraInternos.Length - 1),
-                    NoPedidoGs = NoPedidoGs.Substring(0, NoPedidoGs.Length - 1),
-                    Articulos = Articulos.Substring(0, Articulos.Length - 1),
-                    IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
-                    IdSitios = IdSitios.Substring(0, IdSitios.Length - 1),
-                    Stock = Stock.Substring(0, Stock.Length - 1),
-                    IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
-                };
-                return Json(cons, JsonRequestBehavior.AllowGet);
-            }
-        //}
-
-
-
-
-
-
+            var cons = new
+            {
+                IdCompraInternos = IdCompraInternos.Substring(0, IdCompraInternos.Length - 1),
+                NoPedidoGs = NoPedidoGs.Substring(0, NoPedidoGs.Length - 1),
+                Articulos = Articulos.Substring(0, Articulos.Length - 1),
+                IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
+                IdSitios = IdSitios.Substring(0, IdSitios.Length - 1),
+                Stock = Stock.Substring(0, Stock.Length - 1),
+                IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
+            };
+            return Json(cons, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ConsultaStockArticuloUsadoSuper(string DatosArticulos)
         {
-
-
             string[] Articulos = DatosArticulos.Split(',');
             string[] Articulos2 = DatosArticulos.Split('/');
             int consulta = 0;
-
             for (int i = 0; i < Articulos.GetLength(0); i++)
             {
-
                 string[] IdArticulo = Articulos[i].Split(':');
                 string[] IdTienda = Articulos[i].Split('/');
-                //string[] Observaciones = IdArticulo[i].Split(':');
-
                 string[] Cantidad = Articulos2[i].Split(':');
-
                 int resultado = 0;
-
-                //var ConsultaIDArticulo = InvBD.ExistenciaAlmacenG.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Cantidad[0])) && p.ExitenciaActual > 0).OrderBy(p => p.NoPedidoG)
-                //.Select(p => new
-                //{
-                //    p.IdCompraInterno,
-                //    p.IdArticulo,
-                //    p.Articulo,
-                //    p.ExitenciaActual
-
-                //});
-
                 var ConsultaIDArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
                                          join Compra in InvBD.CompraInterno
                                      on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
@@ -3863,362 +2963,19 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
-
             return Json(consulta, JsonRequestBehavior.AllowGet);
-
         }
 
         public int GuardarNStockUsadoSuper(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-            nregistradosAfectados = 1;//Se pudo realizar
-            //}
-            //catch (Exception ex)
-            //{
-            //    nregistradosAfectados = 0;
-            //}
+            mpag.ExitenciaActual = NExistencia;
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
-
-        //public JsonResult ConsultaPedidosNumeroPedido( long IDTienda)
-        //{
-        //    string IdSitios = "";
-        //    string IdCompraInternos = "";
-        //    string IdArticulos = "";
-        //    string Articulos = "";
-        //    string NoPedidoGs = "";
-
-
-
-        //    var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda))
-        //         .Select(p => new
-        //         {
-        //             //NoPedido = p.NoPedido,
-        //             //IdCmpraInt = p.IdCompraInterno,
-        //             IdSitio = p.IdSitio,
-        //             IdCompraInterno = p.IdCompraInterno
-
-        //         });
-
-        //    if (ConsultaUsado.Count() > 0)
-        //    {
-        //        long contador = 0;
-        //        long tem1 = 0;
-        //        long tem2 = 0;
-
-        //        long pedi = ConsultaUsado.Count();
-
-        //        foreach (var usado in ConsultaUsado)
-        //        {
-        //            if (contador == 0)
-        //            {
-        //                tem1 = (int)usado.IdCompraInterno;
-        //                tem2 = (int)usado.NoPedidoG;
-
-
-        //                IdCompraInternos += usado.IdCompraInterno + ",";
-        //                NoPedidoGs += usado.NoPedidoG + ",";
-        //                Articulos += usado.Articulo + ",";
-        //                IdArticulos += usado.IdArticulo + ",";
-
-        //            }
-        //            if (usado.IdCompraInterno != tem1 || usado.NoPedidoG != tem2)
-        //            {
-        //                IdCompraInternos += usado.IdCompraInterno + ",";
-        //                NoPedidoGs += usado.NoPedidoG + ",";
-        //                Articulos += usado.Articulo + ",";
-        //                IdArticulos += usado.IdArticulo + ",";
-
-        //                tem1 = (int)usado.IdCompraInterno;
-        //                tem2 = (int)usado.NoPedidoG;
-
-
-
-        //                contador++;
-        //            }
-        //            else
-        //            {
-        //                contador++;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        IdCompraInternos += "0" + ",";
-        //        NoPedidoGs += "0" + ",";
-
-        //        Articulos += "0" + ",";
-        //        IdArticulos += "0" + ",";
-        //    }
-        //    var consulta = new
-        //    {
-        //        IdCompraInternos = IdCompraInternos.Substring(0, IdCompraInternos.Length - 1),
-        //        NoPedidoGs = NoPedidoGs.Substring(0, NoPedidoGs.Length - 1),
-        //        Articulos = Articulos.Substring(0, Articulos.Length - 1),
-        //        IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
-        //        IdSitios = IdSitios.Substring(0, IdSitios.Length - 1)
-        //    };
-        //    return Json(consulta, JsonRequestBehavior.AllowGet);
-        //}
-
-
-        //public JsonResult ConsultaArticulosUsados(long IDTienda)
-        //{
-
-        //    string id = "";
-        //    string NoPedido = "";
-        //    string Fecha = "";//Es la fecha de la ultima compra reaizada
-        //    string Stock = "";//Es la suma del stock atcual de todas las compras
-        //    string IdSitio = "";
-        //    string IdArticulos = "";
-        //    string Articulo = "";
-        //    string IdCmpraInt = "";
-        //    string IdTienda = "";
-        //    string Sitio = "";
-        //    string IdProveedor = "";
-        //    string Proveedor = "";
-
-        //    string IdExistenciaAlmacenG = "";
-        //    var ConsultaArticulo = InvBD.CompraInterno.Where(p => p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
-        //         .Select(p => new
-        //         {
-        //             //NoPedido = p.NoPedido,
-        //             //IdCmpraInt = p.IdCompraInterno,
-        //            IdSitio=p.IdSitio
-
-
-        //         });
-
-        //    if (ConsultaArticulo.Count() > 0)
-        //    {
-        //        long contador = 0;
-        //        long tem1 = 0;
-        //        long tem2 = 0;
-        //        long tem3 = 0;
-        //        long tem4 = 0;
-        //        long pedi = ConsultaArticulo.Count();
-
-        //        // int SumaStock = 0;
-        //        foreach (var numero in ConsultaArticulo)
-        //        {
-        //            var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
-        //             .Select(p => new
-        //             {
-        //                 fechaIngreso = p.FechaDeIngreso,
-        //                 ExitenciaActual = p.stockActual,
-        //             });
-
-        //            if (contador == 0)
-        //            {
-        //                tem1 = (int)numero.NoPedido;
-        //                tem2 = (int)numero.IdCmpraInt;
-        //                tem3 = (int)numero.IdSitio;
-        //                id += numero.id + ",";
-        //                NoPedido += numero.NoPedido + ",";
-        //                IdCmpraInt += numero.IdCmpraInt + ",";
-        //                IdSitio += numero.IdSitio + ",";
-        //                IdArticulos += numero.IdArticulo + ",";
-        //                Articulo += numero.Articulo + ",";
-        //                Fecha += numero.FechaDeIngreso + ",";
-        //                IdProveedor += numero.IdProveedor + ",";
-        //                Proveedor += numero.Proveedor + ",";
-
-        //                IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-        //                int UltimoReg = consultaFecha.Count() - 1;
-        //                int cont = 0;
-        //                int SumaStock = 0;
-        //                foreach (var comp in consultaFecha)
-        //                {
-        //                    SumaStock = (int)(SumaStock + comp.ExitenciaActual);
-
-        //                    if (cont == UltimoReg)
-        //                    {
-        //                        Fecha += comp.fechaIngreso + ",";
-        //                    }
-        //                    cont++;
-        //                }
-        //                Stock += SumaStock + ",";
-        //            }
-        //            if (numero.NoPedido != tem1 || numero.IdCmpraInt != tem2 || numero.IdSitio != tem3)
-        //            {
-        //                tem1 = (int)numero.NoPedido;
-        //                tem2 = (int)numero.IdCmpraInt;
-        //                tem3 = (int)numero.IdSitio;
-
-        //                id += numero.id + ",";
-        //                NoPedido += numero.NoPedido + ",";
-        //                IdCmpraInt += numero.IdCmpraInt + ",";
-        //                IdSitio += numero.IdSitio + ",";
-        //                Fecha += numero.FechaDeIngreso + ",";
-        //                IdProveedor += numero.IdProveedor + ",";
-        //                Proveedor += numero.Proveedor + ",";
-        //                IdArticulos += numero.IdArticulo + ",";
-        //                Articulo += numero.Articulo + ",";
-        //                IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-        //                contador++;
-
-        //                int UltimoReg = consultaFecha.Count() - 1;
-        //                int cont = 0;
-        //                int SumaStock = 0;
-        //                foreach (var comp in consultaFecha)
-        //                {
-        //                    SumaStock = (int)(SumaStock + comp.ExitenciaActual);
-
-        //                    if (cont == UltimoReg)
-        //                    {
-        //                        Fecha += comp.fechaIngreso + ",";
-        //                    }
-        //                    cont++;
-        //                }
-        //                Stock += SumaStock + ",";
-        //            }
-        //            else
-        //            {
-        //                contador++;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        id += " " + ",";
-        //        NoPedido += "No hay ningún articulo" + ",";
-        //        IdCmpraInt += " " + ",";
-        //        IdSitio += " " + ",";
-        //        IdArticulos += " " + ",";
-        //        Articulo += " " + ",";
-        //        Fecha += " " + ",";
-        //        Stock += " " + ",";
-        //        IdProveedor += " " + ",";
-        //        Proveedor += " " + ",";
-        //        IdExistenciaAlmacenG += " " + ",";
-        //    }
-        //    var consulta = new
-        //    {
-        //        id = id.Substring(0, id.Length - 1),
-        //        NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-        //        IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
-        //        IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
-        //        IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
-        //        Articulo = Articulo.Substring(0, Articulo.Length - 1),
-        //        Fecha = Fecha.Substring(0, Fecha.Length - 1),
-        //        Stock = Stock.Substring(0, Stock.Length - 1),
-        //        IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
-        //        Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
-        //        IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
-
-        //    };
-        //    return Json(consulta, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-
-
-        //public JsonResult ConsultaArticuloUs(long Id)
-        //{
-        //    string id = "";
-        //    string Nombre = "";
-        //    string NombreProveedor = "";
-        //    string Fechas = "";//Es la fecha de la ultima compra reaizada
-        //    string Stock = "";//Es la suma del stock atcual de todas las compras
-        //    string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
-        //    string NumeroPedido = "";
-        //    string Fecha = "";
-        //    string IdExistenciaAlmacenG = "";
-        //    var ConsultaArticulo = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                           join Compra in InvBD.CompraInterno
-        //                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                           join areas in InvBD.Areas
-        //                       on Compra.IdProveedor equals areas.IdAreas
-        //                           where Compra.IdSitio.Equals(Id) && Compra.EstatusPedido.Equals(1)
-        //                           //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-        //                           select new
-        //                           {
-        //                               IdPedidosInternos = ExistAlm.IdCompraInterno,
-        //                               NumeroPedido = ExistAlm.Articulo,
-        //                               NumPedidoProveedor = Compra.NoPedidoProveedor,
-        //                               nombres = ExistAlm.Articulo,
-        //                               CantidadSolicitada = ExistAlm.ExitenciaInicial,
-        //                               CantidadAprobada = ExistAlm.ExitenciaActual,
-        //                               Tipo = ExistAlm.TipoDeOperacion,
-        //                               IdProveedor = Compra.IdProveedor,
-        //                               Proveedor = Compra.Proveedor,
-        //                               IdTienda = Compra.IdSitio,
-        //                               Id = ExistAlm.IdArticulo,
-        //                               IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-        //                               FechaDeIngreso = Compra.FechaIngreso,
-        //                               ExitenciaActual= ExistAlm.ExitenciaActual,
-        //                               IdAsignacion=Compra.IdAsignacion
-        //                           };
-        //    foreach (var art in ConsultaArticulo)
-        //    {
-        //        id += art.Id + ",";
-        //        Nombre += art.nombres + ",";
-        //        NombreProveedor += art.nombres + ",";
-        //        NumeroPedido += art.NumeroPedido + ",";
-        //        Fecha += art.NumeroPedido + ",";
-        //        IdExistenciaAlmacenG += art.IdExistenciaAlmacenG + ",";
-        //        var consultaFecha = ConsultaArticulo.Where(p => p.Id.Equals(art.Id) && p.ExitenciaActual > 0).OrderBy(p => p.IdAsignacion)
-        //            .Select(p => new
-        //            {
-        //                fechaIngreso = p.FechaDeIngreso,
-        //                stockActual = p.ExitenciaActual,
-        //                //  costo = p.PrecioUnitario,
-        //            });
-
-        //        if (consultaFecha.Count() > 0)
-        //        {
-        //            int UltimoReg = consultaFecha.Count() - 1;
-        //            int cont = 0;
-        //            int SumaStock = 0;
-        //            //inicia
-        //            //DateTime FultCompra;                
-        //            foreach (var comp in consultaFecha)
-        //            {
-
-        //                SumaStock = (int)(SumaStock + comp.stockActual);
-        //                if (cont == 0)
-        //                {
-        //                    // Costos += comp.costo + ",";
-        //                }
-        //                if (cont == UltimoReg)
-        //                {
-        //                    Fechas += comp.fechaIngreso + ",";
-        //                }
-        //                cont++;
-        //            }
-        //            Stock += SumaStock + ",";
-        //            //termina
-        //        }
-        //        else
-        //        {
-        //            Costos += "0" + ",";
-
-        //            Fechas += "2010-08-10" + ",";
-        //            Stock += "0" + ",";
-        //        }
-        //    }
-        //    var ResultadoId = new { 
-        //        id = id.Substring(0, id.Length - 1), 
-        //        Nombre = Nombre.Substring(0, Nombre.Length - 1), 
-        //        Fechas = Fechas.Substring(0, Fechas.Length - 1), 
-        //        Stock = Stock.Substring(0, Stock.Length - 1),
-        //        NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
-        //        Fecha = Fecha.Substring(0, Fecha.Length - 1),
-        //        IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
-        //        NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1) };
-        //    return Json(ResultadoId, JsonRequestBehavior.AllowGet);
-        //}
-
-
         public JsonResult ConsultaArticuloUs(long Id)
         {
             string NumeroPedido = "";
@@ -4229,42 +2986,12 @@ namespace Inventario.Controllers
             string IdArticulo = "";
             string Fechas = "";
             string IdExistenciaAlmacenG = "";
-            //var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
-            //                join Compra in InvBD.CompraInterno
-            //            on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-            //                join areas in InvBD.Areas
-            //            on Compra.IdProveedor equals areas.IdAreas
-            //                where Compra.IdSitio.Equals(Id) && Compra.EstatusPedido.Equals(1)
-            //                //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-            //                select new
-            //                {
-            //                    IdPedidosInternos = ExistAlm.IdCompraInterno,
-            //                    IdCompraInterno = ExistAlm.IdCompraInterno,
-            //                    NumeroPedido = ExistAlm.Articulo,
-            //                    Pedido = ExistAlm.NoPedidoG,
-            //                    NumPedidoProveedor = Compra.NoPedidoProveedor,
-            //                    nombres = ExistAlm.Articulo,
-            //                    CantidadSolicitada = ExistAlm.ExitenciaInicial,
-            //                    CantidadAprobada = ExistAlm.ExitenciaActual,
-            //                    Tipo = ExistAlm.TipoDeOperacion,
-            //                    IdProveedor = Compra.IdProveedor,
-            //                    Proveedor = Compra.Proveedor,
-            //                    IdTienda = Compra.IdSitio,
-            //                    IdArticulo = ExistAlm.IdArticulo,
-            //                    IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-            //                    FechaDeIngreso = Compra.FechaIngreso,
-            //                    ExitenciaActual = ExistAlm.ExitenciaActual,
-            //                    IdAsignacion = Compra.IdAsignacion
-            //                };
-
-
-             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
+            var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                           join areas in InvBD.Areas
                       on Compra.IdProveedor equals areas.IdAreas
-                          where Compra.IdSitio>0 && Compra.EstatusPedido.Equals(1)
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
+                          where Compra.IdSitio > 0 && Compra.EstatusPedido.Equals(1)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -4278,7 +3005,6 @@ namespace Inventario.Controllers
                               Proveedor = Compra.Proveedor,
                               IdTienda = Compra.IdSitio,
                               IdArticulo = ExistAlm.IdArticulo,
-                              //Articulo = ExistAlm.NombreEmpresa,
                               FechaDeIngreso = Compra.FechaIngreso,
                           };
 
@@ -4296,18 +3022,15 @@ namespace Inventario.Controllers
                     {
                         tem1 = (int)numero.IdCompraInterno;
                         tem2 = (int)numero.Pedido;
-                        //tem3 = (int)numero.IdArticulo;
-
                         NumeroPedido += numero.Pedido + ",";
                         IdAsignacion += numero.IdAsignacion + ",";
                         IdTienda += numero.IdTienda + ",";
                         Nombre += numero.nombres + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         Fechas += numero.FechaDeIngreso + ",";
-                        //Nombre += numero.nombres + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                     }
-                    if (numero.IdCompraInterno != tem1 || numero.Pedido != tem2 )
+                    if (numero.IdCompraInterno != tem1 || numero.Pedido != tem2)
                     {
                         NumeroPedido += numero.nombres + ",";
                         IdAsignacion += numero.IdAsignacion + ",";
@@ -4315,13 +3038,9 @@ namespace Inventario.Controllers
                         Nombre += numero.nombres + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         Fechas += numero.FechaDeIngreso + ",";
-                       // Nombre += numero.nombres + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         tem1 = (int)numero.IdCompraInterno;
                         tem2 = (int)numero.Pedido;
-                        //tem3 = (int)numero.IdArticulo;
-
                         contador++;
                     }
                     else
@@ -4335,7 +3054,6 @@ namespace Inventario.Controllers
                 NumeroPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
                 IdTienda += "0" + ",";
-               // NomTienda += "0" + ",";
                 Nombre += "0" + ",";
                 IdArticulo += "0" + ",";
                 Fechas += "0" + ",";
@@ -4346,8 +3064,6 @@ namespace Inventario.Controllers
                 NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
                 IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
-                //NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
-
                 Nombre = Nombre.Substring(0, Nombre.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
                 Fechas = Fechas.Substring(0, Fechas.Length - 1),
@@ -4355,13 +3071,9 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
         //---------------------------Restar pedidos Usados-----------------------------------------------
         public JsonResult ConsultaStockArticuloUsadoLider(string DatosArticulos)
         {
-
-
             string[] Articulos = DatosArticulos.Substring(0, DatosArticulos.Length - 1).Split('/');
             int consulta = 0;
 
@@ -4421,68 +3133,19 @@ namespace Inventario.Controllers
                         break;
                     }
                 }
-
-
             }
-
             return Json(consulta, JsonRequestBehavior.AllowGet);
-
         }
-
         //---------Guardar el nuevo Stock en la tabla de comprasArticulos----------------------
         public int GuardarNStockUsadoLider(long ID, long IDA, double NExistencia)
         {
             int nregistradosAfectados = 0;
-            //try
-            //{
             ExistenciaAlmacenG mpag = InvBD.ExistenciaAlmacenG.Where(p => p.IdCompraInterno.Equals(ID) && p.IdArticulo.Equals(IDA)).First();
-            mpag.ExitenciaActual = NExistencia;//Cambia el estatus en 0
-            InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-            nregistradosAfectados = 1;//Se pudo realizar
-            //}
-            //catch (Exception ex)
-            //{
-            //    nregistradosAfectados = 0;
-            //}
+            mpag.ExitenciaActual = NExistencia;
+            InvBD.SubmitChanges();
+            nregistradosAfectados = 1;
             return nregistradosAfectados;
         }
-
-
-
-        //public JsonResult MostrarArtUsado(long id)
-        ////{(long Id)
-        //{
-        //    var numero = from ExistAlm in InvBD.ExistenciaAlmacenG
-        //                 join Compra in InvBD.CompraInterno
-        //             on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-        //                 join areas in InvBD.Areas
-        //             on Compra.IdProveedor equals areas.IdAreas
-        //                 where Compra.IdSitio.Equals(id) && Compra.EstatusPedido.Equals(1)
-        //                 //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-        //                 select new
-        //                 {
-        //                     IdPedidosInternos = ExistAlm.IdCompraInterno,
-        //                     NumeroPedido = ExistAlm.Articulo,
-        //                     NumPedidoProveedor = Compra.NoPedidoProveedor,
-        //                     Articulo = ExistAlm.Articulo,
-        //                     CantidadSolicitada = ExistAlm.ExitenciaInicial,
-        //                     CantidadAprobada = ExistAlm.ExitenciaActual,
-        //                     Tipo = ExistAlm.TipoDeOperacion,
-        //                     IdProveedor = Compra.IdProveedor,
-        //                     Proveedor = Compra.Proveedor,
-        //                     IdTienda = Compra.IdSitio,
-        //                     IdArticulo = ExistAlm.IdArticulo,
-        //                     //Articulo = ExistAlm.NombreEmpresa,
-        //                     Fecha = Compra.FechaIngreso,
-        //                 };
-        //    return Json(numero, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-
-
-
         ////---------------------------Visualizar Pedidos-----------------------------------------------
         public JsonResult ConsultaArticulosVisualizarPedidos(long IDTienda)
         {
@@ -4496,8 +3159,8 @@ namespace Inventario.Controllers
             string IdSitio = "";
             string id = "";
             string Articulo = "";
-            
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.IdSitio.Equals(IDTienda) && p.IdAsignacion.Equals(2)).OrderByDescending(p => p.IdPedidosInternos)
+
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1) && p.IdSitio.Equals(IDTienda) && p.IdAsignacion.Equals(2)).OrderByDescending(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.NumeroPedido,
@@ -4509,7 +3172,7 @@ namespace Inventario.Controllers
                    noProve = p.NumPedidoProveedor,
                    depa = p.Sitio,
                    IDDepa = p.IdSitio,
-                   IdSitio=p.IdSitio,
+                   IdSitio = p.IdSitio,
                });
             if (Pedidos.Count() > 0)
             {
@@ -4525,8 +3188,6 @@ namespace Inventario.Controllers
                     {
                         tem1 = (int)numero.pedido;
                         tem2 = (int)numero.noProve;
-
-
                         NoPedido += numero.pedido + ",";
                         NoProvedor += numero.noProve + ",";
                         Proveedor += numero.proveedors + ",";
@@ -4537,8 +3198,6 @@ namespace Inventario.Controllers
                         id += numero.id + ",";
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
-
-
                     }
                     if (numero.pedido != tem1 || numero.noProve != tem2)
                     {
@@ -4552,11 +3211,8 @@ namespace Inventario.Controllers
                         id += numero.id + ",";
                         IdSitio += numero.IdSitio + ",";
                         Articulo += numero.Articulo + ",";
-
-
                         tem1 = (int)numero.pedido;
                         tem2 = (int)numero.noProve;
-
                         contador++;
                     }
                     else
@@ -4592,186 +3248,8 @@ namespace Inventario.Controllers
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
                 Articulo = Articulo.Substring(0, Articulo.Length - 1)
             };
-
-            //   string id = "";
-            //   string NoPedido = "";
-            //   string Fecha = "";//Es la fecha de la ultima compra reaizada
-            //   string Stock = "";//Es la suma del stock atcual de todas las compras
-            //   string IdSitio = "";
-            //   string IdArticulos = "";
-            //   string Articulo = "";
-            //   string IdCmpraInt = "";
-            //   string IdTienda = "";
-            //   string Sitio = "";
-            //   string IdProveedor = "";
-            //   string Proveedor = "";
-
-            //   string IdExistenciaAlmacenG = "";
-            //   //var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
-            //   //                       join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
-            //   //                       on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-
-            //   //                       where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.ExitenciaActual >= 0
-            //   //                       select new
-
-            //   //                       {
-            //   //                           id = ExistenciaAlmacenG.IdArticulo,
-            //   //                           NoPedido = CompraInterno.NoPedido,
-            //   //                           IdCmpraInt = ExistenciaAlmacenG.IdCompraInterno,
-            //   //                           IdProveedor = CompraInterno.IdProveedor,
-            //   //                           Proveedor = CompraInterno.Proveedor,
-            //   //                           IdSitio = CompraInterno.IdSitio,
-            //   //                           Tiendas = CompraInterno.Sitio,
-            //   //                           IdArticulo = ExistenciaAlmacenG.IdArticulo,
-            //   //                           Articulo = ExistenciaAlmacenG.Articulo,
-            //   //                           FechaDeIngreso = CompraInterno.FechaIngreso,
-            //   //                           stockActual = ExistenciaAlmacenG.ExitenciaActual,
-            //   //                           IdAsignacion = CompraInterno.IdAsignacion,
-            //   //                           IdExistenciaAlmacenG = ExistenciaAlmacenG.IdExistenciaAlmacenG,
-            //   //                           //EstatusArticulo=ExistenciaAlmacenG.EstatusArticulo
-            //   //                       };
-            //   var ConsultaArticulo = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.IdSitio.Equals(IdTienda)).OrderByDescending(p => p.IdPedidosInternos)
-            //.Select(p => new
-            //{
-            //    id=p.IdArticulo,
-            //    NoPedido = p.NumeroPedido,
-            //    IdProveedor = p.IdProveedor,
-            //    proveedors = p.Proveedor,
-            //    fecha = p.Fecha,
-            //    noProve = p.NumPedidoProveedor,
-            //    depa = p.Sitio,
-            //    IdSitio=p.IdSitio,
-            //    Articulo=p.Articulo,
-            //    IdArticulo= p.IdArticulo,
-            //    FechaDeIngreso=p.Fecha,
-            //    Proveedor=p.Proveedor,
-            //    IDDepa = p.IdSitio,
-            //    stockActual=p.CantidadSolicitada,
-            //    IdAsignacion=p.IdAsignacion
-            //});
-            //   if (ConsultaArticulo.Count() > 0)
-            //   {
-            //       long contador = 0;
-            //       long tem1 = 0;
-            //       long tem2 = 0;
-            //       long tem3 = 0;
-            //       long tem4 = 0;
-            //       long pedi = ConsultaArticulo.Count();
-
-            //       // int SumaStock = 0;
-            //       foreach (var numero in ConsultaArticulo)
-            //       {
-            //           var consultaFecha = ConsultaArticulo.Where(p => p.id.Equals(numero.id) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(IDTienda)).OrderBy(p => p.NoPedido)
-            //            .Select(p => new
-            //            {
-            //                fechaIngreso = p.FechaDeIngreso,
-            //                ExitenciaActual = p.stockActual,
-            //            });
-
-            //           if (contador == 0)
-            //           {
-            //               tem1 = (int)numero.NoPedido;
-            //               tem2 = (int)numero.noProve;
-            //             //  tem3 = (int)numero.IdSitio;
-            //               id += numero.id + ",";
-            //               NoPedido += numero.NoPedido + ",";
-            //               IdCmpraInt += numero.IdProveedor + ",";
-            //               IdSitio += numero.IdSitio + ",";
-            //               IdArticulos += numero.IdArticulo + ",";
-            //               Articulo += numero.Articulo + ",";
-            //               Fecha += numero.FechaDeIngreso + ",";
-            //               IdProveedor += numero.IdProveedor + ",";
-            //               Proveedor += numero.Proveedor + ",";
-
-            //              // IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-            //               int UltimoReg = consultaFecha.Count() - 1;
-            //               int cont = 0;
-            //               int SumaStock = 0;
-            //               foreach (var comp in consultaFecha)
-            //               {
-            //                   SumaStock = (int)(SumaStock + comp.ExitenciaActual);
-
-            //                   if (cont == UltimoReg)
-            //                   {
-            //                       Fecha += comp.fechaIngreso + ",";
-            //                   }
-            //                   cont++;
-            //               }
-            //               Stock += SumaStock + ",";
-            //           }
-            //           if (numero.NoPedido != tem1 || numero.noProve != tem2)
-            //           {
-            //               tem1 = (int)numero.NoPedido;
-            //               tem2 = (int)numero.noProve;
-            //              // tem3 = (int)numero.IdSitio;
-
-            //               id += numero.id + ",";
-            //               NoPedido += numero.NoPedido + ",";
-            //              // IdCmpraInt += numero.IdCmpraInt + ",";
-            //               IdSitio += numero.IdSitio + ",";
-            //               Fecha += numero.FechaDeIngreso + ",";
-            //               IdProveedor += numero.IdProveedor + ",";
-            //               Proveedor += numero.Proveedor + ",";
-            //               IdArticulos += numero.IdArticulo + ",";
-            //               Articulo += numero.Articulo + ",";
-            //              // IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-            //               contador++;
-
-            //               int UltimoReg = consultaFecha.Count() - 1;
-            //               int cont = 0;
-            //               int SumaStock = 0;
-            //               foreach (var comp in consultaFecha)
-            //               {
-            //                   SumaStock = (int)(SumaStock + comp.ExitenciaActual);
-
-            //                   if (cont == UltimoReg)
-            //                   {
-            //                       Fecha += comp.fechaIngreso + ",";
-            //                   }
-            //                   cont++;
-            //               }
-            //               Stock += SumaStock + ",";
-            //           }
-            //           else
-            //           {
-            //               contador++;
-            //           }
-            //       }
-            //   }
-            //   else
-            //   {
-            //       id += " " + ",";
-            //       NoPedido += "No hay ningún articulo" + ",";
-            //       IdCmpraInt += " " + ",";
-            //       IdSitio += " " + ",";
-            //       IdArticulos += " " + ",";
-            //       Articulo += " " + ",";
-            //       Fecha += " " + ",";
-            //       Stock += " " + ",";
-            //       IdProveedor += " " + ",";
-            //       Proveedor += " " + ",";
-            //       //IdExistenciaAlmacenG += " " + ",";
-            //   }
-            //   var consulta = new
-            //   {
-            //       id = id.Substring(0, id.Length - 1),
-            //       NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
-            //       IdCmpraInt = IdCmpraInt.Substring(0, IdCmpraInt.Length - 1),
-            //       IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
-            //       IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
-            //       Articulo = Articulo.Substring(0, Articulo.Length - 1),
-            //       Fecha = Fecha.Substring(0, Fecha.Length - 1),
-            //       Stock = Stock.Substring(0, Stock.Length - 1),
-            //       IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
-            //       Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
-            //      // IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1),
-
-        //};
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
         //-----------------Visualizar pedidos realizados--------
         //Consulta de la función desplegar una sola vez los articulos repetidos por el Id de compraInterna en TiendasSupervisi+on y TiendasLider
         public JsonResult ConsultaArtPedidos(long idCompraInt, long idS)
@@ -4787,7 +3265,6 @@ namespace Inventario.Controllers
             string IdExistenciaAlmacenG = "";
             string Stock = "";
             string IdSitio = "";
-            //var Pedidos = InvBD.PedidosInternos.Where(p => IdSitio.Equals(idS)).OrderBy(p => p.IdPedidosInternos)
             var Pedidos = InvBD.PedidosInternos.Where(p => IdSitio.Equals(idS))
                .Select(p => new
                {
@@ -4805,38 +3282,6 @@ namespace Inventario.Controllers
 
 
                });
-
-
-            //var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
-            //              join Compra in InvBD.CompraInterno
-            //          on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-            //              join areas in InvBD.Areas
-            //          on Compra.IdProveedor equals areas.IdAreas
-            //              where Compra.IdCompraInterno.Equals(idCompraInt) && Compra.IdSitio.Equals(idS) && Compra.EstatusPedido.Equals(1)
-            //              orderby ExistAlm.IdArticulo
-            //              //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-            //              select new
-            //              {
-            //                  IdCompraInterno = ExistAlm.IdCompraInterno,
-            //                  Articulo = ExistAlm.Articulo,
-            //                  NumeroPedido = ExistAlm.NoPedidoG,
-            //                  NumPedidoProveedor = Compra.NoPedidoProveedor,
-            //                  nombres = ExistAlm.Articulo,
-            //                  IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-            //                  IdArticulo = ExistAlm.IdArticulo,
-            //                  Tipo = ExistAlm.TipoDeOperacion,
-            //                  IdProveedor = Compra.IdProveedor,
-            //                  Proveedor = Compra.Proveedor,
-            //                  tiendas = Compra.IdSitio,
-            //                  //IdArticulo = ExistAlm.IdArticulo,
-            //                  Nombre = ExistAlm.Articulo,
-            //                  //Fechas = Compra.FechaIngreso,
-            //                  FechaDeIngreso = Compra.FechaIngreso,
-            //                  stockActual = ExistAlm.ExitenciaActual,
-            //                  IdAsignacion = Compra.IdAsignacion,
-            //                  IdSitio = Compra.IdSitio,
-            //              };
-
             if (Pedidos.Count() > 0)
             {
                 long contador = 0;
@@ -4847,7 +3292,6 @@ namespace Inventario.Controllers
 
                 foreach (var numero in Pedidos)
                 {
-
                     var consultaFecha = Pedidos.Where(p => p.IdArticulo.Equals(numero.IdArticulo) && p.stockActual > 0 && p.IdAsignacion.Equals(2) && p.IdSitio.Equals(idS)).OrderBy(p => p.IdArticulo)
              .Select(p => new
              {
@@ -4859,8 +3303,6 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
                         IdSitio += numero.IdSitio + ",";
@@ -4869,8 +3311,6 @@ namespace Inventario.Controllers
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.Fechas + ",";
                         Nombre += numero.Nombre + ",";
-                       // IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -4896,11 +3336,8 @@ namespace Inventario.Controllers
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.Fechas + ",";
                         Nombre += numero.Nombre + ",";
-                        //IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -4935,7 +3372,6 @@ namespace Inventario.Controllers
                 NumeroPedido += "0" + ",";
                 Fechas += "0" + ",";
                 Nombre += "0" + ",";
-              //  IdExistenciaAlmacenG += "0" + ",";
             }
             var consulta = new
             {
@@ -4947,36 +3383,11 @@ namespace Inventario.Controllers
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
                 NumeroPedido = NumeroPedido.Substring(0, NumeroPedido.Length - 1),
                 Fechas = Fechas.Substring(0, Fechas.Length - 1),
-                Nombre = Nombre.Substring(0, Nombre.Length - 1),
-              //  IdExistenciaAlmacenG = IdExistenciaAlmacenG.Substring(0, IdExistenciaAlmacenG.Length - 1)
+                Nombre = Nombre.Substring(0, Nombre.Length - 1)
             };
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public JsonResult ConsultaArtTiendaDespl(long idCompraInt, long idS)
         {
             string NoPedido = "";
@@ -4990,56 +3401,22 @@ namespace Inventario.Controllers
             string IdExistenciaAlmacenG = "";
             string Stock = "";
             string IdSitio = "";
-            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.NumeroPedido.Equals(idCompraInt)&& p.IdSitio.Equals(idS) && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdPedidosInternos)
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1) && p.NumeroPedido.Equals(idCompraInt) && p.IdSitio.Equals(idS) && p.IdAsignacion.Equals(2)).OrderBy(p => p.IdPedidosInternos)
                .Select(p => new
                {
                    pedido = p.Articulo,
                    asignacion = p.IdArticulo,
-                   //Idtienda = p.IdCompraInterno,
                    tiendas = p.Sitio,
                    IdArticulo = p.IdArticulo,
                    NumeroPedido = p.NumeroPedido,
                    Nombre = p.Articulo,
                    FechaDeIngreso = p.Fecha,
                    IdExistenciaAlmacenG = p.IdProveedor,
-                   Articulo=p.Articulo,
-                   IdSitio=p.IdSitio,
-                   stockActual=p.CantidadSolicitada,
-                   IdAsignacion=p.IdAsignacion
+                   Articulo = p.Articulo,
+                   IdSitio = p.IdSitio,
+                   stockActual = p.CantidadSolicitada,
+                   IdAsignacion = p.IdAsignacion
                });
-
-
-            //var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
-            //              join Compra in InvBD.CompraInterno
-            //          on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-            //              join pedido in InvBD.PedidosInternos
-            //          on Compra.NoPedido equals pedido.NumeroPedido
-            //              where pedido.IdSitio.Equals(idS)&& pedido.Estatus.Equals(1)
-            //              //&& pedido.NumeroPedido.Equals(idCompraInt)
-            //              //orderby ExistAlm.IdArticulo
-            //              //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
-            //              select new
-            //              {
-            //                  IdCompraInterno = ExistAlm.IdCompraInterno,
-            //                  Articulo = ExistAlm.Articulo,
-            //                  NumeroPedido = pedido.NumeroPedido,
-            //                  NumPedidoProveedor = Compra.NoPedidoProveedor,
-            //                  nombres = pedido.Articulo,
-            //                  IdExistenciaAlmacenG = ExistAlm.IdExistenciaAlmacenG,
-            //                  IdArticulo = ExistAlm.IdArticulo,
-            //                  Tipo = ExistAlm.TipoDeOperacion,
-            //                  IdProveedor = Compra.IdProveedor,
-            //                  Proveedor = Compra.Proveedor,
-            //                  tiendas = Compra.IdSitio,
-            //                  //IdArticulo = ExistAlm.IdArticulo,
-            //                  Nombre = ExistAlm.Articulo,
-            //                  //Fechas = Compra.FechaIngreso,
-            //                  FechaDeIngreso = pedido.Fecha,
-            //                  stockActual = pedido.CantidadSolicitada,
-            //                  IdAsignacion = Compra.IdAsignacion,
-            //                  IdSitio = Compra.IdSitio,
-            //              };
-
             if (Pedidos.Count() > 0)
             {
                 long contador = 0;
@@ -5062,8 +3439,6 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
                         IdSitio += numero.IdSitio + ",";
@@ -5102,8 +3477,6 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
 
                         int UltimoReg = consultaFecha.Count() - 1;
@@ -5156,8 +3529,6 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
         //visualizar art de pedidos aceptados
         public JsonResult ConsultaTablaArtPedidosAceptados(long IdCompInt, long idS)
         {
@@ -5171,21 +3542,6 @@ namespace Inventario.Controllers
             string Nombre = "";
             string IdExistenciaAlmacenG = "";
             string Stock = "";
-            //var Pedidos = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG>(1)).OrderBy(p => p.IdExistenciaAlmacenG)
-            //   .Select(p => new
-            //   {
-            //       pedido = p.Articulo,
-            //       asignacion = p.IdArticulo,
-            //       //Idtienda = p.IdCompraInterno,
-            //       tiendas = p.ExitenciaActual,
-            //       IdArticulo = p.IdArticulo,
-            //       NumeroPedido=p.NoPedidoG,
-            //       Nombre=p.Articulo,
-            //       Fechas = p.ExitenciaInicial,
-            //        IdExistenciaAlmacenG = p.IdExistenciaAlmacenG,
-            //   });
-
-
             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
@@ -5193,7 +3549,6 @@ namespace Inventario.Controllers
                       on Compra.IdProveedor equals areas.IdAreas
                           where Compra.IdSitio.Equals(idS) && ExistAlm.IdCompraInterno.Equals(IdCompInt) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1) && ExistAlm.ExitenciaActual >= 0
                           orderby ExistAlm.IdArticulo
-                          //where ExistAlm.IdArticulo.Equals(id) && ExistAlm.NoPedidoG.Equals(no)
                           select new
                           {
                               IdCompraInterno = ExistAlm.IdCompraInterno,
@@ -5207,9 +3562,7 @@ namespace Inventario.Controllers
                               IdProveedor = Compra.IdProveedor,
                               Proveedor = Compra.Proveedor,
                               tiendas = Compra.IdSitio,
-                              //IdArticulo = ExistAlm.IdArticulo,
                               Nombre = ExistAlm.Articulo,
-                              //Fechas = Compra.FechaIngreso,
                               FechaDeIngreso = Compra.FechaIngreso,
                               stockActual = ExistAlm.ExitenciaInicial,
                               IdAsignacion = Compra.IdAsignacion,
@@ -5238,18 +3591,14 @@ namespace Inventario.Controllers
                     {
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        // tem3 = (int)numero.Idtienda;
-
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //  IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
                         Fechas += numero.FechaDeIngreso + ",";
                         Nombre += numero.Nombre + ",";
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -5269,7 +3618,6 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
-                        //IdTienda += numero.Idtienda + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
                         NumeroPedido += numero.NumeroPedido + ",";
@@ -5278,10 +3626,7 @@ namespace Inventario.Controllers
                         IdExistenciaAlmacenG += numero.IdExistenciaAlmacenG + ",";
                         tem1 = numero.Articulo;
                         tem2 = (int)numero.IdArticulo;
-                        //tem3 = (int)numero.Idtienda;
-
                         contador++;
-
                         int UltimoReg = consultaFecha.Count() - 1;
                         int cont = 0;
                         int SumaStock = 0;
@@ -5307,7 +3652,6 @@ namespace Inventario.Controllers
             {
                 NoPedido += "0" + ",";
                 IdAsignacion += "0" + ",";
-                //IdTienda += "0" + ",";
                 NomTienda += "0" + ",";
                 Stock += " " + ",";
                 IdArticulo += "0" + ",";
@@ -5320,7 +3664,6 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
-                //IdTienda = IdTienda.Substring(0, IdTienda.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
                 IdArticulo = IdArticulo.Substring(0, IdArticulo.Length - 1),
@@ -5332,21 +3675,6 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
-
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult PedidosOficina()
-        //{
-        //    return View();
-        //}
         public ActionResult PedidosTienda()
         {
             return View();
