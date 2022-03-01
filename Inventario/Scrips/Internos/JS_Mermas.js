@@ -147,13 +147,16 @@ function GuardarMerma() {
                 consultaFecha();
                 document.getElementById("btnCancelar").click();
             }
-            window.location.reload();
+            actulizar();
         }
     });
 
 
 }
 
+function actulizar() {
+    window.location.reload();
+}
 //------------------------------------------------------------------------------------
 
 function CambiarDev(ID) {
