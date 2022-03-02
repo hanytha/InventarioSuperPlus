@@ -41,33 +41,41 @@
 
                 if (Accesos.NIvel == 1)
                 {
-                   
+
                     string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
                     string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
 
 
                     <div class="row">
-                        <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
-                        <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
-
-                        @{ 
+                      
+                        @{
                             if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 6)
                             {
-                                  <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.FechaIngreso[i]</div>
+
+
                             }
-                            else if (ModeloExistGe.StockActual[i]== 0)
+                            else if (ModeloExistGe.StockActual[i] == 0)
                             {
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.NombreEmpresa[i]</div>
                                 <div class="col-sm" style="background-color:red">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.FechaIngreso[i]</div>
                             }
                             else
                             {
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.NombreEmpresa[i]</div>
                                 <div class="col-sm" style="background-color:white">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.FechaIngreso[i]</div>
                             }
                         }
-
-                      
-                        <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
-                        <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
 
                         <div class="col">
                             <label>
@@ -88,34 +96,43 @@
                 }
                 else if ((long)ModeloExistGe.IdAreas[i] == Accesos.IdArea)
                 {
-                   
+
                     string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
                     string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
 
 
                     <div class="row">
-                        <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
-                        <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
 
-                        
-                        @{ 
+                        @{
                             if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 6)
                             {
-                                  <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.FechaIngreso[i]</div>
+
+
                             }
-                            else if (ModeloExistGe.StockActual[i]== 0)
+                            else if (ModeloExistGe.StockActual[i] == 0)
                             {
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.NombreEmpresa[i]</div>
                                 <div class="col-sm" style="background-color:red">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.FechaIngreso[i]</div>
                             }
                             else
                             {
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.NombreEmpresa[i]</div>
                                 <div class="col-sm" style="background-color:white">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.FechaIngreso[i]</div>
                             }
                         }
 
-                      
-                        <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
-                        <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
+
 
                         <div class="col">
                             <label>
