@@ -1101,12 +1101,12 @@ function Verificar() {
                 NumPedidos[i].style.borderColor = 'Red';
                 Swal.fire(
                     '!',
-                    'La cantidad solicitada no puede ser igual o inferiror a cero!',
+                    'La cantidad solicitada no puede ser igual o menor a cero!',
                     'alert'
                 )
               //  swal("¡La cantidad solicitada no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
             }
-            if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
+            if (NumPedidos[i].value > 0) {
 
                 Precio[i].style.borderColor = 'Red';
             }
@@ -1116,15 +1116,15 @@ function Verificar() {
               //  Precio[i].style.backgroundColor = 'Red';
 
             }
-            if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
-                Swal.fire(
-                    '!',
-                    '   La cantidad solicitada no puede ser igual o inferior a cero!',
-                    'alert'
-                )
+            //if (NumPedidos[i].value <= 0) {
+            //    Swal.fire(
+            //        '!',
+            //        '   La cantidad solicitada no puede ser igual o inferior a cero!',
+            //        'alert'
+            //    )
              
-              //  swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
-            }
+            //  //  swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+            //}
         }
 
         if (combo == 0) {
