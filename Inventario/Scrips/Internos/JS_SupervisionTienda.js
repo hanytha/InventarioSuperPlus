@@ -92,7 +92,7 @@ function MovimientoModal(id) {
 
                 Swal.fire(
                     '!',
-                    'La cantidad excede al stock',
+                    '-La cantidad excede al stock-',
                     'alert'
                 )
             }
@@ -741,61 +741,61 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
-//Validaciones en el modal de usados
-function CalcularExistenciaAct(id) {
+////Validaciones en el modal de usados
+//function CalcularExistenciaAct(id) {
 
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        var res = document.getElementsByClassName("input-existAct");
+//        var res = document.getElementsByClassName("input-existAct");
 
-        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+//        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
 
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-        var Stock = document.getElementsByClassName("input-Stock");
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-                var CantidadSolicitada = cantidadUsados[i].value;
-                var Existencia = Stock[i].value;
-                var frm = new FormData();
-                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
-                if (resultado < 0) {
+//        var Stock = document.getElementsByClassName("input-Stock");
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+//                var CantidadSolicitada = cantidadUsados[i].value;
+//                var Existencia = Stock[i].value;
+//                var frm = new FormData();
+//                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+//                if (resultado < 0) {
 
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede al stock',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                }
+//                    Swal.fire(
+//                        '!',
+//                        '==La cantidad excede al stock==',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                    var cantidad = res[i].value = "";
+//                }
 
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-        //Validacion de numeros negativos en el modal de usados 
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//        //Validacion de numeros negativos en el modal de usados 
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
 
-                if (cantidadUsados[i].value < 0) {
+//                if (cantidadUsados[i].value < 0) {
 
-                    Swal.fire(
-                        '!',
-                        'No se aceptan valores negativos',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                }
+//                    Swal.fire(
+//                        '!',
+//                        'No se aceptan valores negativos',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                }
 
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-    });
-}
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//    });
+//}
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -1131,14 +1131,25 @@ function validarUsadosStock() {
         var Existencia = Stock[i].value;
         var frm = new FormData();
         resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+        if (resultado >= 0) {
+
+            //Swal.fire(
+            //    '!',
+            //    'La cantidad excede al stock---',
+            //    'alert'
+            //)
+            CantidadArt[i].style.borderColor = 'DimGray';
+            //var Result = CantidadArt[i].value = "";
+            //var cantidad = res[i].value = "";
+        }
         if (resultado < 0) {
 
             Swal.fire(
                 '!',
-                'La cantidad excede al stock',
+                'La cantidad excede al stock---',
                 'alert'
             )
-            CantidadArt[i].style.borderColor = 'white';
+            CantidadArt[i].style.borderColor = 'red';
             //var Result = CantidadArt[i].value = "";
             //var cantidad = res[i].value = "";
         }
@@ -1165,7 +1176,7 @@ function validarUsadosStock() {
         }
     }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado>0 ) {
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado>=0 ) {
         Swal.fire(
             '!',
             'Guardao!',
@@ -1216,7 +1227,7 @@ function validarUsadosStock() {
 
 
 //Validaciones en el modal de usados
-function CalcularExistenciaAct(id) {
+function CalcularExistenciaAct1111(id) {
 
     $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
@@ -1237,7 +1248,7 @@ function CalcularExistenciaAct(id) {
 
                     Swal.fire(
                         '!',
-                        'La cantidad excede al stock',
+                        'La cantidad excede',
                         'alert'
                     )
                     var Result = cantidadUsados[i].value = "";
