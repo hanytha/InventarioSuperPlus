@@ -293,6 +293,7 @@ function abrirModal(id, idS) {
 }
 
 function Prov(id) {
+    EliminarInput();
     $.get("/Supervision/ConsultaComJoinProveedor/?Id=" + id, function (Data) {
         document.getElementById("cmbProveedor").value = Data[0].IdProveedor;
         MostrarArticulosPedidos(id);
@@ -302,6 +303,7 @@ function Prov(id) {
 }
 
 function MostrarArticulosPedidos(id) {
+    //EliminarInput();
     var controlesObligatorio = document.getElementsByClassName("obligatorio");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {
@@ -340,10 +342,10 @@ function MostrarArticulosPedidos(id) {
 
 function EliminarInput() {
 
-    var regre = document.getElementsByClassName("LimpiarInput");
-    for (var i = 0; i < regre.length; i++) {
+    var limpiar = document.getElementsByClassName("LimpiarInput");
+    for (var i = 0; i < limpiar.length; i++) {
 
-        regre[i].style.display = 'none';
+        limpiar[i].style.display = 'none';
     }
 
 }
