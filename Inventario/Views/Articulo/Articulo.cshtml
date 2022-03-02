@@ -14,9 +14,6 @@
 <!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Botón del modal------------------------------------------------------------------------------------------------->
-<button onclick="abrirModal(0)" style=" background-color:mediumaquamarine;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
-<br />
-
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -64,9 +61,12 @@
 </script>
 
 <br />
-<div class="input-group mb-3 float-right">
+<div class="input-group float-right">
     <input style="border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;" class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search....">
     <span class="input-group-text" style="border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; " id="basic-addon1"><i class="fas fa-search"></i></span>
+    <label>
+        <button onclick="abrirModal(0)" style=" background-color:mediumaquamarine;" type="button" class="btn btn-success" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+    </label>
 </div>
 
 <!----------------------Crea Tabla de artículos----------------------------------->
