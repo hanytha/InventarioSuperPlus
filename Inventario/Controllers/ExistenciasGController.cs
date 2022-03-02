@@ -290,6 +290,7 @@ namespace Inventario.Controllers
                     IDA += g.IdArticulos + ",";
                     Unidad += g.Unidad + ",";
 
+
                     var articulos = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(g.IdArticulos) && p.Estatus.Equals(1)).OrderBy(p => p.NoCompra)
                   .Select(p => new
                   {
@@ -309,6 +310,10 @@ namespace Inventario.Controllers
                         }
                         cont++;
                     }
+                }
+                else
+                {
+                    Precio += "0" + ",";
                 }
             }
             var resul = new { Articulo = Articulo.Substring(0, Articulo.Length - 1),
