@@ -272,6 +272,8 @@ function LlenarCMBTienda(Id) {
 }
 
 function abrirModal(id, idS) {
+    ResetearBorde();
+  //  ResetearBordeInput();
     LlenarCMBTienda(idS);
     LimpiarCampos();
     if (idS == 0) {
@@ -324,7 +326,7 @@ function MostrarArticulosPedidos(id) {
                 TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
                 TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
-                TablaArticulo += "<input type='number' value='' class='input-cantidadPedidos  redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<input onkeyup='ResetearBordeInput();' type='number' value='' class='input-cantidadPedidos  redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -335,6 +337,33 @@ function MostrarArticulosPedidos(id) {
     }
 }
 
+
+function ResetearBordeInput() {
+   // var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
+            NumPedidos[i].style.borderColor = 'DimGray';
+        }
+        //if (Precio[i].value > 0 && Precio[i].disabled == false) {
+        //    Precio[i].style.backgroundColor = 'PaleTurquoise';
+        //}
+    }
+}
+
+function ResetearBorde() {
+    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
+            NumPedidos[i].style.borderColor = 'white';
+          
+        }
+    }
+}
 function abrirModalMovimiento(IDTienda) {
 
     LimpiarCampos();
@@ -665,17 +694,32 @@ function GuardarPedidoInterno() {
                             else if (data == -1) {
                                 alert("Ya existe este registro");
                             }
-
+                            else {
+                                restablecerBordesInput();
+                                document.getElementById("btnCancelar").click();
+                            }
                         }
                     });
                 }
             }
             alert("Los datos se guardaron correctamente");
-            ConsultaArticuloComp();
-            document.getElementById("btnCancelar").click();
+            //restablecerBordesInput();
+            //document.getElementById("btnCancelar").click();
         }
     }
 }
+
+function restablecerBordesInput() {
+    //var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        NumPedidos[i].style.borderColor = 'DimGray';
+        Precio[i].style.backgroundColor = 'White';
+    }
+}
+
 function GuardarDevolucion() {
     if (CamposObligatoriosDevolucion() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
@@ -1010,21 +1054,21 @@ function Verificar() {
     }
 
     if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0 && provee > 0) {
+        GuardarPedidoInterno();
+        //swal({
+        //    title: "Desea guardar el Pedido?",
+        //    text: "",
+        //    icon: "info",
+        //    buttons: true,
+        //    showCancelButton: true,
+        //    cancelButtonColor: '#d33',
+        //})
+        //    .then((willDelete) => {
+        //        if (willDelete) {
 
-        swal({
-            title: "Desea guardar el Pedido?",
-            text: "",
-            icon: "info",
-            buttons: true,
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-
-                    GuardarPedidoExterno();
-                }
-            });
+        //            GuardarPedidoInterno();
+        //        }
+        //    });
     }
     else {
         if (provee == "") {
