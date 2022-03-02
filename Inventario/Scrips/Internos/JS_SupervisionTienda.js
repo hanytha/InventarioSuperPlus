@@ -272,8 +272,9 @@ function LlenarCMBTienda(Id) {
 }
 
 function abrirModal(id, idS) {
-    ResetearBorde();
+    //ResetearBorde();
   //  ResetearBordeInput();
+    Borrar();
     LlenarCMBTienda(idS);
     LimpiarCampos();
     if (idS == 0) {
@@ -322,10 +323,10 @@ function MostrarArticulosPedidos(id) {
             TablaArticulo += "</div>";
 
             for (var i = 0; i < Data.length; i++) {
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticulo += "<input onkeyup='ResetearBordeInput();' type='number' value='' class='input-cantidadPedidos  redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
@@ -337,6 +338,15 @@ function MostrarArticulosPedidos(id) {
     }
 }
 
+function Borrar() {
+
+    var regre = document.getElementsByClassName("regresar");
+    for (var i = 0; i < regre.length; i++) {
+
+        regre[i].style.display = 'none';
+    }
+
+}
 
 function ResetearBordeInput() {
    // var Precio = document.getElementsByClassName("input-Precio");
@@ -353,17 +363,17 @@ function ResetearBordeInput() {
     }
 }
 
-function ResetearBorde() {
-    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+//function ResetearBorde() {
+//    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
 
-    for (let i = 0; i < NumPedidos.length; i++) {
+//    for (let i = 0; i < NumPedidos.length; i++) {
 
-        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
-            NumPedidos[i].style.borderColor = 'white';
+//        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
+//            NumPedidos[i].style.borderColor = 'white';
           
-        }
-    }
-}
+//        }
+//    }
+//}
 function abrirModalMovimiento(IDTienda) {
 
     LimpiarCampos();
