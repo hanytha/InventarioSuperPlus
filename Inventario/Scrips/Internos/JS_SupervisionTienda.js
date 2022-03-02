@@ -1034,17 +1034,13 @@ function MostrarUs(id, idS) {
 }
 
 
-function Verificar() {
+function ValidarDatosPedidos() {
     var CantidadArt = document.getElementsByClassName("input-cantidadPedidos");
     var Proveedor = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var ContadorMayorAcero = 0;
     for (let i = 0; i < CantidadArt.length; i++) {
         CantidadArt[i].style.borderColor = 'DimGray';
-        if (CantidadArt[i].value == 0) {
-
-            CantidadArt[i].style.borderColor = 'green';
-        }
         if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
             contador++;
         }
@@ -1065,16 +1061,24 @@ function Verificar() {
             )
         }
         for (let i = 0; i < CantidadArt.length; i++) {
-            if (CantidadArt[i].value <= 0) {
+            if (CantidadArt[i].value < 0) {
 
                 CantidadArt[i].style.borderColor = 'Red';
                 Swal.fire(
                     '!',
-                    'La cantidad solicitada no puede ser igual o menor a cero!',
+                    '¡La cantidad solicitada no puede ser negativo!',
                     'alert'
                 )
             }
+            if (CantidadArt[i].value == '0') {
 
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    'No se aceptan valores neutros!',
+                    'alert'
+                )
+            }
             if (CantidadArt[i].value == "") {
 
                 CantidadArt[i].style.borderColor = 'DimGray';
