@@ -1035,108 +1035,58 @@ function MostrarUs(id, idS) {
 
 
 function Verificar() {
-
-   // var Precio = document.getElementsByClassName("input-cantidadPedidos");
-    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
-    var combo = document.getElementById("cmbProveedor").value;
-    //var provee = document.getElementById("cmbProveedor").value;
+    var CantidadArt = document.getElementsByClassName("input-cantidadPedidos");
+    var Proveedor = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var ContadorMayorAcero = 0;
+    for (let i = 0; i < CantidadArt.length; i++) {
+        CantidadArt[i].style.borderColor = 'DimGray';
+        if (CantidadArt[i].value == 0) {
 
-    for (let i = 0; i < NumPedidos.length; i++) {
-
-        if (NumPedidos[i].value == 0) {
-
-            NumPedidos[i].style.borderColor = 'Red';
+            CantidadArt[i].style.borderColor = 'green';
         }
-
-        if (NumPedidos[i].value > 0 || NumPedidos[i].value < 0) {
-
+        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
             contador++;
         }
-        if (NumPedidos[i].value > 0) {
+        if (CantidadArt[i].value > 0) {
 
             ContadorMayorAcero++;
         }
     }
-
-    if (contador == ContadorMayorAcero && ContadorMayorAcero >= 1 && combo > 0) {
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && Proveedor > 0) {
         GuardarPedidoInterno();
-        //swal({
-        //    title: "Desea guardar el Pedido?",
-        //    text: "",
-        //    icon: "info",
-        //    buttons: true,
-        //    showCancelButton: true,
-        //    cancelButtonColor: '#d33',
-        //})
-        //    .then((willDelete) => {
-        //        if (willDelete) {
-
-        //            GuardarPedidoInterno();
-        //        }
-        //    });
     }
     else {
-        //if (provee == "") {
-        //    //swal("¡Seleccione un proveedor!", "", "warning");
-        //    Swal.fire(
-        //        '!',
-        //        'Seleccione un proveedor',
-        //        'alert'
-        //    )
-        //}
-        if (combo > 0) {
-           // swal("¡No se han ingresado datos!", "", "warning");
+        if (Proveedor > 0) {
             Swal.fire(
                 '!',
                 'Ingrese la cantidad de articulos a solicitar',
                 'alert'
             )
         }
+        for (let i = 0; i < CantidadArt.length; i++) {
+            if (CantidadArt[i].value <= 0) {
 
-        for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value < 0) {
-
-                NumPedidos[i].style.borderColor = 'Red';
+                CantidadArt[i].style.borderColor = 'Red';
                 Swal.fire(
                     '!',
                     'La cantidad solicitada no puede ser igual o menor a cero!',
                     'alert'
                 )
-              //  swal("¡La cantidad solicitada no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
             }
-            //if (NumPedidos[i].value > 0) {
 
-            //    Precio[i].style.borderColor = 'Red';
-            //}
-            if (NumPedidos[i].value < 0) {
+            if (CantidadArt[i].value == "") {
 
-                NumPedidos[i].style.borderColor = 'Red';
-              //  Precio[i].style.backgroundColor = 'Red';
-
+                CantidadArt[i].style.borderColor = 'DimGray';
             }
-            //if (NumPedidos[i].value <= 0) {
-            //    Swal.fire(
-            //        '!',
-            //        '   La cantidad solicitada no puede ser igual o inferior a cero!',
-            //        'alert'
-            //    )
-             
-            //  //  swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
-            //}
         }
 
-        if (combo == 0) {
+        if (Proveedor == 0) {
             Swal.fire(
                 '!',
                 'Seleccione el proveedor',
                 'alert'
             )
-
-           // swal("¡Seleccione su departamento!", "", "warning");
         }
-
-
     }
 }
