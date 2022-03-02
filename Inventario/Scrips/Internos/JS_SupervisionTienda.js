@@ -131,61 +131,7 @@ function ExisteciaDevolucion(id) {
         }
     });
 }
-//Validaciones en el modal de usados
-function CalcularExistenciaAct(id) {
 
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
-
-        var res = document.getElementsByClassName("input-existAct");
-
-        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
-
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
-
-        var Stock = document.getElementsByClassName("input-Stock");
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-                var CantidadSolicitada = cantidadUsados[i].value;
-                var Existencia = Stock[i].value;
-                var frm = new FormData();
-                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
-                if (resultado < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede al stock',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                }
-
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-        //Validacion de numeros negativos en el modal de usados 
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
-
-                if (cantidadUsados[i].value < 0) {
-
-                    Swal.fire(
-                        '!',
-                        'No se aceptan valores negativos',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                }
-
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-    });
-}
 //limpiar campos
 function LimpiarCampos() {
     var controlesTXT = document.getElementsByClassName("limpiar");
@@ -1093,4 +1039,223 @@ function ValidarDatosPedidos() {
             )
         }
     }
+}
+
+
+function validarUsados() {
+    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+    //var Proveedor = document.getElementById("cmbProveedor").value;
+    var contador = 0;
+    var ContadorMayorAcero = 0;
+
+    for (let i = 0; i < CantidadArt.length; i++) {
+        CantidadArt[i].style.borderColor = 'DimGray';
+        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+            contador++;
+        }
+        if (CantidadArt[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+    }
+
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && ContadorMayorAcero > 0) {
+        GuardarPedidoInterno();
+    }
+    else {
+        //if (Proveedor > 0) {
+        //    Swal.fire(
+        //        '!',
+        //        'Ingrese la cantidad de articulos a solicitar',
+        //        'alert'
+        //    )
+        //}
+        for (let i = 0; i < CantidadArt.length; i++) {
+            if (CantidadArt[i].value < 0) {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    '¡La cantidad solicitada no puede ser negativo!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == '0') {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    'No se aceptan valores neutros!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == "") {
+
+                CantidadArt[i].style.borderColor = 'DimGray';
+            }
+        }
+
+  
+    }
+}
+
+function validarUsadosStock() {
+    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+    var Stock = document.getElementsByClassName("input-Stock");
+    //var Proveedor = document.getElementById("cmbProveedor").value;
+    var contador = 0;
+    var ContadorMayorAcero = 0;
+
+    for (let i = 0; i < CantidadArt.length; i++) {
+       // CantidadArt[i].value.style.borderColor = 'DimGray';
+        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+
+            contador++;
+        }
+        if (CantidadArt[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+
+        for (let i = 0; i < Stock.length; i++) {
+            //  Stock[i].style.borderColor = 'DimGray';
+            if (Stock[i].value > 0 || Stock[i].value < 0) {
+                contador++;
+            }
+            if (Stock[i].value > 0) {
+
+                ContadorMayorAcero++;
+            }
+        }
+        var CantidadSolicitada = CantidadArt[i].value;
+        var Existencia = Stock[i].value;
+        var frm = new FormData();
+        var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+        if (resultado < 0) {
+
+            Swal.fire(
+                '!',
+                'La cantidad excede al stock',
+                'alert'
+            )
+            var Result = CantidadArt[i].value = "";
+            var cantidad = res[i].value = "";
+        }
+    }
+
+    for (let i = 0; i < Stock.length; i++) {
+      //  Stock[i].style.borderColor = 'DimGray';
+        if (Stock[i].value > 0 || Stock[i].value < 0) {
+            contador++;
+        }
+        if (Stock[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+    }
+
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 ) {
+        Swal.fire(
+            '!',
+            'Guardao!',
+            'alert'
+        )
+        //GuardarPedidoInterno();
+
+      
+    }
+    else {
+        //if (Proveedor > 0) {
+        //    Swal.fire(
+        //        '!',
+        //        'Ingrese la cantidad de articulos a solicitar',
+        //        'alert'
+        //    )
+        //}
+        for (let i = 0; i < CantidadArt.length; i++) {
+
+            if (CantidadArt[i].value < 0) {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    '¡La cantidad solicitada no puede ser negativo!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == '0') {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    'No se aceptan valores neutros!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == "") {
+
+                CantidadArt[i].style.borderColor = 'DimGray';
+            }
+        }
+
+
+    }
+}
+
+
+
+//Validaciones en el modal de usados
+function CalcularExistenciaAct(id) {
+
+    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+
+        var res = document.getElementsByClassName("input-existAct");
+
+        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+
+        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+
+        var Stock = document.getElementsByClassName("input-Stock");
+        for (let i = 0; i < cantidadUsados.length; i++) {
+            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+                var CantidadSolicitada = cantidadUsados[i].value;
+                var Existencia = Stock[i].value;
+                var frm = new FormData();
+                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+                if (resultado < 0) {
+
+                    Swal.fire(
+                        '!',
+                        'La cantidad excede al stock',
+                        'alert'
+                    )
+                    var Result = cantidadUsados[i].value = "";
+                    var cantidad = res[i].value = "";
+                }
+
+                else {
+                    var Result = res[i].value = resultado;
+                }
+            }
+        }
+        ////Validacion de numeros negativos en el modal de usados 
+        //for (let i = 0; i < cantidadUsados.length; i++) {
+        //    if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+
+        //        if (cantidadUsados[i].value < 0) {
+
+        //            Swal.fire(
+        //                '!',
+        //                'No se aceptan valores negativos',
+        //                'alert'
+        //            )
+        //            var Result = cantidadUsados[i].value = "";
+        //        }
+
+        //        else {
+        //            var Result = res[i].value = resultado;
+        //        }
+        //    }
+        //}
+    });
 }
