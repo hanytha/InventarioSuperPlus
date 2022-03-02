@@ -742,7 +742,7 @@ function llenarCombo(data, control) {
     control.innerHTML = contenido;
 }
 ////Validaciones en el modal de usados
-//function CalcularExistenciaAct(id) {
+//function ValidarUsados(id) {
 
 //    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
@@ -965,7 +965,7 @@ function MostrarUs(id, idS) {
                     TablaArticulo += "</label>"
                     TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='ValidarUsados(this.value)' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
@@ -1099,17 +1099,14 @@ function validarUsados() {
     }
 }
 
-function CalcularExistenciaAct() {
+function ValidarUsados() {
     var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
     var Stock = document.getElementsByClassName("input-Stock");
-    //var Proveedor = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var ContadorMayorAcero = 0;
     var resultado = 0;
     for (let i = 0; i < CantidadArt.length; i++) {
-       // CantidadArt[i].value.style.borderColor = 'DimGray';
         if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
-
             contador++;
         }
         if (CantidadArt[i].value > 0) {
@@ -1121,7 +1118,6 @@ function CalcularExistenciaAct() {
             CantidadArt[i].style.borderColor = 'DimGray';
         }
         for (let i = 0; i < Stock.length; i++) {
-            //  Stock[i].style.borderColor = 'DimGray';
             if (Stock[i].value > 0 || Stock[i].value < 0) {
                 contador++;
             }
@@ -1135,51 +1131,40 @@ function CalcularExistenciaAct() {
         var frm = new FormData();
         resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
         if (resultado >= 0) {
-
-            //Swal.fire(
-            //    '!',
-            //    'La cantidad excede al stock---',
-            //    'alert'
-            //)
             CantidadArt[i].style.borderColor = 'DimGray';
-            //var Result = CantidadArt[i].value = "";
-            //var cantidad = res[i].value = "";
         }
         if (resultado < 0) {
 
             Swal.fire(
                 '!',
-                'La cantidad excede al stock---',
+                'La cantidad excede al stock',
                 'alert'
             )
             CantidadArt[i].style.borderColor = 'red';
-            //var Result = CantidadArt[i].value = "";
             var cantidad = CantidadArt[i].value = "";
         }
-        if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado >= 0) {
-           // nuevoStockUsados();
+        if (CantidadArt[i].value < 0) {
+
             Swal.fire(
                 '!',
-                'Guardao!',
+                '¡La cantidad solicitada no puede ser negativo!',
                 'alert'
             )
-            //GuardarPedidoInterno();
-
-
+            CantidadArt[i].style.borderColor = 'red';
+            var cantidad = CantidadArt[i].value = "";
         }
         if (CantidadArt[i].value == '0') {
 
             CantidadArt[i].style.borderColor = 'Red';
             Swal.fire(
                 '!',
-                'No se aceptan valores neutros--!',
+                'No se aceptan valores neutros!',
                 'alert'
             )
         }
     }
 
     for (let i = 0; i < Stock.length; i++) {
-      //  Stock[i].style.borderColor = 'DimGray';
         if (Stock[i].value > 0 || Stock[i].value < 0) {
             contador++;
         }
@@ -1189,115 +1174,163 @@ function CalcularExistenciaAct() {
         }
     }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 ) {
-        //Swal.fire(
-        //    '!',
-        //    'Guardao!',
-        //    'alert'
-        //)
-        //GuardarPedidoInterno();
-
-      
-    }
-    else {
-        //if (Proveedor > 0) {
-        //    Swal.fire(
-        //        '!',
-        //        'Ingrese la cantidad de articulos a solicitar',
-        //        'alert'
-        //    )
-        //}
-        for (let i = 0; i < CantidadArt.length; i++) {
-            //if (CantidadArt[i].value == "") {
-
-            //    CantidadArt[i].style.borderColor = 'DimGray';
-            //}
-
-            if (CantidadArt[i].value < 0) {
-
-              //  CantidadArt[i].style.borderColor = 'Red';
-                Swal.fire(
-                    '!',
-                    '¡La cantidad solicitada no puede ser negativo!',
-                    'alert'
-                )
-                CantidadArt[i].style.borderColor = 'red';
-                //var Result = CantidadArt[i].value = "";
-                var cantidad = CantidadArt[i].value = "";
-            }
-            if (CantidadArt[i].value == '0') {
-
-                CantidadArt[i].style.borderColor = 'Red';
-                Swal.fire(
-                    '!',
-                    'No se aceptan valores neutros!',
-                    'alert'
-                )
-            }
-            //if (CantidadArt[i].value == "") {
-
-            //    CantidadArt[i].style.borderColor = 'DimGray';
-            //}
-        }
-
-
-    }
+ 
 }
 
 
 
-//Validaciones en el modal de usados
-function CalcularExistenciaAct1111(id) {
+////Validaciones en el modal de usados
+//function ValidarUsados1111(id) {
 
-    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
+//    $.get("/Supervision/ConsultaArticulos/?IDTienda=" + id, function (Data) {
 
-        var res = document.getElementsByClassName("input-existAct");
+//        var res = document.getElementsByClassName("input-existAct");
 
-        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
+//        var cantidadUsados = document.getElementsByClassName("input-cantidadUsados");
 
-        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
+//        var NomArticulos = document.getElementsByClassName("input-ArticuloUsados");
 
-        var Stock = document.getElementsByClassName("input-Stock");
-        for (let i = 0; i < cantidadUsados.length; i++) {
-            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
-                var CantidadSolicitada = cantidadUsados[i].value;
-                var Existencia = Stock[i].value;
-                var frm = new FormData();
-                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
-                if (resultado < 0) {
+//        var Stock = document.getElementsByClassName("input-Stock");
+//        for (let i = 0; i < cantidadUsados.length; i++) {
+//            if (cantidadUsados[i].value >= 1 && NomArticulos[i].value && Stock[i].value) {
+//                var CantidadSolicitada = cantidadUsados[i].value;
+//                var Existencia = Stock[i].value;
+//                var frm = new FormData();
+//                var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+//                if (resultado < 0) {
 
-                    Swal.fire(
-                        '!',
-                        'La cantidad excede',
-                        'alert'
-                    )
-                    var Result = cantidadUsados[i].value = "";
-                    var cantidad = res[i].value = "";
-                }
+//                    Swal.fire(
+//                        '!',
+//                        'La cantidad excede',
+//                        'alert'
+//                    )
+//                    var Result = cantidadUsados[i].value = "";
+//                    var cantidad = res[i].value = "";
+//                }
 
-                else {
-                    var Result = res[i].value = resultado;
-                }
-            }
-        }
-        ////Validacion de numeros negativos en el modal de usados 
-        //for (let i = 0; i < cantidadUsados.length; i++) {
-        //    if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
+//                else {
+//                    var Result = res[i].value = resultado;
+//                }
+//            }
+//        }
+//        ////Validacion de numeros negativos en el modal de usados 
+//        //for (let i = 0; i < cantidadUsados.length; i++) {
+//        //    if (cantidadUsados[i].value < 0 && NomArticulos[i].value && Stock[i].value) {
 
-        //        if (cantidadUsados[i].value < 0) {
+//        //        if (cantidadUsados[i].value < 0) {
 
-        //            Swal.fire(
-        //                '!',
-        //                'No se aceptan valores negativos',
-        //                'alert'
-        //            )
-        //            var Result = cantidadUsados[i].value = "";
-        //        }
+//        //            Swal.fire(
+//        //                '!',
+//        //                'No se aceptan valores negativos',
+//        //                'alert'
+//        //            )
+//        //            var Result = cantidadUsados[i].value = "";
+//        //        }
 
-        //        else {
-        //            var Result = res[i].value = resultado;
-        //        }
-        //    }
-        //}
-    });
-}
+//        //        else {
+//        //            var Result = res[i].value = resultado;
+//        //        }
+//        //    }
+//        //}
+//    });
+//}
+
+
+//function GUs() {
+//    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+//    var Stock = document.getElementsByClassName("input-Stock");
+//    var contador = 0;
+//    var ContadorMayorAcero = 0;
+//    var resultado = 0;
+//    for (let i = 0; i < CantidadArt.length; i++) {
+//        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+//            contador++;
+//        }
+//        if (CantidadArt[i].value > 0) {
+
+//            ContadorMayorAcero++;
+//        }
+//        if (CantidadArt[i].value == "") {
+
+//            CantidadArt[i].style.borderColor = 'DimGray';
+//        }
+//        for (let i = 0; i < Stock.length; i++) {
+//            if (Stock[i].value > 0 || Stock[i].value < 0) {
+//                contador++;
+//            }
+//            if (Stock[i].value > 0) {
+
+//                ContadorMayorAcero++;
+//            }
+//        }
+//        var CantidadSolicitada = CantidadArt[i].value;
+//        var Existencia = Stock[i].value;
+//        var frm = new FormData();
+//        resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+//        if (resultado >= 0) {
+//            CantidadArt[i].style.borderColor = 'DimGray';
+//        }
+//        if (resultado < 0) {
+
+//            Swal.fire(
+//                '!',
+//                'La cantidad excede al stock---',
+//                'alert'
+//            )
+//            CantidadArt[i].style.borderColor = 'red';
+//            var cantidad = CantidadArt[i].value = "";
+//        }
+//        if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado >= 0) {
+//            nuevoStockUsados();
+//            Swal.fire(
+//                '!',
+//                'Guardao!',
+//                'alert'
+//            )
+//        }
+//        if (CantidadArt[i].value < 0) {
+
+//            //  CantidadArt[i].style.borderColor = 'Red';
+//            Swal.fire(
+//                '!',
+//                '¡La cantidad solicitada no puede ser negativo--!',
+//                'alert'
+//            )
+//            CantidadArt[i].style.borderColor = 'red';
+//            //var Result = CantidadArt[i].value = "";
+//            var cantidad = CantidadArt[i].value = "";
+//        }
+//        if (CantidadArt[i].value == '0') {
+
+//            CantidadArt[i].style.borderColor = 'Red';
+//            Swal.fire(
+//                '!',
+//                'No se aceptan valores neutros--!',
+//                'alert'
+//            )
+//        }
+//    }
+
+//    for (let i = 0; i < Stock.length; i++) {
+//        //  Stock[i].style.borderColor = 'DimGray';
+//        if (Stock[i].value > 0 || Stock[i].value < 0) {
+//            contador++;
+//        }
+//        if (Stock[i].value > 0) {
+
+//            ContadorMayorAcero++;
+//        }
+//    }
+
+//    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0) {
+//        //Swal.fire(
+//        //    '!',
+//        //    'Guardao!',
+//        //    'alert'
+//        //)
+//        //GuardarPedidoInterno();
+
+
+//    }
+
+//}
