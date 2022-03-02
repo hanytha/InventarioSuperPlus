@@ -1036,10 +1036,10 @@ function MostrarUs(id, idS) {
 
 function Verificar() {
 
-    var Precio = document.getElementsByClassName("input-cantidadPedidos");
+   // var Precio = document.getElementsByClassName("input-cantidadPedidos");
     var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
     var combo = document.getElementById("cmbProveedor").value;
-    var provee = document.getElementById("cmbProveedor").value;
+    //var provee = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var ContadorMayorAcero = 0;
 
@@ -1060,7 +1060,7 @@ function Verificar() {
         }
     }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero >= 1 && combo > 0 && provee > 0) {
+    if (contador == ContadorMayorAcero && ContadorMayorAcero >= 1 && combo > 0) {
         GuardarPedidoInterno();
         //swal({
         //    title: "Desea guardar el Pedido?",
@@ -1078,14 +1078,14 @@ function Verificar() {
         //    });
     }
     else {
-        if (provee == "") {
-            //swal("¡Seleccione un proveedor!", "", "warning");
-            Swal.fire(
-                '!',
-                'Seleccione un proveedor',
-                'alert'
-            )
-        }
+        //if (provee == "") {
+        //    //swal("¡Seleccione un proveedor!", "", "warning");
+        //    Swal.fire(
+        //        '!',
+        //        'Seleccione un proveedor',
+        //        'alert'
+        //    )
+        //}
         if (combo > 0) {
            // swal("¡No se han ingresado datos!", "", "warning");
             Swal.fire(
@@ -1106,11 +1106,11 @@ function Verificar() {
                 )
               //  swal("¡La cantidad solicitada no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
             }
-            if (NumPedidos[i].value > 0) {
+            //if (NumPedidos[i].value > 0) {
 
-                Precio[i].style.borderColor = 'Red';
-            }
-            if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
+            //    Precio[i].style.borderColor = 'Red';
+            //}
+            if (NumPedidos[i].value < 0) {
 
                 NumPedidos[i].style.borderColor = 'Red';
               //  Precio[i].style.backgroundColor = 'Red';
