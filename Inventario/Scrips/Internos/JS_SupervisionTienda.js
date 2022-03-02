@@ -1045,17 +1045,16 @@ function Verificar() {
 
     for (let i = 0; i < NumPedidos.length; i++) {
 
-        if (Precio[i].value == 0) {
+        if (NumPedidos[i].value == 0) {
 
-            Precio[i].disabled = false;
-            Precio[i].style.borderColor = 'Red';
+            NumPedidos[i].style.borderColor = 'Red';
         }
 
-        if (Precio[i].value < 0 && NumPedidos[i].value > 0 || Precio[i].value > 0 && NumPedidos[i].value > 0 || Precio[i].value == 0 && NumPedidos[i].value > 0 || Precio[i].value < 0 && NumPedidos[i].value < 0 || Precio[i].value > 0 && NumPedidos[i].value < 0 || Precio[i].value == 0 && NumPedidos[i].value < 0) {
+        if (NumPedidos[i].value > 0 || NumPedidos[i].value < 0) {
 
             contador++;
         }
-        if (Precio[i].value > 0 && NumPedidos[i].value > 0) {
+        if (NumPedidos[i].value > 0) {
 
             contadorPrecio++;
         }
