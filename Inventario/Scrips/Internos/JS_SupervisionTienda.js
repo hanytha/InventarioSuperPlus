@@ -273,8 +273,8 @@ function LlenarCMBTienda(Id) {
 
 function abrirModal(id, idS) {
     //ResetearBorde();
-  //  ResetearBordeInput();
-    Borrar();
+  //  ResetearLosBordesInput();
+    EliminarInput();
     LlenarCMBTienda(idS);
     LimpiarCampos();
     if (idS == 0) {
@@ -323,11 +323,11 @@ function MostrarArticulosPedidos(id) {
             TablaArticulo += "</div>";
 
             for (var i = 0; i < Data.length; i++) {
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end LimpiarInput'>";
                 TablaArticulo += "<input  class='input-ArticulosPedidos sinborde limpiar ' disabled name=' " + Data[i].IdArticulos + "'   id='" + Data[i].IdArticulos + "'  value='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</div>";
-                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticulo += "<input onkeyup='ResetearBordeInput();' type='number' value='' class='input-cantidadPedidos  redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticulo += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end LimpiarInput'>";
+                TablaArticulo += "<input onkeyup='ResetearLosBordesInput();' type='number' value='' class='input-cantidadPedidos  redondeado limpiar' id='" + Data[i].IdArticulos + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticulo += "</label>"
                 TablaArticulo += "</div>";
             }
@@ -338,9 +338,9 @@ function MostrarArticulosPedidos(id) {
     }
 }
 
-function Borrar() {
+function EliminarInput() {
 
-    var regre = document.getElementsByClassName("regresar");
+    var regre = document.getElementsByClassName("LimpiarInput");
     for (var i = 0; i < regre.length; i++) {
 
         regre[i].style.display = 'none';
@@ -348,18 +348,14 @@ function Borrar() {
 
 }
 
-function ResetearBordeInput() {
-   // var Precio = document.getElementsByClassName("input-Precio");
-    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+function ResetearLosBordesInput() {
+    var InputCantidad = document.getElementsByClassName("input-cantidadPedidos");
 
-    for (let i = 0; i < NumPedidos.length; i++) {
+    for (let i = 0; i < InputCantidad.length; i++) {
 
-        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
-            NumPedidos[i].style.borderColor = 'DimGray';
+        if (InputCantidad[i].value >= 0) {
+            InputCantidad[i].style.borderColor = 'DimGray';
         }
-        //if (Precio[i].value > 0 && Precio[i].disabled == false) {
-        //    Precio[i].style.backgroundColor = 'PaleTurquoise';
-        //}
     }
 }
 
@@ -1136,6 +1132,7 @@ function Verificar() {
                 'Seleccione el proveedor',
                 'alert'
             )
+
            // swal("¡Seleccione su departamento!", "", "warning");
         }
 
