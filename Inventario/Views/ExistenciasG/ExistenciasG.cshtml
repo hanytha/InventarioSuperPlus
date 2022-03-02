@@ -96,7 +96,24 @@
                     <div class="row">
                         <div class="col-sm">@ModeloExistGe.IdArticulos[i]</div>
                         <div class="col-sm">@ModeloExistGe.NombreEmpresa[i]</div>
-                        <div class="col-sm">@ModeloExistGe.StockActual[i]</div>
+
+                        
+                        @{ 
+                            if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 6)
+                            {
+                                  <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                            }
+                            else if (ModeloExistGe.StockActual[i]== 0)
+                            {
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.StockActual[i]</div>
+                            }
+                            else
+                            {
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.StockActual[i]</div>
+                            }
+                        }
+
+                      
                         <div class="col-sm">@ModeloExistGe.PrecioUnitario[i]</div>
                         <div class="col-sm">@ModeloExistGe.FechaIngreso[i]</div>
 
