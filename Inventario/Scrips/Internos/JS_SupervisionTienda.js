@@ -1105,7 +1105,7 @@ function validarUsadosStock() {
     //var Proveedor = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var ContadorMayorAcero = 0;
-
+    var resultado = 0;
     for (let i = 0; i < CantidadArt.length; i++) {
        // CantidadArt[i].value.style.borderColor = 'DimGray';
         if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
@@ -1130,7 +1130,7 @@ function validarUsadosStock() {
         var CantidadSolicitada = CantidadArt[i].value;
         var Existencia = Stock[i].value;
         var frm = new FormData();
-        var resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+        resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
         if (resultado < 0) {
 
             Swal.fire(
@@ -1138,8 +1138,19 @@ function validarUsadosStock() {
                 'La cantidad excede al stock',
                 'alert'
             )
-            var Result = CantidadArt[i].value = "";
-            var cantidad = res[i].value = "";
+            CantidadArt[i].style.borderColor = 'white';
+            //var Result = CantidadArt[i].value = "";
+            //var cantidad = res[i].value = "";
+        }
+        if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado > 0) {
+            Swal.fire(
+                '!',
+                'Guardao!',
+                'alert'
+            )
+            //GuardarPedidoInterno();
+
+
         }
     }
 
@@ -1154,7 +1165,7 @@ function validarUsadosStock() {
         }
     }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 ) {
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado>0 ) {
         Swal.fire(
             '!',
             'Guardao!',
