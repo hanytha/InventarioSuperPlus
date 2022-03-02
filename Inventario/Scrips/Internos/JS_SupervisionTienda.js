@@ -1041,7 +1041,7 @@ function Verificar() {
     var combo = document.getElementById("cmbProveedor").value;
     var provee = document.getElementById("cmbProveedor").value;
     var contador = 0;
-    var contadorPrecio = 0;
+    var ContadorMayorAcero = 0;
 
     for (let i = 0; i < NumPedidos.length; i++) {
 
@@ -1056,11 +1056,11 @@ function Verificar() {
         }
         if (NumPedidos[i].value > 0) {
 
-            contadorPrecio++;
+            ContadorMayorAcero++;
         }
     }
 
-    if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0 && provee > 0) {
+    if (contador == ContadorMayorAcero && ContadorMayorAcero >= 1 && combo > 0 && provee > 0) {
         GuardarPedidoInterno();
         //swal({
         //    title: "Desea guardar el Pedido?",
