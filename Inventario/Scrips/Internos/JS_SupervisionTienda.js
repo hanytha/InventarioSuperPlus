@@ -1099,7 +1099,7 @@ function validarUsados() {
     }
 }
 
-function validarUsadosStock() {
+function CalcularExistenciaAct() {
     var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
     var Stock = document.getElementsByClassName("input-Stock");
     //var Proveedor = document.getElementById("cmbProveedor").value;
@@ -1151,9 +1151,10 @@ function validarUsadosStock() {
             )
             CantidadArt[i].style.borderColor = 'red';
             //var Result = CantidadArt[i].value = "";
-            //var cantidad = res[i].value = "";
+            var cantidad = CantidadArt[i].value = "";
         }
-        if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado > 0) {
+        if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado >= 0) {
+           // nuevoStockUsados();
             Swal.fire(
                 '!',
                 'Guardao!',
@@ -1162,6 +1163,15 @@ function validarUsadosStock() {
             //GuardarPedidoInterno();
 
 
+        }
+        if (CantidadArt[i].value == '0') {
+
+            CantidadArt[i].style.borderColor = 'Red';
+            Swal.fire(
+                '!',
+                'No se aceptan valores neutros--!',
+                'alert'
+            )
         }
     }
 
@@ -1176,12 +1186,12 @@ function validarUsadosStock() {
         }
     }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && resultado>=0 ) {
-        Swal.fire(
-            '!',
-            'Guardao!',
-            'alert'
-        )
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 ) {
+        //Swal.fire(
+        //    '!',
+        //    'Guardao!',
+        //    'alert'
+        //)
         //GuardarPedidoInterno();
 
       
@@ -1195,15 +1205,22 @@ function validarUsadosStock() {
         //    )
         //}
         for (let i = 0; i < CantidadArt.length; i++) {
+            if (CantidadArt[i].value == "") {
+
+                CantidadArt[i].style.borderColor = 'DimGray';
+            }
 
             if (CantidadArt[i].value < 0) {
 
-                CantidadArt[i].style.borderColor = 'Red';
+              //  CantidadArt[i].style.borderColor = 'Red';
                 Swal.fire(
                     '!',
                     '¡La cantidad solicitada no puede ser negativo!',
                     'alert'
                 )
+                CantidadArt[i].style.borderColor = 'red';
+                //var Result = CantidadArt[i].value = "";
+                var cantidad = CantidadArt[i].value = "";
             }
             if (CantidadArt[i].value == '0') {
 
@@ -1214,10 +1231,10 @@ function validarUsadosStock() {
                     'alert'
                 )
             }
-            if (CantidadArt[i].value == "") {
+            //if (CantidadArt[i].value == "") {
 
-                CantidadArt[i].style.borderColor = 'DimGray';
-            }
+            //    CantidadArt[i].style.borderColor = 'DimGray';
+            //}
         }
 
 
