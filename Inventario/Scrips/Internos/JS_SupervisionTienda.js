@@ -1116,7 +1116,10 @@ function CalcularExistenciaAct() {
 
             ContadorMayorAcero++;
         }
+        if (CantidadArt[i].value == "") {
 
+            CantidadArt[i].style.borderColor = 'DimGray';
+        }
         for (let i = 0; i < Stock.length; i++) {
             //  Stock[i].style.borderColor = 'DimGray';
             if (Stock[i].value > 0 || Stock[i].value < 0) {
@@ -1205,10 +1208,10 @@ function CalcularExistenciaAct() {
         //    )
         //}
         for (let i = 0; i < CantidadArt.length; i++) {
-            if (CantidadArt[i].value == "") {
+            //if (CantidadArt[i].value == "") {
 
-                CantidadArt[i].style.borderColor = 'DimGray';
-            }
+            //    CantidadArt[i].style.borderColor = 'DimGray';
+            //}
 
             if (CantidadArt[i].value < 0) {
 
