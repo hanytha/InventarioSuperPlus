@@ -980,3 +980,111 @@ function MostrarUs(id, idS) {
         });
     }
 }
+
+
+function Verificar() {
+
+    var Precio = document.getElementsByClassName("input-cantidadPedidos");
+    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+    var combo = document.getElementById("cmbProveedor").value;
+    var provee = document.getElementById("cmbProveedor").value;
+    var contador = 0;
+    var contadorPrecio = 0;
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (Precio[i].value == 0) {
+
+            Precio[i].disabled = false;
+            Precio[i].style.borderColor = 'Red';
+        }
+
+        if (Precio[i].value < 0 && NumPedidos[i].value > 0 || Precio[i].value > 0 && NumPedidos[i].value > 0 || Precio[i].value == 0 && NumPedidos[i].value > 0 || Precio[i].value < 0 && NumPedidos[i].value < 0 || Precio[i].value > 0 && NumPedidos[i].value < 0 || Precio[i].value == 0 && NumPedidos[i].value < 0) {
+
+            contador++;
+        }
+        if (Precio[i].value > 0 && NumPedidos[i].value > 0) {
+
+            contadorPrecio++;
+        }
+    }
+
+    if (contador == contadorPrecio && contadorPrecio >= 1 && combo > 0 && provee > 0) {
+
+        swal({
+            title: "Desea guardar el Pedido?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    GuardarPedidoExterno();
+                }
+            });
+    }
+    else {
+        if (provee == "") {
+            //swal("¡Seleccione un proveedor!", "", "warning");
+            Swal.fire(
+                '!',
+                'Seleccione un proveedor',
+                'alert'
+            )
+        }
+        if (combo > 0) {
+           // swal("¡No se han ingresado datos!", "", "warning");
+            Swal.fire(
+                '!',
+                'Ingrese la cantidad de articulos a solicitar',
+                'alert'
+            )
+        }
+
+        for (let i = 0; i < NumPedidos.length; i++) {
+            if (NumPedidos[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    'La cantidad solicitada no puede ser igual o inferiror a cero!',
+                    'alert'
+                )
+              //  swal("¡La cantidad solicitada no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
+            }
+            if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
+
+                Precio[i].style.borderColor = 'Red';
+            }
+            if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+              //  Precio[i].style.backgroundColor = 'Red';
+
+            }
+            if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
+                Swal.fire(
+                    '!',
+                    '   La cantidad solicitada no puede ser igual o inferior a cero!',
+                    'alert'
+                )
+             
+              //  swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+            }
+        }
+
+        if (combo == 0) {
+            Swal.fire(
+                '!',
+                'Seleccione el proveedor',
+                'alert'
+            )
+           // swal("¡Seleccione su departamento!", "", "warning");
+        }
+
+
+    }
+}
