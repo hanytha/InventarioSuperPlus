@@ -117,14 +117,14 @@ function ConsultaArticuloCompra(IDTienda) {
         });
     }
 }
-function ConsultaArticuloCompra1(IDTienda) {
+function ConsultaAceptarPedidoAdm(IDTienda) {
     if (IDTienda == 0) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
         $.get("/Supervision/ConsultaArticulosAceptar/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
-            CodigoHtmlArticuloComp += "<div id='contenedorAceptar1'>";
+            CodigoHtmlArticuloComp += "<div id='contenedorAceptarPedido'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
             CodigoHtmlArticuloComp += "<div class='row'>";
             CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
@@ -166,7 +166,7 @@ function ConsultaArticuloCompra1(IDTienda) {
             CodigoHtmlArticuloComp += "</div>";
             CodigoHtmlArticuloComp += "</br>";
             CodigoHtmlArticuloComp += "</br>";
-            let contenedorAceptar = "contenedorAceptar1" + IDTienda;
+            let contenedorAceptar = "contenedorAceptarPedido" + IDTienda;
             document.getElementById(contenedorAceptar).innerHTML = CodigoHtmlArticuloComp;
         });
     }

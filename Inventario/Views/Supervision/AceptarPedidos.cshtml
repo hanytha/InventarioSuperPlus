@@ -143,9 +143,9 @@
 
 
 
-<div id="accordionAceptar1"></div>
+<div id="accordionAceptarPedido"></div>
 
-<div class="accordionAceptar1" id="AcordeonSucursalesAceptar1">
+<div class="accordionAceptarPedido" id="accordionAceptarPedido">
     @{
         if (Accesos.IdPerfil == 1)
         {
@@ -164,26 +164,26 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar1 = "AccordionAceptar1" + @TiendasSupervision.IDTienda[i];
+                    string ColapseAceptarPedido = "accordionAceptarPedido" + @TiendasSupervision.IDTienda[i];
 
                     string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedorAceptar1 = "contenedorAceptar1" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptarPedido = "contenedorAceptarPedido" + @TiendasSupervision.IDTienda[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloCompra1(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar1" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar1" class="collapsed">
+                                <a onclick="ConsultaAceptarPedidoAdm(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptarPedido" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptarPedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                     <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
-                            <div id="@ColapseAceptar1" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                            <div id="@ColapseAceptarPedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
                                 <div class="card-body">
                                     <div class="row">
                                         <div>
                                             <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
 
                                         </div>
-                                        <div id="@contenedorAceptar1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                        <div id="@contenedorAceptarPedido" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
 
                                 </div>
