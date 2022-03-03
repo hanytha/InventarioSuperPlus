@@ -269,10 +269,11 @@
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
     <Content Include="Views\Supervision\TiendaLider.cshtml" />
-    <Content Include="Views\Supervision\PedidosTienda.cshtml" />
+    <Content Include="Views\Supervision\PedidosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidos.cshtml" />
     <Content Include="Views\MovimientosOficina\MovimientosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidosOficina.cshtml" />
+    <Content Include="Views\Supervision\PedidosTienda.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

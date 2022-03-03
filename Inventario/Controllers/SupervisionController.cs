@@ -3744,6 +3744,10 @@ namespace Inventario.Controllers
         {
             return View();
         }
+        public ActionResult PedidosOficina()
+        {
+            return View();
+        }
         
     }
 }
