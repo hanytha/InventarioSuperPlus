@@ -139,36 +139,36 @@ function EliminarCategoria(id) {
 
 
 //*******************************************************************************************
-not();
-function not() {
+//not();
+//function not() {
 
-        $.get("/Categoria/ConsultaNot", function (Data) {
-            CrearTablaCategorias(Data);
-        }
-        );
+//        $.get("/Categoria/ConsultaNot", function (Data) {
+//            CrearTablaCategorias(Data);
+//        }
+//        );
     
-    function CrearTablaCategorias(Data) {
+//    function CrearTablaCategorias(Data) {
 
-        for (var i = 0; i < Data.length; i++) {
+//        for (var i = 0; i < Data.length; i++) {
 
-            if (Data[i].StockActual > 0) {
-                Push.create('Advertencia!', {
-                    body: '' + Data[i].Articulo + ' esta por agotarse ',
-                    icon: 'icon.png',
+//            if (Data[i].StockActual > 0) {
+//                Push.create('Advertencia!', {
+//                    body: '' + Data[i].Articulo + ' esta por agotarse ',
+//                    icon: 'icon.png',
 
-                });
-            }
-            if (Data[i].StockActual == 0) {
+//                });
+//            }
+//            if (Data[i].StockActual == 0) {
 
-                Push.create('Advertencia!', {
-                    body: '' + Data[i].Articulo + ' ya no cuenta con stock ',
-                    icon: 'icon.png',
+//                Push.create('Advertencia!', {
+//                    body: '' + Data[i].Articulo + ' ya no cuenta con stock ',
+//                    icon: 'icon.png',
 
-                });
+//                });
 
-            }
-        }
+//            }
+//        }
 
-    }
+//    }
 
-}
+//}
