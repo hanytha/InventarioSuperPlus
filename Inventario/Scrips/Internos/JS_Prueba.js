@@ -35,7 +35,7 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button  title='Clic para desplegar Artículos de la misma compra' class='btn btn-outline-warning'                             onclick='Desplegar2(" + Data[i].NoCompra + " , "+ Data[i].IdArticulo +")' type='button' data-toggle='collapse'                                          data-target='#desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' aria-expanded='false'                                                   aria-controls='desplegable2(" + Data[i].NoCompra + Data[i].IdArticulo +")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button  data-title='Ver_tabla' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + " , "+ Data[i].IdArticulo +")' type='button' data-toggle='collapse'  data-target='#desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' aria-expanded='false'                      aria-controls='desplegable2(" + Data[i].NoCompra + Data[i].IdArticulo +")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
