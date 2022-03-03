@@ -58,7 +58,7 @@
                     }
                     string Colapse = "Accordion" + @ModeloAreas.IdAreas[i];
                     string titulo = "titulo" + @ModeloAreas.IdAreas[i];
-                    string contenedor1 = "contenedor1" + @ModeloAreas.IdAreas[i];
+                    string contenedorPedidos = "contenedorPedidos" + @ModeloAreas.IdAreas[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
@@ -71,13 +71,12 @@
                                 <div class="card-body">
                                     <div class="row">
 
-                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                       
                                         <div>
                                             <h5>Información de la @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
-                                        <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                        <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
 
                                 </div>

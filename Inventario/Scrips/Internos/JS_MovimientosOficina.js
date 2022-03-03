@@ -7,7 +7,7 @@ function ConsultaArticuloComp(IDTienda) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/MovimientosOficina/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/MovimientosOficina/ConsultaArticulosOficina/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
@@ -731,7 +731,7 @@ function GuardarPedidoInterno() {
                     frm.append("Sitio", Sitio);
                     frm.append("IdSitio", IdSitio);
                     frm.append("Fecha", Fecha);
-                    frm.append("IdAsignacion", 2);
+                    frm.append("IdAsignacion", 1);
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",

@@ -6,7 +6,7 @@ function ConsultaArticuloComp(IDTienda) {
         sessionStorage.setItem('IDTienda', '0');
     }
     else {
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
+        $.get("/MovimientosOficina/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
             var CodigoHtmlArticuloComp = "";
             CodigoHtmlArticuloComp += "<div id='contenedor1'>";
             CodigoHtmlArticuloComp += "<hr class='solid'>";
