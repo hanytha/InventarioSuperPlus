@@ -352,143 +352,143 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" Verificar()">Guardar</button>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <!--    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" Verificar()">Guardar</button>-->
+                   <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!------------------------------------------------------------------------------------------------------------------------->
-<style>
-    .redondeado {
-        border-radius: 5px;
-        border: 1px solid #696969;
-        width: 90px;
-    }
+    <!------------------------------------------------------------------------------------------------------------------------->
+                    <style>
+                        .redondeado {
+                            border-radius: 5px;
+                            border: 1px solid #696969;
+                            width: 90px;
+                        }
 
-    input:focus {
-        background-color: lavender;
-        text-align: center
-    }
-</style>
-<!-------------------------------------------------------------------------------------------------------------------------->
-<style>
+                        input:focus {
+                            background-color: lavender;
+                            text-align: center
+                        }
+                    </style>
+                    <!-------------------------------------------------------------------------------------------------------------------------->
+                    <style>
 
-    [data-title]:hover:after {
-        opacity: 1;
-        transition: all 0.1s ease 0.5s;
-        visibility: visible;
-    }
+                        [data-title]:hover:after {
+                            opacity: 1;
+                            transition: all 0.1s ease 0.5s;
+                            visibility: visible;
+                        }
 
-    [data-title]:after {
-        content: attr(data-title);
-        background-color: #06B4F5;
-        color: #060606;
-        font-size: 14px;
-        font-family: Raleway;
-        position: absolute;
-        padding: 3px 20px;
-        bottom: -1.6em;
-        left: 100%;
-        white-space: nowrap;
-        box-shadow: 1px 1px 3px #222222;
-        opacity: 0;
-        border: 1px solid #111111;
-        z-index: 99999;
-        visibility: hidden;
-        border-radius: 6px;
-    }
+                        [data-title]:after {
+                            content: attr(data-title);
+                            background-color: #06B4F5;
+                            color: #060606;
+                            font-size: 14px;
+                            font-family: Raleway;
+                            position: absolute;
+                            padding: 3px 20px;
+                            bottom: -1.6em;
+                            left: 100%;
+                            white-space: nowrap;
+                            box-shadow: 1px 1px 3px #222222;
+                            opacity: 0;
+                            border: 1px solid #111111;
+                            z-index: 99999;
+                            visibility: hidden;
+                            border-radius: 6px;
+                        }
 
-    [data-title] {
-        position: relative;
-    }
-</style>
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid {
-        border-top: 6px solid #D7DBDD;
-    }
+                        [data-title] {
+                            position: relative;
+                        }
+                    </style>
+                    <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+                    <style>
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        /* Solid border */
+                        hr.solid {
+                            border-top: 6px solid #D7DBDD;
+                        }
 
-    .D1 {
-        background-color: #EBEBEB;
-    }
-</style>
+                        .D1 {
+                            background-color: #EBEBEB;
+                        }
+                    </style>
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 3px solid #f1f507;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid4 {
-        border-top: 4px solid #0B94F8;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid8 {
-        border-top: 1px solid #D7DBDD;
-    }
-</style>
-<!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
-<style>
-    .redondeado {
-        border-radius: 5px;
-        border: 1px solid #696969;
-        width: 100px;
-    }
+                    <style>
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        /* Solid border */
+                        hr.solid3 {
+                            border-top: 3px solid #f1f507;
+                        }
+                    </style>
+                    <style>
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        /* Solid border */
+                        hr.solid4 {
+                            border-top: 4px solid #0B94F8;
+                        }
+                    </style>
+                    <style>
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        /* Solid border */
+                        hr.solid8 {
+                            border-top: 1px solid #D7DBDD;
+                        }
+                    </style>
+                    <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+                    <style>
+                        .redondeado {
+                            border-radius: 5px;
+                            border: 1px solid #696969;
+                            width: 100px;
+                        }
 
-    input:focus {
-        background-color: lavender;
-        text-align: center
-    }
-</style>
+                        input:focus {
+                            background-color: lavender;
+                            text-align: center
+                        }
+                    </style>
 
-<!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
-<style>
-    .sinborde {
-        border: 0;
-    }
-</style>
-<!------------Obtener la fecha-------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaSistema').value = fecha;
+                    <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+                    <style>
+                        .sinborde {
+                            border: 0;
+                        }
+                    </style>
+                    <!------------Obtener la fecha-------------->
+                    <script type="text/javascript">
+                        var f = new Date();
+                        fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+                        document.getElementById('TxtFechaSistema').value = fecha;
 
-</script>
-<!------------------------------------------>
-<!----------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Prueba.js"></script>
-<!--Validacion del formulario-->
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<!--Scripts de la tarjeta y el botón-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
-<!----------------Exportar-------------------------->
+                    </script>
+                    <!------------------------------------------>
+                    <!----------------------------------------------------------------------------------------------------->
+                    <!--Hacer que el modal muestre los pasos por parte-->
+                    <style type="text/css">
+                        #regiration_form fieldset:not(:first-of-type) {
+                            display: none;
+                        }
+                    </style>
+                    <!--Script-->
+                    <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+                    <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+                    <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+                    <script src="~/Scrips/Internos/JS_Prueba.js"></script>
+                    <!--Validacion del formulario-->
+                    <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+                    <!--Scripts de la tarjeta y el botón-->
+                    <link href="~/Content/tarjeta.css" rel="stylesheet" />
+                    <!----------------Exportar-------------------------->

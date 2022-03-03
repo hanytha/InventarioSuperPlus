@@ -562,11 +562,6 @@ function abrirModalPresu(id) {
 //-------------------------------------------------------------------------------------------------
 
 function verArticulos(id) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {//recorre
-        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
-    }
     if (id == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
     }
@@ -606,20 +601,20 @@ function verArticulos(id) {
 
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticuloPre += "<label>"
-                TablaArticuloPre += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input  class='input-Articulos sinborde ' disabled   value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</label>"
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input onkeyup='boordeInput()' class='input-Precio sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'   value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input onkeyup='boordeInputG()' class='input-Precios sinborde ' disabled    value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input type='number' onkeyup='costo();costosart();' class='input-cantidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input type='number' onkeyup='costo();costosart(); comprobar();boordeInputG();LimpiarPres();' class='input-cantidades   redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input type='number'  class='input-subtotal  limpiar redondeado' disabled  id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input type='number'  class='input-subtotal limpiaPres  redondeado' disabled    value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
             
            
@@ -633,8 +628,8 @@ function verArticulos(id) {
 //----------------------------------------------------------------------------------------------------
 function costo() {
 
-    var cantidad = document.getElementsByClassName("input-cantidad");
-    var Precio = document.getElementsByClassName("input-Precio");
+    var cantidad = document.getElementsByClassName("input-cantidades");
+    var Precio = document.getElementsByClassName("input-Precios");
     var total = 0;
     for (let i = 0; i < cantidad.length; i++) {
 
@@ -651,8 +646,8 @@ function costo() {
 //-----------------------------------------------------------------------------------------------------------
 function costosart() {
 
-    var cantidad = document.getElementsByClassName("input-cantidad");
-    var Precio = document.getElementsByClassName("input-Precio");
+    var cantidad = document.getElementsByClassName("input-cantidades");
+    var Precio = document.getElementsByClassName("input-Precios");
     var totalar = document.getElementsByClassName("input-subtotal");
 
 
@@ -667,4 +662,87 @@ function costosart() {
 
     }
  
+}
+
+//-----------------------------------------------------------------------------------------------------------
+function comprobar() {
+
+    var Precio = document.getElementsByClassName("input-Precios");
+    var NumPedidos = document.getElementsByClassName("input-cantidades");
+
+    var contador = 0;
+    var contadorPrecio = 0;
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (Precio[i].value == 0) {
+
+            Precio[i].disabled = false;
+            Precio[i].style.backgroundColor = 'PaleTurquoise';
+        }
+
+        if (Precio[i].value < 0 && NumPedidos[i].value > 0 || Precio[i].value > 0 && NumPedidos[i].value > 0 || Precio[i].value == 0 && NumPedidos[i].value > 0 || Precio[i].value < 0 && NumPedidos[i].value < 0 || Precio[i].value > 0 && NumPedidos[i].value < 0 || Precio[i].value == 0 && NumPedidos[i].value < 0) {
+
+            contador++;
+        }
+        if (Precio[i].value > 0 && NumPedidos[i].value > 0) {
+
+            contadorPrecio++;
+        }
+    }
+
+        for (let i = 0; i < NumPedidos.length; i++) {
+            if (NumPedidos[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+                swal("¡El número no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
+            }
+            if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
+
+                Precio[i].style.backgroundColor = 'Red';
+            }
+            if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
+
+                NumPedidos[i].style.borderColor = 'Red';
+                Precio[i].style.backgroundColor = 'Red';
+
+            }
+            if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
+
+                swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+            }
+        }
+
+    
+}
+
+//-----------------------------------------------------------------------
+//****************Función para restablecer el borde de los inputs cuando su valor sea correcto*******************
+function boordeInputG() {
+    var Precio = document.getElementsByClassName("input-Precios");
+    var NumPedidos = document.getElementsByClassName("input-cantidades");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        if (NumPedidos[i].value > 0 || NumPedidos[i].value == 0) {
+            NumPedidos[i].style.borderColor = 'DimGray';
+        }
+        if (Precio[i].value > 0 && Precio[i].disabled == false) {
+            Precio[i].style.backgroundColor = 'PaleTurquoise';
+        }
+    }
+}
+//--------------------------------------------------------------
+function LimpiarPres() {
+    var controlesTXT = document.getElementsByClassName("limpiaPres");
+
+    var NumPedidos = document.getElementsByClassName("input-cantidades");
+    var totalar = document.getElementsByClassName("input-subtotal");
+
+    for (var i = 0; i < controlesTXT.length; i++) {
+
+        if (NumPedidos[i].value == 0) {
+            totalar[i].value = "";
+        }
+    }
 }
