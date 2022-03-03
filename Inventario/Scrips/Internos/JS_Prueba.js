@@ -601,7 +601,7 @@ function verArticulos(id) {
 
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticuloPre += "<label>"
-                TablaArticuloPre += "<input  class='input-Articulos sinborde ' disabled   value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input  class='input-Articulos sinborde ' disabled name='" + ArrayUnidad[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</label>"
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de los precios por artículo---------------------------------------------------------------
@@ -745,4 +745,64 @@ function LimpiarPres() {
             totalar[i].value = "";
         }
     }
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+//******************************************************************************************************************************************
+function ImprimirPres() {
+
+    var NumPedidos = document.getElementsByClassName("input-cantidades");
+    var totalar = document.getElementsByClassName("input-subtotal");
+    var Nombre = document.getElementsByClassName("input-Articulos");
+    var costos = document.getElementsByClassName("input-Precios");
+
+    document.getElementById("TxtProveedor").value ;
+
+
+
+    var dos = "";
+
+
+
+    dos += "<div style='width: 100%'>"
+    dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+    dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+    dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+    dos += "<thead>"
+    dos += "<tr align='left'>"
+    dos += "<th >Artículo</th>"
+    dos += "<th >Unidad_Medida</th>"
+    dos += "<th >Cantidad Solicitada</th>"
+    dos += "<th >Precio_Unitario</th>"
+    dos += "<th >Total por artículo</th>"
+    dos += "</tr>"
+    dos += "</thead>"
+    dos += "<tbody>"
+
+    for (var i = 0; i < Nombre.length; i++) {
+
+        dos += "<tr>"
+        dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
+        dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
+        dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
+        dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + costos[i].value + "</label></td>"
+        dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + totalar[i].value + "</label></td>"
+        dos += "</tr>"
+    }
+    dos += "<tfoot>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+    dos += "<th style='text-align: center;'>Total</th>"
+ //   dos += "<th style='text-align: center;'>$" + total + "</th>"
+    dos += "</tfoot>"
+
+    dos += "</tbody>"
+    dos += "</table>"
+    dos += "</div>";
+    dos += "</div>";
+
+    document.getElementById("TblArticulosimpre").innerHTML = dos;
+ 
 }
