@@ -1534,6 +1534,63 @@ namespace Inventario.Controllers
         {
             return View();
         }
+        public void CargarTiendasAdm()
+        {
+            TiendasSupervision TiendasSupervision = new TiendasSupervision();
+            TiendasSupervision.IDTienda = new List<long>();
+            TiendasSupervision.Nombre = new List<string>();
+            TiendasSupervision.LNombre = new List<string>();
+            TiendasSupervision.E1Nombre = new List<string>();
+            TiendasSupervision.E2Nombre = new List<string>();
+            TiendasSupervision.E3Nombre = new List<string>();
+            TiendasSupervision.A1Nombre = new List<string>();
+            TiendasSupervision.A2Nombre = new List<string>();
+            TiendasSupervision.A3Nombre = new List<string>();
+            TiendasSupervision.Estado = new List<string>();
+            TiendasSupervision.Municipio = new List<string>();
+            TiendasSupervision.Localidad = new List<string>();
+            TiendasSupervision.Calle = new List<string>();
+            TiendasSupervision.CP = new List<long>();
+            TiendasSupervision.Telefono = new List<long>();
+            TiendasSupervision.HApertura = new List<string>();
+            TiendasSupervision.HCierre = new List<string>();
+            TiendasSupervision.Estatus = new List<int>();
+            var Tiendas = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdTienda,
+                    p.Nombre,
+                    p.LNombre,
+                    p.E1Nombre,
+                    p.E2Nombre,
+                    p.E3Nombre,
+                    p.A1Nombre,
+                    p.A2Nombre,
+                    p.A3Nombre,
+                    p.Estado,
+                    p.Municipio,
+                    p.Localidad,
+                    p.Calle,
+                    p.CP,
+                    p.Telefono,
+                    p.HApertura,
+                    p.HCierre,
+                    p.Estatus
+                });
+            foreach (var Tienda in Tiendas)
+            {
+                TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
+                TiendasSupervision.Nombre.Add(Tienda.Nombre);
+                TiendasSupervision.LNombre.Add(Tienda.LNombre);
+                TiendasSupervision.Estado.Add(Tienda.Estado);
+                TiendasSupervision.Municipio.Add(Tienda.Municipio);
+                TiendasSupervision.Localidad.Add(Tienda.Localidad);
+                TiendasSupervision.Calle.Add(Tienda.Calle);
+                TiendasSupervision.CP.Add(Tienda.CP);
+                TiendasSupervision.Telefono.Add(Tienda.Telefono);
+                TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
+            }
+        }
 
         public int CargarTiendas()
         {

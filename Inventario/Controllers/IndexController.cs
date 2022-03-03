@@ -27,12 +27,16 @@ namespace Inventario.Controllers
             GLOBALController cargarEstados = new GLOBALController();
             cargarEstados.BDEstados();
             //Cargar las tiendas cuando el usuario que inicia sesión es un supervisor(Visualizar solo las tiendas que son asignadas a ese supervisor)
-       
-            if (Accesos.IDAsignacion == 3) {
+            if (Accesos.IdPerfil == 1)
+            {
+                SupervisionController tiendas = new SupervisionController();
+                tiendas.CargarTiendasAdm();
+            }
+           else if (Accesos.IDAsignacion == 3) {
                 DepartamentosController areas = new DepartamentosController();
                 areas.ConsultaDepartamentos();
             }
-            if (Accesos.IDAsignacion == 1)
+          else  if (Accesos.IDAsignacion == 1)
             {
                 if (Accesos.Tiendas != "")
                 {
