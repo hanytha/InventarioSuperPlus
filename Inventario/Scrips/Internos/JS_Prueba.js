@@ -752,6 +752,8 @@ function LimpiarPres() {
 //******************************************************************************************************************************************
 function ImprimirPres() {
 
+    consultaFecha();
+
     var NumPedidos = document.getElementsByClassName("input-cantidades");
     var totalar = document.getElementsByClassName("input-subtotal");
     var Nombre = document.getElementsByClassName("input-Articulos");
@@ -807,4 +809,11 @@ function ImprimirPres() {
 
     document.getElementById("TblArticulosimpre").innerHTML = dos;
  
+}
+
+//----------------------------------------------------------------------
+function consultaFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    document.getElementById('TxtFecha').textContent = fecha;
 }
