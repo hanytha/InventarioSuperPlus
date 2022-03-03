@@ -635,13 +635,77 @@ function CalcularExistenciaAct(id) {
 }
 ////-------------------------------------------OFICINA----------------------------------------
 //----------------------Guardar datos de los pedidos-----------------------------------------------
+//function GuardarPedidoInterno() {
+//    if (CamposObligatoriosPedidosInt() == true) {
+//        if (confirm("¿Desea aplicar los cambios?") == 1) {
+//            var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+//            var ChevPedidos = document.getElementsByClassName("input-ArticulosPedidos");
+//            for (let i = 0; i < NumPedidos.length; i++) {
+//                if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
+//                    var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+//                    var IdProveedor = document.getElementById("cmbProveedor").value;
+//                    var TempProvedor = document.getElementById("cmbProveedor");
+//                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+//                    var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
+//                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
+//                    var Fecha = document.getElementById("TxtFechaIngreso").value;
+//                    var IdArticulo = ChevPedidos[i].name;
+//                    var Articulo = ChevPedidos[i].value;
+//                    var CantidadSolicitada = NumPedidos[i].value;
+//                    var IdSitio = document.getElementById("cmbOficina").value;
+//                    var TempSitio = document.getElementById("cmbOficina");
+//                    var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
+//                    var frm = new FormData();
+//                    frm.append("IdPedidosExternos", IdPedidosExternos);
+//                    frm.append("IdProveedor", IdProveedor);
+//                    frm.append("Proveedor", Proveedor);
+//                    frm.append("IdArticulo", IdArticulo);
+//                    frm.append("Articulo", Articulo);
+//                    frm.append("NumeroPedido", NumeroPedido);
+//                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
+//                    frm.append("CantidadSolicitada", CantidadSolicitada);
+//                    frm.append("Sitio", Sitio);
+//                    frm.append("IdSitio", IdSitio);
+//                    frm.append("Fecha", Fecha);
+//                    frm.append("IdAsignacion", 1);
+//                    frm.append("Estatus", 1);
+//                    $.ajax({
+//                        type: "POST",
+//                        url: "/Supervision/GuardarPedidoInterno",
+//                        data: frm,
+//                        contentType: false,
+//                        processData: false,
+//                        success: function (data) {
+//                            if (data == 0) {
+//                                alert("Ocurrió un error");
+//                            }
+//                            else if (data == -1) {
+//                                alert("Ya existe este registro");
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//            alert("Los datos se guardaron correctamente");
+//            ConsultaArticuloComp();
+//            document.getElementById("btnCancelar").click();
+//            actualizar();
+//        }
+//    }
+//}
 function GuardarPedidoInterno() {
+
     if (CamposObligatoriosPedidosInt() == true) {
+
         if (confirm("¿Desea aplicar los cambios?") == 1) {
+
             var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+
             var ChevPedidos = document.getElementsByClassName("input-ArticulosPedidos");
+
             for (let i = 0; i < NumPedidos.length; i++) {
                 if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
+
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                     var IdProveedor = document.getElementById("cmbProveedor").value;
                     var TempProvedor = document.getElementById("cmbProveedor");
@@ -667,7 +731,7 @@ function GuardarPedidoInterno() {
                     frm.append("Sitio", Sitio);
                     frm.append("IdSitio", IdSitio);
                     frm.append("Fecha", Fecha);
-                    frm.append("IdAsignacion", 1);
+                    frm.append("IdAsignacion", 2);
                     frm.append("Estatus", 1);
                     $.ajax({
                         type: "POST",
@@ -682,15 +746,29 @@ function GuardarPedidoInterno() {
                             else if (data == -1) {
                                 alert("Ya existe este registro");
                             }
+                            else {
+                                restablecerBordesInput();
+                                document.getElementById("btnCancelar").click();
+                            }
                         }
                     });
                 }
             }
             alert("Los datos se guardaron correctamente");
-            ConsultaArticuloComp();
-            document.getElementById("btnCancelar").click();
-            actualizar();
+            //ConsultaArticuloComp();
+            //restablecerBordesInput();
+            //document.getElementById("btnCancelar").click();
         }
+    }
+}
+function restablecerBordesInput() {
+    //var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        NumPedidos[i].style.borderColor = 'DimGray';
+        Precio[i].style.backgroundColor = 'White';
     }
 }
 function llenarComboTienda(data, control) {
