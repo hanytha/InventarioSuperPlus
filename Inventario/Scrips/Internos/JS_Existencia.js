@@ -515,7 +515,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
                     }
                     else {
 
-                        ConsultaCompras();
+                        CalcularFecha();
                         document.getElementById("btnCancelar").click();
                     }
                 }
