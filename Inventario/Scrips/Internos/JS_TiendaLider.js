@@ -117,60 +117,7 @@ function ConsultaArticuloCompra(IDTienda) {
         });
     }
 }
-function ConsultaAceptarPedidoAdm(IDTienda) {
-    if (IDTienda == 0) {
-        sessionStorage.setItem('IDTienda', '0');
-    }
-    else {
-        $.get("/Supervision/ConsultaArticulosAceptar/?IDTienda=" + IDTienda, function (Data) {
-            var CodigoHtmlArticuloComp = "";
-            CodigoHtmlArticuloComp += "<div id='contenedorAceptarPedido'>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "<div class='row'>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha de Ingreso</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "</div>";
-            let id = Data.id;
-            let ArrayId = id.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Proveedor = Data.Proveedor;
-            let ArrayProveedor = Proveedor.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfechas = Fecha.split(',');
-            let Stock = Data.Stock;
-            let Arraystock = Stock.split(',');
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
-            let IdCmpraInt = Data.IdCmpraInt;
-            let ArrayIdCmpraInt = IdCmpraInt.split(',');
-            for (var i = 0; i < ArrayId.length; i++) {
-                CodigoHtmlArticuloComp += "<div>";
-                CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfechas[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col'>"
-                CodigoHtmlArticuloComp += "<label>"
-                CodigoHtmlArticuloComp += "<button title='Clic para Aceptar el pedido' class='btn btn-primary' id='hide' onclick='abrirModalAceptarPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + "," + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")'  data-toggle='modal' data-target='#abrirModalAceptarPedido'><i class='fas fa-archive'></i></button>";
-                CodigoHtmlArticuloComp += "</div>";
-                CodigoHtmlArticuloComp += "</div>";
-                CodigoHtmlArticuloComp += "</div>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayNoPedido[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
-                CodigoHtmlArticuloComp += "</div>";
-            }
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "</br>";
-            CodigoHtmlArticuloComp += "</br>";
-            let contenedorAceptar = "contenedorAceptarPedido" + IDTienda;
-            document.getElementById(contenedorAceptar).innerHTML = CodigoHtmlArticuloComp;
-        });
-    }
-}
+
 //////////////Pedidos REalizados//////////////
 function ConsultaPedidosRealizados(IDTienda) {
     if (IDTienda == 0) {

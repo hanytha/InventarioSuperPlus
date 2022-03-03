@@ -272,6 +272,7 @@
     <Content Include="Views\Supervision\PedidosTienda.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidos.cshtml" />
     <Content Include="Views\MovimientosOficina\MovimientosOficina.cshtml" />
+    <Content Include="Views\Supervision\AceptarPedidosOficina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
