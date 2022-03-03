@@ -427,6 +427,13 @@ function LlenarCMCProveedores() {
     });
 
 }
+//-----------------------------------Llenar el comobobox de proveedores------------------------------------------------------
+function LlenarCMCProveedoresPre() {
+    $.get("/ExistenciasG/BDProveedor", function (data) {
+        llenarCombo(data, document.getElementById("cmbProveedorPre"));
+    });
+
+}
 
 //----------------Combobox de las áreas------------------------
 function LlenarCMCArea() {
@@ -530,3 +537,96 @@ function ConsultaSiguientePedidoPrveedor(id) {
     }
 }
 
+//-----------------------------------------------------------------------------------------
+//----------------Abrir modal Proveedor--------------------------------------------------------
+function abrirModalPresu(id) {
+    LlenarCMCProveedoresPre();
+    LimpiarCampos();
+
+
+    if (id == 0) {
+        sessionStorage.setItem('IDG', '0');
+
+    }
+    else {
+
+        $.get("/ExistenciasG/ConsultaProveedorModal/?Id=" + id, function (Data) {
+            document.getElementById("cmbProveedorPre").value = Data[0].IdProveedores;
+            //---Muestra los artículos que le pertenecen a ese proveedor----
+            verArticulos(id);
+
+        });
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+function verArticulos(id) {
+    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {//recorre
+        controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
+    }
+    if (id == 0) {
+        sessionStorage.setItem('IdPedidosExternos', '0');
+    }
+    else {
+
+        $.get("/ExistenciasG/ConsultaIdProveedorArticulos/?IdPro=" + id, function (Data) {
+            //-----------------------------------------------------------------------------------
+            var TablaArticuloPre = "";
+            TablaArticuloPre += "<div class='row row-cols-auto'>";
+            TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticuloPre += "<label>Artículos</label>";
+            TablaArticuloPre += "</div>";
+            TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticuloPre += "<label>Precio_Unitario</label>";
+            TablaArticuloPre += "</div>";
+            TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticuloPre += "<label>Cantidad_Requerida</label>";
+            TablaArticuloPre += "</div>";
+            TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
+            TablaArticuloPre += "<label>Total_por_art.</label>";
+            TablaArticuloPre += "</div>";
+
+            let Articulo = Data.Articulo;
+            let ArrayArticulo = Articulo.split(',');
+            let IDA = Data.IDA;
+            let ArrayIDA = IDA.split(',');
+            let Unidad = Data.Unidad;
+            let ArrayUnidad = Unidad.split(',');
+            let Precio = Data.Precio;
+            let ArrayPrecio = Precio.split(',');
+
+
+
+
+            for (var i = 0; i < ArrayArticulo.length; i++) {
+                //-------Crea los input con los nombres de los artículos por proveedor---------------------------
+
+                TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticuloPre += "<label>"
+                TablaArticuloPre += "<input  class='input-Articulo sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'  value='" + ArrayArticulo[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "</label>"
+                TablaArticuloPre += "</div>";
+                //-------Crea la lista de los precios por artículo---------------------------------------------------------------
+                TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticuloPre += "<input onkeyup='boordeInput()' class='input-Precio sinborde limpiar' disabled  id='" + ArrayIDA[i] + "'   value='" + ArrayPrecio[i] + "' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticuloPre += "<input type='number' class='input-Unidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "</div>";
+                //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
+                TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
+                TablaArticuloPre += "<input type='number'  class='input-Unidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "</div>";
+            
+           
+            }
+            TablaArticuloPre += "</div>";
+            TablaArticuloPre += "</div>";
+            document.getElementById("TblArticulosPre").innerHTML = TablaArticuloPre;
+        });
+    }
+}

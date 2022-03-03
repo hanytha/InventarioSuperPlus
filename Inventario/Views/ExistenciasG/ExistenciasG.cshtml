@@ -12,12 +12,17 @@
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<!-- Inicia tarjeta-->
-<!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal-->
-<button onclick="abrirModal(0); Borrar(); restablecerBordesInput();" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalProveedor">Realizar_Pedido</button>
+
+
+<!------------------------------------------------------ Botón del modal----------------------------------------------------------->
+<div class="row">
+    <div class="col-sm-9">
+        <button onclick="abrirModal(0); Borrar(); restablecerBordesInput();" style="float:left" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalProveedor">Realizar_Pedido</button>
+    </div>
+    <button onclick="abrirModalPresu(0);Borrar();" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalPresupuesto">Realizar_Presupuesto</button>
+</div>
+
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
 <div id="contenedor1">
     @{
@@ -278,6 +283,96 @@
     </div>
 </div>
 
+
+
+<!------------------------------------------------------------------------------------------------------------------------>
+<!------------------------------------------------------------------------------------------------------------------------->
+
+<div class="container">
+    <div class="modal fade" id="ModalPresupuesto">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registro de pedidos</h5>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedorPre">Proveedor<span class="required">*</span></label>
+                                    <select onchange="abrirModalPresu(this.value)" id="cmbProveedorPre" style="width: 100%" class="form-control limpiarSelect "></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbArea">Área que solicita el(los) artículo(s)<span>*</span></label>
+                                    <select id="cmbArea" style="width: 100%" class="form-control">
+
+                                        @if (ModeloAreas.IdAreas != null)
+                                        {
+                                            for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
+                                            {
+                                                if (Accesos.NIvel == 1)
+                                                {
+                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+
+                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                {
+                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+                                            }
+
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTotal">Total<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtTotal]" id="TxtTotal" class="form-control  limpiar bloquear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulosPre">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulosPre">Artículo(s) del proveedor</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" Verificar()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        border: 1px solid #696969;
+        width: 90px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+</style>
 <!-------------------------------------------------------------------------------------------------------------------------->
 <style>
 
