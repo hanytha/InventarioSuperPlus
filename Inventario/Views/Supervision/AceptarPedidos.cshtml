@@ -37,10 +37,60 @@
         border: 0;
     }
 </style>
-<div id="accordionAceptar"></div>
-<div class="accordionAceptar" id="AcordeonSucursalesAceptar">
+<div id="accordionAceptarPedido"></div>
+<div class="accordionAceptarPedido" id="accordionAceptarPedido">
     @{
-        if (Accesos.IDAsignacion == 2)
+        if (Accesos.IdPerfil == 1)
+        {
+            if (ModeloAreas.IdAreas != null)
+            {
+                int NSucursales = ModeloAreas.IdAreas.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar = "Accordion" + @ModeloAreas.IdAreas[i];
+                    string titulo = "titulo" + @ModeloAreas.IdAreas[i];
+                    string contenedorAceptar = "contenedorAceptar" + @ModeloAreas.IdAreas[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaAceptarPedidoArea(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@ColapseAceptar" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>@ModeloAreas.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <div>
+                                            <h5>Información de la @ModeloAreas.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+        else if (Accesos.IDAsignacion == 2)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -90,6 +140,66 @@
         }
     }
 </div>
+
+
+
+<div id="accordionAceptar1"></div>
+
+<div class="accordionAceptar1" id="AcordeonSucursalesAceptar1">
+    @{
+        if (Accesos.IdPerfil == 1)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+                int NSucursales = TiendasSupervision.IDTienda.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar1 = "AccordionAceptar1" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptar1 = "contenedorAceptar1" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra1(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar1" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar1" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar1" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
+    }
+</div>
+
+
+
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
@@ -555,7 +665,7 @@
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefonoVisualizar"></label></td>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccionVisualizar"></label></td>
-                                                        </tr>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -807,6 +917,7 @@
         visibility: hidden;
         border-radius: 6px;
     }
+
     [data-title] {
         position: relative;
     }
@@ -819,7 +930,7 @@
 </script>
 <script src="~/Scrips/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="~/Scrips/Internos/JS_AceptarPedidos.js"></script>
+<script src="~/Scrips/Internos/JS_TiendaLider.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 
 

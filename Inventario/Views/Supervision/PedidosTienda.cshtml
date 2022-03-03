@@ -42,7 +42,7 @@
 
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.IDAsignacion == 2)
+        if (Accesos.IDAsignacion == 2 ||  Accesos.IdPerfil == 1)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -90,6 +90,7 @@
 
                 }
             }
+
         }
     }
 </div>
