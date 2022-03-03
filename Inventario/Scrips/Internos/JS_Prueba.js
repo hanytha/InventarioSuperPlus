@@ -782,6 +782,7 @@ function ImprimirPres() {
 
     for (var i = 0; i < Nombre.length; i++) {
 
+        if (NumPedidos[i].value > 0 && costos[i].value > 0) {
         dos += "<tr>"
         dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
         dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
@@ -789,6 +790,7 @@ function ImprimirPres() {
         dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + costos[i].value + "</label></td>"
         dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + totalar[i].value + "</label></td>"
         dos += "</tr>"
+            }
     }
     dos += "<tfoot>"
     dos += "<th></th>"
