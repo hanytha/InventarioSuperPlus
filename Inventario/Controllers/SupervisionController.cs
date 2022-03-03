@@ -1535,7 +1535,7 @@ namespace Inventario.Controllers
             return View();
         }
 
-        public int CargarTiendaLider()
+        public int CargarTiendas()
         {
             int Encontrados = 0;
             string[] Sucursales = Accesos.Tiendas.Split('#');

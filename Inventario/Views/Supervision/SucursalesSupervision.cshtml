@@ -38,7 +38,7 @@
 <div id="accordion"></div>
 <div class="accordion" id="AcordeonSucursales">
     @{
-        if (Accesos.IDAsignacion == 2)
+        if (Accesos.IdPerfil == 1)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -74,6 +74,108 @@
                                         <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
                                         <div>
                                             <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else if (Accesos.IDAsignacion == 2)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+                int NSucursales = TiendasSupervision.IDTienda.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>@TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <div>
+                                            <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+</div>
+<div class="accordion" id="AcordeonSucursales">
+    @{
+        if (Accesos.NIvel == 1)
+        {
+            if (ModeloAreas.IdAreas != null)
+            {
+                int NSucursales = ModeloAreas.IdAreas.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string Colapse = "Accordion" + @ModeloAreas.IdAreas[i];
+                    string titulo = "titulo" + @ModeloAreas.IdAreas[i];
+                    string contenedor1 = "contenedor1" + @ModeloAreas.IdAreas[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloComp(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>@ModeloAreas.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <div>
+                                            <h5>Información de la @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
