@@ -615,11 +615,11 @@ function verArticulos(id) {
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input type='number' class='input-Unidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input type='number' onkeyup='costo();costosart();' class='input-cantidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input type='number'  class='input-Unidad  limpiar redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input type='number'  class='input-subtotal  limpiar redondeado' disabled  id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
             
            
@@ -629,4 +629,42 @@ function verArticulos(id) {
             document.getElementById("TblArticulosPre").innerHTML = TablaArticuloPre;
         });
     }
+}
+//----------------------------------------------------------------------------------------------------
+function costo() {
+
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var total = 0;
+    for (let i = 0; i < cantidad.length; i++) {
+
+        if (cantidad[i].value > 0 && Precio[i].value > 0) {
+
+            var sum = (cantidad[i].value) * (Precio[i].value);
+            total = total + sum;
+        }
+
+    }
+    document.getElementById("TxtTotal").value = total;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+function costosart() {
+
+    var cantidad = document.getElementsByClassName("input-cantidad");
+    var Precio = document.getElementsByClassName("input-Precio");
+    var totalar = document.getElementsByClassName("input-subtotal");
+
+
+    var total = 0;
+    for (let i = 0; i < cantidad.length; i++) {
+
+        if (cantidad[i].value > 0 && Precio[i].value > 0) {
+
+            var sum = (cantidad[i].value) * (Precio[i].value);
+            totalar[i].value = sum;
+        }
+
+    }
+ 
 }
