@@ -47,7 +47,7 @@
 
 
                     <div class="row">
-                      
+
                         @{
                             if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 10)
                             {
@@ -79,7 +79,7 @@
 
                         <div class="col">
                             <label>
-                                <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                <button data-title="Desplegar_tabla" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
                                         type="button" data-toggle="collapse" data-target="#@GridIDA"
                                         aria-expanded="false" aria-controls="desplegable(@GridIDA)">
                                     <i class="fas fa-angle-down"></i>
@@ -136,7 +136,7 @@
 
                         <div class="col">
                             <label>
-                                <button title="Clic para desplegar" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                <button data-title="Desplegar_tabla" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
                                         type="button" data-toggle="collapse" data-target="#@GridIDA"
                                         aria-expanded="false" aria-controls="desplegable(@GridIDA)">
                                     <i class="fas fa-angle-down"></i>
@@ -278,7 +278,38 @@
     </div>
 </div>
 
-<!---------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------->
+<style>
+
+    [data-title]:hover:after {
+        opacity: 1;
+        transition: all 0.1s ease 0.5s;
+        visibility: visible;
+    }
+
+    [data-title]:after {
+        content: attr(data-title);
+        background-color: #06B4F5;
+        color: #060606;
+        font-size: 14px;
+        font-family: Raleway;
+        position: absolute;
+        padding: 3px 20px;
+        bottom: -1.6em;
+        left: 100%;
+        white-space: nowrap;
+        box-shadow: 1px 1px 3px #222222;
+        opacity: 0;
+        border: 1px solid #111111;
+        z-index: 99999;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+    [data-title] {
+        position: relative;
+    }
+</style>
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
