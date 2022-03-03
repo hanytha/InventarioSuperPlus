@@ -1042,62 +1042,62 @@ function ValidarDatosPedidos() {
 }
 
 
-function validarUsados() {
-    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
-    //var Proveedor = document.getElementById("cmbProveedor").value;
-    var contador = 0;
-    var ContadorMayorAcero = 0;
+//function validarUsados() {
+//    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+//    //var Proveedor = document.getElementById("cmbProveedor").value;
+//    var contador = 0;
+//    var ContadorMayorAcero = 0;
 
-    for (let i = 0; i < CantidadArt.length; i++) {
-        CantidadArt[i].style.borderColor = 'DimGray';
-        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
-            contador++;
-        }
-        if (CantidadArt[i].value > 0) {
+//    for (let i = 0; i < CantidadArt.length; i++) {
+//        CantidadArt[i].style.borderColor = 'DimGray';
+//        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+//            contador++;
+//        }
+//        if (CantidadArt[i].value > 0) {
 
-            ContadorMayorAcero++;
-        }
-    }
+//            ContadorMayorAcero++;
+//        }
+//    }
 
-    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && ContadorMayorAcero > 0) {
-        GuardarPedidoInterno();
-    }
-    else {
-        //if (Proveedor > 0) {
-        //    Swal.fire(
-        //        '!',
-        //        'Ingrese la cantidad de articulos a solicitar',
-        //        'alert'
-        //    )
-        //}
-        for (let i = 0; i < CantidadArt.length; i++) {
-            if (CantidadArt[i].value < 0) {
+//    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && ContadorMayorAcero > 0) {
+//        GuardarPedidoInterno();
+//    }
+//    else {
+//        //if (Proveedor > 0) {
+//        //    Swal.fire(
+//        //        '!',
+//        //        'Ingrese la cantidad de articulos a solicitar',
+//        //        'alert'
+//        //    )
+//        //}
+//        for (let i = 0; i < CantidadArt.length; i++) {
+//            if (CantidadArt[i].value < 0) {
 
-                CantidadArt[i].style.borderColor = 'Red';
-                Swal.fire(
-                    '!',
-                    '¡La cantidad solicitada no puede ser negativo!',
-                    'alert'
-                )
-            }
-            if (CantidadArt[i].value == '0') {
+//                CantidadArt[i].style.borderColor = 'Red';
+//                Swal.fire(
+//                    '!',
+//                    '¡La cantidad solicitada no puede ser negativo!',
+//                    'alert'
+//                )
+//            }
+//            if (CantidadArt[i].value == '0') {
 
-                CantidadArt[i].style.borderColor = 'Red';
-                Swal.fire(
-                    '!',
-                    'No se aceptan valores neutros!',
-                    'alert'
-                )
-            }
-            if (CantidadArt[i].value == "") {
+//                CantidadArt[i].style.borderColor = 'Red';
+//                Swal.fire(
+//                    '!',
+//                    'No se aceptan valores neutros!',
+//                    'alert'
+//                )
+//            }
+//            if (CantidadArt[i].value == "") {
 
-                CantidadArt[i].style.borderColor = 'DimGray';
-            }
-        }
+//                CantidadArt[i].style.borderColor = 'DimGray';
+//            }
+//        }
 
   
-    }
-}
+//    }
+//}
 
 function ValidarUsados() {
     var CantidadArt = document.getElementsByClassName("input-cantidadUsados");

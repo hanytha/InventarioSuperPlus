@@ -1108,7 +1108,7 @@ function MostrarUs(idS) {
                     TablaArticulo += "</label>"
                     TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
-                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='CalcularExistenciaAct(this.value)' ><span class='help-block text-muted small-font'></span>";
+                    TablaArticulo += "<input type='number' value='' class='input-cantidadUsados redondeado limpiar' id='" + ArrayIdArticulos[i] + "' onchange='ValidarUsados(this.value)' ><span class='help-block text-muted small-font'></span>";
                     TablaArticulo += "</div>";
                     TablaArticulo += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end'>";
                     TablaArticulo += "<input  class='input-Stock sinborde limpiar ' disabled name=' " + ArrayIdArticulos[i] + "'  id='" + ArrayIdArticulos[i] + "'  value='" + Arraystock[i] + "' ><span class='help-block text-muted small-font'></span>";
@@ -1448,4 +1448,82 @@ function ValidarDatosPedidos() {
             )
         }
     }
+}
+
+function ValidarUsados() {
+    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+    var Stock = document.getElementsByClassName("input-Stock");
+    var contador = 0;
+    var ContadorMayorAcero = 0;
+    var resultado = 0;
+    for (let i = 0; i < CantidadArt.length; i++) {
+        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+            contador++;
+        }
+        if (CantidadArt[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+        if (CantidadArt[i].value == "") {
+
+            CantidadArt[i].style.borderColor = 'DimGray';
+        }
+        for (let i = 0; i < Stock.length; i++) {
+            if (Stock[i].value > 0 || Stock[i].value < 0) {
+                contador++;
+            }
+            if (Stock[i].value > 0) {
+
+                ContadorMayorAcero++;
+            }
+        }
+        var CantidadSolicitada = CantidadArt[i].value;
+        var Existencia = Stock[i].value;
+        var frm = new FormData();
+        resultado = parseFloat(Existencia) - parseFloat(CantidadSolicitada);
+        if (resultado >= 0) {
+            CantidadArt[i].style.borderColor = 'DimGray';
+        }
+        if (resultado < 0) {
+
+            Swal.fire(
+                '!',
+                'La cantidad excede al stock',
+                'alert'
+            )
+            CantidadArt[i].style.borderColor = 'red';
+            var cantidad = CantidadArt[i].value = "";
+        }
+        if (CantidadArt[i].value < 0) {
+
+            Swal.fire(
+                '!',
+                '¡La cantidad solicitada no puede ser negativo!',
+                'alert'
+            )
+            CantidadArt[i].style.borderColor = 'red';
+            var cantidad = CantidadArt[i].value = "";
+        }
+        if (CantidadArt[i].value == '0') {
+
+            CantidadArt[i].style.borderColor = 'Red';
+            Swal.fire(
+                '!',
+                'No se aceptan valores neutros!',
+                'alert'
+            )
+        }
+    }
+
+    for (let i = 0; i < Stock.length; i++) {
+        if (Stock[i].value > 0 || Stock[i].value < 0) {
+            contador++;
+        }
+        if (Stock[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+    }
+
+
 }
