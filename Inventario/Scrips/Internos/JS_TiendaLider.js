@@ -582,6 +582,7 @@ function LimpiarCampos() {
     }
 }
 
+//----------------------Guardar datos de los pedidos-----------------------------------------------
 function GuardarPedidoInterno() {
 
     if (CamposObligatoriosPedidosInt() == true) {
@@ -594,6 +595,7 @@ function GuardarPedidoInterno() {
 
             for (let i = 0; i < NumPedidos.length; i++) {
                 if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
+
                     var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
                     var IdProveedor = document.getElementById("cmbProveedor").value;
                     var TempProvedor = document.getElementById("cmbProveedor");
@@ -631,20 +633,32 @@ function GuardarPedidoInterno() {
                             if (data == 0) {
                                 alert("Ocurrió un error");
                             }
-
                             else if (data == -1) {
                                 alert("Ya existe este registro");
                             }
-
+                            else {
+                                restablecerBordesInput();
+                                document.getElementById("btnCancelar").click();
+                            }
                         }
                     });
                 }
             }
             alert("Los datos se guardaron correctamente");
-            ConsultaArticuloComp();
-            document.getElementById("btnCancelar").click();
-            window.location.reload();
+            //ConsultaArticuloComp();
+            //restablecerBordesInput();
+            //document.getElementById("btnCancelar").click();
         }
+    }
+}
+function restablecerBordesInput() {
+    //var Precio = document.getElementsByClassName("input-Precio");
+    var NumPedidos = document.getElementsByClassName("input-cantidad");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+
+        NumPedidos[i].style.borderColor = 'DimGray';
+        Precio[i].style.backgroundColor = 'White';
     }
 }
 
