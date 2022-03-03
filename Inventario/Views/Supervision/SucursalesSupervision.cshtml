@@ -87,7 +87,7 @@
                 }
             }
         }
-        else if (Accesos.IDAsignacion == 2)
+        else if (Accesos.IDAsignacion == 1 || Accesos.IDAsignacion == 2)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -112,7 +112,8 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>@TiendasSupervision.Nombre[i]</span>
+                                  
+                                    <span>Movimientos de la tienda: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
@@ -138,13 +139,18 @@
         }
     }
 </div>
-<div class="accordion" id="AcordeonSucursales">
+
+@* -----------------------------------Tienda lider -----------*@
+
+<div id="accordionPedidos"></div>
+
+<div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.NIvel == 1)
+        if (Accesos.IDAsignacion == 1)
         {
-            if (ModeloAreas.IdAreas != null)
+            if (TiendasSupervision.IDTienda != null)
             {
-                int NSucursales = ModeloAreas.IdAreas.Count();
+                int NSucursales = TiendasSupervision.IDTienda.Count();
 
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < NSucursales; i++)
@@ -157,28 +163,27 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string Colapse = "Accordion" + @ModeloAreas.IdAreas[i];
-                    string titulo = "titulo" + @ModeloAreas.IdAreas[i];
-                    string contenedor1 = "contenedor1" + @ModeloAreas.IdAreas[i];
+                    string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloComp(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="false" aria-controls="@Colapse" class="collapsed">
+                                <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>@ModeloAreas.Nombre[i]</span>
+                                    <span>Pedidos realizados en la tienda: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
-                            <div id="@Colapse" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
+                            <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
                                 <div class="card-body">
                                     <div class="row">
 
-                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
                                         <div>
-                                            <h5>Información de la @ModeloAreas.Nombre[i]</h5>
+                                            <h5>Pedidos del: @TiendasSupervision.Nombre[i]</h5>
 
                                         </div>
-                                        <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                        <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
 
                                 </div>
@@ -186,11 +191,68 @@
 
                         </div>
                     </div>
+
                 }
             }
         }
     }
 </div>
+
+<div id="accordionAceptar"></div>
+
+<div class="accordionAceptar" id="AcordeonSucursalesAceptar">
+    @{
+        if (Accesos.IDAsignacion == 1)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+                int NSucursales = TiendasSupervision.IDTienda.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
+    }
+</div>
+
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -364,9 +426,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick="nuevoStockUsados()">Guardar</button>
                     @*<button type="button" class="btn btn-primary" onclick="GUs()">Guardar</button>*@
-                    
+
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -624,7 +686,7 @@
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccion"></label></td>
-                                                        </tr>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
