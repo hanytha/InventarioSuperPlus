@@ -1583,3 +1583,57 @@ function ValidarUsados() {
 
 
 }
+function ImprimirPres() {
+
+    //obtenerPro();
+
+    var NumPedidos = document.getElementsByClassName("input-StockAceptarP");
+
+    var Nombre = document.getElementsByClassName("input-ArticuloAceptarP");
+
+
+    //var totalfin = document.getElementById('TxtTotal').value;
+
+
+    var dos = "";
+
+
+
+    dos += "<div style='width: 100%'>"
+    dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+    dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+    dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+    dos += "<thead>"
+    dos += "<tr align='left'>"
+    dos += "<th >Artículo</th>"
+    dos += "<th >Cantidad Solicitada</th>"
+    dos += "</tr>"
+    dos += "</thead>"
+    dos += "<tbody>"
+
+    for (var i = 0; i < Nombre.length; i++) {
+
+        if (NumPedidos[i].value > 0) {
+            dos += "<tr>"
+            dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
+            dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
+            // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
+            dos += "</tr>"
+        }
+    }
+    dos += "<tfoot>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+    //  dos += "<th style='text-align: center;'>Total</th>"
+    // dos += "<th style='text-align: center;'>$" + totalfin + "</th>"
+    dos += "</tfoot>"
+
+    dos += "</tbody>"
+    dos += "</table>"
+    dos += "</div>";
+    dos += "</div>";
+
+    document.getElementById("TblArt").innerHTML = dos;
+    actualizar()
+}
