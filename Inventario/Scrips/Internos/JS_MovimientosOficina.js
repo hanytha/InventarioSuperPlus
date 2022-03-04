@@ -443,9 +443,66 @@ function Guardar() {
                 }
             }
         });
-        ConsultaArticuloCompra();
+        //ConsultaArticuloCompra();
         alert("¡¡Pedido aceptado satisfactoriamente!!");
+      //  ImprimirPres();
     }
+}
+
+function ImprimirPres() {
+
+   //ObtenerFecha();
+    //obtenerPro();
+
+    var NumPedidos = document.getElementsByClassName("input-StockAceptarP");
+
+    var Nombre = document.getElementsByClassName("input-ArticuloAceptarP");
+
+
+    //var totalfin = document.getElementById('TxtTotal').value;
+
+
+    var dos = "";
+
+
+
+    dos += "<div style='width: 100%'>"
+    dos += "<div {NM_CSS_FUN_CAB} style='height:11px; display: inline; border-width:0px; '></div>"
+    dos += "<div style='height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline'>"
+    dos += "<table style='width:100%; border-collapse:collapse; padding:0;'>"
+    dos += "<thead>"
+    dos += "<tr align='left'>"
+    dos += "<th >Artículo</th>"
+    dos += "<th >Cantidad Solicitada</th>"
+    dos += "</tr>"
+    dos += "</thead>"
+    dos += "<tbody>"
+
+    for (var i = 0; i < Nombre.length; i++) {
+
+        if (NumPedidos[i].value > 0 ) {
+            dos += "<tr>"
+            dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
+            dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
+           // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
+            dos += "</tr>"
+        }
+    }
+    dos += "<tfoot>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+    dos += "<th></th>"
+  //  dos += "<th style='text-align: center;'>Total</th>"
+   // dos += "<th style='text-align: center;'>$" + totalfin + "</th>"
+    dos += "</tfoot>"
+
+    dos += "</tbody>"
+    dos += "</table>"
+    dos += "</div>";
+    dos += "</div>";
+
+    document.getElementById("TblArt").innerHTML = dos;
+
 }
 function CamposObligatoriosDevolucion() {
     var exito = true;
@@ -998,31 +1055,52 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
             document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
-            document.getElementById("cmbAceptarArea").value = Data[0].IdArea;
+            document.getElementById("cmbAceptarArea").value = Data[0].IdTienda;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             MostrarArt(IdCompInt, idS);
-            VerPedido(id, no, IdCompInt, idS);
+            //VerPedido(id, no, IdCompInt, idS);
+          //  ImprimirPres();
         });
     }
 }
-//------Despliega el modal de aceptar pedidos deacuerdo con el número de pedido-----
-function VerPedido(id, no, IdCompInt, idS) {
-    if (no == 0) {
-        sessionStorage.setItem('IDArt', '0');
-    }
-    else {
-        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
-            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
-            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
-            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
-            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
-            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
-            MostrarArticulos(IdCompInt, idS);
-        });
+//function VerPedido(id, no, IdCompInt, idS) {
+//    if (no == 0) {
+//        sessionStorage.setItem('IDArt', '0');
+//    }
+//    else {
+//        $.get("/Supervision/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+//          //  document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
+//            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
 
-    }
-}
+//            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+//            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+//            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+//            document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
+//            document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
+//            MostrarArticulos(IdCompInt, idS);
+//        });
+//    }
+//}
+
+
+//------Despliega el modal de aceptar pedidos deacuerdo con el número de pedido-----
+//function VerPedido(id, no, IdCompInt, idS) {
+//    if (no == 0) {
+//        sessionStorage.setItem('IDArt', '0');
+//    }
+//    else {
+//        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+//            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
+//            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+//            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+//            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+//            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+//            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
+//            MostrarArticulos(IdCompInt, idS);
+//        });
+
+//    }
+//}
 //-----------Mostrar los articulos en el modal aceptar pedido----------------------
 function MostrarArt(IdCompInt, idS) {
     if (idS == 0) {

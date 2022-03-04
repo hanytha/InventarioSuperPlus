@@ -220,7 +220,8 @@
                 </div>
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-                    <button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
+                    @*<button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>*@
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="Guardar(); ImprimirPres();">Imprimir</a>
                     <!-- Mostrar y ocultar botones-->
                     <script>
                         $(function () {
@@ -237,14 +238,14 @@
         </div>
     </div>
 </div>
-<div class="container">
+@*<div class="container">
     <div class="modal fade" id="ModalPedidos">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <label class="form-control-label" style="font-size: 18px;">
-                            PEDIDOS
+                            PEDIDOS --
                         </label>
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
@@ -336,7 +337,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="container">
     <div class="modal fade" id="VisualizarModalPedidos">
         <div class="modal-dialog modal-lg">
