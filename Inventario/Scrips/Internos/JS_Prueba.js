@@ -651,6 +651,7 @@ function costosart() {
     var totalar = document.getElementsByClassName("input-subtotal");
 
 
+
     var total = 0;
     for (let i = 0; i < cantidad.length; i++) {
 
@@ -669,6 +670,9 @@ function comprobar() {
 
     var Precio = document.getElementsByClassName("input-Precios");
     var NumPedidos = document.getElementsByClassName("input-cantidades");
+    var combo = document.getElementById("cmbProveedorPre");
+    var comoboarea = document.getElementById("cmbAreas");
+
 
     var contador = 0;
     var contadorPrecio = 0;
@@ -709,10 +713,22 @@ function comprobar() {
             }
             if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
 
-                swal("¡El precio unitario no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+                swal("¡El costo no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
             }
         }
 
+
+    if (combo.value == 0 || comoboarea.value == 0) {
+
+        var regre = document.getElementsByClassName("regresar");
+        for (var i = 0; i < regre.length; i++) {
+
+            regre[i].style.display = 'none';
+        }
+
+        swal("¡Seleccione una opción!", "", "warning");
+
+    }
     
 }
 
