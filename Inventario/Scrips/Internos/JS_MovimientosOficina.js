@@ -1096,7 +1096,7 @@ function VerPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Area;
-            MostrarArticulos(IdCompInt, idS);
+            //MostrarArticulos(IdCompInt, idS);
         });
 
     }
