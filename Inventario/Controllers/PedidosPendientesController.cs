@@ -262,40 +262,7 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
-            else
-            {
-                int nveces = InvBD.CompraInterno.Where(p => p.NoPedido.Equals(DatosCompra.NoPedido)
-                && p.NoPedidoProveedor.Equals(DatosCompra.NoPedidoProveedor)
-                && p.IdProveedor.Equals(DatosCompra.IdProveedor)
-                && p.Proveedor.Equals(DatosCompra.Proveedor)
-                && p.FechaIngreso.Equals(DatosCompra.FechaIngreso)
-                && p.IdSitio.Equals(DatosCompra.IdSitio)
-                && p.Sitio.Equals(DatosCompra.Sitio)
-                && p.IdAsignacion.Equals(DatosCompra.IdAsignacion)
-                && p.EstatusPedido.Equals(DatosCompra.EstatusPedido)
 
-                ).Count();
-                if (nveces == 0)
-                {
-                    CompraInterno obj = InvBD.CompraInterno.Where(p => p.IdCompraInterno.Equals(id)).First();
-                    obj.NoPedido = DatosCompra.NoPedido;
-                    obj.NoPedidoProveedor = DatosCompra.NoPedidoProveedor;
-                    obj.IdProveedor = DatosCompra.IdProveedor;
-                    obj.Proveedor = DatosCompra.Proveedor;
-                    obj.FechaIngreso = DatosCompra.FechaIngreso;
-                    obj.IdSitio = DatosCompra.IdSitio;
-                    obj.Sitio = DatosCompra.Sitio;
-                    obj.IdAsignacion = DatosCompra.IdAsignacion;
-                    obj.EstatusPedido = DatosCompra.EstatusPedido;
-
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-                }
-                else
-                {
-                    Afectados = -1;
-                }
-            }
             return Afectados;
         }
 
