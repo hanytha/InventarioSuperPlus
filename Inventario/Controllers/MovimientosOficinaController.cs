@@ -596,14 +596,14 @@ namespace Inventario.Controllers
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
         //Visualizar el archivo de los pedidos
-        public JsonResult ConsultaAceptarPedido(long Id, long No)
+        public JsonResult ConsultaAceptarPedido(long idS, long No)
         {
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
-                            where ExistAlm.NoPedidoG.Equals(No) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(0)
+                            where ExistAlm.NoPedidoG.Equals(No) && Compra.IdSitio.Equals(idS) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(0)
                             select new
                             {
                                 IdPedidosInternos = ExistAlm.IdCompraInterno,

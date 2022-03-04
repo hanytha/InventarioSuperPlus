@@ -992,7 +992,7 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
         sessionStorage.setItem('IdPedido', '0');
     }
     else {
-        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+        $.get("/MovimientosOficina/ConsultaAceptarPedido/?idS=" + idS + "&No= " + no, function (Data) {
             sessionStorage.setItem('IdPedido', Data[0].IdPedidosInternos);
             document.getElementById("TxtNombreUsr");
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
