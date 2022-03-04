@@ -270,17 +270,14 @@
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                     @*<button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>*@
-                    <a type="button" class="btn btn-primary" href="javascript:imprSelec('seleccion')" data-target="#ModalPedidos" onclick="Guardar(); ImprimirPres(); VerPedido(0, 0, 0, 0);">Aceptar Pedido</a>
+                    <a type="button" id="btn-1" class="btn btn-primary" href="javascript:imprSelec('seleccion')" data-target="#ModalPedidos" onclick="Guardar(); ImprimirPres(); VerPedido(0, 0, 0, 0); ">Aceptar Pedido</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="actualizar()">Cerrar</button>
 
                     <!-- Mostrar y ocultar botones-->
                     <script>
                         $(function () {
                             $('#btn-1').click(function () {
-                                $('#button').show();
-                            });
-                            $('#hide').click(function () {
-                                $('#button').hide();
+                                $('#btn-1').hide();
                             });
                         })
                     </script>

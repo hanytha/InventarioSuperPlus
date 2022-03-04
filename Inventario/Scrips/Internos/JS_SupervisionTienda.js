@@ -233,7 +233,7 @@ function ConsultaAceptarPedidoArea(IDTienda) {
     }
 }
 function mostrarBoton() {
-    $('#btn-1').prop('disabled', true);
+    $('#btn-1').prop('disabled', false);
     $('#button').prop('disabled', false);
     Guardar();
     Mostrar();
@@ -241,8 +241,8 @@ function mostrarBoton() {
 
 function ocultarBoton() {
 
-    $('#btn-1').prop('disabled', false);
-    $('#button').prop('disabled', true);
+    $('#btn-1').prop('disabled', true);
+  //  $('#button').prop('disabled', true);
 
 }
 
