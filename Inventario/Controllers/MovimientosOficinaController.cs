@@ -601,8 +601,6 @@ namespace Inventario.Controllers
             var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
                             join Compra in InvBD.CompraInterno
                         on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
-                            join Tienda in InvBD.Tienda
-                           on Compra.IdSitio equals Tienda.IdTienda
                             join areas in InvBD.Areas
                         on Compra.IdProveedor equals areas.IdAreas
                             where ExistAlm.NoPedidoG.Equals(No) && Compra.IdAsignacion.Equals(1) && Compra.EstatusPedido.Equals(0)
@@ -615,15 +613,13 @@ namespace Inventario.Controllers
                                 Tipo = ExistAlm.TipoDeOperacion,
                                 IdProveedor = Compra.IdProveedor,
                                 Proveedor = Compra.Proveedor,
-                                IdTienda = Compra.IdSitio,
+                                IdArea = Compra.IdSitio,
                                 IdArticulo = ExistAlm.IdArticulo,
                                 Articulo = ExistAlm.Articulo,
                                 Fecha = Compra.FechaIngreso,
                                 Telefono = areas.Telefono,
                                 Correo = areas.Correo,
-                                Area = areas.Nombre,
-                                Localidad = Tienda.Localidad,
-                                Direccion = Tienda.Direccion
+                                Area = areas.Nombre
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }

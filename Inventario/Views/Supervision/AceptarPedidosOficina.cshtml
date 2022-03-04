@@ -71,9 +71,7 @@
                                 <div class="card-body">
                                     <div class="row">
 
-                                        <button onclick="abrirModal(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                        <button onclick="abrirModalUsados(0,@ModeloAreas.IdAreas[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@ModeloAreas.IdAreas[i] data-target="#ModalUsados">Movimiento: Usados</button>
-                                        <div>
+                                         <div>
                                             <h5>Información de la @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
@@ -185,8 +183,8 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbAceptarTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
+                                    <label class="form-control-label" for="cmbAceptarArea">Area<span class="required">*</span></label>
+                                    <select id="cmbAceptarArea" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
