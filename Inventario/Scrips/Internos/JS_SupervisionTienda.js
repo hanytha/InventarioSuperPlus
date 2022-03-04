@@ -701,6 +701,7 @@ function GuardarPedidoInterno() {
                 }
             }
             alert("Los datos se guardaron correctamente");
+            actualizar();
             //ConsultaArticuloComp();
             //restablecerBordesInput();
             //document.getElementById("btnCancelar").click();

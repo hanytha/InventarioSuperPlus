@@ -814,6 +814,7 @@ function GuardarPedidoInterno() {
             //ConsultaArticuloComp();
             //restablecerBordesInput();
             //document.getElementById("btnCancelar").click();
+            actualizar();
         }
     }
 }
