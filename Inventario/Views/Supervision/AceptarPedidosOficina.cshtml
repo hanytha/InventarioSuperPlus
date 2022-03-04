@@ -186,13 +186,12 @@
                                     <label class="form-control-label" for="cmbAceptarArea">Area<span class="required">*</span></label>
                                     <select id="cmbAceptarArea" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
                                         @{
-                                            if (@TiendasSupervision.IDTienda != null)
+                                            if (@ModeloAreas.IdAreas != null)
                                             {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                for (int i = 0; i < ModeloAreas.IdAreas.Count(); i++)
                                                 {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                    <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
                                         }
@@ -221,7 +220,7 @@
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                     @*<button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>*@
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="Guardar(); ImprimirPres();">Imprimir</a>
+                <a type="button" class="btn btn-primary" href="javascript:imprSelec('seleccion')" onclick="Guardar(); ImprimirPres();">Aceptar Pedido</a>
                     <!-- Mostrar y ocultar botones-->
                     <script>
                         $(function () {

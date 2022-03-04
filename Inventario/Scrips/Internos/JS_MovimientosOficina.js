@@ -1055,7 +1055,7 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtAceptarNumeroPedidoAceptar").value = Data[0].NumeroPedido;
             document.getElementById("TxtAceptarNumPedidoProveedor").value = Data[0].NumPedidoProveedor;
             document.getElementById("TxtAceptarFechaIngreso").value = Data[0].Fecha;
-            document.getElementById("cmbAceptarArea").value = Data[0].IdTienda;
+            document.getElementById("cmbAceptarArea").value = Data[0].IdArea;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             MostrarArt(IdCompInt, idS);
             //VerPedido(id, no, IdCompInt, idS);
