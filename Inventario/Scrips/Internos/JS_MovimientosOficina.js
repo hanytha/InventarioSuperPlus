@@ -501,7 +501,7 @@ function ImprimirPres() {
     dos += "</div>";
 
     document.getElementById("TblArt").innerHTML = dos;
-    actualizar()
+   // actualizar()
 }
 function CamposObligatoriosDevolucion() {
     var exito = true;

@@ -836,7 +836,7 @@ function VerPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
             document.getElementById("TxtDepartamento").textContent = Data[0].Tienda;
             document.getElementById("TxtDireccion").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
-            MostrarArticulos(IdCompInt, idS);
+            //MostrarArticulos(IdCompInt, idS);
         });
     }
 }
@@ -1635,5 +1635,5 @@ function ImprimirPres() {
     dos += "</div>";
 
     document.getElementById("TblArt").innerHTML = dos;
-    actualizar()
+   // actualizar()
 }
