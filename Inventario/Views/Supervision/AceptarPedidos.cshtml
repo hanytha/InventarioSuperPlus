@@ -197,7 +197,7 @@
                             ACEPTAR PEDIDO
                         </label>
                     </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                  @*  <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>*@
                 </div>
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
@@ -271,6 +271,7 @@
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                     @*<button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>*@
                     <a type="button" class="btn btn-primary" href="javascript:imprSelec('seleccion')" data-target="#ModalPedidos" onclick="Guardar(); ImprimirPres(); VerPedido(0, 0, 0, 0);">Aceptar Pedido</a>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="actualizar()">Cerrar</button>
 
                     <!-- Mostrar y ocultar botones-->
                     <script>

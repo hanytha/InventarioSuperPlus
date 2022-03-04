@@ -1426,7 +1426,8 @@ function nuevoStockUsados() {
     actualizar();
 }
 function actualizar() {
-    location.reload(true);
+    //location.reload(true);
+    window.location.href = window.location.href;
 }
 //Movimiento devolucion
 function nuevoStock() {
@@ -1584,3 +1585,6 @@ function ValidarUsados() {
 
 
 }
+//function actualizarP() {
+//    window.location.href = window.location.href;
+//}

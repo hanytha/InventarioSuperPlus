@@ -1306,8 +1306,11 @@ function nuevoStockUsados() {
     actualizar();
 }
 function actualizar() {
-    location.reload(true);
+    //location.reload(true);
+    window.location.href = window.location.href;
 }
+
+
 function CamposObligatoriosUsados() {
     var exito = true;
     var controlesObligatorio = document.getElementsByClassName("obligatorioUsados");
