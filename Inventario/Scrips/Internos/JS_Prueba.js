@@ -754,6 +754,7 @@ function ImprimirPres() {
 
     consultaFecha();
     obtenerPro();
+    obtenerArea();
 
     var NumPedidos = document.getElementsByClassName("input-cantidades");
     var totalar = document.getElementsByClassName("input-subtotal");
@@ -817,10 +818,17 @@ function consultaFecha() {
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFecha').textContent = fecha;
 }
-//----------------------------------------------------------
+//------------------------------------------------------------------------
 function obtenerPro() {
     var combo = document.getElementById("cmbProveedorPre");
     var selected = combo.options[combo.selectedIndex].text;
 
     document.getElementById('TxtProveedores').textContent = selected;
+}
+//------------------------------------------------------------------------
+function obtenerArea() {
+    var combo = document.getElementById("cmbAreas");
+    var selected = combo.options[combo.selectedIndex].text;
+
+    document.getElementById('TxtAreas').textContent = selected;
 }

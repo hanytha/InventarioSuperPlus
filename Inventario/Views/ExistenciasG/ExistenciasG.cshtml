@@ -308,21 +308,26 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbArea">Área que solicita el(los) artículo(s)<span>*</span></label>
-                                    <select id="cmbArea" style="width: 100%" class="form-control">
+                                    <label class="form-control-label" for="cmbAreas">Área que solicita el(los) artículo(s)<span>*</span></label>
+                                    <select id="cmbAreas" style="width: 100%" class="form-control">
 
                                         @if (ModeloAreas.IdAreas != null)
                                         {
+                                            if (Accesos.NIvel == 1)
+                                            {
+                                                <option value="0">------Seleccione------</option>
+                                            }
+
                                             for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                             {
                                                 if (Accesos.NIvel == 1)
                                                 {
-                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
-                                                }
 
+                                                    <option style="text-align:center" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
                                                 if (Accesos.IdArea == ModeloAreas.IdAreas[i])
                                                 {
-                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
 
@@ -408,11 +413,14 @@
                                                 <thead>
                                                     <tr align="left">
                                                         <th scope="col">Proveedor:</th>
+                                                        <th align="right"  scope="col">Área:</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr align="left">
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label></label><label></label><label id="TxtProveedores"></label></td>
+                                                        <td align="right"  id="lin1_col1" {NM_CSS_CAB}><label></label><label></label><label id="TxtAreas"></label></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
