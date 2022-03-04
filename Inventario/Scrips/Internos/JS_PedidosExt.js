@@ -1,8 +1,9 @@
 ﻿
 //*****************Crea la tabla de todos los pedidos quee se realizan a los proveedores*****************************
+/*
 ConsultaPedidos();
 function ConsultaPedidos() {
-    $.get("/Pedidosext/ConsultaPedidosExternos", function (Data) {
+    $.get("/Pedidosext/ConsultaPedidosNumeroPedido", function (Data) {
         CrearTablaPedidos(Data);
     }
     );
@@ -19,22 +20,37 @@ function CrearTablaPedidos(Data) {
     CodigoHtmlTablaPedidos += "<table class='table-primary table table-bordered order-table'>";
     CodigoHtmlTablaPedidos += "<thead>";
     CodigoHtmlTablaPedidos += "<tr>";
-    CodigoHtmlTablaPedidos += "<th>ID</th>";
     CodigoHtmlTablaPedidos += "<th>Número_Pedido</th>";
     CodigoHtmlTablaPedidos += "<th>Proveedor</th>";
+    CodigoHtmlTablaPedidos += "<th></th>";
     CodigoHtmlTablaPedidos += "<th>Fecha</th>";
     CodigoHtmlTablaPedidos += "<th>Acción</th>";
     CodigoHtmlTablaPedidos += "</tr>";
     CodigoHtmlTablaPedidos += "</thead>";
     CodigoHtmlTablaPedidos += "<tbody>";
-    for (var i = 0; i < Data.length; i++) {
+
+
+
+
+    let NoPedido = Data.NoPedido;
+    let ArrayNoPedido = NoPedido.split(',');
+    let NoProvedor = Data.NoProvedor;
+    let ArrayNoProvedor = NoProvedor.split(',');
+    let Proveedor = Data.Proveedor;
+    let ArrayProveedor = Proveedor.split(',');
+    let fecha = Data.fecha;
+    let Arrayfecha = fecha.split(',');
+    let IdPedido = Data.IdPedido;
+    let ArrayIdPedido = IdPedido.split(',');
+
+
+    for (var i = 0; i < ArrayIdPedido.length; i++) {
 
         CodigoHtmlTablaPedidos += "<tr>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].IdPedidosExternos + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].NumeroPedido + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Proveedor + "</td>"
-        CodigoHtmlTablaPedidos += "<td>" + Data[i].Fecha + "</td>"
-        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + Data[i].NumeroPedido + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
+        CodigoHtmlTablaPedidos += "<td>" + ArrayNoPedido[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td colspan='2'>" + ArrayProveedor[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td>" + Arrayfecha[i] + "</td>"
+        CodigoHtmlTablaPedidos += "<td><button class='btn btn-primary'  data-title='Ver pedido' onclick='VerPedido(" + ArrayNoPedido[i] + ")' data-toggle='modal' data-target='#ModalPedidos'><i class='far fa-eye'></i></i></button></td>";
         CodigoHtmlTablaPedidos += "</tr>";
     }
     CodigoHtmlTablaPedidos += "</tbody>"; 
@@ -42,6 +58,7 @@ function CrearTablaPedidos(Data) {
     document.getElementById("TablaPedidos").innerHTML = CodigoHtmlTablaPedidos;
 }
 
+*/
 //******************************************************************************************************************************
 //*******************Despliega el modal deacuerdo con el número de pedido************************************************
 
@@ -85,26 +102,33 @@ function MostrarArticulos(num) {
             dos += "<th >Unidad_Medida</th>"
             dos += "<th >Cantidad Solicitada</th>"
             dos += "<th >Precio_Unitario</th>"
-            dos += "<th >Total</th>"
+            dos += "<th >Total por artículo</th>"
             dos += "</tr>"
             dos += "</thead>"
             dos += "<tbody>"
 
+            var total = 0;
             for (var i = 0; i < Data.length; i++) {
 
                 //--------Multiplica la cantidad solicitada por el precio unitario para obtener el total------------------------
-                let tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
+
+                var tres = (Data[i].CantidadSolicitada) * (Data[i].PrecioUnitario);
+                total = total + tres;
                 //------------------------Cuerpo de la tabla------------------------------------------
                 dos += "<tr>"
                 dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Articulo + "</label></td>"
                 dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Data[i].Unidad + "</label></td>"
                 dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + Data[i].CantidadSolicitada + "</label></td>"
                 dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + Data[i].PrecioUnitario + "</label></td>"
-                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres +"</label></td>"
+                dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + tres + "</label></td>"
                 dos += "</tr>"
             }
             dos += "<tfoot>"
-            dos += "<th>Total</th>"
+            dos += "<th></th>"
+            dos += "<th></th>"
+            dos += "<th></th>"
+            dos += "<th style='text-align: center;'>Total</th>"
+            dos += "<th style='text-align: center;'>$"+ total+"</th>"
             dos += "</tfoot>"
 
             dos += "</tbody>"

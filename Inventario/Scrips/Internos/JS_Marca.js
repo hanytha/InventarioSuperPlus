@@ -7,15 +7,17 @@ function ConsultaMarcas() {
 }
 function CrearTablaMarcas(Data) {
     var CodigoHtmlTablaMarcas = "";
-    CodigoHtmlTablaMarcas  += "<table id='tablas' class='table table table-sm'>";
+    CodigoHtmlTablaMarcas += "<br />";
+    CodigoHtmlTablaMarcas += "<table id='tablas' class='table table table-sm table-success'>";
     CodigoHtmlTablaMarcas  += "<thead><tr><th>Nombre</th><th>Acción</thead>";
-    CodigoHtmlTablaMarcas  += "<tbody>";
+    CodigoHtmlTablaMarcas += "<tbody>";
+
     for (var i = 0; i < Data.length; i++) {
         CodigoHtmlTablaMarcas  += "<tr>";
         CodigoHtmlTablaMarcas  += "<td>" + Data[i].Nombre + "</td>";
 
         CodigoHtmlTablaMarcas  += "<td>";
-        CodigoHtmlTablaMarcas += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdMarca + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaMarcas += "<button class='btn btn-success' onclick='editarModal(" + Data[i].IdMarca + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaMarcas += "<button class='btn btn-danger' onclick='EliminarMarca(" + Data[i].IdMarca + ",this)'><i class='fas fa-eraser'></i></button>";
 
         CodigoHtmlTablaMarcas  += "</td>";
@@ -23,7 +25,7 @@ function CrearTablaMarcas(Data) {
     }
     CodigoHtmlTablaMarcas += "</tbody>";
     CodigoHtmlTablaMarcas  += "</table>";
-    document.getElementById("tabla").innerHTML = CodigoHtmlTablaMarcas ;
+    document.getElementById("tablaMarcas").innerHTML = CodigoHtmlTablaMarcas ;
 }
 
 

@@ -1,184 +1,244 @@
-﻿
+﻿@using Inventario.Models;
 @{
     ViewBag.Title = "Compra";
 }
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        REGISTRO DE COMPRAS Y BONIFICACIONES DE LOS ARTÍCULOS
+    </h2>
+</center>
 
+<!----------------------------Estilos-------------------------------------->
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Inicia tarjeta-->
-<!-- Estilos -->
-<!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" style="float: right; background-color:mediumturquoise;" class="btn btn-primary " data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<script type="text/javascript">
-    (function (document) {
-        'use strict';
-
-        var LightTableFilter = (function (Arr) {
-
-            var _input;
-
-            function _onInputEvent(e) {
-                _input = e.target;
-                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                Arr.forEach.call(tables, function (table) {
-                    Arr.forEach.call(table.tBodies, function (tbody) {
-                        Arr.forEach.call(tbody.rows, _filter);
-                    });
-                });
-            }
-
-            function _filter(row) {
-                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-            }
-
-            return {
-                init: function () {
-                    var inputs = document.getElementsByClassName('light-table-filter');
-                    Arr.forEach.call(inputs, function (input) {
-                        input.oninput = _onInputEvent;
-                    });
-                }
-            };
-        })(Array.prototype);
-
-        document.addEventListener('readystatechange', function () {
-            if (document.readyState === 'complete') {
-                LightTableFilter.init();
-            }
-        });
-
-    })(document);
-</script>
 <!------------------------------------------------Termina------------------------------------------------------------->
-<!--Mostrar los registros en el accordion-->
-<div id="tablaCompras"></div>
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h4>REGISTRO COMPRA</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="input-group mb-3 float-right">
+            <input style="border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;" class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search....">
+            <span class="input-group-text" style="border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; " id="basic-addon1"><i class="fas fa-search"></i></span>
+        </div>
+    </div>
+    <div class="col-4 col-md-3">
+        <button onclick="abrirModal(0); Borrar();" type="button" class="btn btn-success" data-toggle="modal" data-target="#dialogo1">AGREGAR</button>
+    </div>
+</div>
+<!------------------------------------Mostrar los registros en el accordion--------------------------------------->
+<div id="tablaCompras">
+    @{
+        if (ModeloCompra.IdArea != null)
+        {
+
+            <table class="order-table  table-success" style="position: relative"
+            <thead>
+                    <tr>
+                        <th scope="col">No.Compra</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Operación</th>
+                        <th scope="col">Fecha_Compra</th>
+                        <th scope="col">Accción</th>
+                    </tr>
+            </thead>
+                for (var i = 0; i < ModeloCompra.IdArea.Count(); i++)
+                {
+
+                if (Accesos.NIvel == 1)
+                {
+            <tr>
+                <td>@ModeloCompra.NoCompra[i]</td>
+                <td>@ModeloCompra.Proveedor[i]</td>
+                <td>@ModeloCompra.TipoOperacion[i]</td>
+                <td>@ModeloCompra.FechaDeIngreso[i]</td>
+                <td>
+                    <button class="btn btn-success" data-title="Ver_compra" onclick="abrirModal(@ModeloCompra.IdCompra[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                </td>
+            </tr>
+                }
+                else if ((long)ModeloCompra.IdArea[i] == Accesos.IdArea && ModeloCompra.NomArea[i] != "Administrador")
+                {
+                 <tr>
+                <td>@ModeloCompra.NoCompra[i]</td>
+                <td>@ModeloCompra.Proveedor[i]</td>
+                <td>@ModeloCompra.TipoOperacion[i]</td>
+                <td>@ModeloCompra.FechaDeIngreso[i]</td>
+                <td>
+                    <button class="btn btn-success" data-title="Ver_compra"  onclick="abrirModal(@ModeloCompra.IdCompra[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                </td>
+                 </tr>
+                }
+
+                }
+            }
+        }
+    </table>
+        </div>
+
+        <!-- Encabezado del Modal -->
+        <div class="container">
+            <div class="modal fade" id="dialogo1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">REGISTRO DE COMPRAS Y BONIFICACIONES</h4>
+                            <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                        </div>
+                        <!-- Contenido del modal -->
+                        <div class="modal-body">
+                            <form id="regiration_form" novalidate method="post">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtFechaDeIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control bloquear">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtNoCompraPro">No. Compra por proveedor<span class="required">*</span></label>
+                                                <input type="number" name="data[TxtNoCompraPro]" id="TxtNoCompraPro" class="form-control  limpiar bloquear">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar  bloquear" placeholder="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbMPago">Método de pago<span>*</span></label>
+                                                <select id="cmbMPago" style="width: 100%" class="form-control limpiarSelect limpiarSelects obligatorio"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtCosto">Total<span class="required">*</span></label>
+                                                <input type="number" name="data[TxtCosto]" id="TxtCosto" class="form-control  limpiars limpiar bloquear">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
+                                                <select id="cmbProveedor" onchange="MostrarArticulos(this.value); LimpiarCamposIn();" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TblArticulos">Artículo(s)<span class="required">*</span></label>
+                                                <div id="TblArticulos">Artículo(s) del proveedor</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- pie del modal-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="GCompras" onclick="verificar();">Guardar</button>
+                            <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
-                    <form id="regiration_form" novalidate method="post">
-                        <fieldset>
-                            <h4>Paso 1</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNoCompra">Número de compra<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNoCompra]" id="TxtNoCompra" class="form-control  limpiar obligatorio" placeholder="1">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbArticulo">Artículo<span>*</span></label>
-                                        <select id="cmbArticulo" onchange="LlenarCMBProveedores(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtMetodo">Método de pago<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtMetodo]" id="TxtMetodo" class="form-control  limpiar obligatorio" placeholder="Tarjeta">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbProveedor">Proveedor<span>*</span></label>
-                                        <select id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaDeIngreso">Fecha De Ingreso<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFechaDeIngreso]" id="TxtFechaDeIngreso" class="form-control  limpiar obligatorio" placeholder="Fecha de ingreso">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtPrecioUnitario">Precio Unitario<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPrecioUnitario]" id="TxtPrecioUnitario" class="form-control  limpiar obligatorio" placeholder="$23">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbImpuesto">Impuesto<span>*</span></label>
-                                        <select id="cmbImpuesto" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtExitenciaActual">Exitencia Actual<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtExitenciaActual]" id="TxtExitenciaActual" class="form-control  limpiar obligatorio" placeholder="88">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCoste">Costo<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCoste]" id="TxtCoste" class="form-control  limpiar obligatorio" placeholder="150.00">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbUnidad">Unidad de medida<span>*</span></label>
-                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="GuardarCompra()">Guardar</button>
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!------------------------------------------------------>
-<style>
-    .input-group {
-        float: right;
-    }
-</style>
-<!-------------------------------------------------------------------->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Existencia.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+
+        <!--------------------------------------------->
+        <div id="GIDA">
+            @{
+                if (Accesos.IdArea != null)
+                {
+                    if (Accesos.NIvel == 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.NIvel" />
+                        <input style="display:none" id="NAREA" value="@Accesos.Perfil" />
+                    }
+                    if (Accesos.NIvel != 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.IdArea" />
+                        <input style="display:none" id="NAREA" value="@Accesos.NArea" />
+                    }
+                }
+            }
+
+        </div>
+        <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+        <style>
+            .redondeado {
+                border-radius: 5px;
+                border: 1px solid #696969;
+                width: 90px;
+            }
+
+            input:focus {
+                background-color: lavender;
+                text-align: center
+            }
+        </style>
+
+        <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+        <style>
+            .sinborde {
+                border: 0;
+            }
+        </style>
+        <!------------------------------------------------------------------------------------------------------>
+        <style>
+
+            [data-title]:hover:after {
+                opacity: 1;
+                transition: all 0.1s ease 0.5s;
+                visibility: visible;
+            }
+
+            [data-title]:after {
+                content: attr(data-title);
+                background-color: #06B4F5;
+                color: #060606;
+                font-size: 14px;
+                font-family: Raleway;
+                position: absolute;
+                padding: 3px 20px;
+                bottom: -1.6em;
+                left: 100%;
+                white-space: nowrap;
+                box-shadow: 1px 1px 3px #222222;
+                opacity: 0;
+                border: 1px solid #111111;
+                z-index: 99999;
+                visibility: hidden;
+                border-radius: 6px;
+            }
+
+            [data-title] {
+                position: relative;
+            }
+        </style>
+        <!-------------------------------------------------------------------->
+        <style type="text/css">
+            #regiration_form fieldset:not(:first-of-type) {
+                display: none;
+            }
+        </style>
+
+        <!--Script-->
+        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+        <script src="~/Scrips/Internos/JS_Existencia.js"></script>
+        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+        <script src="~/Scrips/General/JS_Buscador.js"></script>
+        <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

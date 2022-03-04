@@ -5,6 +5,7 @@
 //using System.Web;
 //using System.Web.Mvc;
 
+<<<<<<< HEAD
 //namespace Inventario.Controllers
 //{
 //    //Lamar al método de seguridad
@@ -42,6 +43,71 @@
 //                        stockActual = p.ExitenciaActual,
 //                        costo = p.Coste,
 //                    });
+=======
+namespace Inventario.Controllers
+{
+    //Lamar al método de seguridad
+    [Seguridad]
+    public class ExistenciasGController : Controller
+    {
+        //DCISPlusDataContext InvBD = new DCISPlusDataContext();
+        InventarioBDDataContext InvBD = new InventarioBDDataContext();
+        // GET: Prueba
+        public ActionResult ExistenciasG()
+        {
+            ExistenciasGController vista = new ExistenciasGController();
+            vista.ConsultaArticulosArea();
+            return View();
+        }
+
+        //*****************************************************************************************************************
+        public void ConsultaArticulosArea()
+        {
+            ModeloExistGe modeloArticulosArea = new ModeloExistGe();
+            ModeloExistGe.IdArticulos = new List<long>();
+            ModeloExistGe.IdAreas = new List<long>();
+            ModeloExistGe.NombreEmpresa = new List<string>();
+            ModeloExistGe.Area = new List<string>();
+
+            ModeloExistGe.FechaIngreso = new List<string>();
+            ModeloExistGe.StockActual = new List<long>();
+            ModeloExistGe.IdCompra = new List<long>();
+            ModeloExistGe.PrecioUnitario = new List<long>();
+
+
+
+            string id = "";
+            string Nombre = "";
+            string Fechas = "";//Es la fecha de la ultima compra reaizada
+            string Stock = "";//Es la suma del stock atcual de todas las compras
+            string Costos = "";//Es el costo de la compra que actualmente se esta consumiendo
+            string IDArea = "";
+            string Area = "";
+
+            var ConsultaArticulo = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+            .Select(p => new
+            {
+                Id = p.IdArticulos,
+                nombres = p.NombreEmpresa,
+                IDEDE = p.IdAreas,
+                Area = p.Area,
+
+            });
+            foreach (var art in ConsultaArticulo)
+            {
+                id += art.Id + ",";
+                Nombre += art.nombres + ",";
+                IDArea += art.IDEDE + ",";
+                Area += art.Area + ",";
+
+                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.Id) && p.StockActual > 0).OrderBy(p => p.IdCompra)
+                    .Select(p => new
+                    {
+                        fechaIngreso = p.FechaIngreso,
+                        stockActual = p.StockActual,
+                        costo = p.PrecioUnitario,
+                    });
+>>>>>>> anabel2
 
 //                if (consultaFecha.Count() > 0)
 //                {
@@ -53,6 +119,7 @@
 //                    foreach (var comp in consultaFecha)
 //                    {
 
+<<<<<<< HEAD
 //                        SumaStock = (int)(SumaStock + comp.stockActual);
 //                        if (cont == 0)
 //                        {
@@ -139,8 +206,102 @@
 //                            Direccion = provedor.Direccion,
 
 //                        };
+=======
+                        SumaStock = (int)(SumaStock + comp.stockActual);
+
+                        if (cont == UltimoReg)
+                        {
+                            Fechas += comp.fechaIngreso + ",";
+                            Costos += comp.costo + ",";
+                        }
+                        cont++;
+                    }
+                    Stock += SumaStock + ",";
+                    //termina
+                }
+                else
+                {
+                    Costos += "0" + ",";
+
+                    Fechas += "2010-08-10" + ",";
+                    Stock += "0" + ",";
+                }
+            }
+            var Resultado = new
+            {
+                id = id.Substring(0, id.Length - 1),
+                Nombre = Nombre.Substring(0, Nombre.Length - 1),
+                Fechas = Fechas.Substring(0, Fechas.Length - 1),
+                Stock = Stock.Substring(0, Stock.Length - 1),
+                Costos = Costos.Substring(0, Costos.Length - 1),
+                IDArea = IDArea.Substring(0, IDArea.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+
+            };
+            string[] IDA = id.Substring(0, id.Length - 1).Split(',');
+            string[] Articulo = Nombre.Substring(0, Nombre.Length - 1).Split(',');
+            string[] IDDpertamento = IDArea.Substring(0, IDArea.Length - 1).Split(',');
+            string[] Departamento = Area.Substring(0, Area.Length - 1).Split(',');
+
+            string[] Fecha = Fechas.Substring(0, Fechas.Length - 1).Split(',');
+            string[] Stocks = Stock.Substring(0, Stock.Length - 1).Split(',');
+            string[] Precio = Costos.Substring(0, Costos.Length - 1).Split(',');
+
+            for (int i = 0; i < Articulo.GetLength(0); i++)
+            {
+                ModeloExistGe.IdArticulos.Add(Convert.ToInt32 (IDA[i]));
+                ModeloExistGe.IdAreas.Add(Convert.ToInt32(IDDpertamento[i]));
+                ModeloExistGe.NombreEmpresa.Add(Articulo[i]);
+                ModeloExistGe.Area.Add(Departamento[i]);
+
+                ModeloExistGe.FechaIngreso.Add(Fecha[i]);
+                ModeloExistGe.StockActual.Add(Convert.ToInt32(Stocks[i]));
+                ModeloExistGe.PrecioUnitario.Add(Convert.ToInt32(Precio[i]));
+            }
+        }
 
 
+
+        //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
+        public JsonResult ConsultaNumCompra(long No)
+        {
+            var compra = InvBD.ComprasArticulos.Where(p => p.NoCompra.Equals(No) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NoCompra,
+                    p.Articulo,
+                    p.FechaIngreso,
+                    p.Unidad,
+                    p.PrecioUnitario,
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------
+        //---------------Consulta datos del artículo por Número de compra en la tabla de compras-----------------
+        public JsonResult ConsultaIdArticulo(long Id)
+        {
+            var compra = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Id) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NoCompra,
+                    p.Articulo,
+                    p.FechaIngreso,
+                    p.Unidad,
+                    p.TipoDeOperacion,
+                    p.PrecioUnitario,
+                    p.IdArticulo,
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+   //------------------------------------------------------------
+
+>>>>>>> anabel2
+
+   //----------------------------------Consulta los datos por id de proveedor en la tabla de proveedores-------------------------------------------------
+
+<<<<<<< HEAD
 //            return Json(comps, JsonRequestBehavior.AllowGet);
 
 //        }
@@ -160,6 +321,98 @@
 //            return Json(compra, JsonRequestBehavior.AllowGet);
 //        }
 //        //****************************************************************************************************
+=======
+        public JsonResult ConsultaProveedorModal(string Id)
+        {
+            var compra = InvBD.Proveedores.Where(p => p.IdProveedores.Equals(Id) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.IdProveedores,
+                    p.Nombre,
+                    p.RFC,
+                    p.Correo,
+                    p.Telefono,
+                    p.UsoCFDI,
+                    p.Direccion,
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+
+
+//-----------------------------------------------------------------------------------------------------------------------
+ //********************Consulta para mostrar los artículos por proveedor consultando la tabla de artículos**************
+        public JsonResult ConsultaIdPro(string IdPro)
+        {
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    p.NombreEmpresa,
+                    p.IdArticulos,
+                    p.Unidad,
+                });
+
+            return Json(compra, JsonRequestBehavior.AllowGet);
+        }
+//--------------------------------------------------------------------------
+        public JsonResult ConsultaIdProveedorArticulos(string IdPro)
+        {
+            string Articulo = "";
+            string IDA = "";
+            string Unidad = "";
+            string Precio = "";
+            var compra = InvBD.Articulos.Where(p => p.Proveedor.Contains(IdPro) && p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    NombreEmpresa = p.NombreEmpresa,
+                    IdArticulos = p.IdArticulos,
+                    Unidad = p.Unidad,
+
+                });
+
+                foreach (var g in compra)
+                {
+                    Articulo += g.NombreEmpresa + ",";
+                    IDA += g.IdArticulos + ",";
+                    Unidad += g.Unidad + ",";
+
+
+                    var articulos = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(g.IdArticulos) && p.Estatus.Equals(1)).OrderBy(p => p.NoCompra)
+                  .Select(p => new
+                  {
+                      precio = p.PrecioUnitario,
+
+                  });
+
+                if (articulos.Count() > 0)
+                {
+                    int UltimoReg = articulos.Count() - 1;
+                    int cont = 0;
+
+                    foreach (var f in articulos)
+                    {
+                        if (cont == UltimoReg) {
+                            Precio += f.precio + ",";
+                        }
+                        cont++;
+                    }
+                }
+                else
+                {
+                    Precio += "0" + ",";
+                }
+            }
+            var resul = new { Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IDA = IDA.Substring(0, IDA.Length - 1),
+                Unidad = Unidad.Substring(0, Unidad.Length - 1),
+                Precio = Precio.Substring(0, Precio.Length - 1)
+            };
+
+            return Json(resul, JsonRequestBehavior.AllowGet);
+        }
+
+        //****************************************************************************************************
+>>>>>>> anabel2
 
 //        //****************************Consulta el último número de pedido*************************************************
 
@@ -233,6 +486,7 @@
 //            return Json(datos, JsonRequestBehavior.AllowGet);
 //        }
 
+<<<<<<< HEAD
 //        //----------------------Guarda los datos de los pedidos que son realizados-----------------------------------------
 //        public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
 //        {
@@ -243,6 +497,18 @@
 //            if (id.Equals(0))
 //            {
 //                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+=======
+        //----------------------Guarda los datos de los pedidos que son realizados-----------------------------------------
+        public int GuardarPedidoExterno(PedidosExternos DatosPedidoExterno)
+        {
+            int Afectados = 0;
+            //try
+            //{
+            long id = DatosPedidoExterno.IdPedidosExternos;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.PedidosExternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
+>>>>>>> anabel2
 
 //                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
 //                if (nveces >= 0)
@@ -297,7 +563,36 @@
 //                }
 //            }
 
+<<<<<<< HEAD
 //            return Afectados;
 //        }
 //    }
 //}
+=======
+            return Afectados;
+        }
+
+        //-----------------------------------------------Consulta razor área----------------------------------
+
+        public void BDDepartamento()
+        {
+            ModeloAreas modeloAreas = new ModeloAreas();
+            ModeloAreas.IdAreas = new List<long>();
+            ModeloAreas.Nombre = new List<string>();
+
+            var datos = InvBD.Areas.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    ID = p.IdAreas,
+                    Nombre = p.Nombre
+                });
+            foreach (var a in datos)
+            {
+                ModeloAreas.IdAreas.Add(a.ID);
+                ModeloAreas.Nombre.Add(a.Nombre);
+            }
+           
+        }
+    }
+}
+>>>>>>> anabel2

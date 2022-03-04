@@ -1,0 +1,242 @@
+﻿@using Inventario.Models;
+@{
+    ViewBag.Title = "Mermas";
+}
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        Devoluciones
+    </h2>
+</center>
+<!--Titulo-->
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!--------------------------------------Botón--------------------------------------------->
+<!---------------------------------------------------------------------------------------->
+
+<div id="tablaMermas">
+    @{
+        if (ModeloMermas.IdProveedor != null)
+        {
+            <table class="table-success" style="position: relative"
+            <thead>
+                    <tr>
+                        <th scope="col">Lugar de la devolución</th>
+                        <th scope="col">Número de pedido</th>
+                        <th scope="col">Sitio</th>
+                        <th scope="col">Ver devolución</th>
+                    </tr>
+            </thead>
+            for (var i = 0; i < ModeloMermas.IdProveedor.Count(); i++)
+            {
+                if (Accesos.NIvel == 1)
+                {
+            <tr>
+                <td>@ModeloMermas.Sitio[i]</td>
+                <td>@ModeloMermas.NoPedidoG[i]</td>
+                <td>@ModeloMermas.Articulo[i]</td>
+                <td>
+                    <button class="btn btn-success" onclick="abrirModal(@ModeloMermas.IdExistenciaAlmacenG[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                </td>
+            </tr>
+                }
+                else if ((long)ModeloMermas.IdProveedor[i] == Accesos.IdArea)
+                {
+                 <tr>
+                 <td>@ModeloMermas.Sitio[i]</td>
+                <td>@ModeloMermas.NoPedidoG[i]</td>
+                <td>@ModeloMermas.Articulo[i]</td>
+                <td>
+                    <button class="btn btn-success" onclick="abrirModal(@ModeloMermas.IdExistenciaAlmacenG[i])" data-toggle="modal" data-target="#ModalPedidos"><i class="fas fa-file-upload"></i></button>
+                    </td>
+                    </tr>
+
+                }
+            }
+        }
+        }
+    </table>
+        </div>
+
+        <!---------------------------------------------------------------------------------------------------------->
+        <div id="GIDA">
+            @{
+                if (Accesos.IdArea != null)
+                {
+                    if (Accesos.NIvel == 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.NIvel" />
+                        <input style="display:none" id="NAREA" value="@Accesos.Perfil" />
+                    }
+                    if (Accesos.NIvel != 1)
+                    {
+                        <input style="display:none" id="IDAREA" value="@Accesos.IdArea" />
+                        <input style="display:none" id="NAREA" value="@Accesos.NArea" />
+                    }
+                }
+            }
+
+        </div>
+        <!---------------------------------------------------------------------------------------------------------------------------------------------------->
+        <!-- Encabezado del Modal -->
+
+        <div class="modal fade" id="ModalPedidos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Aprobación de mermas</h5>
+                        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                    </div>
+                    <!-- Contenido del modal -->
+                    <div class="modal-body">
+                        <form id="regiration_form" novalidate method="post">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtIdCompra">Compra<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtIdCompra]" id="TxtIdCompra" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtIdCompraInterna">Compra interna<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtIdCompraInterna]" id="TxtIdCompraInterna" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtFecha">Fecha de devolución<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNumPedido">Número de pedido<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtProveedor">Área<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtProveedor]" id="TxtProveedor" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMovimiento">Selecciona el movimiento a realizar con la devolución<span>*</span></label>
+                                        <select id="cmbMovimiento" name="" style="width: 100%" class="form-control limpiarSelect ">
+                                            <option style="text-align:center" id="comb" value="0" selected>Seleccione una opción</option>
+                                            <option style="text-align:center" value="1">Realizar la merma</option>
+                                            <option style="text-align:center" value="2">Reintegrar la devolucón al stock</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCantidad">Cantidad<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar obligatorio bloquear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtNoObservaciones">Observaciones<span class="required">*</span></label>
+                                        <textarea type="text" id="TxtNoObservaciones" class="form-control limpiar bloquear" rows="3" wrap="soft" placeholder="Agrega observaciones acerca del movimiento..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- pie del modal-->
+                            <div class="modal-footer">
+                                <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" verficar()">Guardar</button>
+                                <button id="btnCancelar" class="btn btn-danger " data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid {
+                border-top: 4px solid #D7DBDD;
+            }
+
+            .D1 {
+                background-color: #EBEBEB;
+            }
+        </style>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid3 {
+                border-top: 1px solid #f1f507;
+            }
+        </style>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Solid border */
+            hr.solid4 {
+                border-top: 1px solid #0B94F8;
+            }
+        </style>
+        <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->
+        <style>
+            .redondeado {
+                border-radius: 5px;
+                border: 1px solid #696969;
+                width: 135px;
+            }
+
+            input:focus {
+                background-color: lavender;
+                text-align: center
+            }
+        </style>
+
+        <!-------------Estilo que elimina los bordes de los inputs de unidad de medida y precio unitario en el modal de pedidos------------------------->
+        <style>
+            .sinborde {
+                border: 0;
+            }
+        </style>
+
+        <!----------------------------------------------------------------------------------------------------->
+        <!--Hacer que el modal muestre los pasos por parte-->
+        <style type="text/css">
+            #regiration_form fieldset:not(:first-of-type) {
+                display: none;
+            }
+        </style>
+        <!--Script-->
+        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+        <script src="~/Scrips/Internos/JS_Mermas.js"></script>
+        <!--Validacion del formulario-->
+        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+        <!--Scripts de la tarjeta y el botón-->
+        <link href="~/Content/tarjeta.css" rel="stylesheet" />
+        <!----------------Exportar-------------------------->

@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Imagenes\ad.png" />
     <Content Include="Assets\Imagenes\clasificacion.png" />
     <Content Include="Assets\Imagenes\cuatro.png" />
     <Content Include="Assets\Imagenes\edit.png" />
@@ -114,20 +115,25 @@
     <Content Include="Scrips\General\jquery.dataTables.min.js" />
     <Content Include="Scrips\General\JS_BotonesUsuarios.js" />
     <Content Include="Scrips\General\JS_Botones.js" />
+    <Content Include="Scrips\General\JS_Buscador.js" />
     <Content Include="Scrips\General\JS_Tarjeta.js" />
     <Content Include="Scrips\General\JS_Carrusel.js" />
     <Content Include="Scrips\General\JS_Buscar.js" />
     <Content Include="Scrips\General\JS_Validacion.js" />
     <Content Include="Scrips\Internos\JS_Articulo2do.js" />
     <Content Include="Scrips\Internos\JS_Articulo3ro.js" />
+    <Content Include="Scrips\Internos\JS_Mermas.js" />
     <Content Include="Scrips\Internos\JS_Categoria2da.js" />
     <Content Include="Scrips\Internos\JS_Categoria3ra.js" />
+    <Content Include="Scrips\Internos\JS_PedidosPendientes.js" />
+    <Content Include="Scrips\Internos\JS_MPago.js" />
     <Content Include="Scrips\Internos\JS_Compra3.js" />
     <Content Include="Scrips\Internos\JS_Compra2.js" />
     <Content Include="Scrips\Internos\JS_Impuesto2do.js" />
     <Content Include="Scrips\Internos\JS_ExistenciasAlmacen2da.js" />
     <Content Include="Scrips\Internos\JS_Proveedores3ra.js" />
     <Content Include="Scrips\Internos\JS_Proveedores2da.js" />
+    <Content Include="Scrips\Internos\JS_Traspasos.js" />
     <Content Include="Scrips\Internos\JS_Supervision2da.js" />
     <Content Include="Scrips\Internos\JS_Supervision.js" />
     <Content Include="Scrips\Internos\JS_PedidoOficina.js" />
@@ -137,7 +143,6 @@
     <Content Include="Scrips\Internos\JS_TiendaLider.js" />
     <Content Include="Scrips\Internos\JS_SupervisionTienda.js" />
     <Content Include="Scrips\Internos\JS_Prueba.js" />
-    <Content Include="Scrips\Internos\JS_Existencias.js" />
     <Content Include="Scrips\Internos\JS_Bonificaciones.js" />
     <Content Include="Scrips\Internos\JS_Existencia.js" />
     <Content Include="Scrips\Internos\JS_Tienda2da.js" />
@@ -186,8 +191,11 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\MermasController.cs" />
+    <Compile Include="Controllers\MPagoController.cs" />
     <Compile Include="Controllers\PedidosextController.cs" />
     <Compile Include="Controllers\PedidosintController.cs" />
+    <Compile Include="Controllers\PedidosPendientesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ExistenciasGController.cs" />
     <Compile Include="Controllers\subAreaController.cs" />
@@ -197,6 +205,7 @@
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Controllers\TiposDeMovimientoController.cs" />
+    <Compile Include="Controllers\TraspasosController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,9 +216,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloArticulos.cs" />
+    <Compile Include="Models\ModeloCompra.cs" />
     <Compile Include="Models\ModeloExistAlm.cs" />
+    <Compile Include="Models\ModeloExistGe.cs" />
+    <Compile Include="Models\ModeloMermas.cs" />
     <Compile Include="Models\ModeloPagina.cs" />
     <Compile Include="Models\ModeloAreas.cs" />
+    <Compile Include="Models\ModeloPedidosExternos.cs" />
+    <Compile Include="Models\ModeloPendientesArea.cs" />
     <Compile Include="Models\ModeloSubAreas.cs" />
     <Compile Include="Models\AccesosController.cs" />
     <Compile Include="Models\Estados.cs" />
@@ -268,12 +283,19 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Supervision\TiendaLider.cshtml" />
     <Content Include="Views\Supervision\PedidosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidos.cshtml" />
     <Content Include="Views\MovimientosOficina\MovimientosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidosOficina.cshtml" />
     <Content Include="Views\Supervision\PedidosTienda.cshtml" />
+=======
+    <Content Include="Views\Traspasos\Traspasos.cshtml" />
+    <Content Include="Views\MPago\MPago.cshtml" />
+    <Content Include="Views\PedidosPendientes\PedidosPendientes.cshtml" />
+    <Content Include="Views\Mermas\Mermas.cshtml" />
+>>>>>>> anabel2
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ArticulosCompras\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

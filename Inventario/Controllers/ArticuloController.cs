@@ -15,6 +15,7 @@
 //        //conexion con DB
 //        InventarioBDDataContext InvBD = new InventarioBDDataContext();
 
+<<<<<<< HEAD
 //        // GET: Articulo
 //        public ActionResult Articulo()
 //        {
@@ -135,6 +136,201 @@
 //                IdMarca += pro.IdMarca + ",";
 //                IdCategorias += pro.IdCategorias + ",";
 //                IdProveedor += pro.IdProveedor + ",";
+=======
+        // GET: Articulo
+        public ActionResult Articulo()
+        {
+            ArticuloController ARTICULOS = new ArticuloController();
+            ARTICULOS.ConsultaPrecioPromedioRazor();
+            return View();
+        }
+        //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
+
+        //----------------------------Consulta para generar la tabla con los artículos y sus precios unitarios promedios--------------------------------------
+        public void ConsultaPrecioPromedioRazor()
+        {
+
+            ModeloArticulos modeloArticulos = new ModeloArticulos();
+            ModeloArticulos.Articulo = new List<string>();
+            ModeloArticulos.Area = new List<string>();
+            ModeloArticulos.PrecioU = new List<long>();
+            ModeloArticulos.IDArea = new List<long>();
+            ModeloArticulos.IDArticulo = new List<long>();
+
+            string Articulo = "";
+            string IDA = "";
+            string PrecioPro = "";
+            string IDProveedor = "";
+            string Area = "";
+          
+
+            var articulos = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                   
+                    Nombre = p.NombreEmpresa,
+                    areas = p.Area,
+                    ID = p.IdArticulos,
+                    Idproveedores = p.IdAreas
+                });
+            foreach (var art in articulos)
+            {
+                IDA += art.ID + ",";
+                IDProveedor += art.Idproveedores + ",";
+                Articulo += art.Nombre + ",";
+                Area += art.areas + ",";
+
+                var consultaFecha = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(art.ID) && p.PrecioUnitario > 0)
+             .Select(p => new
+             {
+                 stock = p.ExistenciaInicial,
+                 precio = p.PrecioUnitario,
+
+             });
+
+
+                if (consultaFecha.Count() > 0)
+                {
+                    int UltimoReg = consultaFecha.Count() - 1;
+                    int SumaStock = 0;
+                    int SumaPrecio = 0;
+                    int Promedio = 0;
+
+                    foreach (var com in consultaFecha)
+                    {
+
+
+                        SumaStock = (int)(SumaStock + com.stock);
+                        SumaPrecio = (int)(SumaPrecio + ((com.stock) * (com.precio)));
+
+                    }
+                    Promedio = SumaPrecio / SumaStock;
+
+                    PrecioPro += Promedio + ",";
+                }
+                else
+                {
+                    PrecioPro += "0" + ",";
+                }
+
+            }
+
+            var Resultado = new
+            {
+              
+                Articulo = Articulo.Substring(0, Articulo.Length - 1),
+                IDA = IDA.Substring(0, IDA.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+                PrecioPro = PrecioPro.Substring(0, PrecioPro.Length - 1),
+                IDProveedor = IDProveedor.Substring(0, IDProveedor.Length - 1),
+            };
+           
+            string[] Articulos = Articulo.Substring(0, Articulo.Length - 1).Split(',');
+            string[] Areas = Area.Substring(0, Area.Length - 1).Split(',');
+            string[] IDArti = IDA.Substring(0, IDA.Length - 1).Split(',');
+            string[] PrecioProme = PrecioPro.Substring(0, PrecioPro.Length - 1).Split(',');
+            string[] IDproveedors = IDProveedor.Substring(0, IDProveedor.Length - 1).Split(',');
+
+            for (int i = 0; i < Articulos.GetLength(0); i++)
+            {
+                ModeloArticulos.Articulo.Add(Articulos[i]);
+                ModeloArticulos.Area.Add(Areas[i]);
+                ModeloArticulos.IDArticulo.Add(Convert.ToInt32(IDArti[i]));
+                ModeloArticulos.IDArea.Add(Convert.ToInt32(IDproveedors[i]));
+                ModeloArticulos.PrecioU.Add(Convert.ToInt32(PrecioProme[i]));
+            }
+        }
+        //*************************************************************************************************************
+        //--------------------------------Consulta los artículos por ID-------------------------------------------
+        public JsonResult ConsultaArticulo(long Id)
+        {
+            var articulo = InvBD.Articulos.Where(p => p.IdArticulos.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdArticulos,
+                    p.NombreEmpresa,
+                    p.IdUnidadDeMedida,
+                    p.IdAreas,
+                    p.IdMarca,
+                    p.IdCategorias,
+                    p.Proveedor,
+                    p.Categoria,
+                    p.NombreProveedor,
+                    p.Descripcion,
+                    p.UnidadSAT,
+                    p.ClaveSAT,
+                    p.Fecha,
+                    p.FechaSistema,
+                    p.Unidad,
+                    p.Area,
+                    p.Marca,
+                    p.IdImpuesto,
+                    p.Impuesto,
+                    p.Conversion,
+                    p.Estatus
+
+                });
+            return Json(articulo, JsonRequestBehavior.AllowGet);
+        }
+        //------------------------------------------------------------------------------------------------------------------------
+   /*     public JsonResult ConsultaArticuloXProveedor()
+        {
+            string IdArticulos = "";
+            string NombreEmpresa = "";
+            string IdUnidadDeMedida = "";
+            string IdAreas = "";
+            string IdMarca = "";
+            string IdCategorias = "";
+            string IdProveedor = "";
+            string Proveedor = "";
+            string Categoria = "";
+            string NombreProveedor = "";
+            string PrecioUnitarioPromedio = "";
+            string Descripcion = "";
+            string UnidadSAT = "";
+            string ClaveSAT = "";
+            string Fecha = "";
+            string FechaSistema = "";
+            string Unidad = "";
+            string Area = "";
+            string Marca = "";
+            string IdImpuesto = "";
+            string Impuesto = "";
+
+            var articuloss = InvBD.Articulos.Where(p => p.Estatus.Equals(1))
+                .Select(p => new
+                {
+                    IdArticulos = p.IdArticulos,
+                    NombreEmpresa = p.NombreEmpresa,
+                    IdUnidadDeMedida = p.IdUnidadDeMedida,
+                    IdAreas = p.IdAreas,
+                    IdMarca = p.IdMarca,
+                    IdCategorias = p.IdCategorias,
+                    Proveedor = p.Proveedor,
+                    Categoria = p.Categoria,
+                    NombreProveedor = p.NombreProveedor,
+                    Descripcion = p.Descripcion,
+                    UnidadSAT = p.UnidadSAT,
+                    ClaveSAT = p.ClaveSAT,
+                    Fecha = p.Fecha,
+                    FechaSistema = p.FechaSistema,
+                    Unidad = p.Unidad,
+                    Area = p.Area,
+                    Marca = p.Marca,
+                    IdImpuesto = p.IdImpuesto,
+                    Impuesto = p.Impuesto,
+
+                });
+            foreach (var pro in articuloss)
+            {
+                IdArticulos += pro.IdArticulos + ",";
+                NombreEmpresa += pro.NombreEmpresa + ",";
+                IdUnidadDeMedida += pro.IdUnidadDeMedida + ",";
+                IdAreas += pro.IdAreas + ",";
+                IdMarca += pro.IdMarca + ",";
+                IdCategorias += pro.IdCategorias + ",";
+
+>>>>>>> anabel2
 
 //                //string[] nombre = pro.Proveedor.Split('#');
 
@@ -143,6 +339,7 @@
 
 //                //}
 
+<<<<<<< HEAD
 //                Proveedor += pro.Proveedor + ",";
 //                Categoria += pro.Categoria + ",";
 //                NombreProveedor += pro.NombreProveedor + ",";
@@ -227,12 +424,102 @@
 //                && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
 //                && p.Fecha.Equals(DatosArticulo.Fecha)
 //                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
+=======
+                Proveedor += pro.Proveedor + ",";
+                Categoria += pro.Categoria + ",";
+                NombreProveedor += pro.NombreProveedor + ",";
+                Descripcion += pro.Descripcion + ",";
+                UnidadSAT += pro.UnidadSAT + ",";
+                ClaveSAT += pro.ClaveSAT + ",";
+                Fecha += pro.Fecha + ",";
+                FechaSistema += pro.FechaSistema + ",";
+                Unidad += pro.Unidad + ",";
+                Area += pro.Area + ",";
+                Marca += pro.Marca + ",";
+                IdImpuesto += pro.IdImpuesto + ",";
+                Impuesto += pro.Impuesto + ",";
+
+            }
+            var Resultado = new
+            {
+                IdArticulos = IdArticulos.Substring(0, IdArticulos.Length - 1),
+                NombreEmpresa = NombreEmpresa.Substring(0, NombreEmpresa.Length - 1),
+                IdUnidadDeMedida = IdUnidadDeMedida.Substring(0, IdUnidadDeMedida.Length - 1),
+                IdAreas = IdAreas.Substring(0, IdAreas.Length - 1),
+                IdMarca = IdMarca.Substring(0, IdMarca.Length - 1),
+                IdCategorias = IdCategorias.Substring(0, IdCategorias.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+                Categoria = Categoria.Substring(0, Categoria.Length - 1),
+                NombreProveedor = NombreProveedor.Substring(0, NombreProveedor.Length - 1),
+                Descripcion = Descripcion.Substring(0, Descripcion.Length - 1),
+                UnidadSAT = UnidadSAT.Substring(0, UnidadSAT.Length - 1),
+                ClaveSAT = ClaveSAT.Substring(0, ClaveSAT.Length - 1),
+                Fecha = Fecha.Substring(0, Fecha.Length - 1),
+                FechaSistema = FechaSistema.Substring(0, FechaSistema.Length - 1),
+                Unidad = Unidad.Substring(0, Unidad.Length - 1),
+                Area = Area.Substring(0, Area.Length - 1),
+                Marca = Marca.Substring(0, Marca.Length - 1),
+                IdImpuesto = IdImpuesto.Substring(0, IdImpuesto.Length - 1),
+                Impuesto = Impuesto.Substring(0, Impuesto.Length - 1),
+            };
+
+            return Json(Resultado, JsonRequestBehavior.AllowGet);
+        }
+   */
+
+
+        //------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------
+        //Guardar los datos de la compra
+        public int GuardarArticulo(Articulos DatosArticulo)
+        {
+            int Afectados = 0;
+            long id = DatosArticulo.IdArticulos;
+            if (id.Equals(0))
+            {
+                int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)).Count();
+
+                // int nveces = InvBD.Proveedores.Where(p => p.Nombre.Equals(DatosProveedor.Nombre) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
+                if (nveces == 0)
+                {
+                    InvBD.Articulos.InsertOnSubmit(DatosArticulo);
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            else
+            {
+                int nveces = InvBD.Articulos.Where(p => p.NombreEmpresa.Equals(DatosArticulo.NombreEmpresa)
+                && p.NombreProveedor.Equals(DatosArticulo.NombreProveedor)
+                && p.Proveedor.Equals(DatosArticulo.Proveedor)
+                && p.IdUnidadDeMedida.Equals(DatosArticulo.IdUnidadDeMedida)
+                && p.Unidad.Equals(DatosArticulo.Unidad)
+                && p.IdMarca.Equals(DatosArticulo.IdMarca)
+                && p.Marca.Equals(DatosArticulo.Marca)
+                && p.IdAreas.Equals(DatosArticulo.IdAreas)
+                && p.Area.Equals(DatosArticulo.Area)
+                && p.IdCategorias.Equals(DatosArticulo.IdCategorias)
+                && p.Categoria.Equals(DatosArticulo.Categoria)
+                && p.Descripcion.Equals(DatosArticulo.Descripcion)
+                && p.UnidadSAT.Equals(DatosArticulo.UnidadSAT)
+                && p.ClaveSAT.Equals(DatosArticulo.ClaveSAT)
+                && p.Fecha.Equals(DatosArticulo.Fecha)
+                && p.Conversion.Equals(DatosArticulo.Conversion)
+                && p.IdImpuesto.Equals(DatosArticulo.IdImpuesto)
+                && p.Impuesto.Equals(DatosArticulo.Impuesto)
+                && p.FechaSistema.Equals(DatosArticulo.FechaSistema)).Count();
+>>>>>>> anabel2
 
 
 //                if (nveces == 0)
 //                {
 //                    Articulos obj = InvBD.Articulos.Where(p => p.IdArticulos.Equals(id)).First();
 
+<<<<<<< HEAD
 //                    obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
 //                    obj.NombreProveedor = DatosArticulo.NombreProveedor;
 //                    obj.IdProveedor = DatosArticulo.IdProveedor;
@@ -267,6 +554,44 @@
 //            //}
 //            return Afectados;
 //        }
+=======
+                    obj.NombreEmpresa = DatosArticulo.NombreEmpresa;
+                    obj.NombreProveedor = DatosArticulo.NombreProveedor;
+                    obj.Proveedor = DatosArticulo.Proveedor;
+                    obj.IdUnidadDeMedida = DatosArticulo.IdUnidadDeMedida;
+                    obj.Unidad = DatosArticulo.Unidad;
+                    obj.IdMarca = DatosArticulo.IdMarca;
+                    obj.Marca = DatosArticulo.Marca;
+                    obj.IdAreas = DatosArticulo.IdAreas;
+                    obj.Area = DatosArticulo.Area;
+                    obj.IdCategorias = DatosArticulo.IdCategorias;
+                    obj.Categoria = DatosArticulo.Categoria;
+                    obj.Descripcion = DatosArticulo.Descripcion;
+                    obj.UnidadSAT = DatosArticulo.UnidadSAT;
+                    obj.ClaveSAT = DatosArticulo.ClaveSAT;
+                    obj.Fecha = DatosArticulo.Fecha;
+                    obj.Conversion = DatosArticulo.Conversion;
+                    obj.IdImpuesto = DatosArticulo.IdImpuesto;
+                    obj.Impuesto = DatosArticulo.Impuesto;
+                    obj.FechaSistema = DatosArticulo.FechaSistema;
+
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                }
+                else
+                {
+                    Afectados = -1;
+                }
+            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Afectados = 0;
+            //}
+            return Afectados;
+
+        }
+>>>>>>> anabel2
 
 
 //        //----------------------------------------------------------------------------------------------

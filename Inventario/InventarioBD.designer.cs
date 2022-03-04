@@ -120,7 +120,11 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
+<<<<<<< HEAD
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
+=======
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString1"].ConnectionString, mappingSource)
+>>>>>>> anabel2
 		{
 			OnCreated();
 		}

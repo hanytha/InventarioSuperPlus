@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "Traspasos";
+}
+
+<link href="~/Content/CObligatorios.css" rel="stylesheet" />
+<link href="~/Content/Tabla.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!----- <button onclick="abrirModal(0)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>-->
+<!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!----------------------Crea Tabla de artículos----------------------------------->
+<div id="contenedor1"></div>
+<!-------------------------------------------------------------------------->
+<!-- Encabezado del Modal -->
+<div class="container">
+    <div class="modal fade" id="dialogo1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">MOVIMIENTO DE ARTÍCULOS</h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtStock">Stock<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
+                                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
+                                        <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Descripcón">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtStockTotal">Nuevo Stock<span class="required">*</span></label>
+                                        <input type="text" name="data[TxtStockTotal]" id="TxtStockTotal" class="form-control  limpiar bloquear" placeholder="Total del stock">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="TxtDescripcion">Observaciones<span class="required">*</span></label>
+                                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega observaciones acerca del movimiento..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------------->
+<!-------------
+<h1>Sumar dos números</h1>
+<p>Por favor, introduce dos números:</p>
+<input id="num1">
+<br>
+<input id="num2">
+<button type="button" onclick="myFunction()">Sumar</button>
+<p id="sumando"></p>
+<script>
+    function myFunction() {
+        var x, y, suma, text;
+        x = document.getElementById("num1").value;
+        y = document.getElementById("num2").value;
+        if (isNaN(x) || isNaN(y)) {
+            text = "Es necesarios introducir dos números válidos";
+        } else {
+            //si no ponemos parseFloat concatenaría x con y
+            suma = parseFloat(x) + parseFloat(y);
+            text = suma;
+        }
+        document.getElementById("sumando").innerHTML = text;
+    }
+</script> -->
+<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid {
+        border-top: 4px solid #F5CA4F;
+    }
+
+    .D1 {
+        background-color: #EBEBEB;
+    }
+</style>
+<!------------Obtener la fecha-------------------------------------------------------------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+
+
+</script>
+<!----------------------------------------------------------------------------------------------------->
+<!--Hacer que el modal muestre los pasos por parte-->
+<style type="text/css">
+    #regiration_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+<!--Script-->
+<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+<script src="~/Scrips/Internos/JS_Traspasos.js"></script>
+<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

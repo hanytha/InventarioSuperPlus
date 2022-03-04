@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "Categoria";
 }
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        CLASIFICACIONES DE LOS ARTÍCULOS
+    </h2>
+</center>
+
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
@@ -12,26 +18,23 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!------------------------------------------------Modal Catetoria------------------------------------------------------------------>
 <!-- Botón del modal-->
-<button onclick="editarModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
-<!--Mostrar los registros en el accordion-->
-<div id="tablaCategoria" class="default "></div>
-<div id="accordion"></div>
+<button onclick="editarModal(0)" type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCategoria">REGISTRAR CATEGORÍA</button>
+
+<!--Mostrar los registros en la tabla-->
+<div id="tablaCategoria"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
     <div class="modal fade" id="ModalCategoria">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">REGISTRO CLASIFICACIÓN</h4>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>REGISTRO CLASIFICACIÓN</h4>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormularioCategorias()">
+                    <form id="regiration_form" novalidate method="post">
                         <!--Los pasos del modal-->
-
-                        <h4>PASO 1</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -51,7 +54,10 @@
         </div>
     </div>
 </div>
-<!--Hacer que el modal muestre los pasos por parte-->
+
+<!-------------------------------------------------------------------------------------------------------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+<!--------------------------------Hacer que el modal muestre los pasos por parte-------------------------------------------->
 <style type="text/css">
     #regiration_form fieldset:not(:first-of-type) {
         display: none;

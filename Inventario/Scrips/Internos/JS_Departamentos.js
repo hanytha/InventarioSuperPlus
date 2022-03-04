@@ -50,7 +50,7 @@ function AcordeonDepartamentos(Data, CtrlAlmacen) {
 
 //Limpia la información y carga la informacion del proveedor
 function abrirModal(id) {//la clase  Obligatorio
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
+    var controlesObligatorio = document.getElementsByClassName("obligatorios");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
         //Cambia los bordes lo las casillas a color rojo
@@ -97,7 +97,7 @@ function LimpiarCampos() {
 
 //Guarda los cambios y altas de las áreas
 function GuardarDepartamento() {
-    if (CamposObligatorios("Area") == true) {
+    if (InputsObligatorios() == true) {
         if (confirm("¿Desea aplicar los cambios?") == 1) {
             var IdAreas = sessionStorage.getItem('IDDepartamento');
             var Nombre = document.getElementById("TxtNombre").value;
@@ -156,7 +156,25 @@ function CamposObligatorios(clase) {
     return exito;
 }
 
-
+//*******************************************************************
+//**************************************************************
+//marca los campos obligatorios
+function InputsObligatorios() {
+    var exito = true;
+    var controlesObligatorio = document.getElementsByClassName("obligatorios");
+    var ncontroles = controlesObligatorio.length;
+    for (var i = 0; i < ncontroles; i++) {
+        if (controlesObligatorio[i].value == "") {
+            exito = false;
+            controlesObligatorio[i].parentNode.classList.add("error");
+        }
+        else {
+            controlesObligatorio[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+//****************************************************************
 
 //"Elimina" el área cambia el Estatus
 function EliminarDepartamento(id) {
@@ -240,8 +258,6 @@ function abrirModalSub(idSubarea, idArea) {//la clase  Obligatorio
     var controlesObligatorio = document.getElementsByClassName("ObligatoriosSub");
     var ncontroles = controlesObligatorio.length;
     for (var i = 0; i < ncontroles; i++) {//recorre
-        //Cambia los bordes lo las casillas a color rojo
-        //controlesObligatorio[i].parentNode.classList.remove("border-danger");
         controlesObligatorio[i].parentNode.classList.remove("error"); //Cambia los bordes lo las casillas a color rojo
 
     }
@@ -330,7 +346,12 @@ function GuardarSubarea() {
                     }
                     else {
                         swal("La subárea se registró exitosamente!", "", "success");
-                        CrearAcordeonSubAreas(IdArea);
+                        consultaFecha();
+                        //---------------------------------
+                        if (data == 1) {
+                            actulizar();
+                        }
+                        //---------------------------------
                         document.getElementById("btnCancelar").click();
                     }
                 }
@@ -339,7 +360,11 @@ function GuardarSubarea() {
     }
 }
 
-//limpiar campos
+//--------------------------------------------------------------------------------
+function actulizar() {
+    window.location.reload();
+}
+//------------------------limpiar campos-------------------
 function LimpiarCamposSub() {
     var controlesTXT = document.getElementsByClassName("limpiar");
     for (var i = 0; i < controlesTXT.length; i++) {
@@ -411,4 +436,10 @@ function LlenarCMBPrin() {
     }
 
 
+}
+
+//-------------------------------Consulta fecha------------------------------------------
+function consultaFecha() {
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
 }

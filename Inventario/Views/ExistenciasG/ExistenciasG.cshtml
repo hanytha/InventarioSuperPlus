@@ -1,22 +1,166 @@
-﻿
+﻿@using Inventario.Models;
 @{
     ViewBag.Title = "Prueba";
 }
-
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        EXISTENCIAS GENERALES
+    </h2>
+</center>
 <!--Titulo-->
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<!-- Inicia tarjeta-->
-<!--Termina tarjeta-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal-->
-<button onclick="abrirModal(0)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalProveedor">REGISTRAR</button>
+
+
+<!------------------------------------------------------ Botón del modal----------------------------------------------------------->
+<div class="row">
+    <div class="col-sm-10">
+        <button onclick="abrirModal(0); Borrar(); restablecerBordesInput();" style="float:left" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalProveedor">Realizar_Pedido</button>
+    </div>
+    <button onclick="abrirModalPresu(0);Borrar();" type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalPresupuesto">Consultar_Presupuesto</button>
+</div>
+
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
-<div id="contenedor1"></div>
-<!------------------------------------------------Modal------------------------------------------------------------------>
+<div id="contenedor1">
+    @{
+        if (ModeloExistGe.IdAreas != null)
+        {
+            <div id="contenedor1">
+                <hr class="solid">
+                <div class="row">
+                    <div class="col-sm">ID</div>
+                    <div class="col-sm">Artículo</div>
+                    <div class="col-sm">Stock</div>
+                    <div class="col-sm">Precio_Unitario</div>
+                    <div class="col-sm">Fecha Ingreso</div>
+                    <div class="col-sm">Acción</div>
+                </div>
+                <hr class="solid">
+            </div>
+
+            for (var i = 0; i < ModeloExistGe.IdAreas.Count(); i++)
+            {
+
+                if (Accesos.NIvel == 1)
+                {
+
+                    string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
+                    string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
+
+
+                    <div class="row">
+
+                        @{
+                            if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 10)
+                            {
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.FechaIngreso[i]</div>
+
+
+                            }
+                            else if (ModeloExistGe.StockActual[i] == 0)
+                            {
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.FechaIngreso[i]</div>
+                            }
+                            else
+                            {
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.FechaIngreso[i]</div>
+                            }
+                        }
+
+                        <div class="col">
+                            <label>
+                                <button data-title="Desplegar_tabla" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                        type="button" data-toggle="collapse" data-target="#@GridIDA"
+                                        aria-expanded="false" aria-controls="desplegable(@GridIDA)">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col"><div id="@GridIDA" class="@collapse"></div></div>
+                    </div>
+
+
+                }
+                else if ((long)ModeloExistGe.IdAreas[i] == Accesos.IdArea)
+                {
+
+                    string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
+                    string collapse = "collapse" + ModeloExistGe.IdArticulos[i];
+
+
+                    <div class="row">
+
+                        @{
+                            if (ModeloExistGe.StockActual[i] > 0 && ModeloExistGe.StockActual[i] < 10)
+                            {
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:yellow">@ModeloExistGe.FechaIngreso[i]</div>
+
+
+                            }
+                            else if (ModeloExistGe.StockActual[i] == 0)
+                            {
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:red">@ModeloExistGe.FechaIngreso[i]</div>
+                            }
+                            else
+                            {
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.IdArticulos[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.NombreEmpresa[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.StockActual[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.PrecioUnitario[i]</div>
+                                <div class="col-sm" style="background-color:white">@ModeloExistGe.FechaIngreso[i]</div>
+                            }
+                        }
+
+
+
+                        <div class="col">
+                            <label>
+                                <button data-title="Desplegar_tabla" class="btn btn-outline-primary" onclick="Desplegar(@ModeloExistGe.IdArticulos[i])"
+                                        type="button" data-toggle="collapse" data-target="#@GridIDA"
+                                        aria-expanded="false" aria-controls="desplegable(@GridIDA)">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col"><div id="@GridIDA" class="@collapse"></div></div>
+                    </div>
+                }
+            }
+        }
+    }
+
+</div>
+
+<!------------------------------------------------Modal para realizar pedidos------------------------------------------------------------------>
 <div id="tablaNum"></div>
 <!-- Encabezado del Modal -->
 <div class="container">
@@ -34,13 +178,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbProveedor">Proveedor<span class="required">*</span></label>
-                                    <select onchange="abrirModal(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <select onchange="abrirModal(this.value)" id="cmbProveedor" style="width: 100%" class="form-control limpiarSelect "></select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumPedidoProve">Número de pedido por proveedor<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtNumPedidoProve]" id="TxtNumPedidoProve" class="form-control  limpiar obligatorio bloquear">
+                                    <input type="number" name="data[TxtNumPedidoProve]" id="TxtNumPedidoProve" class="form-control  limpiar  bloquear">
                                 </div>
                             </div>
                         </div>
@@ -48,13 +192,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtUsoCFDI">UsoCFDI<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtUsoCFDI]" id="TxtUsoCFDI" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtUsoCFDI]" id="TxtUsoCFDI" class="form-control  limpiar bloquear">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtDireccion">Dirección<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtDireccion]" id="TxtDireccion" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtDireccion]" id="TxtDireccion" class="form-control  limpiar bloquear">
                                 </div>
                             </div>
                         </div>
@@ -62,13 +206,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtRFC">RFC<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtRFC]" id="TxtRFC" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtRFC]" id="TxtRFC" class="form-control  limpiar bloquear">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono">Télefono<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar bloquear">
                                 </div>
                             </div>
                         </div>
@@ -76,13 +220,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCorreo">Correo<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio">
+                                    <input type="text" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar bloquear">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtFechaSistema">Fecha de ingreso<span class="required">*</span></label>
-                                    <input type="text" name="data[TxtFechaSistema]" id="TxtFechaSistema" class="form-control obligatorio">
+                                    <input type="text" name="data[TxtFechaSistema]" id="TxtFechaSistema" class="form-control bloquear">
                                 </div>
                             </div>
                         </div>
@@ -90,13 +234,37 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNumPedido">Número general de pedido<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar obligatorio bloquear">
+                                    <input type="number" name="data[TxtNumPedido]" id="TxtNumPedido" class="form-control  limpiar  bloquear">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="cmbArea">Área que solicita el(los) artículo(s)<span>*</span></label>
-                                    <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <select id="cmbArea" style="width: 100%" class="form-control">
+
+                                        @if (ModeloAreas.IdAreas != null)
+                                        {
+                                            if (Accesos.NIvel == 1)
+                                            {
+                                                <option value="0">------Seleccione------</option>
+                                            }
+
+                                            for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
+                                            {
+                                                if (Accesos.NIvel == 1)
+                                                {
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+
+                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                {
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+                                            }
+
+                                        }
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +280,7 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" GuardarPedidoExterno()">Guardar</button>
+                    <button type="button" id="GuardarPedido" class="btn btn-success" onclick=" Verificar()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -120,7 +288,238 @@
     </div>
 </div>
 
-<!---------------------------------------------------------------------------------->
+
+
+<!------------------------------------------------------------------------------------------------------------------------>
+<!-------------------------------------------------Modal para aceptar presupuesto---------------------------------------------------->
+
+<div class="container">
+    <div class="modal fade" id="ModalPresupuesto">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registro de pedidos</h5>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <form id="regiration_form" novalidate method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbProveedorPre">Proveedor<span class="required">*</span></label>
+                                    <select onchange="abrirModalPresu(this.value)" id="cmbProveedorPre" style="width: 100%" class="form-control limpiarSelect "></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="cmbAreas">Área<span>*</span></label>
+                                    <select id="cmbAreas" style="width: 100%" class="form-control">
+
+                                        @if (ModeloAreas.IdAreas != null)
+                                        {
+                                            if (Accesos.NIvel == 1)
+                                            {
+                                                <option value="0">------Seleccione------</option>
+                                            }
+
+                                            for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
+                                            {
+                                                if (Accesos.NIvel == 1)
+                                                {
+
+                                                    <option style="text-align:center" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                {
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                }
+                                            }
+
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TxtTotal">Total<span class="required">*</span></label>
+                                    <input type="text" name="data[TxtTotal]" id="TxtTotal" class="form-control  limpiar bloquear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TblArticulosPre">Artículo(s)<span class="required">*</span></label>
+                                    <div id="TblArticulosPre">Artículo(s) del proveedor</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- pie del modal-->
+                <div class="modal-footer">
+                    <a type="button" id="botonImpres" class="btn btn-info disabled" href="javascript:imprSelec('seleccion')" onclick="ImprimirPres()">Imprimir</a>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+<style>
+    .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
+
+<!------------------------------------------modal para la impresión del presupuesto------------------------------------------------------>
+<div class="container">
+    <div class="modal fade" id="ModalPedidos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">PEDIDOS</h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                </div>
+                <!-- Contenido del modal -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="seleccion">
+                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                    <br />
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--------------------------------------Encabezado de el dodumento--------------------------------------->
+                                    <br />
+                                    <div style="width: 100%">
+                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                            <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                <thead>
+                                                    <tr align="left">
+                                                        <th scope="col">Proveedor:</th>
+                                                        <th align="right"  scope="col">Área:</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr align="left">
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label></label><label></label><label id="TxtProveedores"></label></td>
+                                                        <td align="right"  id="lin1_col1" {NM_CSS_CAB}><label></label><label></label><label id="TxtAreas"></label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblArticulosimpre">Artículo(s) a solicitar</label>
+                                                </div>
+                                                <div id="TblArticulosimpre">Artículo(s) de el pedido</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')">Imprimir</a>
+                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------------------------------------->
+<!--------------------------Función para imprimir el contenido del div------------------------------------------>
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
+
+    }
+</script>
+<!---------------------------------------------------------------------------------------------------------------------------->
+<style>
+    .redondeado {
+        border-radius: 5px;
+        border: 1px solid #696969;
+        width: 90px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+</style>
+<!-------------------------------------------------------------------------------------------------------------------------->
+<style>
+
+    [data-title]:hover:after {
+        opacity: 1;
+        transition: all 0.1s ease 0.5s;
+        visibility: visible;
+    }
+
+    [data-title]:after {
+        content: attr(data-title);
+        background-color: #06B4F5;
+        color: #060606;
+        font-size: 14px;
+        font-family: Raleway;
+        position: absolute;
+        padding: 3px 20px;
+        bottom: -1.6em;
+        left: 100%;
+        white-space: nowrap;
+        box-shadow: 1px 1px 3px #222222;
+        opacity: 0;
+        border: 1px solid #111111;
+        z-index: 99999;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+    [data-title] {
+        position: relative;
+    }
+</style>
 <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
 <style>
     body {
@@ -128,7 +527,7 @@
     }
     /* Solid border */
     hr.solid {
-        border-top: 4px solid #D7DBDD;
+        border-top: 6px solid #D7DBDD;
     }
 
     .D1 {
@@ -142,7 +541,7 @@
     }
     /* Solid border */
     hr.solid3 {
-        border-top: 1px solid #f1f507;
+        border-top: 3px solid #f1f507;
     }
 </style>
 <style>
@@ -151,7 +550,16 @@
     }
     /* Solid border */
     hr.solid4 {
-        border-top: 1px solid #0B94F8;
+        border-top: 4px solid #0B94F8;
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid8 {
+        border-top: 1px solid #D7DBDD;
     }
 </style>
 <!------------------------Estilos para los inputs de cantidad solicitada de los pedidos en el modal  de pedidos----------------------->

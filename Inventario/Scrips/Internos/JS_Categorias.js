@@ -7,8 +7,9 @@ function ConsultaCategorias() {
 }
 function CrearTablaCategorias(Data) {
     var CodigoHtmlTablaCategoria = "";
+    CodigoHtmlTablaCategoria += "<br />";
     CodigoHtmlTablaCategoria += "<div class='table-responsive'>";
-    CodigoHtmlTablaCategoria += "<table class='table-primary table table-bordered order-table'>";
+    CodigoHtmlTablaCategoria += "<table class='table-success table table-bordered order-table'>";
     CodigoHtmlTablaCategoria += "<thead>";
     CodigoHtmlTablaCategoria += "<tr>";
     CodigoHtmlTablaCategoria += "<th>Clasificación</th>";
@@ -21,7 +22,7 @@ function CrearTablaCategorias(Data) {
         CodigoHtmlTablaCategoria  += "<td>" + Data[i].Tipo + "</td>";
 
         CodigoHtmlTablaCategoria  += "<td>";
-        CodigoHtmlTablaCategoria += "<button class='btn btn-primary' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-edit'></i></button>";
+        CodigoHtmlTablaCategoria += "<button class='btn btn-success' onclick='editarModal(" + Data[i].IdCategorias + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarCategoria(" + Data[i].IdCategorias + ",this)'><i class='far fa-trash-alt'></button>";
 
         CodigoHtmlTablaCategoria  += "</td>";
@@ -137,4 +138,37 @@ function EliminarCategoria(id) {
 
 
 
+//*******************************************************************************************
+//not();
+//function not() {
 
+//        $.get("/Categoria/ConsultaNot", function (Data) {
+//            CrearTablaCategorias(Data);
+//        }
+//        );
+    
+//    function CrearTablaCategorias(Data) {
+
+//        for (var i = 0; i < Data.length; i++) {
+
+//            if (Data[i].StockActual > 0) {
+//                Push.create('Advertencia!', {
+//                    body: '' + Data[i].Articulo + ' esta por agotarse ',
+//                    icon: 'icon.png',
+
+//                });
+//            }
+//            if (Data[i].StockActual == 0) {
+
+//                Push.create('Advertencia!', {
+//                    body: '' + Data[i].Articulo + ' ya no cuenta con stock ',
+//                    icon: 'icon.png',
+
+//                });
+
+//            }
+//        }
+
+//    }
+
+//}

@@ -133,6 +133,7 @@ namespace Inventario.Controllers
                         int Filas = IdPaginas.GetLength(0);
                         string[,] IdPagina = new string[Filas, 3];
                         Accesos.Perfil = Permisos.Perfil;
+                        Accesos.NIvel = Permisos.Nivel;
                         Accesos.Accion = new List<string>();
                         Accesos.Controlador = new List<string>();
                         Accesos.Mensaje = new List<string>();

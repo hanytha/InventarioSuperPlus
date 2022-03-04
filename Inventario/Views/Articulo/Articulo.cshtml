@@ -1,16 +1,18 @@
-﻿
+﻿@using Inventario.Models;
 @{
     ViewBag.Title = "Articulo";
 }
-
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        ARTÍCULOS
+    </h2>
+</center>
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!----------------------------------Estilo de las alertas------------------------------------------------------------------------------->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Botón del modal------------------------------------------------------------------------------------------------->
-<button onclick="abrirModal(0)" style="float: right; background-color:mediumaquamarine;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button>
 <!------------------------------------------------Script para buscar datos en la tabla--------------------------------------------->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -57,164 +59,243 @@
     })(document);
 </script>
 
+<!---------------------------------------------->
+<div class="row">
+    <div class="col-sm-9">
+        <div class="input-group float-right">
+            <input style="border-style:  outset; border-width: 3px;  border-color:mediumaquamarine;     border-radius: 8px;   background-color:mintcream;" class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search....">
+            <span class="input-group-text" style="border-style:  outset; border-width: 3px; border-color:mediumaquamarine;   border-radius: 8px; " id="basic-addon1"><i class="fas fa-search"></i></span>
+        </div>
 
+    </div>
+    <div class="col-4 col-md-3"><button onclick="abrirModal(0)" style="float:left" type="button" class="btn btn-success" data-toggle="modal" data-target="#dialogo1">REGISTRAR</button></div>
+</div>
+
+<br />
 <!----------------------Crea Tabla de artículos----------------------------------->
-<div id="tablaArticulos"></div>
-<!-------------------------------------------------------------------------->
-<!-- Encabezado del Modal -->
-<div class="container">
-    <div class="modal fade" id="dialogo1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
-                </div>
-                <!-- Contenido del modal -->
-                <div class="modal-body">
-                    <h4>REGISTRO DE ARTÍCULOS</h4>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <fieldset>
-                            <h4>Paso 1</h4>
-                            <!--Insertar fecha-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFechaIngreso">Fecha de ingreso<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtFechaIngreso]" id="TxtFechaIngreso" class="form-control obligatorio bloquear">
-                                    </div>
-                                </div>
+<div id="tablaArticulos">
+    @{
+        if (ModeloArticulos.IDArea != null)
+        {
+            <table class="order-table  table-success" style="position: relative"
+            <thead>
+                    <tr>
+                        <th scope="col">Artículo</th>
+                        <th scope="col">Precio_Unitario_Promedio</th>
+                        <th scope="col">Área</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+            </thead>
+
+            for (var i = 0; i < ModeloArticulos.IDArea.Count(); i++)
+            {
+
+                if (Accesos.NIvel == 1)
+                {
+                    <tr>
+                        <td>@ModeloArticulos.Articulo[i]</td>
+                        <td>@ModeloArticulos.PrecioU[i]</td>
+                        <td>@ModeloArticulos.Area[i]</td>
+                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
+                    </tr>
+                }
+                else if ((long)ModeloArticulos.IDArea[i] == Accesos.IdArea)
+                {
+                      <tr>
+                        <td>@ModeloArticulos.Articulo[i]</td>
+                        <td>@ModeloArticulos.PrecioU[i]</td>
+                        <td>@ModeloArticulos.Area[i]</td>
+                        <td><button class="btn btn-success" onclick="abrirModal(@ModeloArticulos.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
+                    </tr>
+                }
+
+            }
+        }
+        }
+
+    </table>
+        </div>
+        <!-------------------------------------------------------------------------->
+        <!-- Encabezado del Modal -->
+        <div class="container">
+            <div class="modal fade" id="dialogo1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">REGISTRO DE ARTÍCULOS</h4>
+                            <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+                        </div>
+                        <!-- Contenido del modal -->
+                        <div class="modal-body">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <!--Termina-->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtNombreProveedor">Nombre Aignado por el Proveedor<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div align="center">
-                                            <label class="form-control-label" for="TblProveedores">Proveedores</label>
+                            <form id="regiration_form" novalidate method="post">
+                                <fieldset>
+                                    <h5 align="right">Paso 1</h5>
+                                    <!--Insertar fecha-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtFechaIngreso">Fecha de ingreso<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtFechaIngreso]" id="TxtFechaIngreso" class="form-control obligatorio bloquear">
+                                            </div>
                                         </div>
-                                        <div id="TblProveedores">Proveedores</div>
                                     </div>
-                                </div>
-                            </div>
-                            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-                        </fieldset>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Descripción<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtDescripcion]" id="TxtDescripcion" class="form-control  limpiar obligatorio" placeholder="Descripcón">
+                                    <!--Termina-->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtNombreEmpresa">Nombre Asignado por la Empresa<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtNombreEmpresa]" id="TxtNombreEmpresa" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
-                                        <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtNombreProveedor">Nombre Asignado por el Proveedor<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtNombreProveedor]" id="TxtNombreProveedor" class="form-control  limpiar obligatorio" placeholder="Nombre">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
-                                        <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div align="center">
+                                                    <label class="form-control-label" for="TblProveedores">Proveedores</label>
+                                                </div>
+                                                <div id="TblProveedores">Proveedores</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtPrecioUnitarioPromedio">Precio Unitario Promedio<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtPrecioUnitarioPromedio]" id="TxtPrecioUnitarioPromedio" class="form-control  limpiar obligatorio" placeholder="12.00">
+                                    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+                                </fieldset>
+                                <fieldset>
+                                    <h5 align="right">Paso 2</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbCategoria">Categoria<span>*</span></label>
+                                                <select id="cmbCategoria" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbUnidad">Unidad<span>*</span></label>
+                                                <select id="cmbUnidad" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="Claver SAT">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbImpuesto">Impuesto<span>*</span></label>
+                                                <select id="cmbImpuesto" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtClaveSAT">ClaveSAT<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtClaveSAT]" id="TxtClaveSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="H87">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtUnidadSAT">UnidadSAT<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtUnidadSAT]" id="TxtUnidadSAT" class="form-control  limpiar obligatorio" placeholder="Paquete">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
+                                                <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtFecha">Fecha<span class="required">*</span></label>
-                                        <input type="date" name="data[TxtFecha]" id="TxtFecha" class="form-control  limpiar obligatorio" placeholder="Fecha">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
+                                                <select id="cmbArea" style="width: 100%" class="form-control">
+                                                    @if (ModeloAreas.IdAreas != null)
+                                                    {
+                                                        if (Accesos.NIvel == 1)
+                                                        {
+                                                            <option value="0">------Seleccione------</option>
+                                                        }
+
+                                                        for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
+                                                        {
+                                                            if (Accesos.NIvel == 1)
+                                                            {
+                                                                <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                            }
+
+                                                            if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                            {
+                                                                <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
+                                                <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbArea">Área<span>*</span></label>
-                                        <select id="cmbArea" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtClaveCoversion">Ingrese la conversión<span class="required">*</span></label>
+                                                <input type="text" name="data[TxtClaveCoversion]" id="TxtClaveCoversion" class="form-control  limpiar" placeholder="">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbMarca">Marca<span>*</span></label>
-                                        <select id="cmbMarca" style="width: 100%" class="form-control limpiarSelect obligatorio"></select>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtDescripcion">Descripción del artículo<span class="required">*</span></label>
+
+                                                <textarea type="text" id="TxtDescripcion" class="form-control limpiar obligatorio" rows="3" wrap="soft" placeholder="Agregue una breve descripción del artículo..."></textarea>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
-                            <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
-                        </fieldset>
-                    </form>
-                </div>
-                <!-- pie del modal-->
-                <div class="modal-footer">
-                    <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <input type="button" name="previous" class="previous btn btn-default" value="Atrás" />
+                                    <button type="button" class="btn btn-success" onclick="verifivarPro()">Guardar</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- pie del modal-->
+                        <div class="modal-footer">
+                            <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-
-<!------------Obtener la fecha--------------------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaIngreso').value = fecha;
-
-</script>
-<!----------------------------------------------------------------------------------------------------->
-<!--Hacer que el modal muestre los pasos por parte-->
-<style type="text/css">
-    #regiration_form fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
-<!--Script-->
-<script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
-<!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
-<!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
-<script src="~/Scrips/Internos/JS_Articulos.js"></script>
-<script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
-<link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->
+        <!----------------------------------------------------------------------------------------------------->
+        <!--Hacer que el modal muestre los pasos por parte-->
+        <style type="text/css">
+            #regiration_form fieldset:not(:first-of-type) {
+                display: none;
+            }
+        </style>
+        <!--Script-->
+        <script src="~/Scrips/jquery.min.js"></script>  <!--Visualizar el accordion-->
+        <!--<script src="~/Scrips/jquery-ui.min.js"></script>-->
+        <!--Codigo de la funcion para llamar los registros de la base de datos para almacenarlos al accordion-->
+        <script src="~/Scrips/Internos/JS_Articulos.js"></script>
+        <script src="~/Scrips/js.cookie.js"></script> <!--Recorrer los pasos del modal-->
+        <link href="~/Content/tarjeta.css" rel="stylesheet" /><!--Estlos aplicados a la tarjetam de inicio-->

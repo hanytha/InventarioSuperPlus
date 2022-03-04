@@ -20,8 +20,21 @@ namespace Inventario.Controllers
             //Obtener las consultas del controlador de Supervisión
             SupervisionController TiendaSupervision = new SupervisionController();
             //Cargar las tiendas al iniciar sesión
+<<<<<<< HEAD
             TiendaSupervision.CargarSucursales();
             //PedidosInternos ModeloPedidoInt = new PedidosInternos();
+=======
+
+            //-------CONSULTA PARA OBTENER LOS PEDIDOS PENDIENTES POR ÁREA----------------------------- 
+            PedidosPendientesController pendientesArea = new PedidosPendientesController();
+            pendientesArea.ConsultaPedidosNumeroPedidoArea();
+            //--------------------------------------------------------------------------------------
+            //-------CONSULTA PARA OBTENER LOS ARTÍCULOS POR ÁREA----------------------------- 
+            //ArticuloController ARTICULOS = new ArticuloController();
+            //ARTICULOS.ConsultaPrecioPromedioRazor();
+            //--------------------------------------------------------------------------------------
+
+>>>>>>> anabel2
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();

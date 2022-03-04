@@ -2,6 +2,13 @@
 @{
     ViewBag.Title = "Departamentos";
 }
+
+<center>
+    <h2 class="form-control-label" style="font-size: 20px;">
+        ÁREAS Y SUBÁREAS
+    </h2>
+</center>
+
 <link href="~/Content/CObligatorios.css" rel="stylesheet" />
 <link href="~/Content/Tabla.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,7 +77,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">REGISTRO DE ÁREAS</h4>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
@@ -79,12 +86,11 @@
                     <form id="regiration_form" novalidate method="post">
 
                         <!--Los pasos del modal-->
-                        <h4>Paso 1: Información de la Área</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombre">Área<span class="required">*</span></label>
-                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorio" placeholder="R.H" size="30" maxlength="100" type="text">
+                                    <input id="TxtNombre" name="data[TxtNombre]" class="form-control  limpiar obligatorios" placeholder="R.H" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -92,7 +98,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtUsuario">Usuario<span class="required">*</span></label>
-                                    <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar obligatorio" placeholder="Usuario" size="30" maxlength="100" type="text">
+                                    <input id="TxtUsuario" name="data[TxtUsuario]" class="form-control  limpiar obligatorios" placeholder="Usuario" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -101,14 +107,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCorreo">Email address<span class="required">*</span></label>
-                                    <input type="email" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorio" placeholder="name@example.com">
+                                    <input type="email" name="data[TxtCorreo]" id="TxtCorreo" class="form-control  limpiar obligatorios" placeholder="name@example.com">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtTelefono">Teléfono<span class="required">*</span></label>
-                                    <input type="number" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorio" placeholder="+52953678902">
+                                    <input type="number" name="data[TxtTelefono]" id="TxtTelefono" class="form-control  limpiar obligatorios" placeholder="+52953678902">
                                 </div>
                             </div>
                         </div>
@@ -117,7 +123,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtCarpeta">Carpeta<span class="required">*</span></label>
-                                    <input id="TxtCarpeta" name="data[TxtCarpeta]" class="form-control  limpiar obligatorio" placeholder="Carpeta" size="30" maxlength="100" type="text">
+                                    <input id="TxtCarpeta" name="data[TxtCarpeta]" class="form-control  limpiar obligatorios" placeholder="Carpeta" size="30" maxlength="100" type="text">
                                 </div>
                             </div>
                         </div>
@@ -138,18 +144,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">SUBÁREAS</h4>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
                 </div>
                 <!-- Contenido del modal -->
                 <div class="modal-body">
-                    <h4>SUBÁREAS</h4>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <form id="regiration_form" novalidate method="post">
                         <fieldset>
-                            <h4>Paso 1: Información de la subÁrea</h4>
+                            <h5 align="right">Paso 1</h5>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -205,7 +210,7 @@
                             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
                         </fieldset>
                         <fieldset>
-                            <h4> Paso 2: Información del usuario</h4>
+                            <h5 align="right"> Paso 2</h5>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
