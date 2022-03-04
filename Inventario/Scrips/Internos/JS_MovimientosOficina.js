@@ -451,7 +451,6 @@ function Guardar() {
 
 function ImprimirPres() {
 
-   //ObtenerFecha();
     //obtenerPro();
 
     var NumPedidos = document.getElementsByClassName("input-StockAceptarP");
@@ -1058,7 +1057,7 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
             document.getElementById("cmbAceptarArea").value = Data[0].IdArea;
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             MostrarArt(IdCompInt, idS);
-            //VerPedido(id, no, IdCompInt, idS);
+            VerPedido(id, no, IdCompInt, idS);
           //  ImprimirPres();
         });
     }
@@ -1084,23 +1083,24 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
 
 
 //------Despliega el modal de aceptar pedidos deacuerdo con el número de pedido-----
-//function VerPedido(id, no, IdCompInt, idS) {
-//    if (no == 0) {
-//        sessionStorage.setItem('IDArt', '0');
-//    }
-//    else {
-//        $.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
-//            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
-//            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
-//            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
-//            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
-//            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
-//            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
-//            MostrarArticulos(IdCompInt, idS);
-//        });
+function VerPedido(id, no, IdCompInt, idS) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/MovimientosOficina/ConsultaAceptarPedido/?idS=" + idS + "&No= " + no, function (Data) {
+        //$.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
+            document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
+            document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
+            document.getElementById("TxtCorreo").textContent = Data[0].Correo;
+            document.getElementById("TxtFecha").textContent = Data[0].Fecha;
+            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
+            MostrarArticulos(IdCompInt, idS);
+        });
 
-//    }
-//}
+    }
+}
 //-----------Mostrar los articulos en el modal aceptar pedido----------------------
 function MostrarArt(IdCompInt, idS) {
     if (idS == 0) {
