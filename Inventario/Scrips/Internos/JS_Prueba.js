@@ -760,6 +760,7 @@ function ImprimirPres() {
     var Nombre = document.getElementsByClassName("input-Articulos");
     var costos = document.getElementsByClassName("input-Precios");
 
+    var totalfin = document.getElementById('TxtTotal').value;
 
 
     var dos = "";
@@ -798,7 +799,7 @@ function ImprimirPres() {
     dos += "<th></th>"
     dos += "<th></th>"
     dos += "<th style='text-align: center;'>Total</th>"
- //   dos += "<th style='text-align: center;'>$" + total + "</th>"
+    dos += "<th style='text-align: center;'>$" + totalfin + "</th>"
     dos += "</tfoot>"
 
     dos += "</tbody>"
