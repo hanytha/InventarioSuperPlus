@@ -753,13 +753,12 @@ function LimpiarPres() {
 function ImprimirPres() {
 
     consultaFecha();
+    obtenerPro();
 
     var NumPedidos = document.getElementsByClassName("input-cantidades");
     var totalar = document.getElementsByClassName("input-subtotal");
     var Nombre = document.getElementsByClassName("input-Articulos");
     var costos = document.getElementsByClassName("input-Precios");
-
-    document.getElementById("TxtProveedor").value ;
 
 
 
@@ -816,4 +815,11 @@ function consultaFecha() {
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFecha').textContent = fecha;
+}
+//----------------------------------------------------------
+function obtenerPro() {
+    var combo = document.getElementById("cmbProveedorPre");
+    var selected = combo.options[combo.selectedIndex].text;
+
+    document.getElementById('TxtProveedores').textContent = selected;
 }
