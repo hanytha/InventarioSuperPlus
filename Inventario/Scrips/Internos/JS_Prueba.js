@@ -542,7 +542,7 @@ function ConsultaSiguientePedidoPrveedor(id) {
 function abrirModalPresu(id) {
     LlenarCMCProveedoresPre();
     LimpiarCampos();
-
+    deshabilitar();
 
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -610,7 +610,7 @@ function verArticulos(id) {
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
-                TablaArticuloPre += "<input type='number' onkeyup='costo();costosart(); comprobar();boordeInputG();LimpiarPres();' class='input-cantidades   redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
+                TablaArticuloPre += "<input type='number' onkeyup='costo();costosart(); comprobar(); imprimir(); boordeInputG();LimpiarPres();' class='input-cantidades   redondeado'   id='" + ArrayIDA[i] + "'  value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
                 //-------Crea la lista de las unidades de medida por artículo-----------------------------------------------
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
@@ -670,8 +670,6 @@ function comprobar() {
 
     var Precio = document.getElementsByClassName("input-Precios");
     var NumPedidos = document.getElementsByClassName("input-cantidades");
-    var combo = document.getElementById("cmbProveedorPre");
-    var comoboarea = document.getElementById("cmbAreas");
 
 
     var contador = 0;
@@ -717,18 +715,6 @@ function comprobar() {
             }
         }
 
-
-    if (combo.value == 0 || comoboarea.value == 0) {
-
-        var regre = document.getElementsByClassName("regresar");
-        for (var i = 0; i < regre.length; i++) {
-
-            regre[i].style.display = 'none';
-        }
-
-        swal("¡Seleccione una opción!", "", "warning");
-
-    }
     
 }
 
@@ -847,4 +833,28 @@ function obtenerArea() {
     var selected = combo.options[combo.selectedIndex].text;
 
     document.getElementById('TxtAreas').textContent = selected;
+}
+
+//----------------------------------------------------------------------------
+function imprimir() {
+
+    var totalfin = document.getElementById("TxtTotal");
+    var boton = document.getElementById("botonImpres");
+    var comboPro = document.getElementById("cmbProveedorPre");
+
+    if (totalfin.value != 0 && comboPro.value  != 0) {
+
+        var boton = document.getElementById("botonImpres");
+        boton.classList.remove('disabled');
+    }
+    else if (totalfin.value == 0) {
+        boton.classList.add('disabled');
+    }
+}
+
+//-------------------------------------------------------------------------
+function deshabilitar() {
+
+    var boton = document.getElementById("botonImpres");
+    boton.classList.add('disabled');
 }

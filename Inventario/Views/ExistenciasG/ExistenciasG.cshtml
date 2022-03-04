@@ -362,7 +362,7 @@
                 </div>
                 <!-- pie del modal-->
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ImprimirPres()">Imprimir</a>
+                    <a type="button" id="botonImpres" class="btn btn-info disabled" href="javascript:imprSelec('seleccion')" onclick="ImprimirPres()">Imprimir</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -370,6 +370,14 @@
     </div>
 </div>
 <!---------------------------------------------------------------------------------------------------------------------->
+
+<style>
+    .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
+
 <!------------------------------------------modal para la impresión del presupuesto------------------------------------------------------>
 <div class="container">
     <div class="modal fade" id="ModalPedidos">
