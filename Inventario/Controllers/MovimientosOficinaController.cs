@@ -1654,7 +1654,7 @@ namespace Inventario.Controllers
             var ConsultaArticulo = from CompraInterno in InvBD.CompraInterno
                                    join ExistenciaAlmacenG in InvBD.ExistenciaAlmacenG
                                    on CompraInterno.IdCompraInterno equals ExistenciaAlmacenG.IdCompraInterno
-                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(2) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.ExitenciaActual >= 0
+                                   where CompraInterno.IdSitio.Equals(IDTienda) && CompraInterno.IdAsignacion.Equals(1) && CompraInterno.EstatusPedido.Equals(1) && ExistenciaAlmacenG.ExitenciaActual >= 0
                                    select new
                                    {
                                        id = ExistenciaAlmacenG.IdArticulo,
