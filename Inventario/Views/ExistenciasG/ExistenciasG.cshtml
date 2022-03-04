@@ -244,16 +244,21 @@
 
                                         @if (ModeloAreas.IdAreas != null)
                                         {
+                                            if (Accesos.NIvel == 1)
+                                            {
+                                                <option value="0">------Seleccione------</option>
+                                            }
+
                                             for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                             {
                                                 if (Accesos.NIvel == 1)
                                                 {
-                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
 
                                                 if (Accesos.IdArea == ModeloAreas.IdAreas[i])
                                                 {
-                                                    <option selected="selected" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
+                                                    <option  value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
                                             }
 
