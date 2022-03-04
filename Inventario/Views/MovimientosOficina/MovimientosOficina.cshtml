@@ -676,7 +676,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFechaVisualizar"></label></td>
+                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha Aprovada:</label><label id="TxtFechaVisualizar"></label></td>
                                                     </tr>
                                                     <tr>
                                                         <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
@@ -980,6 +980,8 @@
     var f = new Date();
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaIngreso').value = fecha;
+    document.getElementById('TxtAceptarFechaIngreso').value = fecha;
+    
 </script>
 <script src="~/Scrips/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
