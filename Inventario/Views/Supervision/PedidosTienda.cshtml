@@ -38,7 +38,7 @@
 </style>
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.IdPerfil == 1)
+        if (Accesos.IdPerfil == 1|| Accesos.IDAsignacion == 2)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -64,7 +64,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Pedidos realizados en la tienda: @TiendasSupervision.Nombre[i]</span>
+                                    <span>Pedidos solicitados: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -87,7 +87,7 @@
                 }
             }
         }
-        if (Accesos.IDAsignacion == 2)
+        @*else if (Accesos.IDAsignacion == 2)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -113,7 +113,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Pedidos realizados en la tienda: @TiendasSupervision.Nombre[i]</span>
+                                    <span>Pedidos solicitados: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -136,6 +136,7 @@
                     }
                 }
             }
+        }*@
         }
 </div>
 
@@ -548,7 +549,7 @@
 </script>
 <script src="~/Scrips/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="~/Scrips/Internos/JS_TiendaLider.js"></script>
+<script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
 <link href="~/Content/tarjeta.css" rel="stylesheet" />
 
 
