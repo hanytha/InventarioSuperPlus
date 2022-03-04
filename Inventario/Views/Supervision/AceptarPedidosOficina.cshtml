@@ -1,10 +1,10 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "MovimientosOficina";
+    ViewBag.Title = "AceptarPedidosOficina";
 }
 
 <h2 class="form-control-label" style="font-size: 20px;">
-    OFICINA
+    ACEPTAR PEDIDOS
 </h2>
 <style>
     contenedor2 {
@@ -66,7 +66,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloCompra(@ModeloAreas.IdAreas[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos de la Área de: @ModeloAreas.Nombre[i]</span>
+                                    <span>@ModeloAreas.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -75,7 +75,7 @@
                                     <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                     <div class="row">
                                         <div>
-                                            <h5>Aceptar pedido de la Área de: @ModeloAreas.Nombre[i]</h5>
+                                            <h5>Aceptar pedidos: @ModeloAreas.Nombre[i]</h5>
                                         </div>
                                         <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>

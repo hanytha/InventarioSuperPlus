@@ -1,9 +1,9 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "TiendaLider";
+    ViewBag.Title = "AceptarPedidos";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
-    ACEPTAR LOS PEDIDOS DE LAS TIENDAS
+    ACEPTAR PEDIDOS
 </h2>
 
 <style>
@@ -67,7 +67,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                    <span>@TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -115,7 +115,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                    <span> @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">

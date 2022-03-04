@@ -1,9 +1,9 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "PedidosTienda";
+    ViewBag.Title = "PedidosOficina";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
-    ACEPTAR LOS PEDIDOS DE LAS TIENDAS
+    ACEPTAR PEDIDOS
 </h2>
 
 <style>
@@ -73,7 +73,7 @@
 
                                        
                                         <div>
-                                            <h5>Información de la @ModeloAreas.Nombre[i]</h5>
+                                            <h5>Pedidos de: @ModeloAreas.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>

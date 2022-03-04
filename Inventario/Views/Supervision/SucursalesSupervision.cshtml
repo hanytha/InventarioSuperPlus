@@ -1,6 +1,6 @@
 ﻿@using Inventario.Models;
 @{
-    ViewBag.Title = "TiendaLider";
+    ViewBag.Title = "SucursalesSupervision";
 }
 <h2 class="form-control-label" style="font-size: 20px;">
     TIENDA
@@ -75,7 +75,7 @@
                                         <button onclick="abrirModal(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalPedidoInterno">Realizar Pedidos</button>
                                         <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
                                         <div>
-                                            <h5>Información de la @TiendasSupervision.Nombre[i]</h5>
+                                            <h5>Movimientos: @TiendasSupervision.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -115,7 +115,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Articulos de la tienda @TiendasSupervision.Nombre[i]</span>
+                                    <span>Movimientos: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@Colapse" class="collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
@@ -126,7 +126,7 @@
                                         <button onclick="abrirModalUsados(0,@TiendasSupervision.IDTienda[i])" type="button" class="btn btn-primary" data-toggle="modal" id=@TiendasSupervision.IDTienda[i] data-target="#ModalUsados">Movimiento: Usados</button>
 
                                         <div>
-                                            <h5>Información de la tienda: @TiendasSupervision.Nombre[i]</h5>
+                                            <h5>Movimientos: @TiendasSupervision.Nombre[i]</h5>
 
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
@@ -230,7 +230,7 @@
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
                                 <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos de la tienda: @TiendasSupervision.Nombre[i]</span>
+                                    <span>Aceptar pedido: @TiendasSupervision.Nombre[i]</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
