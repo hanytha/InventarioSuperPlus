@@ -223,6 +223,9 @@
                                 int Elemt = Accesos.Accion.Count();
                                 for (int i = 0; i < Elemt; i++)
                                 {
+
+                                    if (Accesos.Estatus [i] == 1) {
+
                                     <ul id="sidebarnav">
                                         <li class="list-group">
                                             <a class="sidebar-link waves-effect waves-dark sidebar-link"  style="TEXT-DECORATION:none;COLOR:#000000;FONT-FAMILY: tahoma; FONT-SIZE: 14px" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
@@ -231,8 +234,9 @@
                                             </a>
                                         </li>
                                     </ul>
+                                        }
+                                    }
                                 }
-                            }
                         </nav>
                     </div>
                 </aside>

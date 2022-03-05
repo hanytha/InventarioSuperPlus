@@ -28,7 +28,8 @@ namespace Inventario.Controllers
                     p.Accion,
                     p.Controlador,
                     p.Descripcion,
-                    p.Icono
+                    p.Icono,
+                    p.Estatus,
                 });
             return Json(DatosPaginas, JsonRequestBehavior.AllowGet);
         }

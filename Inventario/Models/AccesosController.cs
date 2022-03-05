@@ -14,6 +14,7 @@ namespace Inventario.Models
         public static List<string> Controlador { get; set; }
         public static List<string> Mensaje { get; set; }
         public static List<string> Icono { get; set; }
+        public static List<long> Estatus { get; set; }
 
         public static long Id { get; set; }
         public static string CURP { get; set; }

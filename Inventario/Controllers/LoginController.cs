@@ -138,6 +138,8 @@ namespace Inventario.Controllers
                         Accesos.Controlador = new List<string>();
                         Accesos.Mensaje = new List<string>();
                         Accesos.Icono = new List<string>();
+                        Accesos.Estatus = new List<long>();
+
                         for (int i = 0; i < Filas; i++)
                         {
                             var Pagina = InvBD.Pagina.Where(p => p.IdPagina.Equals(IdPaginas[i]))
@@ -146,7 +148,8 @@ namespace Inventario.Controllers
                                     p.Accion,
                                     p.Controlador,
                                     p.Mensaje,
-                                    p.Icono
+                                    p.Icono,
+                                    p.Estatus
                                 });
                             foreach (var item in Pagina)
                             {
@@ -154,6 +157,7 @@ namespace Inventario.Controllers
                                 Accesos.Controlador.Add(item.Controlador);
                                 Accesos.Mensaje.Add(item.Mensaje);
                                 Accesos.Icono.Add(item.Icono);
+                                Accesos.Estatus.Add(item.Estatus);
                             }
                         }
                     }
