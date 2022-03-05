@@ -283,19 +283,16 @@
     <Content Include="Views\ExistenciaAlmacen\ExistenciaAlmacen2da.cshtml" />
     <Content Include="Views\TiposDeMovimiento\TiposDeMovimiento2da.cshtml" />
     <Content Include="Views\Supervision\Supervision2da.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Supervision\TiendaLider.cshtml" />
     <Content Include="Views\Supervision\PedidosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidos.cshtml" />
     <Content Include="Views\MovimientosOficina\MovimientosOficina.cshtml" />
     <Content Include="Views\Supervision\AceptarPedidosOficina.cshtml" />
     <Content Include="Views\Supervision\PedidosTienda.cshtml" />
-=======
     <Content Include="Views\Traspasos\Traspasos.cshtml" />
     <Content Include="Views\MPago\MPago.cshtml" />
     <Content Include="Views\PedidosPendientes\PedidosPendientes.cshtml" />
     <Content Include="Views\Mermas\Mermas.cshtml" />
->>>>>>> anabel2
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
