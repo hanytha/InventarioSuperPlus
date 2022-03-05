@@ -1589,3 +1589,56 @@ function ValidarUsados() {
 //function actualizarP() {
 //    window.location.href = window.location.href;
 //}
+function ValidarDUsado() {
+    var CantidadArt = document.getElementsByClassName("input-cantidadUsados");
+    //var Stock = document.getElementsByClassName("input-Stock");
+    var Tienda = document.getElementById("cmbTiendaUsados").value;
+    var contador = 0;
+    var ContadorMayorAcero = 0;
+    for (let i = 0; i < CantidadArt.length; i++) {
+        CantidadArt[i].style.borderColor = 'DimGray';
+        if (CantidadArt[i].value > 0 || CantidadArt[i].value < 0) {
+            contador++;
+        }
+        if (CantidadArt[i].value > 0) {
+
+            ContadorMayorAcero++;
+        }
+    }
+    if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && Tienda > 0) {
+        nuevoStockUsados();
+    }
+    else {
+        if (Tienda > 0) {
+            Swal.fire(
+                '!',
+                'Ingrese la cantidad de articulos a solicitar',
+                'alert'
+            )
+        }
+        for (let i = 0; i < CantidadArt.length; i++) {
+            if (CantidadArt[i].value < 0) {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    '¡La cantidad solicitada no puede ser negativo!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == '0') {
+
+                CantidadArt[i].style.borderColor = 'Red';
+                Swal.fire(
+                    '!',
+                    'No se aceptan valores neutros!',
+                    'alert'
+                )
+            }
+            if (CantidadArt[i].value == "") {
+
+                CantidadArt[i].style.borderColor = 'DimGray';
+            }
+        }
+    }
+}
