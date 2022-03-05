@@ -1088,6 +1088,11 @@ function VerPedido(id, no, IdCompInt, idS) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
+        $.get("/MovimientosOficina/BDOficina/?Id=" + idS, function (Data) {
+
+            document.getElementById("TxtDepartamento").textContent = Data[0].Nombre;
+
+        });
         $.get("/MovimientosOficina/ConsultaAceptarPedido/?idS=" + idS + "&No= " + no, function (Data) {
             //$.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
@@ -1095,7 +1100,7 @@ function VerPedido(id, no, IdCompInt, idS) {
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreo").textContent = Data[0].Correo;
             document.getElementById("TxtFecha").textContent = Data[0].Fecha;
-            document.getElementById("TxtDepartamento").textContent = Data[0].Area;
+           // document.getElementById("TxtDepartamento").textContent = Data[0].Area;
             //MostrarArticulos(IdCompInt, idS);
         });
 
@@ -1253,15 +1258,21 @@ function VisualizarPedido(id, no, IdCompInt, idS) {
         sessionStorage.setItem('IDArt', '0');
     }
     else {
+        $.get("/MovimientosOficina/BDOficina/?Id=" + idS, function (Data) {
+    
+            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Nombre;
+
+        });
         $.get("/MovimientosOficina/ConsultaPedidosAceptados/?No=" + no + "&Id= " + id, function (Data) {
             document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
             document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
             document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
             document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
             document.getElementById("TxtCorreoVisualizar").textContent = Data[0].Correo;
-            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Area;
+         //   document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Area;
             MostrarArticulosVisualizar(IdCompInt, idS);
         });
+      
     }
 }
 function MostrarArticulosVisualizar(IdCompInt, idS) {
