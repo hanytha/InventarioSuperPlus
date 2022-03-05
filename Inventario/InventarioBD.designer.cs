@@ -120,11 +120,7 @@ namespace Inventario
     #endregion
 		
 		public InventarioBDDataContext() : 
-<<<<<<< HEAD
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString"].ConnectionString, mappingSource)
-=======
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SuperPlusConnectionString1"].ConnectionString, mappingSource)
->>>>>>> anabel2
 		{
 			OnCreated();
 		}
@@ -10190,7 +10186,7 @@ namespace Inventario
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3Nombre", DbType="VarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3Nombre", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
 		public string A3Nombre
 		{
 			get

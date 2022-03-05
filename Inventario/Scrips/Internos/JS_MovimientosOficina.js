@@ -445,7 +445,7 @@ function Guardar() {
         });
         //ConsultaArticuloCompra();
         alert("¡¡Pedido aceptado satisfactoriamente!!");
-      //  ImprimirPres();
+        //  ImprimirPres();
     }
 }
 
@@ -479,11 +479,11 @@ function ImprimirPres() {
 
     for (var i = 0; i < Nombre.length; i++) {
 
-        if (NumPedidos[i].value > 0 ) {
+        if (NumPedidos[i].value > 0) {
             dos += "<tr>"
             dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
             dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
-           // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
+            // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
             dos += "</tr>"
         }
     }
@@ -491,8 +491,8 @@ function ImprimirPres() {
     dos += "<th></th>"
     dos += "<th></th>"
     dos += "<th></th>"
-  //  dos += "<th style='text-align: center;'>Total</th>"
-   // dos += "<th style='text-align: center;'>$" + totalfin + "</th>"
+    //  dos += "<th style='text-align: center;'>Total</th>"
+    // dos += "<th style='text-align: center;'>$" + totalfin + "</th>"
     dos += "</tfoot>"
 
     dos += "</tbody>"
@@ -501,7 +501,7 @@ function ImprimirPres() {
     dos += "</div>";
 
     document.getElementById("TblArt").innerHTML = dos;
-   // actualizar()
+    // actualizar()
 }
 function CamposObligatoriosDevolucion() {
     var exito = true;
@@ -1059,7 +1059,7 @@ function abrirModalAceptarPedido(id, no, IdCompInt, idS) {
             document.getElementById("cmbAceptarProveedor").value = Data[0].IdProveedor;
             MostrarArt(IdCompInt, idS);
             VerPedido(id, no, IdCompInt, idS);
-          //  ImprimirPres();
+            //  ImprimirPres();
         });
     }
 }
@@ -1089,7 +1089,7 @@ function VerPedido(id, no, IdCompInt, idS) {
     }
     else {
         $.get("/MovimientosOficina/ConsultaAceptarPedido/?idS=" + idS + "&No= " + no, function (Data) {
-        //$.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
+            //$.get("/MovimientosOficina/ConsultaAceptarPedido/?No=" + no + "&Id= " + id, function (Data) {
             document.getElementById("TxtNumeroPedidoArt").textContent = Data[0].NoCompraProveedor;
             document.getElementById("TxtProveedor").textContent = Data[0].Proveedor;
             document.getElementById("TxtTelefono").textContent = Data[0].Telefono;

@@ -87,7 +87,7 @@ function verficar() {
                     nuevoStock();
                 }
             });
-        
+
     }
 }
 
@@ -178,7 +178,7 @@ function nuevoStock() {
     var existencia = document.getElementById("TxtNumPedido").name;
 
 
-    var cantidad = (ncantidad)*(-1)
+    var cantidad = (ncantidad) * (-1)
 
     var total = "";
 

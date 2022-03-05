@@ -87,7 +87,7 @@ namespace Inventario.Controllers
                 });
             return Json(tienda, JsonRequestBehavior.AllowGet);
         }
-   
+
         //Guardar los datos de la compra
         public int GuardarTienda(Tienda DatosTienda)
         {
@@ -113,7 +113,7 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Tienda.Where(p => p.Nombre.Equals(DatosTienda.Nombre) 
+                int nveces = InvBD.Tienda.Where(p => p.Nombre.Equals(DatosTienda.Nombre)
                 && p.IdSupervisor.Equals(DatosTienda.IdSupervisor)
                 && p.IdEstado.Equals(DatosTienda.IdEstado)
                 && p.IdMunicipio.Equals(DatosTienda.IdMunicipio)
@@ -145,7 +145,7 @@ namespace Inventario.Controllers
                     obj.IdEstado = DatosTienda.IdEstado;
                     obj.Estado = DatosTienda.Estado;
                     obj.IdMunicipio = DatosTienda.IdMunicipio;
-                    obj.Municipio= DatosTienda.Municipio;
+                    obj.Municipio = DatosTienda.Municipio;
                     obj.IdLocalidad = DatosTienda.IdLocalidad;
                     obj.Localidad = DatosTienda.Localidad;
                     obj.Direccion = DatosTienda.Direccion;

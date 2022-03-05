@@ -67,11 +67,7 @@ namespace Inventario.Controllers
             }
             else
             {
-<<<<<<< HEAD
                 int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento)).Count();
-=======
-                int nveces = InvBD.TipoDeMovimientos.Where(p => p.TipoDeMovimiento.Equals(DatosMovimiento.TipoDeMovimiento) ).Count();
->>>>>>> anabel2
                 if (nveces == 0)
                 {
                     TipoDeMovimientos obj = InvBD.TipoDeMovimientos.Where(p => p.IdMovimientos.Equals(id)).First();

@@ -6,139 +6,59 @@ function CrearAcordeonProveedores() {
         AcordeonProveedores(data, document.getElementById("accordion"));
     });
 }
-function ConsultaArticuloComp(IDTienda) {
-    if (IDTienda == 0) {
-        sessionStorage.setItem('IDTienda', '0');
+//Crea la información basica de las insidencias
+function AcordeonProveedores(data, IDo) {
+    var CodHtml = "";
+    for (var i = 0; i < data.length; i++) {
+        if (i < 1) {
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+        }
+        else {
+            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
+        }
+        CodHtml += "<div class='card-header' id='heading" + data[i].IdProveedores + "'>";
+        CodHtml += "<h5 class='mb-0'>";
+        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdProveedores + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdProveedores + "' aria-expanded='false' aria-controls='collapse" + data[i].IdProveedores + "' class='collapsed'>";
+        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
+        //CodHtml += "<i class='m-r-5 fas fa-clipboard-list' style='font - size: 100px; color: red;' aria-hidden='true'></i>";
+
+        CodHtml += "<span >" + data[i].Nombre + "</span>";
+        CodHtml += "</a>";
+        CodHtml += "</h5>";
+        CodHtml += "<div id='collapse" + data[i].IdProveedores + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
+        CodHtml += "<div class='card-body'>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Banco: </strong>" + data[i].Banco + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + data[i].Telefono + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>ClaveInterbancaria: </strong>" + data[i].ClaveInterbancaria + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Correo: </strong>" + data[i].Correo + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>NumeroDeCuenta: </strong>" + data[i].NumeroDeCuenta + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'></div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Estado: </strong>" + data[i].Estado + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + data[i].UsoCFDI + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + data[i].Municipio + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RFC: </strong>" + data[i].RFC + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + data[i].Localidad + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RazonSocial: </strong>" + data[i].RazonSocial + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Direccion: </strong>" + data[i].Direccion + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Descripcion: </strong>" + data[i].Descripcion + "</div>";
+        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>CodigoPostal: </strong>" + data[i].CodigoPostal + "</div>";
+        CodHtml += "</div>";
+        CodHtml += "<div class='row'>";
+        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
+        CodHtml += "<button class='btn btn-danger' onclick='EliminarProveedores(" + data[i].IdProveedores + "," + data[i].IdProveedores + ",this)'><i class='fas fa-eraser'></i></button>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
+        CodHtml += "</div>";
     }
-    else {
-        $.get("/Supervision/ConsultaArticulos/?IDTienda=" + IDTienda, function (Data) {
-            var CodigoHtmlArticuloComp = "";
-
-            CodigoHtmlArticuloComp += "<div id='contenedor1'>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "<div class='row'>";
-            // CodigoHtmlArticuloComp += "<div class='col-sm'>Id</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>No. de Pedido</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Proveedor</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Fecha</div>";
-            CodigoHtmlArticuloComp += "<div class='col-sm'>Acción</div>";
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "<hr class='solid'>";
-            CodigoHtmlArticuloComp += "</div>";
-
-            let id = Data.id;
-            let ArrayId = id.split(',');
-            let NoPedido = Data.NoPedido;
-            let ArrayNoPedido = NoPedido.split(',');
-            let Fecha = Data.Fecha;
-            let Arrayfecha = Fecha.split(',');
-            //let Stock = Data.Stock;
-            //let Arraystock = Stock.split(',');
-            //El IdSitio se ocupa para conocer en qué tienda mostrar los pedidos
-            let IdSitio = Data.IdSitio;
-            let ArrayIdSitio = IdSitio.split(',');
-            let Articulo = Data.Articulo;
-            let ArrayArticulo = Articulo.split(',');
-            let Proveedor = Data.Proveedor;
-            let ArrayProveedor = Proveedor.split(',');
-
-            let IdProveedor = Data.IdProveedor;
-            let ArrayIdProveedor = IdProveedor.split(',');
-
-
-
-            let IdCmpraInt = Data.IdCmpraInt;
-            let ArrayIdCmpraInt = IdCmpraInt.split(',');
-
-
-            for (var i = 0; i < ArrayId.length; i++) {
-
-                CodigoHtmlArticuloComp += "<div>";
-                CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + ArrayProveedor[i] + "</div>";
-                CodigoHtmlArticuloComp += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
-                //-----------------Botón para desplegar la primera tabla-------------- 
-                CodigoHtmlArticuloComp += "<div class='col'>"
-                CodigoHtmlArticuloComp += "<label>"
-                //Pasar los 2 parámetros de la función desplegar(función que muestra la tabla del artículo) para  conocer el número de pedido que se va a mostrar en la tienda que tenga el id recibido
-                CodigoHtmlArticuloComp += "<button title='Clic para desplegar' class='btn btn-outline-primary' onclick='Desplegar(" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + ")' type='button' data-toggle='collapse' data-target='#desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' aria-expanded='false' aria-controls='desplegable(" + ArrayIdCmpraInt[i] + ", " + ArrayIdSitio[i] + ")'><i class='fas fa-angle-down'></i></button>";
-                CodigoHtmlArticuloComp += "<button title='Pedido' class='btn btn-primary' onclick='VerPedido(" + ArrayId[i] + "," + ArrayNoPedido[i] + ")'data-toggle='modal' data-target='#ModalPedidos'><i class='fas fa-archive'></i></button>";
-
-                CodigoHtmlArticuloComp += "</div>";
-                //-------------Termina----------------------------------------
-                CodigoHtmlArticuloComp += "</div>";
-                CodigoHtmlArticuloComp += "</div>";
-                //------------------------Despliega primer grid-----------------------------------------------------------------------
-                CodigoHtmlArticuloComp += "<div class='row'>";
-                CodigoHtmlArticuloComp += "<div class='col'><div id='desplegable" + ArrayIdCmpraInt[i] + "," + ArrayIdSitio[i] + "' class='collapse'></div></div>";
-                CodigoHtmlArticuloComp += "</div>";
-                //---------------------------------------Termina----------------------------------------------------------------------------
-            }
-            CodigoHtmlArticuloComp += "</div>";
-            CodigoHtmlArticuloComp += "</br>";
-            CodigoHtmlArticuloComp += "</br>";
-            let contenedor1 = "contenedor1" + IDTienda;
-
-            document.getElementById(contenedor1).innerHTML = CodigoHtmlArticuloComp;
-
-        });
-
-    }
+    IDo.innerHTML = CodHtml;
 }
-
-//function AcordeonProveedores(data, IDo) {
-//    var CodHtml = "";
-//    for (var i = 0; i < data.length; i++) {
-//        if (i < 1) {
-//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        else {
-//            CodHtml += "<div class='card m-b-0 list-group list-group-flush  mb-1'>";
-//        }
-//        CodHtml += "<div class='card-header' id='heading" + data[i].IdProveedores + "'>";
-//        CodHtml += "<h5 class='mb-0'>";
-//        CodHtml += "<a onclick='MostrarProcedimientos(" + data[i].IdProveedores + ");' data-toggle='collapse' data-target='#collapse" + data[i].IdProveedores + "' aria-expanded='false' aria-controls='collapse" + data[i].IdProveedores + "' class='collapsed'>";
-//        CodHtml += "<i class='m-r-5 fas fa-clipboard-list' aria-hidden='true'></i>";
-//        //CodHtml += "<i class='m-r-5 fas fa-clipboard-list' style='font - size: 100px; color: red;' aria-hidden='true'></i>";
-
-//        CodHtml += "<span >" + data[i].Nombre + "</span>";
-//        CodHtml += "</a>";
-//        CodHtml += "</h5>";
-//        CodHtml += "<div id='collapse" + data[i].IdProveedores + "' class='collapse' aria-labelledby='headingOne' data-parent='#accordion' style=''>";
-//        CodHtml += "<div class='card-body'>";
-//        CodHtml += "<div class='row'>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Banco: </strong>" + data[i].Banco + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Teléfono: </strong>" + data[i].Telefono + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>ClaveInterbancaria: </strong>" + data[i].ClaveInterbancaria + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Correo: </strong>" + data[i].Correo + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>NumeroDeCuenta: </strong>" + data[i].NumeroDeCuenta + "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "<div class='row'>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'></div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Estado: </strong>" + data[i].Estado + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>UsoCFDI: </strong>" + data[i].UsoCFDI + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Municipio: </strong>" + data[i].Municipio + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RFC: </strong>" + data[i].RFC + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Localidad: </strong>" + data[i].Localidad + "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "<div class='row'>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>RazonSocial: </strong>" + data[i].RazonSocial + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Direccion: </strong>" + data[i].Direccion + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>Descripcion: </strong>" + data[i].Descripcion + "</div>";
-//        CodHtml += "<div class='col-md-6 col-sm-6 col-xs-6'><strong>CodigoPostal: </strong>" + data[i].CodigoPostal + "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "<div class='row'>";
-//        CodHtml += "<button class='btn btn-primary' onclick='abrirModal(" + data[i].IdProveedores + "," + data[i].IdProveedores + ")' data-toggle='modal' data-target='#dialogo1'><i class='fas fa-edit'></i></button> ";
-//        CodHtml += "<button class='btn btn-danger' onclick='EliminarProveedores(" + data[i].IdProveedores + "," + data[i].IdProveedores + ",this)'><i class='fas fa-eraser'></i></button>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//        CodHtml += "</div>";
-//    }
-//    IDo.innerHTML = CodHtml;
-//}
 BloquearCTRL();
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
@@ -382,11 +302,7 @@ function EliminarProveedores(id) {
                 //  confirmarEliminar();
                 CrearAcordeonProveedores();
             } else {
-                Swal.fire(
-                    '',
-                    'Ocurrìó un error',
-                    'danger'
-                )
+                alert("Ocurrió un error");
             }
         });
     }

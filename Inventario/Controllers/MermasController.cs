@@ -42,27 +42,27 @@ namespace Inventario.Controllers
             ModeloMermas.Observaciones = new List<string>();
 
             var merma = from comprs in InvBD.CompraInterno
-                          join exist in InvBD.ExistenciaAlmacenG
-                      on comprs.IdCompraInterno equals exist.IdCompraInterno
-                          where comprs.EstatusPedido.Equals(1)&& exist.TipoDeOperacion.Equals("Devolucion")&& exist.ExitenciaActual < 0
-                          orderby exist.NoPedidoG
-                          select new
-                          {
-                              IdProveedor = comprs.IdProveedor,
-                              Proveedor = comprs.Proveedor,
-                              Sitio = comprs.Sitio,
-                              IdCompra = exist.IdCompra,
-                              IdCompraInterno = exist.IdCompraInterno,
-                              IdArticulo = exist.IdArticulo,
-                              Articulo = exist.Articulo,
-                              ExitenciaInicial = exist.ExitenciaInicial,
-                              ExitenciaActual = exist.ExitenciaActual,
-                              NoPedidoG = exist.NoPedidoG,
-                              Observaciones = exist.Observaciones,
-                              TipoDeOperacion = exist.TipoDeOperacion,
-                              IdExistenciaAlmacenG = exist.IdExistenciaAlmacenG,
+                        join exist in InvBD.ExistenciaAlmacenG
+                    on comprs.IdCompraInterno equals exist.IdCompraInterno
+                        where comprs.EstatusPedido.Equals(1) && exist.TipoDeOperacion.Equals("Devolucion") && exist.ExitenciaActual < 0
+                        orderby exist.NoPedidoG
+                        select new
+                        {
+                            IdProveedor = comprs.IdProveedor,
+                            Proveedor = comprs.Proveedor,
+                            Sitio = comprs.Sitio,
+                            IdCompra = exist.IdCompra,
+                            IdCompraInterno = exist.IdCompraInterno,
+                            IdArticulo = exist.IdArticulo,
+                            Articulo = exist.Articulo,
+                            ExitenciaInicial = exist.ExitenciaInicial,
+                            ExitenciaActual = exist.ExitenciaActual,
+                            NoPedidoG = exist.NoPedidoG,
+                            Observaciones = exist.Observaciones,
+                            TipoDeOperacion = exist.TipoDeOperacion,
+                            IdExistenciaAlmacenG = exist.IdExistenciaAlmacenG,
 
-                          };
+                        };
             foreach (var mer in merma)
             {
                 ModeloMermas.IdCompraInterno.Add((long)mer.IdCompraInterno);
@@ -89,7 +89,7 @@ namespace Inventario.Controllers
             var Categoria = from comprs in InvBD.CompraInterno
                             join exist in InvBD.ExistenciaAlmacenG
                         on comprs.IdCompraInterno equals exist.IdCompraInterno
-                            where exist.IdExistenciaAlmacenG.Equals(Id) && comprs.EstatusPedido.Equals(1) 
+                            where exist.IdExistenciaAlmacenG.Equals(Id) && comprs.EstatusPedido.Equals(1)
                             orderby exist.NoPedidoG
                             select new
                             {
@@ -117,12 +117,12 @@ namespace Inventario.Controllers
             int Afectados = 0;
 
 
-                    InvBD.MermasGeneral.InsertOnSubmit(DatosMerma);
-                    InvBD.SubmitChanges();
-                    Afectados = 1;
-               
-               
-            
+            InvBD.MermasGeneral.InsertOnSubmit(DatosMerma);
+            InvBD.SubmitChanges();
+            Afectados = 1;
+
+
+
             return Afectados;
         }
         //-----------------------------------------------------------------
@@ -131,7 +131,7 @@ namespace Inventario.Controllers
             var devolucion = InvBD.ExistenciaAlmacenG.Where(p => p.IdExistenciaAlmacenG.Equals(Id) && p.ExitenciaActual < 0)
                 .Select(p => new
                 {
-                    
+
                     p.IdExistenciaAlmacenG,
                     p.TipoDeOperacion,
 
@@ -141,7 +141,7 @@ namespace Inventario.Controllers
             {
                 Devolucion((long)g.IdExistenciaAlmacenG);
             }
- 
+
         }
         //------------------------------------------------------------
         public int Devolucion(long IDE)
@@ -161,50 +161,50 @@ namespace Inventario.Controllers
         {
 
             // string[] Articulos = DatosArticulos.Split('/');
-            string[] Articulos = DatosArticulos.Split(':',',','/');
+            string[] Articulos = DatosArticulos.Split(':', ',', '/');
 
             int consulta = 0;
 
-                int resultado = 0;
+            int resultado = 0;
 
-                var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Articulos[1])) && p.IdCompra.Equals(Convert.ToInt32(Articulos[0]))).OrderBy(p => p.IdCompra)
-                .Select(p => new
+            var ConsultaIDArticulo = InvBD.ComprasArticulos.Where(p => p.IdArticulo.Equals(Convert.ToInt32(Articulos[1])) && p.IdCompra.Equals(Convert.ToInt32(Articulos[0]))).OrderBy(p => p.IdCompra)
+            .Select(p => new
+            {
+                p.IdCompra,
+                p.IdArticulo,
+                p.Articulo,
+                p.StockActual,
+                p.ExistenciaInicial,
+
+            });
+
+            Double Diferencia = Convert.ToInt32(Articulos[2]);
+            Double IDExistencia = Convert.ToInt32(Articulos[3]);
+
+            foreach (var con in ConsultaIDArticulo)
+            {
+                long IDCompras = Convert.ToInt32(con.IdCompra);
+                long IDArticulos = Convert.ToInt32(con.IdArticulo);
+
+
+
+                if (Diferencia > 0)
                 {
-                    p.IdCompra,
-                    p.IdArticulo,
-                    p.Articulo,
-                    p.StockActual,
-                    p.ExistenciaInicial,
+                    Double NExistencia = 0;
 
-                });
+                    NExistencia = (double)Diferencia + (double)con.StockActual;
 
-                Double Diferencia = Convert.ToInt32(Articulos[2]);
-                Double IDExistencia = Convert.ToInt32(Articulos[3]);
-
-                foreach (var con in ConsultaIDArticulo)
-                {
-                    long IDCompras = Convert.ToInt32(con.IdCompra);
-                    long IDArticulos = Convert.ToInt32(con.IdArticulo);
-                  
-                
-
-                    if (Diferencia > 0)
-                    {
-                        Double NExistencia = 0;
-
-                    NExistencia = (double)Diferencia + (double) con.StockActual;
-
-                        consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, IDExistencia);
-                        if (consulta == 0)
-                        {
-                            break;
-                        }
-                    }
-                    else
+                    consulta = GuardarNStock((long)con.IdCompra, (long)con.IdArticulo, NExistencia, IDExistencia);
+                    if (consulta == 0)
                     {
                         break;
                     }
                 }
+                else
+                {
+                    break;
+                }
+            }
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
 

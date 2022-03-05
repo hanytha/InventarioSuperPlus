@@ -636,7 +636,7 @@ namespace Inventario.Controllers
             string Nombre = "";
             string IdExistenciaAlmacenG = "";
             string Stock = "";
-           
+
             var Pedidos = from ExistAlm in InvBD.ExistenciaAlmacenG
                           join Compra in InvBD.CompraInterno
                       on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno

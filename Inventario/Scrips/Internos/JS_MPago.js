@@ -17,22 +17,22 @@ function CrearTablaCategorias(Data) {
     CodigoHtmlTablaCategoria += "<th>Acción</th>";
     CodigoHtmlTablaCategoria += "</tr>";
     CodigoHtmlTablaCategoria += "</thead>";
-    CodigoHtmlTablaCategoria  += "<tbody>";
+    CodigoHtmlTablaCategoria += "<tbody>";
     for (var i = 0; i < Data.length; i++) {
-        CodigoHtmlTablaCategoria  += "<tr>";
+        CodigoHtmlTablaCategoria += "<tr>";
         CodigoHtmlTablaCategoria += "<td>" + Data[i].MetodoPago1 + "</td>";
         CodigoHtmlTablaCategoria += "<td>" + Data[i].Descripcion + "</td>";
 
-        CodigoHtmlTablaCategoria  += "<td>";
+        CodigoHtmlTablaCategoria += "<td>";
         CodigoHtmlTablaCategoria += "<button class='btn btn-info' onclick='editarModal(" + Data[i].IdMetodoPago + ")' data-toggle='modal' data-target='#ModalCategoria'><i class='fas fa-edit'></i></button>";
         CodigoHtmlTablaCategoria += "<button class='btn btn-danger' onclick='EliminarMPago(" + Data[i].IdMetodoPago + ",this)'><i class='far fa-trash-alt'></button>";
 
-        CodigoHtmlTablaCategoria  += "</td>";
-        CodigoHtmlTablaCategoria  += "</tr>";
+        CodigoHtmlTablaCategoria += "</td>";
+        CodigoHtmlTablaCategoria += "</tr>";
     }
-    CodigoHtmlTablaCategoria  += "</tbody>";
-    CodigoHtmlTablaCategoria  += "</table>";
-    document.getElementById("tablaCategoria").innerHTML = CodigoHtmlTablaCategoria ;
+    CodigoHtmlTablaCategoria += "</tbody>";
+    CodigoHtmlTablaCategoria += "</table>";
+    document.getElementById("tablaCategoria").innerHTML = CodigoHtmlTablaCategoria;
 }
 
 

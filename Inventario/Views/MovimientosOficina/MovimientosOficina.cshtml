@@ -375,63 +375,63 @@
                     </h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
                 </div>-->
-                <!-- Contenido del modal -->
-                <!--<div class="modal-body">
-                    <form id="regiration_form" novalidate method="post">
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtStock">Stock actual<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Stock">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
-                                        <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Cantidad">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
-                                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio">
-                                            <option value="0">--Seleccione--</option>
-                                            <option value="1">Uso</option>
-                                            <option value="2">Devolución</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtStockTotal">Stock actualizado<span class="required">*</span></label>
-                                        <input type="text" name="data[TxtStockTotal]" id="TxtStockTotal" class="form-control  limpiar bloquear" placeholder="Total del stock">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="TxtDescripcion">Observaciones<span class="required">*</span></label>
-                                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega observaciones acerca del movimiento..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>-->
-                <!-- pie del modal-->
-                <!--<div class="modal-footer">
+<!-- Contenido del modal -->
+<!--<div class="modal-body">
+    <form id="regiration_form" novalidate method="post">
+        <fieldset>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="TxtArticulo">Artículo<span class="required">*</span></label>
+                        <input type="text" name="data[TxtArticulo]" id="TxtArticulo" class="form-control  bloquear limpiar" placeholder="Artículo">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="TxtStock">Stock actual<span class="required">*</span></label>
+                        <input type="text" name="data[TxtStock]" id="TxtStock" class="form-control  limpiar bloquear" placeholder="Stock">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="TxtCantidad">Ingrese la cantidad<span class="required">*</span></label>
+                        <input type="number" name="data[TxtCantidad]" id="TxtCantidad" class="form-control  limpiar" placeholder="Cantidad">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="cmbMovimiento">Movimiento<span>*</span></label>
+                        <select id="cmbMovimiento" onchange="MovimientoModal(this.value)" style="width: 100%" class="form-control limpiarSelect obligatorio">
+                            <option value="0">--Seleccione--</option>
+                            <option value="1">Uso</option>
+                            <option value="2">Devolución</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="TxtStockTotal">Stock actualizado<span class="required">*</span></label>
+                        <input type="text" name="data[TxtStockTotal]" id="TxtStockTotal" class="form-control  limpiar bloquear" placeholder="Total del stock">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="TxtDescripcion">Observaciones<span class="required">*</span></label>
+                        <textarea type="text" id="TxtDescripcion" class="form-control limpiar" rows="3" wrap="soft" placeholder="Agrega observaciones acerca del movimiento..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>-->
+<!-- pie del modal-->
+<!--<div class="modal-footer">
                     <button type="button" class="btn btn-success" onclick="GuardarArticulo()">Guardar</button>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
@@ -449,7 +449,7 @@
                             ACEPTAR PEDIDO
                         </label>
                     </h2>
-                  @* <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>*@
+                    @* <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>*@
                 </div>
                 <div class="modal-body">
                     <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
@@ -522,7 +522,7 @@
                 <div class="modal-footer">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                     @*<button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" href="javascript:imprSelec('seleccion')" data-toggle="modal" onclick="Guardar(); ImprimirPres();">Aceptar pedido</button>*@
-                    <a type="button"  id="btn-1" class="btn btn-primary" href="javascript:imprSelec('seleccion')" data-target="#ModalPedidos" onclick="Guardar(); ImprimirPres(); VerPedido(0, 0, 0, 0);">Aceptar Pedido</a>
+                    <a type="button" id="btn-1" class="btn btn-primary" href="javascript:imprSelec('seleccion')" data-target="#ModalPedidos" onclick="Guardar(); ImprimirPres(); VerPedido(0, 0, 0, 0);">Aceptar Pedido</a>
                     <button id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="actualizar()">Cerrar</button>
                     <!-- Mostrar y ocultar botones-->
                     <script>
@@ -951,6 +951,7 @@
         transition: all 0.1s ease 0.5s;
         visibility: visible;
     }
+
     [data-title]:after {
         content: attr(data-title);
         background-color: #FFC300;
@@ -969,6 +970,7 @@
         visibility: hidden;
         border-radius: 6px;
     }
+
     [data-title] {
         position: relative;
     }
@@ -979,7 +981,7 @@
     fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     document.getElementById('TxtFechaIngreso').value = fecha;
     document.getElementById('TxtAceptarFechaIngreso').value = fecha;
-    
+
 </script>
 <script src="~/Scrips/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

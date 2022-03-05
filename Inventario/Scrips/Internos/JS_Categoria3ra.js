@@ -17,7 +17,7 @@ function CrearListaCategorias(Data) {
         CodigoHtmlTablaCategoria += "<li>" + Data[i].Tipo + "</li>";
         CodigoHtmlTablaCategoria += "</ul>";
     }
-  
+
     document.getElementById("listaCategoria").innerHTML = CodigoHtmlTablaCategoria;
 }
 

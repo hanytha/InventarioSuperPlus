@@ -35,7 +35,7 @@ function Desplegar(id) {
                 //-----------------Botón para desplegar la segunda tabla--------------------------------------------
                 uno += "<div class='col-sm'>"
                 uno += "<label>"
-                uno += "<button  data-title='Ver_tabla' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + " , "+ Data[i].IdArticulo +")' type='button' data-toggle='collapse'  data-target='#desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' aria-expanded='false'                      aria-controls='desplegable2(" + Data[i].NoCompra + Data[i].IdArticulo +")'><i class='fas fa-angle-down'></i></button>";
+                uno += "<button  data-title='Ver_tabla' class='btn btn-outline-warning' onclick='Desplegar2(" + Data[i].NoCompra + " , " + Data[i].IdArticulo + ")' type='button' data-toggle='collapse'  data-target='#desplegable2" + Data[i].NoCompra + Data[i].IdArticulo + "' aria-expanded='false'                      aria-controls='desplegable2(" + Data[i].NoCompra + Data[i].IdArticulo + ")'><i class='fas fa-angle-down'></i></button>";
                 uno += "</label>"
                 uno += "</div>";
                 //-------------------Termina-------------------------
@@ -206,7 +206,7 @@ function Verificar() {
     var Precio = document.getElementsByClassName("input-Precio");
     var NumPedidos = document.getElementsByClassName("input-cantidad");
     var combo = document.getElementById("cmbArea").value;
-    var provee =  document.getElementById("cmbProveedor").value;
+    var provee = document.getElementById("cmbProveedor").value;
     var contador = 0;
     var contadorPrecio = 0;
 
@@ -616,8 +616,8 @@ function verArticulos(id) {
                 TablaArticuloPre += "<div class='col-md-3 col-sm-12 col-xs-12 justify-content-end regresar'>";
                 TablaArticuloPre += "<input type='number'  class='input-subtotal limpiaPres  redondeado' disabled    value='' ><span class='help-block text-muted small-font'></span>";
                 TablaArticuloPre += "</div>";
-            
-           
+
+
             }
             TablaArticuloPre += "</div>";
             TablaArticuloPre += "</div>";
@@ -662,7 +662,7 @@ function costosart() {
         }
 
     }
- 
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -693,29 +693,29 @@ function comprobar() {
         }
     }
 
-        for (let i = 0; i < NumPedidos.length; i++) {
-            if (NumPedidos[i].value < 0) {
+    for (let i = 0; i < NumPedidos.length; i++) {
+        if (NumPedidos[i].value < 0) {
 
-                NumPedidos[i].style.borderColor = 'Red';
-                swal("¡El número no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
-            }
-            if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
-
-                Precio[i].style.backgroundColor = 'Red';
-            }
-            if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
-
-                NumPedidos[i].style.borderColor = 'Red';
-                Precio[i].style.backgroundColor = 'Red';
-
-            }
-            if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
-
-                swal("¡El costo no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
-            }
+            NumPedidos[i].style.borderColor = 'Red';
+            swal("¡El número no puede ser igual o inferiror a cero!", "Verifique los datos ingresados", "warning");
         }
+        if (NumPedidos[i].value > 0 && Precio[i].value == 0 || Precio[i].value < 0 || NumPedidos[i].value > 0 && Precio[i].value < 0) {
 
-    
+            Precio[i].style.backgroundColor = 'Red';
+        }
+        if (NumPedidos[i].value < 0 && Precio[i].value < 0) {
+
+            NumPedidos[i].style.borderColor = 'Red';
+            Precio[i].style.backgroundColor = 'Red';
+
+        }
+        if (NumPedidos[i].value > 0 && Precio[i].value <= 0) {
+
+            swal("¡El costo no puede ser igual o inferior a cero!", "Verifique los datos ingresados", "warning");
+        }
+    }
+
+
 }
 
 //-----------------------------------------------------------------------
@@ -788,14 +788,14 @@ function ImprimirPres() {
     for (var i = 0; i < Nombre.length; i++) {
 
         if (NumPedidos[i].value > 0 && costos[i].value > 0) {
-        dos += "<tr>"
-        dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
-        dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
-        dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
-        dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + costos[i].value + "</label></td>"
-        dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + totalar[i].value + "</label></td>"
-        dos += "</tr>"
-            }
+            dos += "<tr>"
+            dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
+            dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
+            dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
+            dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + costos[i].value + "</label></td>"
+            dos += "<td align='left' id='lin1_col3' {NM_CSS_CAB}>$<label>" + totalar[i].value + "</label></td>"
+            dos += "</tr>"
+        }
     }
     dos += "<tfoot>"
     dos += "<th></th>"
@@ -811,7 +811,7 @@ function ImprimirPres() {
     dos += "</div>";
 
     document.getElementById("TblArticulosimpre").innerHTML = dos;
- 
+
 }
 
 //----------------------------------------------------------------------
@@ -842,7 +842,7 @@ function imprimir() {
     var boton = document.getElementById("botonImpres");
     var comboPro = document.getElementById("cmbProveedorPre");
 
-    if (totalfin.value != 0 && comboPro.value  != 0) {
+    if (totalfin.value != 0 && comboPro.value != 0) {
 
         var boton = document.getElementById("botonImpres");
         boton.classList.remove('disabled');

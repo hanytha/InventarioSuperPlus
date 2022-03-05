@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SuperPlus" Class="InventarioBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-<<<<<<< HEAD
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45;Initial Catalog=SuperPlus;Persist Security Info=True;User ID=Inventario" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString" Provider="System.Data.SqlClient" />
-=======
   <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.45\SQLEXPRESS;Initial Catalog=SuperPlus;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SuperPlusConnectionString1" Provider="System.Data.SqlClient" />
->>>>>>> anabel2
   <Table Name="dbo.Areas" Member="Areas">
     <Type Name="Areas">
       <Column Name="IdAreas" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -459,7 +455,7 @@
       <Column Name="E3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A1Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="A2Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="A3Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="A3Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="IdMunicipio" Type="System.Int32" DbType="Int" CanBeNull="true" />

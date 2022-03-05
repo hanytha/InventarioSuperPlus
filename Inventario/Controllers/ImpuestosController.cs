@@ -68,7 +68,7 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.Impuesto.Where(p => p.Impuestos.Equals(DatosImpuesto.Impuestos)&& p.Porcentaje.Equals(DatosImpuesto.IdImpuesto)).Count();
+                int nveces = InvBD.Impuesto.Where(p => p.Impuestos.Equals(DatosImpuesto.Impuestos) && p.Porcentaje.Equals(DatosImpuesto.IdImpuesto)).Count();
                 if (nveces == 0)
                 {
                     Impuesto obj = InvBD.Impuesto.Where(p => p.IdImpuesto.Equals(id)).First();
@@ -110,12 +110,12 @@ namespace Inventario.Controllers
             return nregistradosAfectados;
         }
 
-    //*****************************************************************
+        //*****************************************************************
         // GET: Impuestos
         public ActionResult Impuestos2do()
         {
             return View();
         }
- //****************************************************
+        //****************************************************
     }
 }
