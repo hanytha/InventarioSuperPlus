@@ -60,7 +60,7 @@ function Desplegar(id) {
 function abrirModal(id) {
     LlenarCMCProveedores();
     LimpiarCampos();
-
+    limSelec();
 
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -96,6 +96,7 @@ function LimpiarCampos() {
     }
 }
 
+//---------------------------------------------------------------------------------------
 function BloquearCTRL() {
     var CTRL = document.getElementsByClassName("bloquear");
     for (var i = 0; i < CTRL.length; i++) {
@@ -543,6 +544,7 @@ function abrirModalPresu(id) {
     LlenarCMCProveedoresPre();
     LimpiarCampos();
     deshabilitar();
+    limSelecPRE();
 
     if (id == 0) {
         sessionStorage.setItem('IDG', '0');
@@ -857,4 +859,55 @@ function deshabilitar() {
 
     var boton = document.getElementById("botonImpres");
     boton.classList.add('disabled');
+}
+
+///---------------------------------------------------------------------
+
+function limSelec() {
+
+    var lim = document.getElementById("Nivel");
+    var tres = lim.value * 1;
+
+    var uno = document.getElementById("cmbArea");
+
+
+
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+
+    if (tres == 1) {
+
+        uno.classList.add('limpiarSelect');
+    }
+    else {
+        uno.classList.remove('limpiarSelect');
+    }
+}
+
+//------------------------------------------------------------
+///---------------------------------------------------------------------
+
+function limSelecPRE() {
+
+    var lim = document.getElementById("Nivel");
+    var tres = lim.value * 1;
+
+    var uno = document.getElementById("cmbAreas");
+
+
+
+    var controlesSLT = document.getElementsByClassName("limpiarSelect");
+    for (var i = 0; i < controlesSLT.length; i++) {
+        controlesSLT[i].value = "0";
+    }
+
+    if (tres == 1) {
+
+        uno.classList.add('limpiarSelect');
+    }
+    else {
+        uno.classList.remove('limpiarSelect');
+    }
 }
