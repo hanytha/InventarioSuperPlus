@@ -1425,19 +1425,70 @@ namespace Inventario.Controllers
             };
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
-        public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
+        //--------------------------------------------------------------------------------------------------
+        //public int GuardarPedidoInterno(PedidosInternos DatosPedidoInterno)
+        //{
+        //    int Afectados = 0;
+        //    //try
+        //    //{
+        //    long id = DatosPedidoInterno.IdPedidosInternos;
+        //    if (id.Equals(0))
+        //    {
+        //        int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)).Count();
+
+        //        if (nveces >= 0)
+        //        {
+        //            InvBD.PedidosInternos.InsertOnSubmit(DatosPedidoInterno);
+        //            InvBD.SubmitChanges();
+        //            Afectados = 1;
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
+        //        && p.NumPedidoProveedor.Equals(DatosPedidoInterno.NumPedidoProveedor)
+        //        && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
+        //         && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
+        //         && p.Articulo.Equals(DatosPedidoInterno.Articulo)
+        //         && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
+        //        if (nveces == 0)
+        //        {
+        //            PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
+        //            obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
+        //            obj.IdProveedor = DatosPedidoInterno.IdProveedor;
+        //            obj.Proveedor = DatosPedidoInterno.Proveedor;
+        //            obj.Articulo = DatosPedidoInterno.Articulo;
+        //            obj.Fecha = DatosPedidoInterno.Fecha;
+        //            InvBD.SubmitChanges();
+        //            Afectados = 1;
+        //        }
+        //        else
+        //        {
+        //            Afectados = -1;
+        //        }
+        //    }
+        //    return Afectados;
+        //}
+        //--------------------------------------------------------------------------------------------------
+
+        public int GuardarPedidoInternoOficina(PedidosInternos DatosPedidoExterno)
         {
             int Afectados = 0;
             //try
             //{
-            long id = DatosPedidoInterno.IdPedidosInternos;
+            long id = DatosPedidoExterno.IdPedidosInternos;
             if (id.Equals(0))
             {
-                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)).Count();
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)).Count();
 
+                //  int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosProveedor.NumeroPedido) && p.Correo.Equals(DatosProveedor.Correo) && p.RazonSocial.Equals(DatosProveedor.RazonSocial) && p.ClaveInterbancaria.Equals(DatosProveedor.ClaveInterbancaria) && p.CodigoPostal.Equals(DatosProveedor.CodigoPostal) && p.RFC.Equals(DatosProveedor.RFC) && p.Direccion.Equals(DatosProveedor.Direccion) && p.Telefono.Equals(DatosProveedor.Telefono) && p.Banco.Equals(DatosProveedor.Banco) && p.NumeroDeCuenta.Equals(DatosProveedor.NumeroDeCuenta) && p.UsoCFDI.Equals(DatosProveedor.UsoCFDI) && p.Nomenclatura.Equals(DatosProveedor.Nomenclatura)).Count();
                 if (nveces >= 0)
                 {
-                    InvBD.PedidosInternos.InsertOnSubmit(DatosPedidoInterno);
+                    InvBD.PedidosInternos.InsertOnSubmit(DatosPedidoExterno);
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -1448,20 +1499,35 @@ namespace Inventario.Controllers
             }
             else
             {
-                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoInterno.NumeroPedido)
-                && p.NumPedidoProveedor.Equals(DatosPedidoInterno.NumPedidoProveedor)
-                && p.CantidadSolicitada.Equals(DatosPedidoInterno.CantidadSolicitada)
-                 && p.IdArticulo.Equals(DatosPedidoInterno.IdArticulo)
-                 && p.Articulo.Equals(DatosPedidoInterno.Articulo)
-                 && p.Fecha.Equals(DatosPedidoInterno.Fecha)).Count();
+                int nveces = InvBD.PedidosInternos.Where(p => p.NumeroPedido.Equals(DatosPedidoExterno.NumeroPedido)
+                && p.IdProveedor.Equals(DatosPedidoExterno.IdProveedor)
+                 && p.Proveedor.Equals(DatosPedidoExterno.Proveedor)
+                 && p.IdArticulo.Equals(DatosPedidoExterno.IdArticulo)
+                 && p.Articulo.Equals(DatosPedidoExterno.Articulo)
+                 && p.CantidadSolicitada.Equals(DatosPedidoExterno.CantidadSolicitada)
+                 && p.NumPedidoProveedor.Equals(DatosPedidoExterno.NumPedidoProveedor)
+                 && p.IdAsignacion.Equals(DatosPedidoExterno.IdAsignacion)
+                 && p.IdSitio.Equals(DatosPedidoExterno.IdSitio)
+                 && p.Sitio.Equals(DatosPedidoExterno.Sitio)
+                 && p.UnidadMedida.Equals(DatosPedidoExterno.UnidadMedida)
+                 && p.Fecha.Equals(DatosPedidoExterno.Fecha)
+                 && p.Estatus.Equals(DatosPedidoExterno.Estatus)).Count();
                 if (nveces == 0)
                 {
                     PedidosInternos obj = InvBD.PedidosInternos.Where(p => p.IdPedidosInternos.Equals(id)).First();
-                    obj.CantidadSolicitada = DatosPedidoInterno.CantidadSolicitada;
-                    obj.IdProveedor = DatosPedidoInterno.IdProveedor;
-                    obj.Proveedor = DatosPedidoInterno.Proveedor;
-                    obj.Articulo = DatosPedidoInterno.Articulo;
-                    obj.Fecha = DatosPedidoInterno.Fecha;
+                    obj.IdProveedor = DatosPedidoExterno.IdProveedor;
+                    obj.Proveedor = DatosPedidoExterno.Proveedor;
+                    obj.IdArticulo = DatosPedidoExterno.IdArticulo;
+                    obj.Articulo = DatosPedidoExterno.Articulo;
+                    obj.CantidadSolicitada = DatosPedidoExterno.CantidadSolicitada;
+                    obj.NumPedidoProveedor = DatosPedidoExterno.NumPedidoProveedor;
+                    obj.IdAsignacion = DatosPedidoExterno.IdAsignacion;
+                    obj.IdSitio = DatosPedidoExterno.IdSitio;
+                    obj.Sitio = DatosPedidoExterno.Sitio;
+                    obj.UnidadMedida = DatosPedidoExterno.UnidadMedida;
+                    obj.NumPedidoProveedor = DatosPedidoExterno.NumPedidoProveedor;
+                    obj.Fecha = DatosPedidoExterno.Fecha;
+                    obj.Estatus = DatosPedidoExterno.Estatus;
                     InvBD.SubmitChanges();
                     Afectados = 1;
                 }
@@ -1470,9 +1536,11 @@ namespace Inventario.Controllers
                     Afectados = -1;
                 }
             }
+
             return Afectados;
         }
 
+        //-------------------------------------------------------------------------------------------------------------
         public JsonResult ConsultaPedidosDecendiente()
         {
             string NumeroPedido = "";
