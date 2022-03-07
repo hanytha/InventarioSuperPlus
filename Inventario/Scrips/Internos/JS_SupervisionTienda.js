@@ -583,11 +583,6 @@ function SiguientePedidoProveedor(id) {
     }
 }
 function MostrarArticulos(id) {
-    var controlesObligatorio = document.getElementsByClassName("obligatorio");
-    var ncontroles = controlesObligatorio.length;
-    for (var i = 0; i < ncontroles; i++) {
-        controlesObligatorio[i].parentNode.classList.remove("error");
-    }
     if (id == 0) {
         sessionStorage.setItem('IdPedidosExternos', '0');
     }
@@ -605,7 +600,7 @@ function MostrarArticulos(id) {
             TablaArticulo += "<label>Unidad_Medida</label>";
             TablaArticulo += "</div>";
             TablaArticulo += "<div class='col-md-0 col-sm-12 col-xs-12 justify-content-end'>";
-            TablaArticulo += "</div>";
+            TablaArticulo += "</div>"; 
             for (var i = 0; i < Data.length; i++) {
                 TablaArticulo += "<div class='col-md-4 col-sm-12 col-xs-12 justify-content-end'>";
                 TablaArticulo += "<input type='checkbox' class='checkbox-articulos' id='" + Data[i].NombreEmpresa + "' ><span class='help-block text-muted small-font'>" + Data[i].NombreEmpresa + "</span>";
@@ -1695,13 +1690,13 @@ function ImprimirPres() {
 
     for (var i = 0; i < Nombre.length; i++) {
 
-        if (NumPedidos[i].value > 0) {
+       
             dos += "<tr>"
             dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
             dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
             // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
             dos += "</tr>"
-        }
+        
     }
     dos += "<tfoot>"
     dos += "<th></th>"
