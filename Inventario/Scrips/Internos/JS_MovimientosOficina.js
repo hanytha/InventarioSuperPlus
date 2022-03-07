@@ -1552,7 +1552,7 @@ function ValidarDatosPedidos() {
         }
     }
     if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && Proveedor > 0) {
-        GuardarPedidoInterno();
+        GuardarPedidoOficina();
     }
     else {
         if (Proveedor > 0) {

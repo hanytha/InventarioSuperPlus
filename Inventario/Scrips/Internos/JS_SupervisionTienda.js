@@ -639,75 +639,152 @@ function LimpiarCampos() {
 }
 
 //----------------------Guardar datos de los pedidos-----------------------------------------------
-function GuardarPedidoInterno() {
+//function GuardarPedidoInterno() {
 
-    if (CamposObligatoriosPedidosInt() == true) {
+//    if (CamposObligatoriosPedidosInt() == true) {
 
-        if (confirm("¿Desea aplicar los cambios?") == 1) {
+//        if (confirm("¿Desea aplicar los cambios?") == 1) {
 
-            var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+//            var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
 
-            var ChevPedidos = document.getElementsByClassName("input-ArticulosPedidos");
+//            var ChevPedidos = document.getElementsByClassName("input-ArticulosPedidos");
 
-            for (let i = 0; i < NumPedidos.length; i++) {
-                if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
+//            for (let i = 0; i < NumPedidos.length; i++) {
+//                if (NumPedidos[i].value >= 1 && ChevPedidos[i].value) {
 
-                    var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
-                    var IdProveedor = document.getElementById("cmbProveedor").value;
-                    var TempProvedor = document.getElementById("cmbProveedor");
-                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
-                    var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
-                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
-                    var Fecha = document.getElementById("TxtFechaIngreso").value;
-                    var IdArticulo = ChevPedidos[i].name;
-                    var Articulo = ChevPedidos[i].value;
-                    var CantidadSolicitada = NumPedidos[i].value;
-                    var IdSitio = document.getElementById("cmbTienda").value;
-                    var TempSitio = document.getElementById("cmbTienda");
-                    var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
-                    var frm = new FormData();
-                    frm.append("IdPedidosExternos", IdPedidosExternos);
-                    frm.append("IdProveedor", IdProveedor);
-                    frm.append("Proveedor", Proveedor);
-                    frm.append("IdArticulo", IdArticulo);
-                    frm.append("Articulo", Articulo);
-                    frm.append("NumeroPedido", NumeroPedido);
-                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
-                    frm.append("CantidadSolicitada", CantidadSolicitada);
-                    frm.append("Sitio", Sitio);
-                    frm.append("IdSitio", IdSitio);
-                    frm.append("Fecha", Fecha);
-                    frm.append("IdAsignacion", 2);
-                    frm.append("Estatus", 1);
-                    $.ajax({
-                        type: "POST",
-                        url: "/Supervision/GuardarPedidoInterno",
-                        data: frm,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            if (data == 0) {
-                                alert("Ocurrió un error");
-                            }
-                            else if (data == -1) {
-                                alert("Ya existe este registro");
-                            }
-                            else {
-                                restablecerBordesInput();
-                                document.getElementById("btnCancelar").click();
-                            }
-                        }
-                    });
+//                    var IdPedidosExternos = sessionStorage.getItem('IdPedidosExternos');
+//                    var IdProveedor = document.getElementById("cmbProveedor").value;
+//                    var TempProvedor = document.getElementById("cmbProveedor");
+//                    var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+//                    var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
+//                    var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
+//                    var Fecha = document.getElementById("TxtFechaIngreso").value;
+//                    var IdArticulo = ChevPedidos[i].name;
+//                    var Articulo = ChevPedidos[i].value;
+//                    var CantidadSolicitada = NumPedidos[i].value;
+//                    var IdSitio = document.getElementById("cmbTienda").value;
+//                    var TempSitio = document.getElementById("cmbTienda");
+//                    var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
+//                    var frm = new FormData();
+//                    frm.append("IdPedidosExternos", IdPedidosExternos);
+//                    frm.append("IdProveedor", IdProveedor);
+//                    frm.append("Proveedor", Proveedor);
+//                    frm.append("IdArticulo", IdArticulo);
+//                    frm.append("Articulo", Articulo);
+//                    frm.append("NumeroPedido", NumeroPedido);
+//                    frm.append("NumPedidoProveedor", NumPedidoProveedor);
+//                    frm.append("CantidadSolicitada", CantidadSolicitada);
+//                    frm.append("Sitio", Sitio);
+//                    frm.append("IdSitio", IdSitio);
+//                    frm.append("Fecha", Fecha);
+//                    frm.append("IdAsignacion", 2);
+//                    frm.append("Estatus", 1);
+//                    $.ajax({
+//                        type: "POST",
+//                        url: "/Supervision/GuardarPedidoInterno",
+//                        data: frm,
+//                        contentType: false,
+//                        processData: false,
+//                        success: function (data) {
+//                            if (data == 0) {
+//                                alert("Ocurrió un error");
+//                            }
+//                            else if (data == -1) {
+//                                alert("Ya existe este registro");
+//                            }
+//                            else {
+//                                restablecerBordesInput();
+//                                document.getElementById("btnCancelar").click();
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//            alert("Los datos se guardaron correctamente");
+//            actualizar();
+//            //ConsultaArticuloComp();
+//            //restablecerBordesInput();
+//            //document.getElementById("btnCancelar").click();
+//        }
+//    }
+//}
+
+function GuardarPedidoTiendas() {
+
+    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+    var NumPedidos = document.getElementsByClassName("input-cantidadPedidos");
+
+    var NomArticulos = document.getElementsByClassName("input-ArticulosPedidos");
+
+    for (let i = 0; i < NumPedidos.length; i++) {
+        if (NumPedidos[i].value > 0 && NomArticulos[i].value && NomArticulos[i].name) {
+
+
+            var IdPedidosInternos = sessionStorage.getItem('IdPedidosInternos');
+
+            var IdProveedor = document.getElementById("cmbProveedor").value;
+            var TempProvedor = document.getElementById("cmbProveedor");
+            var Proveedor = TempProvedor.options[TempProvedor.selectedIndex].text;
+
+            var NumPedidoProveedor = document.getElementById("TxtNumPedidoProveedor").value;
+            var NumeroPedido = document.getElementById("TxtNumeroPedido").value;
+
+
+
+            var IdSitio = document.getElementById("cmbTienda").value;
+            var TempSitio = document.getElementById("cmbTienda");
+            var Sitio = TempSitio.options[TempSitio.selectedIndex].text;
+
+            var Fecha = document.getElementById("TxtFechaIngreso").value;
+
+            //------------------------Guarda el nombre del artículo solicitado----------------------------------
+            var IdArticulo = NomArticulos[i].name;
+            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+            var Articulo = NomArticulos[i].value;
+            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+            var CantidadSolicitada = NumPedidos[i].value;
+            //-------------------------------------------------------------------------------------------------------------
+            var frm = new FormData();
+            frm.append("IdPedidosInternos", IdPedidosInternos);
+            frm.append("IdProveedor", IdProveedor);
+            frm.append("Proveedor", Proveedor);
+            frm.append("NumPedidoProveedor", NumPedidoProveedor);
+            frm.append("NumeroPedido", NumeroPedido);
+            frm.append("IdSitio", IdSitio);
+            frm.append("Sitio", Sitio);
+            frm.append("Fecha", Fecha);
+            frm.append("IdArticulo", IdArticulo);
+            frm.append("Articulo", Articulo);
+            frm.append("CantidadSolicitada", CantidadSolicitada);
+            frm.append("IdAsignacion", 2);
+            frm.append("Estatus", 1);
+            $.ajax({
+                type: "POST",
+                url: "/Supervision/GuardarPedidoInternoOficina",
+                data: frm,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 0) {
+                        alert("Ocurrió un error");
+                    }
+                    else if (data == -1) {
+                        alert("Ya existe este registro");
+                    }
+                    else {
+                        restablecerBordesInput();
+                        document.getElementById("btnCancelar").click();
+                    }
                 }
-            }
-            alert("Los datos se guardaron correctamente");
-            actualizar();
-            //ConsultaArticuloComp();
-            //restablecerBordesInput();
-            //document.getElementById("btnCancelar").click();
+            });
+
         }
     }
+    //-----Mensaje de confirmación-----------------------
+    alert("Los datos se guardaron correctamente");
+
 }
+
 function restablecerBordesInput() {
     //var Precio = document.getElementsByClassName("input-Precio");
     var NumPedidos = document.getElementsByClassName("input-cantidad");
@@ -1465,7 +1542,7 @@ function ValidarDatosPedidos() {
         }
     }
     if (contador == ContadorMayorAcero && ContadorMayorAcero > 0 && Proveedor > 0) {
-        GuardarPedidoInterno();
+        GuardarPedidoTiendas();
     }
     else {
         if (Proveedor > 0) {
