@@ -1,7 +1,7 @@
 ﻿
 not();
 function not() {
-    alert("Iniciando 3");
+    alert("Iniciando 5");
 }
 
 

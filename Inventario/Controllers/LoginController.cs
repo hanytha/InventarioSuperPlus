@@ -17,16 +17,19 @@ namespace Inventario.Controllers
         }
         public int IniciarUsuario(string User, string Password)
         {
+            Session["Usuario"] = User;
             int solicitud = 0;
             try
             {//Encriptar la contraseña recibida en la caja de texto(Ingresado por el usuario)
                 string ConSif = Encrypt(Password);
                 using (InventarioBDDataContext InvBD = new InventarioBDDataContext())
                 {
-                    solicitud = InvBD.Usuarios.Where(p => p.Usuario == User && p.Password == ConSif && p.Estatus.Equals(1)).Count();
+                    solicitud = InvBD.Usuarios.Where(p => p.Usuario == (string)Session["Usuario"] && p.Password == ConSif && p.Estatus.Equals(1)).Count();
+
+
                     if (solicitud == 1)
                     {
-                        var DatosUsuario = InvBD.Usuarios.Where(p => p.Usuario == User && p.Password == ConSif && p.Estatus.Equals(1))
+                        var DatosUsuario = InvBD.Usuarios.Where(p => p.Usuario == (string)Session["Usuario"] && p.Password == ConSif && p.Estatus.Equals(1))
                         .Select(p => new
                         {
                             p.IdUsuarios,
@@ -98,7 +101,7 @@ namespace Inventario.Controllers
 
 
 
-                        if (Accesos.IDAsignacion != 0)
+                        if ((long)Session["IDAsignacion"] != 0)
                         {
                             var Asignasion = InvBD.Asignacion.Where(p => p.IdAsignacion.Equals(DatosUsuario.IdAsignacion)).First();
                             Accesos.Asignacion = Asignasion.Nombre;
@@ -108,13 +111,13 @@ namespace Inventario.Controllers
                                 Accesos.Sitio = Sucursal.Nombre;
                                 Accesos.Tiendas = DatosUsuario.IdSitio.ToString();
                             }
-                            else if (Accesos.IDAsignacion == 2)
+                            else if ((long)Session["IDAsignacion"] == 2)
                             {
                                 var Supervision = InvBD.Supervision.Where(p => p.IdSupervision.Equals(DatosUsuario.IdSitio)).First();
                                 Accesos.Tiendas = Supervision.Tienda;
                                 Accesos.Sitio = Supervision.TipoSupervicion;
                             }
-                            else if (Accesos.IDAsignacion == 3)
+                            else if ((long)Session["IDAsignacion"] == 3)
                             {
                                 Accesos.Sitio = "Oficina";
                                 Accesos.Tiendas = "";
