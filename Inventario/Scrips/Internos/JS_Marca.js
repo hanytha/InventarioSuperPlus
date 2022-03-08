@@ -1,14 +1,4 @@
 ﻿
-not();
-function not() {
-    alert("Iniciando 5");
-}
-
-
-
-
-
-
 ConsultaMarcas();
 function ConsultaMarcas() {
     $.get("/Marca/ConsultaMarcas", function (Data) {
