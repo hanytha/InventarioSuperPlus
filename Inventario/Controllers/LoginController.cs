@@ -78,6 +78,7 @@ namespace Inventario.Controllers
                         Accesos.NoSS = DatosUsuario.NoSS;
                         Accesos.Correo = DatosUsuario.Correo;
                         Accesos.Telefono = DatosUsuario.Telefono;
+                        Session["IdPerfil"] = (long)DatosUsuario.IdPerfil;
                         Accesos.IdPerfil = DatosUsuario.IdPerfil;
                         Accesos.LvlPerfil = DatosUsuario.LvlPerfil;
                         Accesos.FechaIngreso = DatosUsuario.FechaIngreso;
@@ -93,6 +94,10 @@ namespace Inventario.Controllers
                         Session["IDSitio"] = (long)DatosUsuario.IdSitio;
                         Accesos.IDSitio = (long)DatosUsuario.IdSitio;
                         //Accesos.Sitio = DatosUsuario.IDSitio;
+                        
+
+
+
                         if (Accesos.IDAsignacion != 0)
                         {
                             var Asignasion = InvBD.Asignacion.Where(p => p.IdAsignacion.Equals(DatosUsuario.IdAsignacion)).First();
@@ -128,7 +133,10 @@ namespace Inventario.Controllers
                         {
                             Accesos.NSArea = "";
                         }
-                        var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(DatosUsuario.IdPerfil)).First();
+
+
+                       
+                        var Permisos = InvBD.PerfilDeUsuario.Where(p => p.IdPerfilDeUsuario.Equals(Session["IdPerfil"])).First();
                         string[] IdPaginas = Permisos.Permisos.Split('#');
                         int Filas = IdPaginas.GetLength(0);
                         string[,] IdPagina = new string[Filas, 3];

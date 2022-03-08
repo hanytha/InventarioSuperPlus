@@ -456,7 +456,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
             Precio[i].name = 0;
         }
 
-        if (cantidad[i].value >= 1 && NomArticulos[i].value && Precio[i].value && impuestos[i].value && impuestos[i].name && Precio[i].name && NomArticulos[i].name) {
+        if (cantidad[i].value > 0 && NomArticulos[i].value && Precio[i].value && impuestos[i].value && impuestos[i].name && Precio[i].name && NomArticulos[i].name) {
 
             var IdExistenciaCompra = Precio[i].name;
             var NoCompra = document.getElementById("TxtNoCompra").value;
@@ -465,6 +465,7 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
             //------------------------Guarda el nombre del artículo solicitado----------------------------------
             var Articulo = NomArticulos[i].value;
+
             var IdArticulo = NomArticulos[i].name;
             //------------------------Guarda la cantidad de artículos solicitados----------------------------------
             var StockActual = cantidad[i].value;

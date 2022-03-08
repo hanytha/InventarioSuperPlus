@@ -1,4 +1,15 @@
-﻿ConsultaMarcas();
+﻿
+not();
+function not() {
+    alert("Iniciando 3");
+}
+
+
+
+
+
+
+ConsultaMarcas();
 function ConsultaMarcas() {
     $.get("/Marca/ConsultaMarcas", function (Data) {
         CrearTablaMarcas(Data);
