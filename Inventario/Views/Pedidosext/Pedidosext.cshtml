@@ -70,6 +70,10 @@
 <div id="TablaPedidos">
 
     @{
+
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long AreaID = Convert.ToInt32(Session["IdArea"]);
+
         if (ModeloPedidosExternos.IdArea != null)
         {
 
@@ -77,7 +81,7 @@
             <thead>
 
             </thead>
-            if (Accesos.NIvel == 1)
+            if (nivel == 1)
             {
                       <tr>
                         <th>No_Pedido_General</th>
@@ -100,7 +104,7 @@
 
             for (var i = 0; i < ModeloPedidosExternos.IdArea.Count(); i++)
             {
-                if (Accesos.NIvel == 1)
+                if (nivel == 1)
                 {
 
             <tr>
@@ -114,7 +118,7 @@
 
                 }
 
-                else if ((long)ModeloPedidosExternos.IdArea[i] == Accesos.IdArea)
+                else if ((long)ModeloPedidosExternos.IdArea[i] == AreaID)
                 {
                     <tr>
                         <td>@ModeloPedidosExternos.Fecha[i]</td>

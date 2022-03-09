@@ -33,8 +33,16 @@
 <!------------------------------------Mostrar los registros en el accordion--------------------------------------->
 <div id="tablaCompras">
     @{
+
+                    long nivel = Convert.ToInt32(Session["Nivel"]);
+                    long AreaID = Convert.ToInt32(Session["IdArea"]);
+                    string perfil = Convert.ToString(Session["LvlPerfil"]);
+                    string AreaNom = Convert.ToString(Session["NArea"]);
+                    
+
+
         if (ModeloCompra.IdArea != null)
-        {
+                    {
 
             <table class="order-table  table-success" style="position: relative"
             <thead>
@@ -49,7 +57,7 @@
                 for (var i = 0; i < ModeloCompra.IdArea.Count(); i++)
                 {
 
-                if (Accesos.NIvel == 1)
+                if (nivel == 1)
                 {
             <tr>
                 <td>@ModeloCompra.NoCompra[i]</td>
@@ -61,7 +69,7 @@
                 </td>
             </tr>
                 }
-                else if ((long)ModeloCompra.IdArea[i] == Accesos.IdArea && ModeloCompra.NomArea[i] != "Administrador")
+                else if ((long)ModeloCompra.IdArea[i] == AreaID && ModeloCompra.NomArea[i] != "Administrador")
                 {
                  <tr>
                 <td>@ModeloCompra.NoCompra[i]</td>
@@ -160,19 +168,18 @@
         <!--------------------------------------------->
         <div id="GIDA">
             @{
-                if (Accesos.IdArea != null)
-                {
-                    if (Accesos.NIvel == 1)
+                
+                    if (nivel == 1)
                     {
-                        <input style="display:none" id="IDAREA" value="@Accesos.NIvel" />
-                        <input style="display:none" id="NAREA" value="@Accesos.Perfil" />
+                        <input style="display:none" id="IDAREA" value="@nivel" />
+                        <input style="display:none" id="NAREA" value="@perfil" />
                     }
-                    if (Accesos.NIvel != 1)
+                    if (nivel != 1)
                     {
-                        <input style="display:none" id="IDAREA" value="@Accesos.IdArea" />
-                        <input style="display:none" id="NAREA" value="@Accesos.NArea" />
+                        <input style="display:none" id="IDAREA" value="@AreaID" />
+                        <input style="display:none" id="NAREA" value="@AreaNom" />
                     }
-                }
+                
             }
 
         </div>

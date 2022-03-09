@@ -75,6 +75,10 @@
 <!----------------------Crea Tabla de artículos----------------------------------->
 <div id="tablaArticulos">
     @{
+
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long AreaID = Convert.ToInt32(Session["IdArea"]);
+
         if (ModeloArticulos.IDArea != null)
         {
             <table class="order-table  table-success" style="position: relative"
@@ -90,7 +94,7 @@
             for (var i = 0; i < ModeloArticulos.IDArea.Count(); i++)
             {
 
-                if (Accesos.NIvel == 1)
+                if (nivel == 1)
                 {
                     <tr>
                         <td>@ModeloArticulos.Articulo[i]</td>
@@ -100,7 +104,7 @@
                         <button class="btn btn-danger" onclick="EliminarArticulo(@ModeloArticulos.IDArticulo[i])"><i class="far fa-trash-alt"></i></button></td>
                     </tr>
                 }
-                else if ((long)ModeloArticulos.IDArea[i] == Accesos.IdArea)
+                else if ((long)ModeloArticulos.IDArea[i] == AreaID)
                 {
                       <tr>
                         <td>@ModeloArticulos.Articulo[i]</td>

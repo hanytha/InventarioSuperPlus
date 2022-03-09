@@ -22,6 +22,11 @@
 
 <div id="tablaPedidos">
     @{
+
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long AreaID = Convert.ToInt32(Session["IdArea"]);
+  
+
         if (ModeloPendientesArea.IdProveedor != null)
         {
 
@@ -38,7 +43,7 @@
             for (var i = 0; i < ModeloPendientesArea.IdProveedor.Count(); i++)
             {
 
-                if (Accesos.NIvel == 1)
+                if (nivel == 1)
                 {
                  <tr>
                      <td>@ModeloPendientesArea.NumeroPedido[i]</td>
@@ -48,7 +53,7 @@
                      </td>
                  </tr>
                 }
-                else if ((long)ModeloPendientesArea.IdProveedor[i] == Accesos.IdArea)
+                else if ((long)ModeloPendientesArea.IdProveedor[i] == AreaID)
                 {
                             <tr>
 

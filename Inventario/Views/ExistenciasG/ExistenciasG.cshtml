@@ -26,6 +26,10 @@
 <!-------------------------------------------------Div Principal----------------------------------------------------------->
 <div id="contenedor1">
     @{
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long AreaID = Convert.ToInt32(Session["IdArea"]);
+
+
         if (ModeloExistGe.IdAreas != null)
         {
             <div id="contenedor1">
@@ -44,7 +48,7 @@
             for (var i = 0; i < ModeloExistGe.IdAreas.Count(); i++)
             {
 
-                if (Accesos.NIvel == 1)
+                if (nivel == 1)
                 {
 
                     string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
@@ -99,7 +103,7 @@
 
 
                 }
-                else if ((long)ModeloExistGe.IdAreas[i] == Accesos.IdArea)
+                else if ((long)ModeloExistGe.IdAreas[i] == AreaID)
                 {
 
                     string GridIDA = "desplegable" + ModeloExistGe.IdArticulos[i];
@@ -244,19 +248,19 @@
 
                                         @if (ModeloAreas.IdAreas != null)
                                         {
-                                            if (Accesos.NIvel == 1)
+                                            if (nivel == 1)
                                             {
                                                 <option value="0">------Seleccione------</option>
                                             }
 
                                             for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                             {
-                                                if (Accesos.NIvel == 1)
+                                                if (nivel == 1)
                                                 {
                                                     <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
 
-                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                if (AreaID == ModeloAreas.IdAreas[i])
                                                 {
                                                     <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
@@ -291,7 +295,7 @@
 
 
 <!------------------------------------------------------------------------------------------------------------------------>
-<input style="display:none" id="Nivel" value="@Accesos.NIvel" />
+<input style="display:none" id="Nivel" value="@nivel" />
 <!-------------------------------------------------Modal para aceptar presupuesto---------------------------------------------------->
 
 <div class="container">
@@ -319,19 +323,19 @@
 
                                         @if (ModeloAreas.IdAreas != null)
                                         {
-                                            if (Accesos.NIvel == 1)
+                                            if (nivel == 1)
                                             {
                                                 <option value="0">------Seleccione------</option>
                                             }
 
                                             for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                             {
-                                                if (Accesos.NIvel == 1)
+                                                if (nivel == 1)
                                                 {
 
                                                     <option style="text-align:center" value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
-                                                if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                if (AreaID == ModeloAreas.IdAreas[i])
                                                 {
                                                     <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                 }
