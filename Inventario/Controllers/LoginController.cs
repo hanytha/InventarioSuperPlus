@@ -91,8 +91,9 @@ namespace Inventario.Controllers
                         Session["NSArea"] = DatosUsuario.NSArea;
                         Session["NombreSitio"] = DatosUsuario.NombreSitio;
                         Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
+                        Session["NombreAsignacion"] = DatosUsuario.NombreAsignacion;
                         Session["IDSitio"] = (long)DatosUsuario.IdSitio;
-
+                        Session["Foto"] = "data:image/png;base64," + Convert.ToBase64String(DatosUsuario.Foto.ToArray());
                         //Accesos.Id = DatosUsuario.IdUsuarios;
                         //Accesos.CURP = DatosUsuario.CURP;
                         //Accesos.Nombre = DatosUsuario.Nombre;

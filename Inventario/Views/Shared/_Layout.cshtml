@@ -365,7 +365,7 @@
                                             <!-- Perfil de usuario: Obciones al presionar la foto de perfil-->
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    @{<img src=@Accesos.Foto alt="user"  lass="rounded-circle" width="31" style="object-fit: cover;border-radius:50%;width: 40px;height: 40px;" />}
+                                                    @{<img src=@Session["Foto"] alt="user"  lass="rounded-circle" width="31" style="object-fit: cover;border-radius:50%;width: 40px;height: 40px;" />}
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                                         <a class="dropdown-item" data-toggle="modal" data-target="#ModalPerfil"><i class="fas fa-users list__img" style="font-size: 20px; color: dodgerblue;"></i> Perfil</a>
@@ -430,7 +430,7 @@
                     <article class="CardPerfil">
                         <header class="CardPerfil_Header">
                             <img src="~/Assets/Imagenes/pls.png" alt="Fondo" class="CardPerfil_Header_Fondo"/>
-                            @{<img src=@Accesos.Foto class="CardPerfil_Header_FPerfil" alt="Foto perfil" style="object-fit: cover;border-radius:50%;width: 150px;height: 150px;"/>}
+                            @{<img src=@Session["Foto"] class="CardPerfil_Header_FPerfil" alt="Foto perfil" style="object-fit: cover;border-radius:50%;width: 150px;height: 150px;"/>}
                          </header>
                     </article>
 
@@ -439,20 +439,20 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: left;">
                                 <strong>Nombre:</strong>
-                                @{<p class="CardBody_Text" id="NombreUModal">@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM<span class="CardBody_Text_Claro"><br></span></p>}
+                                @{<p class="CardBody_Text" id="NombreUModal">@Session["Nombre"] @Session["ApellidosP"] @Session["ApellidosM"]<span class="CardBody_Text_Claro"><br></span></p>}
                                 <strong>Usuario:</strong>
-                                @{<p class="CardBody_Text" id="UsuarioUModal">@Accesos.Usuario<span class="CardBody_Text_Claro"><br></span></p>}
+                                @{<p class="CardBody_Text" id="UsuarioUModal">@Session["Usuario"]<span class="CardBody_Text_Claro"><br></span></p>}
                                 <strong>Perfil:</strong>
-                                @{<p class="CardBody_Text" id="PuestoModal">@Accesos.Perfil<span class="CardBody_Text_Claro"><br></span></p>}  
+                                @{<p class="CardBody_Text" id="PuestoModal">@Session["LvlPerfil"]<span class="CardBody_Text_Claro"><br></span></p>}  
                                
                               </div>
                               <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: left;">
                                 <strong>Área:</strong>
-                                @{<p class="CardBody_Text" id="AreaUModal">@Accesos.NArea<span class="CardBody_Text_Claro"></span></p>}     
+                                @{<p class="CardBody_Text" id="AreaUModal">@Session["NArea"]<span class="CardBody_Text_Claro"></span></p>}     
                                   <strong>Subárea:</strong>
-                                  @{<p class="CardBody_Text" id="SubareaUModal">@Accesos.NSArea<span class="CardBody_Text_Claro"></span></p>}
+                                  @{<p class="CardBody_Text" id="SubareaUModal">@Session["NSArea"]<span class="CardBody_Text_Claro"></span></p>}
                                   <strong>Asignación:</strong>
-                                @{<p class="CardBody_Text" id="AsignacionUModal">@Accesos.Asignacion<span class="CardBody_Text_Claro"><br></span></p>}
+                                @{<p class="CardBody_Text" id="AsignacionUModal">@Session["NombreAsignacion"]<span class="CardBody_Text_Claro"><br></span></p>}
 
                             </div>
                             @*<div class="col-md-6 col-sm-4 col-xs-4">
