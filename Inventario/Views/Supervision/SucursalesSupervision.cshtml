@@ -40,7 +40,14 @@
 
 <div class="accordion" id="AcordeonSucursales">
     @{
-        if (Accesos.IdPerfil == 1)
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+
+        String NOMBRE = Convert.ToString(Session["Nombre"]);
+        String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
+        String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
+
+        if (nivel == 1)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -89,7 +96,7 @@
                 }
             }
         }
-        else if (Accesos.IDAsignacion == 1 || Accesos.IDAsignacion == 2)
+        else if (Asignacion == 1 || Asignacion == 2)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -148,7 +155,7 @@
 
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.IDAsignacion == 1)
+        if (Asignacion == 1)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -204,7 +211,7 @@
 
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
-        if (Accesos.IDAsignacion == 1)
+        if (Asignacion == 1)
         {
             if (TiendasSupervision.IDTienda != null)
             {
@@ -541,7 +548,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM">
+                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOM">
                                 </div>
                             </div>
                         </div>

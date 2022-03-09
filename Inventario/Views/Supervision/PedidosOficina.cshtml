@@ -39,7 +39,15 @@
 <div id="accordionPedidos"></div>
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.IdPerfil == 1)
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        //long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+        //long IDArea = Convert.ToInt32(Session["IdArea"]);
+        //String NombreArea = Convert.ToString(Session["NArea"]);
+        String NOMBRE = Convert.ToString(Session["Nombre"]);
+        String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
+        String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
+
+        if (nivel == 1)
         {
             if (ModeloAreas.IdAreas != null)
             {
@@ -157,7 +165,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM">
+                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOM">
                                 </div>
                             </div>
                         </div>

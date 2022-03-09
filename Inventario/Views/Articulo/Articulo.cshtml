@@ -228,19 +228,19 @@
                                                 <select id="cmbArea" style="width: 100%" class="form-control">
                                                     @if (ModeloAreas.IdAreas != null)
                                                     {
-                                                        if (Accesos.NIvel == 1)
+                                                        if (nivel== 1)
                                                         {
                                                             <option value="0">------Seleccione------</option>
                                                         }
 
                                                         for (var i = 0; i < ModeloAreas.IdAreas.Count; i++)
                                                         {
-                                                            if (Accesos.NIvel == 1)
+                                                            if (nivel == 1)
                                                             {
                                                                 <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                             }
 
-                                                            if (Accesos.IdArea == ModeloAreas.IdAreas[i])
+                                                            if (AreaID == ModeloAreas.IdAreas[i])
                                                             {
                                                                 <option value="@ModeloAreas.IdAreas[i]">@ModeloAreas.Nombre[i]</option>
                                                             }

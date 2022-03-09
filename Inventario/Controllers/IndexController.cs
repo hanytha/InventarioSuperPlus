@@ -14,6 +14,10 @@ namespace Inventario.Controllers
         // GET: Index
         public ActionResult Index()
         {
+
+            long nivel = Convert.ToInt32(Session["Nivel"]);
+            long Asignacion = Convert.ToInt32(Session["IDAsignacion"]); 
+            String NomTienda = Convert.ToString(Session["Tiendas"]);
             //Obtener las consultas del controlador de departamentos
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
@@ -27,28 +31,28 @@ namespace Inventario.Controllers
             GLOBALController cargarEstados = new GLOBALController();
             cargarEstados.BDEstados();
             //Cargar las tiendas cuando el usuario que inicia sesión es un supervisor(Visualizar solo las tiendas que son asignadas a ese supervisor)
-            if (Accesos.IdPerfil == 1)
+            if (nivel == 1)
             {
                 SupervisionController tiendas = new SupervisionController();
                 tiendas.CargarTiendasAdm();
             }
-            else if (Accesos.IDAsignacion == 3)
+            else if (Asignacion == 3)
             {
                 DepartamentosController areas = new DepartamentosController();
                 areas.ConsultaDepartamentos();
             }
-            else if (Accesos.IDAsignacion == 1)
+            else if (Asignacion == 1)
             {
-                if (Accesos.Tiendas != "")
+                if (NomTienda != "")
                 {
                     SupervisionController Super = new SupervisionController();
                     Super.CargarSucursalesXSupervision();
 
                 }
             }
-            else if (Accesos.IDAsignacion == 2)
+            else if (Asignacion == 2)
             {
-                if (Accesos.Tiendas != "")
+                if (NomTienda!= "")
                 {
                     SupervisionController Super = new SupervisionController();
                     Super.CargarSucursalesXSupervision();

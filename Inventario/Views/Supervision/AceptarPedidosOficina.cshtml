@@ -41,7 +41,14 @@
 <div id="accordionAceptar"></div>
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
-        if (Accesos.IdPerfil == 1)
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+        long IDArea = Convert.ToInt32(Session["IdArea"]);
+        String NombreArea = Convert.ToString(Session["NArea"]);
+        String NOMBRE = Convert.ToString(Session["Nombre"]);
+        String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
+        String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
+        if (nivel == 1)
         {
             if (ModeloAreas.IdAreas != null)
             {
@@ -178,11 +185,11 @@
                                     <select id="cmbOficina" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @{
-                                            if (Accesos.IdArea != null)
+                                            if (IDArea != null)
                                             {
-                                                for (int i = 0; i < Accesos.IdArea; i++)
+                                                for (int i = 0; i < IDArea; i++)
                                                 {
-                                                    <option value="@Accesos.IdArea">@Accesos.NArea</option>
+                                                    <option value="@IDArea">@NombreArea</option>
                                                 }
                                             }
                                         }
@@ -311,7 +318,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM">
+                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOM">
                                 </div>
                             </div>
                         </div>

@@ -39,7 +39,15 @@
 <div id="accordion"></div>
 <div class="accordion" id="AcordeonSucursales">
     @{
-        if (Accesos.IdPerfil == 1)
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+        long IDArea = Convert.ToInt32(Session["IdArea"]);
+        String NombreArea = Convert.ToString(Session["NArea"]);
+        String NOMBRE = Convert.ToString(Session["Nombre"]);
+        String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
+        String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
+
+        if (nivel == 1)
         {
             if (ModeloAreas.IdAreas != null)
             {
@@ -88,9 +96,9 @@
                 }
             }
         }
-        else if (Accesos.IDAsignacion == 3)
+        else if (Asignacion == 3)
         {
-            if (Accesos.IdArea != null)
+            if (IDArea != null)
             {
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < 1; i++)
@@ -103,25 +111,25 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "Accordion" + @Accesos.IdArea;
-                    string Colapse = "Accordion" + @Accesos.IdArea;
-                    string titulo = "titulo" + @Accesos.IdArea;
-                    string contenedor1 = "contenedor1" + @Accesos.IdArea;
+                    string ColapseAceptar = "Accordion" + @IDArea;
+                    string Colapse = "Accordion" + @IDArea;
+                    string titulo = "titulo" + @IDArea;
+                    string contenedor1 = "contenedor1" + @IDArea;
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloComp(@Accesos.IdArea)" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
+                                <a onclick="ConsultaArticuloComp(@IDArea)" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Movimientos: @Accesos.NArea</span>
+                                    <span>Movimientos: @NombreArea</span>
                                 </a>
                             </h4>
                             <div id="@Colapse" class="collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#AcordeonSucursales" style="">
                                 <div class="card-body">
                                     <div class="row">
-                                        <button onclick="abrirModal(0,@Accesos.IdArea)" type="button" class="btn btn-primary" data-toggle="modal" id=@Accesos.IdArea data-target="#ModalPedidoInterno">Realizar Pedidos</button>
-                                        <button onclick="abrirModalUsados(0,@Accesos.IdArea)" type="button" class="btn btn-primary" data-toggle="modal" id=@Accesos.IdArea data-target="#ModalUsados">Movimiento: Usados</button>
+                                        <button onclick="abrirModal(0,@IDArea)" type="button" class="btn btn-primary" data-toggle="modal" id=@IDArea data-target="#ModalPedidoInterno">Realizar Pedidos</button>
+                                        <button onclick="abrirModalUsados(0,@IDArea)" type="button" class="btn btn-primary" data-toggle="modal" id=@IDArea data-target="#ModalUsados">Movimiento: Usados</button>
                                         <div>
-                                            <h5>Movimientos: @Accesos.NArea</h5>
+                                            <h5>Movimientos: @NombreArea</h5>
                                         </div>
                                         <div id="@contenedor1" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
@@ -139,9 +147,9 @@
 <div id="accordionPedidos"></div>
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Accesos.IDAsignacion == 3)
+        if (Asignacion == 3)
         {
-            if (Accesos.IdArea != null)
+            if (IDArea != null)
             {
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < 1; i++)
@@ -154,23 +162,23 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapsePedido = "accordionPedidos" + @Accesos.IdArea;
+                    string ColapsePedido = "accordionPedidos" + @IDArea;
 
-                    string titulo = "titulo" + @Accesos.IdArea;
-                    string contenedorPedidos = "contenedorPedidos" + @Accesos.IdArea;
+                    string titulo = "titulo" + @IDArea;
+                    string contenedorPedidos = "contenedorPedidos" + @IDArea;
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaPedidosRealizados(@Accesos.IdArea)" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
+                                <a onclick="ConsultaPedidosRealizados(@IDArea)" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Pedidos solicitados: @Accesos.NArea</span>
+                                    <span>Pedidos solicitados: @NombreArea</span>
                                 </a>
                             </h4>
                             <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
                                 <div class="card-body">
                                     <div class="row">
                                         <div>
-                                            <h5>Pedidos solicitados: @Accesos.NArea</h5>
+                                            <h5>Pedidos solicitados: @NombreArea</h5>
                                         </div>
                                         <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
@@ -186,9 +194,9 @@
 <div id="accordionAceptar"></div>
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
-        if (Accesos.IDAsignacion == 3)
+        if (Asignacion == 3)
         {
-            if (Accesos.IdArea != null)
+            if (@IDArea != null)
             {
                 //  int NSucursales = Accesos.IdAreas.Count();
 
@@ -203,16 +211,16 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "AccordionAceptar" + @Accesos.IdArea;
+                    string ColapseAceptar = "AccordionAceptar" + @IDArea;
 
-                    string titulo = "titulo" + @Accesos.IdArea;
-                    string contenedorAceptar = "contenedorAceptar" + @Accesos.IdArea;
+                    string titulo = "titulo" + @IDArea;
+                    string contenedorAceptar = "contenedorAceptar" + @IDArea;
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloCompra(@Accesos.IdArea)" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                <a onclick="ConsultaArticuloCompra(@IDArea)" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span>Aceptar pedidos: @Accesos.NArea</span>
+                                    <span>Aceptar pedidos: @NombreArea</span>
                                 </a>
                             </h4>
                             <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
@@ -221,7 +229,7 @@
                                     <!--Mostrar la tabla de los articulos por tienda en el accordion-->
                                     <div class="row">
                                         <div>
-                                            <h5>Aceptar pedidos: @Accesos.NArea</h5>
+                                            <h5>Aceptar pedidos: @NombreArea</h5>
                                         </div>
                                         <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
                                     </div>
@@ -320,15 +328,15 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="cmbOficina">Tienda<span class="required">*</span></label>
+                                    <label class="form-control-label" for="cmbOficina">Área<span class="required">*</span></label>
                                     <select id="cmbOficina" style="width: 100%" class="form-control obligatorioPedidoInt limpiarSelect bloquear">
                                         <option value="0">--Seleccione--</option>
                                         @{
-                                            if (Accesos.IdArea != null)
+                                            if (IDArea != null)
                                             {
-                                                for (int i = 0; i < Accesos.IdArea; i++)
+                                                for (int i = 0; i < IDArea; i++)
                                                 {
-                                                    <option value="@Accesos.IdArea">@Accesos.NArea</option>
+                                                    <option value="@IDArea">@NombreArea</option>
                                                 }
                                             }
                                         }
@@ -457,7 +465,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@Accesos.Nombre @Accesos.ApellidosP @Accesos.ApellidosM">
+                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOP">
                                 </div>
                             </div>
                         </div>
