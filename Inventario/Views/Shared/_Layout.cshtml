@@ -220,22 +220,38 @@
                         <!--Crear el menú de opciones de manera dinaámica (Razor)-->
                         <nav class="sidebar-nav">
                             @{
-                                int Elemt = Accesos.Accion.Count();
-                                for (int i = 0; i < Elemt; i++)
-                                {
+                                // int Elemt = Accesos.Accion.Count();
+                                string[] Acciones = Convert.ToString(Session["Acciones"]).Split(',');
+                                string[] Controladores = Convert.ToString(Session["Controladores"]).Split(',');
+                                string[] Mensajes = Convert.ToString(Session["Mensajes"]).Split(',');
+                                string[] Iconos = Convert.ToString(Session["Iconos"]).Split(',');
 
-                                    if (Accesos.Estatus [i] == 1) {
+                                //var Acc = Session["Acciones"];
+                                //var control = Session["Controladores"];
+                                //var mens = Session["Mensajes"];
+                                //var icon = Session["Iconos"];
+                                //var est = Session["Estu"];
 
-                                    <ul id="sidebarnav">
-                                        <li class="list-group">
-                                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  style="TEXT-DECORATION:none;COLOR:#000000;FONT-FAMILY: tahoma; FONT-SIZE: 14px" href='@Url.Action(Accesos.Accion[i], Accesos.Controlador[i])' aria-expanded="false">
-                                                <i class='@Accesos.Icono[i]' style="font-size: 21px; color: dodgerblue;"></i> <!--Tamaño de los íconos del menú-->
-                                                <span class="hide-menu" style="color: dodgerblue;">@Accesos.Mensaje[i]</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                        }
-                                    }
+                                //var uno = System.Web.HttpContext.Current.Session["Estu"];
+
+                                //var  dos = Convert.ToInt32(est);
+                                //  var tres = Session["Estu"] = Convert.ToInt32(est);
+
+                                //for (int i = 0; i < (int)uno; i++)
+                                   for (int i = 0; i < Acciones.GetLength(0); i++)
+                                    {
+
+
+                                        <ul id="sidebarnav">
+                                            <li class="list-group">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" style="TEXT-DECORATION:none;COLOR:#000000;FONT-FAMILY: tahoma; FONT-SIZE: 14px" href='@Url.Action(Acciones[i], Controladores[i])' aria-expanded="false">
+                                                    <i class='@Iconos[i]' style="font-size: 21px; color: dodgerblue;"></i> <!--Tamaño de los íconos del menú-->
+                                                    <span class="hide-menu" style="color: dodgerblue;">@Mensajes[i]</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    
+                                }
                                 }
                         </nav>
                     </div>
