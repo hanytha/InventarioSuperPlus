@@ -39,33 +39,33 @@
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
         long nivel = Convert.ToInt32(Session["Nivel"]);
-        //long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+        long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
 
         String NOMBRE = Convert.ToString(Session["Nombre"]);
         String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
         String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
 
-        //if (nivel == 1 || Asignacion == 2)
-        //{
-        //if (TiendasSupervision.IDTienda != null)
-        //{
-        int NSucursales = TiendasSupervision.IDTienda.Count();
-
-        string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-        for (int i = 0; i < NSucursales; i++)
+        if (nivel == 1)
         {
-            if (i == 0)
+            if (TiendasSupervision.IDTienda != null)
             {
-                InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-            }
-            else
-            {
-                InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-            }
-            string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
+                int NSucursales = TiendasSupervision.IDTienda.Count();
 
-            string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-            string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
@@ -93,7 +93,56 @@
 
                 }
             }
-        @*}*@
+        }
+        else if (Asignacion == 2)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+                int NSucursales = TiendasSupervision.IDTienda.Count();
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span> @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div>
+                                            <h5>Pedidos: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
 
     }
 
@@ -444,7 +493,12 @@
         </div>
     </div>
 </div>
-
+<!--------------------------------------------------------------->
+<div id="GIDA">
+    @{
+        <input style="display:none" id="IDnivel" value="@nivel" />
+    }
+</div>
 <!--------------------------Función para imprimir el contenido del div------------------------------------------>
 <script language="Javascript">
     function imprSelec(nombre) {

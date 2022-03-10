@@ -85,54 +85,6 @@ namespace Inventario.Controllers
                 TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
                 TiendasSupervision.Nombre.Add(Tienda.Nombre);
                 TiendasSupervision.LNombre.Add(Tienda.LNombre);
-                if (Tienda.E1Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.E1Nombre.Add(Tienda.E1Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.E1Nombre.Add("");
-                }
-                if (Tienda.E2Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.E2Nombre.Add(Tienda.E2Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.E2Nombre.Add("");
-                }
-                if (Tienda.E3Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.E3Nombre.Add(Tienda.E3Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.E3Nombre.Add("");
-                }
-                if (Tienda.A1Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.A1Nombre.Add(Tienda.A1Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.A1Nombre.Add("");
-                }
-                if (Tienda.A2Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.A2Nombre.Add(Tienda.A2Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.A2Nombre.Add("");
-                }
-                if (Tienda.A3Nombre != "--Seleccione--")
-                {
-                    TiendasSupervision.A3Nombre.Add(Tienda.A3Nombre);
-                }
-                else
-                {
-                    TiendasSupervision.A3Nombre.Add("");
-                }
                 TiendasSupervision.Estado.Add(Tienda.Estado);
                 TiendasSupervision.Municipio.Add(Tienda.Municipio);
                 TiendasSupervision.Localidad.Add(Tienda.Localidad);
@@ -141,27 +93,15 @@ namespace Inventario.Controllers
                 TiendasSupervision.Telefono.Add(Tienda.Telefono);
                 TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
 
-                if (Tienda.HApertura != null)
-                {
-                    TiendasSupervision.HApertura.Add(Tienda.HApertura);
-                }
-                else
-                {
-                    TiendasSupervision.HApertura.Add("");
-
-                }
-                if (Tienda.HCierre != null)
-                {
-                    TiendasSupervision.HCierre.Add(Tienda.HCierre);
-                }
-                else
-                {
-                    TiendasSupervision.HCierre.Add("");
-                }
-
             }
             return Encontrados;
         }
+
+        //----------------------------------------------------------------------
+        //---------------------------------------------------------------
+
+
+
         public JsonResult ConsultaSupervicion(long Id)
         {
             var supervicion = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id))
