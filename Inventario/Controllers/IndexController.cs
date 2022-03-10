@@ -20,12 +20,12 @@ namespace Inventario.Controllers
             //var nom = System.Web.HttpContext.Current.Session["IDAsignacionUno"];
             long Asignaciones = Convert.ToInt32(Session["IDAsignacion"]);
             //Obtener las consultas del controlador de departamentos
-            DepartamentosController departamento = new DepartamentosController();
-            departamento.ConsultaDepartamentos();
+            //DepartamentosController departamento = new DepartamentosController();
+            //departamento.ConsultaDepartamentos();
             //Obtener las consultas del controlador de Supervisión
-            SupervisionController TiendaSupervision = new SupervisionController();
-            //Cargar las tiendas al iniciar sesión
-            TiendaSupervision.CargarSucursales();
+            //SupervisionController TiendaSupervision = new SupervisionController();
+            ////Cargar las tiendas al iniciar sesión
+            //TiendaSupervision.CargarSucursales();
             //PedidosInternos ModeloPedidoInt = new PedidosInternos();
             //Al entrar en el inicio se cargen los estados
             //CardinalController DPto = new CardinalController();
@@ -36,9 +36,6 @@ namespace Inventario.Controllers
             {
                 SupervisionController tiendas = new SupervisionController();
                 tiendas.CargarTiendasAdm();
-
-                SupervisionController Super = new SupervisionController();
-                Super.CargarSucursalesXSupervision();
             }
             else if (Asignaciones == 3)
             {

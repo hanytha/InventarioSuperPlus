@@ -1775,7 +1775,7 @@ function ValidarDUsado() {
 ConsultaCategorias();
 function ConsultaCategorias() {
     $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
-        CrearTablaCategorias(Data);
+       
     }
     );
 }
