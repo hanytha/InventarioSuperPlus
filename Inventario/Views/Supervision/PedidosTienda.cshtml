@@ -5,40 +5,17 @@
 <h2 class="form-control-label" style="font-size: 20px;">
     PEDIDOS SOLICITADOS EN TIENDA
 </h2>
-
-<style>
-    contenedor2 {
-        width: 900px;
-        height: 450px;
-        margin: 16px;
-        padding: 16px;
-    }
-
-    contenedor3 {
-        width: 900px;
-        height: 450px;
-        margin: 16px;
-        padding: 16px;
-    }
-
-    .redondeado {
-        border-radius: 10px;
-        border: 1px solid #696969;
-        width: 100px;
-    }
-
-    input:focus {
-        background-color: lavender;
-        text-align: center
-    }
-
-    .sinborde {
-        border: 0;
-    }
-</style>
-<div class="accordionPedidos" id="AcordeonPedidos">
+<div id="GIDA">
     @{
         long nivel = Convert.ToInt32(Session["Nivel"]);
+        <input style="display:none" id="IDnivel" value="@nivel" />
+    }
+
+</div>
+
+<div class="accordionPedidos" id="AcordeonPedidos">
+    @{
+
         long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
 
         String NOMBRE = Convert.ToString(Session["Nombre"]);
@@ -143,7 +120,55 @@
                 }
             }
         }
+        else if (Asignacion == 1)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+                int NSucursales = TiendasSupervision.IDTienda.Count();
 
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < NSucursales; i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span> @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div>
+                                            <h5>Pedidos: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
     }
 
 </div>
@@ -520,6 +545,37 @@
     hr.solid3 {
         border-top: 1px solid #030303;
         width: 50%;
+    }
+</style>
+
+<style>
+    contenedor2 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    contenedor3 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    .redondeado {
+        border-radius: 10px;
+        border: 1px solid #696969;
+        width: 100px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+
+    .sinborde {
+        border: 0;
     }
 </style>
 <!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
