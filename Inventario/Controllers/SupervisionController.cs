@@ -3694,7 +3694,10 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
+        public ActionResult CargarTiendasAdmin()
+        {
+            return View();
+        }
     }
 }
 
