@@ -1,0 +1,283 @@
+﻿@using Inventario.Models;
+@{
+    ViewBag.Title = "AceptarCompraTienda";
+}
+
+<h2 class="form-control-label" style="font-size: 20px;">
+    ACEPTAR COMPRAS
+</h2>
+
+<!--------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------->
+<div id="GIDA">
+    @{
+        long nivel = Convert.ToInt32(Session["Nivel"]);
+        <input style="display:none" id="IDnivel" value="@nivel" />
+    }
+
+</div>
+<!--------------------------------------------------------------------------------------->
+<div class="accordionAceptar" id="AcordeonSucursalesAceptar">
+    @{
+
+        long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
+        long IDArea = Convert.ToInt32(Session["IdArea"]);
+        String NombreArea = Convert.ToString(Session["NArea"]);
+        String NOMBRE = Convert.ToString(Session["Nombre"]);
+        String APELLIDOP = Convert.ToString(Session["ApellidosP"]);
+        String APELLIDOM = Convert.ToString(Session["ApellidosM"]);
+
+
+        if (nivel == 1)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span>@TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
+        else if (Asignacion == 2)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span> @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+            }
+        }
+
+        else if (Asignacion == 1)
+        {
+            if (TiendasSupervision.IDTienda != null)
+            {
+
+
+                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    else
+                    {
+                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                    }
+                    string ColapseAceptar = "AccordionAceptar" + @TiendasSupervision.IDTienda[i];
+
+                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
+                    string contenedorAceptar = "contenedorAceptar" + @TiendasSupervision.IDTienda[i];
+                    <div class="@InsrtClases">
+                        <div class="card-header" id="@titulo">
+                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
+                                <a onclick="ConsultaArticuloCompra(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapseAceptar" class="collapse show" aria-expanded="false" aria-controls="@ColapseAceptar" class="collapsed">
+                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
+                                    <span> @TiendasSupervision.Nombre[i]</span>
+                                </a>
+                            </h4>
+                            <div id="@ColapseAceptar" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div>
+                                            <h5>Aceptar pedido: @TiendasSupervision.Nombre[i]</h5>
+
+                                        </div>
+                                        <div id="@contenedorAceptar" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+            }
+        }
+
+
+
+    }
+</div>
+<!--------------------------------------------------------------------------------------------->
+
+<style>
+    contenedor2 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    contenedor3 {
+        width: 900px;
+        height: 450px;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    .redondeado {
+        border-radius: 10px;
+        border: 1px solid #696969;
+        width: 100px;
+    }
+
+    input:focus {
+        background-color: lavender;
+        text-align: center
+    }
+
+    .sinborde {
+        border: 0;
+    }
+</style>
+
+<!--------------------------Función para imprimir el contenido del div------------------------------------------>
+<script language="Javascript">
+    function imprSelec(nombre) {
+        var ficha = document.getElementById(nombre);
+        var ventimp = window.open(' ', 'popimpr');
+        ventimp.document.write(ficha.innerHTML);
+        ventimp.document.close();
+        ventimp.print();
+        ventimp.close();
+    }
+</script>
+
+<!--------------------------------------------------------------------------------------------------------------------------->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Solid border */
+    hr.solid3 {
+        border-top: 1px solid #030303;
+        width: 50%;
+    }
+</style>
+<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
+<style>
+
+    [data-title]:hover:after {
+        opacity: 1;
+        transition: all 0.1s ease 0.5s;
+        visibility: visible;
+    }
+
+    [data-title]:after {
+        content: attr(data-title);
+        background-color: #FFC300;
+        color: #fff;
+        font-size: 14px;
+        font-family: Raleway;
+        position: absolute;
+        padding: 3px 20px;
+        bottom: -1.6em;
+        left: 100%;
+        white-space: nowrap;
+        box-shadow: 1px 1px 3px #222222;
+        opacity: 0;
+        border: 1px solid #111111;
+        z-index: 99999;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+    [data-title] {
+        position: relative;
+    }
+</style>
+<!------------Obtener la fecha-------------->
+<script type="text/javascript">
+    var f = new Date();
+    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    //  document.getElementById('TxtFechaIngreso').value = fecha;
+    document.getElementById('TxtAceptarFechaIngreso').value = fecha;
+
+</script>
+<script src="~/Scrips/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+<link href="~/Content/tarjeta.css" rel="stylesheet" />
+

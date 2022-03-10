@@ -3638,6 +3638,11 @@ namespace Inventario.Controllers
         {
             return View();
         }
+
+        public ActionResult AceptarCompraTienda()
+        {
+            return View();
+        }
     }
 }
 

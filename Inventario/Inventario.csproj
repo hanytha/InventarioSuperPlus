@@ -298,6 +298,7 @@
     <Content Include="Views\PedidosPendientes\PedidosPendientes.cshtml" />
     <Content Include="Views\Mermas\Mermas.cshtml" />
     <Content Include="Views\Supervision\CargarTiendasAdmin.cshtml" />
+    <Content Include="Views\Supervision\AceptarCompraTienda.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

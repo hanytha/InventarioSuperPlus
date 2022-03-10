@@ -1773,7 +1773,7 @@ function ValidarDUsado() {
 
 //----------------------------------------------------------------------------------------
 
-function ConsultaCategorias() {
+function ConsultaSucursales() {
     $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
        
     }
@@ -1786,7 +1786,7 @@ function ConsultaCom() {
     var dos = document.getElementById("IDnivel").value;
 
     if (dos != 1 ) {
-        ConsultaCategorias();
+        ConsultaSucursales();
     }
 
 }
