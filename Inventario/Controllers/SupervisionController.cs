@@ -33,94 +33,13 @@ namespace Inventario.Controllers
                 });
             return Json(superviciones, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ConsultaSupervicion(long Id)
-        {
-            var supervicion = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id))
-                .Select(p => new
-                {
-                    p.IdSupervision,
-                    Nombre = p.TipoSupervicion,
-                    p.TipoSupervicion,
-                    p.IdUsuario,
-                    p.IdAreas,
-                    p.Tienda,
-                    p.nombreUsuario,
-                    p.Estatus,
-                });
-            return Json(supervicion, JsonRequestBehavior.AllowGet);
-        }
-        //Guardar los datos
-        public int GuardarSupervicion(Supervision DatosSupervicion)
-        {
-            int Afectados = 0;
-            try
-            {
-                long id = DatosSupervicion.IdSupervision;
-                if (id.Equals(0))
-                {
-                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion)).Count();
 
-                    if (nveces == 0)
-                    {
-                        InvBD.Supervision.InsertOnSubmit(DatosSupervicion);
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
-                }
-                else
-                {
-                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.IdUsuario.Equals(DatosSupervicion.IdUsuario) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
-                    if (nveces == 0)
-                    {
-                        Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
-                        obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
-                        obj.Tienda = DatosSupervicion.Tienda;
-                        obj.IdUsuario = DatosSupervicion.IdUsuario;
-                        obj.nombreUsuario = DatosSupervicion.nombreUsuario;
-                        InvBD.SubmitChanges();
-                        Afectados = 1;
-                    }
-                    else
-                    {
-                        Afectados = -1;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Afectados = 0;
-            }
-            return Afectados;
-        }
-        public int EliminarSupervicion(long Id)
-        {
-            int nregistradosAfectados = 0;
-            try
-            {//Consulta los datos y el primer Id que encuentra  lo compara
-                Supervision Sprv = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id)).First();
-                Sprv.Estatus = 0;//Cambia el estatus en 0
-                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
-                nregistradosAfectados = 1;//Se pudo realizar
-            }
-            catch (Exception ex)
-            {
-                nregistradosAfectados = 0;
-            }
-            return nregistradosAfectados;
-        }
-        //--------------------Controlador SucursalesSupervision--------------------
-        public ActionResult SucursalesSupervision()
-        {
-            return View();
-        }
         public int CargarSucursalesXSupervision()
         {
+            String tiendas1 = Convert.ToString(Session["Tiendas"]);
+
             int Encontrados = 0;
-            string[] Sucursales = Accesos.Tiendas.Split('#');
+            string[] Sucursales = tiendas1.Split('#');
             TiendasSupervision.IDTienda = new List<long>();
             TiendasSupervision.Nombre = new List<string>();
             TiendasSupervision.LNombre = new List<string>();
@@ -243,6 +162,91 @@ namespace Inventario.Controllers
             }
             return Encontrados;
         }
+        public JsonResult ConsultaSupervicion(long Id)
+        {
+            var supervicion = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id))
+                .Select(p => new
+                {
+                    p.IdSupervision,
+                    Nombre = p.TipoSupervicion,
+                    p.TipoSupervicion,
+                    p.IdUsuario,
+                    p.IdAreas,
+                    p.Tienda,
+                    p.nombreUsuario,
+                    p.Estatus,
+                });
+            return Json(supervicion, JsonRequestBehavior.AllowGet);
+        }
+        //Guardar los datos
+        public int GuardarSupervicion(Supervision DatosSupervicion)
+        {
+            int Afectados = 0;
+            try
+            {
+                long id = DatosSupervicion.IdSupervision;
+                if (id.Equals(0))
+                {
+                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion)).Count();
+
+                    if (nveces == 0)
+                    {
+                        InvBD.Supervision.InsertOnSubmit(DatosSupervicion);
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
+                }
+                else
+                {
+                    int nveces = InvBD.Supervision.Where(p => p.TipoSupervicion.Equals(DatosSupervicion.TipoSupervicion) && p.IdUsuario.Equals(DatosSupervicion.IdUsuario) && p.nombreUsuario.Equals(DatosSupervicion.nombreUsuario) && p.Tienda.Equals(DatosSupervicion.Tienda)).Count();
+                    if (nveces == 0)
+                    {
+                        Supervision obj = InvBD.Supervision.Where(p => p.IdSupervision.Equals(id)).First();
+                        obj.TipoSupervicion = DatosSupervicion.TipoSupervicion;
+                        obj.Tienda = DatosSupervicion.Tienda;
+                        obj.IdUsuario = DatosSupervicion.IdUsuario;
+                        obj.nombreUsuario = DatosSupervicion.nombreUsuario;
+                        InvBD.SubmitChanges();
+                        Afectados = 1;
+                    }
+                    else
+                    {
+                        Afectados = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Afectados = 0;
+            }
+            return Afectados;
+        }
+        public int EliminarSupervicion(long Id)
+        {
+            int nregistradosAfectados = 0;
+            try
+            {//Consulta los datos y el primer Id que encuentra  lo compara
+                Supervision Sprv = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Id)).First();
+                Sprv.Estatus = 0;//Cambia el estatus en 0
+                InvBD.SubmitChanges();//Guarda los datos en la Base de datos
+                nregistradosAfectados = 1;//Se pudo realizar
+            }
+            catch (Exception ex)
+            {
+                nregistradosAfectados = 0;
+            }
+            return nregistradosAfectados;
+        }
+        //--------------------Controlador SucursalesSupervision--------------------
+        public ActionResult SucursalesSupervision()
+        {
+            return View();
+        }
+
         public JsonResult ConsultaArticulos(long IDTienda)
         {
             string id = "";

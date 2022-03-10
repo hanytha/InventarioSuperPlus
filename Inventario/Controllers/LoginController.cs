@@ -126,40 +126,45 @@ namespace Inventario.Controllers
                         //Accesos.IDSitio = (long)DatosUsuario.IdSitio;
                         //Accesos.Sitio = DatosUsuario.IDSitio;
 
+                        long Asignaciones = Convert.ToInt32(Session["IDAsignacion"]);
 
 
-
-                        if (Accesos.IDAsignacion != 0)
+                        if (Asignaciones != 0)
                         {
                             var Asignasion = InvBD.Asignacion.Where(p => p.IdAsignacion.Equals(Session["IDAsignacion"])).First();
                             Session["IDAsignacion"] = Asignasion.Nombre;
-                            if ((long)Session["IDAsignacion"] == 1)
+                            Session["IDAsignacionUno"] = Asignasion.IdAsignacion;
+                            if (Asignaciones == 1)
                             {
                                 var Sucursal = InvBD.Tienda.Where(p => p.IdTienda.Equals(Session["IDSitio"])).First();
                                 Session["IDSitio"] = Sucursal.Nombre;
                                 Session["Tiendas"] = DatosUsuario.IdSitio.ToString();
-
+                                Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                             }
-                            else if ((long)Session["IDAsignacion"] == 2)
+                            else if (Asignaciones == 2)
                             {
                                 var Supervision = InvBD.Supervision.Where(p => p.IdSupervision.Equals(Session["IDSitio"])).First();
                                 Session["Tiendas"] = Supervision.Tienda;
                                 Session["IDSitio"] = Supervision.TipoSupervicion;
+                                Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                             }
-                            else if ((long)Session["IDAsignacion"] == 3)
+                            else if (Asignaciones == 3)
                             {
                                 Session["NombreSitio"] = "Oficina";
                                 Session["Tiendas"] = "";
+                                Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                             }
                             else
                             {
                                 Session["NombreSitio"] = "No tiene ninguna asignación";
                                 Session["Tiendas"] = "";
+                                Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                             }
                         }
                         if ((string)Session["NSArea"] != "--Seleccione--")
                         {
                             Session["NSArea"] = Session["NSArea"];
+                            Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
                         }
                         else
                         {

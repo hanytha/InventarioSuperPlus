@@ -255,3 +255,14 @@ function llenarCombo(data, control) {
     }
     control.innerHTML = contenido;
 }
+
+
+//--------------------------------------------------------------------------------------------------------------
+
+ConsultaCategorias();
+function ConsultaCategorias() {
+    $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
+        CrearTablaCategorias(Data);
+    }
+    );
+}

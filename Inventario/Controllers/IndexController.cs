@@ -16,8 +16,9 @@ namespace Inventario.Controllers
         {
 
             long nivel = Convert.ToInt32(Session["Nivel"]);
-            long Asignacion = Convert.ToInt32(Session["IDAsignacion"]); 
-            String NomTienda = Convert.ToString(Session["Tiendas"]);
+            String tiendas1 = Convert.ToString(Session["Tiendas"]);
+            //var nom = System.Web.HttpContext.Current.Session["IDAsignacionUno"];
+            long Asignaciones = Convert.ToInt32(Session["IDAsignacion"]);
             //Obtener las consultas del controlador de departamentos
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
@@ -35,33 +36,39 @@ namespace Inventario.Controllers
             {
                 SupervisionController tiendas = new SupervisionController();
                 tiendas.CargarTiendasAdm();
+
+                SupervisionController Super = new SupervisionController();
+                Super.CargarSucursalesXSupervision();
             }
-            else if (Asignacion == 3)
+            else if (Asignaciones == 3)
             {
                 DepartamentosController areas = new DepartamentosController();
                 areas.ConsultaDepartamentos();
             }
-            else if (Asignacion == 1)
-            {
-                if (NomTienda != "")
-                {
-                    SupervisionController Super = new SupervisionController();
-                    Super.CargarSucursalesXSupervision();
+            //else if (Asignaciones == 1)
+            //{
+            //    //if (NomTienda != "")
+            //    //{
+            //        SupervisionController Super = new SupervisionController();
+            //        Super.CargarSucursalesXSupervision();
 
-                }
-            }
-            else if (Asignacion == 2)
-            {
-                if (NomTienda!= "")
-                {
-                    SupervisionController Super = new SupervisionController();
-                    Super.CargarSucursalesXSupervision();
+            //    //}
+            //}
+            //else if (Asignaciones == 2)
+            //{
+            //    //if (NomTienda != "")
+            //    //{
 
-                }
-            }
+                
+            //        SupervisionController Super = new SupervisionController();
+            //        Super.CargarSucursalesXSupervision();
+
+            //    //}
+            //}
 
             return View();
 
         }
+   
     }
 }
