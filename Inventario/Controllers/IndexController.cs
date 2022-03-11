@@ -31,6 +31,9 @@ namespace Inventario.Controllers
             //CardinalController DPto = new CardinalController();
             GLOBALController cargarEstados = new GLOBALController();
             cargarEstados.BDEstados();
+
+            SupervisionController ARTICULOS = new SupervisionController();
+            ARTICULOS.ConsultaPedidosNumeroPedidoRa();
             //Cargar las tiendas cuando el usuario que inicia sesión es un supervisor(Visualizar solo las tiendas que son asignadas a ese supervisor)
             if (nivel == 1)
             {

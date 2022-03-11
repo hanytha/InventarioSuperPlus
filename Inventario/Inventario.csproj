@@ -217,6 +217,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>InventarioBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Lider.cs" />
     <Compile Include="Models\ModeloArticulos.cs" />
     <Compile Include="Models\ModeloCompra.cs" />
     <Compile Include="Models\ModeloExistAlm.cs" />

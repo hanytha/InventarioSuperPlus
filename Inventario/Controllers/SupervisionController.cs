@@ -16,6 +16,8 @@ namespace Inventario.Controllers
         // GET: Supervision
         public ActionResult Supervision()
         {
+            SupervisionController ARTICULOS = new SupervisionController();
+            ARTICULOS.ConsultaPedidosNumeroPedidoRa();
             return View();
         }
         public JsonResult ConsultaSuperviciones()
@@ -33,6 +35,217 @@ namespace Inventario.Controllers
                 });
             return Json(superviciones, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        //public int ConsultaPedInterno()
+        //{
+
+        //    TiendasSupervision.NumeroPedido = new List<long>();
+        //    TiendasSupervision.Proveedor = new List<string>();
+        //    TiendasSupervision.Fecha = new List<string>();
+        //    string NoPedido = "";
+        //    string Proveedor = "";
+        //    string fecha = "";
+
+        //    var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1) && p.IdAsignacion.Equals(2)).OrderByDescending(p => p.IdPedidosInternos)
+        //       .Select(p => new
+        //       {
+        //           pedido = p.NumeroPedido,
+        //           proveedors = p.Proveedor,
+        //           fecha = p.Fecha
+        //       });
+        //    if (Pedidos.Count() > 0)
+        //    {
+        //        long contador = 0;
+        //        long tem1 = 0;
+        //        long tem2 = 0;
+
+        //        long pedi = Pedidos.Count();
+
+        //        foreach (var numero in Pedidos)
+        //        {
+        //            if (contador == 0)
+        //            {
+        //                tem1 = (int)numero.pedido;
+        //                NoPedido += numero.pedido + ",";
+        //                Proveedor += numero.proveedors + ",";
+        //                fecha += numero.fecha + ",";
+
+        //            }
+        //            if (numero.pedido != tem1 || numero.noProve != tem2)
+        //            {
+        //                NoPedido += numero.pedido + ",";
+        //                NoProvedor += numero.noProve + ",";
+        //                Proveedor += numero.proveedors + ",";
+        //                IdProveedor += numero.IdProveedor + ",";
+        //                fecha += numero.fecha + ",";
+        //                Area += numero.depa + ",";
+        //                IDArea += numero.IDDepa + ",";
+        //                id += numero.id + ",";
+        //                IdSitio += numero.IdSitio + ",";
+        //                Articulo += numero.Articulo + ",";
+        //                tem1 = (int)numero.pedido;
+        //                tem2 = (int)numero.noProve;
+        //                contador++;
+        //            }
+        //            else
+        //            {
+        //                contador++;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        id += "" + ",";
+        //        IdSitio += "" + ",";
+        //        Articulo += "" + ",";
+        //        IdProveedor += "" + ",";
+        //        NoPedido += "" + ",";
+        //        NoProvedor += "" + ",";
+        //        Proveedor += "No hay pedidos" + ",";
+        //        fecha += "" + ",";
+        //        Area += "" + ",";
+        //        IDArea += "" + ",";
+        //        Articulo += "" + ",";
+        //    }
+        //    var consulta = new
+        //    {
+        //        NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
+        //        NoProvedor = NoProvedor.Substring(0, NoProvedor.Length - 1),
+        //        Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+        //        IdProveedor = IdProveedor.Substring(0, IdProveedor.Length - 1),
+        //        fecha = fecha.Substring(0, fecha.Length - 1),
+        //        Area = Area.Substring(0, Area.Length - 1),
+        //        IDArea = IDArea.Substring(0, IDArea.Length - 1),
+        //        id = id.Substring(0, id.Length - 1),
+        //        IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
+        //        Articulo = Articulo.Substring(0, Articulo.Length - 1)
+        //    };
+        //    string[] NoPedidos = NoPedido.Substring(0, NoPedido.Length - 1).Split(',');
+        //    string[] Provedor = Proveedor.Substring(0, Proveedor.Length - 1).Split(',');
+        //    string[] Fecha = fecha.Substring(0, fecha.Length - 1).Split(',');
+
+        //    for (int i = 0; i < NoPedidos.GetLength(0); i++)
+        //    {
+        //        TiendasSupervision.NumeroPedido.Add(NoPedido[i]);
+        //        TiendasSupervision.Proveedor.Add(Provedor[i]);
+        //        TiendasSupervision.Fecha.Add(Fecha[i]);
+        //    }
+
+        //}
+
+        //****************************Consulta de pedidos externos RAZOR***********************************************************
+
+        public void ConsultaPedidosNumeroPedidoRa()
+        {
+            Lider modeloPedidosExternos = new Lider();
+            Lider.NumeroPedido = new List<long>();
+            Lider.Proveedor = new List<string>();
+            Lider.Fecha = new List<string>();
+            Lider.IdSitio = new List<long>();
+
+            string NoProvedor = "";
+            string Proveedor = "";
+            string fecha = "";
+            string IdSi = "";
+
+
+            var Pedidos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1))
+               .Select(p => new
+               {
+                   pedido = p.NumeroPedido,
+                   proveedors = p.Proveedor,
+                   fecha = p.Fecha,
+                   noProve = p.NumPedidoProveedor,
+                   sitio = p.IdSitio,
+             
+               });
+            if (Pedidos.Count() > 0)
+            {
+                long contador = 0;
+                long tem1 = 0;
+                long tem2 = 0;
+
+                long pedi = Pedidos.Count();
+
+                foreach (var numero in Pedidos)
+                {
+                    if (contador == 0)
+                    {
+                        tem1 = (int)numero.pedido;
+                        tem2 = (int)numero.noProve;
+
+
+                        NoProvedor += numero.pedido + ",";
+                        Proveedor += numero.proveedors + ",";
+                        fecha += numero.fecha + ",";
+                        IdSi += numero.sitio + ",";
+
+
+
+                    }
+                    if (numero.pedido != tem1 || numero.noProve != tem2)
+                    {
+                   
+                        NoProvedor += numero.pedido + ",";
+                        Proveedor += numero.proveedors + ",";
+                        fecha += numero.fecha + ",";
+                        IdSi += numero.sitio + ",";
+
+
+                        tem1 = (int)numero.pedido;
+                        tem2 = (int)numero.noProve;
+
+                        contador++;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
+                }
+            }
+            else
+            {
+              
+                NoProvedor += "0" + ",";
+                Proveedor += "0" + ",";
+                fecha += "0" + ",";
+                IdSi += "0" + ",";
+
+            }
+            var consulta = new
+            {
+             
+                NoProvedor = NoProvedor.Substring(0, NoProvedor.Length - 1),
+                Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
+                fecha = fecha.Substring(0, fecha.Length - 1),
+                IdSi = IdSi.Substring(0, IdSi.Length - 1),
+            };
+
+         
+            string[] NoProvedores = NoProvedor.Substring(0, NoProvedor.Length - 1).Split(',');
+        
+            string[] Proveedores = Proveedor.Substring(0, Proveedor.Length - 1).Split(',');
+     
+            string[] Fechas = fecha.Substring(0, fecha.Length - 1).Split(',');
+
+            string[] IDSitio = IdSi.Substring(0, IdSi.Length - 1).Split(',');
+
+            for (int i = 0; i < Proveedores.GetLength(0); i++)
+            {
+
+                Lider.NumeroPedido.Add(Convert.ToInt32(NoProvedores[i]));
+                Lider.IdSitio.Add(Convert.ToInt32(IDSitio[i]));
+                Lider.Fecha.Add(Fechas[i]);
+                Lider.Proveedor.Add(Proveedores[i]);
+
+             
+            }
+        }
+
+
+        //******************************************Cosulta los pedidos por número de compra**************************************************
 
         public int CargarSucursalesXSupervision()
         {

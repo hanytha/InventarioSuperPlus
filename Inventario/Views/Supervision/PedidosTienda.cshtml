@@ -15,7 +15,7 @@
 
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-
+       // long IdSitio = Convert.ToInt32(Session["IDSitio"]);
         long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
 
         String NOMBRE = Convert.ToString(Session["Nombre"]);
@@ -122,290 +122,376 @@
         }
         else if (Asignacion == 1)
         {
-            if (TiendasSupervision.IDTienda != null)
-            {
-                int NSucursales = TiendasSupervision.IDTienda.Count();
+            long SitioID = Convert.ToInt32(Session["Tiendas"]);
 
-                string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-                for (int i = 0; i < NSucursales; i++)
+                <table class="order-table  table-success" style="position: relative"
+            <thead>
+                    <tr>
+                        <th scope="col">No.Pedido</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+            </thead>
+            int NSucursales = Lider.Proveedor.Count();
+
+
+            for (int i = 0; i < NSucursales; i++) {
+
+                if ((long)Lider.IdSitio[i] == SitioID)
                 {
-                    if (i == 0)
-                    {
-                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
+                      <tr>
+                        <td>@Lider.NumeroPedido[i]</td>
+                        <td>@Lider.Proveedor[i]</td>
+                        <td>@Lider.Fecha[i]</td>
+                        @*<td><button class="btn btn-success" onclick="abrirModal(@TiendasSupervision.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>*@
+                       
+                    </tr>
+
                     }
-                    else
-                    {
-                        InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
-                    }
-                    string ColapsePedido = "accordionPedidos" + @TiendasSupervision.IDTienda[i];
-
-                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedorPedidos = "contenedorPedidos" + @TiendasSupervision.IDTienda[i];
-                    <div class="@InsrtClases">
-                        <div class="card-header" id="@titulo">
-                            <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaPedidosRealizados(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@ColapsePedido" class="collapse show" aria-expanded="false" aria-controls="@ColapsePedido" class="collapsed">
-                                    <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
-                                    <span> @TiendasSupervision.Nombre[i]</span>
-                                </a>
-                            </h4>
-                            <div id="@ColapsePedido" class="collapse" aria-labelledby="headingOne" data-parent="#AcordeonSucursalesAceptar" style="">
-                                <div class="card-body">
-                                    <div class="row">
-
-                                        <div>
-                                            <h5>Pedidos: @TiendasSupervision.Nombre[i]</h5>
-
-                                        </div>
-                                        <div id="@contenedorPedidos" class="col-md-12 col-sm-12 col-xs-12">No hay ningún registro</div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
 
                 }
             }
         }
-    }
-
-</div>
-
-
-
-<!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    hr.solid {
-        border-top: 4px solid #808080;
-    }
-
-    .D1 {
-        background-color: #EBEBEB;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    hr.solid4 {
-        border-top: 4px solid #0B94F8;
-    }
-</style>
-<!------------------------------------Estilos para los inputs de los pedidos en el modal--------------------------->
-<style>
-    .redondeado {
-        border-radius: 5px;
-        /*grosor del alto de la casilla*/
-        height: 30px;
-        border: 1.5px solid #808080;
-        /*Ancho de la casilla*/
-        width: 100px
-    }
-
-    input:focus {
-        background-color: white;
-        border-color: dodgerblue;
-    }
-</style>
-<!------------Obtener la fecha-------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaSistema').value = fecha;
-
-</script>
-
-<div class="container">
-    <div class="modal fade" id="abrirModalAceptarPedido">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">
-                        <label class="form-control-label" style="font-size: 18px;">
-                            ACEPTAR PEDIDO
-                        </label>
-                    </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-                </div>
-                <div class="modal-body">
-                    <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
-                                    <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOM">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtAceptarNumeroPedidoAceptar">No. Pedido<span class="required">*</span></label>
-                                    <input type="number" id="TxtAceptarNumeroPedidoAceptar" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtAceptarNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
-                                    <input type="number" id="TxtAceptarNumPedidoProveedor" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TxtAceptarFechaIngreso">Fecha<span></span></label>
-                                    <input type="text" id="TxtAceptarFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbAceptarTienda">Tienda<span class="required">*</span></label>
-                                    <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
-                                        <option value="0">--Seleccione--</option>
-                                        @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
-                                        @{
-                                            if (@TiendasSupervision.IDTienda != null)
-                                            {
-                                                for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
-                                                {
-                                                    <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
-                                                }
-                                            }
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="cmbAceptarProveedor">Proveedor<span class="required">*</span></label>
-                                    <select id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorioAceptar bloquear"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="TblAceptarArticulos">Artículo(s)<span class="required">*</span></label>
-                                    <div id="TblAceptarArticulos">No hay Ningún artículo de este proveedor</div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-                    <button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
-                    <!-- Mostrar y ocultar botones-->
-                    <script>
-                        $(function () {
-                            $('#btn-1').click(function () {
-                                $('#button').show();
-                            });
-                            $('#hide').click(function () {
-                                $('#button').hide();
-                            });
-                        })
-                    </script>
-                </div>
+    </table>
             </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="modal fade" id="ModalPedidos">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">
-                        <label class="form-control-label" style="font-size: 18px;">
-                            PEDIDOS
-                        </label>
-                    </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div id="seleccion">
-                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
-                                    <br />
-                                    <br />
-                                    <div style="width: 100%">
-                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
-                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
-                                            <table style="width:100%; border-collapse:collapse; padding:0;">
-                                                <tbody>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArt"></label></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+
+
+
+            <!-------------------------------Estilo para la linea en el encabezado del los divs----------------------------------------->
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+
+                hr.solid {
+                    border-top: 4px solid #808080;
+                }
+
+                .D1 {
+                    background-color: #EBEBEB;
+                }
+            </style>
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+
+                hr.solid4 {
+                    border-top: 4px solid #0B94F8;
+                }
+            </style>
+            <!------------------------------------Estilos para los inputs de los pedidos en el modal--------------------------->
+            <style>
+                .redondeado {
+                    border-radius: 5px;
+                    /*grosor del alto de la casilla*/
+                    height: 30px;
+                    border: 1.5px solid #808080;
+                    /*Ancho de la casilla*/
+                    width: 100px
+                }
+
+                input:focus {
+                    background-color: white;
+                    border-color: dodgerblue;
+                }
+            </style>
+            <!------------Obtener la fecha-------------->
+            <script type="text/javascript">
+                var f = new Date();
+                fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+                document.getElementById('TxtFechaSistema').value = fecha;
+
+            </script>
+
+            <div class="container">
+                <div class="modal fade" id="abrirModalAceptarPedido">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">
+                                    <label class="form-control-label" style="font-size: 18px;">
+                                        ACEPTAR PEDIDO
+                                    </label>
+                                </h2>
+                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="regiration_form" novalidate method="post" onsubmit="return validarFormulario()">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtNombreUsr">Nombre del usuario:<span class="required">*</span></label>
+                                                <input type="text" id="TxtNombreUsr" class="form-control obligatorioAceptar bloquear" value="@NOMBRE @APELLIDOP @APELLIDOM">
+                                            </div>
                                         </div>
                                     </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <div style="width: 100%">
-                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
-                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
-                                            <table style="width:100%; border-collapse:collapse; padding:0;">
-                                                <thead>
-                                                    <tr align="center">
-                                                        <th scope="col">Proveedor</th>
-                                                        <th scope="col">Enviar a</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedor"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
-                                                    </tr>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
-                                                    </tr>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Localidad: </label><label></label> <label id="TxtDireccion"></label></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtAceptarNumeroPedidoAceptar">No. Pedido<span class="required">*</span></label>
+                                                <input type="number" id="TxtAceptarNumeroPedidoAceptar" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtAceptarNumPedidoProveedor">No. Pedido por proveedor<span class="required">*</span></label>
+                                                <input type="number" id="TxtAceptarNumPedidoProveedor" class="form-control limpiar obligatorioAceptar bloquear" placeholder="Número de Pedido">
+                                            </div>
                                         </div>
                                     </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TxtAceptarFechaIngreso">Fecha<span></span></label>
+                                                <input type="text" id="TxtAceptarFechaIngreso" class="form-control bloquear" name="data[TxtFechaIngreso]" size="25" maxlength="100">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="cmbAceptarTienda">Tienda<span class="required">*</span></label>
+                                                <select id="cmbAceptarTienda" style="width: 100%" class="form-control obligatorioPedido limpiarSelect bloquear">
+                                                    <option value="0">--Seleccione--</option>
+                                                    @*Aquí se está ocupando razor para mostrar el nombre de la tienda de manera automática*@
+                                                    @{
+                                                        if (@TiendasSupervision.IDTienda != null)
+                                                        {
+                                                            for (int i = 0; i < TiendasSupervision.IDTienda.Count(); i++)
+                                                            {
+                                                                <option value="@TiendasSupervision.IDTienda[i]">@TiendasSupervision.Nombre[i]</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <div align="center">
-                                                    <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                <label class="form-control-label" for="cmbAceptarProveedor">Proveedor<span class="required">*</span></label>
+                                                <select id="cmbAceptarProveedor" style="width: 100%" class="form-control limpiarSelect obligatorioAceptar bloquear"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="TblAceptarArticulos">Artículo(s)<span class="required">*</span></label>
+                                                <div id="TblAceptarArticulos">No hay Ningún artículo de este proveedor</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+                                <button type="button" class="btn btn-primary ocultarBoton" id="AceptarPedido" data-toggle="modal" data-target="#ModalPedidos" onclick="Guardar()">Aceptar pedido</button>
+                                <!-- Mostrar y ocultar botones-->
+                                <script>
+                                    $(function () {
+                                        $('#btn-1').click(function () {
+                                            $('#button').show();
+                                        });
+                                        $('#hide').click(function () {
+                                            $('#button').hide();
+                                        });
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="modal fade" id="ModalPedidos">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">
+                                    <label class="form-control-label" style="font-size: 18px;">
+                                        PEDIDOS
+                                    </label>
+                                </h2>
+                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div id="seleccion">
+                                                <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                                <br />
+                                                <br />
+                                                <div style="width: 100%">
+                                                    <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                                    <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                                        <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFecha"></label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArt"></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                                <div id="TblArt">Artículo(s) de el pedido</div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div style="width: 100%">
+                                                    <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                                    <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                                        <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                            <thead>
+                                                                <tr align="center">
+                                                                    <th scope="col">Proveedor</th>
+                                                                    <th scope="col">Enviar a</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedor"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                                </tr>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreo"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamento"></label></td>
+                                                                </tr>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefono"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Localidad: </label><label></label> <label id="TxtDireccion"></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div align="center">
+                                                                <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                            </div>
+                                                            <div id="TblArt">Artículo(s) de el pedido</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="modal fade" id="VisualizarModalPedidos">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">
+                                    <label class="form-control-label" style="font-size: 18px;">
+                                        PEDIDOS
+                                    </label>
+                                </h2>
+                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div id="seleccion">
+                                                <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
+                                                <br />
+                                                <br />
+                                                <div style="width: 100%">
+                                                    <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                                    <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                                        <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFechaVisualizar"></label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArtVisualizar"></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div style="width: 100%">
+                                                    <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
+                                                    <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
+                                                        <table style="width:100%; border-collapse:collapse; padding:0;">
+                                                            <thead>
+                                                                <tr align="center">
+                                                                    <th scope="col">Proveedor</th>
+                                                                    <th scope="col">Enviar a</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedorVisualizar"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
+                                                                </tr>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreoVisualizar"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamentoVisualizar"></label></td>
+                                                                </tr>
+                                                                <tr align="left">
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefonoVisualizar"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccionVisualizar"></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div align="center">
+                                                                <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                            </div>
+                                                            <div id="TblArt">No hay ningún Artículo</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -414,211 +500,108 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-info" href="javascript:imprSelec('seleccion')" onclick="ocultarBoton()">Imprimir</a>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="modal fade" id="VisualizarModalPedidos">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">
-                        <label class="form-control-label" style="font-size: 18px;">
-                            PEDIDOS
-                        </label>
-                    </h2>
-                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle" style="font-size: 25px; color: red;"></i></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div id="seleccion">
-                                    <div align="left"><img src="~/Assets/Imagenes/Plus.jpg" style="width: 13em;"></div>
-                                    <br />
-                                    <br />
-                                    <div style="width: 100%">
-                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
-                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
-                                            <table style="width:100%; border-collapse:collapse; padding:0;">
-                                                <tbody>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tel. 953 530 0087</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Av. Zafiro No.1 Int. A, Col. Agua Dulce</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Fecha:</label><label id="TxtFechaVisualizar"></label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Huajuapan de León, Oaxaca. C.P. 69005.</label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>No. de Pedido:</label><label id="TxtNumeroPedidoArtVisualizar"></label></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <div style="width: 100%">
-                                        <div {NM_CSS_FUN_CAB} style="height:11px; display: inline; border-width:0px; "></div>
-                                        <div style="height:37px; background-color:#FFFFFF; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: inline">
-                                            <table style="width:100%; border-collapse:collapse; padding:0;">
-                                                <thead>
-                                                    <tr align="center">
-                                                        <th scope="col">Proveedor</th>
-                                                        <th scope="col">Enviar a</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: </label><label></label><label id="TxtProveedorVisualizar"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
-                                                    </tr>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreoVisualizar"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamentoVisualizar"></label></td>
-                                                    </tr>
-                                                    <tr align="left">
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Contacto: </label><label></label> <label id="TxtTelefonoVisualizar"></label></td>
-                                                        <td id="lin1_col1" {NM_CSS_CAB}><label>Dirección: </label><label></label> <label id="TxtDireccionVisualizar"></label></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div align="center">
-                                                    <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
-                                                </div>
-                                                <div id="TblArt">No hay ningún Artículo</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!--------------------------------------------------------------->
+            <div id="GIDA">
+                @{
+                    <input style="display:none" id="IDnivel" value="@nivel" />
+                }
             </div>
-        </div>
-    </div>
-</div>
-<!--------------------------------------------------------------->
-<div id="GIDA">
-    @{
-        <input style="display:none" id="IDnivel" value="@nivel" />
-    }
-</div>
-<!--------------------------Función para imprimir el contenido del div------------------------------------------>
-<script language="Javascript">
-    function imprSelec(nombre) {
-        var ficha = document.getElementById(nombre);
-        var ventimp = window.open(' ', 'popimpr');
-        ventimp.document.write(ficha.innerHTML);
-        ventimp.document.close();
-        ventimp.print();
-        ventimp.close();
-    }
-</script>
+            <!--------------------------Función para imprimir el contenido del div------------------------------------------>
+            <script language="Javascript">
+                function imprSelec(nombre) {
+                    var ficha = document.getElementById(nombre);
+                    var ventimp = window.open(' ', 'popimpr');
+                    ventimp.document.write(ficha.innerHTML);
+                    ventimp.document.close();
+                    ventimp.print();
+                    ventimp.close();
+                }
+            </script>
 
-<!--------------------------------------------------------------------------------------------------------------------------->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    /* Solid border */
-    hr.solid3 {
-        border-top: 1px solid #030303;
-        width: 50%;
-    }
-</style>
+            <!--------------------------------------------------------------------------------------------------------------------------->
+            <style>
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+                /* Solid border */
+                hr.solid3 {
+                    border-top: 1px solid #030303;
+                    width: 50%;
+                }
+            </style>
 
-<style>
-    contenedor2 {
-        width: 900px;
-        height: 450px;
-        margin: 16px;
-        padding: 16px;
-    }
+            <style>
+                contenedor2 {
+                    width: 900px;
+                    height: 450px;
+                    margin: 16px;
+                    padding: 16px;
+                }
 
-    contenedor3 {
-        width: 900px;
-        height: 450px;
-        margin: 16px;
-        padding: 16px;
-    }
+                contenedor3 {
+                    width: 900px;
+                    height: 450px;
+                    margin: 16px;
+                    padding: 16px;
+                }
 
-    .redondeado {
-        border-radius: 10px;
-        border: 1px solid #696969;
-        width: 100px;
-    }
+                .redondeado {
+                    border-radius: 10px;
+                    border: 1px solid #696969;
+                    width: 100px;
+                }
 
-    input:focus {
-        background-color: lavender;
-        text-align: center
-    }
+                input:focus {
+                    background-color: lavender;
+                    text-align: center
+                }
 
-    .sinborde {
-        border: 0;
-    }
-</style>
-<!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
-<style>
+                .sinborde {
+                    border: 0;
+                }
+            </style>
+            <!----------------------------------- Estilo para el title del botón de ver pedido------------------------------------------------------>
+            <style>
 
-    [data-title]:hover:after {
-        opacity: 1;
-        transition: all 0.1s ease 0.5s;
-        visibility: visible;
-    }
+                [data-title]:hover:after {
+                    opacity: 1;
+                    transition: all 0.1s ease 0.5s;
+                    visibility: visible;
+                }
 
-    [data-title]:after {
-        content: attr(data-title);
-        background-color: #FFC300;
-        color: #fff;
-        font-size: 14px;
-        font-family: Raleway;
-        position: absolute;
-        padding: 3px 20px;
-        bottom: -1.6em;
-        left: 100%;
-        white-space: nowrap;
-        box-shadow: 1px 1px 3px #222222;
-        opacity: 0;
-        border: 1px solid #111111;
-        z-index: 99999;
-        visibility: hidden;
-        border-radius: 6px;
-    }
+                [data-title]:after {
+                    content: attr(data-title);
+                    background-color: #FFC300;
+                    color: #fff;
+                    font-size: 14px;
+                    font-family: Raleway;
+                    position: absolute;
+                    padding: 3px 20px;
+                    bottom: -1.6em;
+                    left: 100%;
+                    white-space: nowrap;
+                    box-shadow: 1px 1px 3px #222222;
+                    opacity: 0;
+                    border: 1px solid #111111;
+                    z-index: 99999;
+                    visibility: hidden;
+                    border-radius: 6px;
+                }
 
-    [data-title] {
-        position: relative;
-    }
-</style>
-<!------------Obtener la fecha-------------->
-<script type="text/javascript">
-    var f = new Date();
-    fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    document.getElementById('TxtFechaIngreso').value = fecha;
-</script>
-<script src="~/Scrips/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
-<link href="~/Content/tarjeta.css" rel="stylesheet" />
+                [data-title] {
+                    position: relative;
+                }
+            </style>
+            <!------------Obtener la fecha-------------->
+            <script type="text/javascript">
+                var f = new Date();
+                fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+                document.getElementById('TxtFechaIngreso').value = fecha;
+            </script>
+            <script src="~/Scrips/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="~/Scrips/Internos/JS_SupervisionTienda.js"></script>
+            <link href="~/Content/tarjeta.css" rel="stylesheet" />
 
 

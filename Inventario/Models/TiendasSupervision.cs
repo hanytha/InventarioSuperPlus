@@ -28,5 +28,7 @@ namespace Inventario.Models
         public static List<string> HCierre { get; set; }
 
         public static List<int> Estatus { get; set; }
+
+        
     }
 }
