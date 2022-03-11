@@ -1720,7 +1720,7 @@ function ImprimirPres() {
 
     //obtenerPro();
 
-    var NumPedidos = document.getElementsByClassName("input-cantidadUsados");
+    var NumPedidos = document.getElementsByClassName("input-StockAceptarP");
 
     var Nombre = document.getElementsByClassName("input-ArticuloAceptarP");
 
@@ -1748,8 +1748,8 @@ function ImprimirPres() {
 
        
             dos += "<tr>"
-            dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
-            dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].name + "</label></td>"
+        dos += "<td align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + Nombre[i].value + "</label></td>"
+        dos += "<td  align='left' id='lin1_col1' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
             // dos += "<td  align='left' id='lin1_col2' {NM_CSS_CAB}><label>" + NumPedidos[i].value + "</label></td>"
             dos += "</tr>"
         
