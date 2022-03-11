@@ -931,6 +931,61 @@ function VisualizarPedido(id, no, IdCompInt, idS) {
         });
     }
 }
+//-------------------------
+function VisualizarPedidoLider(no) {
+    if (no == 0) {
+        sessionStorage.setItem('IDArt', '0');
+    }
+    else {
+        $.get("/Supervision/VerPedidoLider/?No=" + no, function (Data) {
+            document.getElementById("TxtFechaVisualizar").textContent = Data[0].Fecha;
+            document.getElementById("TxtNumeroPedidoArtVisualizar").textContent = Data[0].NoCompraProveedor;
+            document.getElementById("TxtProveedorVisualizar").textContent = Data[0].Proveedor;
+            document.getElementById("TxtTelefonoVisualizar").textContent = Data[0].Telefono;
+            document.getElementById("TxtDireccionVisualizar").textContent = Data[0].Localidad + "." + " " + "Dirección:" + Data[0].Direccion;
+            document.getElementById("TxtDepartamentoVisualizar").textContent = Data[0].Tienda;
+            MostrarArticulosLider(no); 
+        });
+    }
+}
+//------------------------------------------------------
+function MostrarArticulosLider(no) {
+    if (no == 0) {
+        sessionStorage.setItem('IdMovimiento', '0');
+    }
+    else {
+        $.get("/Supervision/ConsultaLider/?no=" + no, function (Data) {
+            var Tabla = "";
+            Tabla += "<div class='row row-cols-auto'>";
+            Tabla += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            Tabla += "<label>Artículos</label>";
+            Tabla += "</div>";
+            Tabla += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+            Tabla += "<label>Cantidad</label>";
+            Tabla += "</div>";
+
+            for (var i = 0; i < Data.length; i++) {
+
+                
+                Tabla += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                Tabla += "<label>"
+                Tabla += "<input  class='input-ArticuloAceptarP sinborde limpiar ' disabled  value='" + Data[i].Articulo + "' ><span class='help-block text-muted small-font'></span>";
+                Tabla += "</label>"
+                Tabla += "</div>";
+                Tabla += "<div class='col-md-6 col-sm-12 col-xs-12 justify-content-end'>";
+                Tabla += "<input  class='input-StockAceptarP sinborde limpiar ' disabled    value='" + Data[i].CantidadSolicitada + "' ><span class='help-block text-muted small-font'></span>";
+                Tabla += "</div>";
+                
+
+            }
+            Tabla += "</div>";
+            Tabla += "</div>";
+            document.getElementById("TblArticulo").innerHTML = Tabla;
+        });
+    }
+}
+
+//-------------------------------------------------------
 function MostrarArticulosVisualizar(IdCompInt, idS) {
     if (idS == 0) {
         sessionStorage.setItem('IdMovimiento', '0');
@@ -977,6 +1032,7 @@ function MostrarArticulosVisualizar(IdCompInt, idS) {
         });
     }
 }
+
 function MostrarArticulos(IdCompInt, idS) {
     if (idS == 0) {
         sessionStorage.setItem('IdMovimiento', '0');

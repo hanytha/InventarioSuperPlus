@@ -15,7 +15,7 @@
 
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-       // long IdSitio = Convert.ToInt32(Session["IDSitio"]);
+        // long IdSitio = Convert.ToInt32(Session["IDSitio"]);
         long Asignacion = Convert.ToInt32(Session["IDAsignacion"]);
 
         String NOMBRE = Convert.ToString(Session["Nombre"]);
@@ -124,37 +124,39 @@
         {
             long SitioID = Convert.ToInt32(Session["Tiendas"]);
 
-                <table class="order-table  table-success" style="position: relative"
+            <table class="order-table  table-success" style="position: relative"
             <thead>
-                    <tr>
-                        <th scope="col">No.Pedido</th>
-                        <th scope="col">Proveedor</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
+            <tr>
+            <th scope="col">No.Pedido</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acciones</th>
+            </tr>
             </thead>
             int NSucursales = Lider.Proveedor.Count();
 
 
-            for (int i = 0; i < NSucursales; i++) {
+            for (int i = 0; i < NSucursales; i++)
+            {
 
                 if ((long)Lider.IdSitio[i] == SitioID)
                 {
-                      <tr>
-                        <td>@Lider.NumeroPedido[i]</td>
-                        <td>@Lider.Proveedor[i]</td>
-                        <td>@Lider.Fecha[i]</td>
-                        @*<td><button class="btn btn-success" onclick="abrirModal(@TiendasSupervision.IDArticulo[i])" data-toggle="modal" data-target="#dialogo1"><i class="fas fa-edit"></i></button>*@
-                       
+                    <tr>
+                    <td>@Lider.NumeroPedido[i]</td>
+                    <td>@Lider.Proveedor[i]</td>
+                    <td>@Lider.Fecha[i]</td>
+
+                    <td><button class="btn btn-success" onclick="VisualizarPedidoLider(@Lider.NumeroPedido[i])" data-toggle="modal" data-target="#VisualizarModalPedidos"><i class="fas fa-edit"></i></button>
+
                     </tr>
 
-                    }
-
                 }
+
             }
         }
+    }
     </table>
-            </div>
+</div>
 
 
 
@@ -466,7 +468,7 @@
                                                                     <td id="lin1_col1" {NM_CSS_CAB}><label>Compañía: Comercializadora Picaros de la Mixteca S.A. de C.V.</label></td>
                                                                 </tr>
                                                                 <tr align="left">
-                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label>Correo: </label><label></label><label id="TxtCorreoVisualizar"></label></td>
+                                                                    <td id="lin1_col1" {NM_CSS_CAB}><label> </label><label></label><label id=""></label></td>
                                                                     <td id="lin1_col1" {NM_CSS_CAB}><label>Tienda: </label><label></label><label id="TxtDepartamentoVisualizar"></label></td>
                                                                 </tr>
                                                                 <tr align="left">
@@ -486,9 +488,9 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <div align="center">
-                                                                <label class="form-control-label" for="TblArt">Artículo(s) a solicitar</label>
+                                                                <label class="form-control-label" for="TblArticulo">Artículo(s) a solicitar</label>
                                                             </div>
-                                                            <div id="TblArt">No hay ningún Artículo</div>
+                                                            <div id="TblArticulo">No hay ningún Artículo</div>
                                                         </div>
                                                     </div>
                                                 </div>

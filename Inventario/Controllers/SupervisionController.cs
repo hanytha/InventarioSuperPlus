@@ -159,7 +159,7 @@ namespace Inventario.Controllers
                    fecha = p.Fecha,
                    noProve = p.NumPedidoProveedor,
                    sitio = p.IdSitio,
-             
+
                });
             if (Pedidos.Count() > 0)
             {
@@ -187,7 +187,7 @@ namespace Inventario.Controllers
                     }
                     if (numero.pedido != tem1 || numero.noProve != tem2)
                     {
-                   
+
                         NoProvedor += numero.pedido + ",";
                         Proveedor += numero.proveedors + ",";
                         fecha += numero.fecha + ",";
@@ -207,7 +207,7 @@ namespace Inventario.Controllers
             }
             else
             {
-              
+
                 NoProvedor += "0" + ",";
                 Proveedor += "0" + ",";
                 fecha += "0" + ",";
@@ -216,18 +216,18 @@ namespace Inventario.Controllers
             }
             var consulta = new
             {
-             
+
                 NoProvedor = NoProvedor.Substring(0, NoProvedor.Length - 1),
                 Proveedor = Proveedor.Substring(0, Proveedor.Length - 1),
                 fecha = fecha.Substring(0, fecha.Length - 1),
                 IdSi = IdSi.Substring(0, IdSi.Length - 1),
             };
 
-         
+
             string[] NoProvedores = NoProvedor.Substring(0, NoProvedor.Length - 1).Split(',');
-        
+
             string[] Proveedores = Proveedor.Substring(0, Proveedor.Length - 1).Split(',');
-     
+
             string[] Fechas = fecha.Substring(0, fecha.Length - 1).Split(',');
 
             string[] IDSitio = IdSi.Substring(0, IdSi.Length - 1).Split(',');
@@ -240,7 +240,7 @@ namespace Inventario.Controllers
                 Lider.Fecha.Add(Fechas[i]);
                 Lider.Proveedor.Add(Proveedores[i]);
 
-             
+
             }
         }
 
@@ -2204,7 +2204,60 @@ namespace Inventario.Controllers
                             };
             return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
         }
+        //..........................................................................
+        //public JsonResult VerPedidoLider(long No)
+        //{
+        //    var ExistAlmG = from ExistAlm in InvBD.ExistenciaAlmacenG
+        //                    join Compra in InvBD.CompraInterno
+        //                on ExistAlm.IdCompraInterno equals Compra.IdCompraInterno
+        //                    join Tienda in InvBD.Tienda
+        //                   on Compra.IdSitio equals Tienda.IdTienda
+        //                    join areas in InvBD.Areas
+        //                on Compra.IdProveedor equals areas.IdAreas
+        //                    where ExistAlm.NoPedidoG.Equals(No) && Compra.IdAsignacion.Equals(2) && Compra.EstatusPedido.Equals(1)
+        //                    select new
+        //                    {
+        //                        IdPedidosInternos = ExistAlm.IdCompraInterno,
+        //                        NumeroPedido = ExistAlm.NoPedidoG,
+        //                        NumPedidoProveedor = Compra.NoPedidoProveedor,
+        //                        NoCompraProveedor = Compra.NoPedido,
+        //                        Tipo = ExistAlm.TipoDeOperacion,
+        //                        IdProveedor = Compra.IdProveedor,
+        //                        Proveedor = Compra.Proveedor,
+        //                        IdTienda = Compra.IdSitio,
+        //                        IdArticulo = ExistAlm.IdArticulo,
+        //                        Articulo = ExistAlm.Articulo,
+        //                        Fecha = Compra.FechaIngreso,
+        //                        Telefono = areas.Telefono,
+        //                        Correo = areas.Correo,
+        //                        Tienda = Tienda.Nombre,
+        //                        Localidad = Tienda.Localidad,
+        //                        Direccion = Tienda.Direccion
+        //                    };
+        //    return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        //}
 
+        public JsonResult VerPedidoLider(long No)
+        {
+            //var datos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&& p.NumeroPedido.Equals(No))
+            //    .Select(p => new {
+            var ExistAlmG = from PedidosInternos in InvBD.PedidosInternos
+                            join Tienda in InvBD.Tienda
+                        on PedidosInternos.IdSitio equals Tienda.IdTienda
+                            where PedidosInternos.NumeroPedido.Equals(No) && PedidosInternos.Estatus.Equals(1)
+                            select new
+                            {
+                                Fecha = PedidosInternos.Fecha,
+                                NoCompraProveedor = PedidosInternos.NumPedidoProveedor,
+                                Proveedor = PedidosInternos.Proveedor,
+                                Telefono = Tienda.Telefono,
+                                Localidad = Tienda.Localidad,
+                                Direccion=Tienda.Direccion,
+                                Tienda=Tienda.Nombre
+                            };
+            return Json(ExistAlmG, JsonRequestBehavior.AllowGet);
+        }
+        //..........................................................................
         public int Guardar(CompraInterno AceptarPedido)
         {
             int Afectados = 0;
@@ -3831,6 +3884,19 @@ namespace Inventario.Controllers
 
             return Json(consulta, JsonRequestBehavior.AllowGet);
         }
+
+
+        //----------------------
+        public JsonResult ConsultaLider(long no)
+        {
+            var datos = InvBD.PedidosInternos.Where(p => p.Estatus.Equals(1)&&p.NumeroPedido.Equals(no))
+                .Select(p => new {
+                    p.Articulo,
+                    p.CantidadSolicitada
+                });
+            return Json(datos, JsonRequestBehavior.AllowGet);
+        }
+        //----------------------
         public ActionResult PedidosTienda()
         {
             return View();
