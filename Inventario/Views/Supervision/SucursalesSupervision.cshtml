@@ -110,9 +110,12 @@
         }
         else if (Asignacion == 1)
         {
-            if (TiendasSupervision.IDTienda != null)
+            String Tienda = Convert.ToString(Session["Tiendas"]);
+            string[] Tiend = Tienda.Substring(0, Tienda.Length).Split('#');
+
+            if (Tiend != null)
             {
-                int NSucursales = TiendasSupervision.IDTienda.Count();
+                int NSucursales = Tiend.Count();
 
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < NSucursales; i++)
@@ -125,14 +128,14 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
+                    string ColapseAceptar = "Accordion" + @Tiend[i];
+                    string Colapse = "Accordion" + @Tiend[i];
+                    string titulo = "titulo" + @Tiend[i];
+                    string contenedor1 = "contenedor1" + @Tiend[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
+                                <a onclick="ConsultaArticuloComp(@Tiend[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                     <span>Movimientos: @TiendasSupervision.Nombre[i]</span>
                                 </a>
@@ -160,9 +163,12 @@
         }
         else if (Asignacion == 2)
         {
-            if (TiendasSupervision.IDTienda != null)
+            String Tienda = Convert.ToString(Session["Tiendas"]);
+            string[] Tiend = Tienda.Substring(0, Tienda.Length).Split('#');
+
+            if (Tiend != null)
             {
-                int NSucursales = TiendasSupervision.IDTienda.Count();
+                int NSucursales = Tiend.Count();
 
                 string InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                 for (int i = 0; i < NSucursales; i++)
@@ -175,14 +181,14 @@
                     {
                         InsrtClases = "card m-b-0 list-group list-group-flush  mb-1";
                     }
-                    string ColapseAceptar = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string Colapse = "Accordion" + @TiendasSupervision.IDTienda[i];
-                    string titulo = "titulo" + @TiendasSupervision.IDTienda[i];
-                    string contenedor1 = "contenedor1" + @TiendasSupervision.IDTienda[i];
+                    string ColapseAceptar = "Accordion" + @Tiend[i];
+                    string Colapse = "Accordion" + @Tiend[i];
+                    string titulo = "titulo" + @Tiend[i];
+                    string contenedor1 = "contenedor1" + @Tiend[i];
                     <div class="@InsrtClases">
                         <div class="card-header" id="@titulo">
                             <h4 class="m-b-0 list-group list-group-flush  mb-1">
-                                <a onclick="ConsultaArticuloComp(@TiendasSupervision.IDTienda[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
+                                <a onclick="ConsultaArticuloComp(@Tiend[i])" data-toggle="collapse" data-target="#@Colapse" aria-expanded="true" aria-controls="@Colapse" class="collapsed">
                                     <i class="m-r-5 fas fa-clipboard-list" aria-hidden="true"></i>
                                     <span>Movimientos: @TiendasSupervision.Nombre[i]</span>
                                 </a>
