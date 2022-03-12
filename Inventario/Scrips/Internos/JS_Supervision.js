@@ -259,10 +259,10 @@ function llenarCombo(data, control) {
 
 //--------------------------------------------------------------------------------------------------------------
 
-ConsultaCategorias();
-function ConsultaCategorias() {
-    $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
-        CrearTablaCategorias(Data);
-    }
-    );
-}
+//ConsultaCategorias();
+//function ConsultaCategorias() {
+//    $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
+//        CrearTablaCategorias(Data);
+//    }
+//    );
+//}

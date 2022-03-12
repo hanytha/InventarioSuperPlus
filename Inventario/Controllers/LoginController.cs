@@ -147,6 +147,8 @@ namespace Inventario.Controllers
                                 Session["Tiendas"] = Supervision.Tienda;
                                 Session["IDSitio"] = Supervision.TipoSupervicion;
                                 Session["IDAsignacion"] = (long)DatosUsuario.IdAsignacion;
+
+                             
                             }
                             else if (Asignaciones == 3)
                             {

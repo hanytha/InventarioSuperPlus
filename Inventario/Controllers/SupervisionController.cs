@@ -247,12 +247,72 @@ namespace Inventario.Controllers
 
         //******************************************Cosulta los pedidos por número de compra**************************************************
 
-        public int CargarSucursalesXSupervision()
-        {
-            String tiendas1 = Convert.ToString(Session["Tiendas"]);
+        //public int CargarSucursalesXSupervision()
+        //{
+        //    TiendasSupervision.IDTienda = new List<long>();
+        //    TiendasSupervision.Nombre = new List<string>();
+        //    TiendasSupervision.LNombre = new List<string>();
+        //    TiendasSupervision.E1Nombre = new List<string>();
+        //    TiendasSupervision.E2Nombre = new List<string>();
+        //    TiendasSupervision.E3Nombre = new List<string>();
+        //    TiendasSupervision.A1Nombre = new List<string>();
+        //    TiendasSupervision.A2Nombre = new List<string>();
+        //    TiendasSupervision.A3Nombre = new List<string>();
+        //    TiendasSupervision.Estado = new List<string>();
+        //    TiendasSupervision.Municipio = new List<string>();
+        //    TiendasSupervision.Localidad = new List<string>();
+        //    TiendasSupervision.Calle = new List<string>();
+        //    TiendasSupervision.CP = new List<long>();
+        //    TiendasSupervision.Telefono = new List<long>();
+        //    TiendasSupervision.HApertura = new List<string>();
+        //    TiendasSupervision.HCierre = new List<string>();
+        //    TiendasSupervision.Estatus = new List<int>();
 
-            int Encontrados = 0;
-            string[] Sucursales = tiendas1.Split('#');
+        //    for (int i = 0; i < Sucursales.Length; i++)
+        //    {
+        //        var Tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Sucursales[i]))
+        //        .Select(p => new
+        //        {
+        //            p.IdTienda,
+        //            p.Nombre,
+        //            p.LNombre,
+        //            p.E1Nombre,
+        //            p.E2Nombre,
+        //            p.E3Nombre,
+        //            p.A1Nombre,
+        //            p.A2Nombre,
+        //            p.A3Nombre,
+        //            p.Estado,
+        //            p.Municipio,
+        //            p.Localidad,
+        //            p.Calle,
+        //            p.CP,
+        //            p.Telefono,
+        //            p.HApertura,
+        //            p.HCierre,
+        //            p.Estatus
+        //        }).First();
+        //        TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
+        //        TiendasSupervision.Nombre.Add(Tienda.Nombre);
+        //        TiendasSupervision.LNombre.Add(Tienda.LNombre);
+        //        TiendasSupervision.Estado.Add(Tienda.Estado);
+        //        TiendasSupervision.Municipio.Add(Tienda.Municipio);
+        //        TiendasSupervision.Localidad.Add(Tienda.Localidad);
+        //        TiendasSupervision.Calle.Add(Tienda.Calle);
+        //        TiendasSupervision.CP.Add(Tienda.CP);
+        //        TiendasSupervision.Telefono.Add(Tienda.Telefono);
+        //        TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
+
+        //    }
+        //    return Encontrados;
+        //}
+
+        //----------------------------------------------------------------------
+
+
+
+        public void CargarSucursalesXSupervision()
+        {
             TiendasSupervision.IDTienda = new List<long>();
             TiendasSupervision.Nombre = new List<string>();
             TiendasSupervision.LNombre = new List<string>();
@@ -271,9 +331,9 @@ namespace Inventario.Controllers
             TiendasSupervision.HApertura = new List<string>();
             TiendasSupervision.HCierre = new List<string>();
             TiendasSupervision.Estatus = new List<int>();
-            for (int i = 0; i < Sucursales.Length; i++)
-            {
-                var Tienda = InvBD.Tienda.Where(p => p.IdTienda.Equals(Sucursales[i]))
+
+
+                var Tienda = InvBD.Tienda.Where(p => p.Estatus.Equals(1))
                 .Select(p => new
                 {
                     p.IdTienda,
@@ -294,23 +354,26 @@ namespace Inventario.Controllers
                     p.HApertura,
                     p.HCierre,
                     p.Estatus
-                }).First();
-                TiendasSupervision.IDTienda.Add(Tienda.IdTienda);
-                TiendasSupervision.Nombre.Add(Tienda.Nombre);
-                TiendasSupervision.LNombre.Add(Tienda.LNombre);
-                TiendasSupervision.Estado.Add(Tienda.Estado);
-                TiendasSupervision.Municipio.Add(Tienda.Municipio);
-                TiendasSupervision.Localidad.Add(Tienda.Localidad);
-                TiendasSupervision.Calle.Add(Tienda.Calle);
-                TiendasSupervision.CP.Add(Tienda.CP);
-                TiendasSupervision.Telefono.Add(Tienda.Telefono);
-                TiendasSupervision.Estatus.Add(Convert.ToInt32(Tienda.Estatus));
+                });
+
+            foreach (var com in Tienda)
+            {
+                TiendasSupervision.IDTienda.Add(com.IdTienda);
+                TiendasSupervision.Nombre.Add(com.Nombre);
+                TiendasSupervision.LNombre.Add(com.LNombre);
+                TiendasSupervision.Estado.Add(com.Estado);
+                TiendasSupervision.Municipio.Add(com.Municipio);
+                TiendasSupervision.Localidad.Add(com.Localidad);
+                TiendasSupervision.Calle.Add(com.Calle);
+                TiendasSupervision.CP.Add(com.CP);
+                TiendasSupervision.Telefono.Add(com.Telefono);
+                TiendasSupervision.Estatus.Add(Convert.ToInt32(com.Estatus));
 
             }
-            return Encontrados;
+          
         }
 
-        //----------------------------------------------------------------------
+
         //---------------------------------------------------------------
 
 

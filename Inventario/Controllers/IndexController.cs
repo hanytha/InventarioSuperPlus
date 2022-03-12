@@ -37,7 +37,9 @@ namespace Inventario.Controllers
             //-------------------------------------------------
             DepartamentosController departamento = new DepartamentosController();
             departamento.ConsultaDepartamentos();
-
+            //-------------------------------------------------
+            SupervisionController Tiendas = new SupervisionController();
+            Tiendas.CargarSucursalesXSupervision();
             //Cargar las tiendas cuando el usuario que inicia sesión es un supervisor(Visualizar solo las tiendas que son asignadas a ese supervisor)
             if (nivel == 1)
             {

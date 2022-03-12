@@ -1835,22 +1835,3 @@ function ValidarDUsado() {
     }
 }
 
-//----------------------------------------------------------------------------------------
-
-function ConsultaSucursales() {
-    $.get("/Supervision/CargarSucursalesXSupervision", function (Data) {
-       
-    }
-    );
-}
-//----------------------------------------------------------------------------------------
-ConsultaCom();
-function ConsultaCom() {
-
-    var dos = document.getElementById("IDnivel").value;
-
-    if (dos != 1 ) {
-        ConsultaSucursales();
-    }
-
-}
