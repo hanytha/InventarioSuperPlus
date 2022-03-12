@@ -347,13 +347,21 @@ function Desplegar(IdCmpraInt, id) {
             let ArrayArticulo = Nombre.split(',');
             let IdExistenciaAlmacenG = Data.IdExistenciaAlmacenG;
             let ArrayIdExistenciaAlmacenG = IdExistenciaAlmacenG.split(',');
+
+
+            var des = document.getElementById("IDAsig");
+
+
             for (var i = 0; i < ArrayIdArticulos.length; i++) {
                 DespXArt += "<div class='row'>";
                 DespXArt += "<div class='col-sm'>" + ArrayNoPedido[i] + "</div>";
                 DespXArt += "<div class='col-sm'>" + ArrayArticulo[i] + "</div>";
                 DespXArt += "<div class='col-sm'>" + Arrayfecha[i] + "</div>";
                 DespXArt += "<div class='col-sm'>" + Arraystock[i] + "</div>";
-                DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                if (des.value != 1) {
+                    DespXArt += "<button title='Devoluciones' class='btn btn-primary' onclick='abrirModalDevoluciones(" + ArrayIdExistenciaAlmacenG[i] + "," + ArrayIdArticulos[i] + "," + ArrayIdSitio[i] + ")'data-toggle='modal' data-target='#ModalDevoluciones'><i class='fas fa-archive'></i></button>";
+                }
+       
                 DespXArt += "<div class='col-sm'></div>";
                 DespXArt += "</div>";
             }

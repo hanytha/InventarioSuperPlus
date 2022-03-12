@@ -1127,6 +1127,7 @@ namespace Inventario.Controllers
         {
             string NoPedido = "";
             string IdAsignacion = "";
+            string IdAsig = "";
             string IdTienda = "";
             string NomTienda = "";
             string IdArticulo = "";
@@ -1187,6 +1188,7 @@ namespace Inventario.Controllers
                         tem2 = (int)numero.IdArticulo;
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
+                        IdAsig += numero.IdAsignacion + ",";
                         IdSitio += numero.IdSitio + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
@@ -1213,6 +1215,7 @@ namespace Inventario.Controllers
                     {
                         NoPedido += numero.Articulo + ",";
                         IdAsignacion += numero.IdArticulo + ",";
+                        IdAsig += numero.IdAsignacion + ",";
                         IdSitio += numero.IdSitio + ",";
                         NomTienda += numero.tiendas + ",";
                         IdArticulo += numero.IdArticulo + ",";
@@ -1262,6 +1265,7 @@ namespace Inventario.Controllers
             {
                 NoPedido = NoPedido.Substring(0, NoPedido.Length - 1),
                 IdAsignacion = IdAsignacion.Substring(0, IdAsignacion.Length - 1),
+                IdAsig = IdAsig.Substring(0, IdAsig.Length - 1),
                 IdSitio = IdSitio.Substring(0, IdSitio.Length - 1),
                 NomTienda = NomTienda.Substring(0, NomTienda.Length - 1),
                 Stock = Stock.Substring(0, Stock.Length - 1),
