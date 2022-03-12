@@ -96,7 +96,7 @@
                 }
             }
         }
-        else if (Asignacion == 3)
+        else if (Asignacion == 3 && nivel!=1)
         {
             if (IDArea != null)
             {
@@ -147,7 +147,7 @@
 <div id="accordionPedidos"></div>
 <div class="accordionPedidos" id="AcordeonPedidos">
     @{
-        if (Asignacion == 3)
+        if (Asignacion == 3 && nivel != 1)
         {
             if (IDArea != null)
             {
@@ -194,9 +194,9 @@
 <div id="accordionAceptar"></div>
 <div class="accordionAceptar" id="AcordeonSucursalesAceptar">
     @{
-        if (Asignacion == 3)
+        if (Asignacion == 3 && nivel != 1)
         {
-            if (@IDArea != null)
+            if (@IDArea != 0)
             {
                 //  int NSucursales = Accesos.IdAreas.Count();
 
