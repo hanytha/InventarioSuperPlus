@@ -284,70 +284,37 @@ namespace Inventario.Controllers
             return Afectados;
         }
 
-        //public int GuardarDatosArticuloCompra(ComprasArticulos DatosTienda)
-        //{
-        //    int Afectados = 0;
-
-        //    long id = (long)DatosTienda.IdExistenciaCompra;
-        //    if (id.Equals(0))
-        //    {
-        //        int nveces = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(DatosTienda.IdExistenciaCompra)).Count();
-
-        //        if (nveces == 0)
-        //        {
-        //            InvBD.ComprasArticulos.InsertOnSubmit(DatosTienda);
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        int nveces = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(DatosTienda.IdExistenciaCompra)
-        //        && p.StockActual.Equals(DatosTienda.StockActual)
-        //        && p.Articulo.Equals(DatosTienda.Articulo)
-        //        && p.Unidad.Equals(DatosTienda.Unidad)
-        //        && p.NoCompra.Equals(DatosTienda.NoCompra)
-        //        && p.Impuesto.Equals(DatosTienda.Impuesto)
-        //        && p.IdCompra.Equals(DatosTienda.IdCompra)
-        //        && p.PrecioUnitario.Equals(DatosTienda.PrecioUnitario)
-        //        && p.TipoDeOperacion.Equals(DatosTienda.TipoDeOperacion)
-        //        && p.ExistenciaInicial.Equals(DatosTienda.ExistenciaInicial)
-        //        && p.IdArticulo.Equals(DatosTienda.IdArticulo)
-        //        && p.FechaIngreso.Equals(DatosTienda.FechaIngreso)
-        //        ).Count();
+        //****************************************************************************************************************
+        //---------------Guardar los datos de las modificaciones de los articulos de las compras en la tabla ComprasArticulos--------------
 
 
-        //        if (nveces == 0)
-        //        {
-        //            ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(id)).First();
+        public int GuardarModificacionesArticulos(ComprasArticulos DatosTienda)
+        {
+            int Afectados = 0;
 
-        //            obj.StockActual = DatosTienda.StockActual;
-        //            obj.Articulo = DatosTienda.Articulo;
-        //            obj.Unidad = DatosTienda.Unidad;
-        //            obj.NoCompra = DatosTienda.NoCompra;
-        //            obj.Impuesto = DatosTienda.Impuesto;
-        //            obj.IdCompra = DatosTienda.IdCompra;
-        //            obj.PrecioUnitario = DatosTienda.PrecioUnitario;
-        //            obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
-        //            obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
-        //            obj.IdArticulo = DatosTienda.IdArticulo;
-        //            obj.FechaIngreso = DatosTienda.FechaIngreso;
+            long id = DatosTienda.IdExistenciaCompra;
 
-        //            InvBD.SubmitChanges();
-        //            Afectados = 1;
-        //        }
-        //        else
-        //        {
-        //            Afectados = -1;
-        //        }
-        //    }
+            
+                    ComprasArticulos obj = InvBD.ComprasArticulos.Where(p => p.IdExistenciaCompra.Equals(id)).First();
 
-        //    return Afectados;
-        //}
+                    obj.StockActual = DatosTienda.StockActual;
+                    obj.PrecioUnitario = DatosTienda.PrecioUnitario;
+                    obj.TipoDeOperacion = DatosTienda.TipoDeOperacion;
+                    obj.ExistenciaInicial = DatosTienda.ExistenciaInicial;
+
+
+
+                    InvBD.SubmitChanges();
+                    Afectados = 1;
+                
+                if(Afectados == -1)
+                {
+                    Afectados = -1;
+                }
+            
+
+            return Afectados;
+        }
 
         //------------------------------------Consultar los artículos por id de compra----------------------------
         public JsonResult ConsultaIdCompraenCompraArts(long Id)
