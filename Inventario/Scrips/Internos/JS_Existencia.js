@@ -412,10 +412,11 @@ function GuardarCompra(movimiento) {
                 //-------GuardarDatosArticuloCompra deacuerdo con la función que le corresponda----------
                 if (IdCompra == 0) {
 
-                    GuardarDatosArticuloCompra(data, movimiento);
-                    //---guarda el nuevo registro
+                    comp(data, movimiento);
+                   
                 }
                 else {
+
                     GuardarDatosArticuloCompra(IdCompra, movimiento);
                     //---guarda las modificaciones de las compras
                 }
@@ -427,11 +428,10 @@ function GuardarCompra(movimiento) {
 
 }
 
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//----------------------Guardar datos de los pedidos-----------------------------------------------
-function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
-
+//****************************************************************************************************
+function comp(IdCompras, Tmovimiento) {
+   //-----------------------------------------
+    var contador = 0;
     //----------Guardar los inputs de manera individual en la Base de datos--------------------
     var cantidad = document.getElementsByClassName("input-cantidad");
 
@@ -443,10 +443,8 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
 
     var impuestos = document.getElementsByClassName("input-impuesto");
 
-
-    for (let i = 0; i < cantidad.length; i++) {
-
-        //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
+    for (let i = 0; i < NomArticulos.length; i++) {
+    //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
 
         if (Precio[i].value == "") {
             Precio[i].value = 0;
@@ -454,29 +452,55 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
         }
         if (Precio[i].name == "") {
             Precio[i].name = 0;
-        }
+    }
 
         if (cantidad[i].value > 0 && NomArticulos[i].value && Precio[i].value && impuestos[i].value && impuestos[i].name && Precio[i].name && NomArticulos[i].name) {
+            contador++;
 
-            var IdExistenciaCompra = Precio[i].name;
-            var NoCompra = document.getElementById("TxtNoCompra").value;
-            var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
-            var TipoDeOperacion = Tmovimiento;
-
-            //------------------------Guarda el nombre del artículo solicitado----------------------------------
             var Articulo = NomArticulos[i].value;
 
             var IdArticulo = NomArticulos[i].name;
             //------------------------Guarda la cantidad de artículos solicitados----------------------------------
             var StockActual = cantidad[i].value;
-
-            var ExistenciaInicial = cantidad[i].value;
             //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
             var Unidad = impuestos[i].name;
             //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
             var PrecioUnitario = Precio[i].value;
+            var IdExistenciaCompra = Precio[i].name;
             //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
             var Impuesto = impuestos[i].value;
+
+            GuardarDatosArticuloCompraNueva(IdCompras, Tmovimiento , Articulo, IdArticulo, StockActual, Unidad, PrecioUnitario, Impuesto, IdExistenciaCompra);
+
+        }
+    }
+    alert("Se ingresaron "+ contador +"artículos en su compra");
+}
+//------------------------------------------------------------------------------------------------------
+
+function GuardarDatosArticuloCompraNueva(IdCompras, Tmovimiento , Articulos, IdArticulos, StockActuales, Unidades, PrecioUnitarios, Impuestos, IdExistenciaCompras) {
+
+
+           var IdExistenciaCompra = IdExistenciaCompras;
+           var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
+          var NoCompra = document.getElementById("TxtNoCompra").value;
+           var TipoDeOperacion = Tmovimiento;
+
+           var Articulo = Articulos;
+
+           var IdArticulo = IdArticulos;
+            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+            var StockActual = StockActuales;
+
+           var ExistenciaInicial = StockActuales;
+            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+            var Unidad = Unidades;
+            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+            var PrecioUnitario = PrecioUnitarios;
+            //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+            var Impuesto = Impuestos;
+             //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+            
             //-------------------------------------------------------------------------------------------------------------
             var frm = new FormData();
             frm.append("IdExistenciaCompra", IdExistenciaCompra);
@@ -521,15 +545,118 @@ function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
                     }
                 }
             });
-
-        }
-    }
+        
+    
 
     //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
     CalcularFecha();
     swal("Su " + TipoDeOperacion + " se guardó exitosamente!", "", "success");
     //  actulizar();
 }
+
+
+
+//////----------------------Guardar datos de los pedidos-----------------------------------------------
+////function GuardarDatosArticuloCompra(IdCompras, Tmovimiento) {
+
+////    //----------Guardar los inputs de manera individual en la Base de datos--------------------
+////    var cantidad = document.getElementsByClassName("input-cantidad");
+
+////    var NomArticulos = document.getElementsByClassName("input-Articulo");
+
+////    //var UnidadM = document.getElementsByClassName("input-Unidad");
+
+////    var Precio = document.getElementsByClassName("input-Precio");
+
+////    var impuestos = document.getElementsByClassName("input-impuesto");
+
+
+////    for (let i = 0; i < cantidad.length; i++) {
+
+////        //----asigna un valor de 0 cuando los precios son null para poder guardar las bonificaciones
+
+////        if (Precio[i].value == "") {
+////            Precio[i].value = 0;
+
+////        }
+////        if (Precio[i].name == "") {
+////            Precio[i].name = 0;
+////        }
+
+////        if (cantidad[i].value > 0 && NomArticulos[i].value && Precio[i].value && impuestos[i].value && impuestos[i].name && Precio[i].name && NomArticulos[i].name) {
+
+////            var IdExistenciaCompra = Precio[i].name;
+////            var NoCompra = document.getElementById("TxtNoCompra").value;
+////            var FechaIngreso = document.getElementById("TxtFechaDeIngreso").value;
+////            var TipoDeOperacion = Tmovimiento;
+
+////            //------------------------Guarda el nombre del artículo solicitado----------------------------------
+////            var Articulo = NomArticulos[i].value;
+
+////            var IdArticulo = NomArticulos[i].name;
+////            //------------------------Guarda la cantidad de artículos solicitados----------------------------------
+////            var StockActual = cantidad[i].value;
+
+////            var ExistenciaInicial = cantidad[i].value;
+////            //------------------------Guarda la unidad media de los artículos solicitados----------------------------------
+////            var Unidad = impuestos[i].name;
+////            //------------------------Guarda el precio unitario de los artículos solicitados----------------------------------
+////            var PrecioUnitario = Precio[i].value;
+////            //------------------------Guarda el Impuesto de los artículos solicitados----------------------------------
+////            var Impuesto = impuestos[i].value;
+////            //-------------------------------------------------------------------------------------------------------------
+////            var frm = new FormData();
+////            frm.append("IdExistenciaCompra", IdExistenciaCompra);
+////            frm.append("IdCompra", IdCompras);
+////            frm.append("StockActual", StockActual);
+////            frm.append("Articulo", Articulo);
+////            frm.append("Unidad", Unidad);
+////            frm.append("NoCompra", NoCompra);
+////            frm.append("Impuesto", Impuesto);
+////            frm.append("PrecioUnitario", PrecioUnitario);
+////            frm.append("TipoDeOperacion", TipoDeOperacion);
+////            frm.append("ExistenciaInicial", ExistenciaInicial);
+////            frm.append("FechaIngreso", FechaIngreso);
+////            frm.append("IdArticulo", IdArticulo);
+
+
+////            frm.append("Estatus", 1);
+////            $.ajax({
+////                type: "POST",
+////                url: "/Compra/GuardarDatosArticuloCompra",
+////                data: frm,
+////                contentType: false,
+////                processData: false,
+////                success: function (data) {
+////                    if (data == 0) {
+////                        swal("¡Ocurrio un error!", "", "danger");
+////                    }
+////                    else if (data == -1) {
+////                        swal({
+////                            title: "Verifique la actualización de sus datos",
+////                            text: "",
+////                            icon: "info",
+////                            buttons: true,
+////                            showCancelButton: true,
+////                            cancelButtonColor: '#d33',
+////                        })
+////                    }
+////                    else {
+
+////                        CalcularFecha();
+////                        document.getElementById("btnCancelar").click();
+////                    }
+////                }
+////            });
+
+////        }
+////    }
+
+////    //-----Mensaje de confirmación de que la compra o bonificación se guardo exitosamente-----------------------
+////    CalcularFecha();
+////    swal("Su " + TipoDeOperacion + " se guardó exitosamente!", "", "success");
+////    //  actulizar();
+////}
 
 //-----------------------------------------------------
 
