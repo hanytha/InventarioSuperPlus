@@ -26,7 +26,8 @@ function abrirModal(id) {
 
         $.get("/Compra/ConsultaCompra/?Id=" + id, function (Data) {
 
-            habilitar();
+            //habilitar();
+            deshabilitarProve();
 
             sessionStorage.setItem('IDExt', Data[0].IdCompra);
             document.getElementById("TxtFechaDeIngreso").value = Data[0].FechaDeIngreso;
@@ -923,7 +924,15 @@ function deshabilitar() {
     }
 
 }
+//-------Función para deshabilitar los inputs en el modal de editar compras-------------------------------
 
+function deshabilitarProve() {
+
+    var provee = document.getElementById("cmbProveedor");
+
+    provee.disabled = true;
+
+}
 //-------Función para habilitar los inputs en el modal de compras-------------------------------
 function habilitar() {
     var cantidad = document.getElementsByClassName("input-cantidad");
